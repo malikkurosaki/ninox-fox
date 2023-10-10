@@ -1,10 +1,11 @@
+import { ListCandidates } from '@/modules/candidate';
 import React from 'react';
 
 function Page() {
   return (
-    <div>
-      CANDIDATE
-    </div>
+    <>
+      <ListCandidates />
+    </>
   );
 }
 
