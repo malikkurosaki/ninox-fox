@@ -1,15 +1,22 @@
 "use client";
 import { useDisclosure } from "@mantine/hooks";
 import {
+  ActionIcon,
   AppShell,
+  Box,
   Burger,
   Group,
+  Menu,
   NavLink,
   Skeleton,
   UnstyledButton,
+  rem,
 } from "@mantine/core";
 import React, { useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { FaUserCircle, FaUserTie } from "react-icons/fa";
+import { LuLayoutDashboard } from "react-icons/lu";
+import { RiLogoutCircleRLine } from "react-icons/ri";
 
 /**
  * Fungsi untuk menampilkan template dashsboard admin.
@@ -36,7 +43,7 @@ export default function LayoutView({
     {
       key: "md3",
       link: "/dashboard/pairing",
-      label: "REGION DATA PAIRING",
+      label: "REGIONAL DATA PAIRING",
     },
   ];
 
@@ -100,16 +107,56 @@ export default function LayoutView({
         padding="md"
       >
         <AppShell.Header>
-          <Group h="100%" px="md">
+          <Group  h="100%" px="md" justify="space-between">
+          <Group>
             <Burger
               opened={opened}
               onClick={toggle}
               hiddenFrom="sm"
               size="sm"
             />
-            <UnstyledButton onClick={() => router.push("/")} fz={25} fw={700}>
-              NINOX
-            </UnstyledButton>
+            <Box>
+              <UnstyledButton onClick={() => router.push("/")} fz={25} fw={700}>
+                NINOX
+              </UnstyledButton>
+            </Box>
+          </Group>
+          <Box>
+            <Menu>
+              <Menu.Target>
+                <ActionIcon
+                  variant="filled"
+                  color="rgba(0, 0, 0, 1)"
+                  radius="xl"
+                  aria-label="Settings"
+                >
+                  <FaUserCircle
+                    style={{ width: "70%", height: "70%" }}
+                    stroke={1.5}
+                  />
+                </ActionIcon>
+              </Menu.Target>
+              <Menu.Dropdown>
+                <Menu.Item
+                  leftSection={
+                    <FaUserTie style={{ width: rem(14), height: rem(14) }} />
+                  }
+                >
+                  Moh Alif Al Lukman
+                </Menu.Item>
+                <Menu.Item
+                  leftSection={
+                    <RiLogoutCircleRLine
+                      style={{ width: rem(14), height: rem(14) }}
+                    />
+                  }
+                  // onClick={onLogout}
+                >
+                  Logout
+                </Menu.Item>
+              </Menu.Dropdown>
+            </Menu>
+          </Box>
           </Group>
         </AppShell.Header>
         <AppShell.Navbar p="md" pb={30}>
@@ -127,7 +174,7 @@ export default function LayoutView({
             );
           })}
           <NavLink
-            label="REGIONAL VALUE EDITOR"
+            label="REGION VALUE EDITOR"
             childrenOffset={28}
             c={"#61677A"}
             fw={"bolder"}
@@ -160,7 +207,11 @@ export default function LayoutView({
             );
           })}
         </AppShell.Navbar>
-        <AppShell.Main>{children}</AppShell.Main>
+        <AppShell.Main>
+          <Box p={10} pl={20} pr={20}>
+          {children}
+          </Box>
+        </AppShell.Main>
       </AppShell>
     </>
   );
