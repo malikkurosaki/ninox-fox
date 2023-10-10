@@ -1,5 +1,9 @@
+import { AddCandidate } from "@/modules/candidate";
+
 export default function Page() {
     return (
-        <>Add Candidate</>
+        <>
+            <AddCandidate />
+        </>
     )
 }

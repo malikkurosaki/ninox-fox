@@ -1,5 +1,9 @@
+import { EditCandidate } from "@/modules/candidate";
+
 export default function Page({ params }: { params: { id: string } }) {
     return (
-        <>Edit candidate {params.id}</>
+        <>
+            <EditCandidate data={[]} />
+        </>
     )
 }
