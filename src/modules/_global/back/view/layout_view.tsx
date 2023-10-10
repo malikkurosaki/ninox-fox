@@ -207,7 +207,7 @@ export default function LayoutView({
             );
           })}
         </AppShell.Navbar>
-        <AppShell.Main>
+        <AppShell.Main bg={"#EAEAEA"}>
           <Box p={10} pl={20} pr={20}>
           {children}
           </Box>
