@@ -1,3 +1,3 @@
 # Ninox-Fox Project
 
-![gambar](bg.png)
+![gambar](ninox.png)
