@@ -1,5 +1,5 @@
-export default function Page(){
-    return(
-        <>EMOTION EDITOR</>
-    )
+import { ViewBackEmotion } from "@/modules/emotion";
+
+export default function Page() {
+  return <ViewBackEmotion />;
 }
