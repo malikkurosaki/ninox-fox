@@ -13,59 +13,57 @@ import { MdOutlineCancel } from "react-icons/md";
 export default function UploadData(props: Partial<DropzoneProps>) {
   return (
     <>
-      <Dropzone
-        onDrop={(files) => console.log("accepted files", files)}
-        onReject={(files) => console.log("rejected files", files)}
-        maxSize={3 * 1024 ** 2}
-        accept={IMAGE_MIME_TYPE}
-        {...props}
-        style={{cursor: "pointer"}}
+      <Box
+        style={{
+          border: "1px dashed gray",
+          borderRadius: 10,
+          padding: 5,
+        }}
       >
-        <Group
-          justify="center"
-          gap="xl"
-          mih={50}
-          style={{ pointerEvents: "none" }}
+        <Dropzone
+          onDrop={(files) => console.log("accepted files", files)}
+          onReject={(files) => console.log("rejected files", files)}
+          maxSize={3 * 1024 ** 2}
+          accept={IMAGE_MIME_TYPE}
+          {...props}
+          style={{ cursor: "pointer" }}
         >
-          <Dropzone.Accept>
-            <AiOutlineCloudUpload
-              style={{
-                width: rem(30),
-                height: rem(30),
-                color: "var(--mantine-color-blue-6)",
-              }}
-              stroke={1.5}
-            />
-          </Dropzone.Accept>
-          <Dropzone.Reject>
-            <MdOutlineCancel
-              style={{
-                width: rem(30),
-                height: rem(30),
-                color: "var(--mantine-color-red-6)",
-              }}
-              stroke={1.5}
-            />
-          </Dropzone.Reject>
-          <Dropzone.Idle>
-            <GrDocumentWindows
-              style={{
-                width: rem(30),
-                height: rem(30),
-                color: "var(--mantine-color-dimmed)",
-              }}
-              stroke={1.5}
-            />
-          </Dropzone.Idle>
+          <Group
+            justify="center"
+            gap="xl"
+            mih={70}
+            m={20}
+            style={{ pointerEvents: "none" }}
+          >
+            <Dropzone.Accept>
+              <AiOutlineCloudUpload
+                style={{
+                  width: rem(30),
+                  height: rem(30),
+                  color: "var(--mantine-color-blue-6)",
+                }}
+                stroke={1.5}
+              />
+            </Dropzone.Accept>
+            <Dropzone.Reject>
+              <MdOutlineCancel
+                style={{
+                  width: rem(30),
+                  height: rem(30),
+                  color: "var(--mantine-color-red-6)",
+                }}
+                stroke={1.5}
+              />
+            </Dropzone.Reject>
 
-          <div>
-            <Text size="xl" inline>
-              UPLOAD DATA
-            </Text>
-          </div>
-        </Group>
-      </Dropzone>
-
+            <div>
+              <Text size="xl" inline>
+                UPLOAD DATA
+              </Text>
+            </div>
+          </Group>
+        </Dropzone>
+      </Box>
     </>
   );
 }

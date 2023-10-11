@@ -1,11 +1,8 @@
-import React from 'react';
+import { ViewPairing } from "@/modules/pairing";
+import React from "react";
 
 function Page() {
-  return (
-    <div>
-      NATIONAL DATA PAIRING
-    </div>
-  );
+  return <ViewPairing />;
 }
 
 export default Page;

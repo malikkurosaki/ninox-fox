@@ -1,16 +1,31 @@
 "use client";
-import { Box, Button, Group, Select, TextInput } from "@mantine/core";
+import {
+  Box,
+  Button,
+  Group,
+  Select,
+  Stack,
+  Text,
+  TextInput,
+} from "@mantine/core";
 import { DateInput } from "@mantine/dates";
 import React, { useState } from "react";
 import TablePopularity from "./table_popularity";
 import { useRouter } from "next/navigation";
 
+/**
+ * Fungsi menampilkan halaman popularity.
+ * @returns  Hasil dari Popularity menampilkan fitur copy data dan upload data.
+ */
 export default function Popularity() {
   const [valuePopularity, setValuePopularity] = useState(false);
   const router = useRouter();
   return (
     <>
-      <Group grow>
+      <Stack>
+        <Text fw={"bold"}>NATIONAL POPULARITY METRICS</Text>
+      </Stack>
+      <Group grow pt={30}>
         <Select
           placeholder="PROVINCE"
           data={["BALI", "JAWA BARAT", "JAWA TIMUR", "KALIMANTAN TENGAH"]}

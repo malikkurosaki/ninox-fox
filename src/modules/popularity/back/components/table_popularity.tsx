@@ -77,6 +77,10 @@ const data = [
 
 ];
 
+/**
+ * Fungsi menampilkan tabel.
+ * @returns  Hasil dari Table popularity menampilkan table beserta data
+ */
 export default function TablePopularity() {
   return (
     <>
