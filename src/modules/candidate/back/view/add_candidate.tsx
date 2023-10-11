@@ -1,7 +1,10 @@
 'use client'
 
 import { ButtonBack } from "@/modules/_global"
-import { Avatar, Box, Button, Center, Grid, Group, Paper, Stack, Text, TextInput } from "@mantine/core"
+import { Avatar, Box, Button, Center, Grid, Group, Modal, Paper, Stack, Text, TextInput } from "@mantine/core"
+import { useAtom } from "jotai"
+import { isModalCandidate } from "../val/isModalCandidate"
+import ModalAddCandidate from "../component/modal_add_candidate"
 
 
 /**
@@ -10,6 +13,9 @@ import { Avatar, Box, Button, Center, Grid, Group, Paper, Stack, Text, TextInput
  */
 
 export default function AddCandidate() {
+    const [openModal, setOpenModal] = useAtom(isModalCandidate)
+
+
     return (
         <>
             <ButtonBack />
@@ -41,12 +47,21 @@ export default function AddCandidate() {
                                 placeholder="Candidate Name"
                             />
                             <Group justify="flex-end">
-                                <Button bg={"gray"} mt={30}>PROCESS</Button>
+                                <Button bg={"gray"} mt={30} onClick={() => setOpenModal(true)}>SAVE</Button>
                             </Group>
                         </Box>
                     </Stack>
                 </Paper>
             </Box>
+            <Modal
+                opened={openModal}
+                onClose={() => setOpenModal(false)}
+                centered
+                withCloseButton={false}
+                closeOnClickOutside={false}
+            >
+                <ModalAddCandidate />
+            </Modal>
         </>
     )
 }

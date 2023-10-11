@@ -1,10 +1,10 @@
 import { ListCandidates } from '@/modules/candidate';
 import React from 'react';
 
-function Page() {
+function Page({searchParams}:{searchParams:{prov:string}}) {
   return (
     <>
-      <ListCandidates />
+      <ListCandidates title={searchParams.prov}/>
     </>
   );
 }

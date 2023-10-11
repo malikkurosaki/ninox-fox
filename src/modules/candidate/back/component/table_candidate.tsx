@@ -1,8 +1,11 @@
 'use client'
 
-import { ActionIcon, Box, Button, Center, Group, Image, Paper, ScrollArea, Stack, Table, Text } from "@mantine/core"
+import { ActionIcon, Box, Button, Center, Group, Image, Modal, Paper, ScrollArea, Stack, Table, Text } from "@mantine/core"
+import { useAtom } from "jotai";
 import { useRouter } from "next/navigation";
 import { MdDelete, MdEditCalendar, MdOutlineModeEdit } from "react-icons/md";
+import { isModalCandidate } from "../val/isModalCandidate";
+import ModalDelCandidate from "./modal_del_candidate";
 
 /**
  * Fungsi untuk menampilkan table list kandidat.
@@ -21,6 +24,7 @@ export default function TableCandidate({ title, data }: { title: string, data: a
     ];
 
     const router = useRouter();
+    const [openModal, setOpenModal] = useAtom(isModalCandidate)
 
     return (
         <>
@@ -33,7 +37,7 @@ export default function TableCandidate({ title, data }: { title: string, data: a
                     }}
                 >
                     <Group justify="space-between" gap="lg">
-                        <Text fw={"bold"}>{title}</Text>
+                        <Text fw={"bold"} c={"white"}>{title}</Text>
                         <Button bg={"gray"} onClick={() => router.push('candidate/add')}>ADD CANDIDATE</Button>
                     </Group>
                     <Box pt={20}>
@@ -72,7 +76,7 @@ export default function TableCandidate({ title, data }: { title: string, data: a
                                                         color="rgba(5, 128, 23, 1)"
                                                         size="xl"
                                                         aria-label="Edit"
-                                                        onClick={()=>router.push('candidate/edit/IKomangAyu')}
+                                                        onClick={() => router.push('candidate/edit/IKomangAyu')}
                                                     >
                                                         <MdEditCalendar size={20} />
                                                     </ActionIcon>
@@ -81,6 +85,7 @@ export default function TableCandidate({ title, data }: { title: string, data: a
                                                         color="rgba(209, 4, 4, 1)"
                                                         size="xl"
                                                         aria-label="Delete"
+                                                        onClick={() => setOpenModal(true)}
                                                     >
                                                         <MdDelete size={20} />
                                                     </ActionIcon>
@@ -95,68 +100,16 @@ export default function TableCandidate({ title, data }: { title: string, data: a
                 </Box>
             </Box>
 
-            {/* <Box pt={30}>
-                <Paper shadow="xs" p="xl" bg={"#f1f1f1"}>
-                    <Group justify="space-between" gap="lg">
-                        <Text fw={"bold"}>{title}</Text>
-                        <Button bg={"gray"} onClick={()=> router.push('candidate/add')}>ADD CANDIDATE</Button>
-                    </Group>
-                    <Stack mt={30}>
-                        <Table highlightOnHover withTableBorder withColumnBorders bg={"white"}>
-                            <Table.Thead>
-                                <Table.Tr>
-                                    <Table.Th>No</Table.Th>
-                                    <Table.Th>Name</Table.Th>
-                                    <Table.Th>Image</Table.Th>
-                                    <Table.Th>Action</Table.Th>
-                                </Table.Tr>
-                            </Table.Thead>
-                            <Table.Tbody>
-                                {elements.map((v) => (
-                                    <Table.Tr key={v.name}>
-                                        <Table.Td>{v.position}</Table.Td>
-                                        <Table.Td>{v.name}</Table.Td>
-                                        <Table.Td>
-                                            <Image
-                                                src={"/profile.png"}
-                                                radius={100}
-                                                maw={{ base: 50, sm: 50 }}
-                                                mx="auto"
-                                                alt="img"
-                                            />
-                                        </Table.Td>
-                                        <Table.Td>
-                                            <Group>
-                                                <Box>
-                                                    <ActionIcon
-                                                        color="yellow.9"
-                                                        onClick={() =>
-                                                            router.push('candidate/edit/IKomangAyu')
-                                                        }
-                                                    >
-                                                        <MdOutlineModeEdit size="23" />
-                                                    </ActionIcon>
-                                                </Box>
-                                                <Box>
-                                                    <ActionIcon
-                                                        color="red.9"
-                                                        onClick={() => {
-                                                            console.log()
-                                                        }}
-                                                    >
-                                                        <MdDelete size="23" />
-                                                    </ActionIcon>
-                                                </Box>
-                                            </Group>
-                                        </Table.Td>
-                                    </Table.Tr>
-                                ))}
-                            </Table.Tbody>
 
-                        </Table>
-                    </Stack>
-                </Paper>
-            </Box> */}
+            <Modal
+                opened={openModal}
+                onClose={() => setOpenModal(false)}
+                centered
+                withCloseButton={false}
+                closeOnClickOutside={false}
+            >
+                <ModalDelCandidate />
+            </Modal>
         </>
     )
 }

@@ -3,15 +3,18 @@
 import { Box, Button, Center, Paper, Select, SimpleGrid, Stack, Text, UnstyledButton } from "@mantine/core"
 import { useState } from "react"
 import TableCandidate from "../component/table_candidate"
+import { useRouter } from "next/navigation"
 
 
 /**
  * Fungsi untuk menampilkan select wilayah.
+ * @param {string} title - judul
  * @returns {component} Select wilayah.
  */
 
-export function ListCandidates() {
-    const [show, setShow] = useState(false)
+export default function ListCandidates({ title }: { title: string }) {
+    const router = useRouter()
+
     return (
         <>
             <Stack>
@@ -39,12 +42,12 @@ export function ListCandidates() {
                                     placeholder="CITY"
                                     data={["BADUNG", "DENPASAR", "TABANAN"]}
                                 />
-                                <Button bg={"gray"} onClick={() => setShow(true)}>PROCESS</Button>
+                                <Button bg={"gray"} onClick={() => router.push('candidate?prov=bali')}>PROCESS</Button>
                             </Stack>
                         </Paper>
                     </Box>
                 </SimpleGrid>
-                {show &&
+                {title &&
                     <TableCandidate title="PROVINSI BALI" data={[]} />
                 }
 
