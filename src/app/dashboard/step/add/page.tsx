@@ -1,5 +1,7 @@
-export default function Page(){
+import { AddStep } from "@/modules/step";
+
+export default function Page() {
     return (
-        <>Add Step</>
+        <><AddStep /></>
     )
 }

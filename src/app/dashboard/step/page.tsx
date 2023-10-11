@@ -1,10 +1,11 @@
+import { ListStep } from '@/modules/step';
 import React from 'react';
 
-function Page() {
+function Page({ searchParams }: { searchParams: { prov: string } }) {
   return (
-    <div>
-      STEP
-    </div>
+    <>
+      <ListStep title={searchParams.prov} />
+    </>
   );
 }
 
