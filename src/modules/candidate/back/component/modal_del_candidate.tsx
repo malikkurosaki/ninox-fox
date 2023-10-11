@@ -1,6 +1,10 @@
 'use client'
 
 import { Alert, Box, Button, Grid, Text } from "@mantine/core"
+import { useAtom } from "jotai";
+import { isModalCandidate } from "../val/isModalCandidate";
+import { useRouter } from "next/navigation";
+import toast from "react-simple-toasts";
 
 
 /**
@@ -10,6 +14,14 @@ import { Alert, Box, Button, Grid, Text } from "@mantine/core"
 
 
 export default function ModalDelCandidate() {
+    const [openModal, setOpenModal] = useAtom(isModalCandidate)
+    const router = useRouter()
+
+    function onDeleteCandidate() {
+        toast("Success", { theme: "dark" });
+        setOpenModal(false);
+    }
+
     return (
         <>
             <Box>
@@ -23,7 +35,7 @@ export default function ModalDelCandidate() {
                                 radius={10}
                                 color="gray.7"
                                 fullWidth
-                            // onClick={() => setOpenProfile(false)}
+                                onClick={() => setOpenModal(false)}
                             >
                                 NO
                             </Button>
@@ -33,7 +45,7 @@ export default function ModalDelCandidate() {
                                 radius={10}
                                 color="gray.7"
                                 fullWidth
-                            // onClick={() => { editProfile() }}
+                                onClick={() => onDeleteCandidate()}
                             >
                                 YES
                             </Button>

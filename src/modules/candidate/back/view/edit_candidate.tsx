@@ -1,7 +1,10 @@
 'use client'
 
 import { ButtonBack } from "@/modules/_global"
-import { Avatar, Box, Button, Center, Group, Paper, Stack, Text, TextInput } from "@mantine/core"
+import { Avatar, Box, Button, Center, Group, Modal, Paper, Stack, Text, TextInput } from "@mantine/core"
+import { useAtom } from "jotai"
+import { isModalCandidate } from "../val/isModalCandidate"
+import ModalEditCandidate from "../component/modal_edit_candidate"
 
 /**
  * Fungsi untuk menampilkan view edit candidate.
@@ -10,6 +13,8 @@ import { Avatar, Box, Button, Center, Group, Paper, Stack, Text, TextInput } fro
  */
 
 export default function EditCandidate({ data }: { data: any }) {
+    const [openModal, setOpenModal] = useAtom(isModalCandidate)
+
     return (
         <>
             <ButtonBack />
@@ -42,12 +47,22 @@ export default function EditCandidate({ data }: { data: any }) {
                                 value={"I Komang Ayu"}
                             />
                             <Group justify="flex-end">
-                                <Button bg={"gray"} mt={30}>PROCESS</Button>
+                                <Button bg={"gray"} mt={30} onClick={() => setOpenModal(true)}>SAVE</Button>
                             </Group>
                         </Box>
                     </Stack>
                 </Paper>
             </Box>
+
+            <Modal
+                opened={openModal}
+                onClose={() => setOpenModal(false)}
+                centered
+                withCloseButton={false}
+                closeOnClickOutside={false}
+            >
+                <ModalEditCandidate />
+            </Modal>
         </>
     )
 }

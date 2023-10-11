@@ -1,10 +1,9 @@
+import { ListSwot } from '@/modules/swot';
 import React from 'react';
 
-function Page() {
+function Page({ searchParams }: { searchParams: { prov: string } }) {
   return (
-    <div>
-      SWOT
-    </div>
+    <><ListSwot title={searchParams.prov} /></>
   );
 }
 

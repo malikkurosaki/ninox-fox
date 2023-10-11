@@ -2,4 +2,4 @@
 
 import { atom } from "jotai"
 
-export const isModalCandidate = atom(false)
+export const isModalMlAi = atom(false)
