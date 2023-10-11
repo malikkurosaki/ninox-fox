@@ -38,7 +38,7 @@ export default function LayoutView({
     {
       key: "md2",
       link: "/dashboard/popularity",
-      label: "POPULARITY",
+      label: "NATIONAL POPULARITY METRICS",
     },
     {
       key: "md3",
