@@ -16,7 +16,12 @@ import React, { useState } from "react";
 import "@mantine/dates/styles.css";
 import { useAtom } from "jotai";
 import { isModalPopularity } from "../val/val_modal_popularity";
+import CopyDataModal from "./modal/copy_data_modal";
 
+/**
+ * Fungsi menampilkan halaman copy data.
+ * @returns  Hasil dari copi data menampilkan fitur untuk copy data.
+ */
 export default function CopyDataPopularity() {
   const [value, setValue] = useState<Date | null>(null);
   const [openModal, setOpenModal] = useAtom(isModalPopularity);
@@ -101,7 +106,7 @@ export default function CopyDataPopularity() {
         withCloseButton={false}
         closeOnClickOutside={false}
       >
-        
+        <CopyDataModal/>
       </Modal>
     </>
   );

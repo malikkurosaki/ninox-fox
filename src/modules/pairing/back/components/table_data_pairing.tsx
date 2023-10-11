@@ -3,85 +3,91 @@ import React from "react";
 
 const data = [
   {
-    id: 1121,
+    id: 1,
     candidate1: "I Wayan Adi",
     candidate2: "I Komang Ayu",
     Confidence: 22221,
+    Kabupaten: 12123,
     Supportive: 12121,
-    image1: "/profile.png",
-    image2: "/profile.png",
   },
   {
-    id: 1223,
+    id: 2,
     candidate1: "I Wayan Adi",
     candidate2: "I Komang Ayu",
     Confidence: 22221,
+    Kabupaten: 12123,
     Supportive: 12121,
-    image1: "/profile.png",
-    image2: "/profile.png",
   },
   {
-    id: 3433,
+    id: 3,
     candidate1: "I Wayan Adi",
     candidate2: "I Komang Ayu",
     Confidence: 22221,
+    Kabupaten: 12123,
     Supportive: 12121,
-    image1: "/profile.png",
-    image2: "/profile.png",
   },
   {
-    id: 1212,
+    id: 4,
     candidate1: "I Wayan Adi",
     candidate2: "I Komang Ayu",
     Confidence: 22221,
+    Kabupaten: 12123,
     Supportive: 12121,
-    image1: "/profile.png",
-    image2: "/profile.png",
   },
   {
-    id: 7617,
+    id: 5,
     candidate1: "I Wayan Adi",
     candidate2: "I Komang Ayu",
     Confidence: 22221,
+    Kabupaten: 12123,
     Supportive: 12121,
-    image1: "/profile.png",
-    image2: "/profile.png",
   },
   {
-    id: 7617,
+    id: 6,
     candidate1: "I Wayan Adi",
     candidate2: "I Komang Ayu",
     Confidence: 22221,
+    Kabupaten: 12123,
     Supportive: 12121,
-    image1: "/profile.png",
-    image2: "/profile.png",
   },
   {
-    id: 7617,
+    id: 7,
     candidate1: "I Wayan Adi",
     candidate2: "I Komang Ayu",
     Confidence: 22221,
+    Kabupaten: 12123,
     Supportive: 12121,
-    image1: "/profile.png",
-    image2: "/profile.png",
   },
   {
-    id: 7617,
+    id: 8,
     candidate1: "I Wayan Adi",
     candidate2: "I Komang Ayu",
     Confidence: 22221,
+    Kabupaten: 12123,
     Supportive: 12121,
-    image1: "/profile.png",
-    image2: "/profile.png",
   },
-
+  {
+    id: 9,
+    candidate1: "I Wayan Adi",
+    candidate2: "I Komang Ayu",
+    Confidence: 22221,
+    Kabupaten: 12123,
+    Supportive: 12121,
+  },
+  {
+    id: 10,
+    candidate1: "I Wayan Adi",
+    candidate2: "I Komang Ayu",
+    Confidence: 22221,
+    Kabupaten: 12123,
+    Supportive: 12121,
+  },
 ];
-
 /**
- * Fungsi menampilkan tabel.
- * @returns  Hasil dari Table popularity menampilkan table beserta data
+ * Fungsi menampilkan halaman table data pairing.
+ * @returns  Hasil dari table data pairing untuk menampilkan data table
  */
-export default function TablePopularity() {
+export default function TableDataPairing() {
   return (
     <>
       <Box
@@ -94,10 +100,10 @@ export default function TablePopularity() {
         <Table withTableBorder horizontalSpacing="xl">
           <Table.Thead>
             <Table.Tr>
-              <Table.Th></Table.Th>
+              <Table.Th>ID</Table.Th>
               <Table.Th>CANDIDATE 1</Table.Th>
               <Table.Th>CANDIDATE 2</Table.Th>
-              <Table.Th>ID</Table.Th>
+              <Table.Th>KABUPATEN ID</Table.Th>
               <Table.Th>CONFIDENCE</Table.Th>
               <Table.Th>SUPPORTIVE</Table.Th>
             </Table.Tr>
@@ -105,15 +111,10 @@ export default function TablePopularity() {
           <Table.Tbody>
             {data.map((v, i) => (
               <Table.Tr key={i}>
-                <Table.Td>
-                  <Group>
-                    <Avatar src={v.image1} alt="it's me" />
-                    <Avatar src={v.image2} alt="it's me" />
-                  </Group>
-                </Table.Td>
+                <Table.Td>{v.id}</Table.Td>
                 <Table.Td>{v.candidate1}</Table.Td>
                 <Table.Td>{v.candidate2}</Table.Td>
-                <Table.Td>{v.id}</Table.Td>
+                <Table.Td>{v.Kabupaten}</Table.Td>
                 <Table.Td>{v.Confidence}</Table.Td>
                 <Table.Td>{v.Supportive}</Table.Td>
               </Table.Tr>

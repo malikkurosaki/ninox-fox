@@ -1,11 +1,8 @@
-import React from 'react';
+import { ViewAudience } from "@/modules/audience";
+import React from "react";
 
 function Page() {
-  return (
-    <div>
-      AUDIENCE
-    </div>
-  );
+  return <ViewAudience />;
 }
 
 export default Page;

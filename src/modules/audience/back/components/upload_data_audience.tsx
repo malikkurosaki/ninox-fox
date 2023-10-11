@@ -1,23 +1,25 @@
+"use client";
 import React, { Component } from "react";
 import { Box, Group, Text, rem } from "@mantine/core";
 import { Dropzone, DropzoneProps, IMAGE_MIME_TYPE } from "@mantine/dropzone";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 import { GrDocumentWindows } from "react-icons/gr";
 import { MdOutlineCancel } from "react-icons/md";
+import TableData from "./table_data_audience";
 
 /**
  * Fungsi untuk upload file.
  * @param {Component} props mengambil file.
  * @returns Hasil menampilkan data yang sudah di upload
  */
-export default function UploadData(props: Partial<DropzoneProps>) {
+export default function UploadDataAudience(props: Partial<DropzoneProps>) {
   return (
     <>
       <Box
         style={{
           border: "1px dashed gray",
           borderRadius: 10,
-          padding: 5,
+          padding: 30,
         }}
       >
         <Dropzone
@@ -31,8 +33,7 @@ export default function UploadData(props: Partial<DropzoneProps>) {
           <Group
             justify="center"
             gap="xl"
-            mih={70}
-            m={20}
+            mih={50}
             style={{ pointerEvents: "none" }}
           >
             <Dropzone.Accept>
@@ -64,6 +65,7 @@ export default function UploadData(props: Partial<DropzoneProps>) {
           </Group>
         </Dropzone>
       </Box>
+
     </>
   );
 }

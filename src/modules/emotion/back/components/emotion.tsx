@@ -20,7 +20,7 @@ import { DateInput } from "@mantine/dates";
 import UploadData from "./upload_data";
 import TableData from "./table_data";
 import { useRouter } from "next/navigation";
-import '@mantine/dates/styles.css'
+
 
 /**
  * Fungsi menampilkan halaman emotion.
@@ -68,16 +68,16 @@ export default function Emotion() {
             </Paper>
           </Box>
           <Box>
-            <Paper shadow="xs" p={30}>
-              <Box
-                style={{
-                  borderRadius: 10,
-                  padding: 10,
-                }}
-              >
+            <Box style={{
+              backgroundColor: "white",
+              padding: 16,
+              borderRadius: 10
+            }}>
+              <Group justify="center">
+
                 <UploadData />
-              </Box>
-            </Paper>
+              </Group>
+            </Box>
             {proccess && (
               <Group justify="space-between" grow pt={30}>
                 <Box>

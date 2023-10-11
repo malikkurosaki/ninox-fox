@@ -1,10 +1,11 @@
 "use client";
-import { useDisclosure } from "@mantine/hooks";
+import { useDisclosure, useShallowEffect } from "@mantine/hooks";
 import {
   ActionIcon,
   AppShell,
   Box,
   Burger,
+  Divider,
   Group,
   Menu,
   NavLink,
@@ -13,7 +14,7 @@ import {
   rem,
 } from "@mantine/core";
 import React, { useState } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { FaUserCircle, FaUserTie } from "react-icons/fa";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { RiLogoutCircleRLine } from "react-icons/ri";
@@ -94,6 +95,11 @@ export default function LayoutView({
   ];
 
   const router = useRouter();
+  const pathname = usePathname();
+  const [active, setActive] = useState("");
+  useShallowEffect(() => {
+    setActive(pathname);
+  });
 
   return (
     <>
@@ -107,56 +113,60 @@ export default function LayoutView({
         padding="md"
       >
         <AppShell.Header>
-          <Group  h="100%" px="md" justify="space-between">
-          <Group>
-            <Burger
-              opened={opened}
-              onClick={toggle}
-              hiddenFrom="sm"
-              size="sm"
-            />
+          <Group h="100%" px="md" justify="space-between">
+            <Group>
+              <Burger
+                opened={opened}
+                onClick={toggle}
+                hiddenFrom="sm"
+                size="sm"
+              />
+              <Box>
+                <UnstyledButton
+                  onClick={() => router.push("/")}
+                  fz={25}
+                  fw={700}
+                >
+                  NINOX
+                </UnstyledButton>
+              </Box>
+            </Group>
             <Box>
-              <UnstyledButton onClick={() => router.push("/")} fz={25} fw={700}>
-                NINOX
-              </UnstyledButton>
-            </Box>
-          </Group>
-          <Box>
-            <Menu>
-              <Menu.Target>
-                <ActionIcon
-                  variant="filled"
-                  color="rgba(0, 0, 0, 1)"
-                  radius="xl"
-                  aria-label="Settings"
-                >
-                  <FaUserCircle
-                    style={{ width: "70%", height: "70%" }}
-                    stroke={1.5}
-                  />
-                </ActionIcon>
-              </Menu.Target>
-              <Menu.Dropdown>
-                <Menu.Item
-                  leftSection={
-                    <FaUserTie style={{ width: rem(14), height: rem(14) }} />
-                  }
-                >
-                  Moh Alif Al Lukman
-                </Menu.Item>
-                <Menu.Item
-                  leftSection={
-                    <RiLogoutCircleRLine
-                      style={{ width: rem(14), height: rem(14) }}
+              <Menu>
+                <Menu.Target>
+                  <ActionIcon
+                    variant="filled"
+                    color="rgba(0, 0, 0, 1)"
+                    radius="xl"
+                    aria-label="Settings"
+                  >
+                    <FaUserCircle
+                      style={{ width: "70%", height: "70%" }}
+                      stroke={1.5}
                     />
-                  }
-                  // onClick={onLogout}
-                >
-                  Logout
-                </Menu.Item>
-              </Menu.Dropdown>
-            </Menu>
-          </Box>
+                  </ActionIcon>
+                </Menu.Target>
+                <Menu.Dropdown>
+                  <Menu.Item
+                    leftSection={
+                      <FaUserTie style={{ width: rem(14), height: rem(14) }} />
+                    }
+                  >
+                    Moh Alif Al Lukman
+                  </Menu.Item>
+                  <Menu.Item
+                    leftSection={
+                      <RiLogoutCircleRLine
+                        style={{ width: rem(14), height: rem(14) }}
+                      />
+                    }
+                    // onClick={onLogout}
+                  >
+                    Logout
+                  </Menu.Item>
+                </Menu.Dropdown>
+              </Menu>
+            </Box>
           </Group>
         </AppShell.Header>
         <AppShell.Navbar p="md" pb={30}>
@@ -164,31 +174,35 @@ export default function LayoutView({
             return (
               <NavLink
                 key={item.key}
-                c={item.label ? "#61677A" : "dark"}
+                active={item.link === active }
                 fw={item.label ? "bolder" : "normal"}
-                label={item.label}
+                label={item.label }
+                // description={item.description === active}
                 onClick={() => {
                   router.push(item.link);
                 }}
+                color="rgba(68, 6, 115, 1)"
+                variant="filled"
               />
             );
           })}
           <NavLink
             label="REGION VALUE EDITOR"
             childrenOffset={28}
-            c={"#61677A"}
             fw={"bolder"}
           >
             {dataRegion.map((item) => {
               return (
                 <NavLink
                   key={item.key}
-                  c={item.label ? "#61677A" : "dark"}
+                  active={item.link === active}
                   fw={item.label ? "bolder" : "normal"}
                   label={item.label}
                   onClick={() => {
                     router.push(item.link);
                   }}
+                  color="rgba(68, 6, 115, 1)"
+                  variant="filled"
                 />
               );
             })}
@@ -197,19 +211,21 @@ export default function LayoutView({
             return (
               <NavLink
                 key={item.key}
-                c={item.label ? "#61677A" : "dark"}
+                active={item.link === active}
                 fw={item.label ? "bolder" : "normal"}
                 label={item.label}
                 onClick={() => {
                   router.push(item.link);
                 }}
+                color="rgba(68, 6, 115, 1)"
+                variant="filled"
               />
             );
           })}
         </AppShell.Navbar>
         <AppShell.Main bg={"#EAEAEA"}>
           <Box p={10} pl={20} pr={20}>
-          {children}
+            {children}
           </Box>
         </AppShell.Main>
       </AppShell>

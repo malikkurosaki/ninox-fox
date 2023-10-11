@@ -1,11 +1,8 @@
-import React from 'react';
+import { ViewUploadDataPopularity } from "@/modules/popularity";
+import React from "react";
 
 function Page() {
-  return (
-    <div>
-      Page
-    </div>
-  );
+  return <ViewUploadDataPopularity />;
 }
 
 export default Page;
