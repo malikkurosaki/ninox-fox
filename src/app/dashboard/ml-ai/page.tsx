@@ -1,10 +1,12 @@
+import { ListMlAi } from '@/modules/mlai';
 import React from 'react';
+import _ from 'lodash';
 
-function Page() {
+function Page({ searchParams }: { searchParams: { prov: string, city: string } }) {
   return (
-    <div>
-      ML - AI
-    </div>
+    <>
+      <ListMlAi title={searchParams.prov} />
+    </>
   );
 }
 
