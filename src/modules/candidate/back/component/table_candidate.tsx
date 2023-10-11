@@ -1,8 +1,8 @@
 'use client'
 
-import { ActionIcon, Box, Button, Center, Group, Image, Paper, Stack, Table, Text } from "@mantine/core"
+import { ActionIcon, Box, Button, Center, Group, Image, Paper, ScrollArea, Stack, Table, Text } from "@mantine/core"
 import { useRouter } from "next/navigation";
-import { MdDelete, MdOutlineModeEdit } from "react-icons/md";
+import { MdDelete, MdEditCalendar, MdOutlineModeEdit } from "react-icons/md";
 
 /**
  * Fungsi untuk menampilkan table list kandidat.
@@ -24,7 +24,78 @@ export default function TableCandidate({ title, data }: { title: string, data: a
 
     return (
         <>
-            <Box pt={30}>
+            <Box mt={30}>
+                <Box
+                    style={{
+                        backgroundColor: "gray",
+                        padding: 20,
+                        borderRadius: 10,
+                    }}
+                >
+                    <Group justify="space-between" gap="lg">
+                        <Text fw={"bold"}>{title}</Text>
+                        <Button bg={"gray"} onClick={() => router.push('candidate/add')}>ADD CANDIDATE</Button>
+                    </Group>
+                    <Box pt={20}>
+                        <Box style={{
+                            backgroundColor: "white",
+                            padding: 10,
+                            borderRadius: 10
+                        }}>
+
+                            <ScrollArea>
+                                <Table withTableBorder horizontalSpacing="xl" >
+                                    <Table.Thead>
+                                        <Table.Tr>
+                                            <Table.Th>No</Table.Th>
+                                            <Table.Th>Name</Table.Th>
+                                            <Table.Th>Image</Table.Th>
+                                            <Table.Th>Action</Table.Th>
+                                        </Table.Tr>
+                                    </Table.Thead>
+                                    <Table.Tbody>
+                                        {elements.map((v, i) => (
+                                            <Table.Tr key={i}>
+                                                <Table.Td>{v.position}</Table.Td>
+                                                <Table.Td>{v.name}</Table.Td>
+                                                <Table.Td>
+                                                    <Image
+                                                        src={"/profile.png"}
+                                                        radius={100}
+                                                        maw={{ base: 50, sm: 50 }}
+                                                        alt="img"
+                                                    />
+                                                </Table.Td>
+                                                <Table.Td>
+                                                    <ActionIcon
+                                                        variant="transparent"
+                                                        color="rgba(5, 128, 23, 1)"
+                                                        size="xl"
+                                                        aria-label="Edit"
+                                                        onClick={()=>router.push('candidate/edit/IKomangAyu')}
+                                                    >
+                                                        <MdEditCalendar size={20} />
+                                                    </ActionIcon>
+                                                    <ActionIcon
+                                                        variant="transparent"
+                                                        color="rgba(209, 4, 4, 1)"
+                                                        size="xl"
+                                                        aria-label="Delete"
+                                                    >
+                                                        <MdDelete size={20} />
+                                                    </ActionIcon>
+                                                </Table.Td>
+                                            </Table.Tr>
+                                        ))}
+                                    </Table.Tbody>
+                                </Table>
+                            </ScrollArea>
+                        </Box>
+                    </Box>
+                </Box>
+            </Box>
+
+            {/* <Box pt={30}>
                 <Paper shadow="xs" p="xl" bg={"#f1f1f1"}>
                     <Group justify="space-between" gap="lg">
                         <Text fw={"bold"}>{title}</Text>
@@ -47,7 +118,7 @@ export default function TableCandidate({ title, data }: { title: string, data: a
                                         <Table.Td>{v.name}</Table.Td>
                                         <Table.Td>
                                             <Image
-                                                src={"../favicon.ico"}
+                                                src={"/profile.png"}
                                                 radius={100}
                                                 maw={{ base: 50, sm: 50 }}
                                                 mx="auto"
@@ -85,7 +156,7 @@ export default function TableCandidate({ title, data }: { title: string, data: a
                         </Table>
                     </Stack>
                 </Paper>
-            </Box>
+            </Box> */}
         </>
     )
 }
