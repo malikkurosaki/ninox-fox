@@ -20,6 +20,7 @@ import { DateInput } from "@mantine/dates";
 import UploadData from "./upload_data";
 import TableData from "./table_data";
 import { useRouter } from "next/navigation";
+import '@mantine/dates/styles.css'
 
 /**
  * Fungsi menampilkan halaman emotion.
@@ -59,7 +60,7 @@ export default function Emotion() {
                   placeholder="CANDIDATE"
                   data={["I WAYAN KADEK", "I KETUT SURYA", "KOMANG ADI"]}
                 />
-                <DateInput valueFormat="YYYY MMM DD" placeholder="Date input" />
+                <DateInput valueFormat="YYYY MMM DD" placeholder="SELECT DATE" />
                 <Button bg={"gray"} onClick={() => setProccess(true)}>
                   PROCCESS
                 </Button>

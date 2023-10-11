@@ -98,7 +98,7 @@ export default function CopyData() {
                   w="auto"
                   alt="candidate"
                   fit="contain"
-                  src="../../../../profile.png"
+                  src="/profile.png"
                 />
               </Center>
             </Box>
@@ -117,14 +117,15 @@ export default function CopyData() {
                 <Text fw={"bold"} fz={20}>
                   FROM
                 </Text>
-                <Image
-                  radius="md"
-                  h={400}
-                  w="auto"
-                  alt="candidate"
-                  fit="contain"
-                  src="../../../../tgl-coba.png"
-                />
+                <Box
+                  style={{
+                    backgroundColor: "white",
+                    padding: 10,
+                    borderRadius: 10,
+                  }}
+                >
+                  <DatePicker value={value} onChange={setValue} />
+                </Box>
               </Box>
             </Center>
           </Box>
@@ -134,14 +135,15 @@ export default function CopyData() {
                 <Text fw={"bold"} fz={20}>
                   TO
                 </Text>
-                <Image
-                  radius="md"
-                  h={400}
-                  w="auto"
-                  alt="candidate"
-                  fit="contain"
-                  src="../../../../tgl-coba.png"
-                />
+                <Box
+                  style={{
+                    backgroundColor: "white",
+                    padding: 10,
+                    borderRadius: 10,
+                  }}
+                >
+                  <DatePicker value={value} onChange={setValue} />
+                </Box>
                 <Group justify="flex-end">
                   <Button
                     mt={20}
@@ -164,7 +166,7 @@ export default function CopyData() {
         withCloseButton={false}
         closeOnClickOutside={false}
       >
-        <ModalEmotion/>
+        <ModalEmotion />
       </Modal>
     </>
   );

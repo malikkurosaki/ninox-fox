@@ -78,62 +78,45 @@ export default function TableData() {
             PROVINSI BALI
           </Text>
           <Box pt={20}>
-            <Box style={{
+            <Box
+              style={{
                 backgroundColor: "white",
                 padding: 10,
-                borderRadius: 10
-            }}>
-          <ScrollArea>
-            <Table withTableBorder horizontalSpacing="xl" >
-              <Table.Thead>
-                <Table.Tr>
-                  <Table.Th>NO</Table.Th>
-                  <Table.Th>KABUPATEN / KOTA</Table.Th>
-                  <Table.Th>CONFIDENCE</Table.Th>
-                  <Table.Th>SUPPORTIVE</Table.Th>
-                  <Table.Th>POSITIVE</Table.Th>
-                  <Table.Th>UNDERCIDED</Table.Th>
-                  <Table.Th>UNSUPPORTIVE</Table.Th>
-                  <Table.Th>NEGATIVE</Table.Th>
-                  <Table.Th>DISAPPROVAL</Table.Th>
-                  <Table.Th>ACTION</Table.Th>
-                </Table.Tr>
-              </Table.Thead>
-              <Table.Tbody>
-                {data.map((v, i) => (
-                  <Table.Tr key={i}>
-                    <Table.Td>{v.id}</Table.Td>
-                    <Table.Td>{v.kabupaten}</Table.Td>
-                    <Table.Td>{v.Confidence}</Table.Td>
-                    <Table.Td>{v.Supportive}</Table.Td>
-                    <Table.Td>{v.Positive}</Table.Td>
-                    <Table.Td>{v.Undecided}</Table.Td>
-                    <Table.Td>{v.Unsupportive}</Table.Td>
-                    <Table.Td>{v.Negative}</Table.Td>
-                    <Table.Td>{v.Disapproval}</Table.Td>
-                    <Table.Td>
-                      <ActionIcon
-                        variant="transparent"
-                        color="rgba(5, 128, 23, 1)"
-                        size="xl"
-                        aria-label="Edit"
-                      >
-                        <MdEditCalendar size={20} />
-                      </ActionIcon>
-                      <ActionIcon
-                        variant="transparent"
-                        color="rgba(209, 4, 4, 1)"
-                        size="xl"
-                        aria-label="Delete"
-                      >
-                        <MdDelete size={20} />
-                      </ActionIcon>
-                    </Table.Td>
-                  </Table.Tr>
-                ))}
-              </Table.Tbody>
-            </Table>
-          </ScrollArea>
+                borderRadius: 10,
+              }}
+            >
+              <ScrollArea>
+                <Table withTableBorder horizontalSpacing="xl">
+                  <Table.Thead>
+                    <Table.Tr>
+                      <Table.Th>NO</Table.Th>
+                      <Table.Th>KABUPATEN / KOTA</Table.Th>
+                      <Table.Th>CONFIDENCE</Table.Th>
+                      <Table.Th>SUPPORTIVE</Table.Th>
+                      <Table.Th>POSITIVE</Table.Th>
+                      <Table.Th>UNDERCIDED</Table.Th>
+                      <Table.Th>UNSUPPORTIVE</Table.Th>
+                      <Table.Th>NEGATIVE</Table.Th>
+                      <Table.Th>DISAPPROVAL</Table.Th>
+                    </Table.Tr>
+                  </Table.Thead>
+                  <Table.Tbody>
+                    {data.map((v, i) => (
+                      <Table.Tr key={i}>
+                        <Table.Td>{v.id}</Table.Td>
+                        <Table.Td>{v.kabupaten}</Table.Td>
+                        <Table.Td>{v.Confidence}</Table.Td>
+                        <Table.Td>{v.Supportive}</Table.Td>
+                        <Table.Td>{v.Positive}</Table.Td>
+                        <Table.Td>{v.Undecided}</Table.Td>
+                        <Table.Td>{v.Unsupportive}</Table.Td>
+                        <Table.Td>{v.Negative}</Table.Td>
+                        <Table.Td>{v.Disapproval}</Table.Td>
+                      </Table.Tr>
+                    ))}
+                  </Table.Tbody>
+                </Table>
+              </ScrollArea>
             </Box>
           </Box>
         </Box>
