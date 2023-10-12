@@ -15,6 +15,11 @@ import { useRouter } from "next/navigation";
 import UploadLeader from "../components/upload_leader";
 import TableLeader from "../components/table_leader";
 
+/**
+ * Fungsi untuk menampilkan table list leader.
+ * @param {string} title - Judul table.
+ * @returns {component} Table list leader sesuai dengan parameter.
+ */
 export default function ViewListLeader({ title }: { title: string }) {
   const router = useRouter()
   return (

@@ -23,8 +23,9 @@ import TableData from "../components/table_data";
 
 
 /**
- * Fungsi menampilkan halaman emotion.
- * @returns  Hasil dari emotion menampilakan fitur dan button download dan copy.
+ * Fungsi untuk menampilkan table list Emotion.
+ * @param {string} title - Judul table.
+ * @returns {component} Table list Emotion sesuai dengan parameter.
  */
 export default function ViewBackEmotion({title}: {title: string}) {
   const [proccess, setProccess] = useState(false);

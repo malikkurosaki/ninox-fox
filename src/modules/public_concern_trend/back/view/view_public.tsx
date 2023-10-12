@@ -16,6 +16,11 @@ import UploadPublic from "../components/upload_public";
 import TablePublic from "../components/table_public";
 import { useRouter } from "next/navigation";
 
+/**
+ * Fungsi untuk menampilkan table list public.
+ * @param {string} title - Judul table.
+ * @returns {component} Table list Public sesuai dengan parameter.
+ */
 function ViewPublic({ title }: { title: string }) {
   const router = useRouter()
   return (

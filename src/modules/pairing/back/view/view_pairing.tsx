@@ -4,6 +4,7 @@ import {
   Button,
   Grid,
   Group,
+  Paper,
   Select,
   SimpleGrid,
   Stack,
@@ -12,12 +13,15 @@ import {
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import TableDataPairing from "../components/table_data_pairing";
+import { DateInput } from "@mantine/dates";
+import UploadDataPairing from "../components/upload_data_pairing";
 
 /**
- * Fungsi menampilkan halaman pairing.
- * @returns  Hasil dari pairing menampilkan fitur download, upload , table
+ * Fungsi untuk menampilkan table list pairing.
+ * @param {string} title - Judul table.
+ * @returns {component} Table list pairing sesuai dengan parameter.
  */
-export default function ViewPairing({title}: {title: string}) {
+export default function ViewPairing({ title }: { title: string }) {
   const router = useRouter();
   return (
     <>
@@ -25,57 +29,89 @@ export default function ViewPairing({title}: {title: string}) {
         <Text fw={"bold"}>REGIONAL DATA PAIRING</Text>
       </Stack>
       <Box pt={30}>
-        <Grid grow>
-          <Grid.Col span={{ base: 12, md: 5, lg: 5 }}>
-            <Select
-              placeholder="PROVINCE"
-              data={["BALI", "JAWA BARAT", "JAWA TIMUR", "KALIMANTAN TENGAH"]}
-            />
-          </Grid.Col>
-          <Grid.Col span={{ base: 12, md: 5, lg: 5 }}>
-            <Select
-              placeholder="CITY"
-              data={["BADUNG", "DENPASAR", "TABANAN"]}
-            />
-          </Grid.Col>
-          <Grid.Col span={{ base: 12, md: 2, lg: 2 }}>
-            <Button bg={"gray"} fullWidth onClick={() => router.push('pairing?prov=bali')}>
-              PROCCESS
-            </Button>
-          </Grid.Col>
-        </Grid>
+        <SimpleGrid
+          cols={{ base: 1, sm: 2, lg: 2 }}
+          spacing={{ base: 10, sm: "xl" }}
+          verticalSpacing={{ base: "md", sm: "xl" }}
+        >
+          <Box>
+            <Paper shadow="xs" p="xl">
+              <Stack>
+                <Select
+                  placeholder="PROVINCE"
+                  data={[
+                    "BALI",
+                    "JAWA BARAT",
+                    "JAWA TIMUR",
+                    "KALIMANTAN TENGAH",
+                  ]}
+                />
+                <Select
+                  placeholder="CITY"
+                  data={["BADUNG", "DENPASAR", "TABANAN"]}
+                />
+                <Select
+                  placeholder="CANDIDATE 1"
+                  data={["I WAYAN KADEK", "I KETUT SURYA", "KOMANG ADI"]}
+                />
+                <Select
+                  placeholder="CANDIDATE 2"
+                  data={["I WAYAN KADEK", "I KETUT SURYA", "KOMANG ADI"]}
+                />
+                <DateInput valueFormat="YYYY MMM DD" placeholder="SELECT DATE" />
+                <Button bg={"gray"} onClick={() => router.push('pairing?prov=bali')}>
+                  PROCCESS
+                </Button>
+              </Stack>
+            </Paper>
+          </Box>
+          {title &&
+            <Box>
+              <UploadDataPairing />
+              <Group justify="space-between" grow pt={30}>
+                <Box>
+                  <Box
+                    style={{
+                      borderRadius: 10,
+                      padding: 30,
+                      paddingTop: 50,
+                      paddingBottom: 50,
+                      backgroundColor: "gray",
+                      cursor: "pointer",
+                    }}
+                  >
+                    <Text c={"white"} fw={"bold"} ta={"center"}>
+                      DOWNLOAD
+                    </Text>
+                  </Box>
+                </Box>
+                <Box>
+                  <Box
+                    style={{
+                      borderRadius: 10,
+                      padding: 30,
+                      paddingTop: 50,
+                      paddingBottom: 50,
+                      backgroundColor: "gray",
+                      cursor: "pointer",
+                    }}
+                    onClick={() => router.push("pairing/copy-data")}
+                  >
+                    <Text c={"white"} fw={"bold"} ta={"center"}>
+                      COPY DATA
+                    </Text>
+                  </Box>
+                </Box>
+              </Group>
+            </Box>
+          }
+        </SimpleGrid>
       </Box>
-      {title && (
-        <Box>
-          <Box pt={40}>
-            <SimpleGrid
-              cols={{ base: 1, sm: 2, lg: 5 }}
-              spacing={{ base: 10, sm: "xl" }}
-              verticalSpacing={{ base: "md", sm: "xl" }}
-            >
-              <Button bg={"gray"}>DOWNLOAD</Button>
-              <Button
-                bg={"gray"}
-                onClick={() => router.push("/dashboard/pairing/upload")}
-              >
-                UPLOAD
-              </Button>
-              <Select
-                placeholder="CANDIDATE 1"
-                data={["I WAYAN KADEK", "I KETUT SURYA", "KOMANG ADI"]}
-              />
-              <Select
-                placeholder="CANDIDATE 2"
-                data={["I WAYAN KADEK", "I KETUT SURYA", "KOMANG ADI"]}
-              />
-              <Button bg={"gray"}>PROCCESS</Button>
-            </SimpleGrid>
-          </Box>
-          <Box pt={30}>
-            <TableDataPairing />
-          </Box>
+      {title &&
+        <Box pt={30}>
+          <TableDataPairing />
         </Box>
-      )}
+      }
     </>
   );
 }
