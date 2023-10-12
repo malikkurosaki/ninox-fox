@@ -8,15 +8,15 @@ import { isModalPairing } from "../../val/val_modal_pairing";
 
 /**
  * Fungsi menampilkan modal.
- * @returns  Hasil dari upload data modal untuk menampilkan allert yes or no
+ * @returns  Hasil dari Copy data modal untuk menampilkan allert yes or no
  */
-export default function UploadDataModal() {
+export default function ModalCopy() {
   const [openModal, setOpenModal] = useAtom(isModalPairing);
   const router = useRouter();
 
   async function onUpload() {
     // router.push("/dashboard/pairing");
-    toast("Success Upload Data", { theme: "dark" });
+    toast("Success Copy Data", { theme: "dark" });
     setOpenModal(false);
   }
 
@@ -25,7 +25,7 @@ export default function UploadDataModal() {
       <Box>
         <Alert color="gray" variant="outline">
           <Text fw={700} ta={"center"} mb={20} mt={20}>
-            ARE YOU SURE TO UPLOAD DATA?
+            ARE YOU SURE TO COPY DATA?
           </Text>
           <Group justify="space-between" pt={10}>
             <Button
