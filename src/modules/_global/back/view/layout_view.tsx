@@ -33,13 +33,8 @@ export default function LayoutView({
   const dataDashboard = [
     {
       key: "md1",
-      link: "/dashboard",
+      link: "/dashboard/emotion",
       label: "EMOTION EDITOR",
-    },
-    {
-      key: "md2",
-      link: "/dashboard/popularity",
-      label: "NATIONAL POPULARITY METRICS",
     },
     {
       key: "md3",
@@ -61,7 +56,7 @@ export default function LayoutView({
     },
     {
       key: "md6",
-      link: "/dashboard/leader_trait_assessment",
+      link: "/dashboard/leader-trait-assessment",
       label: "LEADER TRAIT ASSESSMENT",
     },
     {

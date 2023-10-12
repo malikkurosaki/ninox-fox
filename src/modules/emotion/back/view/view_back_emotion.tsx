@@ -61,7 +61,7 @@ export default function ViewBackEmotion({title}: {title: string}) {
                   data={["I WAYAN KADEK", "I KETUT SURYA", "KOMANG ADI"]}
                 />
                 <DateInput valueFormat="YYYY MMM DD" placeholder="SELECT DATE" />
-                <Button bg={"gray"} onClick={() => router.push('dashboard?prov=bali')}>
+                <Button bg={"gray"} onClick={() => router.push('emotion?prov=bali')}>
                   PROCCESS
                 </Button>
               </Stack>
@@ -106,7 +106,7 @@ export default function ViewBackEmotion({title}: {title: string}) {
                       backgroundColor: "gray",
                       cursor: "pointer",
                     }}
-                    onClick={() => router.push("/dashboard/copy-data")}
+                    onClick={() => router.push("emotion/copy-data")}
                   >
                     <Text c={"white"} fw={"bold"} ta={"center"}>
                       COPY DATA

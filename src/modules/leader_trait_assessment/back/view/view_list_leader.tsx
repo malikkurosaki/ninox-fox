@@ -49,7 +49,7 @@ export default function ViewListLeader({ title }: { title: string }) {
                 />
                 <Button
                   bg={"gray"}
-                  onClick={() => router.push('leader_trait_assessment?prov=bali')}
+                  onClick={() => router.push('leader-trait-assessment?prov=bali')}
                 >
                   PROCCESS
                 </Button>
