@@ -1,5 +1,5 @@
 import { ViewBackEmotion } from "@/modules/emotion";
 
-export default function Page() {
-  return <ViewBackEmotion />;
+export default function Page({searchParams}: {searchParams: {prov: string}}) {
+  return <ViewBackEmotion title={searchParams.prov} />;
 }

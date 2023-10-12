@@ -28,7 +28,7 @@ export default function CopyData() {
   return (
     <>
       <Stack>
-        <ButtonBack to="/dashboard" />
+        <ButtonBack />
         <Text fw={"bold"} fz={25}>
           {" "}
           COPY DATA

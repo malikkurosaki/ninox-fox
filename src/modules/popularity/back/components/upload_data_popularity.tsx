@@ -24,7 +24,7 @@ export default function UploadDataPopularity(props: Partial<DropzoneProps>) {
   return (
     <>
       <Stack>
-        <ButtonBack to="/dashboard/popularity" />
+        <ButtonBack/>
         <Text fw={"bold"} fz={25}>
           {" "}
           UPLOAD CSV

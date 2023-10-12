@@ -29,7 +29,7 @@ export default function CopyDataPopularity() {
   return (
     <>
       <Stack>
-        <ButtonBack to="/dashboard/popularity" />
+        <ButtonBack />
         <Text fw={"bold"} fz={25}>
           {" "}
           COPY DATA

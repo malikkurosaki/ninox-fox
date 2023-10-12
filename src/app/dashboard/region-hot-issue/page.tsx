@@ -1,11 +1,8 @@
-import React from 'react';
+import { ViewListRegion } from "@/modules/region_hot_issue";
+import React from "react";
 
-function Page() {
-  return (
-    <div>
-      REGION HOT ISSUE
-    </div>
-  );
+function Page({ searchParams }: { searchParams: { prov: string } }) {
+  return <ViewListRegion title={searchParams.prov} />;
 }
 
 export default Page;

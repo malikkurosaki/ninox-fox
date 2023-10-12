@@ -6,27 +6,52 @@ const data = [
   {
     id: 1,
     kabupaten: "BADUNG",
-    value: 232,
+    Pendidikan: 232,
+    infrastruktur: 21,
+    layanan: 311,
+    kemiskinan: 32,
+    keadilan: 21,
+    pekerjaan: 3232,
   },
   {
     id: 2,
     kabupaten: "DENPASAR",
-    value: 2323,
+    Pendidikan: 232,
+    infrastruktur: 21,
+    layanan: 311,
+    kemiskinan: 32,
+    keadilan: 21,
+    pekerjaan: 3232,
   },
   {
     id: 3,
     kabupaten: "BULELENG",
-    value: 3443,
+    Pendidikan: 232,
+    infrastruktur: 21,
+    layanan: 311,
+    kemiskinan: 32,
+    keadilan: 21,
+    pekerjaan: 3232,
   },
   {
     id: 4,
     kabupaten: "GIANYAR",
-    value: 22321,
+    Pendidikan: 232,
+    infrastruktur: 21,
+    layanan: 311,
+    kemiskinan: 32,
+    keadilan: 21,
+    pekerjaan: 3232,
   },
   {
     id: 5,
     kabupaten: "TABANAN",
-    value: 5654,
+    Pendidikan: 232,
+    infrastruktur: 21,
+    layanan: 311,
+    kemiskinan: 32,
+    keadilan: 21,
+    pekerjaan: 3232,
   },
 ];
 /**
@@ -34,7 +59,7 @@ const data = [
  * @returns  Hasil menampilkan tabel beserta valuenya.
  */
 
-export default function TableDataAudience() {
+export default function TablePublic() {
   return (
     <>
       <Box>
@@ -62,7 +87,12 @@ export default function TableDataAudience() {
                     <Table.Tr>
                       <Table.Th>NO</Table.Th>
                       <Table.Th>KABUPATEN / KOTA</Table.Th>
-                      <Table.Th>VALUE</Table.Th>
+                      <Table.Th>PENDIDIKAN</Table.Th>
+                      <Table.Th>INFRASTRUKTUR</Table.Th>
+                      <Table.Th>LAYANAN KESEHATAN</Table.Th>
+                      <Table.Th>KEMISKINAN</Table.Th>
+                      <Table.Th>KEADILAN SOSIAL</Table.Th>
+                      <Table.Th>LAPANGAN PEKERJAAN</Table.Th>
                     </Table.Tr>
                   </Table.Thead>
                   <Table.Tbody>
@@ -70,7 +100,12 @@ export default function TableDataAudience() {
                       <Table.Tr key={i}>
                         <Table.Td>{v.id}</Table.Td>
                         <Table.Td>{v.kabupaten}</Table.Td>
-                        <Table.Td>{v.value}</Table.Td>
+                        <Table.Td>{v.Pendidikan}</Table.Td>
+                        <Table.Td>{v.infrastruktur}</Table.Td>
+                        <Table.Td>{v.layanan}</Table.Td>
+                        <Table.Td>{v.kemiskinan}</Table.Td>
+                        <Table.Td>{v.keadilan}</Table.Td>
+                        <Table.Td>{v.pekerjaan}</Table.Td>
                       </Table.Tr>
                     ))}
                   </Table.Tbody>
@@ -83,4 +118,5 @@ export default function TableDataAudience() {
     </>
   );
 }
+
 
