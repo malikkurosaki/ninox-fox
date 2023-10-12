@@ -9,9 +9,7 @@ import { AiOutlineCloudUpload } from "react-icons/ai";
 import { GrDocumentWindows } from "react-icons/gr";
 import { MdOutlineCancel } from "react-icons/md";
 import { useAtom } from "jotai";
-import { isModalPopularity } from "@/modules/popularity/back/val/val_modal_popularity";
 import { isModalPairing } from "../val/val_modal_pairing";
-import UploadDataModal from "./modal/upload_pairing_modal";
 
 /**
  * Fungsi menampilkan halaman upload data.
@@ -22,25 +20,17 @@ export default function UploadDataPairing(props: Partial<DropzoneProps>) {
   const [openModal, setOpenModal] = useAtom(isModalPairing);
   return (
     <>
-      <Stack>
-        <ButtonBack />
-        <Text fw={"bold"} fz={25}>
-          {" "}
-          UPLOAD CSV
-        </Text>
-      </Stack>
-      <Box pt={20}>
         <Box
           style={{
-            backgroundColor: "gray",
-            padding: 50,
+            backgroundColor: "white",
+            padding: 27,
             borderRadius: 10,
           }}
         >
           <Center>
             <Box
               style={{
-                border: "1px dashed white",
+                border: "1px dashed gray",
                 borderRadius: 10,
                 padding: 50,
               }}
@@ -81,7 +71,7 @@ export default function UploadDataPairing(props: Partial<DropzoneProps>) {
                   </Dropzone.Reject>
 
                   <Box>
-                    <Text c={"white"} size="xl" inline>
+                    <Text c={"gray"} size="xl" inline>
                       UPLOAD DATA
                     </Text>
                   </Box>
@@ -89,22 +79,7 @@ export default function UploadDataPairing(props: Partial<DropzoneProps>) {
               </Dropzone>
             </Box>
           </Center>
-          <Center pt={20}>
-            <Button bg={"white"} c={"dark"} onClick={() => setOpenModal(true)}>
-              UPDATE
-            </Button>
-          </Center>
         </Box>
-      </Box>
-      <Modal
-        opened={openModal}
-        onClose={() => setOpenModal(false)}
-        centered
-        withCloseButton={false}
-        closeOnClickOutside={false}
-      >
-        <UploadDataModal />
-      </Modal>
     </>
   );
 }

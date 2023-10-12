@@ -15,6 +15,11 @@ import { useRouter } from "next/navigation";
 import UploadRegion from "../components/upload_region";
 import TableRegion from "../components/table_region";
 
+/**
+ * Fungsi untuk menampilkan table list region.
+ * @param {string} title - Judul table.
+ * @returns {component} Table list region sesuai dengan parameter.
+ */
 export default function ViewListRegion({ title }: { title: string }) {
   const router = useRouter()
   return (

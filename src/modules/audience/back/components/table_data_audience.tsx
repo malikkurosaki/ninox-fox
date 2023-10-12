@@ -33,7 +33,6 @@ const data = [
  * Fungsi untuk mendapatkan nilai dari table.
  * @returns  Hasil menampilkan tabel beserta valuenya.
  */
-
 export default function TableDataAudience() {
   return (
     <>

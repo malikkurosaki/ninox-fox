@@ -1,5 +1,5 @@
 import { ViewPairing } from "./back";
-import {ViewUploadPairing} from "./back";
+import {ViewCopyDataPairing} from "./back";
 
 export {ViewPairing}
-export {ViewUploadPairing};
+export {ViewCopyDataPairing}

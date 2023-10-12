@@ -1,6 +1,6 @@
 'use client'
 
-import { Box, Button, Center, Paper, Select, SimpleGrid, Stack, Text, UnstyledButton } from "@mantine/core"
+import { Box, Button, Center, Group, Paper, Select, SimpleGrid, Stack, Text, UnstyledButton } from "@mantine/core"
 import { useState } from "react"
 import TableCandidate from "../component/table_candidate"
 import { useRouter } from "next/navigation"
@@ -21,32 +21,16 @@ export default function ListCandidates({ title }: { title: string }) {
                 <Text fw={"bold"}>CANDIDATE</Text>
             </Stack>
             <Box pt={30}>
-                <SimpleGrid
-                    cols={{ base: 1, sm: 2, lg: 2 }}
-                    spacing={{ base: 10, sm: "xl" }}
-                    verticalSpacing={{ base: "md", sm: "xl" }}
-                >
-                    <Box>
-                        <Paper shadow="xs" p="xl">
-                            <Stack>
-                                <Select
-                                    placeholder="PROVINCE"
-                                    data={[
-                                        "BALI",
-                                        "JAWA BARAT",
-                                        "JAWA TIMUR",
-                                        "KALIMANTAN TENGAH",
-                                    ]}
-                                />
-                                <Select
-                                    placeholder="CITY"
-                                    data={["BADUNG", "DENPASAR", "TABANAN"]}
-                                />
-                                <Button bg={"gray"} onClick={() => router.push('candidate?prov=bali')}>PROCESS</Button>
-                            </Stack>
-                        </Paper>
-                    </Box>
-                </SimpleGrid>
+                <Group grow mt={30}>
+                    <Select
+                        placeholder="PROVINCE"
+                        data={["BALI", "JAWA BARAT", "JAWA TIMUR", "KALIMANTAN TENGAH"]}
+                    />
+                    <Select placeholder="CITY" data={["BADUNG", "DENPASAR", "TABANAN"]} />
+                    <Button bg={"gray"} onClick={() => router.push('candidate?prov=bali')}>
+                        PROCCESS
+                    </Button>
+                </Group>
                 {title &&
                     <TableCandidate title="PROVINSI BALI" data={[]} />
                 }
