@@ -3,7 +3,7 @@
 
 
 ### Features
-- coming soon ...
+- coming soon ....
 
 
 ### Tech Stack
