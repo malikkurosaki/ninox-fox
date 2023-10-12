@@ -15,7 +15,7 @@ export default function UploadDataModal() {
   const router = useRouter();
 
   async function onUpload() {
-    router.push("/dashboard/pairing");
+    // router.push("/dashboard/pairing");
     toast("Success Upload Data", { theme: "dark" });
     setOpenModal(false);
   }

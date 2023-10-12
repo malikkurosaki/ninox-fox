@@ -6,27 +6,57 @@ const data = [
   {
     id: 1,
     kabupaten: "BADUNG",
-    value: 232,
+    cerdas: 232,
+    jujur: 21,
+    tegas: 311,
+    agamis: 32,
+    pekerja_keras: 21,
+    berprestasi: 3232,
+    merakyat: 3232,
   },
   {
     id: 2,
     kabupaten: "DENPASAR",
-    value: 2323,
+    cerdas: 232,
+    jujur: 21,
+    tegas: 311,
+    agamis: 32,
+    pekerja_keras: 21,
+    berprestasi: 3232,
+    merakyat: 3232,
   },
   {
     id: 3,
     kabupaten: "BULELENG",
-    value: 3443,
+    cerdas: 232,
+    jujur: 21,
+    tegas: 311,
+    agamis: 32,
+    pekerja_keras: 21,
+    berprestasi: 3232,
+    merakyat: 3232,
   },
   {
     id: 4,
     kabupaten: "GIANYAR",
-    value: 22321,
+    cerdas: 232,
+    jujur: 21,
+    tegas: 311,
+    agamis: 32,
+    pekerja_keras: 21,
+    berprestasi: 3232,
+    merakyat: 3232,
   },
   {
     id: 5,
     kabupaten: "TABANAN",
-    value: 5654,
+    cerdas: 232,
+    jujur: 21,
+    tegas: 311,
+    agamis: 32,
+    pekerja_keras: 21,
+    berprestasi: 3232,
+    merakyat: 3232,
   },
 ];
 /**
@@ -34,7 +64,7 @@ const data = [
  * @returns  Hasil menampilkan tabel beserta valuenya.
  */
 
-export default function TableDataAudience() {
+export default function TableLeader() {
   return (
     <>
       <Box>
@@ -62,7 +92,13 @@ export default function TableDataAudience() {
                     <Table.Tr>
                       <Table.Th>NO</Table.Th>
                       <Table.Th>KABUPATEN / KOTA</Table.Th>
-                      <Table.Th>VALUE</Table.Th>
+                      <Table.Th>CERDAS</Table.Th>
+                      <Table.Th>JUJUR</Table.Th>
+                      <Table.Th>TEGAS</Table.Th>
+                      <Table.Th>AGAMIS</Table.Th>
+                      <Table.Th>PEKERJA KERAS</Table.Th>
+                      <Table.Th>BERPRESTASI</Table.Th>
+                      <Table.Th>MERAKYAT</Table.Th>
                     </Table.Tr>
                   </Table.Thead>
                   <Table.Tbody>
@@ -70,7 +106,13 @@ export default function TableDataAudience() {
                       <Table.Tr key={i}>
                         <Table.Td>{v.id}</Table.Td>
                         <Table.Td>{v.kabupaten}</Table.Td>
-                        <Table.Td>{v.value}</Table.Td>
+                        <Table.Td>{v.cerdas}</Table.Td>
+                        <Table.Td>{v.jujur}</Table.Td>
+                        <Table.Td>{v.tegas}</Table.Td>
+                        <Table.Td>{v.agamis}</Table.Td>
+                        <Table.Td>{v.pekerja_keras}</Table.Td>
+                        <Table.Td>{v.berprestasi}</Table.Td>
+                        <Table.Td>{v.merakyat}</Table.Td>
                       </Table.Tr>
                     ))}
                   </Table.Tbody>
@@ -83,4 +125,5 @@ export default function TableDataAudience() {
     </>
   );
 }
+
 

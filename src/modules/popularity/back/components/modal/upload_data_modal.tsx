@@ -15,7 +15,6 @@ export default function UploadDataModal() {
   const router = useRouter();
 
   async function onUpload() {
-    router.push("/dashboard/popularity");
     toast("Success Upload Data", { theme: "dark" });
     setOpenModal(false);
   }

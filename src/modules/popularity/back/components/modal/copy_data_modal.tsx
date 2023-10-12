@@ -16,7 +16,6 @@ export default function CopyDataModal() {
   const router = useRouter();
 
   async function onCopy() {
-    router.push("/dashboard/popularity");
     toast("COPY DATA  SUCCESS", { theme: "dark" });
     setOpenModal(false);
   }

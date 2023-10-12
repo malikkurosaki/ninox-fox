@@ -1,10 +1,9 @@
+import { ViewListLeader } from '@/modules/leader_trait_assessment';
 import React from 'react';
 
-function Page() {
+function Page({searchParams}: {searchParams: {prov: string}}) {
   return (
-    <div>
-      LEADER TRAIT ASSESSMENT
-    </div>
+    <ViewListLeader title={searchParams.prov}/>
   );
 }
 

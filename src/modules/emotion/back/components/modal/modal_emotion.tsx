@@ -15,7 +15,6 @@ export default function ModalEmotion() {
   const router = useRouter()
 
   async function onCopy() {
-    router.push("/dashboard")
     toast("COPY DATA  SUCCESS", {theme: "dark"});
     setOpenModal(false);
   }

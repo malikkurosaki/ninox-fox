@@ -1,8 +1,9 @@
+
 "use client"
+import React from "react";
 import {
   Box,
   Button,
-  Container,
   Group,
   Paper,
   Select,
@@ -10,28 +11,21 @@ import {
   Stack,
   Text,
 } from "@mantine/core";
-import { DateInput } from "@mantine/dates";
-import React, { useState } from "react";
-import UploadDataAudience from "./upload_data_audience";
-import TableDataAudience from "./table_data_audience";
+import { useRouter } from "next/navigation";
+import UploadLeader from "../components/upload_leader";
+import TableLeader from "../components/table_leader";
 
-
-/**
- * Fungsi menampilkan halaman audience.
- * @returns  Hasil dari audience select dan download
- */
-export default function Audience() {
-  const [valueAudience, setAudience] = useState(false)
+export default function ViewListLeader({ title }: { title: string }) {
+  const router = useRouter()
   return (
     <>
       <Stack>
-        <Text fw={"bold"}>AUDIENCE</Text>
+        <Text fw={"bold"}>LEADER TRAIT ASSESSMENT</Text>
       </Stack>
       <Box pt={30}>
         <SimpleGrid
           cols={{ base: 1, sm: 2, lg: 2 }}
           spacing={{ base: 10, sm: "xl" }}
-
         >
           <Box>
             <Paper shadow="xs" p="xl">
@@ -55,40 +49,44 @@ export default function Audience() {
                 />
                 <Button
                   bg={"gray"}
-                  onClick={() => setAudience(true)}
+                  onClick={() => router.push('leader_trait_assessment?prov=bali')}
                 >
                   PROCCESS
                 </Button>
               </Stack>
             </Paper>
           </Box>
-            <Group justify="center" grow style={{
+          <Group
+            justify="center"
+            grow
+            style={{
               backgroundColor: "white",
               borderRadius: 10,
-              padding: 20
-            }}>
-
-            <UploadDataAudience />
+              padding: 20,
+            }}
+          >
+            <UploadLeader />
             <Box
               style={{
                 border: "1px dashed gray",
                 borderRadius: 10,
                 padding: 40,
-                cursor: "pointer"
+                cursor: "pointer",
               }}
             >
               <Text ta={"center"} size="xl" inline>
                 DOWNLOAD
               </Text>
             </Box>
-            </Group>
+          </Group>
         </SimpleGrid>
       </Box>
-      {valueAudience &&
-      <Box pt={30}>
-        <TableDataAudience/>
-      </Box>
-      }
+      {title && (
+        <Box pt={30}>
+          <TableLeader />
+        </Box>
+      )}
     </>
   );
 }
+

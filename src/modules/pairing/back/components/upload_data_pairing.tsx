@@ -23,7 +23,7 @@ export default function UploadDataPairing(props: Partial<DropzoneProps>) {
   return (
     <>
       <Stack>
-        <ButtonBack to="/dashboard/pairing" />
+        <ButtonBack />
         <Text fw={"bold"} fz={25}>
           {" "}
           UPLOAD CSV
