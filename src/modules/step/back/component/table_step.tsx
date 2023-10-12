@@ -21,6 +21,7 @@ import { MdDelete, MdEditCalendar } from "react-icons/md";
 import { CiRead } from "react-icons/ci";
 import ModalDelStep from "./modal_del_step";
 import { useDisclosure } from "@mantine/hooks";
+import ComponentTableStep from "./component_table_step";
 
 /**
  * Fungsi untuk menampilkan view table step.
@@ -134,74 +135,7 @@ export default function TableStep() {
                     </Table.Tr>
                   </Table.Thead>
                   {elements.map((v, i) => (
-                    <Table.Tbody key={i}>
-                      <Table.Tr>
-                        <Table.Td>{v.no}</Table.Td>
-                        <Table.Td>{v.name}</Table.Td>
-                        <Table.Td>{v.category}</Table.Td>
-                        <Table.Td>{v.sentiment}</Table.Td>
-                        <Table.Td>
-                          <Center>
-                            <ActionIcon
-                              variant="transparent"
-                              color="rgba(5, 128, 23, 1)"
-                              size="xl"
-                              aria-label="Edit"
-                              onClick={toggle}
-                            >
-                              <CiRead size={20} />
-                            </ActionIcon>
-
-                            <ActionIcon
-                              variant="transparent"
-                              color="rgba(5, 128, 23, 1)"
-                              size="xl"
-                              aria-label="Edit"
-                              onClick={() =>
-                                router.push("step/edit/IKomangAyu")
-                              }
-                            >
-                              <MdEditCalendar size={20} />
-                            </ActionIcon>
-                            <ActionIcon
-                              variant="transparent"
-                              color="rgba(209, 4, 4, 1)"
-                              size="xl"
-                              aria-label="Delete"
-                              onClick={() => setOpenModal(true)}
-                            >
-                              <MdDelete size={20} />
-                            </ActionIcon>
-                          </Center>
-                        </Table.Td>
-                      </Table.Tr>
-                      <Table.Tr
-                        style={{
-                          borderBottom: "1px solid #CED4D9",
-                        }}
-                      >
-                        <Table.Td colSpan={5}>
-                          <Collapse
-                            in={opened}
-                            transitionDuration={500}
-                            transitionTimingFunction="linear"
-                          >
-                            <Box
-                              style={{
-                                backgroundColor: "gray",
-                                padding: 20,
-                                borderRadius: 10,
-                              }}
-                            >
-                              <Text c={"white"} fw={"bold"} fz={20} mb={10}>
-                                Content
-                              </Text>
-                              <Text c={"white"}>{v.value}</Text>
-                            </Box>
-                          </Collapse>
-                        </Table.Td>
-                      </Table.Tr>
-                    </Table.Tbody>
+                    <ComponentTableStep v={v} i={i} key={i} />
                   ))}
                 </Table>
               </ScrollArea>
