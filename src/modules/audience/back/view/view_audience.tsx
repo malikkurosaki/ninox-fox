@@ -18,8 +18,9 @@ import { useRouter } from "next/navigation";
 
 
 /**
- * Fungsi menampilkan halaman audience.
- * @returns  Hasil dari audience select dan download
+ * Fungsi untuk menampilkan table list Audience.
+ * @param {string} title - Judul table.
+ * @returns {component} Table list audience sesuai dengan parameter.
  */
 export default function ViewAudience({title}: {title: string}) {
   const router = useRouter()
