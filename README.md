@@ -22,4 +22,5 @@ NextJS, Mantine, Prisma Postgres
 
 ![gambar](ninox.png)
 
-test
+test 1
+test 2
