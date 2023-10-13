@@ -20,22 +20,19 @@ export default function ListCandidates({ title }: { title: string }) {
             <Stack>
                 <Text fw={"bold"}>CANDIDATE</Text>
             </Stack>
-            <Box pt={30}>
-                <Group grow mt={30}>
-                    <Select
-                        placeholder="PROVINCE"
-                        data={["BALI", "JAWA BARAT", "JAWA TIMUR", "KALIMANTAN TENGAH"]}
-                    />
-                    <Select placeholder="CITY" data={["BADUNG", "DENPASAR", "TABANAN"]} />
-                    <Button bg={"gray"} onClick={() => router.push('candidate?prov=bali')}>
-                        PROCCESS
-                    </Button>
-                </Group>
-                {title &&
-                    <TableCandidate title="PROVINSI BALI" data={[]} />
-                }
-
-            </Box>
+            <Group grow mt={30}>
+                <Select
+                    placeholder="PROVINCE"
+                    data={["BALI", "JAWA BARAT", "JAWA TIMUR", "KALIMANTAN TENGAH"]}
+                />
+                <Select placeholder="CITY" data={["BADUNG", "DENPASAR", "TABANAN"]} />
+                <Button bg={"gray"} onClick={() => router.push('candidate?prov=bali')}>
+                    PROCCESS
+                </Button>
+            </Group>
+            {title &&
+                <TableCandidate title="PROVINSI BALI" data={[]} />
+            }
         </>
     )
 }
