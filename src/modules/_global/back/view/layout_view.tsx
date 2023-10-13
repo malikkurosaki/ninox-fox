@@ -37,7 +37,7 @@ export default function LayoutView({
       label: "EMOTION EDITOR",
     },
     {
-      key: "md3",
+      key: "md2",
       link: "/dashboard/pairing",
       label: "REGIONAL DATA PAIRING",
     },
@@ -45,22 +45,22 @@ export default function LayoutView({
 
   const dataRegion = [
     {
-      key: "md4",
+      key: "md3",
       link: "/dashboard/audience",
       label: "AUDIENCE",
     },
     {
-      key: "md5",
+      key: "md4",
       link: "/dashboard/public-concern-trend",
       label: "PUBLIC CONCERNS TRENDS",
     },
     {
-      key: "md6",
+      key: "md5",
       link: "/dashboard/leader-trait-assessment",
       label: "LEADER TRAIT ASSESSMENT",
     },
     {
-      key: "md7",
+      key: "md6",
       link: "/dashboard/region-hot-issue",
       label: "REGION HOT ISSUE",
     },
@@ -68,22 +68,22 @@ export default function LayoutView({
 
   const dataDua = [
     {
-      key: "md4",
+      key: "md7",
       link: "/dashboard/step",
       label: "STEP",
     },
     {
-      key: "md5",
+      key: "md8",
       link: "/dashboard/swot",
       label: "SWOT",
     },
     {
-      key: "md6",
+      key: "md9",
       link: "/dashboard/ml-ai",
       label: "ML - AI",
     },
     {
-      key: "md7",
+      key: "md10",
       link: "/dashboard/candidate",
       label: "CANDIDATE",
     },
@@ -155,7 +155,7 @@ export default function LayoutView({
                         style={{ width: rem(14), height: rem(14) }}
                       />
                     }
-                    // onClick={onLogout}
+                  // onClick={onLogout}
                   >
                     Logout
                   </Menu.Item>
@@ -169,9 +169,9 @@ export default function LayoutView({
             return (
               <NavLink
                 key={item.key}
-                active={item.link === active }
+                active={item.link === active}
                 fw={item.label ? "bolder" : "normal"}
-                label={item.label }
+                label={item.label}
                 // description={item.description === active}
                 onClick={() => {
                   router.push(item.link);
