@@ -11,12 +11,12 @@ export async function funSeederKecamatan() {
             },
             create: {
                 id: Number(data.id),
-                idKabkot: Number(data.masterKabKotId),
+                idKabkot: Number(data.idKabkot),
                 name: data.name
             },
             update: {
                 id: Number(data.id),
-                idKabkot: Number(data.masterKabKotId),
+                idKabkot: Number(data.idKabkot),
                 name: data.name
             }
         })

@@ -11,12 +11,12 @@ export async function funSeederKabupaten() {
             },
             create: {
                 id: Number(data.id),
-                idProvinsi: Number(data.masterProvinceId),
+                idProvinsi: Number(data.idProvinsi),
                 name: data.name
             },
             update: {
                 id: Number(data.id),
-                idProvinsi: Number(data.masterProvinceId),
+                idProvinsi: Number(data.idProvinsi),
                 name: data.name
             }
         })
