@@ -6,6 +6,9 @@ import TableCandidate from "../component/table_candidate"
 import { useRouter } from "next/navigation"
 import { MasterProvinceGetAll } from "@/modules/_global/fun/master_province_get_all"
 import { MasterKabGetByProvince } from "@/modules/_global/fun/master_kabupaten_get_by_province"
+import toast from "react-simple-toasts"
+import _ from "lodash"
+import { useShallowEffect } from "@mantine/hooks"
 
 
 /**
@@ -14,35 +17,43 @@ import { MasterKabGetByProvince } from "@/modules/_global/fun/master_kabupaten_g
  * @returns {component} Select wilayah.
  */
 
-export default function ListCandidates({ title, provinsi }: { title: string, provinsi: any }) {
+export default function ListCandidates({ param, provinsi }: { param: any, provinsi: any }) {
     const router = useRouter()
+    const [dataProvinsi, setDataProvinsi] = useState(provinsi)
+    const [dataKab, setDataKab] = useState<any>([])
+    const [isProvinsi, setProvinsi] = useState<any>(param.prov || null)
+    const [isKabupaten, setKabupaten] = useState<any>(param.city || null)
 
-    const [isProvinsi, setProvinsi] = useState(provinsi)
-    const [isKab, setKab] = useState<any>([])
 
     async function onKabupaten({ idProv }: { idProv: any }) {
+        setProvinsi(idProv)
+        setKabupaten(null)
+        const dataDbKab = await MasterKabGetByProvince({ idProvinsi: Number(idProv) })
+        setDataKab(dataDbKab)
+    }
 
-        const dataKab = await MasterKabGetByProvince({ idProvinsi: Number(idProv) })
-        setKab(dataKab)
+    function onProccess() {
+        if (isProvinsi == null) return toast("Provinces cannot be empty", { theme: "dark" })
+        router.push('candidate?prov=' + isProvinsi + '&city=' + isKabupaten)
     }
 
     return (
         <>
 
-            {/* {JSON.stringify(isProvinsi)} */}
             <Stack>
                 <Text fw={"bold"}>CANDIDATE</Text>
             </Stack>
             <Group grow mt={30}>
                 <Select
                     placeholder="PROVINCE"
-                    data={isProvinsi.map((pro: any) => ({
+                    data={dataProvinsi.map((pro: any) => ({
                         value: String(pro.id),
                         label: pro.name
                     }))}
                     searchable
                     label="Provinsi"
                     required
+                    value={isProvinsi}
                     onChange={(val) => {
                         onKabupaten({ idProv: val })
                     }}
@@ -50,16 +61,20 @@ export default function ListCandidates({ title, provinsi }: { title: string, pro
                 <Select searchable
                     label="Kabupaten"
                     placeholder="CITY"
-                    data={isKab.map((kab: any) => ({
+                    data={dataKab.map((kab: any) => ({
                         value: String(kab.id),
                         label: kab.name
                     }))}
+                    value={isKabupaten}
+                    onChange={(val) => {
+                        setKabupaten(val)
+                    }}
                 />
-                <Button mt={25} bg={"gray"} onClick={() => router.push('candidate?prov=bali')}>
+                <Button mt={25} bg={"gray"} onClick={() => onProccess()}>
                     PROCCESS
                 </Button>
             </Group>
-            {title &&
+            {param.prov &&
                 <TableCandidate title="PROVINSI BALI" data={[]} />
             }
         </>
