@@ -3,7 +3,7 @@ import { MasterProvinceGetAll } from '@/modules/_global/fun/master_province_get_
 import { ListCandidates } from '@/modules/candidate';
 import React from 'react';
 
-export default async function Page({ searchParams, idProvinsi }: { searchParams: { prov: string }, idProvinsi: any }) {
+export default async function Page({ searchParams }: { searchParams: { prov: string } }) {
   const data = await MasterProvinceGetAll()
   // const kab = await MasterKabGetByProvince({idProvinsi:0})
   return (
