@@ -7,15 +7,15 @@ export async function funSeederUserAccess() {
     for (let data of seederUserAccess) {
         await prisma.userAccess.upsert({
             where: {
-                id: String(data.id)
+                id: data.id
             },
             create: {
-                id: String(data.id),
+                id: data.id,
                 idComponent: data.idComponent,
                 idUserRole: data.idUserRole
             },
             update: {
-                id: String(data.id),
+                id: data.id,
                 idComponent: data.idComponent,
                 idUserRole: data.idUserRole
             }
