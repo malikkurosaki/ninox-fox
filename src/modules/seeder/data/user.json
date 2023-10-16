@@ -5,7 +5,8 @@
         "name": "Dev Amalia",
         "email": "amalia@bip.com",
         "password": "amalia@developer",
-        "phone": "628980185458"
+        "phone": "628980185458",
+        "isAllArea": true
     },
     {
         "id": "UserDeveloper2",
@@ -13,6 +14,7 @@
         "name": "Dev Lukman",
         "email": "lukman@bip.com",
         "password": "lukman@developer",
-        "phone": "6287701790942"
+        "phone": "6287701790942",
+        "isAllArea": true
     }
 ]
