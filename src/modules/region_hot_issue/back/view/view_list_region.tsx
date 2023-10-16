@@ -43,6 +43,9 @@ export default function ViewListRegion({ title }: { title: string }) {
                     "JAWA TIMUR",
                     "KALIMANTAN TENGAH",
                   ]}
+                  required
+                  label={"Provinsi"}
+                  searchable
                 />
                 <Select
                   placeholder="CITY"

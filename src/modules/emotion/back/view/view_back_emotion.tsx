@@ -27,7 +27,7 @@ import TableData from "../components/table_data";
  * @param {string} title - Judul table.
  * @returns {component} Table list Emotion sesuai dengan parameter.
  */
-export default function ViewBackEmotion({title}: {title: string}) {
+export default function ViewBackEmotion({ title }: { title: string }) {
   const [proccess, setProccess] = useState(false);
   const router = useRouter()
   return (
@@ -52,17 +52,25 @@ export default function ViewBackEmotion({title}: {title: string}) {
                     "JAWA TIMUR",
                     "KALIMANTAN TENGAH",
                   ]}
+                  required
+                  label={"Provinsi"}
+                  searchable
                 />
                 <Select
                   placeholder="CITY"
                   data={["BADUNG", "DENPASAR", "TABANAN"]}
+                  mt={10}
                 />
                 <Select
                   placeholder="CANDIDATE"
                   data={["I WAYAN KADEK", "I KETUT SURYA", "KOMANG ADI"]}
+                  required
+                  label={"Candidate"}
+                  searchable
                 />
-                <DateInput valueFormat="YYYY MMM DD" placeholder="SELECT DATE" />
-                <Button bg={"gray"} onClick={() => router.push('emotion?prov=bali')}>
+                <DateInput valueFormat="YYYY MMM DD" required
+                  label={"Select Date"} placeholder="SELECT DATE" />
+                <Button bg={"gray"}  onClick={() => router.push('emotion?prov=bali')}>
                   PROCCESS
                 </Button>
               </Stack>

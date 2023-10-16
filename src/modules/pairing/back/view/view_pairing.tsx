@@ -45,20 +45,35 @@ export default function ViewPairing({ title }: { title: string }) {
                     "JAWA TIMUR",
                     "KALIMANTAN TENGAH",
                   ]}
+                  required
+                  label={"Provinsi"}
+                  searchable
                 />
                 <Select
                   placeholder="CITY"
                   data={["BADUNG", "DENPASAR", "TABANAN"]}
+                  mt={10}
                 />
                 <Select
                   placeholder="CANDIDATE 1"
                   data={["I WAYAN KADEK", "I KETUT SURYA", "KOMANG ADI"]}
+                  required
+                  label={"Candidate 1"}
+                  searchable
                 />
                 <Select
                   placeholder="CANDIDATE 2"
                   data={["I WAYAN KADEK", "I KETUT SURYA", "KOMANG ADI"]}
+                  required
+                  label={"Candidate 2"}
+                  searchable
                 />
-                <DateInput valueFormat="YYYY MMM DD" placeholder="SELECT DATE" />
+                <DateInput
+                  valueFormat="YYYY MMM DD"
+                  placeholder="SELECT DATE"
+                  required
+                  label={"Select Date"}
+                />
                 <Button bg={"gray"} onClick={() => router.push('pairing?prov=bali')}>
                   PROCCESS
                 </Button>

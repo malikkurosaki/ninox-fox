@@ -22,9 +22,12 @@ export default function ListStep({ title }: { title?: string }) {
                 <Select
                     placeholder="PROVINCE"
                     data={["BALI", "JAWA BARAT", "JAWA TIMUR", "KALIMANTAN TENGAH"]}
+                    required
+                    label={"Provinsi"}
+                    searchable
                 />
-                <Select placeholder="CITY" data={["BADUNG", "DENPASAR", "TABANAN"]} />
-                <Button bg={"gray"} onClick={() => router.push('step?prov=bali')}>
+                <Select mt={25} placeholder="CITY" data={["BADUNG", "DENPASAR", "TABANAN"]} />
+                <Button mt={25} bg={"gray"} onClick={() => router.push('step?prov=bali')}>
                     PROCCESS
                 </Button>
             </Group>
