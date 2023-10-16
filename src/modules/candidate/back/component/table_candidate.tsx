@@ -80,7 +80,7 @@ export default function TableCandidate({ title, data }: { title: string, data: a
                           >
                             <MdEditCalendar size={20} />
                           </ActionIcon>
-                          <ActionIcon
+                          {/* <ActionIcon
                             variant="transparent"
                             color="rgba(209, 4, 4, 1)"
                             size="xl"
@@ -88,7 +88,7 @@ export default function TableCandidate({ title, data }: { title: string, data: a
                             onClick={() => setOpenModal(true)}
                           >
                             <MdDelete size={20} />
-                          </ActionIcon>
+                          </ActionIcon> */}
                         </Table.Td>
                       </Table.Tr>
                     ))}
