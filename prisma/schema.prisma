@@ -51,7 +51,7 @@ model UserRole {
 }
 
 model UserAccess {
-  id          String    @id @default(cuid())
+  id          Int       @id @default(autoincrement())
   idUserRole  Int
   idComponent Int
   isActive    Boolean   @default(true)
