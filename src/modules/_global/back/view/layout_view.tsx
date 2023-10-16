@@ -33,6 +33,11 @@ export default function LayoutView({
   const dataDashboard = [
     {
       key: "md1",
+      link: "/dashboard",
+      label: "DASHBOARD",
+    },
+    {
+      key: "md1",
       link: "/dashboard/emotion",
       label: "EMOTION EDITOR",
     },
@@ -176,7 +181,7 @@ export default function LayoutView({
                 onClick={() => {
                   router.push(item.link);
                 }}
-                color="rgba(68, 6, 115, 1)"
+                color="#213555"
                 variant="filled"
               />
             );
@@ -196,7 +201,7 @@ export default function LayoutView({
                   onClick={() => {
                     router.push(item.link);
                   }}
-                  color="rgba(68, 6, 115, 1)"
+                  color="#213555"
                   variant="filled"
                 />
               );
@@ -212,7 +217,7 @@ export default function LayoutView({
                 onClick={() => {
                   router.push(item.link);
                 }}
-                color="rgba(68, 6, 115, 1)"
+                color="#213555"
                 variant="filled"
               />
             );
