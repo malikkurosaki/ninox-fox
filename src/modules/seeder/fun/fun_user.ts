@@ -15,7 +15,8 @@ export async function funSeederUser() {
                 idUserRole: data.idUserRole,
                 name: data.name,
                 password: data.password,
-                phone: data.phone
+                phone: data.phone,
+                isAllArea: data.isAllArea
             },
             update: {
                 id: data.id,
@@ -23,7 +24,8 @@ export async function funSeederUser() {
                 idUserRole: data.idUserRole,
                 name: data.name,
                 password: data.password,
-                phone: data.phone
+                phone: data.phone,
+                isAllArea: data.isAllArea
             }
         })
     }
