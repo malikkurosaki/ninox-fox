@@ -49,7 +49,7 @@ export default function ComponentTableStep({ v, i }: { v: any; i: any }) {
                 color="rgba(5, 128, 23, 1)"
                 size="xl"
                 aria-label="Edit"
-                onClick={() => router.push("ml-ai/edit/IKomangAyu")}
+                onClick={() => router.push("step/edit/IKomangAyu")}
               >
                 <MdEditCalendar size={20} />
               </ActionIcon>
