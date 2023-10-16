@@ -46,6 +46,9 @@ export default function ViewAudience({title}: {title: string}) {
                     "JAWA TIMUR",
                     "KALIMANTAN TENGAH",
                   ]}
+                  required
+                  label={"Provinsi"}
+                  searchable
                 />
                 <Select
                   placeholder="CITY"
