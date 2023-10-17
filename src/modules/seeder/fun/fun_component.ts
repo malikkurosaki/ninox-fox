@@ -3,6 +3,10 @@
 import prisma from "@/modules/_global/bin/prisma"
 import { seederComponents } from ".."
 
+/**
+ * Fungsi untuk ambil data seeder component.
+ * @returns hasil untuk data seeder components
+ */
 export async function funSeederComponents() {
     for (let data of seederComponents) {
         await prisma.component.upsert({

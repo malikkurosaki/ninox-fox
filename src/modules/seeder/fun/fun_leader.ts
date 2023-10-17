@@ -4,6 +4,10 @@
 import prisma from "@/modules/_global/bin/prisma"
 import { seederLeader } from ".."
 
+/**
+ * Fungsi untuk ambil data seeder leader .
+ * @returns hasil untuk data seeder leader
+ */
 export async function funSeederLeader() {
     for (let data of seederLeader) {
         await prisma.categoryLeaderTraitAssessment.upsert({
