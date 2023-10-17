@@ -1,6 +1,10 @@
 import { Box, Group, SimpleGrid, Stack, Text } from '@mantine/core';
 import React from 'react';
 
+/**
+ * Fungsi untuk menampilkan dashboard.
+ * @returns  hasilk yang ditampilkan seperti daftar access wilayah, jumlah kandidate, jumlah wilayah
+ */
 export default function Home() {
   return (
     <>
