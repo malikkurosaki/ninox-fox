@@ -3,6 +3,10 @@
 import prisma from "@/modules/_global/bin/prisma"
 import { seederKecamatan } from ".."
 
+/**
+ * Fungsi untuk ambil data seeder kecamatan.
+ * @returns hasil untuk data seeder kecamatan
+ */
 export async function funSeederKecamatan() {
     for (let data of seederKecamatan) {
         await prisma.areaKecamatan.upsert({
