@@ -19,7 +19,6 @@ export default function ModalAddCandidate({ data }: { data: any }) {
     const router = useRouter()
 
     async function onCreateCandidate() {
-        console.log(data)
         const create = await funAddCandidate({ body: data })
         if (!create.success)
             toast(create.message, { theme: "dark" });

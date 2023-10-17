@@ -6,10 +6,9 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { MdDelete, MdEditCalendar, MdOutlineModeEdit } from "react-icons/md";
 import { isModalCandidate } from "../val/isModalCandidate";
 import ModalDelCandidate from "./modal_del_candidate";
-import { useShallowEffect } from "@mantine/hooks";
 import { useState } from "react";
-import funGetCandidateByArea from "../fun/get_candidate_by_area";
 import SwitchStatusCandidate from "./status_candidate";
+import { funGetCandidateByArea } from "../..";
 
 /**
  * Fungsi untuk menampilkan table list kandidat.
@@ -19,6 +18,7 @@ import SwitchStatusCandidate from "./status_candidate";
  */
 
 export default function TableCandidate({ title, data }: { title: string, data: any[] }) {
+  // console.log("awal", data)
   const elements = [
     { position: 1, mass: 12.011, symbol: 'C', name: 'Komang Ayu' },
     { position: 2, mass: 14.007, symbol: 'N', name: 'Kadek Agung' },
@@ -27,25 +27,28 @@ export default function TableCandidate({ title, data }: { title: string, data: a
     { position: 5, mass: 140.12, symbol: 'Ce', name: 'I Komang Nuri' },
   ];
 
-  const [isData, setData] = useState<any>([]);
-  const [isTitle, setTitle] = useState("")
+  const [openModal, setOpenModal] = useAtom(isModalCandidate)
+  const [isDataDel, setDataDel] = useState({
+    idCandidate: "",
+    active: false
+  })
+
+  const [isData, setData] = useState(data)
 
   const router = useRouter();
   const searchParams = useSearchParams()
 
-  async function funGetData() {
-    const dataDB = await funGetCandidateByArea();
-    setData(dataDB.data);
-    setTitle(dataDB.title);
+  async function onLoad() {
+    const dataDB = await funGetCandidateByArea({ find: { tingkat: 2, idProvinsi: 1, idKabkot: 2 } });
+    setData(dataDB.data)
+    console.log("ini", isData)
   }
 
-  useShallowEffect(() => {
-    funGetData();
-  })
 
 
   return (
     <>
+      {/* {JSON.stringify(data)} */}
       <Box mt={30}>
         <Box
           style={{
@@ -55,7 +58,7 @@ export default function TableCandidate({ title, data }: { title: string, data: a
           }}
         >
           <Group justify="space-between" gap="lg">
-            <Text fw={"bold"} c={"white"}>{isTitle}</Text>
+            <Text fw={"bold"} c={"white"}>{title}</Text>
             <Button bg={"gray"} onClick={() => router.push('candidate/add?prov=' + searchParams.get('prov') + '&city=' + searchParams.get('city'))}>ADD CANDIDATE</Button>
           </Group>
           <Box pt={20}>
@@ -77,7 +80,7 @@ export default function TableCandidate({ title, data }: { title: string, data: a
                     </Table.Tr>
                   </Table.Thead>
                   <Table.Tbody>
-                    {isData.map((v: any, i: any) => (
+                    {data.map((v: any, i: any) => (
                       <Table.Tr key={i}>
                         <Table.Td>{i + 1}</Table.Td>
                         <Table.Td>{v.name}</Table.Td>
@@ -90,7 +93,14 @@ export default function TableCandidate({ title, data }: { title: string, data: a
                           />
                         </Table.Td>
                         <Table.Td>
-                          <SwitchStatusCandidate status={v.isActive} />
+                          <SwitchStatusCandidate status={v.isActive} onCallBack={(val) => {
+                            setOpenModal(true)
+                            setDataDel({
+                              ...isDataDel,
+                              idCandidate: v.id,
+                              active: val
+                            })
+                          }} />
                         </Table.Td>
                         <Table.Td>
                           <ActionIcon
@@ -102,15 +112,6 @@ export default function TableCandidate({ title, data }: { title: string, data: a
                           >
                             <MdEditCalendar size={20} />
                           </ActionIcon>
-                          {/* <ActionIcon
-                            variant="transparent"
-                            color="rgba(209, 4, 4, 1)"
-                            size="xl"
-                            aria-label="Delete"
-                            onClick={() => setOpenModal(true)}
-                          >
-                            <MdDelete size={20} />
-                          </ActionIcon> */}
                         </Table.Td>
                       </Table.Tr>
                     ))}
@@ -121,6 +122,20 @@ export default function TableCandidate({ title, data }: { title: string, data: a
           </Box>
         </Box>
       </Box>
+
+      <Modal
+        opened={openModal}
+        onClose={() => setOpenModal(false)}
+        centered
+        withCloseButton={false}
+        closeOnClickOutside={false}
+      >
+        <ModalDelCandidate data={isDataDel} onSuccess={(val) => {
+          // data = val
+          // router.refresh()
+          onLoad()
+        }} />
+      </Modal>
     </>
   )
 }
