@@ -1,6 +1,6 @@
 
 "use client"
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Button,
@@ -10,18 +10,24 @@ import {
   SimpleGrid,
   Stack,
   Text,
+  rem,
 } from "@mantine/core";
 import { useRouter } from "next/navigation";
-import UploadLeader from "../components/upload_leader";
 import TableLeader from "../components/table_leader";
+import papa from "papaparse"
+import { Dropzone } from "@mantine/dropzone";
+import toast from "react-simple-toasts";
+import { AiOutlineCloudUpload } from "react-icons/ai";
+import { MdOutlineCancel } from "react-icons/md";
 
 /**
  * Fungsi untuk menampilkan table list leader.
  * @param {string} title - Judul table.
  * @returns {component} Table list leader sesuai dengan parameter.
  */
-export default function ViewListLeader({ title }: { title: string }) {
+export default function ViewListLeader({ title, data, }: { title: string, data: any, }) {
   const router = useRouter()
+  const [isData, setData] = useState(data)
   return (
     <>
       <Stack>
@@ -72,14 +78,40 @@ export default function ViewListLeader({ title }: { title: string }) {
               borderRadius: 10,
               padding: 20,
             }}
-          >
-            <UploadLeader />
+            >
+            <Box
+             style={{
+               border: "1px dashed gray",
+               borderRadius: 10,
+               padding: 40,
+               cursor: "pointer",
+              }}
+              onClick={() => router.push("/dashboard/leader-trait-assessment/upload")}
+            >
+            <Text ta={"center"} size="xl" inline>
+              UPLOAD
+            </Text>
+            </Box>
+
+
+            {/*  */}
             <Box
               style={{
                 border: "1px dashed gray",
                 borderRadius: 10,
                 padding: 40,
                 cursor: "pointer",
+              }}
+              onClick={() => {
+                const dataJson = isData
+
+                const jsonData = papa.unparse(dataJson)
+                const jsonDataUrl = "data:text/csv;charset=utf-8," + encodeURIComponent(jsonData)
+
+                const jsonDwnloadLink = document.createElement("a")
+                jsonDwnloadLink.href = jsonDataUrl
+                jsonDwnloadLink.download = "Leader.csv"
+                jsonDwnloadLink.click()
               }}
             >
               <Text ta={"center"} size="xl" inline>

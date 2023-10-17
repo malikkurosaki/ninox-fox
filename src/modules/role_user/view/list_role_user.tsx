@@ -6,6 +6,11 @@ import { useRouter } from 'next/navigation';
 import { useAtom } from 'jotai';
 import { isModalRoleUser } from '../val/val_role_user';
 
+
+/**
+ * Fungsi untuk list role user.
+ * @returns {Component} hasil untuk menampilkan list role user
+ */
 export default function ListRoleUser() {
   const router = useRouter()
   return (

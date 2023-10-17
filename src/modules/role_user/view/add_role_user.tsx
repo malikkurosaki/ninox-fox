@@ -18,6 +18,10 @@ const emotion = [
   { label: 'Tabel Data', checked: false, key: 5 },
 ];
 
+/**
+ * Fungsi untuk add role user.
+ * @returns {Component} hasil untuk menampilkan add role user
+ */
 export default function AddRoleUser() {
   const [valOpenModal, setOpenModal] = useAtom(isModalRoleUser)
   const [values, handlers] = useListState(emotion);
