@@ -5,6 +5,10 @@ import { Avatar, Box, Button, Center, Grid, Group, Modal, Paper, Stack, Text, Te
 import { useAtom } from "jotai"
 import { isModalCandidate } from "../val/isModalCandidate"
 import ModalAddCandidate from "../component/modal_add_candidate"
+import { useState } from "react"
+import toast from "react-simple-toasts"
+import { useSearchParams } from "next/navigation"
+import _ from "lodash"
 
 
 /**
@@ -14,6 +18,19 @@ import ModalAddCandidate from "../component/modal_add_candidate"
 
 export default function AddCandidate() {
     const [openModal, setOpenModal] = useAtom(isModalCandidate)
+    const query = useSearchParams()
+    const [body, setBody] = useState({
+        name: "",
+        idProvinsi: Number(query.get('prov')),
+        idKabkot: (query.get('city') == 'null' || query.get('city') == "" || _.isNull(query.get('city'))) ? null : Number(query.get('city')),
+        tingkat: (query.get('city') == 'null' || query.get('city') == "" || _.isNull(query.get('city'))) ? 1 : 2
+    });
+
+    function onConfirmation() {
+        if (body.name === "")
+            return toast("Name cannot be empty", { theme: "dark" });
+        setOpenModal(true)
+    }
 
 
     return (
@@ -29,8 +46,7 @@ export default function AddCandidate() {
                             <Avatar
                                 size={130}
                                 radius={100}
-                                // src={"../favicon.ico"}
-                                alt="kandidat"
+                                alt="candidate"
                                 color="dark"
                             />
                         </Center>
@@ -44,10 +60,16 @@ export default function AddCandidate() {
                         </Group>
                         <Box pt={40}>
                             <TextInput
-                                placeholder="Candidate Name"
+                                placeholder="Candidate Name" withAsterisk label="Name"
+                                onChange={(val) => {
+                                    setBody({
+                                        ...body,
+                                        name: val.target.value
+                                    })
+                                }}
                             />
                             <Group justify="flex-end">
-                                <Button bg={"gray"} mt={30} onClick={() => setOpenModal(true)}>SAVE</Button>
+                                <Button bg={"gray"} mt={30} onClick={() => onConfirmation()}>SAVE</Button>
                             </Group>
                         </Box>
                     </Stack>
@@ -60,7 +82,7 @@ export default function AddCandidate() {
                 withCloseButton={false}
                 closeOnClickOutside={false}
             >
-                <ModalAddCandidate />
+                <ModalAddCandidate data={body} />
             </Modal>
         </>
     )
