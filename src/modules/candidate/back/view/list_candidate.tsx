@@ -4,11 +4,9 @@ import { Box, Button, Center, Group, Paper, Select, SimpleGrid, Stack, Text, Uns
 import { useState } from "react"
 import TableCandidate from "../component/table_candidate"
 import { useRouter } from "next/navigation"
-import { MasterProvinceGetAll } from "@/modules/_global/fun/master_province_get_all"
 import { MasterKabGetByProvince } from "@/modules/_global/fun/master_kabupaten_get_by_province"
 import toast from "react-simple-toasts"
 import _ from "lodash"
-import { useShallowEffect } from "@mantine/hooks"
 
 
 /**
@@ -19,7 +17,8 @@ import { useShallowEffect } from "@mantine/hooks"
 
 export const dynamic = "force-dynamic"
 
-export default function ListCandidates({ param, provinsi, kabupaten }: { param: any, provinsi: any, kabupaten: any }) {
+export default function ListCandidates({ param, provinsi, kabupaten, datatable }: { param: any, provinsi: any, kabupaten: any, datatable: any }) {
+
     const router = useRouter()
     const [dataProvinsi, setDataProvinsi] = useState(provinsi)
     const [dataKab, setDataKab] = useState<any>(kabupaten)
@@ -37,7 +36,6 @@ export default function ListCandidates({ param, provinsi, kabupaten }: { param: 
     function onProccess() {
         if (isProvinsi == null) return toast("Provinces cannot be empty", { theme: "dark" })
         router.replace('/dashboard/candidate?prov=' + isProvinsi + '&city=' + isKabupaten)
-        console.log(isProvinsi)
     }
 
     return (
@@ -77,8 +75,8 @@ export default function ListCandidates({ param, provinsi, kabupaten }: { param: 
                     PROCCESS
                 </Button>
             </Group>
-            {param.prov &&
-                <TableCandidate title="PROVINSI BALI" data={[]} />
+            {!_.isNull(datatable.title) &&
+                <TableCandidate title={datatable.title} data={datatable.data} />
             }
         </>
     )

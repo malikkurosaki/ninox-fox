@@ -5,6 +5,7 @@ import { useAtom } from "jotai";
 import { isModalCandidate } from "../val/isModalCandidate";
 import { useRouter } from "next/navigation";
 import toast from "react-simple-toasts";
+import funSetStatusCandidate from "../fun/set_status_candidate";
 
 
 /**
@@ -13,13 +14,16 @@ import toast from "react-simple-toasts";
  */
 
 
-export default function ModalDelCandidate() {
+export default function ModalDelCandidate({ data, onSuccess }: { data: any, onSuccess: (val: any) => void }) {
     const [openModal, setOpenModal] = useAtom(isModalCandidate)
     const router = useRouter()
 
-    function onDeleteCandidate() {
+    async function onDeleteCandidate() {
+        const del = await funSetStatusCandidate({ dataUpdate: data })
         toast("Success", { theme: "dark" });
         setOpenModal(false);
+        onSuccess(del.data);
+        // router.push('/dashboard/candidate?prov=' + isProvinsi + '&city=' + isKabupaten)
     }
 
     return (
