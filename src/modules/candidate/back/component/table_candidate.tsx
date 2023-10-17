@@ -1,11 +1,15 @@
 'use client'
 
-import { ActionIcon, Box, Button, Center, Group, Image, Modal, Paper, ScrollArea, Stack, Table, Text } from "@mantine/core"
+import { ActionIcon, Box, Button, Center, Group, Image, Modal, Paper, ScrollArea, Stack, Switch, Table, Text } from "@mantine/core"
 import { useAtom } from "jotai";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { MdDelete, MdEditCalendar, MdOutlineModeEdit } from "react-icons/md";
 import { isModalCandidate } from "../val/isModalCandidate";
 import ModalDelCandidate from "./modal_del_candidate";
+import { useShallowEffect } from "@mantine/hooks";
+import { useState } from "react";
+import funGetCandidateByArea from "../fun/get_candidate_by_area";
+import SwitchStatusCandidate from "./status_candidate";
 
 /**
  * Fungsi untuk menampilkan table list kandidat.
@@ -23,8 +27,22 @@ export default function TableCandidate({ title, data }: { title: string, data: a
     { position: 5, mass: 140.12, symbol: 'Ce', name: 'I Komang Nuri' },
   ];
 
+  const [isData, setData] = useState<any>([]);
+  const [isTitle, setTitle] = useState("")
+
   const router = useRouter();
-  const [openModal, setOpenModal] = useAtom(isModalCandidate)
+  const searchParams = useSearchParams()
+
+  async function funGetData() {
+    const dataDB = await funGetCandidateByArea();
+    setData(dataDB.data);
+    setTitle(dataDB.title);
+  }
+
+  useShallowEffect(() => {
+    funGetData();
+  })
+
 
   return (
     <>
@@ -37,8 +55,8 @@ export default function TableCandidate({ title, data }: { title: string, data: a
           }}
         >
           <Group justify="space-between" gap="lg">
-            <Text fw={"bold"} c={"white"}>{title}</Text>
-            <Button bg={"gray"} onClick={() => router.push('candidate/add')}>ADD CANDIDATE</Button>
+            <Text fw={"bold"} c={"white"}>{isTitle}</Text>
+            <Button bg={"gray"} onClick={() => router.push('candidate/add?prov=' + searchParams.get('prov') + '&city=' + searchParams.get('city'))}>ADD CANDIDATE</Button>
           </Group>
           <Box pt={20}>
             <Box style={{
@@ -54,13 +72,14 @@ export default function TableCandidate({ title, data }: { title: string, data: a
                       <Table.Th>No</Table.Th>
                       <Table.Th>Name</Table.Th>
                       <Table.Th>Image</Table.Th>
+                      <Table.Th>Status</Table.Th>
                       <Table.Th>Action</Table.Th>
                     </Table.Tr>
                   </Table.Thead>
                   <Table.Tbody>
-                    {elements.map((v, i) => (
+                    {isData.map((v: any, i: any) => (
                       <Table.Tr key={i}>
-                        <Table.Td>{v.position}</Table.Td>
+                        <Table.Td>{i + 1}</Table.Td>
                         <Table.Td>{v.name}</Table.Td>
                         <Table.Td>
                           <Image
@@ -69,6 +88,9 @@ export default function TableCandidate({ title, data }: { title: string, data: a
                             maw={{ base: 50, sm: 50 }}
                             alt="img"
                           />
+                        </Table.Td>
+                        <Table.Td>
+                          <SwitchStatusCandidate status={v.isActive} />
                         </Table.Td>
                         <Table.Td>
                           <ActionIcon
@@ -99,17 +121,6 @@ export default function TableCandidate({ title, data }: { title: string, data: a
           </Box>
         </Box>
       </Box>
-
-
-      <Modal
-        opened={openModal}
-        onClose={() => setOpenModal(false)}
-        centered
-        withCloseButton={false}
-        closeOnClickOutside={false}
-      >
-        <ModalDelCandidate />
-      </Modal>
     </>
   )
 }

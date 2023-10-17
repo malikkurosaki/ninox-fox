@@ -32,7 +32,7 @@ export default function LayoutView({
   const [opened, { toggle }] = useDisclosure();
   const dataDashboard = [
     {
-      key: "md1",
+      key: "md0",
       link: "/dashboard",
       label: "DASHBOARD",
     },

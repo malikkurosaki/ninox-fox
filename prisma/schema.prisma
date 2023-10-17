@@ -52,17 +52,18 @@ model UserRole {
 
 model UserAccess {
   id          Int       @id @default(autoincrement())
+  UserRole    UserRole  @relation(fields: [idUserRole], references: [id])
   idUserRole  Int
+  Component   Component @relation(fields: [idComponent], references: [id])
   idComponent Int
   isActive    Boolean   @default(true)
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
-  UserRole    UserRole  @relation(fields: [idUserRole], references: [id])
-  Component   Component @relation(fields: [idComponent], references: [id])
 }
 
 model User {
   id         String     @id @default(cuid())
+  UserRole   UserRole   @relation(fields: [idUserRole], references: [id])
   idUserRole Int
   name       String
   email      String     @unique
@@ -72,20 +73,19 @@ model User {
   isActive   Boolean    @default(true)
   createdAt  DateTime   @default(now())
   updatedAt  DateTime   @updatedAt
-  UserRole   UserRole   @relation(fields: [idUserRole], references: [id])
   UserLog    UserLog[]
   UserArea   UserArea[]
 }
 
 model UserLog {
   id          String   @id @default(cuid())
+  User        User     @relation(fields: [idUser], references: [id])
   idUser      String
   activity    String
   description String   @db.Text
   isActive    Boolean  @default(true)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  User        User     @relation(fields: [idUser], references: [id])
 }
 
 model AreaProvinsi {
@@ -107,12 +107,12 @@ model AreaProvinsi {
 
 model AreaKabkot {
   id                    Int                     @id @default(autoincrement())
+  AreaProvinsi          AreaProvinsi            @relation(fields: [idProvinsi], references: [id])
   idProvinsi            Int
   name                  String
   isActive              Boolean                 @default(true)
   createdAt             DateTime                @default(now())
   updatedAt             DateTime                @updatedAt
-  AreaProvinsi          AreaProvinsi            @relation(fields: [idProvinsi], references: [id])
   AreaKecamatan         AreaKecamatan[]
   UserArea              UserArea[]
   LeaderTraitAssessment LeaderTraitAssessment[]
@@ -126,12 +126,12 @@ model AreaKabkot {
 
 model AreaKecamatan {
   id                    Int                     @id @default(autoincrement())
+  AreaKabkot            AreaKabkot              @relation(fields: [idKabkot], references: [id])
   idKabkot              Int
   name                  String
   isActive              Boolean                 @default(true)
   createdAt             DateTime                @default(now())
   updatedAt             DateTime                @updatedAt
-  AreaKabkot            AreaKabkot              @relation(fields: [idKabkot], references: [id])
   AreaKelurahan         AreaKelurahan[]
   UserArea              UserArea[]
   LeaderTraitAssessment LeaderTraitAssessment[]
@@ -144,12 +144,12 @@ model AreaKecamatan {
 
 model AreaKelurahan {
   id                    Int                     @id @default(autoincrement())
+  AreaKecamatan         AreaKecamatan           @relation(fields: [idKecamatan], references: [id])
   idKecamatan           Int
   name                  String
   isActive              Boolean                 @default(true)
   createdAt             DateTime                @default(now())
   updatedAt             DateTime                @updatedAt
-  AreaKecamatan         AreaKecamatan           @relation(fields: [idKecamatan], references: [id])
   UserArea              UserArea[]
   LeaderTraitAssessment LeaderTraitAssessment[]
   PublicConcernTrend    PublicConcernTrend[]
@@ -160,85 +160,86 @@ model AreaKelurahan {
 
 model UserArea {
   id            String         @id @default(cuid())
+  User          User           @relation(fields: [idUser], references: [id])
   idUser        String
+  AreaProvinsi  AreaProvinsi?  @relation(fields: [idProvinsi], references: [id])
   idProvinsi    Int?
+  AreaKabkot    AreaKabkot?    @relation(fields: [idKabkot], references: [id])
   idKabkot      Int?
+  AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
   idKecamatan   Int?
+  AreaKelurahan AreaKelurahan? @relation(fields: [idKelurahan], references: [id])
   idKelurahan   Int?
   isFront       Boolean        @default(false)
   isActive      Boolean        @default(true)
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
-  User          User           @relation(fields: [idUser], references: [id])
-  AreaProvinsi  AreaProvinsi?  @relation(fields: [idProvinsi], references: [id])
-  AreaKabkot    AreaKabkot?    @relation(fields: [idKabkot], references: [id])
-  AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
-  AreaKelurahan AreaKelurahan? @relation(fields: [idKelurahan], references: [id])
 }
 
 model LeaderTraitAssessment {
   id                            String                        @id @default(cuid())
+  AreaProvinsi                  AreaProvinsi?                 @relation(fields: [idProvinsi], references: [id])
   idProvinsi                    Int?
+  AreaKabkot                    AreaKabkot?                   @relation(fields: [idKabkot], references: [id])
   idKabkot                      Int?
+  AreaKecamatan                 AreaKecamatan?                @relation(fields: [idKecamatan], references: [id])
   idKecamatan                   Int?
+  AreaKelurahan                 AreaKelurahan?                @relation(fields: [idKelurahan], references: [id])
   idKelurahan                   Int?
+  CategoryLeaderTraitAssessment CategoryLeaderTraitAssessment @relation(fields: [idCategory], references: [id])
   idCategory                    Int
   content                       String                        @db.Text
   isActive                      Boolean                       @default(true)
   createdAt                     DateTime                      @default(now())
   updatedAt                     DateTime                      @updatedAt
-  AreaProvinsi                  AreaProvinsi?                 @relation(fields: [idProvinsi], references: [id])
-  AreaKabkot                    AreaKabkot?                   @relation(fields: [idKabkot], references: [id])
-  AreaKecamatan                 AreaKecamatan?                @relation(fields: [idKecamatan], references: [id])
-  AreaKelurahan                 AreaKelurahan?                @relation(fields: [idKelurahan], references: [id])
-  CategoryLeaderTraitAssessment CategoryLeaderTraitAssessment @relation(fields: [idCategory], references: [id])
 }
 
 model PublicConcernTrend {
   id                         String                     @id @default(cuid())
+  AreaProvinsi               AreaProvinsi?              @relation(fields: [idProvinsi], references: [id])
   idProvinsi                 Int?
+  AreaKabkot                 AreaKabkot?                @relation(fields: [idKabkot], references: [id])
   idKabkot                   Int?
+  AreaKecamatan              AreaKecamatan?             @relation(fields: [idKecamatan], references: [id])
   idKecamatan                Int?
+  AreaKelurahan              AreaKelurahan?             @relation(fields: [idKelurahan], references: [id])
   idKelurahan                Int?
+  CategoryPublicConcernTrend CategoryPublicConcernTrend @relation(fields: [idCategory], references: [id])
   idCategory                 Int
   content                    String                     @db.Text
   isActive                   Boolean                    @default(true)
   createdAt                  DateTime                   @default(now())
   updatedAt                  DateTime                   @updatedAt
-  AreaProvinsi               AreaProvinsi?              @relation(fields: [idProvinsi], references: [id])
-  AreaKabkot                 AreaKabkot?                @relation(fields: [idKabkot], references: [id])
-  AreaKecamatan              AreaKecamatan?             @relation(fields: [idKecamatan], references: [id])
-  AreaKelurahan              AreaKelurahan?             @relation(fields: [idKelurahan], references: [id])
-  CategoryPublicConcernTrend CategoryPublicConcernTrend @relation(fields: [idCategory], references: [id])
 }
 
 model RegionHotIssues {
   id            String         @id @default(cuid())
+  AreaProvinsi  AreaProvinsi?  @relation(fields: [idProvinsi], references: [id])
   idProvinsi    Int?
+  AreaKabkot    AreaKabkot?    @relation(fields: [idKabkot], references: [id])
   idKabkot      Int?
+  AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
   idKecamatan   Int?
+  AreaKelurahan AreaKelurahan? @relation(fields: [idKelurahan], references: [id])
   idKelurahan   Int?
   description   String         @db.Text
   isActive      Boolean        @default(true)
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
-  AreaProvinsi  AreaProvinsi?  @relation(fields: [idProvinsi], references: [id])
-  AreaKabkot    AreaKabkot?    @relation(fields: [idKabkot], references: [id])
-  AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
-  AreaKelurahan AreaKelurahan? @relation(fields: [idKelurahan], references: [id])
 }
 
 model Candidate {
   id                Int                @id @default(autoincrement())
+  AreaProvinsi      AreaProvinsi?      @relation(fields: [idProvinsi], references: [id])
   idProvinsi        Int
-  idKabkot          Int
+  AreaKabkot        AreaKabkot?        @relation(fields: [idKabkot], references: [id])
+  idKabkot          Int?
   tingkat           Int                @default(1) //1: tingkat prov, 2: tingkat kabkot
   name              String
+  img               String?
   isActive          Boolean            @default(true)
   createdAt         DateTime           @default(now())
   updatedAt         DateTime           @updatedAt
-  AreaProvinsi      AreaProvinsi       @relation(fields: [idProvinsi], references: [id])
-  AreaKabkot        AreaKabkot         @relation(fields: [idKabkot], references: [id])
   MlAi              MlAi[]
   Swot              Swot[]
   Step              Step[]
@@ -249,28 +250,29 @@ model Candidate {
 
 model MlAi {
   id          Int       @id @default(autoincrement())
+  Candidate   Candidate @relation(fields: [idCandidate], references: [id])
   idCandidate Int
   category    String?
   content     String    @db.Text
   isActive    Boolean   @default(true)
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
-  Candidate   Candidate @relation(fields: [idCandidate], references: [id])
 }
 
 model Swot {
   id          Int       @id @default(autoincrement())
+  Candidate   Candidate @relation(fields: [idCandidate], references: [id])
   idCandidate Int
   category    String //social, weakness dll
   content     String    @db.Text
   isActive    Boolean   @default(true)
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
-  Candidate   Candidate @relation(fields: [idCandidate], references: [id])
 }
 
 model Step {
   id          Int       @id @default(autoincrement())
+  Candidate   Candidate @relation(fields: [idCandidate], references: [id])
   idCandidate Int
   category    String //tecnology, economi dll
   sentiment   Int       @default(1) //1: positive, 2: negative
@@ -278,31 +280,35 @@ model Step {
   isActive    Boolean   @default(true)
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
-  Candidate   Candidate @relation(fields: [idCandidate], references: [id])
 }
 
 model Audience {
   id            Int            @id @default(autoincrement())
+  AreaProvinsi  AreaProvinsi?  @relation(fields: [idProvinsi], references: [id])
   idProvinsi    Int?
+  AreaKabkot    AreaKabkot?    @relation(fields: [idKabkot], references: [id])
   idKabkot      Int?
+  AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
   idKecamatan   Int?
+  AreaKelurahan AreaKelurahan? @relation(fields: [idKelurahan], references: [id])
   idKelurahan   Int?
   value         Int
   isActive      Boolean        @default(true)
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
-  AreaProvinsi  AreaProvinsi?  @relation(fields: [idProvinsi], references: [id])
-  AreaKabkot    AreaKabkot?    @relation(fields: [idKabkot], references: [id])
-  AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
-  AreaKelurahan AreaKelurahan? @relation(fields: [idKelurahan], references: [id])
 }
 
 model CandidateEmotion {
   id            String         @id @default(cuid())
+  AreaProvinsi  AreaProvinsi?  @relation(fields: [idProvinsi], references: [id])
   idProvinsi    Int?
+  AreaKabkot    AreaKabkot?    @relation(fields: [idKabkot], references: [id])
   idKabkot      Int?
+  AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
   idKecamatan   Int?
+  AreaKelurahan AreaKelurahan? @relation(fields: [idKelurahan], references: [id])
   idKelurahan   Int?
+  Candidate     Candidate      @relation(fields: [idCandidate], references: [id])
   idCandidate   Int
   dateEmotion   DateTime       @db.Date
   confidence    Int
@@ -316,19 +322,19 @@ model CandidateEmotion {
   isActive      Boolean        @default(true)
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
-  AreaProvinsi  AreaProvinsi?  @relation(fields: [idProvinsi], references: [id])
-  AreaKabkot    AreaKabkot?    @relation(fields: [idKabkot], references: [id])
-  AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
-  AreaKelurahan AreaKelurahan? @relation(fields: [idKelurahan], references: [id])
-  Candidate     Candidate      @relation(fields: [idCandidate], references: [id])
 }
 
 model CandidatePairing {
   id            String         @id @default(cuid())
+  Candidate1    Candidate      @relation("C1ToCandidate", fields: [idCandidate1], references: [id], map: "Candidate1Map")
   idCandidate1  Int
+  Candidate2    Candidate      @relation("C2ToCandidate", fields: [idCandidate2], references: [id], map: "Candidate2Map")
   idCandidate2  Int
+  AreaProvinsi  AreaProvinsi?  @relation(fields: [idProvinsi], references: [id])
   idProvinsi    Int?
+  AreaKabkot    AreaKabkot?    @relation(fields: [idKabkot], references: [id])
   idKabkot      Int?
+  AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
   idKecamatan   Int?
   rate          Decimal
   dateEmotion   DateTime       @db.Date
@@ -343,9 +349,4 @@ model CandidatePairing {
   isActive      Boolean        @default(true)
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
-  AreaProvinsi  AreaProvinsi?  @relation(fields: [idProvinsi], references: [id])
-  AreaKabkot    AreaKabkot?    @relation(fields: [idKabkot], references: [id])
-  AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
-  Candidate1    Candidate      @relation("C1ToCandidate", fields: [idCandidate1], references: [id], map: "Candidate1Map")
-  Candidate2    Candidate      @relation("C2ToCandidate", fields: [idCandidate2], references: [id], map: "Candidate2Map")
 }

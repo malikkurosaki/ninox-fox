@@ -17,10 +17,12 @@ import { useShallowEffect } from "@mantine/hooks"
  * @returns {component} Select wilayah.
  */
 
-export default function ListCandidates({ param, provinsi }: { param: any, provinsi: any }) {
+export const dynamic = "force-dynamic"
+
+export default function ListCandidates({ param, provinsi, kabupaten }: { param: any, provinsi: any, kabupaten: any }) {
     const router = useRouter()
     const [dataProvinsi, setDataProvinsi] = useState(provinsi)
-    const [dataKab, setDataKab] = useState<any>([])
+    const [dataKab, setDataKab] = useState<any>(kabupaten)
     const [isProvinsi, setProvinsi] = useState<any>(param.prov || null)
     const [isKabupaten, setKabupaten] = useState<any>(param.city || null)
 
@@ -34,7 +36,8 @@ export default function ListCandidates({ param, provinsi }: { param: any, provin
 
     function onProccess() {
         if (isProvinsi == null) return toast("Provinces cannot be empty", { theme: "dark" })
-        router.push('candidate?prov=' + isProvinsi + '&city=' + isKabupaten)
+        router.replace('/dashboard/candidate?prov=' + isProvinsi + '&city=' + isKabupaten)
+        console.log(isProvinsi)
     }
 
     return (
