@@ -18,6 +18,10 @@ const emotion = [
   { label: 'Tabel Data', checked: false, key: 5 },
 ];
 
+/**
+ * Fungsi untuk eidt role user.
+ * @returns {Component} hasil untuk menampilkan edit role user
+ */
 export default function EditRoleUser() {
   const [values, handlers] = useListState(emotion);
   const [valOpenModal, setOpenModal] = useAtom(isModalRoleUser)
