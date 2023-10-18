@@ -25,7 +25,7 @@ export default function ComponentTable({ v, i }: { v: any; i: any }) {
     <>
       <Table.Tbody key={i}>
         <Table.Tr>
-          <Table.Td>{v.no}</Table.Td>
+          <Table.Td>{v.id}</Table.Td>
           <Table.Td>{v.name}</Table.Td>
           <Table.Td>{v.category}</Table.Td>
           <Table.Td>
