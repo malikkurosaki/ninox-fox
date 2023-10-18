@@ -5,6 +5,7 @@ import { Avatar, Box, Button, Center, Group, Modal, Paper, Stack, Text, TextInpu
 import { useAtom } from "jotai"
 import { isModalCandidate } from "../val/isModalCandidate"
 import ModalEditCandidate from "../component/modal_edit_candidate"
+import { useState } from "react"
 
 /**
  * Fungsi untuk menampilkan view edit candidate.
@@ -14,6 +15,11 @@ import ModalEditCandidate from "../component/modal_edit_candidate"
 
 export default function EditCandidate({ data }: { data: any }) {
     const [openModal, setOpenModal] = useAtom(isModalCandidate)
+    const [dataEdit, setDataEdit] = useState({
+        id: data.id,
+        name: data.name,
+        img: data.img
+    })
 
     return (
         <>
@@ -44,7 +50,13 @@ export default function EditCandidate({ data }: { data: any }) {
                         <Box pt={40}>
                             <TextInput
                                 placeholder="Candidate Name"
-                                value={"I Komang Ayu"}
+                                value={dataEdit.name}
+                                onChange={(val) => {
+                                    setDataEdit({
+                                        ...dataEdit,
+                                        name: val.target.value
+                                    })
+                                }}
                             />
                             <Group justify="flex-end">
                                 <Button bg={"gray"} mt={30} onClick={() => setOpenModal(true)}>SAVE</Button>
@@ -61,7 +73,7 @@ export default function EditCandidate({ data }: { data: any }) {
                 withCloseButton={false}
                 closeOnClickOutside={false}
             >
-                <ModalEditCandidate />
+                <ModalEditCandidate data={dataEdit} />
             </Modal>
         </>
     )

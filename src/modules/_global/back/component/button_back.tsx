@@ -12,7 +12,6 @@ import { BiArrowBack } from "react-icons/bi"
 export default function ButtonBack({ to }: { to?: string }) {
     const router = useRouter()
     function toPage() {
-        console.log(to)
         if (to === undefined) {
             router.back()
         } else {

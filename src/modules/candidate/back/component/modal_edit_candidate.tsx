@@ -5,6 +5,7 @@ import { useAtom } from "jotai";
 import { isModalCandidate } from "../val/isModalCandidate";
 import { useRouter } from "next/navigation";
 import toast from "react-simple-toasts";
+import funEditCandidate from "../fun/edit_candidate";
 
 
 /**
@@ -13,11 +14,12 @@ import toast from "react-simple-toasts";
  */
 
 
-export default function ModalEditCandidate() {
+export default function ModalEditCandidate({ data }: { data: any }) {
     const [openModal, setOpenModal] = useAtom(isModalCandidate)
     const router = useRouter()
 
-    function onEditCandidate() {
+    async function onEditCandidate() {
+        const edit = await funEditCandidate({ body: data })
         toast("Success", { theme: "dark" });
         setOpenModal(false);
         router.back()

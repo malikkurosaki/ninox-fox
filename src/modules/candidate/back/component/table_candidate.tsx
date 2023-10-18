@@ -6,8 +6,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { MdDelete, MdEditCalendar, MdOutlineModeEdit } from "react-icons/md";
 import { isModalCandidate } from "../val/isModalCandidate";
 import ModalDelCandidate from "./modal_del_candidate";
-import { useState } from "react";
-import SwitchStatusCandidate from "./status_candidate";
+import { useEffect, useState } from "react";
 import { funGetCandidateByArea } from "../..";
 
 /**
@@ -17,15 +16,7 @@ import { funGetCandidateByArea } from "../..";
  * @returns {component} Table list candidate sesuai dengan parameter.
  */
 
-export default function TableCandidate({ title, data }: { title: string, data: any[] }) {
-  // console.log("awal", data)
-  const elements = [
-    { position: 1, mass: 12.011, symbol: 'C', name: 'Komang Ayu' },
-    { position: 2, mass: 14.007, symbol: 'N', name: 'Kadek Agung' },
-    { position: 3, mass: 88.906, symbol: 'Y', name: 'I Wayan Merta' },
-    { position: 4, mass: 137.33, symbol: 'Ba', name: 'Surya Diningrat' },
-    { position: 5, mass: 140.12, symbol: 'Ce', name: 'I Komang Nuri' },
-  ];
+export default function TableCandidate({ title, data, searchParam }: { title: string, data: any[], searchParam: any }) {
 
   const [openModal, setOpenModal] = useAtom(isModalCandidate)
   const [isDataDel, setDataDel] = useState({
@@ -39,16 +30,18 @@ export default function TableCandidate({ title, data }: { title: string, data: a
   const searchParams = useSearchParams()
 
   async function onLoad() {
-    const dataDB = await funGetCandidateByArea({ find: { tingkat: 2, idProvinsi: 1, idKabkot: 2 } });
+    const dataDB = await funGetCandidateByArea({ find: searchParam });
     setData(dataDB.data)
-    console.log("ini", isData)
   }
+
+  useEffect(() => {
+    setData(data)
+  }, [data])
 
 
 
   return (
     <>
-      {/* {JSON.stringify(data)} */}
       <Box mt={30}>
         <Box
           style={{
@@ -80,7 +73,7 @@ export default function TableCandidate({ title, data }: { title: string, data: a
                     </Table.Tr>
                   </Table.Thead>
                   <Table.Tbody>
-                    {data.map((v: any, i: any) => (
+                    {isData.map((v: any, i: any) => (
                       <Table.Tr key={i}>
                         <Table.Td>{i + 1}</Table.Td>
                         <Table.Td>{v.name}</Table.Td>
@@ -93,12 +86,12 @@ export default function TableCandidate({ title, data }: { title: string, data: a
                           />
                         </Table.Td>
                         <Table.Td>
-                          <SwitchStatusCandidate status={v.isActive} onCallBack={(val) => {
+                          <Switch checked={v.isActive} size="md" onLabel="ON" offLabel="OFF" onChange={(val) => {
                             setOpenModal(true)
                             setDataDel({
                               ...isDataDel,
                               idCandidate: v.id,
-                              active: val
+                              active: val.currentTarget.checked
                             })
                           }} />
                         </Table.Td>
@@ -108,7 +101,7 @@ export default function TableCandidate({ title, data }: { title: string, data: a
                             color="rgba(5, 128, 23, 1)"
                             size="xl"
                             aria-label="Edit"
-                            onClick={() => router.push('candidate/edit/IKomangAyu')}
+                            onClick={() => router.push('candidate/edit/'+v.id)}
                           >
                             <MdEditCalendar size={20} />
                           </ActionIcon>
@@ -131,9 +124,7 @@ export default function TableCandidate({ title, data }: { title: string, data: a
         closeOnClickOutside={false}
       >
         <ModalDelCandidate data={isDataDel} onSuccess={(val) => {
-          // data = val
-          // router.refresh()
-          onLoad()
+          if (val) return onLoad();
         }} />
       </Modal>
     </>
