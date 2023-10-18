@@ -1,7 +1,7 @@
 'use client'
 
 import { Box, Button, Center, Group, Paper, Select, SimpleGrid, Stack, Text, UnstyledButton } from "@mantine/core"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import TableCandidate from "../component/table_candidate"
 import { useRouter } from "next/navigation"
 import { MasterKabGetByProvince } from "@/modules/_global/fun/master_kabupaten_get_by_province"
@@ -22,8 +22,8 @@ export default function ListCandidates({ param, provinsi, kabupaten, datatable }
     const router = useRouter()
     const [dataProvinsi, setDataProvinsi] = useState(provinsi)
     const [dataKab, setDataKab] = useState<any>(kabupaten)
-    const [isProvinsi, setProvinsi] = useState<any>(param.prov || null)
-    const [isKabupaten, setKabupaten] = useState<any>(param.city || null)
+    const [isProvinsi, setProvinsi] = useState<any>(param.idProvinsi || null)
+    const [isKabupaten, setKabupaten] = useState<any>(param.idKabkot || null)
 
 
     async function onKabupaten({ idProv }: { idProv: any }) {
@@ -37,6 +37,11 @@ export default function ListCandidates({ param, provinsi, kabupaten, datatable }
         if (isProvinsi == null) return toast("Provinces cannot be empty", { theme: "dark" })
         router.replace('/dashboard/candidate?prov=' + isProvinsi + '&city=' + isKabupaten)
     }
+
+    useEffect(() => {
+        setProvinsi((param.idProvinsi == 0) ? null : param.idProvinsi)
+        setKabupaten((param.idKabkot == 0) ? null : param.idKabkot)
+    }, [param])
 
     return (
         <>
@@ -76,7 +81,7 @@ export default function ListCandidates({ param, provinsi, kabupaten, datatable }
                 </Button>
             </Group>
             {!_.isNull(datatable.title) &&
-                <TableCandidate title={datatable.title} data={datatable.data} />
+                <TableCandidate title={datatable.title} data={datatable.data} searchParam={param} />
             }
         </>
     )

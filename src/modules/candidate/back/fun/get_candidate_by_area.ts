@@ -1,6 +1,7 @@
 'use server'
 
 import prisma from "@/modules/_global/bin/prisma"
+import { provinsiCount } from "@/modules/_global/fun/fun_provinsi_count"
 
 
 /**
@@ -12,14 +13,20 @@ import prisma from "@/modules/_global/bin/prisma"
 export default async function funGetCandidateByArea({ find }: { find: any }) {
     let titleTrue, dataTable = <any>[], area
 
-    if (find.idProvinsi > 0) {
+    const nProv = await provinsiCount();
+
+    if (find.idProvinsi > 0 && find.idProvinsi <= nProv) {
         if (find.tingkat == 1) {
             dataTable = await prisma.candidate.findMany({
                 where: {
                     tingkat: find.tingkat,
                     idProvinsi: find.idProvinsi
+                },
+                orderBy: {
+                    id: 'asc'
                 }
             })
+
             area = await prisma.areaProvinsi.findUnique({
                 where: {
                     id: find.idProvinsi
@@ -33,6 +40,9 @@ export default async function funGetCandidateByArea({ find }: { find: any }) {
                     tingkat: find.tingkat,
                     idProvinsi: find.idProvinsi,
                     idKabkot: find.idKabkot
+                },
+                orderBy: {
+                    id: 'asc'
                 }
             })
 
@@ -55,5 +65,6 @@ export default async function funGetCandidateByArea({ find }: { find: any }) {
         title: titleTrue,
         data: dataTable
     }
+
     return allData
 }

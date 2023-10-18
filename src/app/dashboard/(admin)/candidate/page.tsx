@@ -18,7 +18,7 @@ export default async function Page({ searchParams }: { searchParams: { prov: any
 
   return (
     <>
-      <ListCandidates param={searchParams} provinsi={prov} kabupaten={kab} datatable={dataDB} />
+      <ListCandidates param={findData} provinsi={prov} kabupaten={kab} datatable={dataDB} />
     </>
   );
 }

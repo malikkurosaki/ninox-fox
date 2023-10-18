@@ -1,9 +1,10 @@
-import { EditCandidate } from "@/modules/candidate";
+import { EditCandidate, funGetOneCandidate } from "@/modules/candidate";
 
-export default function Page({ params }: { params: { id: string } }) {
+export default async function Page({ params }: { params: { id: string } }) {
+    const data = await funGetOneCandidate({ id: params.id });
     return (
         <>
-            <EditCandidate data={[]} />
+            <EditCandidate data={data} />
         </>
     )
 }
