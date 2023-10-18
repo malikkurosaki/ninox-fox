@@ -1,6 +1,6 @@
 'use client'
 import { ButtonBack } from '@/modules/_global';
-import { Box, Button, Group, Stack, Text, Title, rem } from '@mantine/core';
+import { Box, Button, Center, Group, ScrollArea, Stack, Table, Text, Title, rem } from '@mantine/core';
 import { Dropzone, DropzoneProps, IMAGE_MIME_TYPE } from '@mantine/dropzone';
 import papa from 'papaparse'
 import { useState } from 'react';
@@ -9,6 +9,7 @@ import { GrDocumentCsv } from 'react-icons/gr';
 import { MdCancelPresentation } from 'react-icons/md';
 import toast from 'react-simple-toasts';
 import { funUploadLeader } from '../fun/fun_upload_leader';
+import TableUpload from '../components/table_upload';
 
 
 /**
@@ -17,12 +18,15 @@ import { funUploadLeader } from '../fun/fun_upload_leader';
  */
 export function ViewUploadLeader() {
   const [json, setJson] = useState()
-  async function onpload(data : any) {
+  async function onpload(data: any) {
     const res = await funUploadLeader(data)
     if (res.success) return toast(res.message)
   }
-
   const [dataUpload, setDataUplaod] = useState()
+
+  const getHeadings = () => {
+    return json
+  };
 
   return (
     <>
@@ -42,7 +46,8 @@ export function ViewUploadLeader() {
             style={{
               border: "1px dashed",
               color: "white",
-              borderRadius: 10
+              borderRadius: 10,
+              cursor: "pointer"
             }}
             onDrop={async (files: any) => {
               const csv_file = Buffer.from(await files[0].arrayBuffer()).toString()
@@ -91,12 +96,42 @@ export function ViewUploadLeader() {
             borderRadius: 10,
             paddingTop: 20
           }}>
+            <Center>
+              <Button mb={20} w={200} bg={"dark"}>UPLOAD</Button>
+            </Center>
             {json && <Stack bg={"dark"} style={{ borderRadius: 10, }} c={"white"} p={"md"}>
               <Title order={3}>Result</Title>
               <pre>
                 {JSON.stringify(json, null, 2)}
               </pre>
             </Stack>}
+            {/* <TableUpload theadData={getHeadings()} tbodyData={json} /> */}
+            {/* <Box
+              style={{
+                backgroundColor: "white",
+                padding: 10,
+                borderRadius: 10,
+              }}
+            >
+              <ScrollArea>
+                <Table withTableBorder horizontalSpacing="xl">
+                  <Table.Thead>
+                    <Table.Tr>
+                      <Table.Th>NO</Table.Th>
+                      <Table.Th>KABUPATEN / KOTA</Table.Th>
+                      <Table.Th>CERDAS</Table.Th>
+                      <Table.Th>JUJUR</Table.Th>
+                      <Table.Th>TEGAS</Table.Th>
+                      <Table.Th>AGAMIS</Table.Th>
+                      <Table.Th>PEKERJA KERAS</Table.Th>
+                      <Table.Th>BERPRESTASI</Table.Th>
+                      <Table.Th>MERAKYAT</Table.Th>
+                    </Table.Tr>
+                  </Table.Thead>
+                  {json}
+                </Table>
+              </ScrollArea>
+            </Box> */}
           </Box>
         </Box>
       </Stack>
