@@ -17,7 +17,7 @@ import TableUpload from '../components/table_upload';
  * @returns {Component} hasil untuk menampilkan upload leader
  */
 export function ViewUploadLeader() {
-  const [json, setJson] = useState()
+  const [json, setJson] = useState<any[]>([])
   async function onpload(data: any) {
     const res = await funUploadLeader(data)
     if (res.success) return toast(res.message)
@@ -96,17 +96,8 @@ export function ViewUploadLeader() {
             borderRadius: 10,
             paddingTop: 20
           }}>
-            <Center>
-              <Button mb={20} w={200} bg={"dark"}>UPLOAD</Button>
-            </Center>
-            {json && <Stack bg={"dark"} style={{ borderRadius: 10, }} c={"white"} p={"md"}>
-              <Title order={3}>Result</Title>
-              <pre>
-                {JSON.stringify(json, null, 2)}
-              </pre>
-            </Stack>}
-            {/* <TableUpload theadData={getHeadings()} tbodyData={json} /> */}
-            {/* <Box
+
+            <Box
               style={{
                 backgroundColor: "white",
                 padding: 10,
@@ -114,25 +105,36 @@ export function ViewUploadLeader() {
               }}
             >
               <ScrollArea>
-                <Table withTableBorder horizontalSpacing="xl">
+                <Table
+                  withTableBorder
+                  withRowBorders={false}
+                  horizontalSpacing="xl"
+                >
                   <Table.Thead>
-                    <Table.Tr>
-                      <Table.Th>NO</Table.Th>
-                      <Table.Th>KABUPATEN / KOTA</Table.Th>
-                      <Table.Th>CERDAS</Table.Th>
-                      <Table.Th>JUJUR</Table.Th>
-                      <Table.Th>TEGAS</Table.Th>
-                      <Table.Th>AGAMIS</Table.Th>
-                      <Table.Th>PEKERJA KERAS</Table.Th>
-                      <Table.Th>BERPRESTASI</Table.Th>
-                      <Table.Th>MERAKYAT</Table.Th>
+                    <Table.Tr
+                      style={{
+                        borderBottom: "1px solid #CED4D9",
+                      }}
+                    >
+                      <Table.Th>No</Table.Th>
+                      <Table.Th>Name</Table.Th>
                     </Table.Tr>
                   </Table.Thead>
-                  {json}
+                  <Table.Tbody>
+                    {json.map(home =>
+                      <Table.Tr key={home.id}>
+                        <Table.Td>{home.id}</Table.Td>
+                        <Table.Td>{home.name}</Table.Td>
+                      </Table.Tr>
+                    )}
+                  </Table.Tbody>
                 </Table>
               </ScrollArea>
-            </Box> */}
+            </Box>
           </Box>
+          <Group >
+            <Button mt={20} fullWidth bg={"dark"}>UPLOAD</Button>
+          </Group>
         </Box>
       </Stack>
     </>
