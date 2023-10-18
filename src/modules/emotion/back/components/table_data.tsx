@@ -1,5 +1,6 @@
 import { ActionIcon, Box, Group, ScrollArea, Table, Text } from "@mantine/core";
-import React from "react";
+import { AnyCnameRecord } from "dns";
+import React, { useEffect, useState } from "react";
 import { MdDelete, MdEditCalendar } from "react-icons/md";
 
 const data = [
@@ -63,7 +64,16 @@ const data = [
  * Fungsi untuk mendapatkan nilai dari table.
  * @returns  Hasil menampilkan tabel beserta valuenya.
  */
-export default function TableData() {
+export default function TableData({ title, data }: { title: string, data: any }) {
+
+
+  const [isData, setData] = useState(data)
+
+  useEffect(() => {
+    setData(data)
+  }, [data])
+
+
   return (
     <>
       <Box>
@@ -75,7 +85,7 @@ export default function TableData() {
           }}
         >
           <Text fw={"bold"} c={"white"}>
-            PROVINSI BALI
+            {title}
           </Text>
           <Box pt={20}>
             <Box
@@ -101,7 +111,7 @@ export default function TableData() {
                     </Table.Tr>
                   </Table.Thead>
                   <Table.Tbody>
-                    {data.map((v, i) => (
+                    {/* {isData.map((v: any, i: any) => (
                       <Table.Tr key={i}>
                         <Table.Td>{v.id}</Table.Td>
                         <Table.Td>{v.kabupaten}</Table.Td>
@@ -113,7 +123,7 @@ export default function TableData() {
                         <Table.Td>{v.Negative}</Table.Td>
                         <Table.Td>{v.Disapproval}</Table.Td>
                       </Table.Tr>
-                    ))}
+                    ))} */}
                   </Table.Tbody>
                 </Table>
               </ScrollArea>
