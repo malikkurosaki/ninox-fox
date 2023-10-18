@@ -15,7 +15,6 @@ import _ from "lodash"
  * @returns {component} Select wilayah.
  */
 
-export const dynamic = "force-dynamic"
 
 export default function ListCandidates({ param, provinsi, kabupaten, datatable }: { param: any, provinsi: any, kabupaten: any, datatable: any }) {
 

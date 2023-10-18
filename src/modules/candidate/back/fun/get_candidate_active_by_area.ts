@@ -3,15 +3,15 @@
 import { provinsiCount } from "@/modules/_global";
 import prisma from "@/modules/_global/bin/prisma"
 
-
 /**
  * Fungsi untuk menampilkan candidate berdasarkan area
  * @param {any} find - berisi tingkat kandidat, idprovinsi, dan idkabkot
- * @returns title & data 
+ * @returns data 
  */
 
-export default async function funGetCandidateByArea({ find }: { find: any }) {
-    let titleTrue, dataTable = <any>[], area
+
+export default async function funGetCandidateActiveByArea({ find }: { find: any }) {
+    let dataTable = <any>[]
 
     const nProv = await provinsiCount();
 
@@ -19,6 +19,7 @@ export default async function funGetCandidateByArea({ find }: { find: any }) {
         if (find.tingkat == 1) {
             dataTable = await prisma.candidate.findMany({
                 where: {
+                    isActive: true,
                     tingkat: find.tingkat,
                     idProvinsi: find.idProvinsi
                 },
@@ -26,17 +27,10 @@ export default async function funGetCandidateByArea({ find }: { find: any }) {
                     id: 'asc'
                 }
             })
-
-            area = await prisma.areaProvinsi.findUnique({
-                where: {
-                    id: find.idProvinsi
-                }
-            })
-            titleTrue = "PROVINSI " + area?.name
-
         } else if (find.tingkat == 2) {
             dataTable = await prisma.candidate.findMany({
                 where: {
+                    isActive: true,
                     tingkat: find.tingkat,
                     idProvinsi: find.idProvinsi,
                     idKabkot: find.idKabkot
@@ -45,26 +39,12 @@ export default async function funGetCandidateByArea({ find }: { find: any }) {
                     id: 'asc'
                 }
             })
-
-            area = await prisma.areaKabkot.findUnique({
-                where: {
-                    id: find.idKabkot
-                }
-            })
-
-            titleTrue = "" + area?.name
         }
     } else {
-        titleTrue = null;
         dataTable = [];
     }
 
 
 
-    const allData = {
-        title: titleTrue,
-        data: dataTable
-    }
-
-    return allData
+    return dataTable
 }
