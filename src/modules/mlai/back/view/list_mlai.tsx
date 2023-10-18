@@ -6,6 +6,7 @@ import TableMlAi from "../component/table_mlai"
 import { useRouter, useSearchParams } from "next/navigation"
 import { MasterKabGetByProvince } from "@/modules/_global"
 import toast from "react-simple-toasts"
+import _ from "lodash"
 
 /**
  * Fungsi untuk menampilkan table list mlai.
@@ -13,7 +14,7 @@ import toast from "react-simple-toasts"
  * @returns {component} Table list mlai sesuai dengan parameter.
  */
 
-export default function ListMlAi({ params, provinsi, kabupaten }: { params: any, provinsi: any, kabupaten: any }) {
+export default function ListMlAi({ params, provinsi, kabupaten, datatable }: { params: any, provinsi: any, kabupaten: any, datatable: any }) {
     const router = useRouter();
     const [dataProvinsi, setDataProvinsi] = useState(provinsi)
     const [dataKabupaten, setDatakabupaten] = useState<any>(kabupaten)
@@ -73,7 +74,9 @@ export default function ListMlAi({ params, provinsi, kabupaten }: { params: any,
                     PROCCESS
                 </Button>
             </Group>
-            {/* {title && <TableMlAi />} */}
+            {!_.isNull(datatable.dataTable) &&
+            <TableMlAi title={datatable.title} data={datatable.data} searchParam={params}/>
+            }
         </>
     )
 }

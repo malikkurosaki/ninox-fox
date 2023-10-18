@@ -15,7 +15,7 @@ import {
   Text,
 } from "@mantine/core";
 import { useAtom } from "jotai";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import {
   MdArrowCircleDown,
   MdArrowCircleUp,
@@ -26,53 +26,34 @@ import { isModalMlAi } from "../val/val_mlai";
 import ModalDelMlAi from "./modal_del_mlai";
 import { CiRead, CiUnread } from "react-icons/ci";
 import { useDisclosure } from "@mantine/hooks";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ComponentTable from "./component_table";
+import { funGetCandidateActiveByArea } from "@/modules/candidate";
 
 /**
  * Fungsi untuk menampilkan table ml ai.
  * @returns {component} table & pagination ml ai.
  */
 
-export default function TableMlAi() {
+export default function TableMlAi({ title, data, searchParam }: { title: any, data: any, searchParam: any }) {
   const [openModal, setOpenModal] = useAtom(isModalMlAi);
   const router = useRouter();
-  const [opened, { toggle }] = useDisclosure(false);
-  const elements = [
-    {
-      no: 1,
-      content:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.",
-      name: "Komang Ayu",
-    },
-    {
-      no: 2,
-      content:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.",
-      name: "Kadek Agung",
-    },
-    {
-      no: 3,
-      content:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.",
-      name: "I Wayan Merta",
-    },
-    {
-      no: 4,
-      content:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.",
-      name: "Surya Diningrat",
-    },
-    {
-      no: 5,
-      content:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.",
-      name: "I Komang Nuri",
-    },
-  ];
+
+  const [isData, setData] = useState(data)
+  const searchParams = useSearchParams()
+
+  async function onLoad() {
+    const dataDB = await funGetCandidateActiveByArea({ find: searchParam })
+    setData(dataDB.data)
+  }
+
+  useEffect(() => {
+    setData(data)
+  }, [data])
 
   return (
     <>
+      {/* {JSON.stringify(isData, null, 2)} */}
       <Box mt={30}>
         <Box
           style={{
@@ -83,9 +64,9 @@ export default function TableMlAi() {
         >
           <Group justify="space-between" gap="lg">
             <Text fw={"bold"} c={"white"}>
-              {"PROVINSI BALI"}
+              {title}
             </Text>
-            <Button bg={"gray"} onClick={() => router.push("ml-ai/add")}>
+            <Button bg={"gray"} onClick={() => router.push("ml-ai/add?prov=" + searchParams.get('prov') + '&city=' + searchParams.get('city'))}>
               ADD MLAI
             </Button>
           </Group>
@@ -116,7 +97,7 @@ export default function TableMlAi() {
                       </Table.Th>
                     </Table.Tr>
                   </Table.Thead>
-                  {elements.map((v, i) => (
+                  {isData.map((v: any, i: any) => (
                     <ComponentTable v={v} i={i} key={i} />
                   ))}
                 </Table>

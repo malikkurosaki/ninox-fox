@@ -3,6 +3,10 @@
 import { Button, Group, Select, Stack, Text } from "@mantine/core"
 import { useRouter } from "next/navigation";
 import TableSwot from "../component/table_swot";
+import { useEffect, useState } from "react";
+import toast from "react-simple-toasts";
+import { MasterKabGetByProvince } from "@/modules/_global";
+import _ from "lodash"
 
 /**
  * Fungsi untuk menampilkan table list swot.
@@ -10,8 +14,30 @@ import TableSwot from "../component/table_swot";
  * @returns {component} Table list swot sesuai dengan parameter.
  */
 
-export default function ListSwot({params, provinsi, kabupaten}: {params: any, provinsi: any, kabupaten: any}) {
-    const router = useRouter();
+export default function ListSwot({ params, provinsi, kabupaten, datatable }: { params: any, provinsi: any, kabupaten: any, datatable: any }) {
+    const router = useRouter()
+
+    const [dataProvinsi, setDataProvinsi] = useState(provinsi)
+    const [dataKabupaten, setDataKabupaten] = useState<any>(kabupaten)
+    const [isProvinsi, setProvinsi] = useState<any>(params.idProvinsi || null)
+    const [isKabupaten, setKabupaten] = useState<any>(params.idKabkot || null)
+
+    async function onKabupaten({ idProv }: { idProv: any }) {
+        setProvinsi(idProv)
+        setKabupaten(null)
+        const dataKab = await MasterKabGetByProvince({ idProvinsi: Number(idProv) })
+        setDataKabupaten(dataKab)
+    }
+
+    function onProsses() {
+        if (isProvinsi == null) return toast("Provinces cannot be empty", { theme: "dark" })
+        router.replace("/dashboard/swot?prov=" + isProvinsi + "&city=" + isKabupaten)
+    }
+
+    useEffect(() => {
+        setProvinsi(params.idProvinsi == 0 ? null : params.idProvinsi)
+        setKabupaten(params.idKabkot == 0 ? null : params.idKabkot)
+    }, [params])
 
     return (
         <>
@@ -21,17 +47,38 @@ export default function ListSwot({params, provinsi, kabupaten}: {params: any, pr
             <Group grow mt={30}>
                 <Select
                     placeholder="PROVINCE"
-                    data={["BALI", "JAWA BARAT", "JAWA TIMUR", "KALIMANTAN TENGAH"]}
+                    data={dataProvinsi.map((pro: any) => ({
+                        value: String(pro.id),
+                        label: pro.name,
+                    }))}
                     required
                     label={"Provinsi"}
                     searchable
+                    value={isProvinsi}
+                    onChange={(val) => (
+                        onKabupaten({ idProv: val })
+                    )}
                 />
-                <Select mt={25} placeholder="CITY" data={["BADUNG", "DENPASAR", "TABANAN"]} />
-                <Button mt={25} bg={"gray"} onClick={() => router.push('swot?prov=bali')}>
+                <Select
+                    label={"Kabupaten"}
+                    placeholder="CITY"
+                    data={dataKabupaten.map((kab: any) => ({
+                        value: String(kab.id),
+                        label: kab.name,
+                    }))}
+                    value={isKabupaten}
+                    onChange={(val) => (
+                        setKabupaten(val)
+                    )}
+                    searchable
+                />
+                <Button mt={25} bg={"gray"} onClick={() => onProsses()}>
                     PROCCESS
                 </Button>
             </Group>
-            {/* {title && <TableSwot />} */}
+            {!_.isNaN(datatable.dataTable) &&
+            <TableSwot title={datatable.title} data={datatable.data} searchParam={params}/>
+            }
         </>
     )
 }

@@ -110,18 +110,6 @@ export default function TableRoleUser() {
                                 <MdOutlineModeEdit size="23" />
                               </ActionIcon>
                             </Box>
-                            <Box>
-                              <ActionIcon
-                                color="red.9"
-                                variant="transparent" aria-label="Settings"
-                              // onClick={() => {
-                              //   setDataDelete(v.id);
-                              //   setOpenModal(true);
-                              // }}
-                              >
-                                <MdDelete size="23" />
-                              </ActionIcon>
-                            </Box>
                           </Group>
                         </Table.Td>
                       </Table.Tr>
