@@ -23,6 +23,8 @@ import TableData from "../components/table_data";
 import { MasterKabGetByProvince } from "@/modules/_global";
 import _ from "lodash";
 import { funGetCandidateActiveByArea } from "@/modules/candidate";
+import moment from "moment";
+import toast from "react-simple-toasts";
 
 
 /**
@@ -30,27 +32,34 @@ import { funGetCandidateActiveByArea } from "@/modules/candidate";
  * @param {string} title - Judul table.
  * @returns {component} Table list Emotion sesuai dengan parameter.
  */
-export default function ViewBackEmotion({ param, provinsi, kabupaten, candidate }: { param: any, provinsi: any, kabupaten: any, candidate: any }) {
+
+
+
+export default function ViewBackEmotion({ param, provinsi, kabupaten, candidate, datatable }: { param: any, provinsi: any, kabupaten: any, candidate: any, datatable: any }) {
   const router = useRouter()
+  const today = new Date();
+
   const [dataProvinsi, setDataProvinsi] = useState(provinsi)
   const [dataKabupaten, setDataKabupaten] = useState<any>(kabupaten)
   const [dataCandidate, setDataCandidate] = useState<any>(candidate)
   const [isProvinsi, setProvinsi] = useState<any>(param.idProvinsi || null)
   const [isKabupaten, setKabupaten] = useState<any>(param.idKabkot || null)
   const [isCandidate, setCandidate] = useState<any>(param.idCandidate || null)
-  const nowDate = new Date();
+  const [isDate, setDate] = useState<any>((_.isNull(param.date)) ? today : new Date(param.date))
 
-  console.log(nowDate.getDate() + ' ' + nowDate.getMonth() + ' ' + nowDate.getFullYear())
+
 
   useEffect(() => {
     setProvinsi((param.idProvinsi == 0) ? null : param.idProvinsi)
     setKabupaten((param.idKabkot == 0) ? null : param.idKabkot)
     setCandidate((param.idCandidate == 0) ? null : param.idCandidate)
+    setDate((param.date == null) ? new Date() : new Date(param.date))
   }, [param])
 
   async function onProvinsi({ idProv }: { idProv: any }) {
     setProvinsi(idProv)
     setKabupaten(null)
+    setCandidate(null)
     const dataDbKab = await MasterKabGetByProvince({ idProvinsi: Number(idProv) })
     const dataDbCan = await funGetCandidateActiveByArea({ find: { idProvinsi: Number(idProv), tingkat: 1 } })
     setDataKabupaten(dataDbKab)
@@ -60,8 +69,15 @@ export default function ViewBackEmotion({ param, provinsi, kabupaten, candidate 
 
   async function onKabupaten({ idKab }: { idKab: any }) {
     setKabupaten(idKab)
+    setCandidate(null)
     const dataDbCan = await funGetCandidateActiveByArea({ find: { idProvinsi: Number(isProvinsi), idKabkot: Number(idKab), tingkat: 2 } })
     setDataCandidate(dataDbCan)
+  }
+
+  function onProccess() {
+    if (_.isNull(isProvinsi)) return toast("Silahkan pilih provinsi", { theme: "dark" })
+    if (_.isNull(isCandidate)) return toast("Silahkan pilih kandidat", { theme: "dark" })
+    router.replace('/dashboard/emotion?prov=' + isProvinsi + '&city=' + isKabupaten + '&can=' + isCandidate + '&date=' + moment(isDate).format("YYYY-MM-DD"))
   }
 
 
@@ -112,10 +128,11 @@ export default function ViewBackEmotion({ param, provinsi, kabupaten, candidate 
                   value={isCandidate}
                   label={"Candidate"}
                   searchable
+                  onChange={(val) => { setCandidate(val) }}
                 />
-                <DateInput valueFormat="DD-MM-YYYY" required
-                  label={"Select Date"} placeholder="SELECT DATE" />
-                <Button bg={"gray"} onClick={() => router.push('emotion?prov=bali')}>
+                <DateInput valueFormat="DD-MM-YYYY" required value={isDate}
+                  label={"Select Date"} placeholder="SELECT DATE" onChange={(val) => { setDate(val) }} />
+                <Button bg={"gray"} onClick={() => onProccess()}>
                   PROCCESS
                 </Button>
               </Stack>
@@ -132,7 +149,7 @@ export default function ViewBackEmotion({ param, provinsi, kabupaten, candidate 
                 <UploadData />
               </Group>
             </Box>
-            {(param.idProvinsi > 0) && (
+            {!_.isNull(datatable.title) && (
               <Group justify="space-between" grow pt={30}>
                 <Box>
                   <Box
@@ -172,9 +189,9 @@ export default function ViewBackEmotion({ param, provinsi, kabupaten, candidate 
           </Box>
         </SimpleGrid>
       </Box>
-      {(param.idProvinsi > 0) && (
+      {!_.isNull(datatable.title) && (
         <Box pt={20}>
-          <TableData />
+          <TableData title={datatable.title} data={datatable.data} />
         </Box>
       )}
     </>

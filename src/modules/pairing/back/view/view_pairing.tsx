@@ -10,19 +10,79 @@ import {
   Stack,
   Text,
 } from "@mantine/core";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import TableDataPairing from "../components/table_data_pairing";
 import { DateInput } from "@mantine/dates";
 import UploadDataPairing from "../components/upload_data_pairing";
+import _ from "lodash";
+import moment from "moment";
+import { MasterKabGetByProvince } from "@/modules/_global";
+import { funGetCandidateActiveByArea } from "@/modules/candidate";
+import toast from "react-simple-toasts";
 
 /**
  * Fungsi untuk menampilkan table list pairing.
  * @param {string} title - Judul table.
  * @returns {component} Table list pairing sesuai dengan parameter.
  */
-export default function ViewPairing({ title }: { title: string }) {
-  const router = useRouter();
+
+
+
+export default function ViewPairing({ param, provinsi, kabupaten, candidate, datatable }: { param: any, provinsi: any, kabupaten: any, candidate: any, datatable: any }) {
+  const router = useRouter()
+  const today = new Date();
+
+  const [dataProvinsi, setDataProvinsi] = useState(provinsi)
+  const [dataKabupaten, setDataKabupaten] = useState<any>(kabupaten)
+  const [dataCandidate, setDataCandidate] = useState<any>(candidate)
+  const [isProvinsi, setProvinsi] = useState<any>(param.idProvinsi || null)
+  const [isKabupaten, setKabupaten] = useState<any>(param.idKabkot || null)
+  const [isCandidate1, setCandidate1] = useState<any>(param.idCandidate1 || null)
+  const [isCandidate2, setCandidate2] = useState<any>(param.idCandidate2 || null)
+  const [isDate, setDate] = useState<any>((_.isNull(param.date)) ? today : new Date(param.date))
+
+
+
+  useEffect(() => {
+    setProvinsi((param.idProvinsi == 0) ? null : param.idProvinsi)
+    setKabupaten((param.idKabkot == 0) ? null : param.idKabkot)
+    setCandidate1((param.idCandidate1 == 0) ? null : param.idCandidate1)
+    setCandidate2((param.idCandidate2 == 0) ? null : param.idCandidate2)
+    setDate((param.date == null) ? new Date() : new Date(param.date))
+  }, [param])
+
+
+
+  async function onProvinsi({ idProv }: { idProv: any }) {
+    setProvinsi(idProv)
+    setKabupaten(null)
+    setCandidate1(null)
+    setCandidate2(null)
+    const dataDbKab = await MasterKabGetByProvince({ idProvinsi: Number(idProv) })
+    const dataDbCan = await funGetCandidateActiveByArea({ find: { idProvinsi: Number(idProv), tingkat: 1 } })
+    setDataKabupaten(dataDbKab)
+    setDataCandidate(dataDbCan)
+  }
+
+  async function onKabupaten({ idKab }: { idKab: any }) {
+    setKabupaten(idKab)
+    setCandidate1(null)
+    setCandidate2(null)
+    const dataDbCan = await funGetCandidateActiveByArea({ find: { idProvinsi: Number(isProvinsi), idKabkot: Number(idKab), tingkat: 2 } })
+    setDataCandidate(dataDbCan)
+  }
+
+
+  function onProccess() {
+    if (_.isNull(isProvinsi)) return toast("Silahkan pilih provinsi", { theme: "dark" })
+    if (_.isNull(isCandidate1)) return toast("Silahkan pilih kandidat pertama", { theme: "dark" })
+    if (_.isNull(isCandidate2)) return toast("Silahkan pilih kandidat kedua", { theme: "dark" })
+    router.replace('/dashboard/pairing?prov=' + isProvinsi + '&city=' + isKabupaten + '&can1=' + isCandidate1 + '&can2=' + isCandidate2 + '&date=' + moment(isDate).format("YYYY-MM-DD"))
+  }
+
+
+
   return (
     <>
       <Stack>
@@ -39,48 +99,70 @@ export default function ViewPairing({ title }: { title: string }) {
               <Stack>
                 <Select
                   placeholder="PROVINCE"
-                  data={[
-                    "BALI",
-                    "JAWA BARAT",
-                    "JAWA TIMUR",
-                    "KALIMANTAN TENGAH",
-                  ]}
+                  data={dataProvinsi.map((pro: any) => ({
+                    value: String(pro.id),
+                    label: pro.name
+                  }))}
+                  value={isProvinsi}
                   required
                   label={"Provinsi"}
                   searchable
+                  onChange={(val) => onProvinsi({ idProv: val })}
                 />
                 <Select
                   placeholder="CITY"
-                  data={["BADUNG", "DENPASAR", "TABANAN"]}
-                  mt={10}
+                  data={dataKabupaten.map((kab: any) => ({
+                    value: String(kab.id),
+                    label: kab.name
+                  }))}
+                  value={isKabupaten}
+                  label="Kabupaten/Kota"
+                  searchable
+                  onChange={(val) => onKabupaten({ idKab: val })}
                 />
                 <Select
                   placeholder="CANDIDATE 1"
-                  data={["I WAYAN KADEK", "I KETUT SURYA", "KOMANG ADI"]}
+                  data={dataCandidate.map((can: any) => ({
+                    value: String(can.id),
+                    label: can.name
+                  }))}
                   required
+                  value={isCandidate1}
                   label={"Candidate 1"}
                   searchable
+                  onChange={(val) => {
+                    setCandidate2(null)
+                    setCandidate1(val)
+                  }}
                 />
                 <Select
                   placeholder="CANDIDATE 2"
-                  data={["I WAYAN KADEK", "I KETUT SURYA", "KOMANG ADI"]}
+                  data={dataCandidate.map((can: any) => ({
+                    value: String(can.id),
+                    label: can.name
+                  }))}
                   required
+                  value={isCandidate2}
                   label={"Candidate 2"}
-                  searchable
+
+                  onChange={(val) => {
+                    if (val == isCandidate1) {
+                      setCandidate2(null)
+                      toast("Kandidat 1 & 2 tidak boleh sama", { theme: "dark" })
+                    } else {
+                      setCandidate2(val)
+                    }
+                  }}
                 />
-                <DateInput
-                  valueFormat="YYYY MMM DD"
-                  placeholder="SELECT DATE"
-                  required
-                  label={"Select Date"}
-                />
-                <Button bg={"gray"} onClick={() => router.push('pairing?prov=bali')}>
+                <DateInput valueFormat="DD-MM-YYYY" required value={isDate}
+                  label={"Select Date"} placeholder="SELECT DATE" onChange={(val) => { setDate(val) }} />
+                <Button bg={"gray"} onClick={() => onProccess()}>
                   PROCCESS
                 </Button>
               </Stack>
             </Paper>
           </Box>
-          {title &&
+          {(param.idProvinsi > 0) &&
             <Box>
               <UploadDataPairing />
               <Group justify="space-between" grow pt={30}>
@@ -122,7 +204,7 @@ export default function ViewPairing({ title }: { title: string }) {
           }
         </SimpleGrid>
       </Box>
-      {title &&
+      {(param.idProvinsi > 0) &&
         <Box pt={30}>
           <TableDataPairing />
         </Box>
