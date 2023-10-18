@@ -16,76 +16,35 @@ import {
 } from "@mantine/core";
 import { useAtom } from "jotai";
 import { isModalStep } from "../val/val_step";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { MdDelete, MdEditCalendar } from "react-icons/md";
 import { CiRead } from "react-icons/ci";
 import ModalDelStep from "./modal_del_step";
 import { useDisclosure } from "@mantine/hooks";
 import ComponentTableStep from "./component_table_step";
+import { useEffect, useState } from "react";
+import { funGetCandidateActiveByArea } from "@/modules/candidate";
 
 /**
  * Fungsi untuk menampilkan view table step.
  * @returns {component} table step.
  */
 
-export default function TableStep() {
+export default function TableStep({ title, data, searchParam }: { title: any, data: any, searchParam: any }) {
   const [openModal, setOpenModal] = useAtom(isModalStep);
   const router = useRouter();
-  const [opened, { toggle }] = useDisclosure(false);
-  const elements = [
-    {
-      no: 1,
-      sentiment: "Positive",
-      category: "Social",
-      content:
-        "Contrary to popular belief, Lorem Ipsum is not simply random text.",
-      name: "Komang Ayu",
-      value:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.",
-    },
-    {
-      no: 2,
-      sentiment: "Positive",
-      category: "Politic",
-      content:
-        "Contrary to popular belief, Lorem Ipsum is not simply random text.",
-      name: "Kadek Agung",
-      value:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.",
-    },
-    {
-      no: 3,
-      sentiment: "Negative",
-      category: "Economy",
-      content:
-        "Contrary to popular belief, Lorem Ipsum is not simply random text.",
-      name: "I Wayan Merta",
-      value:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.",
-    },
-    {
-      no: 4,
-      sentiment: "Positive",
-      category: "Technology",
-      content:
-        "Contrary to popular belief, Lorem Ipsum is not simply random text.",
-      name: "Surya Diningrat",
-      value:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.",
-    },
-    {
-      no: 5,
-      sentiment: "Negative",
-      category: "Social",
-      content:
-        "Contrary to popular belief, Lorem Ipsum is not simply random text.",
-      name: "I Komang Nuri",
-      value:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.",
-    },
-  ];
+ 
+  const [isData, setData] = useState(data)
+  const searchParams = useSearchParams()
 
-  let a = 3;
+  async function onLoad() {
+    const dataDB = await funGetCandidateActiveByArea({ find: searchParam })
+    setData(dataDB.data)
+  }
+
+  useEffect(() => {
+    setData(data)
+  }, [data])
 
   return (
     <>
@@ -99,9 +58,9 @@ export default function TableStep() {
         >
           <Group justify="space-between" gap="lg">
             <Text fw={"bold"} c={"white"}>
-              {"PROVINSI BALI"}
+              {title}
             </Text>
-            <Button bg={"gray"} onClick={() => router.push("step/add")}>
+            <Button bg={"gray"} onClick={() => router.push("step/add?prov=" + searchParams.get('prov') + '&city=' + searchParams.get('city'))}>
               ADD STEP
             </Button>
           </Group>
@@ -134,7 +93,7 @@ export default function TableStep() {
                       </Table.Th>
                     </Table.Tr>
                   </Table.Thead>
-                  {elements.map((v, i) => (
+                  {isData.map((v: any, i: any) => (
                     <ComponentTableStep v={v} i={i} key={i} />
                   ))}
                 </Table>
