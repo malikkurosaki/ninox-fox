@@ -10,7 +10,7 @@ import TableSwot from "../component/table_swot";
  * @returns {component} Table list swot sesuai dengan parameter.
  */
 
-export default function ListSwot({ title }: { title?: string }) {
+export default function ListSwot({params, provinsi, kabupaten}: {params: any, provinsi: any, kabupaten: any}) {
     const router = useRouter();
 
     return (
@@ -31,7 +31,7 @@ export default function ListSwot({ title }: { title?: string }) {
                     PROCCESS
                 </Button>
             </Group>
-            {title && <TableSwot />}
+            {/* {title && <TableSwot />} */}
         </>
     )
 }

@@ -1,9 +1,11 @@
 'use client'
 
 import { Button, Group, Select, Stack, Text } from "@mantine/core"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import TableMlAi from "../component/table_mlai"
 import { useRouter, useSearchParams } from "next/navigation"
+import { MasterKabGetByProvince } from "@/modules/_global"
+import toast from "react-simple-toasts"
 
 /**
  * Fungsi untuk menampilkan table list mlai.
@@ -11,8 +13,29 @@ import { useRouter, useSearchParams } from "next/navigation"
  * @returns {component} Table list mlai sesuai dengan parameter.
  */
 
-export default function ListMlAi({ title }: { title?: string }) {
+export default function ListMlAi({ params, provinsi, kabupaten }: { params: any, provinsi: any, kabupaten: any }) {
     const router = useRouter();
+    const [dataProvinsi, setDataProvinsi] = useState(provinsi)
+    const [dataKabupaten, setDatakabupaten] = useState<any>(kabupaten)
+    const [isProvinsi, setProvinsi] = useState<any>(params.idProvinsi || null)
+    const [isKabupaten, setKabupaten] = useState<any>(params.idKabkot || null)
+
+    async function onKabupaten({ idProv }: { idProv: any }) {
+        setProvinsi(idProv)
+        setKabupaten(null)
+        const dataKab = await MasterKabGetByProvince({ idProvinsi: Number(idProv) })
+        setDatakabupaten(dataKab)
+    }
+
+    function onProsses() {
+        if (isProvinsi == null) return toast("Provinces cannot be empty", { theme: "dark" })
+        router.replace("/dashboard/ml-ai?prov=" + isProvinsi + "&city=" + isKabupaten)
+    }
+
+    useEffect(() => {
+        setProvinsi(params.idProvinsi == 0 ? null : params.idProvinsi)
+        setKabupaten(params.idKabkot == 0 ? null : params.idKabkot)
+    }, [params])
 
     return (
         <>
@@ -22,17 +45,35 @@ export default function ListMlAi({ title }: { title?: string }) {
             <Group grow mt={30}>
                 <Select
                     placeholder="PROVINCE"
-                    data={["BALI", "JAWA BARAT", "JAWA TIMUR", "KALIMANTAN TENGAH"]}
+                    data={dataProvinsi.map((pro: any) => ({
+                        value: String(pro.id),
+                        label: pro.name
+                    }))}
                     required
                     label={"Provinsi"}
+                    value={isProvinsi}
+                    onChange={(val) => (
+                        onKabupaten({ idProv: val })
+                    )}
                     searchable
                 />
-                <Select mt={25} placeholder="CITY" data={["BADUNG", "DENPASAR", "TABANAN"]} />
-                <Button mt={25} bg={"gray"} onClick={() => router.push('ml-ai?prov=bali')}>
+                <Select 
+                    placeholder="CITY"
+                    data={dataKabupaten.map((kab: any) => ({
+                        value: String(kab.id),
+                        label: kab.name
+                    }))}
+                    label={"Kabupaten"}
+                    value={isKabupaten}
+                    onChange={(val) => (
+                        setKabupaten(val)
+                    )}
+                />
+                <Button mt={25} bg={"gray"} onClick={() => onProsses()}>
                     PROCCESS
                 </Button>
             </Group>
-            {title && <TableMlAi />}
+            {/* {title && <TableMlAi />} */}
         </>
     )
 }
