@@ -5,17 +5,19 @@ import { useAtom } from "jotai"
 import { isModalMlAi } from "../val/val_mlai"
 import toast from "react-simple-toasts"
 import { useRouter } from "next/navigation"
+import funEditMlAi from "../fun/fun_edit_mlai"
 
 /**
  * Fungsi untuk menampilkan modal konfirmasi edit ml ai.
  * @returns {component} modal konfirmasi edit ml ai.
  */
 
-export default function ModalEditMlAi() {
+export default function ModalEditMlAi({data}: {data: any}) {
     const [openModal, setOpenModal] = useAtom(isModalMlAi)
     const router = useRouter()
 
-    function onEditMlAi() {
+    async function onEditMlAi() {
+        const edit = await funEditMlAi({body: data})
         toast("Success", { theme: "dark" });
         setOpenModal(false);
         router.back()

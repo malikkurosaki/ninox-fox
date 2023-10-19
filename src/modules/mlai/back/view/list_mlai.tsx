@@ -74,7 +74,7 @@ export default function ListMlAi({ params, provinsi, kabupaten, datatable }: { p
                     PROCCESS
                 </Button>
             </Group>
-            {!_.isNull(datatable.dataTable) &&
+            {!_.isNull(datatable.title) &&
             <TableMlAi title={datatable.title} data={datatable.data} searchParam={params}/>
             }
         </>

@@ -4,7 +4,7 @@ import { ButtonBack } from "@/modules/_global"
 import { Box, Button, Group, Modal, Radio, Select, Stack, Text, TextInput, Textarea } from "@mantine/core"
 import ModalAddMlAi from "../component/modal_add_mlai"
 import { useAtom } from "jotai"
-import { isModalMlAi } from "../val/val_mlai"
+import { isModalMlAi, isModalMlaiAdd } from "../val/val_mlai"
 import { useSearchParams } from "next/navigation"
 import { useState } from "react"
 import _, { values } from "lodash"
@@ -18,7 +18,7 @@ import toast from "react-simple-toasts"
 
 export default function AddMlAi({ params, candidate, provinsi, kabupaten }: { params: any, candidate: any, provinsi: any, kabupaten: any }) {
     const today = new Date();
-    const [openModal, setOpenModal] = useAtom(isModalMlAi)
+    const [openModal, setOpenModal] = useAtom(isModalMlaiAdd)
     const query = useSearchParams()
     const [isDataCandidate, setDataCandidate] = useState(candidate)
     const [dataProvinsi, setDataProvinsi] = useState(provinsi)
@@ -41,7 +41,6 @@ export default function AddMlAi({ params, candidate, provinsi, kabupaten }: { pa
     return (
         <>
             <ButtonBack />
-            {/* <pre>{JSON.stringify(isDataCandidate, null, 2)}</pre> */}
             <Stack mt={30}>
                 <Text fw={"bold"}>ADD ML-AI</Text>
             </Stack>
