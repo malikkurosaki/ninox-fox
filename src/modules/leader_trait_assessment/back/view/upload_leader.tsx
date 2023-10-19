@@ -9,7 +9,6 @@ import { GrDocumentCsv } from 'react-icons/gr';
 import { MdCancelPresentation } from 'react-icons/md';
 import toast from 'react-simple-toasts';
 import { funUploadLeader } from '../fun/fun_upload_leader';
-import TableUpload from '../components/table_upload';
 
 
 /**
