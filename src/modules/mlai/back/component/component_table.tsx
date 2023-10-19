@@ -1,7 +1,7 @@
 "use client";
 
 import { useAtom } from "jotai";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { isModalMlAi } from "../val/val_mlai";
 import {
@@ -21,6 +21,7 @@ export default function ComponentTable({ v, i }: { v: any; i: any }) {
   const open = useState(false);
   const router = useRouter();
   const [openModal, setOpenModal] = useAtom(isModalMlAi);
+  const searchParams = useSearchParams()
   return (
     <>
       <Table.Tbody key={i}>
@@ -47,7 +48,7 @@ export default function ComponentTable({ v, i }: { v: any; i: any }) {
                 color="rgba(5, 128, 23, 1)"
                 size="xl"
                 aria-label="Edit"
-                onClick={() => router.push("ml-ai/edit/IKomangAyu")}
+                onClick={() => router.push("ml-ai/edit/"+ v.id)}
               >
                 <MdEditCalendar size={20} />
               </ActionIcon>
