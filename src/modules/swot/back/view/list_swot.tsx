@@ -10,7 +10,10 @@ import _ from "lodash"
 
 /**
  * Fungsi untuk menampilkan table list swot.
- * @param {string} title - Judul table.
+ * @param {string} params - Judul table.
+ * @param {string} provinsi - Judul table.
+ * @param {string} kabupaten - Judul table.
+ * @param {string} datatable - Judul table.
  * @returns {component} Table list swot sesuai dengan parameter.
  */
 
