@@ -1,8 +1,8 @@
 "use client"
 import { ActionIcon, Box, Group, ScrollArea, Table, Text } from "@mantine/core";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-const data = [
+const datanya = [
   {
     id: 1,
     kabupaten: "BADUNG",
@@ -64,7 +64,13 @@ const data = [
  * @returns  Hasil menampilkan tabel beserta valuenya.
  */
 
-export default function TableLeader() {
+export default function TableLeader({ title, data }: { title: string, data: any }) {
+  const [isData, setData] = useState(data)
+
+  useEffect(() => {
+    setData(data)
+  }, [data])
+
   return (
     <>
       <Box>
@@ -76,7 +82,7 @@ export default function TableLeader() {
           }}
         >
           <Text fw={"bold"} c={"white"}>
-            PROVINSI BALI
+            {title}
           </Text>
           <Box pt={20}>
             <Box
@@ -102,7 +108,7 @@ export default function TableLeader() {
                     </Table.Tr>
                   </Table.Thead>
                   <Table.Tbody>
-                    {data.map((v, i) => (
+                    {isData.map((v: any, i: any) => (
                       <Table.Tr key={i}>
                         <Table.Td>{v.id}</Table.Td>
                         <Table.Td>{v.kabupaten}</Table.Td>
