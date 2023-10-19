@@ -1,8 +1,8 @@
 "use client"
 import { ActionIcon, Box, Group, ScrollArea, Table, Text } from "@mantine/core";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-const data = [
+const datanya = [
   {
     id: 1,
     kabupaten: "BADUNG",
@@ -54,12 +54,20 @@ const data = [
     pekerjaan: 3232,
   },
 ];
+
+
 /**
  * Fungsi untuk mendapatkan nilai dari table.
  * @returns  Hasil menampilkan tabel beserta valuenya.
  */
 
-export default function TablePublic() {
+export default function TablePublic({ title, data }: { title: string, data: any }) {
+  const [isData, setData] = useState(data)
+
+  useEffect(() => {
+    setData(data)
+  }, [data])
+
   return (
     <>
       <Box>
@@ -71,7 +79,7 @@ export default function TablePublic() {
           }}
         >
           <Text fw={"bold"} c={"white"}>
-            PROVINSI BALI
+            {title}
           </Text>
           <Box pt={20}>
             <Box
@@ -96,7 +104,7 @@ export default function TablePublic() {
                     </Table.Tr>
                   </Table.Thead>
                   <Table.Tbody>
-                    {data.map((v, i) => (
+                    {isData.map((v: any, i: any) => (
                       <Table.Tr key={i}>
                         <Table.Td>{v.id}</Table.Td>
                         <Table.Td>{v.kabupaten}</Table.Td>
