@@ -35,7 +35,7 @@ const datanya = [
  * Fungsi untuk mendapatkan nilai dari table.
  * @returns  Hasil menampilkan tabel beserta valuenya.
  */
-export default function TableDataAudience({ title, data }: { title: string, data: any }) {
+export default function TableDataAudience({ title, data, th }: { title: string, data: any, th: any }) {
   const [isData, setData] = useState(data)
 
   useEffect(() => {
@@ -68,15 +68,15 @@ export default function TableDataAudience({ title, data }: { title: string, data
                   <Table.Thead>
                     <Table.Tr>
                       <Table.Th>NO</Table.Th>
-                      <Table.Th>KABUPATEN / KOTA</Table.Th>
+                      <Table.Th>{th}</Table.Th>
                       <Table.Th>VALUE</Table.Th>
                     </Table.Tr>
                   </Table.Thead>
                   <Table.Tbody>
                     {isData.map((v: any, i: any) => (
                       <Table.Tr key={i}>
-                        <Table.Td>{v.id}</Table.Td>
-                        <Table.Td>{v.kabupaten}</Table.Td>
+                        <Table.Td>{i+1}</Table.Td>
+                        <Table.Td>{v.name}</Table.Td>
                         <Table.Td>{v.value}</Table.Td>
                       </Table.Tr>
                     ))}

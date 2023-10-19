@@ -151,7 +151,7 @@ function ViewPublic({ param, provinsi, kabupaten, kecamatan, datatable }: { para
       </Box>
       {!_.isNull(datatable.title) && (
         <Box pt={30}>
-          <TablePublic data={[]} title={datatable.title} />
+          <TablePublic data={datatable.data} title={datatable.title} th={datatable.thTitle} />
         </Box>
       )}
     </>

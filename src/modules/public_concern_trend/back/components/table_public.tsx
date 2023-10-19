@@ -61,7 +61,7 @@ const datanya = [
  * @returns  Hasil menampilkan tabel beserta valuenya.
  */
 
-export default function TablePublic({ title, data }: { title: string, data: any }) {
+export default function TablePublic({ title, data, th }: { title: string, data: any, th: any }) {
   const [isData, setData] = useState(data)
 
   useEffect(() => {
@@ -94,7 +94,7 @@ export default function TablePublic({ title, data }: { title: string, data: any 
                   <Table.Thead>
                     <Table.Tr>
                       <Table.Th>NO</Table.Th>
-                      <Table.Th>KABUPATEN / KOTA</Table.Th>
+                      <Table.Th>{th}</Table.Th>
                       <Table.Th>PENDIDIKAN</Table.Th>
                       <Table.Th>INFRASTRUKTUR</Table.Th>
                       <Table.Th>LAYANAN KESEHATAN</Table.Th>
@@ -106,14 +106,14 @@ export default function TablePublic({ title, data }: { title: string, data: any 
                   <Table.Tbody>
                     {isData.map((v: any, i: any) => (
                       <Table.Tr key={i}>
-                        <Table.Td>{v.id}</Table.Td>
-                        <Table.Td>{v.kabupaten}</Table.Td>
-                        <Table.Td>{v.Pendidikan}</Table.Td>
+                        <Table.Td>{i + 1}</Table.Td>
+                        <Table.Td>{v.name}</Table.Td>
+                        <Table.Td>{v.pendidikan}</Table.Td>
                         <Table.Td>{v.infrastruktur}</Table.Td>
-                        <Table.Td>{v.layanan}</Table.Td>
+                        <Table.Td>{v.layananKesehatan}</Table.Td>
                         <Table.Td>{v.kemiskinan}</Table.Td>
-                        <Table.Td>{v.keadilan}</Table.Td>
-                        <Table.Td>{v.pekerjaan}</Table.Td>
+                        <Table.Td>{v.keadilanSosial}</Table.Td>
+                        <Table.Td>{v.lapanganPekerjaan}</Table.Td>
                       </Table.Tr>
                     ))}
                   </Table.Tbody>
