@@ -1,9 +1,11 @@
 import { EditMlAi } from "@/modules/mlai";
+import funGetOneMlAi from "@/modules/mlai/back/fun/fun_get_one_mlai";
 
-export default function Page({ params }: { params: { id: string } }) {
+export default async function Page({ params }: { params: { id: string } }) {
+    const data = await funGetOneMlAi({id: params.id})
     return (
         <>
-            <EditMlAi />
+            <EditMlAi data={data}/>
         </>
     )
 }
