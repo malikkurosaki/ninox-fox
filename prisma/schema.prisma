@@ -89,73 +89,81 @@ model UserLog {
 }
 
 model AreaProvinsi {
-  id                    Int                     @id @default(autoincrement())
-  name                  String
-  isActive              Boolean                 @default(true)
-  createdAt             DateTime                @default(now())
-  updatedAt             DateTime                @updatedAt
-  AreaKabkot            AreaKabkot[]
-  UserArea              UserArea[]
-  LeaderTraitAssessment LeaderTraitAssessment[]
-  PublicConcernTrend    PublicConcernTrend[]
-  RegionHotIssues       RegionHotIssues[]
-  Candidate             Candidate[]
-  CandidateEmotion      CandidateEmotion[]
-  Audience              Audience[]
-  CandidatePairing      CandidatePairing[]
+  id                       Int                        @id @default(autoincrement())
+  name                     String
+  isActive                 Boolean                    @default(true)
+  createdAt                DateTime                   @default(now())
+  updatedAt                DateTime                   @updatedAt
+  AreaKabkot               AreaKabkot[]
+  UserArea                 UserArea[]
+  LeaderTraitAssessment    LeaderTraitAssessment[]
+  PublicConcernTrend       PublicConcernTrend[]
+  RegionHotIssues          RegionHotIssues[]
+  Candidate                Candidate[]
+  CandidateEmotion         CandidateEmotion[]
+  Audience                 Audience[]
+  CandidatePairing         CandidatePairing[]
+  PublicConcernTrendFix    PublicConcernTrendFix[]
+  LeaderTraitAssessmentFix LeaderTraitAssessmentFix[]
 }
 
 model AreaKabkot {
-  id                    Int                     @id @default(autoincrement())
-  AreaProvinsi          AreaProvinsi            @relation(fields: [idProvinsi], references: [id])
-  idProvinsi            Int
-  name                  String
-  isActive              Boolean                 @default(true)
-  createdAt             DateTime                @default(now())
-  updatedAt             DateTime                @updatedAt
-  AreaKecamatan         AreaKecamatan[]
-  UserArea              UserArea[]
-  LeaderTraitAssessment LeaderTraitAssessment[]
-  PublicConcernTrend    PublicConcernTrend[]
-  RegionHotIssues       RegionHotIssues[]
-  Candidate             Candidate[]
-  CandidateEmotion      CandidateEmotion[]
-  Audience              Audience[]
-  CandidatePairing      CandidatePairing[]
+  id                       Int                        @id @default(autoincrement())
+  AreaProvinsi             AreaProvinsi               @relation(fields: [idProvinsi], references: [id])
+  idProvinsi               Int
+  name                     String
+  isActive                 Boolean                    @default(true)
+  createdAt                DateTime                   @default(now())
+  updatedAt                DateTime                   @updatedAt
+  AreaKecamatan            AreaKecamatan[]
+  UserArea                 UserArea[]
+  LeaderTraitAssessment    LeaderTraitAssessment[]
+  PublicConcernTrend       PublicConcernTrend[]
+  RegionHotIssues          RegionHotIssues[]
+  Candidate                Candidate[]
+  CandidateEmotion         CandidateEmotion[]
+  Audience                 Audience[]
+  CandidatePairing         CandidatePairing[]
+  PublicConcernTrendFix    PublicConcernTrendFix[]
+  LeaderTraitAssessmentFix LeaderTraitAssessmentFix[]
 }
 
 model AreaKecamatan {
-  id                    Int                     @id @default(autoincrement())
-  AreaKabkot            AreaKabkot              @relation(fields: [idKabkot], references: [id])
-  idKabkot              Int
-  name                  String
-  isActive              Boolean                 @default(true)
-  createdAt             DateTime                @default(now())
-  updatedAt             DateTime                @updatedAt
-  AreaKelurahan         AreaKelurahan[]
-  UserArea              UserArea[]
-  LeaderTraitAssessment LeaderTraitAssessment[]
-  PublicConcernTrend    PublicConcernTrend[]
-  RegionHotIssues       RegionHotIssues[]
-  CandidateEmotion      CandidateEmotion[]
-  Audience              Audience[]
-  CandidatePairing      CandidatePairing[]
+  id                       Int                        @id @default(autoincrement())
+  AreaKabkot               AreaKabkot                 @relation(fields: [idKabkot], references: [id])
+  idKabkot                 Int
+  name                     String
+  isActive                 Boolean                    @default(true)
+  createdAt                DateTime                   @default(now())
+  updatedAt                DateTime                   @updatedAt
+  AreaKelurahan            AreaKelurahan[]
+  UserArea                 UserArea[]
+  LeaderTraitAssessment    LeaderTraitAssessment[]
+  PublicConcernTrend       PublicConcernTrend[]
+  RegionHotIssues          RegionHotIssues[]
+  CandidateEmotion         CandidateEmotion[]
+  Audience                 Audience[]
+  CandidatePairing         CandidatePairing[]
+  PublicConcernTrendFix    PublicConcernTrendFix[]
+  LeaderTraitAssessmentFix LeaderTraitAssessmentFix[]
 }
 
 model AreaKelurahan {
-  id                    Int                     @id @default(autoincrement())
-  AreaKecamatan         AreaKecamatan           @relation(fields: [idKecamatan], references: [id])
-  idKecamatan           Int
-  name                  String
-  isActive              Boolean                 @default(true)
-  createdAt             DateTime                @default(now())
-  updatedAt             DateTime                @updatedAt
-  UserArea              UserArea[]
-  LeaderTraitAssessment LeaderTraitAssessment[]
-  PublicConcernTrend    PublicConcernTrend[]
-  RegionHotIssues       RegionHotIssues[]
-  CandidateEmotion      CandidateEmotion[]
-  Audience              Audience[]
+  id                       Int                        @id @default(autoincrement())
+  AreaKecamatan            AreaKecamatan              @relation(fields: [idKecamatan], references: [id])
+  idKecamatan              Int
+  name                     String
+  isActive                 Boolean                    @default(true)
+  createdAt                DateTime                   @default(now())
+  updatedAt                DateTime                   @updatedAt
+  UserArea                 UserArea[]
+  LeaderTraitAssessment    LeaderTraitAssessment[]
+  PublicConcernTrend       PublicConcernTrend[]
+  RegionHotIssues          RegionHotIssues[]
+  CandidateEmotion         CandidateEmotion[]
+  Audience                 Audience[]
+  PublicConcernTrendFix    PublicConcernTrendFix[]
+  LeaderTraitAssessmentFix LeaderTraitAssessmentFix[]
 }
 
 model UserArea {
@@ -194,6 +202,30 @@ model LeaderTraitAssessment {
   updatedAt                     DateTime                      @updatedAt
 }
 
+model LeaderTraitAssessmentFix {
+  id                    Int            @id @default(autoincrement())
+  AreaProvinsi          AreaProvinsi?  @relation(fields: [idProvinsi], references: [id])
+  idProvinsi            Int?
+  AreaKabkot            AreaKabkot?    @relation(fields: [idKabkot], references: [id])
+  idKabkot              Int?
+  AreaKecamatan         AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
+  idKecamatan           Int?
+  AreaKelurahan         AreaKelurahan? @relation(fields: [idKelurahan], references: [id])
+  idKelurahan           Int?
+  pekerjaKeras          Int
+  cerdas                Int
+  jujur                 Int
+  merakyat              Int
+  tegas                 Int
+  berpengalamanMemimpin Int
+  berprestasi           Int
+  latarBelakangMiliter  Int
+  agamis                Int
+  isActive              Boolean        @default(true)
+  createdAt             DateTime       @default(now())
+  updatedAt             DateTime       @updatedAt
+}
+
 model PublicConcernTrend {
   id                         String                     @id @default(cuid())
   AreaProvinsi               AreaProvinsi?              @relation(fields: [idProvinsi], references: [id])
@@ -210,6 +242,27 @@ model PublicConcernTrend {
   isActive                   Boolean                    @default(true)
   createdAt                  DateTime                   @default(now())
   updatedAt                  DateTime                   @updatedAt
+}
+
+model PublicConcernTrendFix {
+  id                Int            @id @default(autoincrement())
+  AreaProvinsi      AreaProvinsi?  @relation(fields: [idProvinsi], references: [id])
+  idProvinsi        Int?
+  AreaKabkot        AreaKabkot?    @relation(fields: [idKabkot], references: [id])
+  idKabkot          Int?
+  AreaKecamatan     AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
+  idKecamatan       Int?
+  AreaKelurahan     AreaKelurahan? @relation(fields: [idKelurahan], references: [id])
+  idKelurahan       Int?
+  pendidikan        Int
+  infrastruktur     Int
+  layananKesehatan  Int
+  kemiskinan        Int
+  lapanganPekerjaan Int
+  keadilanSosial    Int
+  isActive          Boolean        @default(true)
+  createdAt         DateTime       @default(now())
+  updatedAt         DateTime       @updatedAt
 }
 
 model RegionHotIssues {
