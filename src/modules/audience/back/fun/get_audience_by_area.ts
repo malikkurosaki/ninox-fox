@@ -2,6 +2,7 @@
 
 import { provinsiCount } from "@/modules/_global";
 import prisma from "@/modules/_global/bin/prisma";
+import _ from "lodash"
 
 
 /**
@@ -11,49 +12,123 @@ import prisma from "@/modules/_global/bin/prisma";
  */
 
 export default async function funGetAudienceByArea({ find }: { find: any }) {
-    let titleTrue, dataTable = <any>[], area
+    let titleTrue, dataTable = <any>[], area, th
 
     const nProv = await provinsiCount();
 
     if (find.idProvinsi > 0 && find.idProvinsi <= nProv) {
         if (find.idKec == 0 && find.idKabkot == 0) {
-            dataTable = []
+            dataTable = await prisma.audience.findMany({
+                where: {
+                    idProvinsi: find.idProvinsi
+                },
+                select: {
+                    value: true,
+                    idKabkot: true,
+                    AreaKabkot: {
+                        select: {
+                            name: true
+                        }
+                    }
+                }
+            })
+
+            dataTable = dataTable.map((v: any) => ({
+                ..._.omit(v, ["AreaKabkot"]),
+                name: v.AreaKabkot.name
+            }))
+
+            dataTable = _.map(_.groupBy(dataTable, "idKabkot"), (v: any) => ({
+                value: _.sumBy(v, 'value'),
+                name: v[0].name
+            }))
+
             area = await prisma.areaProvinsi.findUnique({
                 where: {
                     id: find.idProvinsi
                 }
             })
             titleTrue = "PROVINSI " + area?.name
+            th = "KABUPATEN/KOTA"
 
         } else if (find.idKec == 0 && find.idKabkot > 0) {
-            dataTable = []
+            dataTable = await prisma.audience.findMany({
+                where: {
+                    idKabkot: find.idKabkot
+                },
+                select: {
+                    value: true,
+                    idKecamatan: true,
+                    AreaKecamatan: {
+                        select: {
+                            name: true
+                        }
+                    }
+                }
+            })
+
+            dataTable = dataTable.map((v: any) => ({
+                ..._.omit(v, ["AreaKecamatan"]),
+                name: v.AreaKecamatan.name
+            }))
+
+            dataTable = _.map(_.groupBy(dataTable, "idKecamatan"), (v: any) => ({
+                value: _.sumBy(v, 'value'),
+                name: v[0].name
+            }))
+
             area = await prisma.areaKabkot.findUnique({
                 where: {
                     id: find.idKabkot
                 }
             })
             titleTrue = "" + area?.name
+            th = "KECAMATAN"
 
         } else {
-            dataTable = []
+            dataTable = await prisma.audience.findMany({
+                where: {
+                    idKecamatan: find.idKec
+                },
+                select: {
+                    value: true,
+                    AreaKelurahan: {
+                        select: {
+                            name: true,
+                        }
+                    }
+                }
+            })
+
+            dataTable = dataTable.map((v: any) => ({
+                ..._.omit(v, ["AreaKelurahan"]),
+                name: v.AreaKelurahan.name
+            }))
+
             area = await prisma.areaKecamatan.findUnique({
                 where: {
                     id: find.idKec
                 }
             })
             titleTrue = "KECAMATAN " + area?.name.toUpperCase()
+            th = "KELURAHAN"
 
         }
 
     } else {
-        titleTrue = null;
-        dataTable = [];
+        titleTrue = null
+        dataTable = []
+        th: null
     }
 
     const allData = {
         title: titleTrue,
+        thTitle: th,
         data: dataTable
     }
+
+
+    console.log(dataTable)
 
 
     return allData

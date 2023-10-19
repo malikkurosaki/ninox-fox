@@ -149,7 +149,7 @@ export default function ViewAudience({ param, provinsi, kabupaten, kecamatan, da
       </Box>
       {!_.isNull(datatable.title) &&
         <Box pt={30}>
-          <TableDataAudience data={datatable.data} title={datatable.title} />
+          <TableDataAudience data={datatable.data} title={datatable.title} th={datatable.thTitle} />
         </Box>
       }
     </>
