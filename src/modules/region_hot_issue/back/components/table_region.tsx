@@ -9,9 +9,9 @@ import {
   Table,
   Text,
 } from "@mantine/core";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-const data = [
+const datanya = [
   {
     id: "1",
     kabupaten: "BADUNG",
@@ -48,7 +48,13 @@ const data = [
  * @returns  Hasil menampilkan tabel beserta valuenya.
  */
 
-export default function TableRegion() {
+export default function TableRegion({ title, data }: { title: string, data: any }) {
+  const [isData, setData] = useState(data)
+
+  useEffect(() => {
+    setData(data)
+  }, [data])
+
   return (
     <>
       <Box>
@@ -60,7 +66,7 @@ export default function TableRegion() {
           }}
         >
           <Text fw={"bold"} c={"white"}>
-            PROVINSI BALI
+            {title}
           </Text>
           <Box pt={20}>
             <Box
@@ -81,7 +87,7 @@ export default function TableRegion() {
                     </Table.Tr>
                   </Table.Thead>
                   <Table.Tbody>
-                    {data.map((v, i) => (
+                    {isData.map((v: any, i: any) => (
                       <Table.Tr key={i}>
                         <Table.Td>
                           <Center>{v.id}</Center>
@@ -92,8 +98,8 @@ export default function TableRegion() {
                               border: "none",
                             }}>
                               <Accordion.Control style={{
-                               borderRadius: 10,
-                               
+                                borderRadius: 10,
+
                               }}>
                                 {v.kabupaten}
                               </Accordion.Control>

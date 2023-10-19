@@ -1,3 +1,4 @@
-import { ViewAudience } from "./back";
+import { ViewAudience, funGetAudienceByArea } from "./back";
 
-export {ViewAudience}
+export { ViewAudience }
+export { funGetAudienceByArea }
