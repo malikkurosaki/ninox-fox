@@ -11,7 +11,7 @@ import ModalEditMlAi from "../component/modal_edit_mlai"
  * @returns {component} view form edit mlai.
  */
 
-export default function EditMlAi() {
+export default function EditMlAi({data}: {data: any}) {
     const [openModal, setOpenModal] = useAtom(isModalMlAi)
 
     return (
