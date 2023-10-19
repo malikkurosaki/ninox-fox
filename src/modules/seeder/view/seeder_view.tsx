@@ -13,6 +13,9 @@ import { funSeederComponents } from "../fun/fun_component";
 import { funSeederUserRole } from "../fun/fun_user_role";
 import { funSeederUserAccess } from "../fun/fun_user_access";
 import { funSeederUser } from "../fun/fun_user";
+import funSeederAudience from "../fun/fun_audience";
+import funSeederPct from "../fun/fun_pct";
+import funSeederLta from "../fun/fun_lta";
 
 /**
  * Fungsi untuk menampilkan view halaman seeder.
@@ -83,6 +86,23 @@ export default function SeederView() {
         const res = await funSeederPublic()
         if (res?.success) return setLoading(false), toast(res?.message, { theme: "dark" })
     }
+    async function onAudience() {
+        setLoading(true)
+        const res = await funSeederAudience()
+        if (res?.success) return setLoading(false), toast(res?.message, { theme: "dark" })
+    }
+
+    async function onPCTFix() {
+        setLoading(true)
+        const res = await funSeederPct()
+        if (res?.success) return setLoading(false), toast(res?.message, { theme: "dark" })
+    }
+
+    async function onLTAFix() {
+        setLoading(true)
+        const res = await funSeederLta()
+        if (res?.success) return setLoading(false), toast(res?.message, { theme: "dark" })
+    }
 
 
 
@@ -130,8 +150,13 @@ export default function SeederView() {
                         <Text fw={"bold"}>DATA LAINNYA</Text>
                         <Divider mt={10} mb={30} />
                         <Group justify="center" gap="md" grow my={15}>
-                            <Button bg={"gray"} loading={loading} onClick={onLeader}>LEADER TRAIT ASSESSMENT</Button>
-                            <Button bg={"gray"} loading={loading} onClick={onPublic}>PUBLIC CONCERN TREND</Button>
+                            <Button bg={"gray"} loading={loading} onClick={onLeader}>CATEGORY LEADER TRAIT ASSESSMENT</Button>
+                            <Button bg={"gray"} loading={loading} onClick={onPublic}>CATEGORY PUBLIC CONCERN TREND</Button>
+                            <Button bg={"gray"} loading={loading} onClick={onAudience}>AUDIENCE</Button>
+                        </Group>
+                        <Group justify="center" gap="md" grow my={15}>
+                            <Button bg={"gray"} loading={loading} onClick={onPCTFix}>VALUE PUBLIC CONCERN TREND</Button>
+                            <Button bg={"gray"} loading={loading} onClick={onLTAFix}>VALUE LEADER TRAIT ASSESSMENT</Button>
                         </Group>
                     </Paper>
                 </Box>
