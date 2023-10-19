@@ -2,7 +2,7 @@
 
 import { Alert, Box, Button, Group, Text } from "@mantine/core"
 import { useAtom } from "jotai"
-import { isModalMlAi } from "../val/val_mlai"
+import { isModalMlAi, isModalMlaiAdd } from "../val/val_mlai"
 import toast from "react-simple-toasts"
 import { useRouter } from "next/navigation"
 import funAddMlAi from "../fun/fun_add_mlai"
@@ -13,12 +13,13 @@ import funAddMlAi from "../fun/fun_add_mlai"
  */
 
 export default function ModalAddMlAi({ data }: { data: any }) {
-    const [openModal, setOpenModal] = useAtom(isModalMlAi)
+    const [openModal, setOpenModal] = useAtom(isModalMlaiAdd)
     const router = useRouter()
 
     async function onCreateMlAi() {
         const addData = await funAddMlAi({ body: data })
-        if (addData.success) return  toast(addData.message, { theme: "dark" });
+        if (!addData.success) return  toast(addData.message, { theme: "dark" });
+        toast("Success", { theme: "dark" });
         setOpenModal(false);
         router.back()
     }

@@ -38,6 +38,7 @@ import { funGetCandidateActiveByArea } from "@/modules/candidate";
 export default function TableMlAi({ title, data, searchParam }: { title: any, data: any, searchParam: any }) {
   const [openModal, setOpenModal] = useAtom(isModalMlAi);
   const router = useRouter();
+  const [dataDelete, setDataDelete] = useState(Number)
 
   const [isData, setData] = useState(data)
   const searchParams = useSearchParams()
@@ -50,6 +51,7 @@ export default function TableMlAi({ title, data, searchParam }: { title: any, da
   useEffect(() => {
     setData(data)
   }, [data])
+
 
   return (
     <>
@@ -98,7 +100,10 @@ export default function TableMlAi({ title, data, searchParam }: { title: any, da
                     </Table.Tr>
                   </Table.Thead>
                   {isData.map((v: any, i: any) => (
-                    <ComponentTable v={v} i={i} key={i} />
+                    <ComponentTable v={v} i={i} key={i} onClick={(val)=>{
+                      setDataDelete(val)
+                      setOpenModal(true)
+                    }}/>
                   ))}
                 </Table>
               </ScrollArea>
@@ -117,7 +122,7 @@ export default function TableMlAi({ title, data, searchParam }: { title: any, da
         withCloseButton={false}
         closeOnClickOutside={false}
       >
-        <ModalDelMlAi />
+        <ModalDelMlAi id={dataDelete}/>
       </Modal>
     </>
   );
