@@ -5,6 +5,11 @@ import { provinsiCount } from "@/modules/_global";
 import prisma from "@/modules/_global/bin/prisma"
 import _ from "lodash"
 
+/**
+ * Fungsi untuk menampilkan ml ai berdasarkan area
+ * @param {any} find - berisi tingkat kandidat, idprovinsi, dan idkabkot
+ * @returns data 
+ */
 export default async function funGetAllMlAi({ find }: { find: any }) {
 
     let titleTrue, dataTable = <any>[], area
