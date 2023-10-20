@@ -266,7 +266,7 @@ model PublicConcernTrendFix {
 }
 
 model RegionHotIssues {
-  id            String         @id @default(cuid())
+  id            Int            @id @default(autoincrement())
   AreaProvinsi  AreaProvinsi?  @relation(fields: [idProvinsi], references: [id])
   idProvinsi    Int?
   AreaKabkot    AreaKabkot?    @relation(fields: [idKabkot], references: [id])
