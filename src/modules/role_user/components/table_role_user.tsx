@@ -78,7 +78,7 @@ export default function TableRoleUser() {
                       }}
                     >
                       <Table.Th>No</Table.Th>
-                      <Table.Th>Name</Table.Th>
+                      <Table.Th>Nama</Table.Th>
                       <Table.Th>Components</Table.Th>
                       <Table.Th>Status</Table.Th>
                       <Table.Th>

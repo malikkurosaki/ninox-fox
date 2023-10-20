@@ -116,7 +116,7 @@ export function ViewUploadLeader() {
                       }}
                     >
                       <Table.Th>No</Table.Th>
-                      <Table.Th>Name</Table.Th>
+                      <Table.Th>Nama</Table.Th>
                     </Table.Tr>
                   </Table.Thead>
                   <Table.Tbody>

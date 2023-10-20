@@ -28,7 +28,7 @@ export default function AddCandidate() {
 
     function onConfirmation() {
         if (body.name === "")
-            return toast("Name cannot be empty", { theme: "dark" });
+            return toast("Nama tidak boleh kosong", { theme: "dark" });
         setOpenModal(true)
     }
 
@@ -37,7 +37,7 @@ export default function AddCandidate() {
         <>
             <ButtonBack />
             <Stack mt={30}>
-                <Text fw={"bold"}>ADD CANDIDATE</Text>
+                <Text fw={"bold"}>TAMBAH KANDIDAT</Text>
             </Stack>
             <Box pt={30}>
                 <Paper shadow="xs" p="xl" bg={"#f1f1f1"}>
@@ -46,7 +46,7 @@ export default function AddCandidate() {
                             <Avatar
                                 size={130}
                                 radius={100}
-                                alt="candidate"
+                                alt="kandidat"
                                 color="dark"
                             />
                         </Center>
@@ -60,7 +60,7 @@ export default function AddCandidate() {
                         </Group>
                         <Box pt={40}>
                             <TextInput
-                                placeholder="Candidate Name" withAsterisk label="Name"
+                                placeholder="Nama Kandidat" withAsterisk label="Nama"
                                 onChange={(val) => {
                                     setBody({
                                         ...body,

@@ -98,7 +98,7 @@ export default function ViewPairing({ param, provinsi, kabupaten, candidate, dat
             <Paper shadow="xs" p="xl">
               <Stack>
                 <Select
-                  placeholder="PROVINCE"
+                  placeholder="Pilih Provinsi"
                   data={dataProvinsi.map((pro: any) => ({
                     value: String(pro.id),
                     label: pro.name
@@ -110,7 +110,7 @@ export default function ViewPairing({ param, provinsi, kabupaten, candidate, dat
                   onChange={(val) => onProvinsi({ idProv: val })}
                 />
                 <Select
-                  placeholder="CITY"
+                  placeholder="Pilih Kabupaten/Kota"
                   data={dataKabupaten.map((kab: any) => ({
                     value: String(kab.id),
                     label: kab.name
@@ -121,7 +121,7 @@ export default function ViewPairing({ param, provinsi, kabupaten, candidate, dat
                   onChange={(val) => onKabupaten({ idKab: val })}
                 />
                 <Select
-                  placeholder="CANDIDATE 1"
+                  placeholder="KANDIDAT 1"
                   data={dataCandidate.map((can: any) => ({
                     value: String(can.id),
                     label: can.name
@@ -136,7 +136,7 @@ export default function ViewPairing({ param, provinsi, kabupaten, candidate, dat
                   }}
                 />
                 <Select
-                  placeholder="CANDIDATE 2"
+                  placeholder="KANDIDAT 2"
                   data={dataCandidate.map((can: any) => ({
                     value: String(can.id),
                     label: can.name
@@ -157,7 +157,7 @@ export default function ViewPairing({ param, provinsi, kabupaten, candidate, dat
                 <DateInput valueFormat="DD-MM-YYYY" required value={isDate}
                   label={"Select Date"} placeholder="SELECT DATE" onChange={(val) => { setDate(val) }} />
                 <Button bg={"gray"} onClick={() => onProccess()}>
-                  PROCCESS
+                  PROSES
                 </Button>
               </Stack>
             </Paper>

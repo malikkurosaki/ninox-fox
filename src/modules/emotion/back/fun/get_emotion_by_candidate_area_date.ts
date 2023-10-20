@@ -76,8 +76,5 @@ export default async function funGetEmotionByCandidateAreaDate({ find }: { find:
         data: dataTable
     }
 
-    console.log(allData)
-
-
     return allData
 }

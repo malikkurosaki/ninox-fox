@@ -30,7 +30,7 @@ export default function ModalEditCandidate({ data }: { data: any }) {
             <Box>
                 <Alert color="gray" variant="outline">
                     <Text fw={700} ta={"center"} mb={20} mt={20}>
-                        ARE YOU SURE TO EDIT CANDIDATE?
+                        ANDA YAKIN INGIN MENGEDIT DATA KANDIDAT?
                     </Text>
                     <Grid>
                         <Grid.Col span={6}>
@@ -40,7 +40,7 @@ export default function ModalEditCandidate({ data }: { data: any }) {
                                 fullWidth
                                 onClick={() => setOpenModal(false)}
                             >
-                                NO
+                                TIDAK
                             </Button>
                         </Grid.Col>
                         <Grid.Col span={6}>
@@ -50,7 +50,7 @@ export default function ModalEditCandidate({ data }: { data: any }) {
                                 fullWidth
                                 onClick={() => onEditCandidate()}
                             >
-                                YES
+                                YA
                             </Button>
                         </Grid.Col>
                     </Grid>

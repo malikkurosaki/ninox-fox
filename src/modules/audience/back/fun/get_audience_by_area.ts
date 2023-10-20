@@ -128,8 +128,5 @@ export default async function funGetAudienceByArea({ find }: { find: any }) {
     }
 
 
-    console.log(dataTable)
-
-
     return allData
 }
