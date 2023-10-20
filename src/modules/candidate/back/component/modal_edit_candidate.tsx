@@ -5,6 +5,7 @@ import { useAtom } from "jotai";
 import { isModalCandidate } from "../val/isModalCandidate";
 import { useRouter } from "next/navigation";
 import toast from "react-simple-toasts";
+import funEditCandidate from "../fun/edit_candidate";
 
 
 /**
@@ -13,12 +14,13 @@ import toast from "react-simple-toasts";
  */
 
 
-export default function ModalEditCandidate() {
+export default function ModalEditCandidate({ data }: { data: any }) {
     const [openModal, setOpenModal] = useAtom(isModalCandidate)
     const router = useRouter()
 
-    function onEditCandidate() {
-        toast("Success", { theme: "dark" });
+    async function onEditCandidate() {
+        const edit = await funEditCandidate({ body: data })
+        toast("Sukses", { theme: "dark" });
         setOpenModal(false);
         router.back()
     }
@@ -28,7 +30,7 @@ export default function ModalEditCandidate() {
             <Box>
                 <Alert color="gray" variant="outline">
                     <Text fw={700} ta={"center"} mb={20} mt={20}>
-                        ARE YOU SURE TO EDIT CANDIDATE?
+                        ANDA YAKIN INGIN MENGEDIT DATA KANDIDAT?
                     </Text>
                     <Grid>
                         <Grid.Col span={6}>
@@ -38,7 +40,7 @@ export default function ModalEditCandidate() {
                                 fullWidth
                                 onClick={() => setOpenModal(false)}
                             >
-                                NO
+                                TIDAK
                             </Button>
                         </Grid.Col>
                         <Grid.Col span={6}>
@@ -48,7 +50,7 @@ export default function ModalEditCandidate() {
                                 fullWidth
                                 onClick={() => onEditCandidate()}
                             >
-                                YES
+                                YA
                             </Button>
                         </Grid.Col>
                     </Grid>

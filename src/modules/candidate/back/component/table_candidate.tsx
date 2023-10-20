@@ -1,11 +1,13 @@
 'use client'
 
-import { ActionIcon, Box, Button, Center, Group, Image, Modal, Paper, ScrollArea, Stack, Table, Text } from "@mantine/core"
+import { ActionIcon, Box, Button, Center, Group, Image, Modal, Paper, ScrollArea, Stack, Switch, Table, Text } from "@mantine/core"
 import { useAtom } from "jotai";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { MdDelete, MdEditCalendar, MdOutlineModeEdit } from "react-icons/md";
 import { isModalCandidate } from "../val/isModalCandidate";
 import ModalDelCandidate from "./modal_del_candidate";
+import { useEffect, useState } from "react";
+import { funGetCandidateByArea } from "../..";
 
 /**
  * Fungsi untuk menampilkan table list kandidat.
@@ -14,17 +16,29 @@ import ModalDelCandidate from "./modal_del_candidate";
  * @returns {component} Table list candidate sesuai dengan parameter.
  */
 
-export default function TableCandidate({ title, data }: { title: string, data: any[] }) {
-  const elements = [
-    { position: 1, mass: 12.011, symbol: 'C', name: 'Komang Ayu' },
-    { position: 2, mass: 14.007, symbol: 'N', name: 'Kadek Agung' },
-    { position: 3, mass: 88.906, symbol: 'Y', name: 'I Wayan Merta' },
-    { position: 4, mass: 137.33, symbol: 'Ba', name: 'Surya Diningrat' },
-    { position: 5, mass: 140.12, symbol: 'Ce', name: 'I Komang Nuri' },
-  ];
+export default function TableCandidate({ title, data, searchParam }: { title: string, data: any[], searchParam: any }) {
+
+  const [openModal, setOpenModal] = useAtom(isModalCandidate)
+  const [isDataDel, setDataDel] = useState({
+    idCandidate: "",
+    active: false
+  })
+
+  const [isData, setData] = useState(data)
 
   const router = useRouter();
-  const [openModal, setOpenModal] = useAtom(isModalCandidate)
+  const searchParams = useSearchParams()
+
+  async function onLoad() {
+    const dataDB = await funGetCandidateByArea({ find: searchParam });
+    setData(dataDB.data)
+  }
+
+  useEffect(() => {
+    setData(data)
+  }, [data])
+
+
 
   return (
     <>
@@ -38,7 +52,7 @@ export default function TableCandidate({ title, data }: { title: string, data: a
         >
           <Group justify="space-between" gap="lg">
             <Text fw={"bold"} c={"white"}>{title}</Text>
-            <Button bg={"gray"} onClick={() => router.push('candidate/add')}>ADD CANDIDATE</Button>
+            <Button bg={"gray"} onClick={() => router.push('candidate/add?prov=' + searchParams.get('prov') + '&city=' + searchParams.get('city'))}>TAMBAH KANDIDAT</Button>
           </Group>
           <Box pt={20}>
             <Box style={{
@@ -52,15 +66,16 @@ export default function TableCandidate({ title, data }: { title: string, data: a
                   <Table.Thead>
                     <Table.Tr>
                       <Table.Th>No</Table.Th>
-                      <Table.Th>Name</Table.Th>
-                      <Table.Th>Image</Table.Th>
-                      <Table.Th>Action</Table.Th>
+                      <Table.Th>Nama</Table.Th>
+                      <Table.Th>Gambar</Table.Th>
+                      <Table.Th>Status</Table.Th>
+                      <Table.Th>Aksi</Table.Th>
                     </Table.Tr>
                   </Table.Thead>
                   <Table.Tbody>
-                    {elements.map((v, i) => (
+                    {isData.map((v: any, i: any) => (
                       <Table.Tr key={i}>
-                        <Table.Td>{v.position}</Table.Td>
+                        <Table.Td>{i + 1}</Table.Td>
                         <Table.Td>{v.name}</Table.Td>
                         <Table.Td>
                           <Image
@@ -71,23 +86,24 @@ export default function TableCandidate({ title, data }: { title: string, data: a
                           />
                         </Table.Td>
                         <Table.Td>
+                          <Switch checked={v.isActive} size="md" onLabel="ON" offLabel="OFF" onChange={(val) => {
+                            setOpenModal(true)
+                            setDataDel({
+                              ...isDataDel,
+                              idCandidate: v.id,
+                              active: val.currentTarget.checked
+                            })
+                          }} />
+                        </Table.Td>
+                        <Table.Td>
                           <ActionIcon
                             variant="transparent"
                             color="rgba(5, 128, 23, 1)"
                             size="xl"
                             aria-label="Edit"
-                            onClick={() => router.push('candidate/edit/IKomangAyu')}
+                            onClick={() => router.push('candidate/edit/'+v.id)}
                           >
                             <MdEditCalendar size={20} />
-                          </ActionIcon>
-                          <ActionIcon
-                            variant="transparent"
-                            color="rgba(209, 4, 4, 1)"
-                            size="xl"
-                            aria-label="Delete"
-                            onClick={() => setOpenModal(true)}
-                          >
-                            <MdDelete size={20} />
                           </ActionIcon>
                         </Table.Td>
                       </Table.Tr>
@@ -100,7 +116,6 @@ export default function TableCandidate({ title, data }: { title: string, data: a
         </Box>
       </Box>
 
-
       <Modal
         opened={openModal}
         onClose={() => setOpenModal(false)}
@@ -108,7 +123,9 @@ export default function TableCandidate({ title, data }: { title: string, data: a
         withCloseButton={false}
         closeOnClickOutside={false}
       >
-        <ModalDelCandidate />
+        <ModalDelCandidate data={isDataDel} onSuccess={(val) => {
+          if (val) return onLoad();
+        }} />
       </Modal>
     </>
   )

@@ -9,46 +9,20 @@ import {
   Table,
   Text,
 } from "@mantine/core";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-const data = [
-  {
-    id: "1",
-    kabupaten: "BADUNG",
-    value:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.",
-  },
-  {
-    id: 2,
-    kabupaten: "DENPASAR",
-    value:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.",
-  },
-  {
-    id: 3,
-    kabupaten: "BULELENG",
-    value:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.",
-  },
-  {
-    id: 4,
-    kabupaten: "GIANYAR",
-    value:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.",
-  },
-  {
-    id: 5,
-    kabupaten: "TABANAN",
-    value:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.",
-  },
-];
 /**
  * Fungsi untuk mendapatkan nilai dari table.
  * @returns  Hasil menampilkan tabel beserta valuenya.
  */
 
-export default function TableRegion() {
+export default function TableRegion({ title, data, th }: { title: string, data: any, th: any }) {
+  const [isData, setData] = useState(data)
+
+  useEffect(() => {
+    setData(data)
+  }, [data])
+
   return (
     <>
       <Box>
@@ -60,7 +34,7 @@ export default function TableRegion() {
           }}
         >
           <Text fw={"bold"} c={"white"}>
-            PROVINSI BALI
+            {title}
           </Text>
           <Box pt={20}>
             <Box
@@ -77,25 +51,25 @@ export default function TableRegion() {
                       <Table.Th w={20}>
                         <Center>NO</Center>
                       </Table.Th>
-                      <Table.Th>KABUPATEN / KOTA</Table.Th>
+                      <Table.Th>{th}</Table.Th>
                     </Table.Tr>
                   </Table.Thead>
                   <Table.Tbody>
-                    {data.map((v, i) => (
+                    {isData.map((v: any, i: any) => (
                       <Table.Tr key={i}>
                         <Table.Td>
-                          <Center>{v.id}</Center>
+                          <Center>{i + 1}</Center>
                         </Table.Td>
                         <Table.Td>
                           <Accordion transitionDuration={1000}>
-                            <Accordion.Item key={v.value} value={v.value} style={{
+                            <Accordion.Item key={v.description} value={v.description} style={{
                               border: "none",
                             }}>
                               <Accordion.Control style={{
-                               borderRadius: 10,
-                               
+                                borderRadius: 10,
+
                               }}>
-                                {v.kabupaten}
+                                {v.name}
                               </Accordion.Control>
                               <Accordion.Panel>
                                 <Box style={{
@@ -103,7 +77,7 @@ export default function TableRegion() {
                                   padding: 20,
                                   borderRadius: 10
                                 }}>
-                                  <Text c={"white"}>{v.value}</Text>
+                                  <Text c={"white"}>{v.description}</Text>
                                 </Box>
                               </Accordion.Panel>
                             </Accordion.Item>

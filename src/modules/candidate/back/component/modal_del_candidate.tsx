@@ -5,6 +5,7 @@ import { useAtom } from "jotai";
 import { isModalCandidate } from "../val/isModalCandidate";
 import { useRouter } from "next/navigation";
 import toast from "react-simple-toasts";
+import funSetStatusCandidate from "../fun/set_status_candidate";
 
 
 /**
@@ -13,13 +14,16 @@ import toast from "react-simple-toasts";
  */
 
 
-export default function ModalDelCandidate() {
+export default function ModalDelCandidate({ data, onSuccess }: { data: any, onSuccess: (val: any) => void }) {
     const [openModal, setOpenModal] = useAtom(isModalCandidate)
     const router = useRouter()
 
-    function onDeleteCandidate() {
-        toast("Success", { theme: "dark" });
+    async function onDeleteCandidate() {
+        const del = await funSetStatusCandidate({ dataUpdate: data })
+        if (!del.success) return toast("Failed", { theme: "dark" })
+        toast("Sukses", { theme: "dark" });
         setOpenModal(false);
+        onSuccess(true);
     }
 
     return (
@@ -27,7 +31,7 @@ export default function ModalDelCandidate() {
             <Box>
                 <Alert color="gray" variant="outline">
                     <Text fw={700} ta={"center"} mb={20} mt={20}>
-                        ARE YOU SURE TO DELETE CANDIDATE?
+                        ANDA YAKIN INGIN MENGEDIT STATUS KANDIDAT?
                     </Text>
                     <Grid>
                         <Grid.Col span={6}>
@@ -37,7 +41,7 @@ export default function ModalDelCandidate() {
                                 fullWidth
                                 onClick={() => setOpenModal(false)}
                             >
-                                NO
+                                TIDAK
                             </Button>
                         </Grid.Col>
                         <Grid.Col span={6}>
@@ -47,7 +51,7 @@ export default function ModalDelCandidate() {
                                 fullWidth
                                 onClick={() => onDeleteCandidate()}
                             >
-                                YES
+                                YA
                             </Button>
                         </Grid.Col>
                     </Grid>

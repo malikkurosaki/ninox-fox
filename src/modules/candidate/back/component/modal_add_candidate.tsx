@@ -5,6 +5,7 @@ import { useAtom } from "jotai";
 import { isModalCandidate } from "../val/isModalCandidate";
 import { useRouter } from "next/navigation";
 import toast from "react-simple-toasts";
+import funAddCandidate from "../fun/add_candidate";
 
 
 /**
@@ -13,12 +14,15 @@ import toast from "react-simple-toasts";
  */
 
 
-export default function ModalAddCandidate() {
+export default function ModalAddCandidate({ data }: { data: any }) {
     const [openModal, setOpenModal] = useAtom(isModalCandidate)
     const router = useRouter()
 
-    function onCreateCandidate() {
-        toast("Success", { theme: "dark" });
+    async function onCreateCandidate() {
+        const create = await funAddCandidate({ body: data })
+        if (!create.success)
+            toast(create.message, { theme: "dark" });
+        toast("Sukses", { theme: "dark" });
         setOpenModal(false);
         router.back()
     }
@@ -28,7 +32,7 @@ export default function ModalAddCandidate() {
             <Box>
                 <Alert color="gray" variant="outline">
                     <Text fw={700} ta={"center"} mb={20} mt={20}>
-                        ARE YOU SURE TO ADD CANDIDATE?
+                        ANDA YAKIN INGIN MENAMBAHKAN KANDIDAT?
                     </Text>
                     <Grid>
                         <Grid.Col span={6}>
@@ -38,7 +42,7 @@ export default function ModalAddCandidate() {
                                 fullWidth
                                 onClick={() => setOpenModal(false)}
                             >
-                                NO
+                                TIDAK
                             </Button>
                         </Grid.Col>
                         <Grid.Col span={6}>
@@ -48,7 +52,7 @@ export default function ModalAddCandidate() {
                                 fullWidth
                                 onClick={() => onCreateCandidate()}
                             >
-                                YES
+                                YA
                             </Button>
                         </Grid.Col>
                     </Grid>

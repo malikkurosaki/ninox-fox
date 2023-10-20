@@ -15,62 +15,39 @@ import {
   Text,
 } from "@mantine/core";
 import { useAtom } from "jotai";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { MdDelete, MdEditCalendar } from "react-icons/md";
 import { isModalSwot } from "../val/val_swot";
 import ModalDelSwot from "./modal_del_swot";
 import { CiRead, CiUnread } from "react-icons/ci";
 import { useDisclosure } from "@mantine/hooks";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ComponentTable from "./component_table";
+import { funGetCandidateActiveByArea } from "@/modules/candidate";
+import funGetAllSwot from "../fun/fun_get_all_swot";
 
 /**
  * Fungsi untuk menampilkan view table swot.
  * @returns {component} table swot.
  */
 
-export default function TableSwot() {
-  const open = useState(false)
+export default function TableSwot({ title, data, searchParam }: { title: any, data: any, searchParam: any }) {
   const [openModal, setOpenModal] = useAtom(isModalSwot);
   const router = useRouter();
-  const [opened, { toggle }] = useDisclosure(false);
-  const elements = [
-    {
-      no: 1,
-      category: "Strength",
-      content:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.",
-      name: "Komang Ayu",
-    },
-    {
-      no: 2,
-      category: "Weakness",
-      content:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.",
-      name: "Kadek Agung",
-    },
-    {
-      no: 3,
-      category: "Opportunity",
-      content:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.",
-      name: "I Wayan Merta",
-    },
-    {
-      no: 4,
-      category: "Strength",
-      content:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.",
-      name: "Surya Diningrat",
-    },
-    {
-      no: 5,
-      category: "Threat",
-      content:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.",
-      name: "I Komang Nuri",
-    },
-  ];
+  const [dataDelete, setDataDelete] = useState(Number)
+
+
+  const [isData, setData] = useState(data)
+  const searchParams = useSearchParams()
+
+  async function onLoad() {
+    const dataDB = await funGetAllSwot({ find: searchParam })
+    setData(dataDB.data)
+  }
+
+  useEffect(() => {
+    setData(data)
+  }, [data])
 
   return (
     <>
@@ -84,10 +61,10 @@ export default function TableSwot() {
         >
           <Group justify="space-between" gap="lg">
             <Text fw={"bold"} c={"white"}>
-              {"PROVINSI BALI"}
+              {title}
             </Text>
-            <Button bg={"gray"} onClick={() => router.push("swot/add")}>
-              ADD SWOT
+            <Button bg={"gray"} onClick={() => router.push("swot/add?prov=" + searchParams.get('prov') + '&city=' + searchParams.get('city'))}>
+              TAMBAH SWOT
             </Button>
           </Group>
           <Box pt={20}>
@@ -111,22 +88,21 @@ export default function TableSwot() {
                       }}
                     >
                       <Table.Th>No</Table.Th>
-                      <Table.Th w={200}>Candidate</Table.Th>
-                      <Table.Th>Category</Table.Th>
-                      {/* <Table.Th>Content</Table.Th> */}
+                      <Table.Th w={200}>Kandidat</Table.Th>
+                      <Table.Th>Kategori</Table.Th>
                       <Table.Th w={180}>
-                        <Center>Action</Center>
+                        <Center>Aksi</Center>
                       </Table.Th>
                     </Table.Tr>
                   </Table.Thead>
-                  {elements.map((v, i) => (
-                    <ComponentTable v={v} i={i} key={i} />
+                  {isData.map((v: any, i: any) => (
+                    <ComponentTable v={v} i={i} key={i} onClick={(val)=>{
+                      setDataDelete(val)
+                      setOpenModal(true)
+                    }} />
                   ))}
                 </Table>
               </ScrollArea>
-              <Group justify="flex-end" mt={20}>
-                <Pagination total={10} />
-              </Group>
             </Box>
           </Box>
         </Box>
@@ -139,38 +115,8 @@ export default function TableSwot() {
         withCloseButton={false}
         closeOnClickOutside={false}
       >
-        <ModalDelSwot />
+        <ModalDelSwot id={dataDelete} onSuccess={() => onLoad()}/>
       </Modal>
-    </>
-  );
-}
-function ClickMore({ v }: { v: any }) {
-  const open = useState(false);
-
-  return (
-    <>
-      <Stack>
-      <Group>
-        </Group>
-        <Collapse
-          in={open[0]}
-          transitionDuration={500}
-          transitionTimingFunction="linear"
-        >
-          <Box
-            style={{
-              backgroundColor: "gray",
-              padding: 20,
-              borderRadius: 10,
-            }}
-          >
-            <Text c={"white"} fw={"bold"} fz={20} mb={10}>
-              Content
-            </Text>
-            <Text c={"white"}>{v.content}</Text>
-          </Box>
-        </Collapse>
-      </Stack>
     </>
   );
 }

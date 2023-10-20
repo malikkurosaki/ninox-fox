@@ -5,18 +5,20 @@ import { useAtom } from "jotai";
 import { isModalStep } from "../val/val_step";
 import { useRouter } from "next/navigation";
 import toast from "react-simple-toasts";
+import funEditStep from "../fun/fun_edit_step";
 
 /**
  * Fungsi untuk menampilkan modal konfirmasi edit step.
  * @returns {component} Modal konfirmasi edit step.
  */
 
-export default function ModalEditStep() {
+export default function ModalEditStep({data}: {data : any}) {
     const [openModal, setOpenModal] = useAtom(isModalStep)
     const router = useRouter()
 
-    function onEditStep() {
-        toast("Success", { theme: "dark" });
+    async function onEditStep() {
+        const edit = await funEditStep({body: data})
+        toast("Sukses", { theme: "dark" });
         setOpenModal(false);
         router.back()
     }
@@ -26,7 +28,7 @@ export default function ModalEditStep() {
             <Box>
                 <Alert color="gray" variant="outline">
                     <Text fw={700} ta={"center"} mb={20} mt={20}>
-                        ARE YOU SURE TO EDIT STEP?
+                        ANDA YAKIN INGIN MENGEDIT  STEP?
                     </Text>
                     <Group justify="space-between" pt={10}>
                         <Button

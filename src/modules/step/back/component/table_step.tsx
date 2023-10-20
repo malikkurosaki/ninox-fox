@@ -16,76 +16,37 @@ import {
 } from "@mantine/core";
 import { useAtom } from "jotai";
 import { isModalStep } from "../val/val_step";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { MdDelete, MdEditCalendar } from "react-icons/md";
 import { CiRead } from "react-icons/ci";
 import ModalDelStep from "./modal_del_step";
 import { useDisclosure } from "@mantine/hooks";
 import ComponentTableStep from "./component_table_step";
+import { useEffect, useState } from "react";
+import { funGetCandidateActiveByArea } from "@/modules/candidate";
+import { funGetAllStap } from "../..";
 
 /**
  * Fungsi untuk menampilkan view table step.
  * @returns {component} table step.
  */
 
-export default function TableStep() {
+export default function TableStep({ title, data, searchParam }: { title: any, data: any, searchParam: any }) {
   const [openModal, setOpenModal] = useAtom(isModalStep);
   const router = useRouter();
-  const [opened, { toggle }] = useDisclosure(false);
-  const elements = [
-    {
-      no: 1,
-      sentiment: "Positive",
-      category: "Social",
-      content:
-        "Contrary to popular belief, Lorem Ipsum is not simply random text.",
-      name: "Komang Ayu",
-      value:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.",
-    },
-    {
-      no: 2,
-      sentiment: "Positive",
-      category: "Politic",
-      content:
-        "Contrary to popular belief, Lorem Ipsum is not simply random text.",
-      name: "Kadek Agung",
-      value:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.",
-    },
-    {
-      no: 3,
-      sentiment: "Negative",
-      category: "Economy",
-      content:
-        "Contrary to popular belief, Lorem Ipsum is not simply random text.",
-      name: "I Wayan Merta",
-      value:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.",
-    },
-    {
-      no: 4,
-      sentiment: "Positive",
-      category: "Technology",
-      content:
-        "Contrary to popular belief, Lorem Ipsum is not simply random text.",
-      name: "Surya Diningrat",
-      value:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.",
-    },
-    {
-      no: 5,
-      sentiment: "Negative",
-      category: "Social",
-      content:
-        "Contrary to popular belief, Lorem Ipsum is not simply random text.",
-      name: "I Komang Nuri",
-      value:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.",
-    },
-  ];
+  const [dataDelete, setDataDelete] = useState(Number)
 
-  let a = 3;
+  const [isData, setData] = useState(data)
+  const searchParams = useSearchParams()
+
+  async function onLoad() {
+    const dataDB = await funGetAllStap({ find: searchParam })
+    setData(dataDB.data)
+  }
+
+  useEffect(() => {
+    setData(data)
+  }, [data])
 
   return (
     <>
@@ -99,10 +60,10 @@ export default function TableStep() {
         >
           <Group justify="space-between" gap="lg">
             <Text fw={"bold"} c={"white"}>
-              {"PROVINSI BALI"}
+              {title}
             </Text>
-            <Button bg={"gray"} onClick={() => router.push("step/add")}>
-              ADD STEP
+            <Button bg={"gray"} onClick={() => router.push("step/add?prov=" + searchParams.get('prov') + '&city=' + searchParams.get('city'))}>
+              TAMBAH STEP
             </Button>
           </Group>
           <Box pt={20}>
@@ -126,22 +87,22 @@ export default function TableStep() {
                       }}
                     >
                       <Table.Th>No</Table.Th>
-                      <Table.Th w={200}>Candidate</Table.Th>
-                      <Table.Th>Category</Table.Th>
+                      <Table.Th w={200}>Kandidat</Table.Th>
+                      <Table.Th>Kategori</Table.Th>
                       <Table.Th>Sentiment</Table.Th>
                       <Table.Th>
-                        <Center>Action</Center>
+                        <Center>Aksi</Center>
                       </Table.Th>
                     </Table.Tr>
                   </Table.Thead>
-                  {elements.map((v, i) => (
-                    <ComponentTableStep v={v} i={i} key={i} />
+                  {isData.map((v: any, i: any) => (
+                    <ComponentTableStep v={v} i={i} key={i} onClick={(val) => {
+                      setDataDelete(val)
+                      setOpenModal(true)
+                    }} />
                   ))}
                 </Table>
               </ScrollArea>
-              <Group justify="flex-end" mt={20}>
-                <Pagination total={10} />
-              </Group>
             </Box>
           </Box>
         </Box>
@@ -154,7 +115,7 @@ export default function TableStep() {
         withCloseButton={false}
         closeOnClickOutside={false}
       >
-        <ModalDelStep />
+    <ModalDelStep id={dataDelete} onSuccess={() => onLoad()}/>
       </Modal>
     </>
   );

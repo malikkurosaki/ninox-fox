@@ -32,6 +32,11 @@ export default function LayoutView({
   const [opened, { toggle }] = useDisclosure();
   const dataDashboard = [
     {
+      key: "md0",
+      link: "/dashboard",
+      label: "BERANDA",
+    },
+    {
       key: "md1",
       link: "/dashboard/emotion",
       label: "EMOTION EDITOR",
@@ -85,7 +90,7 @@ export default function LayoutView({
     {
       key: "md10",
       link: "/dashboard/candidate",
-      label: "CANDIDATE",
+      label: "KANDIDAT",
     },
   ];
 
@@ -176,7 +181,7 @@ export default function LayoutView({
                 onClick={() => {
                   router.push(item.link);
                 }}
-                color="rgba(68, 6, 115, 1)"
+                color="#213555"
                 variant="filled"
               />
             );
@@ -196,7 +201,7 @@ export default function LayoutView({
                   onClick={() => {
                     router.push(item.link);
                   }}
-                  color="rgba(68, 6, 115, 1)"
+                  color="#213555"
                   variant="filled"
                 />
               );
@@ -212,7 +217,7 @@ export default function LayoutView({
                 onClick={() => {
                   router.push(item.link);
                 }}
-                color="rgba(68, 6, 115, 1)"
+                color="#213555"
                 variant="filled"
               />
             );

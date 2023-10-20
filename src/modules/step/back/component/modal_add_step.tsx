@@ -5,17 +5,20 @@ import { useAtom } from "jotai";
 import { isModalStep } from "../val/val_step";
 import { useRouter } from "next/navigation";
 import toast from "react-simple-toasts";
+import funAddStep from "../fun/fun_add_step";
 
 /**
  * Fungsi untuk menampilkan modal konfirmasi add step.
  * @returns {component} Modal konfirmasi add step.
  */
 
-export default function ModalAddStep() {
+export default function ModalAddStep({data}: {data: any}) {
     const [openModal, setOpenModal] = useAtom(isModalStep)
     const router = useRouter()
 
-    function onCreateStep() {
+   async function onCreateStep() {
+        const addData = await funAddStep({body: data})
+        if (!addData.success) return  toast(addData.message, { theme: "dark" });
         toast("Success", {theme: "dark"});
         setOpenModal(false);
         router.back()
@@ -26,7 +29,7 @@ export default function ModalAddStep() {
             <Box>
                 <Alert color="gray" variant="outline">
                     <Text fw={700} ta={"center"} mb={20} mt={20}>
-                        ARE YOU SURE TO ADD STEP?
+                        ANDA YAKIN INGIN MENAMBAH STEP?
                     </Text>
                     <Group justify="space-between" pt={10}>
                         <Button

@@ -5,18 +5,20 @@ import { useAtom } from "jotai"
 import { isModalMlAi } from "../val/val_mlai"
 import toast from "react-simple-toasts"
 import { useRouter } from "next/navigation"
+import funEditMlAi from "../fun/fun_edit_mlai"
 
 /**
  * Fungsi untuk menampilkan modal konfirmasi edit ml ai.
  * @returns {component} modal konfirmasi edit ml ai.
  */
 
-export default function ModalEditMlAi() {
+export default function ModalEditMlAi({data}: {data: any}) {
     const [openModal, setOpenModal] = useAtom(isModalMlAi)
     const router = useRouter()
 
-    function onEditMlAi() {
-        toast("Success", { theme: "dark" });
+    async function onEditMlAi() {
+        const edit = await funEditMlAi({body: data})
+        toast("Sukses", { theme: "dark" });
         setOpenModal(false);
         router.back()
     }
@@ -26,7 +28,7 @@ export default function ModalEditMlAi() {
             <Box>
                 <Alert color="gray" variant="outline">
                     <Text fw={700} ta={"center"} mb={20} mt={20}>
-                        ARE YOU SURE TO EDIT ML-AI?
+                        ANDA YAKIN INGIN MENGEDIT ML-AI?
                     </Text>
                     <Group justify="space-between" pt={10}>
                         <Button
@@ -35,10 +37,10 @@ export default function ModalEditMlAi() {
                             w={150}
                             onClick={() => setOpenModal(false)}
                         >
-                            NO
+                            TIDAK
                         </Button>
                         <Button radius={10} color="gray.7" w={150} onClick={() => onEditMlAi()}>
-                            YES
+                            YA
                         </Button>
                     </Group>
                 </Alert>

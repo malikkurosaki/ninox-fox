@@ -17,18 +17,21 @@ import { CiRead, CiUnread } from "react-icons/ci";
 import { MdDelete, MdEditCalendar } from "react-icons/md";
 import { isModalStep, isModalvalueStep } from "../val/val_step";
 
-export default function ComponentTableStep({ v, i }: { v: any; i: any }) {
+export default function ComponentTableStep({ v, i, onClick }: { v: any; i: any, onClick: (val: any) => void }) {
   const open = useState(false);
   const router = useRouter();
   const [openModal, setOpenModal] = useAtom(isModalStep);
+  function callBackDelete({ idDel }: { idDel: any }) {
+    onClick(idDel)
+  }
   return (
     <>
       <Table.Tbody key={i}>
         <Table.Tr>
-          <Table.Td>{v.no}</Table.Td>
+          <Table.Td>{i + 1}</Table.Td>
           <Table.Td>{v.name}</Table.Td>
           <Table.Td>{v.category}</Table.Td>
-          <Table.Td>{v.sentiment}</Table.Td>
+          <Table.Td>{(v.sentiment == "1") ? "Positive" : "Negative"}</Table.Td>
           <Table.Td>
             <Center>
               <Stack>
@@ -49,7 +52,8 @@ export default function ComponentTableStep({ v, i }: { v: any; i: any }) {
                 color="rgba(5, 128, 23, 1)"
                 size="xl"
                 aria-label="Edit"
-                onClick={() => router.push("ml-ai/edit/IKomangAyu")}
+                onClick={() => router.push("step/edit/" + v.id)}
+
               >
                 <MdEditCalendar size={20} />
               </ActionIcon>
@@ -58,7 +62,9 @@ export default function ComponentTableStep({ v, i }: { v: any; i: any }) {
                 color="rgba(209, 4, 4, 1)"
                 size="xl"
                 aria-label="Delete"
-                onClick={() => setOpenModal(true)}
+                onClick={(val) => {
+                  callBackDelete({ idDel: v.id })
+                }}
               >
                 <MdDelete size={20} />
               </ActionIcon>

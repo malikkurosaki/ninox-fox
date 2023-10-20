@@ -1,7 +1,7 @@
 "use client";
 
 import { useAtom } from "jotai";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { isModalMlAi } from "../val/val_mlai";
 import {
@@ -16,16 +16,20 @@ import {
 } from "@mantine/core";
 import { CiRead, CiUnread } from "react-icons/ci";
 import { MdDelete, MdEditCalendar } from "react-icons/md";
+import { toNumber } from "lodash";
 
-export default function ComponentTable({ v, i }: { v: any; i: any }) {
+export default function ComponentTable({ v, i, onClick }: { v: any; i: any, onClick: (val: any) => void }) {
   const open = useState(false);
   const router = useRouter();
-  const [openModal, setOpenModal] = useAtom(isModalMlAi);
+
+  function callBackDelete({ idDel }: { idDel: any }) {
+    onClick(idDel)
+  }
   return (
     <>
       <Table.Tbody key={i}>
         <Table.Tr>
-          <Table.Td>{v.no}</Table.Td>
+          <Table.Td>{i + 1}</Table.Td>
           <Table.Td>{v.name}</Table.Td>
           <Table.Td>
             <Center>
@@ -47,7 +51,7 @@ export default function ComponentTable({ v, i }: { v: any; i: any }) {
                 color="rgba(5, 128, 23, 1)"
                 size="xl"
                 aria-label="Edit"
-                onClick={() => router.push("ml-ai/edit/IKomangAyu")}
+                onClick={() => router.push("ml-ai/edit/" + v.id)}
               >
                 <MdEditCalendar size={20} />
               </ActionIcon>
@@ -56,7 +60,9 @@ export default function ComponentTable({ v, i }: { v: any; i: any }) {
                 color="rgba(209, 4, 4, 1)"
                 size="xl"
                 aria-label="Delete"
-                onClick={() => setOpenModal(true)}
+                onClick={(val) => {
+                  callBackDelete({ idDel: v.id })
+                }}
               >
                 <MdDelete size={20} />
               </ActionIcon>
