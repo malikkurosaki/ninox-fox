@@ -33,7 +33,7 @@ export default function ListCandidates({ param, provinsi, kabupaten, datatable }
     }
 
     function onProccess() {
-        if (isProvinsi == null) return toast("Provinces cannot be empty", { theme: "dark" })
+        if (isProvinsi == null) return toast("Silahkan pilih provinsi", { theme: "dark" })
         router.replace('/dashboard/candidate?prov=' + isProvinsi + '&city=' + isKabupaten)
     }
 
@@ -46,11 +46,11 @@ export default function ListCandidates({ param, provinsi, kabupaten, datatable }
         <>
 
             <Stack>
-                <Text fw={"bold"}>CANDIDATE</Text>
+                <Text fw={"bold"}>KANDIDAT</Text>
             </Stack>
             <Group grow mt={30}>
                 <Select
-                    placeholder="PROVINCE"
+                    placeholder="Pilih Provinsi"
                     data={dataProvinsi.map((pro: any) => ({
                         value: String(pro.id),
                         label: pro.name
@@ -65,7 +65,7 @@ export default function ListCandidates({ param, provinsi, kabupaten, datatable }
                 />
                 <Select searchable
                     label="Kabupaten"
-                    placeholder="CITY"
+                    placeholder="Pilih Kabupaten/Kota"
                     data={dataKab.map((kab: any) => ({
                         value: String(kab.id),
                         label: kab.name
@@ -76,7 +76,7 @@ export default function ListCandidates({ param, provinsi, kabupaten, datatable }
                     }}
                 />
                 <Button mt={25} bg={"gray"} onClick={() => onProccess()}>
-                    PROCCESS
+                    PROSES
                 </Button>
             </Group>
             {!_.isNull(datatable.title) &&

@@ -101,8 +101,8 @@ export default function TableDataPairing() {
           <Table.Thead>
             <Table.Tr>
               <Table.Th>ID</Table.Th>
-              <Table.Th>CANDIDATE 1</Table.Th>
-              <Table.Th>CANDIDATE 2</Table.Th>
+              <Table.Th>KANDIDAT 1</Table.Th>
+              <Table.Th>KANDIDAT 2</Table.Th>
               <Table.Th>KABUPATEN ID</Table.Th>
               <Table.Th>CONFIDENCE</Table.Th>
               <Table.Th>SUPPORTIVE</Table.Th>

@@ -96,7 +96,7 @@ export default function CopyData() {
                   radius="md"
                   h={175}
                   w="auto"
-                  alt="candidate"
+                  alt="kandidat"
                   fit="contain"
                   src="/profile.png"
                 />
@@ -150,7 +150,7 @@ export default function CopyData() {
                     bg={"gray"}
                     onClick={() => setOpenModal(true)}
                   >
-                    PROCCESS
+                    PROSES
                   </Button>
                 </Group>
               </Box>

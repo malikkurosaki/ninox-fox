@@ -34,7 +34,7 @@ export default function Home({ pro, kab, kec, kel, can1, can2 }: { pro: number, 
             borderRadius: 5
           }}>
             <Box pb={10}>
-              <Text c={"#4F709C"} fw={'bold'}>DAFTAR ACCESS WILAYAH</Text>
+              <Text c={"#4F709C"} fw={'bold'}>DAFTAR AKSES WILAYAH</Text>
             </Box>
             <Group grow>
               <Box
@@ -75,7 +75,7 @@ export default function Home({ pro, kab, kec, kel, can1, can2 }: { pro: number, 
           borderRadius: 5
         }}>
           <Box pb={10}>
-            <Text c={"#4F709C"} fw={'bold'}>JUMLAH CANDIDATE</Text>
+            <Text c={"#4F709C"} fw={'bold'}>JUMLAH KANDIDAT</Text>
           </Box>
           <SimpleGrid
             cols={{ base: 1, sm: 2, lg: 2 }}

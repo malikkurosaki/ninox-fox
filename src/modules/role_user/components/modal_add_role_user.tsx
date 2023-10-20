@@ -16,7 +16,7 @@ export default function ModalAddRoleUser() {
     const router = useRouter()
 
     function onRoleUser() {
-        toast("Success", { theme: "dark" });
+        toast("Sukses", { theme: "dark" });
         setOpenModal(false);
         router.back()
     }
@@ -27,7 +27,7 @@ export default function ModalAddRoleUser() {
             <Box>
                 <Alert color="gray" variant="outline">
                     <Text fw={700} ta={"center"} mb={20} mt={20}>
-                        ARE YOU SURE TO ADD ROLE USER?
+                        ANDA YAKIN INGIN MENAMBAH ROLE USER?
                     </Text>
                     <Group justify="space-between" pt={10}>
                         <Button

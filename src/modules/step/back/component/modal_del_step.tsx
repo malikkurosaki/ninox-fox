@@ -20,7 +20,7 @@ export default function ModalDelStep({id, onSuccess}: {id: any, onSuccess: (val:
    async function onDelStep() {
         const delData = await funDeleteStep({id: id})
         if (!delData.success) return toast(delData.message, { theme: "dark" })
-        toast("Success", { theme: "dark" });
+        toast("Sukses", { theme: "dark" });
         setOpenModal(false);
         onSuccess(true)
     }
@@ -30,7 +30,7 @@ export default function ModalDelStep({id, onSuccess}: {id: any, onSuccess: (val:
             <Box>
                 <Alert color="gray" variant="outline">
                     <Text fw={700} ta={"center"} mb={20} mt={20}>
-                        ARE YOU SURE TO DELETE STEP?
+                        ANDA YAKIN INGIN MENGHAPUS  STEP?
                     </Text>
                     <Group justify="space-between" pt={10}>
                         <Button

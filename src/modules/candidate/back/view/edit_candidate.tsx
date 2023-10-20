@@ -25,7 +25,7 @@ export default function EditCandidate({ data }: { data: any }) {
         <>
             <ButtonBack />
             <Stack mt={30}>
-                <Text fw={"bold"}>EDIT CANDIDATE</Text>
+                <Text fw={"bold"}>EDIT KANDIDAT</Text>
             </Stack>
             <Box pt={30}>
                 <Paper shadow="xs" p="xl" bg={"#f1f1f1"}>
@@ -49,7 +49,7 @@ export default function EditCandidate({ data }: { data: any }) {
                         </Group>
                         <Box pt={40}>
                             <TextInput
-                                placeholder="Candidate Name"
+                                placeholder="Nama Kandidat"
                                 value={dataEdit.name}
                                 onChange={(val) => {
                                     setDataEdit({

@@ -22,7 +22,7 @@ export default function ModalAddCandidate({ data }: { data: any }) {
         const create = await funAddCandidate({ body: data })
         if (!create.success)
             toast(create.message, { theme: "dark" });
-        toast("Success", { theme: "dark" });
+        toast("Sukses", { theme: "dark" });
         setOpenModal(false);
         router.back()
     }
@@ -32,7 +32,7 @@ export default function ModalAddCandidate({ data }: { data: any }) {
             <Box>
                 <Alert color="gray" variant="outline">
                     <Text fw={700} ta={"center"} mb={20} mt={20}>
-                        ARE YOU SURE TO ADD CANDIDATE?
+                        ANDA YAKIN INGIN MENAMBAHKAN KANDIDAT?
                     </Text>
                     <Grid>
                         <Grid.Col span={6}>
@@ -42,7 +42,7 @@ export default function ModalAddCandidate({ data }: { data: any }) {
                                 fullWidth
                                 onClick={() => setOpenModal(false)}
                             >
-                                NO
+                                TIDAK
                             </Button>
                         </Grid.Col>
                         <Grid.Col span={6}>
@@ -52,7 +52,7 @@ export default function ModalAddCandidate({ data }: { data: any }) {
                                 fullWidth
                                 onClick={() => onCreateCandidate()}
                             >
-                                YES
+                                YA
                             </Button>
                         </Grid.Col>
                     </Grid>

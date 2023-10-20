@@ -1,5 +1,6 @@
 import { MasterKabGetByProvince, MasterKecGetByKab, MasterProvinceGetAll } from "@/modules/_global";
 import { ViewAudience, funGetAudienceByArea } from "@/modules/audience";
+import { funDownloadAudience } from "@/modules/audience/back";
 import _ from "lodash";
 import React from "react";
 
@@ -14,7 +15,8 @@ async function Page({ searchParams }: { searchParams: { prov: any, city: any, ke
   const city = await MasterKabGetByProvince({ idProvinsi: findData.idProvinsi })
   const kec = await MasterKecGetByKab({ idKabkot: findData.idKabkot })
   const dataDB = await funGetAudienceByArea({ find: findData })
-  return <ViewAudience param={findData} provinsi={prov} kabupaten={city} kecamatan={kec} datatable={dataDB} />;
+  const dataDownload = await funDownloadAudience({ find: findData })
+  return <ViewAudience param={findData} provinsi={prov} kabupaten={city} kecamatan={kec} datatable={dataDB} datadownload={dataDownload} />;
 }
 
 export default Page;

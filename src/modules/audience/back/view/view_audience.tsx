@@ -2,7 +2,6 @@
 import {
   Box,
   Button,
-  Container,
   Group,
   Paper,
   Select,
@@ -18,6 +17,7 @@ import { MasterKabGetByProvince } from "@/modules/_global";
 import { MasterKecGetByKab } from "@/modules/_global/fun/master_kecamatan_get_by_kabupaten";
 import _ from "lodash";
 import toast from "react-simple-toasts";
+import papa from "papaparse"
 
 
 /**
@@ -27,9 +27,8 @@ import toast from "react-simple-toasts";
  */
 
 
-export default function ViewAudience({ param, provinsi, kabupaten, kecamatan, datatable }: { param: any, provinsi: any, kabupaten: any, kecamatan: any, datatable: any }) {
+export default function ViewAudience({ param, provinsi, kabupaten, kecamatan, datatable, datadownload }: { param: any, provinsi: any, kabupaten: any, kecamatan: any, datatable: any, datadownload: any }) {
   const router = useRouter()
-
   const [dataProvinsi, setDataProvinsi] = useState(provinsi)
   const [dataKabupaten, setDataKabupaten] = useState<any>(kabupaten)
   const [dataKecamatan, setDataKecamatan] = useState<any>(kecamatan)
@@ -83,7 +82,7 @@ export default function ViewAudience({ param, provinsi, kabupaten, kecamatan, da
             <Paper shadow="xs" p="xl">
               <Stack>
                 <Select
-                  placeholder="PROVINCE"
+                  placeholder="Pilih Provinsi"
                   data={dataProvinsi.map((pro: any) => ({
                     value: String(pro.id),
                     label: pro.name
@@ -95,7 +94,7 @@ export default function ViewAudience({ param, provinsi, kabupaten, kecamatan, da
                   onChange={(val) => onProvinsi({ idProv: val })}
                 />
                 <Select
-                  placeholder="CITY"
+                  placeholder="Pilih Kabupaten/Kota"
                   data={dataKabupaten.map((kab: any) => ({
                     value: String(kab.id),
                     label: kab.name
@@ -106,7 +105,7 @@ export default function ViewAudience({ param, provinsi, kabupaten, kecamatan, da
                   onChange={(val) => onKabupaten({ idKab: val })}
                 />
                 <Select
-                  placeholder="SUBDISTRICT"
+                  placeholder="Pilih Kecamatan"
                   data={dataKecamatan.map((kec: any) => ({
                     value: String(kec.id),
                     label: kec.name
@@ -120,30 +119,45 @@ export default function ViewAudience({ param, provinsi, kabupaten, kecamatan, da
                   bg={"gray"}
                   onClick={() => onProccess()}
                 >
-                  PROCCESS
+                  PROSES
                 </Button>
               </Stack>
             </Paper>
           </Box>
-          <Group justify="center" grow style={{
-            backgroundColor: "white",
-            borderRadius: 10,
-            padding: 20
-          }}>
-
+          <Group
+            justify="left"
+            style={{
+              backgroundColor: "white",
+              borderRadius: 10,
+            }}
+            px={50}
+          >
             <UploadDataAudience />
-            <Box
-              style={{
-                border: "1px dashed gray",
-                borderRadius: 10,
-                padding: 40,
-                cursor: "pointer"
-              }}
-            >
-              <Text ta={"center"} size="xl" inline>
-                DOWNLOAD
-              </Text>
-            </Box>
+            {!_.isNull(datatable.title) &&
+              <Box
+                style={{
+                  border: "1px dashed gray",
+                  borderRadius: 10,
+                  padding: 40,
+                  cursor: "pointer"
+                }}
+                onClick={() => {
+                  const dataJson = datadownload.data
+
+                  const jsonData = papa.unparse(dataJson)
+                  const jsonDataUrl = "data:text/csv;charset=utf-8," + encodeURIComponent(jsonData)
+
+                  const jsonDwnloadLink = document.createElement("a")
+                  jsonDwnloadLink.href = jsonDataUrl
+                  jsonDwnloadLink.download = datadownload.title + ".csv"
+                  jsonDwnloadLink.click()
+                }}
+              >
+                <Text ta={"center"} size="xl" inline>
+                  DOWNLOAD
+                </Text>
+              </Box>
+            }
           </Group>
         </SimpleGrid>
       </Box>

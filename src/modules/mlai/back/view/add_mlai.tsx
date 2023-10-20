@@ -4,11 +4,10 @@ import { ButtonBack } from "@/modules/_global"
 import { Box, Button, Group, Modal, Radio, Select, Stack, Text, TextInput, Textarea } from "@mantine/core"
 import ModalAddMlAi from "../component/modal_add_mlai"
 import { useAtom } from "jotai"
-import { isModalMlAi, isModalMlaiAdd } from "../val/val_mlai"
+import { isModalMlAi } from "../val/val_mlai"
 import { useSearchParams } from "next/navigation"
 import { useState } from "react"
 import _, { values } from "lodash"
-import { funGetCandidateActiveByArea } from "@/modules/candidate"
 import toast from "react-simple-toasts"
 
 /**
@@ -18,7 +17,7 @@ import toast from "react-simple-toasts"
 
 export default function AddMlAi({ params, candidate, provinsi, kabupaten }: { params: any, candidate: any, provinsi: any, kabupaten: any }) {
     const today = new Date();
-    const [openModal, setOpenModal] = useAtom(isModalMlaiAdd)
+    const [openModal, setOpenModal] = useAtom(isModalMlAi)
     const query = useSearchParams()
     const [isDataCandidate, setDataCandidate] = useState(candidate)
     const [dataProvinsi, setDataProvinsi] = useState(provinsi)
@@ -42,12 +41,12 @@ export default function AddMlAi({ params, candidate, provinsi, kabupaten }: { pa
         <>
             <ButtonBack />
             <Stack mt={30}>
-                <Text fw={"bold"}>ADD ML-AI</Text>
+                <Text fw={"bold"}>TAMBAH ML-AI</Text>
             </Stack>
             <Box pt={30}>
                 <Group grow>
                     <Select
-                        placeholder="PROVINCE"
+                        placeholder="Pilih Provinsi"
                         data={dataProvinsi.map((pro: any) => ({
                             value: String(pro.id),
                             label: pro.name
@@ -58,7 +57,7 @@ export default function AddMlAi({ params, candidate, provinsi, kabupaten }: { pa
                         disabled
                     />
                     <Select
-                        placeholder="CITY"
+                        placeholder="Pilih Kabupaten/Kota"
                         data={dataKabupaten.map((kab: any) => ({
                             value: String(kab.id),
                             label: kab.name
@@ -69,14 +68,14 @@ export default function AddMlAi({ params, candidate, provinsi, kabupaten }: { pa
                     />
                 </Group>
                 <Select
-                    placeholder="CANDIDATE"
+                    placeholder="Pilih Kandidat"
                     data={isDataCandidate.map((can: any) => ({
                         value: String(can.id),
                         label: can.name
                     }))}
                     required
                     value={String(isBody.idCandidate)}
-                    label={"Candidate"}
+                    label={"Kandidat"}
                     searchable
                     onChange={(val) => {
                         setBody({
@@ -87,7 +86,9 @@ export default function AddMlAi({ params, candidate, provinsi, kabupaten }: { pa
                 />
                 <Textarea
                     mt={20}
-                    placeholder="TEXT"
+                    placeholder="Value Content"
+                    label="Content"
+                    withAsterisk
                     onChange={(val) => {
                         setBody({
                             ...isBody,

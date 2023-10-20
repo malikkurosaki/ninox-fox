@@ -21,9 +21,6 @@ import { toNumber } from "lodash";
 export default function ComponentTable({ v, i, onClick }: { v: any; i: any, onClick: (val: any) => void }) {
   const open = useState(false);
   const router = useRouter();
-  const [openModal, setOpenModal] = useAtom(isModalMlAi);
-  const [dataDelete, setDataDelete] = useState(Number)
-  const searchParams = useSearchParams()
 
   function callBackDelete({ idDel }: { idDel: any }) {
     onClick(idDel)

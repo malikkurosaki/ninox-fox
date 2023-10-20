@@ -96,6 +96,5 @@ export default async function funGetAllStap({ find }: { find: any }) {
       title: titleTrue,
       data: result
   }
-  // console.log(allData)
   return allData
 }

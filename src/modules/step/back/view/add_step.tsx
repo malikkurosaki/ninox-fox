@@ -38,13 +38,13 @@ export default function AddStep({ params, candidate, provinsi, kabupaten }: { pa
         <>
             <ButtonBack />
             <Stack mt={30}>
-                <Text fw={"bold"}>ADD STEP</Text>
+                <Text fw={"bold"}>TAMBAH STEP</Text>
             </Stack>
             <Box pt={30}>
                 <Stack>
                     <Group grow>
                         <Select
-                            placeholder="PROVINCE"
+                            placeholder="Pilih Provinsi"
                             data={dataProvinsi.map((pro: any) => ({
                                 value: String(pro.id),
                                 label: pro.name
@@ -55,7 +55,7 @@ export default function AddStep({ params, candidate, provinsi, kabupaten }: { pa
                             disabled
                         />
                         <Select
-                            placeholder="CITY"
+                            placeholder="Pilih Kabupaten/Kota"
                             data={dataKabupaten.map((kab: any) => ({
                                 value: String(kab.id),
                                 label: kab.name
@@ -66,14 +66,14 @@ export default function AddStep({ params, candidate, provinsi, kabupaten }: { pa
                         />
                     </Group>
                     <Select mt={20}
-                        placeholder="CANDIDATE"
+                        placeholder="Pilih Kandidat"
                         data={isDataCandidate.map((can: any) => ({
                             value: String(can.id),
                             label: can.name
                         }))}
                         required
                         value={String(isBody.idCandidate)}
-                        label={"Candidate"}
+                        label={"Kandidat"}
                         searchable
                         onChange={(val) => {
                             setBody({
@@ -84,10 +84,9 @@ export default function AddStep({ params, candidate, provinsi, kabupaten }: { pa
                     />
                 </Stack>
                 <Select mt={20}
-                    placeholder="CATEGORY"
+                    placeholder="Pilih Kategori"
                     data={["STRENGTH", "WEAKNESS", "OPPORTUNITY", "THREAT"]}
-                    label={"Category"}
-                    searchable
+                    label={"Kategori"}
                     required
                     onChange={(val) => {
                         setBody({
@@ -109,7 +108,7 @@ export default function AddStep({ params, candidate, provinsi, kabupaten }: { pa
                 </Radio.Group>
                 <Textarea
                     mt={20}
-                    placeholder="TEXT"
+                    placeholder="Value Content"
                     label={"Content"}
                     required
                     onChange={(val) => {

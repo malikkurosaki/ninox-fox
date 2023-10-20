@@ -39,12 +39,12 @@ export default function AddSwot({ params, candidate, provinsi, kabupaten }: { pa
         <>
             <ButtonBack />
             <Stack mt={30}>
-                <Text fw={"bold"}>ADD SWOT</Text>
+                <Text fw={"bold"}>TAMBAH SWOT</Text>
             </Stack>
             <Box pt={30}>
                 <Group grow>
                     <Select
-                        placeholder="PROVINCE"
+                        placeholder="Pilih Provinsi"
                         data={dataProvinsi.map((pro: any) => ({
                             value: String(pro.id),
                             label: pro.name
@@ -55,7 +55,7 @@ export default function AddSwot({ params, candidate, provinsi, kabupaten }: { pa
                         disabled
                     />
                     <Select
-                        placeholder="CITY"
+                        placeholder="Pilih Kabupaten/Kota"
                         data={dataKabupaten.map((kab: any) => ({
                             value: String(kab.id),
                             label: kab.name
@@ -66,14 +66,14 @@ export default function AddSwot({ params, candidate, provinsi, kabupaten }: { pa
                     />
                 </Group>
                 <Select mt={20}
-                    placeholder="CANDIDATE"
+                    placeholder="Pilih Kandidat"
                     data={isDataCandidate.map((can: any) => ({
                         value: String(can.id),
                         label: can.name
                     }))}
                     required
                     value={String(isBody.idCandidate)}
-                    label={"Candidate"}
+                    label={"Kandidat"}
                     searchable
                     onChange={(val) => {
                         setBody({
@@ -83,10 +83,10 @@ export default function AddSwot({ params, candidate, provinsi, kabupaten }: { pa
                     }}
                 />
                 <Select mt={20}
-                    placeholder="CATEGORY"
+                    placeholder="Pilih Kategori"
+                    required
                     data={["STRENGTH", "WEAKNESS", "OPPORTUNITY", "THREAT"]}
-                    label={"Category"}
-                    searchable
+                    label={"Kategori"}
                     onChange={(val) => {
                         setBody({
                             ...isBody,
@@ -96,7 +96,9 @@ export default function AddSwot({ params, candidate, provinsi, kabupaten }: { pa
                 />
                 <Textarea
                     mt={20}
-                    placeholder="TEXT"
+                    label={"Content"}
+                    required
+                    placeholder="Value Content"
                     onChange={(val) => {
                         setBody({
                             ...isBody,

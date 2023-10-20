@@ -64,7 +64,7 @@ export default function TableSwot({ title, data, searchParam }: { title: any, da
               {title}
             </Text>
             <Button bg={"gray"} onClick={() => router.push("swot/add?prov=" + searchParams.get('prov') + '&city=' + searchParams.get('city'))}>
-              ADD SWOT
+              TAMBAH SWOT
             </Button>
           </Group>
           <Box pt={20}>
@@ -88,10 +88,10 @@ export default function TableSwot({ title, data, searchParam }: { title: any, da
                       }}
                     >
                       <Table.Th>No</Table.Th>
-                      <Table.Th w={200}>Candidate</Table.Th>
-                      <Table.Th>Category</Table.Th>
+                      <Table.Th w={200}>Kandidat</Table.Th>
+                      <Table.Th>Kategori</Table.Th>
                       <Table.Th w={180}>
-                        <Center>Action</Center>
+                        <Center>Aksi</Center>
                       </Table.Th>
                     </Table.Tr>
                   </Table.Thead>
@@ -103,9 +103,6 @@ export default function TableSwot({ title, data, searchParam }: { title: any, da
                   ))}
                 </Table>
               </ScrollArea>
-              <Group justify="flex-end" mt={20}>
-                <Pagination total={10} />
-              </Group>
             </Box>
           </Box>
         </Box>

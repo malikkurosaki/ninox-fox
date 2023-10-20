@@ -1,30 +1,34 @@
 'use server'
 
 import { provinsiCount } from "@/modules/_global";
-import prisma from "@/modules/_global/bin/prisma";
+import prisma from "@/modules/_global/bin/prisma"
 import _ from "lodash"
 
-
 /**
- * Fungsi untuk menampilkan data audience berdasarkan area
+ * Fungsi untuk menampilkan data download RHI berdasarkan area
  * @param {any} find - berisi idprovinsi, idkabkot, idkecamatan
  * @returns title & data 
  */
 
-export default async function funGetAudienceByArea({ find }: { find: any }) {
-    let titleTrue, dataTable = <any>[], area, th
+export default async function funDownloadRHI({ find }: { find: any }) {
+    let titleTrue, dataTable = <any>[], area
 
     const nProv = await provinsiCount();
 
     if (find.idProvinsi > 0 && find.idProvinsi <= nProv) {
         if (find.idKec == 0 && find.idKabkot == 0) {
-            dataTable = await prisma.audience.findMany({
+            dataTable = await prisma.regionHotIssues.findMany({
                 where: {
-                    idProvinsi: find.idProvinsi
+                    idProvinsi: find.idProvinsi,
+                    NOT: {
+                        idKabkot: null,
+                    },
+                    idKecamatan: null,
+                    idKelurahan: null
                 },
                 select: {
-                    value: true,
-                    idKabkot: true,
+                    id: true,
+                    description: true,
                     AreaKabkot: {
                         select: {
                             name: true
@@ -34,13 +38,9 @@ export default async function funGetAudienceByArea({ find }: { find: any }) {
             })
 
             dataTable = dataTable.map((v: any) => ({
-                ..._.omit(v, ["AreaKabkot"]),
-                name: v.AreaKabkot.name
-            }))
-
-            dataTable = _.map(_.groupBy(dataTable, "idKabkot"), (v: any) => ({
-                value: _.sumBy(v, 'value'),
-                name: v[0].name
+                ..._.omit(v, ["description", "AreaKabkot"]),
+                Kabkot: v.AreaKabkot.name,
+                description: v.description
             }))
 
             area = await prisma.areaProvinsi.findUnique({
@@ -48,17 +48,21 @@ export default async function funGetAudienceByArea({ find }: { find: any }) {
                     id: find.idProvinsi
                 }
             })
-            titleTrue = "PROVINSI " + area?.name
-            th = "KABUPATEN/KOTA"
+            titleTrue = "REGION HOT ISSUES - PROVINSI " + area?.name
 
         } else if (find.idKec == 0 && find.idKabkot > 0) {
-            dataTable = await prisma.audience.findMany({
+            dataTable = await prisma.regionHotIssues.findMany({
                 where: {
-                    idKabkot: find.idKabkot
+                    idProvinsi: find.idProvinsi,
+                    idKabkot: find.idKabkot,
+                    NOT: {
+                        idKecamatan: null,
+                    },
+                    idKelurahan: null
                 },
                 select: {
-                    value: true,
-                    idKecamatan: true,
+                    id: true,
+                    description: true,
                     AreaKecamatan: {
                         select: {
                             name: true
@@ -68,13 +72,9 @@ export default async function funGetAudienceByArea({ find }: { find: any }) {
             })
 
             dataTable = dataTable.map((v: any) => ({
-                ..._.omit(v, ["AreaKecamatan"]),
-                name: v.AreaKecamatan.name
-            }))
-
-            dataTable = _.map(_.groupBy(dataTable, "idKecamatan"), (v: any) => ({
-                value: _.sumBy(v, 'value'),
-                name: v[0].name
+                ..._.omit(v, ["description", "AreaKecamatan"]),
+                Kecamatan: v.AreaKecamatan.name,
+                description: v.description
             }))
 
             area = await prisma.areaKabkot.findUnique({
@@ -82,27 +82,33 @@ export default async function funGetAudienceByArea({ find }: { find: any }) {
                     id: find.idKabkot
                 }
             })
-            titleTrue = "" + area?.name
-            th = "KECAMATAN"
+            titleTrue = "REGION HOT ISSUES - " + area?.name
 
         } else {
-            dataTable = await prisma.audience.findMany({
+            dataTable = await prisma.regionHotIssues.findMany({
                 where: {
-                    idKecamatan: find.idKec
+                    idProvinsi: find.idProvinsi,
+                    idKabkot: find.idKabkot,
+                    idKecamatan: find.idKec,
+                    NOT: {
+                        idKelurahan: null
+                    },
                 },
                 select: {
-                    value: true,
+                    id: true,
+                    description: true,
                     AreaKelurahan: {
                         select: {
-                            name: true,
+                            name: true
                         }
                     }
                 }
             })
 
             dataTable = dataTable.map((v: any) => ({
-                ..._.omit(v, ["AreaKelurahan"]),
-                name: v.AreaKelurahan.name
+                ..._.omit(v, ["description", "AreaKelurahan"]),
+                Kelurahan: v.AreaKelurahan.name,
+                description: v.description
             }))
 
             area = await prisma.areaKecamatan.findUnique({
@@ -110,23 +116,19 @@ export default async function funGetAudienceByArea({ find }: { find: any }) {
                     id: find.idKec
                 }
             })
-            titleTrue = "KECAMATAN " + area?.name.toUpperCase()
-            th = "KELURAHAN"
+            titleTrue = "REGION HOT ISSUES - KECAMATAN " + area?.name.toUpperCase()
 
         }
 
     } else {
         titleTrue = null
         dataTable = []
-        th: null
     }
 
     const allData = {
         title: titleTrue,
-        thTitle: th,
         data: dataTable
     }
-
 
     return allData
 }

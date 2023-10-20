@@ -78,7 +78,7 @@ export default function TableRoleUser() {
                       }}
                     >
                       <Table.Th>No</Table.Th>
-                      <Table.Th>Name</Table.Th>
+                      <Table.Th>Nama</Table.Th>
                       <Table.Th>Components</Table.Th>
                       <Table.Th>Status</Table.Th>
                       <Table.Th>
@@ -117,9 +117,6 @@ export default function TableRoleUser() {
                   </Table.Tbody>
                 </Table>
               </ScrollArea>
-              <Group justify="flex-end" mt={20}>
-                <Pagination total={10} />
-              </Group>
             </Box>
           </Box>
         </Box>

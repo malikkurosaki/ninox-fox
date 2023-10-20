@@ -32,11 +32,13 @@ export default function EditMlAi({ data }: { data: any }) {
                     <TextInput label={"Provinsi"} value={data.areaProvinsi} disabled/>
                     <TextInput label={"Kabupaten"} value={data.areaKabkot} disabled/>
                 </Group>
-                    <TextInput label={"Candidate"} value={data.name} disabled/>
+                    <TextInput label={"Kandidat"} value={data.name} disabled/>
                 </Stack>
                 <Textarea
                     mt={20}
-                    placeholder="TEXT"
+                    placeholder="Value Content"
+                    label="Content"
+                    withAsterisk
                     value={isBody.content}
                     onChange={(val) => {
                         setBody({

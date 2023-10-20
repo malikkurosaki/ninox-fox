@@ -3,9 +3,7 @@ import React, { Component } from "react";
 import { Box, Group, Text, rem } from "@mantine/core";
 import { Dropzone, DropzoneProps, IMAGE_MIME_TYPE } from "@mantine/dropzone";
 import { AiOutlineCloudUpload } from "react-icons/ai";
-import { GrDocumentWindows } from "react-icons/gr";
 import { MdOutlineCancel } from "react-icons/md";
-import TableData from "./table_data_audience";
 
 /**
  * Fungsi untuk upload file.

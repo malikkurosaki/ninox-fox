@@ -19,7 +19,7 @@ export default function ModalDelSwot({id, onSuccess}: {id: any, onSuccess: (val:
     async function onDelSwot() {
         const delData = await funDeleteSwot({id: id})
         if (!delData.success) return toast(delData.message, { theme: "dark" })
-        toast("Success", { theme: "dark" });
+        toast("Sukses", { theme: "dark" });
         setOpenModal(false);
         onSuccess(true)
     }
@@ -29,7 +29,7 @@ export default function ModalDelSwot({id, onSuccess}: {id: any, onSuccess: (val:
             <Box>
                 <Alert color="gray" variant="outline">
                     <Text fw={700} ta={"center"} mb={20} mt={20}>
-                        ARE YOU SURE TO DELETE SWOT?
+                        ANDA YAKIN INGIN MENGHAPUS  SWOT?
                     </Text>
                     <Group justify="space-between" pt={10}>
                         <Button

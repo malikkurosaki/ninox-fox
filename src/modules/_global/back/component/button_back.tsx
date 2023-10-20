@@ -25,7 +25,7 @@ export default function ButtonBack({ to }: { to?: string }) {
                     <Group style={{ cursor: "pointer" }}>
                         <BiArrowBack size="20" />
                         <Text fz={15} fw={700} color="dark.9">
-                            Back
+                            Kembali
                         </Text>
                     </Group>
                 </Box>

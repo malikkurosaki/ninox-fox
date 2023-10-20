@@ -29,7 +29,7 @@ export default function ListStep({ params, provinsi, kabupaten, datatable }: { p
     }
 
     function onProsses() {
-        if (isProvinsi == null) return toast("Provinces cannot be empty", { theme: "dark" })
+        if (isProvinsi == null) return toast("Silahkan pilih provinsi", { theme: "dark" })
         router.replace("/dashboard/step?prov=" + isProvinsi + "&city=" + isKabupaten)
     }
 
@@ -45,7 +45,7 @@ export default function ListStep({ params, provinsi, kabupaten, datatable }: { p
             </Stack>
             <Group grow mt={30}>
                 <Select
-                    placeholder="PROVINCE"
+                    placeholder="Pilih Provinsi"
                     data={dataProvinsi.map((val: any) => ({
                         value: String(val.id),
                         label: val.name,
@@ -59,7 +59,7 @@ export default function ListStep({ params, provinsi, kabupaten, datatable }: { p
                     searchable
                 />
                 <Select
-                    placeholder="CITY"
+                    placeholder="Pilih Kabupaten/Kota"
                     label={"Kabupaten"}
                     searchable
                     data={dataKabupaten.map((val: any) => ({
@@ -72,7 +72,7 @@ export default function ListStep({ params, provinsi, kabupaten, datatable }: { p
                     )}
                 />
                 <Button mt={25} bg={"gray"} onClick={() => onProsses()}>
-                    PROCCESS
+                    PROSES
                 </Button>
             </Group>
             {!_.isNull(datatable.title) &&
