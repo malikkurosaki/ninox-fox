@@ -75,7 +75,7 @@ export default function ListStep({ params, provinsi, kabupaten, datatable }: { p
                     PROCCESS
                 </Button>
             </Group>
-            {!_.isNaN(datatable.dataTable) &&
+            {!_.isNull(datatable.title) &&
             <TableStep title={datatable.title} data={datatable.data} searchParam={params}/>
             }
         </>

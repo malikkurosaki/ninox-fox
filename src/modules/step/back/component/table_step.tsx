@@ -33,7 +33,8 @@ import { funGetCandidateActiveByArea } from "@/modules/candidate";
 export default function TableStep({ title, data, searchParam }: { title: any, data: any, searchParam: any }) {
   const [openModal, setOpenModal] = useAtom(isModalStep);
   const router = useRouter();
- 
+  const [dataDelete, setDataDelete] = useState(Number)
+
   const [isData, setData] = useState(data)
   const searchParams = useSearchParams()
 
@@ -94,7 +95,10 @@ export default function TableStep({ title, data, searchParam }: { title: any, da
                     </Table.Tr>
                   </Table.Thead>
                   {isData.map((v: any, i: any) => (
-                    <ComponentTableStep v={v} i={i} key={i} />
+                    <ComponentTableStep v={v} i={i} key={i} onClick={(val) => {
+                      setDataDelete(val)
+                      setOpenModal(true)
+                    }} />
                   ))}
                 </Table>
               </ScrollArea>
@@ -113,7 +117,7 @@ export default function TableStep({ title, data, searchParam }: { title: any, da
         withCloseButton={false}
         closeOnClickOutside={false}
       >
-        <ModalDelStep />
+    <ModalDelStep id={dataDelete}/>
       </Modal>
     </>
   );

@@ -5,15 +5,35 @@ import { Box, Button, Group, Modal, Radio, Select, Stack, Text, TextInput, Texta
 import ModalAddStep from "../component/modal_add_step"
 import { useAtom } from "jotai"
 import { isModalStep } from "../val/val_step"
+import { useState } from "react"
+import toast from "react-simple-toasts"
 
 /**
  * Fungsi untuk menampilkan view form add step.
  * @returns {component} view form add step.
  */
 
-export default function AddStep() {
+export default function AddStep({ params, candidate, provinsi, kabupaten }: { params: any, candidate: any, provinsi: any, kabupaten: any }) {
     const [openModal, setOpenModal] = useAtom(isModalStep)
+    const [isDataCandidate, setDataCandidate] = useState(candidate)
+    const [dataProvinsi, setDataProvinsi] = useState(provinsi)
+    const [dataKabupaten, setDatakabupaten] = useState<any>(kabupaten)
+    const [isProvinsi, setProvinsi] = useState<any>(params.idProvinsi || null)
+    const [isKabupaten, setKabupaten] = useState<any>(params.idKabkot || null)
 
+
+    const [isBody, setBody] = useState({
+        idCandidate: "",
+        content: "",
+        category: "",
+        sentiment: "1"
+    })
+
+    function onConfirmation() {
+        if (Object.values(isBody).includes(""))
+            return toast("Data cannot be empty", { theme: "dark" });
+        setOpenModal(true)
+    }
     return (
         <>
             <ButtonBack />
@@ -22,29 +42,85 @@ export default function AddStep() {
             </Stack>
             <Box pt={30}>
                 <Stack>
-
-                <Group grow>
-                <TextInput disabled label="Provinsi" value={"BALI"} required  />
-                <TextInput disabled label="Kabupaten" value={"DENPASAR"}  required/>
-                    
-                </Group>
-                <TextInput disabled label="Candidate" value={"I KOMANG AYU"}  required/>
+                    <Group grow>
+                        <Select
+                            placeholder="PROVINCE"
+                            data={dataProvinsi.map((pro: any) => ({
+                                value: String(pro.id),
+                                label: pro.name
+                            }))}
+                            required
+                            label={"Provinsi"}
+                            value={isProvinsi}
+                            disabled
+                        />
+                        <Select
+                            placeholder="CITY"
+                            data={dataKabupaten.map((kab: any) => ({
+                                value: String(kab.id),
+                                label: kab.name
+                            }))}
+                            label={"Kabupaten"}
+                            value={isKabupaten}
+                            disabled
+                        />
+                    </Group>
+                    <Select mt={20}
+                        placeholder="CANDIDATE"
+                        data={isDataCandidate.map((can: any) => ({
+                            value: String(can.id),
+                            label: can.name
+                        }))}
+                        required
+                        value={String(isBody.idCandidate)}
+                        label={"Candidate"}
+                        searchable
+                        onChange={(val) => {
+                            setBody({
+                                ...isBody,
+                                idCandidate: String(val)
+                            })
+                        }}
+                    />
                 </Stack>
-                <Select mt={20} label={"Category"} required placeholder="CATEGORY" data={["STRENGTH", "WEAKNESS", "OPPORTUNITY", "THREAT"]} />
-                <Radio.Group mt={20} label={"Sentiment"} required>
+                <Select mt={20}
+                    placeholder="CATEGORY"
+                    data={["STRENGTH", "WEAKNESS", "OPPORTUNITY", "THREAT"]}
+                    label={"Category"}
+                    searchable
+                    required
+                    onChange={(val) => {
+                        setBody({
+                            ...isBody,
+                            category: String(val)
+                        })
+                    }}
+                />
+                <Radio.Group mt={20} label={"Sentiment"} required value={isBody.sentiment} onChange={(val)=>{
+                    setBody({
+                        ...isBody,
+                        sentiment: val
+                    })
+                }}>
                     <Group mt="xs">
-                        <Radio value="Positive" label="Positive"/>
-                        <Radio value="Negative" label="Negative" />
+                        <Radio value="1" label="Positive" />
+                        <Radio value="2" label="Negative" />
                     </Group>
                 </Radio.Group>
                 <Textarea
                     mt={20}
-                    placeholder="CONTENT"
+                    placeholder="TEXT"
                     label={"Content"}
                     required
+                    onChange={(val) => {
+                        setBody({
+                            ...isBody,
+                            content: val.target.value
+                        })
+                    }}
                 />
                 <Group justify="flex-end">
-                    <Button bg={"gray"} mt={30} size="md" onClick={() => setOpenModal(true)}>SAVE</Button>
+                    <Button bg={"gray"} mt={30} size="md" onClick={onConfirmation}>SAVE</Button>
                 </Group>
             </Box>
             <Modal
@@ -54,7 +130,7 @@ export default function AddStep() {
                 withCloseButton={false}
                 closeOnClickOutside={false}
             >
-                <ModalAddStep />
+                <ModalAddStep data={isBody}/>
             </Modal>
         </>
     )

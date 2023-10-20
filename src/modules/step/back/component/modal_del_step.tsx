@@ -5,17 +5,21 @@ import { useAtom } from "jotai";
 import { isModalStep } from "../val/val_step";
 import { useRouter } from "next/navigation";
 import toast from "react-simple-toasts";
+import funDeleteStep from "../fun/fun_delete_step";
+
 
 /**
  * Fungsi untuk menampilkan modal konfirmasi delete step.
  * @returns {component} Modal konfirmasi delete step.
  */
 
-export default function ModalDelStep() {
+export default function ModalDelStep({id}: {id: any}) {
     const [openModal, setOpenModal] = useAtom(isModalStep)
     const router = useRouter()
 
-    function onDelStep() {
+   async function onDelStep() {
+        const delData = await funDeleteStep({id: id})
+        if (!delData.success) return toast(delData.message, { theme: "dark" })
         toast("Success", { theme: "dark" });
         setOpenModal(false);
     }
