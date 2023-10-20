@@ -12,7 +12,7 @@ import funDeleteSwot from "../fun/fun_delete_swot";
  * @returns {component} Modal konfirmasi delete swot.
  */
 
-export default function ModalDelSwot({id}: {id: any}) {
+export default function ModalDelSwot({id, onSuccess}: {id: any, onSuccess: (val: any) => void}) {
     const [openModal, setOpenModal] = useAtom(isModalSwot)
     const router = useRouter()
 
@@ -21,6 +21,7 @@ export default function ModalDelSwot({id}: {id: any}) {
         if (!delData.success) return toast(delData.message, { theme: "dark" })
         toast("Success", { theme: "dark" });
         setOpenModal(false);
+        onSuccess(true)
     }
 
     return (
