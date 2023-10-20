@@ -12,7 +12,6 @@ export default async function funGetOneMlAi({ id }: { id: any }) {
         },
         select: {
             id: true,
-            // idCandidate: true,
             content: true,
             Candidate: {
                 select: {
