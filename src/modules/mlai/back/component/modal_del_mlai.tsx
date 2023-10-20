@@ -12,7 +12,7 @@ import funDeleteMlAi from "../fun/fun_delete_mlai"
  * @returns {component} modal konfirmasi delete ml ai.
  */
 
-export default function ModalDelMlAi({ id }: { id: any }) {
+export default function ModalDelMlAi({ id, onSuccess }: { id: any, onSuccess: (val: any) => void }) {
     const [openModal, setOpenModal] = useAtom(isModalMlAi)
     const router = useRouter()
 
@@ -21,6 +21,7 @@ export default function ModalDelMlAi({ id }: { id: any }) {
         if (!delData.success) return toast(delData.message, { theme: "dark" })
         toast("Success", { theme: "dark" });
         setOpenModal(false);
+        onSuccess(true)
     }
 
     return (
