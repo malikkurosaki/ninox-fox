@@ -31,7 +31,7 @@ export default function ModalDelCandidate({ data, onSuccess }: { data: any, onSu
             <Box>
                 <Alert color="gray" variant="outline">
                     <Text fw={700} ta={"center"} mb={20} mt={20}>
-                        ARE YOU SURE TO DELETE CANDIDATE?
+                        ANDA YAKIN INGIN MENGEDIT STATUS KANDIDAT?
                     </Text>
                     <Grid>
                         <Grid.Col span={6}>
@@ -41,7 +41,7 @@ export default function ModalDelCandidate({ data, onSuccess }: { data: any, onSu
                                 fullWidth
                                 onClick={() => setOpenModal(false)}
                             >
-                                NO
+                                TIDAK
                             </Button>
                         </Grid.Col>
                         <Grid.Col span={6}>
@@ -51,7 +51,7 @@ export default function ModalDelCandidate({ data, onSuccess }: { data: any, onSu
                                 fullWidth
                                 onClick={() => onDeleteCandidate()}
                             >
-                                YES
+                                YA
                             </Button>
                         </Grid.Col>
                     </Grid>

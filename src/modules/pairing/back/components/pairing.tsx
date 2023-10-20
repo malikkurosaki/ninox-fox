@@ -29,19 +29,19 @@ export default function Pairing() {
         <Grid grow>
           <Grid.Col span={{ base: 12, md: 5, lg: 5 }}>
             <Select
-              placeholder="PROVINCE"
+              placeholder="Pilih Provinsi"
               data={["BALI", "JAWA BARAT", "JAWA TIMUR", "KALIMANTAN TENGAH"]}
             />
           </Grid.Col>
           <Grid.Col span={{ base: 12, md: 5, lg: 5 }}>
             <Select
-              placeholder="CITY"
+              placeholder="Pilih Kabupaten/Kota"
               data={["BADUNG", "DENPASAR", "TABANAN"]}
             />
           </Grid.Col>
           <Grid.Col span={{ base: 12, md: 2, lg: 2 }}>
             <Button bg={"gray"} fullWidth onClick={() => setValuePairing(true)}>
-              PROCCESS
+              PROSES
             </Button>
           </Grid.Col>
         </Grid>
@@ -62,14 +62,14 @@ export default function Pairing() {
                 UPLOAD
               </Button>
               <Select
-                placeholder="CANDIDATE 1"
+                placeholder="KANDIDAT 1"
                 data={["I WAYAN KADEK", "I KETUT SURYA", "KOMANG ADI"]}
               />
               <Select
-                placeholder="CANDIDATE 2"
+                placeholder="KANDIDAT 2"
                 data={["I WAYAN KADEK", "I KETUT SURYA", "KOMANG ADI"]}
               />
-              <Button bg={"gray"}>PROCCESS</Button>
+              <Button bg={"gray"}>PROSES</Button>
             </SimpleGrid>
           </Box>
           <Box pt={30}>

@@ -45,7 +45,7 @@ export default function ListMlAi({ params, provinsi, kabupaten, datatable }: { p
             </Stack>
             <Group grow mt={30}>
                 <Select
-                    placeholder="PROVINCE"
+                    placeholder="Pilih Provinsi"
                     data={dataProvinsi.map((pro: any) => ({
                         value: String(pro.id),
                         label: pro.name
@@ -59,7 +59,7 @@ export default function ListMlAi({ params, provinsi, kabupaten, datatable }: { p
                     searchable
                 />
                 <Select 
-                    placeholder="CITY"
+                    placeholder="Pilih Kabupaten/Kota"
                     data={dataKabupaten.map((kab: any) => ({
                         value: String(kab.id),
                         label: kab.name
@@ -71,7 +71,7 @@ export default function ListMlAi({ params, provinsi, kabupaten, datatable }: { p
                     )}
                 />
                 <Button mt={25} bg={"gray"} onClick={() => onProsses()}>
-                    PROCCESS
+                    PROSES
                 </Button>
             </Group>
             {!_.isNull(datatable.title) &&

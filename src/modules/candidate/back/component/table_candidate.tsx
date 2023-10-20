@@ -52,7 +52,7 @@ export default function TableCandidate({ title, data, searchParam }: { title: st
         >
           <Group justify="space-between" gap="lg">
             <Text fw={"bold"} c={"white"}>{title}</Text>
-            <Button bg={"gray"} onClick={() => router.push('candidate/add?prov=' + searchParams.get('prov') + '&city=' + searchParams.get('city'))}>ADD CANDIDATE</Button>
+            <Button bg={"gray"} onClick={() => router.push('candidate/add?prov=' + searchParams.get('prov') + '&city=' + searchParams.get('city'))}>TAMBAH KANDIDAT</Button>
           </Group>
           <Box pt={20}>
             <Box style={{
@@ -66,10 +66,10 @@ export default function TableCandidate({ title, data, searchParam }: { title: st
                   <Table.Thead>
                     <Table.Tr>
                       <Table.Th>No</Table.Th>
-                      <Table.Th>Name</Table.Th>
-                      <Table.Th>Image</Table.Th>
+                      <Table.Th>Nama</Table.Th>
+                      <Table.Th>Gambar</Table.Th>
                       <Table.Th>Status</Table.Th>
-                      <Table.Th>Action</Table.Th>
+                      <Table.Th>Aksi</Table.Th>
                     </Table.Tr>
                   </Table.Thead>
                   <Table.Tbody>

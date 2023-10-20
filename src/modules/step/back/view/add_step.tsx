@@ -44,7 +44,7 @@ export default function AddStep({ params, candidate, provinsi, kabupaten }: { pa
                 <Stack>
                     <Group grow>
                         <Select
-                            placeholder="PROVINCE"
+                            placeholder="Pilih Provinsi"
                             data={dataProvinsi.map((pro: any) => ({
                                 value: String(pro.id),
                                 label: pro.name
@@ -55,7 +55,7 @@ export default function AddStep({ params, candidate, provinsi, kabupaten }: { pa
                             disabled
                         />
                         <Select
-                            placeholder="CITY"
+                            placeholder="Pilih Kabupaten/Kota"
                             data={dataKabupaten.map((kab: any) => ({
                                 value: String(kab.id),
                                 label: kab.name

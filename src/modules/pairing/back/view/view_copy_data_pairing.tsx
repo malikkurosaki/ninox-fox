@@ -90,7 +90,7 @@ export default function ViewCopyDataPairing() {
                       radius="md"
                       h={130}
                       w="auto"
-                      alt="candidate"
+                      alt="kandidat"
                       fit="contain"
                       src="/profile.png"
                     />
@@ -109,7 +109,7 @@ export default function ViewCopyDataPairing() {
                       radius="md"
                       h={130}
                       w="auto"
-                      alt="candidate"
+                      alt="kandidat"
                       fit="contain"
                       src="/profile.png"
                     />
@@ -166,7 +166,7 @@ export default function ViewCopyDataPairing() {
                     bg={"gray"}
                     onClick={() => setOpenModal(true)}
                   >
-                    PROCCESS
+                    PROSES
                   </Button>
                 </Group>
               </Box>

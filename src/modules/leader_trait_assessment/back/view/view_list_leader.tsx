@@ -80,7 +80,7 @@ export default function ViewListLeader({ datadownload, param, provinsi, kabupate
             <Paper shadow="xs" p="xl">
               <Stack>
                 <Select
-                  placeholder="PROVINCE"
+                  placeholder="Pilih Provinsi"
                   data={dataProvinsi.map((pro: any) => ({
                     value: String(pro.id),
                     label: pro.name
@@ -92,7 +92,7 @@ export default function ViewListLeader({ datadownload, param, provinsi, kabupate
                   onChange={(val) => onProvinsi({ idProv: val })}
                 />
                 <Select
-                  placeholder="CITY"
+                  placeholder="Pilih Kabupaten/Kota"
                   data={dataKabupaten.map((kab: any) => ({
                     value: String(kab.id),
                     label: kab.name
@@ -103,7 +103,7 @@ export default function ViewListLeader({ datadownload, param, provinsi, kabupate
                   onChange={(val) => onKabupaten({ idKab: val })}
                 />
                 <Select
-                  placeholder="SUBDISTRICT"
+                  placeholder="Pilih Kecamatan"
                   data={dataKecamatan.map((kec: any) => ({
                     value: String(kec.id),
                     label: kec.name
@@ -117,7 +117,7 @@ export default function ViewListLeader({ datadownload, param, provinsi, kabupate
                   bg={"gray"}
                   onClick={() => onProccess()}
                 >
-                  PROCCESS
+                  PROSES
                 </Button>
               </Stack>
             </Paper>
