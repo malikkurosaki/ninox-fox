@@ -13,7 +13,7 @@ import funDeleteStep from "../fun/fun_delete_step";
  * @returns {component} Modal konfirmasi delete step.
  */
 
-export default function ModalDelStep({id}: {id: any}) {
+export default function ModalDelStep({id, onSuccess}: {id: any, onSuccess: (val: any) => void}) {
     const [openModal, setOpenModal] = useAtom(isModalStep)
     const router = useRouter()
 
@@ -22,6 +22,7 @@ export default function ModalDelStep({id}: {id: any}) {
         if (!delData.success) return toast(delData.message, { theme: "dark" })
         toast("Success", { theme: "dark" });
         setOpenModal(false);
+        onSuccess(true)
     }
 
     return (

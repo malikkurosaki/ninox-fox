@@ -24,6 +24,7 @@ import { useDisclosure } from "@mantine/hooks";
 import ComponentTableStep from "./component_table_step";
 import { useEffect, useState } from "react";
 import { funGetCandidateActiveByArea } from "@/modules/candidate";
+import { funGetAllStap } from "../..";
 
 /**
  * Fungsi untuk menampilkan view table step.
@@ -39,7 +40,7 @@ export default function TableStep({ title, data, searchParam }: { title: any, da
   const searchParams = useSearchParams()
 
   async function onLoad() {
-    const dataDB = await funGetCandidateActiveByArea({ find: searchParam })
+    const dataDB = await funGetAllStap({ find: searchParam })
     setData(dataDB.data)
   }
 
@@ -117,7 +118,7 @@ export default function TableStep({ title, data, searchParam }: { title: any, da
         withCloseButton={false}
         closeOnClickOutside={false}
       >
-    <ModalDelStep id={dataDelete}/>
+    <ModalDelStep id={dataDelete} onSuccess={() => onLoad()}/>
       </Modal>
     </>
   );
