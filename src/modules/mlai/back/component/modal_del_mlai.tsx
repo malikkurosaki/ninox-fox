@@ -19,7 +19,7 @@ export default function ModalDelMlAi({ id, onSuccess }: { id: any, onSuccess: (v
     async function onDelMlAi() {
         const delData = await funDeleteMlAi({ id: id })
         if (!delData.success) return toast(delData.message, { theme: "dark" })
-        toast("Success", { theme: "dark" });
+        toast("Sukses", { theme: "dark" });
         setOpenModal(false);
         onSuccess(true)
     }
@@ -29,7 +29,7 @@ export default function ModalDelMlAi({ id, onSuccess }: { id: any, onSuccess: (v
             <Box>
                 <Alert color="gray" variant="outline">
                     <Text fw={700} ta={"center"} mb={20} mt={20}>
-                        ARE YOU SURE TO DELETE ML-AI?
+                        ANDA YAKIN INGIN MENGHAPUS ML-AI?
                     </Text>
                     <Group justify="space-between" pt={10}>
                         <Button
@@ -38,10 +38,10 @@ export default function ModalDelMlAi({ id, onSuccess }: { id: any, onSuccess: (v
                             w={150}
                             onClick={() => setOpenModal(false)}
                         >
-                            NO
+                            TIDAK
                         </Button>
                         <Button radius={10} color="gray.7" w={150} onClick={() => onDelMlAi()}>
-                            YES
+                            YA
                         </Button>
                     </Group>
                 </Alert>

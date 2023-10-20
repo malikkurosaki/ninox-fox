@@ -63,7 +63,7 @@ export default function TableStep({ title, data, searchParam }: { title: any, da
               {title}
             </Text>
             <Button bg={"gray"} onClick={() => router.push("step/add?prov=" + searchParams.get('prov') + '&city=' + searchParams.get('city'))}>
-              ADD STEP
+              TAMBAH STEP
             </Button>
           </Group>
           <Box pt={20}>
@@ -87,11 +87,11 @@ export default function TableStep({ title, data, searchParam }: { title: any, da
                       }}
                     >
                       <Table.Th>No</Table.Th>
-                      <Table.Th w={200}>Candidate</Table.Th>
-                      <Table.Th>Category</Table.Th>
+                      <Table.Th w={200}>Kandidat</Table.Th>
+                      <Table.Th>Kategori</Table.Th>
                       <Table.Th>Sentiment</Table.Th>
                       <Table.Th>
-                        <Center>Action</Center>
+                        <Center>Aksi</Center>
                       </Table.Th>
                     </Table.Tr>
                   </Table.Thead>
@@ -103,9 +103,6 @@ export default function TableStep({ title, data, searchParam }: { title: any, da
                   ))}
                 </Table>
               </ScrollArea>
-              <Group justify="flex-end" mt={20}>
-                <Pagination total={10} />
-              </Group>
             </Box>
           </Box>
         </Box>

@@ -22,7 +22,7 @@ export default function ModalAddCandidate({ data }: { data: any }) {
         const create = await funAddCandidate({ body: data })
         if (!create.success)
             toast(create.message, { theme: "dark" });
-        toast("Success", { theme: "dark" });
+        toast("Sukses", { theme: "dark" });
         setOpenModal(false);
         router.back()
     }

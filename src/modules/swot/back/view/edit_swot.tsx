@@ -33,13 +33,14 @@ export default function EditSwot({ data }: { data: any }) {
                         <TextInput label={"Provinsi"} value={data.areaProvinsi} disabled />
                         <TextInput label={"Kabupaten"} value={data.areaKabkot} disabled />
                     </Group>
-                    <TextInput label={"Candidate"} value={data.name} disabled />
+                    <TextInput label={"Kandidat"} value={data.name} disabled />
                 </Stack>
                 <Select mt={20}
-                    placeholder="CATEGORY"
+                    placeholder="Pilih Kategori"
+                    label="Kategori"
                     data={["STRENGTH", "WEAKNESS", "OPPORTUNITY", "THREAT"]}
                     value={isBody.category}
-                    searchable
+                    required
                     onChange={(val) => {
                         setBody({
                             ...isBody,
@@ -49,7 +50,9 @@ export default function EditSwot({ data }: { data: any }) {
                 />
                 <Textarea
                     mt={20}
-                    placeholder="TEXT"
+                    label="Content"
+                    required
+                    placeholder="Value Content"
                     value={isBody.content}
                     onChange={(val) => {
                         setBody({

@@ -93,6 +93,5 @@ export default async function funGetAllMlAi({ find }: { find: any }) {
         title: titleTrue,
         data: result
     }
-    // console.log(allData)
     return allData
 }

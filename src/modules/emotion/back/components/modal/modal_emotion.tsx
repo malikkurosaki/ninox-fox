@@ -15,7 +15,7 @@ export default function ModalEmotion() {
   const router = useRouter()
 
   async function onCopy() {
-    toast("COPY DATA  SUCCESS", {theme: "dark"});
+    toast("Sukses Copy Data", { theme: "dark" });
     setOpenModal(false);
   }
   return (
@@ -23,7 +23,7 @@ export default function ModalEmotion() {
       <Box>
         <Alert color="gray" variant="outline">
           <Text fw={700} ta={"center"} mb={20} mt={20}>
-            ARE YOU SURE TO COPY DATA?
+            ANDA YAKIN INGIN MELAKUKAN COPY DATA?
           </Text>
           <Group justify="space-between" pt={10}>
             <Button

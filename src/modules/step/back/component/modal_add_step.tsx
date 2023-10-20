@@ -29,7 +29,7 @@ export default function ModalAddStep({data}: {data: any}) {
             <Box>
                 <Alert color="gray" variant="outline">
                     <Text fw={700} ta={"center"} mb={20} mt={20}>
-                        ARE YOU SURE TO ADD STEP?
+                        ANDA YAKIN INGIN MENAMBAH STEP?
                     </Text>
                     <Group justify="space-between" pt={10}>
                         <Button

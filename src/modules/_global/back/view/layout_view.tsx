@@ -34,7 +34,7 @@ export default function LayoutView({
     {
       key: "md0",
       link: "/dashboard",
-      label: "DASHBOARD",
+      label: "BERANDA",
     },
     {
       key: "md1",
@@ -90,7 +90,7 @@ export default function LayoutView({
     {
       key: "md10",
       link: "/dashboard/candidate",
-      label: "CANDIDATE",
+      label: "KANDIDAT",
     },
   ];
 

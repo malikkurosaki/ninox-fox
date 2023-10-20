@@ -10,7 +10,6 @@ import { revalidatePath } from "next/cache"
  * @returns success - true 
  */
 export default async function funAddStep({body}: {body: Step}) {
-    console.log(body)
     const data = await prisma.step.create({
         data: {
             idCandidate: Number(body.idCandidate),

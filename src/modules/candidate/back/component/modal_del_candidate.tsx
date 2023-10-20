@@ -21,7 +21,7 @@ export default function ModalDelCandidate({ data, onSuccess }: { data: any, onSu
     async function onDeleteCandidate() {
         const del = await funSetStatusCandidate({ dataUpdate: data })
         if (!del.success) return toast("Failed", { theme: "dark" })
-        toast("Success", { theme: "dark" });
+        toast("Sukses", { theme: "dark" });
         setOpenModal(false);
         onSuccess(true);
     }
