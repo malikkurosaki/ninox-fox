@@ -5,17 +5,20 @@ import { useAtom } from "jotai";
 import { isModalSwot } from "../val/val_swot";
 import { useRouter } from "next/navigation";
 import toast from "react-simple-toasts";
+import funDeleteSwot from "../fun/fun_delete_swot";
 
 /**
  * Fungsi untuk menampilkan modal konfirmasi delete swot.
  * @returns {component} Modal konfirmasi delete swot.
  */
 
-export default function ModalDelSwot() {
+export default function ModalDelSwot({id}: {id: any}) {
     const [openModal, setOpenModal] = useAtom(isModalSwot)
     const router = useRouter()
 
-    function onDelSwot() {
+    async function onDelSwot() {
+        const delData = await funDeleteSwot({id: id})
+        if (!delData.success) return toast(delData.message, { theme: "dark" })
         toast("Success", { theme: "dark" });
         setOpenModal(false);
     }

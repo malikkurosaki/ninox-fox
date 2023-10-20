@@ -13,7 +13,6 @@ export default async function Page({ searchParams }: { searchParams: { prov: str
   const pro = await MasterProvinceGetAll()
   const kab = await MasterKabGetByProvince({idProvinsi: datastep.idProvinsi})
   const dataDB = await funGetAllStap({find: datastep})
-  console.log(dataDB)
   return (
     <>
       <ListStep params={datastep} provinsi={pro} kabupaten={kab} datatable={dataDB} />

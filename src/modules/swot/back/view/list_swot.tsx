@@ -79,8 +79,8 @@ export default function ListSwot({ params, provinsi, kabupaten, datatable }: { p
                     PROCCESS
                 </Button>
             </Group>
-            {!_.isNaN(datatable.dataTable) &&
-            <TableSwot title={datatable.title} data={datatable.data} searchParam={params}/>
+            {!_.isNull(datatable.title) &&
+                <TableSwot title={datatable.title} data={datatable.data} searchParam={params} />
             }
         </>
     )

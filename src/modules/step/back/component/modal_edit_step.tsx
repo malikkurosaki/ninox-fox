@@ -5,17 +5,19 @@ import { useAtom } from "jotai";
 import { isModalStep } from "../val/val_step";
 import { useRouter } from "next/navigation";
 import toast from "react-simple-toasts";
+import funEditStep from "../fun/fun_edit_step";
 
 /**
  * Fungsi untuk menampilkan modal konfirmasi edit step.
  * @returns {component} Modal konfirmasi edit step.
  */
 
-export default function ModalEditStep() {
+export default function ModalEditStep({data}: {data : any}) {
     const [openModal, setOpenModal] = useAtom(isModalStep)
     const router = useRouter()
 
-    function onEditStep() {
+    async function onEditStep() {
+        const edit = await funEditStep({body: data})
         toast("Success", { theme: "dark" });
         setOpenModal(false);
         router.back()

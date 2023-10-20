@@ -17,15 +17,19 @@ import { CiRead, CiUnread } from "react-icons/ci";
 import { MdDelete, MdEditCalendar } from "react-icons/md";
 import { isModalValue } from "../val/val_swot";
 
-export default function ComponentTable({ v, i }: { v: any; i: any }) {
+export default function ComponentTable({ v, i, onClick }: { v: any; i: any, onClick: (val: any) => void }) {
   const open = useState(false);
   const router = useRouter();
   const [openModal, setOpenModal] = useAtom(isModalValue);
+
+  function callBackDelete({ idDel }: { idDel: any }) {
+    onClick(idDel)
+  }
   return (
     <>
       <Table.Tbody key={i}>
         <Table.Tr>
-          <Table.Td>{v.id}</Table.Td>
+          <Table.Td>{i + 1}</Table.Td>
           <Table.Td>{v.name}</Table.Td>
           <Table.Td>{v.category}</Table.Td>
           <Table.Td>
@@ -48,7 +52,7 @@ export default function ComponentTable({ v, i }: { v: any; i: any }) {
                 color="rgba(5, 128, 23, 1)"
                 size="xl"
                 aria-label="Edit"
-                onClick={() => router.push("swot/edit/IKomangAyu")}
+                onClick={() => router.push("swot/edit/" + v.id)}
               >
                 <MdEditCalendar size={20} />
               </ActionIcon>
@@ -57,7 +61,9 @@ export default function ComponentTable({ v, i }: { v: any; i: any }) {
                 color="rgba(209, 4, 4, 1)"
                 size="xl"
                 aria-label="Delete"
-                onClick={() => setOpenModal(true)}
+                onClick={(val) => {
+                  callBackDelete({ idDel: v.id })
+                }}
               >
                 <MdDelete size={20} />
               </ActionIcon>

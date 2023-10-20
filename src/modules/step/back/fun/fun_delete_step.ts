@@ -2,8 +2,8 @@
 
 import prisma from "@/modules/_global/bin/prisma"
 
-export default async function funDeleteSwot({ id }: { id: number }) {
-    const update = await prisma.swot.update({
+export default async function funDeleteStep({ id }: { id: number }) {
+    const update = await prisma.step.update({
         where: {
             id: id
         },

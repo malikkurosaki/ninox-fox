@@ -33,8 +33,12 @@ import { funGetCandidateActiveByArea } from "@/modules/candidate";
 export default function TableSwot({ title, data, searchParam }: { title: any, data: any, searchParam: any }) {
   const [openModal, setOpenModal] = useAtom(isModalSwot);
   const router = useRouter();
+  const [dataDelete, setDataDelete] = useState(Number)
+
+
   const [isData, setData] = useState(data)
   const searchParams = useSearchParams()
+
   async function onLoad() {
     const dataDB = await funGetCandidateActiveByArea({ find: searchParam })
     setData(dataDB.data)
@@ -91,7 +95,10 @@ export default function TableSwot({ title, data, searchParam }: { title: any, da
                     </Table.Tr>
                   </Table.Thead>
                   {isData.map((v: any, i: any) => (
-                    <ComponentTable v={v} i={i} key={i} />
+                    <ComponentTable v={v} i={i} key={i} onClick={(val)=>{
+                      setDataDelete(val)
+                      setOpenModal(true)
+                    }} />
                   ))}
                 </Table>
               </ScrollArea>
@@ -110,38 +117,8 @@ export default function TableSwot({ title, data, searchParam }: { title: any, da
         withCloseButton={false}
         closeOnClickOutside={false}
       >
-        <ModalDelSwot />
+        <ModalDelSwot id={dataDelete}/>
       </Modal>
-    </>
-  );
-}
-function ClickMore({ v }: { v: any }) {
-  const open = useState(false);
-
-  return (
-    <>
-      <Stack>
-      <Group>
-        </Group>
-        <Collapse
-          in={open[0]}
-          transitionDuration={500}
-          transitionTimingFunction="linear"
-        >
-          <Box
-            style={{
-              backgroundColor: "gray",
-              padding: 20,
-              borderRadius: 10,
-            }}
-          >
-            <Text c={"white"} fw={"bold"} fz={20} mb={10}>
-              Content
-            </Text>
-            <Text c={"white"}>{v.content}</Text>
-          </Box>
-        </Collapse>
-      </Stack>
     </>
   );
 }

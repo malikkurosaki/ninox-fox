@@ -1,18 +1,25 @@
 'use client'
 
 import { ButtonBack } from "@/modules/_global"
-import { Box, Button, Group, Modal, Select, Stack, Text, Textarea } from "@mantine/core"
+import { Box, Button, Group, Modal, Select, Stack, Text, TextInput, Textarea } from "@mantine/core"
 import ModalEditSwot from "../component/modal_edit_swot"
 import { useAtom } from "jotai"
 import { isModalSwot } from "../val/val_swot"
+import { useState } from "react"
 
 /**
  * Fungsi untuk menampilkan view form edit swot.
  * @returns {component} view form edit swot.
  */
 
-export default function EditSwot() {
+export default function EditSwot({ data }: { data: any }) {
     const [openModal, setOpenModal] = useAtom(isModalSwot)
+    const [isBody, setBody] = useState({
+        id: data.id,
+        idCandidate: data.idCandidate,
+        content: data.content,
+        category: data.category
+    })
 
     return (
         <>
@@ -21,18 +28,35 @@ export default function EditSwot() {
                 <Text fw={"bold"}>EDIT SWOT</Text>
             </Stack>
             <Box pt={30}>
-                <Group grow>
-                    <Select
-                        placeholder="PROVINCE"
-                        data={["BALI", "JAWA BARAT", "JAWA TIMUR", "KALIMANTAN TENGAH"]}
-                    />
-                    <Select placeholder="CITY" data={["BADUNG", "DENPASAR", "TABANAN"]} />
-                </Group>
-                <Select mt={20} placeholder="CANDIDATE" data={["KOMANG", "WAYAN", "AGUNG"]} />
-                <Select mt={20} placeholder="CATEGORY" data={["STRENGTH", "WEAKNESS", "OPPORTUNITY", "THREAT"]} />
+                <Stack>
+                    <Group grow>
+                        <TextInput label={"Provinsi"} value={data.areaProvinsi} disabled />
+                        <TextInput label={"Kabupaten"} value={data.areaKabkot} disabled />
+                    </Group>
+                    <TextInput label={"Candidate"} value={data.name} disabled />
+                </Stack>
+                <Select mt={20}
+                    placeholder="CATEGORY"
+                    data={["STRENGTH", "WEAKNESS", "OPPORTUNITY", "THREAT"]}
+                    value={isBody.category}
+                    searchable
+                    onChange={(val) => {
+                        setBody({
+                            ...isBody,
+                            category: String(val)
+                        })
+                    }}
+                />
                 <Textarea
                     mt={20}
                     placeholder="TEXT"
+                    value={isBody.content}
+                    onChange={(val) => {
+                        setBody({
+                            ...isBody,
+                            content: val.target.value
+                        })
+                    }}
                 />
                 <Group justify="flex-end">
                     <Button bg={"gray"} mt={30} size="md" onClick={() => setOpenModal(true)}>SAVE</Button>
@@ -45,7 +69,7 @@ export default function EditSwot() {
                 withCloseButton={false}
                 closeOnClickOutside={false}
             >
-                <ModalEditSwot />
+                <ModalEditSwot data={isBody} />
             </Modal>
         </>
     )
