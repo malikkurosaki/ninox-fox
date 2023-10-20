@@ -33,7 +33,7 @@ export default function ListCandidates({ param, provinsi, kabupaten, datatable }
     }
 
     function onProccess() {
-        if (isProvinsi == null) return toast("Provinces cannot be empty", { theme: "dark" })
+        if (isProvinsi == null) return toast("Silahkan pilih provinsi", { theme: "dark" })
         router.replace('/dashboard/candidate?prov=' + isProvinsi + '&city=' + isKabupaten)
     }
 

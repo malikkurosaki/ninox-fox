@@ -33,7 +33,7 @@ export default function ListSwot({ params, provinsi, kabupaten, datatable }: { p
     }
 
     function onProsses() {
-        if (isProvinsi == null) return toast("Provinces cannot be empty", { theme: "dark" })
+        if (isProvinsi == null) return toast("Silahkan pilih provinsi", { theme: "dark" })
         router.replace("/dashboard/swot?prov=" + isProvinsi + "&city=" + isKabupaten)
     }
 
