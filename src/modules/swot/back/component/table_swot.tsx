@@ -24,6 +24,7 @@ import { useDisclosure } from "@mantine/hooks";
 import { useEffect, useState } from "react";
 import ComponentTable from "./component_table";
 import { funGetCandidateActiveByArea } from "@/modules/candidate";
+import funGetAllSwot from "../fun/fun_get_all_swot";
 
 /**
  * Fungsi untuk menampilkan view table swot.
@@ -40,7 +41,7 @@ export default function TableSwot({ title, data, searchParam }: { title: any, da
   const searchParams = useSearchParams()
 
   async function onLoad() {
-    const dataDB = await funGetCandidateActiveByArea({ find: searchParam })
+    const dataDB = await funGetAllSwot({ find: searchParam })
     setData(dataDB.data)
   }
 
@@ -117,7 +118,7 @@ export default function TableSwot({ title, data, searchParam }: { title: any, da
         withCloseButton={false}
         closeOnClickOutside={false}
       >
-        <ModalDelSwot id={dataDelete}/>
+        <ModalDelSwot id={dataDelete} onSuccess={() => onLoad()}/>
       </Modal>
     </>
   );

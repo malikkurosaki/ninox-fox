@@ -3,6 +3,11 @@
 import prisma from "@/modules/_global/bin/prisma"
 import _ from "lodash"
 
+/**
+ * Fungsi untuk Edit step
+ * @param {Step} id - berisi idcandidate, category, content, sentiment
+ * @returns success - true 
+ */
 export default async function funGetOneStep({ id }: { id: any }) {
     const data = await prisma.step.findUnique({
         where: {

@@ -3,6 +3,11 @@
 import prisma from "@/modules/_global/bin/prisma"
 import _ from "lodash"
 
+/**
+ * Fungsi untuk get one swot
+ * @param {Swot} id - berisi name, idprovinsi, idkabkot, tingkat
+ * @returns success - true 
+ */
 export default async function funGetOneSwot({ id }: { id: any }) {
     const data = await prisma.swot.findUnique({
         where: {

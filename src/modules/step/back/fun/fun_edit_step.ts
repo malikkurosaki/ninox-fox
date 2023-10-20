@@ -4,6 +4,11 @@ import prisma from "@/modules/_global/bin/prisma"
 import { Step } from "@prisma/client"
 import { revalidatePath } from "next/cache"
 
+/**
+ * Fungsi untuk Edit step
+ * @param {Step} body - berisi idcandidate, category, content, sentiment
+ * @returns success - true 
+ */
 export default async function funEditStep({body}: {body: Step}) {
     const data = await prisma.step.update({
         where: {

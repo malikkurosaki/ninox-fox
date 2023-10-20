@@ -16,19 +16,11 @@ import {
 } from "@mantine/core";
 import { useAtom } from "jotai";
 import { useRouter, useSearchParams } from "next/navigation";
-import {
-  MdArrowCircleDown,
-  MdArrowCircleUp,
-  MdDelete,
-  MdEditCalendar,
-} from "react-icons/md";
 import { isModalMlAi } from "../val/val_mlai";
 import ModalDelMlAi from "./modal_del_mlai";
-import { CiRead, CiUnread } from "react-icons/ci";
-import { useDisclosure } from "@mantine/hooks";
 import { useEffect, useState } from "react";
 import ComponentTable from "./component_table";
-import { funGetCandidateActiveByArea } from "@/modules/candidate";
+import { funGetAllMlAi } from "../..";
 
 /**
  * Fungsi untuk menampilkan table ml ai.
@@ -44,7 +36,7 @@ export default function TableMlAi({ title, data, searchParam }: { title: any, da
   const searchParams = useSearchParams()
 
   async function onLoad() {
-    const dataDB = await funGetCandidateActiveByArea({ find: searchParam })
+    const dataDB = await funGetAllMlAi({ find: searchParam })
     setData(dataDB.data)
   }
 
@@ -122,7 +114,7 @@ export default function TableMlAi({ title, data, searchParam }: { title: any, da
         withCloseButton={false}
         closeOnClickOutside={false}
       >
-        <ModalDelMlAi id={dataDelete}/>
+        <ModalDelMlAi id={dataDelete} onSuccess={()=>onLoad()}/>
       </Modal>
     </>
   );
