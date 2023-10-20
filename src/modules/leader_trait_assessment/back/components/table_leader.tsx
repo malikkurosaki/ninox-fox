@@ -2,69 +2,13 @@
 import { ActionIcon, Box, Group, ScrollArea, Table, Text } from "@mantine/core";
 import React, { useEffect, useState } from "react";
 
-const datanya = [
-  {
-    id: 1,
-    kabupaten: "BADUNG",
-    cerdas: 232,
-    jujur: 21,
-    tegas: 311,
-    agamis: 32,
-    pekerja_keras: 21,
-    berprestasi: 3232,
-    merakyat: 3232,
-  },
-  {
-    id: 2,
-    kabupaten: "DENPASAR",
-    cerdas: 232,
-    jujur: 21,
-    tegas: 311,
-    agamis: 32,
-    pekerja_keras: 21,
-    berprestasi: 3232,
-    merakyat: 3232,
-  },
-  {
-    id: 3,
-    kabupaten: "BULELENG",
-    cerdas: 232,
-    jujur: 21,
-    tegas: 311,
-    agamis: 32,
-    pekerja_keras: 21,
-    berprestasi: 3232,
-    merakyat: 3232,
-  },
-  {
-    id: 4,
-    kabupaten: "GIANYAR",
-    cerdas: 232,
-    jujur: 21,
-    tegas: 311,
-    agamis: 32,
-    pekerja_keras: 21,
-    berprestasi: 3232,
-    merakyat: 3232,
-  },
-  {
-    id: 5,
-    kabupaten: "TABANAN",
-    cerdas: 232,
-    jujur: 21,
-    tegas: 311,
-    agamis: 32,
-    pekerja_keras: 21,
-    berprestasi: 3232,
-    merakyat: 3232,
-  },
-];
+
 /**
  * Fungsi untuk mendapatkan nilai dari table.
  * @returns  Hasil menampilkan tabel beserta valuenya.
  */
 
-export default function TableLeader({ title, data }: { title: string, data: any }) {
+export default function TableLeader({ title, data, th }: { title: string, data: any, th: any }) {
   const [isData, setData] = useState(data)
 
   useEffect(() => {
@@ -97,28 +41,32 @@ export default function TableLeader({ title, data }: { title: string, data: any 
                   <Table.Thead>
                     <Table.Tr>
                       <Table.Th>NO</Table.Th>
-                      <Table.Th>KABUPATEN / KOTA</Table.Th>
+                      <Table.Th>{th}</Table.Th>
                       <Table.Th>CERDAS</Table.Th>
                       <Table.Th>JUJUR</Table.Th>
                       <Table.Th>TEGAS</Table.Th>
                       <Table.Th>AGAMIS</Table.Th>
                       <Table.Th>PEKERJA KERAS</Table.Th>
+                      <Table.Th>BERPENGALAMAN MEMIMPIN</Table.Th>
                       <Table.Th>BERPRESTASI</Table.Th>
                       <Table.Th>MERAKYAT</Table.Th>
+                      <Table.Th>LATAR BELAKANG MILITER</Table.Th>
                     </Table.Tr>
                   </Table.Thead>
                   <Table.Tbody>
                     {isData.map((v: any, i: any) => (
                       <Table.Tr key={i}>
-                        <Table.Td>{v.id}</Table.Td>
-                        <Table.Td>{v.kabupaten}</Table.Td>
+                        <Table.Td>{i + 1}</Table.Td>
+                        <Table.Td>{v.name}</Table.Td>
                         <Table.Td>{v.cerdas}</Table.Td>
                         <Table.Td>{v.jujur}</Table.Td>
                         <Table.Td>{v.tegas}</Table.Td>
                         <Table.Td>{v.agamis}</Table.Td>
-                        <Table.Td>{v.pekerja_keras}</Table.Td>
+                        <Table.Td>{v.pekerjaKeras}</Table.Td>
+                        <Table.Td>{v.berpengalamanMemimpin}</Table.Td>
                         <Table.Td>{v.berprestasi}</Table.Td>
                         <Table.Td>{v.merakyat}</Table.Td>
+                        <Table.Td>{v.latarBelakangMiliter}</Table.Td>
                       </Table.Tr>
                     ))}
                   </Table.Tbody>

@@ -2,33 +2,6 @@
 import { ActionIcon, Box, Group, ScrollArea, Table, Text } from "@mantine/core";
 import React, { useEffect, useState } from "react";
 
-const datanya = [
-  {
-    id: 1,
-    kabupaten: "BADUNG",
-    value: 232,
-  },
-  {
-    id: 2,
-    kabupaten: "DENPASAR",
-    value: 2323,
-  },
-  {
-    id: 3,
-    kabupaten: "BULELENG",
-    value: 3443,
-  },
-  {
-    id: 4,
-    kabupaten: "GIANYAR",
-    value: 22321,
-  },
-  {
-    id: 5,
-    kabupaten: "TABANAN",
-    value: 5654,
-  },
-];
 
 
 /**

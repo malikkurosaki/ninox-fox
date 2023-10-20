@@ -175,7 +175,7 @@ export default function ViewListLeader({ datadownload, param, provinsi, kabupate
       </Box>
       {!_.isNull(datatable.title) && (
         <Box pt={30}>
-          <TableLeader data={datatable.data} title={datatable.title} />
+          <TableLeader data={datatable.data} title={datatable.title} th={datatable.thTitle} />
         </Box>
       )}
     </>

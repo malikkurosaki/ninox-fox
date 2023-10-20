@@ -2,59 +2,6 @@
 import { ActionIcon, Box, Group, ScrollArea, Table, Text } from "@mantine/core";
 import React, { useEffect, useState } from "react";
 
-const datanya = [
-  {
-    id: 1,
-    kabupaten: "BADUNG",
-    Pendidikan: 232,
-    infrastruktur: 21,
-    layanan: 311,
-    kemiskinan: 32,
-    keadilan: 21,
-    pekerjaan: 3232,
-  },
-  {
-    id: 2,
-    kabupaten: "DENPASAR",
-    Pendidikan: 232,
-    infrastruktur: 21,
-    layanan: 311,
-    kemiskinan: 32,
-    keadilan: 21,
-    pekerjaan: 3232,
-  },
-  {
-    id: 3,
-    kabupaten: "BULELENG",
-    Pendidikan: 232,
-    infrastruktur: 21,
-    layanan: 311,
-    kemiskinan: 32,
-    keadilan: 21,
-    pekerjaan: 3232,
-  },
-  {
-    id: 4,
-    kabupaten: "GIANYAR",
-    Pendidikan: 232,
-    infrastruktur: 21,
-    layanan: 311,
-    kemiskinan: 32,
-    keadilan: 21,
-    pekerjaan: 3232,
-  },
-  {
-    id: 5,
-    kabupaten: "TABANAN",
-    Pendidikan: 232,
-    infrastruktur: 21,
-    layanan: 311,
-    kemiskinan: 32,
-    keadilan: 21,
-    pekerjaan: 3232,
-  },
-];
-
 
 /**
  * Fungsi untuk mendapatkan nilai dari table.

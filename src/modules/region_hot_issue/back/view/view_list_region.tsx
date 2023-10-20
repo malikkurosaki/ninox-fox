@@ -148,7 +148,7 @@ export default function ViewListRegion({ param, provinsi, kabupaten, kecamatan, 
       </Box>
       {!_.isNull(datatable.title) && (
         <Box pt={30}>
-          <TableRegion data={datatable.data} title={datatable.title} />
+          <TableRegion data={datatable.data} title={datatable.title} th={datatable.thTitle} />
         </Box>
       )}
     </>
