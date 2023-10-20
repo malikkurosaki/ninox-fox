@@ -1,7 +1,6 @@
 
 "use client"
 import React, { useEffect, useState } from "react";
-import Public from "../components/table_public";
 import {
   Box,
   Button,
@@ -18,6 +17,7 @@ import { useRouter } from "next/navigation";
 import _ from "lodash";
 import { MasterKabGetByProvince, MasterKecGetByKab } from "@/modules/_global";
 import toast from "react-simple-toasts";
+import papa from "papaparse"
 
 /**
  * Fungsi untuk menampilkan table list public.
@@ -27,7 +27,7 @@ import toast from "react-simple-toasts";
 
 
 
-function ViewPublic({ param, provinsi, kabupaten, kecamatan, datatable }: { param: any, provinsi: any, kabupaten: any, kecamatan: any, datatable: any }) {
+function ViewPublic({ param, provinsi, kabupaten, kecamatan, datatable, datadownload }: { param: any, provinsi: any, kabupaten: any, kecamatan: any, datatable: any, datadownload: any }) {
   const router = useRouter()
 
   const [dataProvinsi, setDataProvinsi] = useState(provinsi)
@@ -125,27 +125,41 @@ function ViewPublic({ param, provinsi, kabupaten, kecamatan, datatable }: { para
             </Paper>
           </Box>
           <Group
-            justify="center"
-            grow
+            justify="left"
             style={{
               backgroundColor: "white",
               borderRadius: 10,
-              padding: 20,
             }}
+            px={50}
           >
             <UploadPublic />
-            <Box
-              style={{
-                border: "1px dashed gray",
-                borderRadius: 10,
-                padding: 40,
-                cursor: "pointer",
-              }}
-            >
-              <Text ta={"center"} size="xl" inline>
-                DOWNLOAD
-              </Text>
-            </Box>
+            {!_.isNull(datatable.title) &&
+              <Box
+                style={{
+                  border: "1px dashed gray",
+                  borderRadius: 10,
+                  padding: 40,
+                  cursor: "pointer",
+                }}
+
+                onClick={() => {
+                  const dataJson = datadownload.data
+
+                  const jsonData = papa.unparse(dataJson)
+                  const jsonDataUrl = "data:text/csv;charset=utf-8," + encodeURIComponent(jsonData)
+
+                  const jsonDwnloadLink = document.createElement("a")
+                  jsonDwnloadLink.href = jsonDataUrl
+                  jsonDwnloadLink.download = datadownload.title+".csv"
+                  jsonDwnloadLink.click()
+                }}
+              >
+                <Text ta={"center"} size="xl" inline>
+                  DOWNLOAD
+                </Text>
+              </Box>
+            }
+
           </Group>
         </SimpleGrid>
       </Box>

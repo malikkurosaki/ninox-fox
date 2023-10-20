@@ -119,14 +119,14 @@ export default function ViewBackEmotion({ param, provinsi, kabupaten, candidate,
                   onChange={(val) => onKabupaten({ idKab: val })}
                 />
                 <Select
-                  placeholder="CANDIDATE"
+                  placeholder="Pilih Kandidat"
                   data={dataCandidate.map((can: any) => ({
                     value: String(can.id),
                     label: can.name
                   }))}
                   required
                   value={isCandidate}
-                  label={"Candidate"}
+                  label={"Kandidat"}
                   searchable
                   onChange={(val) => { setCandidate(val) }}
                 />

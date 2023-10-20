@@ -93,7 +93,6 @@ export default async function funGetAllSwot({ find }: { find: any }) {
         title: titleTrue,
         data: result
     }
-    // console.log(allData)
     return allData
 
 }

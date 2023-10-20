@@ -47,7 +47,6 @@ export default function TableMlAi({ title, data, searchParam }: { title: any, da
 
   return (
     <>
-      {/* {JSON.stringify(isData, null, 2)} */}
       <Box mt={30}>
         <Box
           style={{
@@ -61,7 +60,7 @@ export default function TableMlAi({ title, data, searchParam }: { title: any, da
               {title}
             </Text>
             <Button bg={"gray"} onClick={() => router.push("ml-ai/add?prov=" + searchParams.get('prov') + '&city=' + searchParams.get('city'))}>
-              ADD MLAI
+              TAMBAH MLAI
             </Button>
           </Group>
           <Box pt={20}>
@@ -85,9 +84,9 @@ export default function TableMlAi({ title, data, searchParam }: { title: any, da
                       }}
                     >
                       <Table.Th>No</Table.Th>
-                      <Table.Th w={200}>Candidate</Table.Th>
+                      <Table.Th w={200}>Kandidat</Table.Th>
                       <Table.Th>
-                        <Center>Action</Center>
+                        <Center>Aksi</Center>
                       </Table.Th>
                     </Table.Tr>
                   </Table.Thead>
@@ -99,9 +98,6 @@ export default function TableMlAi({ title, data, searchParam }: { title: any, da
                   ))}
                 </Table>
               </ScrollArea>
-              <Group justify="flex-end" mt={20}>
-                <Pagination total={10} />
-              </Group>
             </Box>
           </Box>
         </Box>

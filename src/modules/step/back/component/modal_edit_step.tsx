@@ -18,7 +18,7 @@ export default function ModalEditStep({data}: {data : any}) {
 
     async function onEditStep() {
         const edit = await funEditStep({body: data})
-        toast("Success", { theme: "dark" });
+        toast("Sukses", { theme: "dark" });
         setOpenModal(false);
         router.back()
     }
@@ -28,7 +28,7 @@ export default function ModalEditStep({data}: {data : any}) {
             <Box>
                 <Alert color="gray" variant="outline">
                     <Text fw={700} ta={"center"} mb={20} mt={20}>
-                        ARE YOU SURE TO EDIT STEP?
+                        ANDA YAKIN INGIN MENGEDIT  STEP?
                     </Text>
                     <Group justify="space-between" pt={10}>
                         <Button

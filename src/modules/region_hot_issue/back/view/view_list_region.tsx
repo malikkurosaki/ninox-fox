@@ -17,6 +17,7 @@ import TableRegion from "../components/table_region";
 import { MasterKabGetByProvince, MasterKecGetByKab } from "@/modules/_global";
 import toast from "react-simple-toasts";
 import _ from "lodash";
+import papa from "papaparse"
 
 /**
  * Fungsi untuk menampilkan table list region.
@@ -25,7 +26,7 @@ import _ from "lodash";
  */
 
 
-export default function ViewListRegion({ param, provinsi, kabupaten, kecamatan, datatable }: { param: any, provinsi: any, kabupaten: any, kecamatan: any, datatable: any }) {
+export default function ViewListRegion({ param, provinsi, kabupaten, kecamatan, datatable, datadownload }: { param: any, provinsi: any, kabupaten: any, kecamatan: any, datatable: any, datadownload: any }) {
   const router = useRouter()
 
   const [dataProvinsi, setDataProvinsi] = useState(provinsi)
@@ -122,27 +123,40 @@ export default function ViewListRegion({ param, provinsi, kabupaten, kecamatan, 
             </Paper>
           </Box>
           <Group
-            justify="center"
-            grow
+            justify="left"
             style={{
               backgroundColor: "white",
               borderRadius: 10,
-              padding: 20,
             }}
+            px={50}
           >
             <UploadRegion />
-            <Box
-              style={{
-                border: "1px dashed gray",
-                borderRadius: 10,
-                padding: 40,
-                cursor: "pointer",
-              }}
-            >
-              <Text ta={"center"} size="xl" inline>
-                DOWNLOAD
-              </Text>
-            </Box>
+            {!_.isNull(datatable.title) &&
+              <Box
+                style={{
+                  border: "1px dashed gray",
+                  borderRadius: 10,
+                  padding: 40,
+                  cursor: "pointer",
+                }}
+
+                onClick={() => {
+                  const dataJson = datadownload.data
+
+                  const jsonData = papa.unparse(dataJson)
+                  const jsonDataUrl = "data:text/csv;charset=utf-8," + encodeURIComponent(jsonData)
+
+                  const jsonDwnloadLink = document.createElement("a")
+                  jsonDwnloadLink.href = jsonDataUrl
+                  jsonDwnloadLink.download = datadownload.title + ".csv"
+                  jsonDwnloadLink.click()
+                }}
+              >
+                <Text ta={"center"} size="xl" inline>
+                  DOWNLOAD
+                </Text>
+              </Box>
+            }
           </Group>
         </SimpleGrid>
       </Box>

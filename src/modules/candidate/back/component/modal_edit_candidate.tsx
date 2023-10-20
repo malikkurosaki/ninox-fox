@@ -20,7 +20,7 @@ export default function ModalEditCandidate({ data }: { data: any }) {
 
     async function onEditCandidate() {
         const edit = await funEditCandidate({ body: data })
-        toast("Success", { theme: "dark" });
+        toast("Sukses", { theme: "dark" });
         setOpenModal(false);
         router.back()
     }

@@ -28,7 +28,7 @@ import _ from "lodash";
 
 export default function ViewListLeader({ datadownload, param, provinsi, kabupaten, kecamatan, datatable }: { datadownload: any, param: any, provinsi: any, kabupaten: any, kecamatan: any, datatable: any }) {
   const router = useRouter()
-  const [isDataDownload, setDataDownload] = useState(datadownload)
+
   const [dataProvinsi, setDataProvinsi] = useState(provinsi)
   const [dataKabupaten, setDataKabupaten] = useState<any>(kabupaten)
   const [dataKecamatan, setDataKecamatan] = useState<any>(kecamatan)
@@ -146,7 +146,6 @@ export default function ViewListLeader({ datadownload, param, provinsi, kabupate
             </Box>
 
 
-            {/*  */}
             <Box
               style={{
                 border: "1px dashed gray",
@@ -155,14 +154,14 @@ export default function ViewListLeader({ datadownload, param, provinsi, kabupate
                 cursor: "pointer",
               }}
               onClick={() => {
-                const dataJson = isDataDownload
+                const dataJson = datadownload.data
 
                 const jsonData = papa.unparse(dataJson)
                 const jsonDataUrl = "data:text/csv;charset=utf-8," + encodeURIComponent(jsonData)
 
                 const jsonDwnloadLink = document.createElement("a")
                 jsonDwnloadLink.href = jsonDataUrl
-                jsonDwnloadLink.download = "Leader.csv"
+                jsonDwnloadLink.download = datadownload.title
                 jsonDwnloadLink.click()
               }}
             >

@@ -5,6 +5,9 @@ import React, { useEffect, useState } from "react";
 
 /**
  * Fungsi untuk mendapatkan nilai dari table.
+ * @param {string} title untuk judul table
+ * @param {any} data untuk data table
+ * @param {any} th untuk th table
  * @returns  Hasil menampilkan tabel beserta valuenya.
  */
 

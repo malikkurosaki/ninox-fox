@@ -34,13 +34,14 @@ export default function EditStep({ data }: { data: any }) {
                         <TextInput label={"Provinsi"} value={data.areaProvinsi} disabled />
                         <TextInput label={"Kabupaten"} value={data.areaKabkot} disabled />
                     </Group>
-                    <TextInput label={"Candidate"} value={data.name} disabled />
+                    <TextInput label={"Kandidat"} value={data.name} disabled />
                 </Stack>
                 <Select mt={20}
-                    placeholder="CATEGORY"
+                    placeholder="Pilih Kategori"
+                    withAsterisk
+                    label="Kategori"
                     data={["STRENGTH", "WEAKNESS", "OPPORTUNITY", "THREAT"]}
                     value={isBody.category}
-                    searchable
                     onChange={(val) => {
                         setBody({
                             ...isBody,
@@ -61,7 +62,9 @@ export default function EditStep({ data }: { data: any }) {
                 </Radio.Group>
                 <Textarea
                     mt={20}
-                    placeholder="TEXT"
+                    placeholder="Value Content"
+                    label="Content"
+                    withAsterisk
                     value={isBody.content}
                     onChange={(val) => {
                         setBody({

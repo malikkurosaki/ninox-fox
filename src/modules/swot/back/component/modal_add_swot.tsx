@@ -29,7 +29,7 @@ export default function ModalAddSwot({data}: {data: any}) {
             <Box>
                 <Alert color="gray" variant="outline">
                     <Text fw={700} ta={"center"} mb={20} mt={20}>
-                        ARE YOU SURE TO ADD SWOT?
+                        ANDA YAKIN INGIN MENAMBAH SWOT?
                     </Text>
                     <Group justify="space-between" pt={10}>
                         <Button

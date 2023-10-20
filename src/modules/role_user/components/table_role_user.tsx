@@ -117,9 +117,6 @@ export default function TableRoleUser() {
                   </Table.Tbody>
                 </Table>
               </ScrollArea>
-              <Group justify="flex-end" mt={20}>
-                <Pagination total={10} />
-              </Group>
             </Box>
           </Box>
         </Box>

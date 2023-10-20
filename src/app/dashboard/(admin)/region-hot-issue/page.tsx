@@ -1,5 +1,5 @@
 import { MasterKabGetByProvince, MasterKecGetByKab, MasterProvinceGetAll } from "@/modules/_global";
-import { ViewListRegion, funGetRhiByArea } from "@/modules/region_hot_issue";
+import { ViewListRegion, funDownloadRHI, funGetRhiByArea } from "@/modules/region_hot_issue";
 import _ from "lodash";
 import React from "react";
 
@@ -14,7 +14,8 @@ async function Page({ searchParams }: { searchParams: { prov: any, city: any, ke
   const city = await MasterKabGetByProvince({ idProvinsi: findData.idProvinsi })
   const kec = await MasterKecGetByKab({ idKabkot: findData.idKabkot })
   const dataDB = await funGetRhiByArea({ find: findData })
-  return <ViewListRegion param={findData} provinsi={prov} kabupaten={city} kecamatan={kec} datatable={dataDB} />;
+  const dataDownload = await funDownloadRHI({ find: findData })
+  return <ViewListRegion param={findData} provinsi={prov} kabupaten={city} kecamatan={kec} datatable={dataDB} datadownload={dataDownload} />;
 }
 
 export default Page;

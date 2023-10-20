@@ -1,5 +1,5 @@
 import { MasterKabGetByProvince, MasterKecGetByKab, MasterProvinceGetAll } from '@/modules/_global';
-import { ViewListLeader, funDownLeader, funGetLtaByArea } from '@/modules/leader_trait_assessment';
+import { ViewListLeader, funDownloadLTA, funGetLtaByArea } from '@/modules/leader_trait_assessment';
 import _ from 'lodash';
 import React from 'react';
 
@@ -13,7 +13,7 @@ export default async function Page({ searchParams }: { searchParams: { prov: any
   const city = await MasterKabGetByProvince({ idProvinsi: findData.idProvinsi })
   const kec = await MasterKecGetByKab({ idKabkot: findData.idKabkot })
   const dataDB = await funGetLtaByArea({ find: findData })
-  const datadown = await funDownLeader()
+  const datadown = await funDownloadLTA({ find: findData })
 
   return (
     <ViewListLeader datadownload={datadown} param={findData} provinsi={prov} kabupaten={city} kecamatan={kec} datatable={dataDB} />
