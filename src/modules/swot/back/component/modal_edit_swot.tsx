@@ -5,17 +5,19 @@ import { useAtom } from "jotai";
 import { isModalSwot } from "../val/val_swot";
 import { useRouter } from "next/navigation";
 import toast from "react-simple-toasts";
+import funEditSwot from "../fun/fun_edit_swot";
 
 /**
  * Fungsi untuk menampilkan modal konfirmasi edit swot.
  * @returns {component} Modal konfirmasi edit swot.
  */
 
-export default function ModalEditSwot() {
+export default function ModalEditSwot({ data }: { data: any }) {
     const [openModal, setOpenModal] = useAtom(isModalSwot)
     const router = useRouter()
 
-    function onEditSwot() {
+    async function onEditSwot() {
+        const edit = await funEditSwot({body: data})
         toast("Success", { theme: "dark" });
         setOpenModal(false);
         router.back()
