@@ -44,7 +44,7 @@ export default function AddCandidate({ params, candidate, provinsi, kabupaten }:
 
     return (
         <>
-            <pre>{JSON.stringify(candidate, null, 2)}</pre>
+            {/* <pre>{JSON.stringify(candidate, null, 2)}</pre> */}
             <ButtonBack />
             <Stack mt={30}>
                 <Text fw={"bold"}>TAMBAH KANDIDAT</Text>

@@ -12,7 +12,6 @@ export default async function Page({ searchParams }: { searchParams: { prov: any
       const prov = await MasterProvinceGetAll()
       const kab = await MasterKabGetByProvince({ idProvinsi: findData.idProvinsi })
       const candidate = await funGetCandidateByArea({ find: findData });
-    console.log(candidate)
     return (
         <>
             <AddCandidate params={findData} provinsi={prov} kabupaten={kab} candidate={candidate}/>
