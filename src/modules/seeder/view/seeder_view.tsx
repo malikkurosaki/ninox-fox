@@ -154,7 +154,7 @@ export default function SeederView() {
                 </SimpleGrid>
                 <Box mt={30}>
                     <Paper shadow="xs" p="lg">
-                        <Text fw={"bold"}>DATA LAINNYA</Text>
+                        <Text fw={"bold"}>DATA LAINNYA...</Text>
                         <Divider mt={10} mb={30} />
                         <Group justify="center" gap="md" grow my={15}>
                             {/* <Button bg={"gray"} loading={loading} onClick={onLeader}>CATEGORY LEADER TRAIT ASSESSMENT</Button> */}
