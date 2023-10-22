@@ -9,21 +9,24 @@ import { seederLeader } from ".."
  * @returns hasil untuk data seeder leader
  */
 export async function funSeederLeader() {
-    for (let data of seederLeader) {
-        await prisma.categoryLeaderTraitAssessment.upsert({
-            where: {
-                id: data.id
-            },
-            create: {
-                id: data.id,
-                name: data.name
-            },
-            update: {
-                id: data.id,
-                name: data.name
-            }
-        })
-    }
+    const ins = await prisma.categoryLeaderTraitAssessment.createMany({
+        data: seederLeader
+    })
+    // for (let data of seederLeader) {
+    //     await prisma.categoryLeaderTraitAssessment.upsert({
+    //         where: {
+    //             id: data.id
+    //         },
+    //         create: {
+    //             id: data.id,
+    //             name: data.name
+    //         },
+    //         update: {
+    //             id: data.id,
+    //             name: data.name
+    //         }
+    //     })
+    // }
 
     return {
         success: true,
