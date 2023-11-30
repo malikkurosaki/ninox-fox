@@ -7,8 +7,8 @@ import { GrBarChart } from 'react-icons/gr';
 import { MdPersonSearch } from 'react-icons/md';
 import { HiChip, HiOutlineChartSquareBar } from 'react-icons/hi';
 import { usePathname, useRouter } from 'next/navigation';
-import { ActionIcon, AppShell, Burger, Center, Group, NavLink, Skeleton, Text } from '@mantine/core';
-import { keyBy } from 'lodash';
+import { ActionIcon, AppShell, Box, Burger, Center, Group, NavLink, Skeleton, Stack, Text, Tooltip } from '@mantine/core';
+import _, { keyBy } from 'lodash';
 
 export default function LayoutViewFront({ children }: { children: React.ReactNode }) {
   const [opened, { toggle }] = useDisclosure();
@@ -17,37 +17,44 @@ export default function LayoutViewFront({ children }: { children: React.ReactNod
     {
       key: "1",
       link: "/summary",
-      icon: LuLayoutDashboard
+      icon: LuLayoutDashboard,
+      label: "Summary"
     },
     {
       key: "2",
       link: "/popularity",
-      icon: FaChartLine
+      icon: FaChartLine,
+      label: "Popularity"
     },
     {
       key: "3",
       link: "/insights",
-      icon: GrBarChart
+      icon: HiOutlineChartSquareBar,
+      label: "Insights"
     },
     {
       key: "4",
       link: "/pairing",
-      icon: MdPersonSearch
+      icon: MdPersonSearch,
+      label: "Pairing"
     },
     {
       key: "5",
       link: "/step",
-      icon: FaChartPie
+      icon: FaChartPie,
+      label: "Step"
     },
     {
       key: "6",
       link: "/swot",
-      icon: HiOutlineChartSquareBar
+      icon: HiOutlineChartSquareBar,
+      label: "Swot"
     },
     {
       key: "7",
       link: "/ml-ai",
-      icon: HiChip
+      icon: HiChip,
+      label: "Ml-ai"
     },
 
   ]
@@ -66,39 +73,45 @@ export default function LayoutViewFront({ children }: { children: React.ReactNod
         navbar={{ width: 100, breakpoint: 'sm', collapsed: { mobile: !opened } }}
         padding="md"
       >
-        <AppShell.Header>
+        <AppShell.Header bg={"dark"}>
           <Group h="100%" px="md">
-            <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
+            <Burger opened={opened} color="rgba(255, 255, 255, 1)" onClick={toggle} hiddenFrom="sm" size="sm" />
           </Group>
         </AppShell.Header>
-        <AppShell.Navbar pl={23} pt={20}>
+        <AppShell.Navbar pl={23} pt={20} bg={"dark"} style={{
+          border: "none"
+        }}>
           <Group>
-            <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
+            <Text fw={"bold"} c={"white"}>NINOX</Text>
+            <Burger opened={opened} color="rgba(255, 255, 255, 1)" onClick={toggle} hiddenFrom="sm" size="sm" />
           </Group>
           <Group justify='flex-end' style={{
             position: "absolute",
-            bottom: 150,
+            bottom: 130,
+            // bottom: "50"
           }}>
-            {dataFront.map((item) => {
-              return (
-                <NavLink
-                  key={item.key}
-                  active={item.link === active}
-                  fw={item.icon ? "dark" : "dark"}
-                  label={<ActionIcon variant="subtle" color="rgba(24, 2, 87, 1)" size="xl" aria-label="Settings"><item.icon size={30} /></ActionIcon>}
-                  onClick={() => {
-                    router.push(item.link);
-                  }}
-                  color="#213555"
-                  variant="filled"
-
-                />
-              )
-            })} 
+            <Stack align="center" p={"xs"}>
+              {dataFront.map((v, i) => (
+                <Box key={i}>
+                  <Tooltip label={_.upperCase((v.label))}>
+                    <ActionIcon
+                      c={v.link === active ? "white" : "violet"}
+                      size={32}
+                      variant="subtle"
+                      onClick={() => {
+                        router.push(v.link);
+                      }}
+                    >
+                      <v.icon size={32} />
+                    </ActionIcon>
+                  </Tooltip>
+                </Box>
+              ))}
+            </Stack>
           </Group>
 
         </AppShell.Navbar>
-        <AppShell.Main>
+        <AppShell.Main bg={"gray.1"}>
           {children}
         </AppShell.Main>
       </AppShell>
