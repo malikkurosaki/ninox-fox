@@ -1,11 +1,13 @@
 'use client'
-
 import { ButtonBack } from "@/modules/_global"
 import { Avatar, Box, Button, Center, Group, Modal, Paper, Stack, Text, TextInput } from "@mantine/core"
 import { useAtom } from "jotai"
 import { isModalCandidate } from "../val/isModalCandidate"
 import ModalEditCandidate from "../component/modal_edit_candidate"
-import { useState } from "react"
+import { useRef, useState } from "react"
+import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone"
+import toast from "react-simple-toasts"
+import _ from "lodash"
 
 /**
  * Fungsi untuk menampilkan view edit candidate.
@@ -14,12 +16,21 @@ import { useState } from "react"
  */
 
 export default function EditCandidate({ data }: { data: any }) {
+    const openRef = useRef<() => void>(null);
     const [openModal, setOpenModal] = useAtom(isModalCandidate)
+    const [imgForm, setImgForm] = useState<FormData>()
+    const [img, setIMG] = useState<any | null>(`/img/candidate/${data.img}`)
     const [dataEdit, setDataEdit] = useState({
         id: data.id,
-        name: data.name,
-        img: data.img
+        name: data.name
     })
+
+
+    function onConfirmation() {
+        if (dataEdit.name === "")
+            return toast("Nama tidak boleh kosong", { theme: "dark" });
+        setOpenModal(true)
+    }
 
     return (
         <>
@@ -34,18 +45,43 @@ export default function EditCandidate({ data }: { data: any }) {
                             <Avatar
                                 size={130}
                                 radius={100}
-                                // src={"../favicon.ico"}
+                                src={img}
                                 alt="kandidat"
                                 color="dark"
                             />
                         </Center>
                         <Group justify="center">
-                            <Button
-                                bg="gray"
-                                radius="xl"
-                            >
-                                UPLOAD
-                            </Button>
+                            <Center pt={10}>
+                                <Dropzone
+                                    openRef={openRef}
+                                    onDrop={async (files) => {
+                                        if (!files || _.isEmpty(files))
+                                            return toast("tidak ada yang dipilih", { theme: 'dark' });
+                                        const fd = new FormData();
+                                        fd.append("file", files[0]);
+                                        setImgForm(fd)
+                                        const buffer = URL.createObjectURL(new Blob([new Uint8Array(await files[0].arrayBuffer())]))
+                                        setIMG(buffer)
+                                    }}
+                                    onReject={(files) => {
+                                        return toast("file tidak didukung, atau terlalu besar", { theme: 'dark' });
+                                    }}
+                                    maxSize={3 * 1024 ** 2}
+                                    accept={IMAGE_MIME_TYPE}
+                                    activateOnClick={false}
+                                    styles={{ inner: { pointerEvents: "all" } }}
+                                >
+                                    <Group justify="center">
+                                        <Button
+                                            color="gray.5"
+                                            radius="xl"
+                                            onClick={() => openRef.current?.()}
+                                        >
+                                            UPLOAD
+                                        </Button>
+                                    </Group>
+                                </Dropzone>
+                            </Center>
                         </Group>
                         <Box pt={40}>
                             <TextInput
@@ -59,7 +95,7 @@ export default function EditCandidate({ data }: { data: any }) {
                                 }}
                             />
                             <Group justify="flex-end">
-                                <Button bg={"gray"} mt={30} onClick={() => setOpenModal(true)}>SAVE</Button>
+                                <Button bg={"gray"} mt={30} onClick={() => onConfirmation()}>SAVE</Button>
                             </Group>
                         </Box>
                     </Stack>
@@ -73,7 +109,7 @@ export default function EditCandidate({ data }: { data: any }) {
                 withCloseButton={false}
                 closeOnClickOutside={false}
             >
-                <ModalEditCandidate data={dataEdit} />
+                <ModalEditCandidate data={dataEdit} img={imgForm} />
             </Modal>
         </>
     )

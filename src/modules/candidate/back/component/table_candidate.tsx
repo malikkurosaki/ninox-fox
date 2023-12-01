@@ -1,6 +1,6 @@
 'use client'
 
-import { ActionIcon, Box, Button, Center, Group, Image, Modal, Paper, ScrollArea, Stack, Switch, Table, Text } from "@mantine/core"
+import { ActionIcon, Avatar, Box, Button, Center, Group, Image, Modal, Paper, ScrollArea, Stack, Switch, Table, Text } from "@mantine/core"
 import { useAtom } from "jotai";
 import { useRouter, useSearchParams } from "next/navigation";
 import { MdDelete, MdEditCalendar, MdOutlineModeEdit } from "react-icons/md";
@@ -78,11 +78,12 @@ export default function TableCandidate({ title, data, searchParam }: { title: st
                         <Table.Td>{i + 1}</Table.Td>
                         <Table.Td>{v.name}</Table.Td>
                         <Table.Td>
-                          <Image
-                            src={"/profile.png"}
+                          <Avatar
+                            src={`/img/candidate/${v.img}`}
                             radius={100}
-                            maw={{ base: 50, sm: 50 }}
-                            alt="img"
+                            alt="kandidat"
+                            color="dark"
+                            size={50}
                           />
                         </Table.Td>
                         <Table.Td>
@@ -101,7 +102,7 @@ export default function TableCandidate({ title, data, searchParam }: { title: st
                             color="rgba(5, 128, 23, 1)"
                             size="xl"
                             aria-label="Edit"
-                            onClick={() => router.push('candidate/edit/'+v.id)}
+                            onClick={() => router.push('candidate/edit/' + v.id)}
                           >
                             <MdEditCalendar size={20} />
                           </ActionIcon>
