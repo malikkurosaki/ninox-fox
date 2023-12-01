@@ -7,9 +7,9 @@ import { revalidatePath } from "next/cache";
 
 
 export default async function funAddMlAi({ body }: { body: MlAi }) {
- const data = await prisma.mlAi.create({
+  const data = await prisma.mlAi.create({
     data: {
-      idCandidate: Number(body.idCandidate),
+      idCandidate: body.idCandidate,
       content: body.content,
     },
     select: {

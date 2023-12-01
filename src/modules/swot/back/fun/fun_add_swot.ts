@@ -13,7 +13,7 @@ import { revalidatePath } from "next/cache"
 export default async function funAddSwotf({ body }: { body: Swot }) {
     const data = await prisma.swot.create({
         data: {
-            idCandidate: Number(body.idCandidate),
+            idCandidate: body.idCandidate,
             category: body.category,
             content: body.content
         },
