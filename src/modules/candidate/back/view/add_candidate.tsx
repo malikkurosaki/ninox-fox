@@ -1,7 +1,6 @@
 'use client'
-
 import { ButtonBack } from "@/modules/_global"
-import { Avatar, Box, Button, Center, Grid, Group, Modal, Paper, Stack, Text, TextInput } from "@mantine/core"
+import { Avatar, Box, Button, Center, Group, Modal, Paper, Stack, Text, TextInput } from "@mantine/core"
 import { useAtom } from "jotai"
 import { isModalCandidate } from "../val/isModalCandidate"
 import ModalAddCandidate from "../component/modal_add_candidate"
@@ -10,21 +9,17 @@ import toast from "react-simple-toasts"
 import { useSearchParams } from "next/navigation"
 import _ from "lodash"
 import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone"
-import { funUploadImg } from "../fun/fun_upload_img"
-import { funUpdProfileImg } from "../fun/fun_upd_file_img"
-
 
 /**
  * Fungsi untuk menampilkan view add candidate.
  * @returns {component} view add candidate.
  */
 
-export default function AddCandidate({ params, candidate, provinsi, kabupaten }: { params: any, candidate: any, provinsi: any, kabupaten: any }) {
+export default function AddCandidate() {
     const [openModal, setOpenModal] = useAtom(isModalCandidate)
-    const [hasilGambar, setHasilGambar] = useState(
-        `/img/user/${candidate.img}`
-    )
-    const [dataUser, setDataUser] = useState(candidate);
+    const [img, setIMG] = useState<any | null>()
+    const [imgForm, setImgForm] = useState<FormData>()
+
     const query = useSearchParams()
     const openRef = useRef<() => void>(null);
     const [body, setBody] = useState({
@@ -44,7 +39,6 @@ export default function AddCandidate({ params, candidate, provinsi, kabupaten }:
 
     return (
         <>
-            {/* <pre>{JSON.stringify(candidate, null, 2)}</pre> */}
             <ButtonBack />
             <Stack mt={30}>
                 <Text fw={"bold"}>TAMBAH KANDIDAT</Text>
@@ -54,6 +48,7 @@ export default function AddCandidate({ params, candidate, provinsi, kabupaten }:
                     <Stack mt={30}>
                         <Center>
                             <Avatar
+                                src={img}
                                 size={130}
                                 radius={100}
                                 alt="kandidat"
@@ -66,44 +61,20 @@ export default function AddCandidate({ params, candidate, provinsi, kabupaten }:
                                     openRef={openRef}
                                     onDrop={async (files) => {
                                         if (!files || _.isEmpty(files))
-                                            return toast("tidak ada yang dipilih");
+                                            return toast("tidak ada yang dipilih", { theme: 'dark' });
                                         const fd = new FormData();
                                         fd.append("file", files[0]);
-
-                                        const apa = await funUploadImg(fd);
-                                        if (apa.success) {
-                                            setHasilGambar(
-                                                `/img/user/${apa.data.id}.${apa.data.img}`
-                                            );
-                                            funUpdProfileImg({ id: dataUser.id, img: String(apa.data.id) })
-                                            return toast("Success", { theme: "dark" });
-                                        }
+                                        setImgForm(fd)
+                                        const buffer = URL.createObjectURL(new Blob([new Uint8Array(await files[0].arrayBuffer())]))
+                                        setIMG(buffer)
                                     }}
-                                    onReject={(files) => console.log("rejected files", files)}
-                                    // maxSize={3 * 1024 ** 2}
+                                    onReject={(files) => {
+                                        return toast("file tidak didukung, atau terlalu besar", { theme: 'dark' });
+                                    }}
+                                    maxSize={3 * 1024 ** 2}
                                     accept={IMAGE_MIME_TYPE}
                                     activateOnClick={false}
                                     styles={{ inner: { pointerEvents: "all" } }}
-                                    // sx={(theme) => ({
-                                    //     display: "flex",
-                                    //     justifyContent: "center",
-                                    //     alignItems: "center",
-                                    //     border: 0,
-                                    //     backgroundColor:
-                                    //         theme.colorScheme === "dark"
-                                    //             ? theme.colors.dark[6]
-                                    //             : theme.colors.gray[0],
-
-                                    //     "&[data-accept]": {
-                                    //         color: theme.white,
-                                    //         backgroundColor: theme.colors.blue[6],
-                                    //     },
-
-                                    //     "&[data-reject]": {
-                                    //         color: theme.white,
-                                    //         backgroundColor: theme.colors.red[6],
-                                    //     },
-                                    // })}
                                 >
                                     <Group justify="center">
                                         <Button
@@ -111,7 +82,7 @@ export default function AddCandidate({ params, candidate, provinsi, kabupaten }:
                                             radius="xl"
                                             onClick={() => openRef.current?.()}
                                         >
-                                            Edit Image Profile
+                                            UPLOAD
                                         </Button>
                                     </Group>
                                 </Dropzone>
@@ -141,7 +112,7 @@ export default function AddCandidate({ params, candidate, provinsi, kabupaten }:
                 withCloseButton={false}
                 closeOnClickOutside={false}
             >
-                <ModalAddCandidate data={body} />
+                <ModalAddCandidate data={body} img={imgForm} />
             </Modal>
         </>
     )

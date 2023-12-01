@@ -14,12 +14,12 @@ import funAddCandidate from "../fun/add_candidate";
  */
 
 
-export default function ModalAddCandidate({ data }: { data: any }) {
+export default function ModalAddCandidate({ data, img }: { data: any, img: any }) {
     const [openModal, setOpenModal] = useAtom(isModalCandidate)
     const router = useRouter()
 
     async function onCreateCandidate() {
-        const create = await funAddCandidate({ body: data })
+        const create = await funAddCandidate({ body: data, img: img })
         if (!create.success)
             toast(create.message, { theme: "dark" });
         toast("Sukses", { theme: "dark" });

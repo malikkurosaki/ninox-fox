@@ -12,12 +12,12 @@ import funEditMlAi from "../fun/fun_edit_mlai"
  * @returns {component} modal konfirmasi edit ml ai.
  */
 
-export default function ModalEditMlAi({data}: {data: any}) {
+export default function ModalEditMlAi({ data, content }: { data: any, content: any }) {
     const [openModal, setOpenModal] = useAtom(isModalMlAi)
     const router = useRouter()
 
     async function onEditMlAi() {
-        const edit = await funEditMlAi({body: data})
+        const edit = await funEditMlAi({ body: data, text: content })
         toast("Sukses", { theme: "dark" });
         setOpenModal(false);
         router.back()

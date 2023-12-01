@@ -1,9 +1,6 @@
-"use client";
-
-import { useAtom } from "jotai";
+"use client"
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
-import { isModalMlAi } from "../val/val_mlai";
 import {
   ActionIcon,
   Box,
@@ -16,7 +13,7 @@ import {
 } from "@mantine/core";
 import { CiRead, CiUnread } from "react-icons/ci";
 import { MdDelete, MdEditCalendar } from "react-icons/md";
-import { toNumber } from "lodash";
+import TextAnimation from "react-typing-dynamics";
 
 export default function ComponentTable({ v, i, onClick }: { v: any; i: any, onClick: (val: any) => void }) {
   const open = useState(false);
@@ -86,7 +83,18 @@ export default function ComponentTable({ v, i, onClick }: { v: any; i: any, onCl
                 <Text c={"white"} fw={"bold"} fz={20} mb={10}>
                   Content
                 </Text>
-                <Text c={"white"}>{v.content}</Text>
+                <Text c={"white"}>
+                  <TextAnimation
+                    phrases={[...v.content.split('\n')]}
+                    typingSpeed={0}
+                    backspaceDelay={0}
+                    eraseDelay={0}
+                    timeComplete={0}
+                    errorProbability={0}
+                    eraseOnComplete={false}
+                    isSecure={false}
+                  />
+                </Text>
               </Box>
             </Collapse>
           </Table.Td>

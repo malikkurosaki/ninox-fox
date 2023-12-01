@@ -1,16 +1,13 @@
-import { Select } from '@mantine/core';
 "use server"
-
 import prisma from "@/modules/_global/bin/prisma";
-import { MlAi } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 
 
-export default async function funAddMlAi({ body }: { body: MlAi }) {
- const data = await prisma.mlAi.create({
+export default async function funAddMlAi({ candidate, content }: { candidate: string, content: any }) {
+  const data = await prisma.mlAi.create({
     data: {
-      idCandidate: Number(body.idCandidate),
-      content: body.content,
+      idCandidate: candidate,
+      content: content
     },
     select: {
       Candidate: {
@@ -30,8 +27,8 @@ export default async function funAddMlAi({ body }: { body: MlAi }) {
       }
     }
   })
-  revalidatePath("dashboard/ml-ai?prov" + data.Candidate.AreaProvinsi + "&city" + data.Candidate.AreaKabkot)
 
+  revalidatePath("dashboard/ml-ai?prov" + data.Candidate.AreaProvinsi + "&city" + data.Candidate.AreaKabkot)
 
   return {
     success: true,
