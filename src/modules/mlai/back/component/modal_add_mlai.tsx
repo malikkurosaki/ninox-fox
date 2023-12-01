@@ -12,12 +12,12 @@ import funAddMlAi from "../fun/fun_add_mlai"
  * @returns {component} modal konfirmasi add ml ai.
  */
 
-export default function ModalAddMlAi({ data }: { data: any }) {
+export default function ModalAddMlAi({ candidate, text }: { candidate: any, text: any }) {
     const [openModal, setOpenModal] = useAtom(isModalMlAi)
     const router = useRouter()
 
     async function onCreateMlAi() {
-        const addData = await funAddMlAi({ body: data })
+        const addData = await funAddMlAi({ candidate: candidate, content: text })
         if (!addData.success) return toast(addData.message, { theme: "dark" });
         toast("Sukses", { theme: "dark" });
         setOpenModal(false);
