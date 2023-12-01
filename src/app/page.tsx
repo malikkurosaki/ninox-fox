@@ -1,3 +1,10 @@
+import { ViewLogin, ViewVerification } from "@/modules/auth";
+
 export default function Page() {
-    return <>Page pertama</>
+    return (
+        <>
+        {/* <ViewLogin/> */}
+        <ViewVerification/>
+        </>
+    )
 }
