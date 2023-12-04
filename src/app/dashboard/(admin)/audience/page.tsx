@@ -16,6 +16,7 @@ async function Page({ searchParams }: { searchParams: { prov: any, city: any, ke
   const kec = await MasterKecGetByKab({ idKabkot: findData.idKabkot })
   const dataDB = await funGetAudienceByArea({ find: findData })
   const dataDownload = await funDownloadAudience({ find: findData })
+
   return <ViewAudience param={findData} provinsi={prov} kabupaten={city} kecamatan={kec} datatable={dataDB} datadownload={dataDownload} />;
 }
 
