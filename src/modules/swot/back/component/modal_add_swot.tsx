@@ -1,5 +1,4 @@
 'use client'
-
 import { Alert, Box, Button, Group, Text } from "@mantine/core"
 import { useAtom } from "jotai";
 import { isModalSwot } from "../val/val_swot";
@@ -12,14 +11,14 @@ import funAddSwotf from "../fun/fun_add_swot";
  * @returns {component} Modal konfirmasi add swot.
  */
 
-export default function ModalAddSwot({data}: {data: any}) {
+export default function ModalAddSwot({ data, text }: { data: any, text: any }) {
     const [openModal, setOpenModal] = useAtom(isModalSwot)
     const router = useRouter()
 
     async function onCreateSwot() {
-        const addData = await funAddSwotf({body: data})
-        if (!addData.success) return  toast(addData.message, { theme: "dark" });
-        toast("Success", {theme: "dark"});
+        const addData = await funAddSwotf({ body: data, content: text })
+        if (!addData.success) return toast(addData.message, { theme: "dark" });
+        toast("Success", { theme: "dark" });
         setOpenModal(false);
         router.back()
     }

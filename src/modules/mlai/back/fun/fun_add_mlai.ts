@@ -2,7 +2,6 @@
 import prisma from "@/modules/_global/bin/prisma";
 import { revalidatePath } from "next/cache";
 
-
 export default async function funAddMlAi({ candidate, content }: { candidate: string, content: any }) {
   const data = await prisma.mlAi.create({
     data: {

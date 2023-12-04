@@ -1,5 +1,4 @@
 'use server'
-
 import { provinsiCount } from "@/modules/_global";
 import prisma from "@/modules/_global/bin/prisma";
 import _ from "lodash";
@@ -154,9 +153,46 @@ export default async function funGetLtaByArea({ find }: { find: any }) {
         }
 
     } else {
-        titleTrue = null
-        dataTable = []
-        th: null
+        dataTable = await prisma.leaderTraitAssessmentFix.findMany({
+            select: {
+                pekerjaKeras: true,
+                cerdas: true,
+                jujur: true,
+                merakyat: true,
+                tegas: true,
+                berpengalamanMemimpin: true,
+                berprestasi: true,
+                latarBelakangMiliter: true,
+                agamis: true,
+                idProvinsi: true,
+                AreaProvinsi: {
+                    select: {
+                        name: true
+                    }
+                }
+            }
+        })
+
+        dataTable = dataTable.map((v: any) => ({
+            ..._.omit(v, ["AreaProvinsi"]),
+            name: v.AreaProvinsi.name
+        }))
+
+        dataTable = _.map(_.groupBy(dataTable, "idProvinsi"), (v: any) => ({
+            pekerjaKeras: _.sumBy(v, 'pekerjaKeras'),
+            cerdas: _.sumBy(v, 'cerdas'),
+            jujur: _.sumBy(v, 'jujur'),
+            merakyat: _.sumBy(v, 'merakyat'),
+            tegas: _.sumBy(v, 'tegas'),
+            berpengalamanMemimpin: _.sumBy(v, 'berpengalamanMemimpin'),
+            berprestasi: _.sumBy(v, 'berprestasi'),
+            latarBelakangMiliter: _.sumBy(v, 'latarBelakangMiliter'),
+            agamis: _.sumBy(v, 'agamis'),
+            name: v[0].name
+        }))
+
+        titleTrue = "SELURUH INDONESIA"
+        th = "PROVINSI"
     }
 
     const allData = {

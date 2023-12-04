@@ -1,5 +1,4 @@
 "use client";
-
 import { useAtom } from "jotai";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -16,14 +15,23 @@ import {
 import { CiRead, CiUnread } from "react-icons/ci";
 import { MdDelete, MdEditCalendar } from "react-icons/md";
 import { isModalStep, isModalvalueStep } from "../val/val_step";
+import TextAnimation from "react-typing-dynamics";
 
 export default function ComponentTableStep({ v, i, onClick }: { v: any; i: any, onClick: (val: any) => void }) {
   const open = useState(false);
   const router = useRouter();
   const [openModal, setOpenModal] = useAtom(isModalStep);
+
   function callBackDelete({ idDel }: { idDel: any }) {
     onClick(idDel)
   }
+
+  function RubahHTML(c: any) {
+    return {
+      __html: c
+    }
+  }
+
   return (
     <>
       <Table.Tbody key={i}>
@@ -88,7 +96,19 @@ export default function ComponentTableStep({ v, i, onClick }: { v: any; i: any, 
                 <Text c={"white"} fw={"bold"} fz={20} mb={10}>
                   Content
                 </Text>
-                <Text c={"white"}>{v.content}</Text>
+                {/* <Text c={"white"} dangerouslySetInnerHTML={RubahHTML(v.content)} /> */}
+                <Text c={"white"}>
+                  <TextAnimation
+                    phrases={[...v.content.split('\n')]}
+                    typingSpeed={0}
+                    backspaceDelay={0}
+                    eraseDelay={0}
+                    timeComplete={0}
+                    errorProbability={0}
+                    eraseOnComplete={false}
+                    isSecure={false}
+                  />
+                </Text>
               </Box>
             </Collapse>
           </Table.Td>

@@ -1,5 +1,4 @@
 "use server"
-
 import prisma from "@/modules/_global/bin/prisma"
 import { Swot } from "@prisma/client"
 import { revalidatePath } from "next/cache"
@@ -9,13 +8,14 @@ import { revalidatePath } from "next/cache"
  * @param {Swot} body - berisi name, idprovinsi, idkabkot, tingkat
  * @returns success - true 
  */
-export default async function funEditSwot({body}: {body: Swot}) {
+
+export default async function funEditSwot({ body, text }: { body: Swot, text: any }) {
     const data = await prisma.swot.update({
         where: {
             id: body.id,
         },
         data: {
-            content: body.content,
+            content: text,
             category: body.category
         },
         select: {

@@ -1,4 +1,3 @@
-
 "use client"
 import React, { useEffect, useState } from "react";
 import {
@@ -11,7 +10,6 @@ import {
   Stack,
   Text,
 } from "@mantine/core";
-import UploadPublic from "../components/upload_public";
 import TablePublic from "../components/table_public";
 import { useRouter } from "next/navigation";
 import _ from "lodash";
@@ -24,8 +22,6 @@ import papa from "papaparse"
  * @param {string} title - Judul table.
  * @returns {component} Table list Public sesuai dengan parameter.
  */
-
-
 
 function ViewPublic({ param, provinsi, kabupaten, kecamatan, datatable, datadownload }: { param: any, provinsi: any, kabupaten: any, kecamatan: any, datatable: any, datadownload: any }) {
   const router = useRouter()
@@ -132,8 +128,23 @@ function ViewPublic({ param, provinsi, kabupaten, kecamatan, datatable, datadown
             }}
             px={50}
           >
-            <UploadPublic />
-            {!_.isNull(datatable.title) &&
+            <Box
+              style={{
+                border: "1px dashed gray",
+                borderRadius: 10,
+                paddingTop: 40,
+                paddingBottom: 40,
+                paddingLeft: 30,
+                paddingRight: 30,
+                cursor: "pointer",
+              }}
+              onClick={() => router.push("/dashboard/public-concern-trend/upload")}
+            >
+              <Text ta={"center"} size="xl" inline>
+                UPLOAD DATA
+              </Text>
+            </Box>
+            {param && !_.isNull(param.idProvinsi) && param.idProvinsi != 0 &&
               <Box
                 style={{
                   border: "1px dashed gray",
@@ -150,7 +161,7 @@ function ViewPublic({ param, provinsi, kabupaten, kecamatan, datatable, datadown
 
                   const jsonDwnloadLink = document.createElement("a")
                   jsonDwnloadLink.href = jsonDataUrl
-                  jsonDwnloadLink.download = datadownload.title+".csv"
+                  jsonDwnloadLink.download = datadownload.title + ".csv"
                   jsonDwnloadLink.click()
                 }}
               >

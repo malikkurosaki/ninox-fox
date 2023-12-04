@@ -31,7 +31,7 @@ export default function RootLayout({ children }: { children: any }) {
         />
       </head>
       <body style={poppins.style}>
-        <MantineProvider theme={theme} defaultColorScheme="dark">{children}</MantineProvider>
+        <MantineProvider theme={theme}>{children}</MantineProvider>
       </body>
     </html>
   );

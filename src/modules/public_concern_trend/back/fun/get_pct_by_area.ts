@@ -1,5 +1,4 @@
 'use server'
-
 import { provinsiCount } from "@/modules/_global";
 import prisma from "@/modules/_global/bin/prisma";
 import _ from "lodash"
@@ -134,9 +133,41 @@ export default async function funGetPctByArea({ find }: { find: any }) {
         }
 
     } else {
-        titleTrue = null
-        dataTable = []
-        th: null
+        dataTable = await prisma.publicConcernTrendFix.findMany({
+            select: {
+                infrastruktur: true,
+                keadilanSosial: true,
+                kemiskinan: true,
+                lapanganPekerjaan: true,
+                layananKesehatan: true,
+                pendidikan: true,
+                idProvinsi: true,
+                AreaProvinsi: {
+                    select: {
+                        name: true
+                    }
+                }
+            }
+        })
+
+        dataTable = dataTable.map((v: any) => ({
+            ..._.omit(v, ["AreaProvinsi"]),
+            name: v.AreaProvinsi.name
+        }))
+
+        dataTable = _.map(_.groupBy(dataTable, "idProvinsi"), (v: any) => ({
+            infrastruktur: _.sumBy(v, 'infrastruktur'),
+            keadilanSosial: _.sumBy(v, 'keadilanSosial'),
+            kemiskinan: _.sumBy(v, 'kemiskinan'),
+            lapanganPekerjaan: _.sumBy(v, 'lapanganPekerjaan'),
+            layananKesehatan: _.sumBy(v, 'layananKesehatan'),
+            pendidikan: _.sumBy(v, 'pendidikan'),
+            name: v[0].name
+        }))
+
+
+        titleTrue = "SELURUH INDONESIA"
+        th= "PROVINSI"
     }
 
     const allData = {

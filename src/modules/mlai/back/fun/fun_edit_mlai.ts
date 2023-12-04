@@ -1,6 +1,4 @@
-
 "use server"
-
 import prisma from "@/modules/_global/bin/prisma"
 import { MlAi } from "@prisma/client"
 import { revalidatePath } from "next/cache"

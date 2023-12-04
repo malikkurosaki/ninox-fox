@@ -1,5 +1,4 @@
 "use server"
-
 import prisma from "@/modules/_global/bin/prisma"
 import { Step } from "@prisma/client"
 import { revalidatePath } from "next/cache"
@@ -9,12 +8,12 @@ import { revalidatePath } from "next/cache"
  * @param {Step} body - berisi idcandidate, category, content, sentiment
  * @returns success - true 
  */
-export default async function funAddStep({body}: {body: Step}) {
+export default async function funAddStep({ body, content }: { body: Step, content: any }) {
     const data = await prisma.step.create({
         data: {
             idCandidate: body.idCandidate,
             category: body.category,
-            content: body.content,
+            content: content,
             sentiment: Number(body.sentiment)
         }
     })

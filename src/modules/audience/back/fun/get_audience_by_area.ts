@@ -1,5 +1,4 @@
 'use server'
-
 import { provinsiCount } from "@/modules/_global";
 import prisma from "@/modules/_global/bin/prisma";
 import _ from "lodash"
@@ -116,9 +115,31 @@ export default async function funGetAudienceByArea({ find }: { find: any }) {
         }
 
     } else {
-        titleTrue = null
-        dataTable = []
-        th: null
+        dataTable = await prisma.audience.findMany({
+            select: {
+                value: true,
+                idProvinsi: true,
+                AreaProvinsi: {
+                    select: {
+                        name: true
+                    }
+                }
+            }
+        })
+
+        dataTable = dataTable.map((v: any) => ({
+            ..._.omit(v, ["AreaProvinsi"]),
+            name: v.AreaProvinsi.name
+        }))
+
+        dataTable = _.map(_.groupBy(dataTable, "idProvinsi"), (v: any) => ({
+            value: _.sumBy(v, 'value'),
+            name: v[0].name
+        }))
+
+        titleTrue = "SELURUH INDONESIA"
+        // dataTable = []
+        th= "PROVINSI"
     }
 
     const allData = {

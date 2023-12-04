@@ -1,5 +1,4 @@
 'use client'
-
 import { Alert, Box, Button, Group, Text } from "@mantine/core"
 import { useAtom } from "jotai";
 import { isModalStep } from "../val/val_step";
@@ -12,12 +11,12 @@ import funEditStep from "../fun/fun_edit_step";
  * @returns {component} Modal konfirmasi edit step.
  */
 
-export default function ModalEditStep({data}: {data : any}) {
+export default function ModalEditStep({ data, content }: { data: any, content: any }) {
     const [openModal, setOpenModal] = useAtom(isModalStep)
     const router = useRouter()
 
     async function onEditStep() {
-        const edit = await funEditStep({body: data})
+        const edit = await funEditStep({ body: data, text: content })
         toast("Sukses", { theme: "dark" });
         setOpenModal(false);
         router.back()
