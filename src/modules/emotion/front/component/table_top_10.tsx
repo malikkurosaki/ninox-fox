@@ -2,6 +2,7 @@
 import { WARNA } from '@/modules/_global/fun/WARNA';
 import { Box, Group, Pagination, ScrollArea, Table } from '@mantine/core';
 import React from 'react';
+import TopPairingCandidate from './top_pairing_candidate';
 
 const top10 = [
   {
@@ -156,6 +157,9 @@ export default function TableTop10() {
         <Group justify='flex-end'>
           <Pagination total={10} color="#A0ADA6" />
         </Group>
+      </Box>
+      <Box pt={30}>
+        <TopPairingCandidate />
       </Box>
 
 

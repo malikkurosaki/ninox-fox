@@ -1,11 +1,12 @@
 
 
+import { ViewRegionalInsights } from '@/modules/regional_insights';
 import React from 'react';
 
 function Page() {
   return (
     <>
-    page
+    <ViewRegionalInsights/>
     </>
   );
 }
