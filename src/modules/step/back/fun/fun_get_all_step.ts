@@ -37,6 +37,9 @@ export default async function funGetAllStap({ find }: { find: any }) {
                       tingkat: find.tingkat,
                       idProvinsi: find.idProvinsi
                   }
+              },
+              orderBy: {
+                createdAt: 'asc'
               }
           })
 
@@ -69,6 +72,9 @@ export default async function funGetAllStap({ find }: { find: any }) {
                       idProvinsi: find.idProvinsi,
                       idKabkot: find.idKabkot
                   }
+              },
+              orderBy: {
+                createdAt: 'asc'
               }
           })
 

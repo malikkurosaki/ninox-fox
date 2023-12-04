@@ -1,5 +1,4 @@
 "use server"
-
 import prisma from "@/modules/_global/bin/prisma"
 import { Swot } from "@prisma/client"
 import { revalidatePath } from "next/cache"
@@ -10,12 +9,12 @@ import { revalidatePath } from "next/cache"
  * @returns success - true 
  */
 
-export default async function funAddSwotf({ body }: { body: Swot }) {
+export default async function funAddSwotf({ body, content }: { body: Swot, content: any }) {
     const data = await prisma.swot.create({
         data: {
             idCandidate: body.idCandidate,
             category: body.category,
-            content: body.content
+            content: content
         },
         select: {
             Candidate: {

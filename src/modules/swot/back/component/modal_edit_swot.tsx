@@ -1,5 +1,4 @@
 'use client'
-
 import { Alert, Box, Button, Group, Text } from "@mantine/core"
 import { useAtom } from "jotai";
 import { isModalSwot } from "../val/val_swot";
@@ -12,12 +11,12 @@ import funEditSwot from "../fun/fun_edit_swot";
  * @returns {component} Modal konfirmasi edit swot.
  */
 
-export default function ModalEditSwot({ data }: { data: any }) {
+export default function ModalEditSwot({ data, content }: { data: any, content: any }) {
     const [openModal, setOpenModal] = useAtom(isModalSwot)
     const router = useRouter()
 
     async function onEditSwot() {
-        const edit = await funEditSwot({body: data})
+        const edit = await funEditSwot({ body: data, text: content })
         toast("Sukses", { theme: "dark" });
         setOpenModal(false);
         router.back()

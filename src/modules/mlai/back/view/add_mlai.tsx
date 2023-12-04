@@ -1,5 +1,4 @@
 'use client'
-
 import { ButtonBack } from "@/modules/_global"
 import { Box, Button, Group, Modal, Radio, Select, Stack, Text, TextInput, Textarea } from "@mantine/core"
 import ModalAddMlAi from "../component/modal_add_mlai"

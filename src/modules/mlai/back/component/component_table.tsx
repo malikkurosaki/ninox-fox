@@ -22,6 +22,13 @@ export default function ComponentTable({ v, i, onClick }: { v: any; i: any, onCl
   function callBackDelete({ idDel }: { idDel: any }) {
     onClick(idDel)
   }
+
+  function RubahHTML(c: any) {
+    return {
+      __html: c
+    }
+  }
+
   return (
     <>
       <Table.Tbody key={i}>
@@ -84,6 +91,7 @@ export default function ComponentTable({ v, i, onClick }: { v: any; i: any, onCl
                   Content
                 </Text>
                 <Text c={"white"}>
+                  {/* <Text style={{ fontSize: '16', color: "white" }} dangerouslySetInnerHTML={RubahHTML(v.content)} /> */}
                   <TextAnimation
                     phrases={[...v.content.split('\n')]}
                     typingSpeed={0}
