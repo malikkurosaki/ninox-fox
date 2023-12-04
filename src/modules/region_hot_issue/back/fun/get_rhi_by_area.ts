@@ -28,6 +28,7 @@ export default async function funGetRhiByArea({ find }: { find: any }) {
                     idKelurahan: null
                 },
                 select: {
+                    id: true,
                     description: true,
                     AreaKabkot: {
                         select: {
@@ -61,6 +62,7 @@ export default async function funGetRhiByArea({ find }: { find: any }) {
                     idKelurahan: null
                 },
                 select: {
+                    id: true,
                     description: true,
                     AreaKecamatan: {
                         select: {
@@ -93,6 +95,7 @@ export default async function funGetRhiByArea({ find }: { find: any }) {
                     },
                 },
                 select: {
+                    id: true,
                     description: true,
                     AreaKelurahan: {
                         select: {
