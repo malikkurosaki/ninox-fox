@@ -1,10 +1,9 @@
+import { ViewPairingFront } from '@/modules/pairing/front';
 import React from 'react';
 
 function Page() {
   return (
-    <div>
-      Page
-    </div>
+    <ViewPairingFront/>
   );
 }
 
