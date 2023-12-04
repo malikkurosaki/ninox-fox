@@ -20,7 +20,7 @@ export default async function funUploadPct({ body }: { body: any }) {
         });
     }
 
-    revalidatePath('dashboard-admin/public-concern-trend')
+    revalidatePath('dashboard/public-concern-trend')
 
     return {
         success: true,
