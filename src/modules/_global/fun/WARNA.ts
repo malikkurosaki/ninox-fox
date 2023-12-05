@@ -5,4 +5,5 @@ export const WARNA = {
     bg: "rgba(0,0,0,0.3)",
     merah_emotion: '#DD0202',
     hijau_emotion: "#62C63F",
+    ungu: "#18003C"
 }

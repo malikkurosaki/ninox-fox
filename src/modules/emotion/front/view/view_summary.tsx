@@ -1,10 +1,11 @@
 "use client"
 import PageSubTitle from '@/modules/_global/front/components/PageSubtitle';
-import { BackgroundImage, Box, Flex, Grid, Image, SimpleGrid, Stack } from '@mantine/core';
+import { BackgroundImage, Box, Center, Flex, Grid, Image, SimpleGrid, Stack } from '@mantine/core';
 import React from 'react';
 import CandidateSummary from '../component/candidate_summary';
 import TableTop10 from '../component/table_top_10';
 import EchartCandidateSummary from '../component/echart_candidate_summary';
+import TopPairingCandidate from '../component/top_pairing_candidate';
 
 export default function ViewSummary() {
   return (
@@ -28,30 +29,21 @@ export default function ViewSummary() {
           <Box>
             <CandidateSummary />
           </Box>
-          <Box >
-            <Image src={"/bgEmotion.png"} alt='bg' />
-          </Box>
+          <Center
+          >
+            <Image src={"/bgEmotion1.png"} alt='bg' h={"45vh"}
+              w="auto" />
+          </Center>
           <Box>
-          <EchartCandidateSummary />
+            <EchartCandidateSummary />
           </Box>
         </SimpleGrid>
-        {/* <Grid grow gutter="xl">
-          <Grid.Col span={{  md: 2, lg: 2 }}>
-            <CandidateSummary />
-          </Grid.Col>
-          <Grid.Col span={{ md: 5, lg: 5 }}>
-            <Box >
-              <Image src={"/bgEmotion.png"} alt='bg' h={200}
-                w="auto" />
-            </Box>
-          </Grid.Col>
-          <Grid.Col span={{ md: 5, lg: 5 }}>
-            <EchartCandidateSummary />
-          </Grid.Col>
-        </Grid> */}
 
-        <Box pt={20}>
+        <Box pt={10}>
           <TableTop10 />
+        </Box>
+        <Box pt={30}>
+          <TopPairingCandidate />
         </Box>
       </Stack>
 

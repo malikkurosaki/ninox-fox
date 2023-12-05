@@ -5,6 +5,7 @@ import { useShallowEffect } from '@mantine/hooks';
 import * as echarts from 'echarts';
 import { WARNA } from '@/modules/_global/fun/WARNA';
 import { COLOR_EMOTION } from '@/modules/_global/fun/COLOR_EMOTION';
+import { Box, Center } from '@mantine/core';
 
 export default function EchartPopularityPie() {
   const [options, setOptions] = useState<EChartsOption>({});
@@ -96,7 +97,7 @@ export default function EchartPopularityPie() {
               value: 30,
               name: 'Uncomfortable',
               itemStyle: {
-                color:"#F37D80",
+                color: "#F37D80",
               }
             },
             {
@@ -132,10 +133,14 @@ export default function EchartPopularityPie() {
 
   return (
     <>
-      <EChartsReact style={{
-        height: 400,
-        width: 400,
-      }} option={options} />
+    <Box pt={20}>
+        <Center>
+        <EChartsReact style={{
+          height: 400,
+          width: 400,
+        }} option={options} />
+        </Center>
+    </Box>
     </>
   );
 }

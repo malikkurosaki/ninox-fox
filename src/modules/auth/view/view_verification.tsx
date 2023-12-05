@@ -16,22 +16,14 @@ export default function ViewVerification() {
         <Flex justify={"center"} align={"center"} style={{
           height: "100vh"
         }} >
-          <Box style={{
-            backgroundColor: "#000000",
-            border: `2px solid navy`,
-            padding: 30,
-            borderRadius: 10,
-            position: "fixed",
-            opacity: 0.7,
-            zIndex: 0
-          }}
-            w={{ base: 300, sm: 400 }}
-            h={{ base: 300, sm: 320 }}
-          />
           <Box
             style={{
-              zIndex: 1000
+              backgroundColor: "#000000",
+              border: `2px solid ${"#280B4F"}`,
+              padding: 30,
+              borderRadius: 10,
             }}
+              w={{ base: 300, sm: 400 }}
           >
             <Grid grow>
               <Grid.Col>

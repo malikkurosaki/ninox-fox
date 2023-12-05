@@ -5,6 +5,7 @@ import React from 'react';
 import EchartSentimentAnalysis from '../components/echart_sentiment_analysis';
 import EchartPublicConcerns from '../components/echart_public_concerns';
 import EchartLeader from '../components/echart_leader';
+import { WARNA } from '@/modules/_global/fun/WARNA';
 
 const dataKabupaten = [
   {
@@ -50,13 +51,23 @@ export default function ViewRegionalInsights() {
     <>
       <PageSubTitle text1='REGIONAL' text2='INSIGHTS' />
       <Stack pt={20}>
-        <Group justify='flex-end'>
-          <Select
-            placeholder=" Select Candidate"
-            data={['I Wayan Koster', 'I Kadek Adi', 'I Wayan Marta']}
-          />
-          <Button c={"dark"} bg={"white"}>GENERATE</Button>
-        </Group>
+        <Box
+        style={{
+          backgroundColor: WARNA.ungu,
+          position: "sticky",
+          top: 0,
+          zIndex: 99,
+          padding: 10,
+        }}
+        >
+          <Group justify='flex-end'>
+            <Select
+              placeholder=" Select Candidate"
+              data={['I Wayan Koster', 'I Kadek Adi', 'I Wayan Marta']}
+            />
+            <Button c={"dark"} bg={"white"}>GENERATE</Button>
+          </Group>
+        </Box>
         {dataKabupaten.map((item) => {
           return (
             <Box key={item.id}>
@@ -70,7 +81,7 @@ export default function ViewRegionalInsights() {
                 </Grid.Col>
                 <Grid.Col span={{ md: 4, lg: 4 }}>
                   <EchartLeader />
-                </Grid.Col> 
+                </Grid.Col>
               </Grid>
             </Box>
           )

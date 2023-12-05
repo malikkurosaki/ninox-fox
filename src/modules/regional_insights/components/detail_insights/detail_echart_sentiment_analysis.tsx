@@ -7,7 +7,7 @@ import { Box, Button, Center, Grid, Group, Text } from '@mantine/core';
 import { WARNA } from '@/modules/_global/fun/WARNA';
 import { useRouter } from 'next/navigation';
 
-export default function EchartSentimentAnalysis() {
+export default function DetailEchartSentimentAnalysis() {
   const router = useRouter()
   const [options, setOptions] = useState<EChartsOption>({});
 
@@ -21,7 +21,8 @@ export default function EchartSentimentAnalysis() {
         text: "SENTIMENT ANALYSIS",
         right: "0",
         textStyle: {
-          color: "white"
+          color: "white",
+          fontSize: 15
         }
       },
       tooltip: {
@@ -148,7 +149,7 @@ export default function EchartSentimentAnalysis() {
           borderRadius: 10
         }}
       >
-        <EChartsReact style={{ height: 350, }} option={options} />
+        <EChartsReact style={{ height: 300, }} option={options} />
         <Group justify='space-between'>
           <Group pl={30}>
             <Box mr={20}>
@@ -160,9 +161,6 @@ export default function EchartSentimentAnalysis() {
               <Text ta={'center'} c={WARNA.hijau_emotion} fz={25} fw={'bold'}>3.810.901</Text>
             </Box>
           </Group>
-          <Box pr={30}>
-            <Button w={130} c={"dark"} bg={"white"} onClick={() => router.push("/insights/detail/1")}>DETAIL</Button>
-          </Box>
         </Group>
       </Box>
     </>
