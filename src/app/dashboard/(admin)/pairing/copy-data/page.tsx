@@ -1,9 +1,12 @@
+import { MasterProvinceGetAll } from '@/modules/_global';
 import { ViewCopyDataPairing } from '@/modules/pairing';
 import React from 'react';
 
-function Page() {
+async function Page() {
+  const prov = await MasterProvinceGetAll()
+
   return (
-    <ViewCopyDataPairing/>
+    <ViewCopyDataPairing provinsi={prov} />
   );
 }
 
