@@ -143,7 +143,7 @@ export default function EchartCandidateSummary() {
                 }}
             >
                 <EChartsReact style={{
-                    height: 350, width: "auto"
+                    height: 335, width: "auto"
                 }} option={options} />
             </Box>
         </>

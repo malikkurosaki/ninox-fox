@@ -14,36 +14,62 @@ export default function EchartTopPairingCandidate() {
 
     const loadData = () => {
         const option: EChartsOption = {
-            xAxis: {
-                type: 'category',
-                data: ['Mon', 'Tue', 'Wed', 'Thu'],
-                show: false
-            },
-            yAxis: {
-                type: 'value',
-                show: false
-            },
             tooltip: {
-                trigger: 'axis'
-            },
-            series: [
-                {
-                    data: [10, 33, 30, 40],
-                    name: "Candidate ",
-                    type: 'line',
-                    color: WARNA.hijau,
-                    smooth: true,
-                    showSymbol: false,
+                trigger: 'axis',
+                axisPointer: {
+                  type: 'shadow'
                 }
-            ]
-        };
+              },
+              grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+              },
+              xAxis: [
+                {
+                  type: 'category',
+                  data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                  show: false,
+                  axisTick: {
+                    alignWithLabel: true
+                  }
+                }
+              ],
+              yAxis: [
+                {
+                  type: 'value',
+                  show: false,
+                  max: "100",
+                  splitLine: {
+                    lineStyle: {
+                      color: "gray",
+                      opacity: 0.5
+                    }
+                  },
+                  axisLabel: {
+                    formatter: `{value}% `,
+                    color: "white"
+                  },
+                }
+              ],
+              series: [
+                {
+                  name: 'Top Candidate',
+                  type: 'bar',
+                  barWidth: '60%',
+                  data: [10, 52,40, 33, 30, 40, 67],
+                  color: WARNA.hijau_emotion
+                }
+              ]
+            };
         setOptions(option);
     }
 
     return (
         <>
-        <Box pt={20}>
-            <EChartsReact style={{ height: 100, width: "auto" }} option={options} />
+        <Box>
+            <EChartsReact style={{ height: 200 }} option={options} />
         </Box>
         </>
     );

@@ -1,48 +1,48 @@
 import { WARNA } from '@/modules/_global/fun/WARNA';
-import { Box, Grid, Group, Image, SimpleGrid, Text } from '@mantine/core';
+import { Box, Flex, Grid, Group, Image, SimpleGrid, Text } from '@mantine/core';
 import React from 'react';
 import EchartTopPairingCandidate from './echart_top_pairing_candidate';
 
 const dataCan = [
     {
         id: 1,
-        can: "/candidate/can1.png",
-        wakilCan: "/candidate/can2.png",
+        can: "/candidate/candidate.png",
+        wakilCan: "/candidate/candidate.png",
         value: "43.05 %",
         chart: "chart"
     },
     {
         id: 2,
-        can: "/candidate/can1.png",
-        wakilCan: "/candidate/can3.png",
+        can: "/candidate/candidate.png",
+        wakilCan: "/candidate/candidate.png",
         value: "33.08 %",
         chart: "chart"
     },
     {
         id: 3,
-        can: "/candidate/can1.png",
-        wakilCan: "/candidate/can4.png",
+        can: "/candidate/candidate.png",
+        wakilCan: "/candidate/candidate.png",
         value: "23.10 %",
         chart: "chart"
     },
     {
         id: 4,
-        can: "/candidate/can1.png",
-        wakilCan: "/candidate/can2.png",
+        can: "/candidate/candidate.png",
+        wakilCan: "/candidate/candidate.png",
         value: "13.15 %",
         chart: "chart"
     },
     {
         id: 5,
-        can: "/candidate/can1.png",
-        wakilCan: "/candidate/can3.png",
+        can: "/candidate/candidate.png",
+        wakilCan: "/candidate/candidate.png",
         value: "12.08 %",
         chart: "chart"
     },
     {
         id: 6,
-        can: "/candidate/can1.png",
-        wakilCan: "/candidate/can4.png",
+        can: "/candidate/candidate.png",
+        wakilCan: "/candidate/candidate.png",
         value: "11.10 %",
         chart: "chart"
     },
@@ -53,17 +53,17 @@ export default function TopPairingCandidate() {
         <>
             <Box>
                 <Box style={{
-                    background: WARNA.bg,
-                    borderRadius: 10,
-                    padding: 20
+                    // background: WARNA.bg,
+                    // borderRadius: 10,
+                    // padding: 20
                 }}>
                     <Box>
-                        <Text c={"white"} fz={20} fw={"bold"}>TOP PAIRING CANDIDATES</Text>
+                        <Text c={"white"} fz={25} fw={"bold"}>TOP PAIRING CANDIDATES</Text>
                     </Box>
                     <SimpleGrid
-                        cols={{ base: 1, sm: 2, lg: 3 }}
+                        cols={{ base: 1, sm: 2, lg: 2 }}
                         spacing={{ base: 10, sm: 'xl' }}
-                        pt={30}
+                        pt={10}
                     >
                         {dataCan.map((item) => {
                             return (
@@ -71,16 +71,18 @@ export default function TopPairingCandidate() {
                                     <Box style={{
                                         backgroundColor: "rgba(0,0,0,0.3)",
                                         borderRadius: 10,
-                                        padding: 20
+                                        padding: 10
                                     }}>
-                                        <Grid>
+                                        <Grid gutter={0}>
                                             <Grid.Col span={{ md: 6, lg: 6 }}>
-                                                <Group>
-                                                    <Image alt='sdsd' src={item.can} maw={60} mx="auto" />
-                                                    <Image alt='sdsd' src={item.wakilCan} maw={60} mx="auto" />
-                                                </Group>
-                                                <Box pt={20}>
-                                                    <Text ta={"center"} c={"white"} fw={"bold"} fz={20}>{item.value}</Text>
+                                                <Box pt={"3vh"}>
+                                                    <Group justify='center'>
+                                                        <Image alt='sdsd' src={item.can} maw={100} mx="auto" />
+                                                        <Image alt='sdsd' src={item.wakilCan} maw={100} mx="auto" />
+                                                    </Group>
+                                                    <Box pt={20}>
+                                                        <Text ta={"center"} c={"white"} fw={"bold"} fz={35}>{item.value}</Text>
+                                                    </Box>
                                                 </Box>
 
                                             </Grid.Col>

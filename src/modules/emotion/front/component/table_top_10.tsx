@@ -158,9 +158,7 @@ export default function TableTop10() {
           <Pagination total={10} color="#A0ADA6" />
         </Group>
       </Box>
-      <Box pt={30}>
-        <TopPairingCandidate />
-      </Box>
+
 
 
     </>
