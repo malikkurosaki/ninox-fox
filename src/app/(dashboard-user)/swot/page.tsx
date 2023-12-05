@@ -1,10 +1,11 @@
+import { ViewSwot } from '@/modules/swot';
 import React from 'react';
 
 function Page() {
   return (
-    <div>
-      Page
-    </div>
+    <>
+    <ViewSwot/>
+    </>
   );
 }
 

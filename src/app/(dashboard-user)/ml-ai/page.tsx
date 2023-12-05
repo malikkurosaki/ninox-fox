@@ -1,10 +1,9 @@
+import { ViewMlAi } from '@/modules/mlai';
 import React from 'react';
 
 function Page() {
   return (
-    <div>
-      Page
-    </div>
+    <ViewMlAi/>
   );
 }
 
