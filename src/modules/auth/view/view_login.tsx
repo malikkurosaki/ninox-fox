@@ -1,6 +1,6 @@
 "use client"
 import { WARNA } from '@/modules/_global/fun/WARNA';
-import { BackgroundImage, Box, Button, Flex, Grid, Group, PasswordInput, Stack, Text, TextInput } from '@mantine/core';
+import { BackgroundImage, Box, Button, Flex, Grid, Group, PasswordInput, SimpleGrid, Stack, Text, TextInput } from '@mantine/core';
 import React, { useState } from 'react';
 import { LuShieldCheck } from 'react-icons/lu';
 
@@ -12,22 +12,14 @@ export default function ViewLogin() {
         <Flex justify={"center"} align={"center"} style={{
           height: "100vh"
         }} >
-          <Box style={{
-            backgroundColor: "#000000",
-            border: `2px solid navy`,
-            padding: 30,
-            borderRadius: 10,
-            position: "fixed",
-            opacity: 0.7,
-            zIndex: 0
-          }}
-            w={{ base: 300, sm: 400 }}
-            h={{ base: 300, sm: 400 }}
-          />
           <Box
             style={{
-              zIndex: 1000
+              backgroundColor: "#000000",
+              border: `2px solid ${"#280B4F"}`,
+              padding: 30,
+              borderRadius: 10,
             }}
+            w={{ base: 300, sm: 400 }}
           >
             <Box
             >
