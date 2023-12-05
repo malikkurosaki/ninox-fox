@@ -2,7 +2,7 @@
 import {
   Box,
   Button,
-  Grid,
+  Center,
   Group,
   Paper,
   Select,
@@ -14,12 +14,12 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import TableDataPairing from "../components/table_data_pairing";
 import { DateInput } from "@mantine/dates";
-import UploadDataPairing from "../components/upload_data_pairing";
 import _ from "lodash";
 import moment from "moment";
 import { MasterKabGetByProvince } from "@/modules/_global";
 import { funGetCandidateActiveByArea } from "@/modules/candidate";
 import toast from "react-simple-toasts";
+import papa from "papaparse"
 
 /**
  * Fungsi untuk menampilkan table list pairing.
@@ -29,7 +29,7 @@ import toast from "react-simple-toasts";
 
 
 
-export default function ViewPairing({ param, provinsi, kabupaten, candidate, datatable }: { param: any, provinsi: any, kabupaten: any, candidate: any, datatable: any }) {
+export default function ViewPairing({ param, provinsi, kabupaten, candidate, datatable, dataDownload }: { param: any, provinsi: any, kabupaten: any, candidate: any, datatable: any, dataDownload: any}) {
   const router = useRouter()
   const today = new Date();
 
@@ -144,7 +144,7 @@ export default function ViewPairing({ param, provinsi, kabupaten, candidate, dat
                   required
                   value={isCandidate2}
                   label={"Candidate 2"}
-
+                  searchable
                   onChange={(val) => {
                     if (val == isCandidate1) {
                       setCandidate2(null)
@@ -162,9 +162,31 @@ export default function ViewPairing({ param, provinsi, kabupaten, candidate, dat
               </Stack>
             </Paper>
           </Box>
-          {(param.idProvinsi > 0) &&
-            <Box>
-              <UploadDataPairing />
+          <Box>
+            <Box
+              style={{
+                backgroundColor: "white",
+                padding: 27,
+                borderRadius: 10,
+              }}
+            >
+              <Center>
+                <Box
+                  style={{
+                    border: "1px dashed gray",
+                    borderRadius: 10,
+                    padding: 50,
+                    cursor: "pointer",
+                  }}
+                  onClick={() => router.push("/dashboard/pairing/upload")}
+                >
+                  <Text ta={"center"} size="xl" inline>
+                    UPLOAD DATA
+                  </Text>
+                </Box>
+              </Center>
+            </Box>
+            {(param.idProvinsi > 0) &&
               <Group justify="space-between" grow pt={30}>
                 <Box>
                   <Box
@@ -176,6 +198,18 @@ export default function ViewPairing({ param, provinsi, kabupaten, candidate, dat
                       backgroundColor: "gray",
                       cursor: "pointer",
                     }}
+
+                    onClick={() => {
+                      const dataJson = dataDownload.data
+
+                      const jsonData = papa.unparse(dataJson)
+                      const jsonDataUrl = "data:text/csv;charset=utf-8," + encodeURIComponent(jsonData)
+
+                      const jsonDwnloadLink = document.createElement("a")
+                      jsonDwnloadLink.href = jsonDataUrl
+                      jsonDwnloadLink.download = dataDownload.title + ".csv"
+                      jsonDwnloadLink.click()
+                  }}
                   >
                     <Text c={"white"} fw={"bold"} ta={"center"}>
                       DOWNLOAD
@@ -200,13 +234,13 @@ export default function ViewPairing({ param, provinsi, kabupaten, candidate, dat
                   </Box>
                 </Box>
               </Group>
-            </Box>
-          }
+            }
+          </Box>
         </SimpleGrid>
       </Box>
       {(param.idProvinsi > 0) &&
         <Box pt={30}>
-          <TableDataPairing />
+          <TableDataPairing data={datatable.data} th={datatable.th} />
         </Box>
       }
     </>
