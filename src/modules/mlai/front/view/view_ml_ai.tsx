@@ -28,11 +28,11 @@ export default function ViewMlAi() {
           <Text fw={"bold"} ta={"center"} c={"white"}>I WAYAN COSTER</Text>
         </Box>
 
-        <Box>
+        <Box pt={20}>
           <Box
             style={{
               background: "rgba(0,0,0,0.3)",
-              padding: 10,
+              padding: 30,
               borderRadius: 10
             }}
 
@@ -46,10 +46,10 @@ export default function ViewMlAi() {
               />
             </Group>
             <Box pt={20}>
-            <ScrollArea h={"45vh"}>
+            <ScrollArea h={"34vh"}>
               {dataMl.map((item) => {
                 return (
-                  <Stack pl={10} key={item.id}>
+                  <Stack key={item.id}>
                   <Text c={"white"} fz={14}>
                     <TextAnimation
                       phrases={[...item.desc.split('\n')]}

@@ -14,13 +14,13 @@ export default function ViewPopularity() {
         <Grid gutter={'lg'}>
           <Grid.Col span={{ md: 6, lg: 6 }}>
             <Box
-              // style={{
-              //   background: "rgba(0,0,0,0.3)",
-              //   padding: 10,
-              //   borderRadius: 10
-              // }}
-              // pt={20}
-              // pb={20}
+            // style={{
+            //   background: "rgba(0,0,0,0.3)",
+            //   padding: 10,
+            //   borderRadius: 10
+            // }}
+            // pt={20}
+            // pb={20}
             >
               <Text ta={"center"} c={"white"} fz={25} fw={"bold"}>CALON GUBERNUR BALI 2024</Text>
               <Group justify='space-evenly' gap={30} pt={30}>
@@ -53,6 +53,7 @@ export default function ViewPopularity() {
               <Button fullWidth bg={"white"} c={"dark"}>GENERATE</Button>
             </SimpleGrid>
             <Box pt={50}>
+              <Text ta={"center"} c={"white"} fw={"bold"} fz={30}>SUCCESS PROBABILITY PROJECTION</Text>
               <Text ta={"center"} c={"#1EBA1B"} fw={"bold"} fz={120}>57.99 %</Text>
             </Box>
           </Grid.Col>

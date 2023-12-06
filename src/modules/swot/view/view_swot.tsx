@@ -59,7 +59,7 @@ export default function ViewSwot() {
           </Flex>
         </Grid.Col>
         <Grid.Col span={{ md: 9, lg: 9 }}>
-          <ScrollArea h={"100vh"}>
+          <ScrollArea h={"85vh"}>
             {dataSwot.map((item) => {
               return (
                 <Box key={item.id} pb={20}>

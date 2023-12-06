@@ -63,7 +63,7 @@ export default function ViewStep() {
           </Flex>
         </Grid.Col>
         <Grid.Col span={{ md: 9, lg: 9 }}>
-          <ScrollArea h={"100vh"}>
+          <ScrollArea h={"85vh"}>
             {dataStep.map((item) => {
               return (
                 <Box key={item.id} pb={20}>

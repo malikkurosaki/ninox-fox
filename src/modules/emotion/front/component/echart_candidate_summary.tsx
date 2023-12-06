@@ -3,7 +3,7 @@ import { EChartsOption, color } from "echarts";
 import EChartsReact from "echarts-for-react";
 import { useShallowEffect } from '@mantine/hooks';
 import * as echarts from 'echarts';
-import { Box } from '@mantine/core';
+import { Box, Button, Divider, Group } from '@mantine/core';
 
 export default function EchartCandidateSummary() {
     const [options, setOptions] = useState<EChartsOption>({});
@@ -88,7 +88,7 @@ export default function EchartCandidateSummary() {
                     smooth: true,
                     showSymbol: false,
                     data: [20, 21, 5, 41, 22, 34, 31],
-                    color: "white",
+                    color: "#EBEBEB",
                     stack: 'x',
                     areaStyle: {
                         opacity: 1,
@@ -136,14 +136,23 @@ export default function EchartCandidateSummary() {
     return (
         <>
             <Box
-                style={{
-                    background: "rgba(0,0,0,0.3)",
-                    padding: 10,
-                    borderRadius: 10
-                }}
+                // style={{
+                //     background: "rgba(0,0,0,0.3)",
+                //     padding: 10,
+                //     borderRadius: 10
+                // }}
             >
+                <Group justify='flex-end'>
+                    <Group>
+                        <Button variant='subtle' c={"white"}>Month</Button>
+                        <Divider orientation="vertical" />
+                        <Button variant='subtle' c={"white"}>Week</Button>
+                        <Divider orientation="vertical" />
+                        <Button variant='subtle' c={"white"}>Custom</Button>
+                    </Group>
+                </Group>
                 <EChartsReact style={{
-                    height: 335, width: "auto"
+                    height: 320
                 }} option={options} />
             </Box>
         </>

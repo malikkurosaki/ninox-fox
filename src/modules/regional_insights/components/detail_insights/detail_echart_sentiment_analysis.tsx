@@ -19,7 +19,6 @@ export default function DetailEchartSentimentAnalysis() {
     const option: EChartsOption = {
       title: {
         text: "SENTIMENT ANALYSIS",
-        right: "0",
         textStyle: {
           color: "white",
           fontSize: 15

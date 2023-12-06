@@ -113,7 +113,7 @@ export default function EchartPublicConcerns() {
           borderRadius: 10
         }}
       >
-        <EChartsReact style={{ height: 280, }} option={options} />
+        <EChartsReact style={{ height: 330, }} option={options} />
       </Box>
     </>
   );

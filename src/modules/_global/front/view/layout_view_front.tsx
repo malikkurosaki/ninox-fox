@@ -59,7 +59,7 @@ export default function LayoutViewFront({ children }: { children: React.ReactNod
                     <Box key={i}>
                       <Tooltip label={_.upperCase((v.label))}>
                         <ActionIcon
-                          c={v.link === active ? WARNA.merah : "white"}
+                          c={v.link === active ? "#CF0A0A" : "white"}
                           size={30}
                           variant="subtle"
                           onClick={() => {
@@ -122,7 +122,7 @@ export default function LayoutViewFront({ children }: { children: React.ReactNod
                         </Title>
                         <Grid pt={5}>
                           <Grid.Col span={3}>
-                            <Divider color={WARNA.merah} size="lg" />
+                            <Divider color={"#CF0A0A"} size="lg" />
                           </Grid.Col>
                         </Grid>
                       </Box>
