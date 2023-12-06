@@ -1,6 +1,6 @@
 "use client"
 
-import { Box, Group, SimpleGrid, Stack, Text } from '@mantine/core';
+import { Box, Group, Select, SimpleGrid, Stack, Text } from '@mantine/core';
 import React, { useState } from 'react';
 import { provinsiCount } from '../fun/fun_provinsi_count';
 
@@ -22,10 +22,14 @@ export default function Home({ pro, kab, kec, kel, can1, can2 }: { pro: number, 
       <Text fz={25} c={'#213555'} fw={'bold'}>HI ADMIN 2</Text>
       <Group>
         <Text c={"#4F709C"}>DEFAULT WILAYAH UNTUK DASHBOARD USER</Text>
-        <Text c={"#4F709C"} fw={'bold'}>JAWA TIMUR</Text>
+        <Select
+          placeholder="Select Wilayah"
+          defaultValue={'Jawa Timur'}
+          data={['Jawa Timur', 'Kalimantan Tengah', 'DKI Jakarta']}
+          radius={20}
+          w={200}
+        />
       </Group>
-
-
       <Box pt={30}>
         <Group grow>
           <Box style={{
