@@ -152,16 +152,13 @@ export default function EchartSentimentAnalysis() {
           <Group pl={30}>
             <Box mr={20}>
               <Text c={WARNA.merah_emotion} fz={15}>Filtered Audience</Text>
-              <Text ta={'center'} c={WARNA.hijau_emotion} fz={25} fw={'bold'}>2.801.891</Text>
+              <Text ta={'center'} c={WARNA.hijau_emotion} fz={25} fw={'bold'}>3.810.901</Text>
             </Box>
             <Box>
               <Text c={WARNA.merah_emotion} fz={15}>Locked Audience</Text>
               <Text ta={'center'} c={WARNA.hijau_emotion} fz={25} fw={'bold'}>3.810.901</Text>
             </Box>
           </Group>
-          <Box pr={30}>
-            <Button w={130} c={"dark"} bg={"white"} onClick={() => router.push("/insights/detail/1")}>DETAIL</Button>
-          </Box>
         </Group>
       </Box>
     </>

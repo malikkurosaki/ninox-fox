@@ -183,7 +183,7 @@ export default function EchartPairingSentiment() {
                 <Text fz={25} ml={20} fw={"bold"} c={"white"}>{item.name}</Text>
                 <Text fz={16} mr={20}  c={"white"}>SENTIMENT ANALYSIS</Text>
               </Group>
-              <EChartsReact style={{ height: 600, }} option={options} />
+              <EChartsReact style={{ height: 500, width: "100%"}} option={options} />
             </Box>
           </Box>
         )

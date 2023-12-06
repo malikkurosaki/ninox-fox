@@ -7,7 +7,7 @@ import { GrBarChart } from 'react-icons/gr';
 import { MdArrowForwardIos, MdPersonSearch } from 'react-icons/md';
 import { HiChip, HiOutlineChartSquareBar } from 'react-icons/hi';
 import { usePathname, useRouter } from 'next/navigation';
-import { ActionIcon, AppShell, AppShellNavbar, AppShellSection, Box, Burger, Button, Center, Divider, Grid, Group, NavLink, Skeleton, Stack, Text, Title, Tooltip } from '@mantine/core';
+import { ActionIcon, AppShell, AppShellNavbar, AppShellSection, Box, Burger, Button, Center, Divider, Grid, Group, Modal, NavLink, Skeleton, Stack, Text, Title, Tooltip } from '@mantine/core';
 import _, { keyBy } from 'lodash';
 import { DataNavbarTutup } from '../components/data_navbar_tutup';
 import { GlobalDark } from '../components/dark';
@@ -16,8 +16,12 @@ import { RiLogoutCircleRLine } from 'react-icons/ri';
 import { Truculenta } from 'next/font/google';
 import { AiOutlineClose } from 'react-icons/ai';
 import { DataNavbarBuka } from '../components/data_navbar_buka';
+import { useAtom } from 'jotai';
+import { isModalLayout } from '../val/isModallayout';
+import ModalLogoutUser from '../components/modal_logout_user';
 
 export default function LayoutViewFront({ children }: { children: React.ReactNode }) {
+  const [valOpenModal, setOpenModal] = useAtom(isModalLayout)
   const [opened, { toggle }] = useDisclosure();
   const [isOpenNavbar, setOpenNavbar] = useState(true)
   const [isNavOpt, setNavOpt] = useState({ width: 100, breakpoint: 'sm', collapsed: { mobile: isOpenNavbar } })
@@ -55,7 +59,7 @@ export default function LayoutViewFront({ children }: { children: React.ReactNod
                     <Box key={i}>
                       <Tooltip label={_.upperCase((v.label))}>
                         <ActionIcon
-                          c={v.link === active ? WARNA.merah : "white"}
+                          c={v.link === active ? "#CF0A0A" : "white"}
                           size={30}
                           variant="subtle"
                           onClick={() => {
@@ -86,7 +90,7 @@ export default function LayoutViewFront({ children }: { children: React.ReactNod
                   </ActionIcon>
                 </Group>
                 <Group justify='center' >
-                  <ActionIcon variant='subtle'>
+                  <ActionIcon variant='subtle' onClick={() => setOpenModal(true)}>
                     <RiLogoutCircleRLine size={30} color={"white"} />
                   </ActionIcon>
                 </Group>
@@ -118,7 +122,7 @@ export default function LayoutViewFront({ children }: { children: React.ReactNod
                         </Title>
                         <Grid pt={5}>
                           <Grid.Col span={3}>
-                            <Divider color={WARNA.merah} size="lg" />
+                            <Divider color={"#CF0A0A"} size="lg" />
                           </Grid.Col>
                         </Grid>
                       </Box>
@@ -147,7 +151,7 @@ export default function LayoutViewFront({ children }: { children: React.ReactNod
                 cursor: 'pointer',
               }}
             >
-              <Group justify='center' pl={20}  >
+              <Group justify='center' pl={20}  onClick={() => setOpenModal(true)}>
                 <ActionIcon variant='subtle'>
                   <RiLogoutCircleRLine size={30} color={"white"} />
                 </ActionIcon>
@@ -162,6 +166,15 @@ export default function LayoutViewFront({ children }: { children: React.ReactNod
           </Box>
         </AppShell.Main>
       </AppShell>
+      <Modal
+        opened={valOpenModal}
+        onClose={() => setOpenModal(false)}
+        centered
+        withCloseButton={false}
+        closeOnClickOutside={false}
+      >
+        <ModalLogoutUser />
+      </Modal>
     </>
   );
 }

@@ -5,6 +5,8 @@ import React from 'react';
 import EchartSentimentAnalysis from '../components/echart_sentiment_analysis';
 import EchartPublicConcerns from '../components/echart_public_concerns';
 import EchartLeader from '../components/echart_leader';
+import { WARNA } from '@/modules/_global/fun/WARNA';
+import { useRouter } from 'next/navigation';
 
 const dataKabupaten = [
   {
@@ -46,22 +48,37 @@ const dataKabupaten = [
 ]
 
 export default function ViewRegionalInsights() {
+  const router = useRouter()
   return (
     <>
       <PageSubTitle text1='REGIONAL' text2='INSIGHTS' />
       <Stack pt={20}>
-        <Group justify='flex-end'>
-          <Select
-            placeholder=" Select Candidate"
-            data={['I Wayan Koster', 'I Kadek Adi', 'I Wayan Marta']}
-          />
-          <Button c={"dark"} bg={"white"}>GENERATE</Button>
-        </Group>
+        <Box
+          style={{
+            backgroundColor: WARNA.ungu,
+            position: "sticky",
+            top: 0,
+            zIndex: 99,
+            paddingTop: 10,
+            paddingBottom: 10
+          }}
+        >
+          <Group justify='flex-end'>
+            <Select
+              placeholder=" Select Candidate"
+              data={['I Wayan Koster', 'I Kadek Adi', 'I Wayan Marta']}
+            />
+            <Button c={"dark"} bg={"white"}>GENERATE</Button>
+          </Group>
+        </Box>
         {dataKabupaten.map((item) => {
           return (
-            <Box key={item.id}>
-              <Group justify='space-between'>
+            <Box key={item.id} pt={20}>
+              <Group justify='space-between' pb={10}>
                 <Text fz={26} fw={"bold"} c={"white"}>{item.name}</Text>
+                <Box>
+                  <Button w={130} c={"dark"}  bg={"white"} onClick={() => router.push("/insights/detail/1")}>DETAIL</Button>
+                </Box>
               </Group>
               <EchartSentimentAnalysis />
               <Grid gutter={30} pt={20} pb={30}>
@@ -70,7 +87,7 @@ export default function ViewRegionalInsights() {
                 </Grid.Col>
                 <Grid.Col span={{ md: 4, lg: 4 }}>
                   <EchartLeader />
-                </Grid.Col> 
+                </Grid.Col>
               </Grid>
             </Box>
           )

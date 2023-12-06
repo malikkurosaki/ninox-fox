@@ -7,11 +7,12 @@ export default function CandidateSummary() {
     <>
       <Box>
         <Box
-          style={{
-            background: "rgba(0,0,0,0.3)",
-            padding: 10,
-            borderRadius: 10
-          }}
+          // style={{
+          //   background: "rgba(0,0,0,0.3)",
+          //   padding: 10,
+          //   borderRadius: 10,
+          //   zIndex: 99999
+          // }}
         >
           <Image src={"/candidate/candidate.png"} alt='canidate' maw={200} mx="auto" />
           <Box p={10}>
@@ -31,7 +32,7 @@ export default function CandidateSummary() {
               borderRadius: 5
             }}>
               <Text ml={5} fz={13} c={"white"}>POSITIVE</Text>
-              <Text ta={'center'} mt={10} fw={'bold'} c={"white"} fz={24}>57.76%</Text>
+              <Text ta={'center'} fw={'bold'} c={"white"} fz={24}>57.76%</Text>
             </Box>
           </Box>
           <Box pt={20}>
@@ -42,7 +43,7 @@ export default function CandidateSummary() {
               borderRadius: 5
             }}>
               <Text ml={5} fz={13} c={WARNA.hijau}>NEUTRAL</Text>
-              <Text ta={'center'} mt={10} fw={'bold'} c={WARNA.hijau} fz={24}>57.76%</Text>
+              <Text ta={'center'} fw={'bold'} c={WARNA.hijau} fz={24}>57.76%</Text>
             </Box>
           </Box>
           <Box pt={20}>
@@ -53,7 +54,7 @@ export default function CandidateSummary() {
               borderRadius: 5
             }}>
               <Text ml={5} fz={13} c={"white"}>NEGATIVE</Text>
-              <Text ta={'center'} mt={10} fw={'bold'} c={"white"} fz={24}>57.76%</Text>
+              <Text ta={'center'} fw={'bold'} c={"white"} fz={24}>57.76%</Text>
             </Box>
           </Box>
         </SimpleGrid>

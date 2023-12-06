@@ -3,7 +3,7 @@ import { EChartsOption, color } from "echarts";
 import EChartsReact from "echarts-for-react";
 import { useShallowEffect } from '@mantine/hooks';
 import * as echarts from 'echarts';
-import { Box } from '@mantine/core';
+import { Box, Center } from '@mantine/core';
 import { WARNA } from '@/modules/_global/fun/WARNA';
 
 
@@ -69,7 +69,7 @@ export default function EchartPopularityLine() {
     return (
         <>
             <Box pt={20}>
-                <EChartsReact style={{ height: 350, }} option={options} />
+                    <EChartsReact style={{ height: 400, width: "auto" }} option={options} />
             </Box>
         </>
     );

@@ -14,22 +14,22 @@ export default function ViewPopularity() {
         <Grid gutter={'lg'}>
           <Grid.Col span={{ md: 6, lg: 6 }}>
             <Box
-              style={{
-                background: "rgba(0,0,0,0.3)",
-                padding: 10,
-                borderRadius: 10
-              }}
-              pt={20}
-              pb={20}
+            // style={{
+            //   background: "rgba(0,0,0,0.3)",
+            //   padding: 10,
+            //   borderRadius: 10
+            // }}
+            // pt={20}
+            // pb={20}
             >
-              <Text ta={"center"} c={"white"} fz={20} fw={"bold"}>CALON GUBERNUR BALI 2024</Text>
-              <Group justify='center' gap={30} pt={20}>
+              <Text ta={"center"} c={"white"} fz={25} fw={"bold"}>CALON GUBERNUR BALI 2024</Text>
+              <Group justify='space-evenly' gap={30} pt={30}>
                 <Box>
-                  <Image src={"/candidate/can1.png"} alt="candidate" h={200} w="auto" />
+                  <Image src={"/candidate/candidate.png"} alt="candidate" h={200} w="auto" />
                   <Text mt={20} c={"white"} ta={"center"}>I WAYAN COSTER</Text>
                 </Box>
                 <Box>
-                  <Image src={"/candidate/can2.png"} alt="candidate" h={200} w="auto" />
+                  <Image src={"/candidate/candidate.png"} alt="candidate" h={200} w="auto" />
                   <Text mt={20} c={"white"} ta={"center"}> WAKIL I WAYAN COSTER</Text>
                 </Box>
               </Group>
@@ -50,14 +50,15 @@ export default function ViewPopularity() {
                 placeholder="Candidate 2"
                 data={['I Wayan Koster', 'I Kadek Adi', 'I Wayan Marta']}
               />
-              <Button fullWidth bg={"dark"}>GENERATE</Button>
+              <Button fullWidth bg={"white"} c={"dark"}>GENERATE</Button>
             </SimpleGrid>
             <Box pt={50}>
+              <Text ta={"center"} c={"white"} fw={"bold"} fz={30}>SUCCESS PROBABILITY PROJECTION</Text>
               <Text ta={"center"} c={"#1EBA1B"} fw={"bold"} fz={120}>57.99 %</Text>
             </Box>
           </Grid.Col>
         </Grid>
-        <Grid gutter={'lg'}>
+        <Grid gutter={30}>
           <Grid.Col span={{ md: 7, lg: 7 }}>
             <EchartPopularityLine />
           </Grid.Col>

@@ -153,7 +153,7 @@ export default function EchartLeader() {
                 }}
             >
                 <Text fz={18} fw={"bold"} c={"white"}>LEADER TRAIT ASSESSMENT</Text>
-                <EChartsReact style={{ height: 250, }} option={options} />
+                <EChartsReact style={{ height: 300, }} option={options} />
             </Box>
         </>
     );
