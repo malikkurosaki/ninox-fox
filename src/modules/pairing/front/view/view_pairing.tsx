@@ -16,6 +16,7 @@ export default function ViewPairingFront() {
                 top: 0,
                 zIndex: 99,
                 // padding: 10,
+                paddingBottom: 10
               }}
       >
         <Group justify='flex-end'
@@ -36,7 +37,7 @@ export default function ViewPairingFront() {
                 }}
               >
                 <SimpleGrid
-                  cols={{ base: 1, sm: 2, lg: 2 }}
+                  cols={{ sm: 2, lg: 2 }}
                   spacing={{ base: 10, sm: 'xl' }}
                   verticalSpacing={{ base: 'md', sm: 'xl' }}
                 >
@@ -73,7 +74,7 @@ export default function ViewPairingFront() {
           </Grid.Col>
           <Grid.Col span={{ md: 7, lg: 7 }}>
 
-            <ScrollArea h={"100vh"}>
+            <ScrollArea h={"74vh"}>
               <EchartPairingSentiment />
             </ScrollArea>
           </Grid.Col>
