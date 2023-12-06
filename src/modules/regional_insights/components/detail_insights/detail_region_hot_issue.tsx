@@ -16,17 +16,17 @@ export default function DetailRegionHotIssue() {
         <Box
           style={{
             background: "rgba(0,0,0,0.3)",
-            padding: 10,
-            borderRadius: 10
+            borderRadius: 10,
+            padding: 30
           }}
         >
-          <Box pb={10}>
+          <Box pb={20}>
             <Text fz={18} fw={"bold"} c={"red"}>REGION HOT ISSUE</Text>
           </Box>
           {dataRegion.map((item) => {
             return (
-              <ScrollArea h={288} key={item.id}>
-                <Stack  pl={10}>
+              <ScrollArea h={240} key={item.id}>
+                <Stack >
                   <Text c={"white"} fz={14}>
                     <TextAnimation
                       phrases={[...item.name.split('\n')]}

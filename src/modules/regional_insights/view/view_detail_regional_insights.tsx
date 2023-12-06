@@ -40,7 +40,8 @@ export default function ViewDetailRegionalInsights() {
         position: "sticky",
         top: 0,
         zIndex: 99,
-        padding: 10,
+       paddingTop: 10,
+       paddingBottom: 10
       }}>
         <Group justify='space-between'>
           <Text fz={26} fw={"bold"} c={"white"}>DENPASAR</Text>
