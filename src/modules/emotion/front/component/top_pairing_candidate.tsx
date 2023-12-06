@@ -2,47 +2,48 @@ import { WARNA } from '@/modules/_global/fun/WARNA';
 import { Box, Flex, Grid, Group, Image, SimpleGrid, Text } from '@mantine/core';
 import React from 'react';
 import EchartTopPairingCandidate from './echart_top_pairing_candidate';
+import PageSubTitle from '@/modules/_global/front/components/PageSubtitle';
 
 const dataCan = [
     {
         id: 1,
-        can: "/candidate/candidate.png",
-        wakilCan: "/candidate/candidate.png",
+        can: "/candidate/candidate2.png",
+        wakilCan: "/candidate/candidate2.png",
         value: "43.05 %",
         chart: "chart"
     },
     {
         id: 2,
-        can: "/candidate/candidate.png",
-        wakilCan: "/candidate/candidate.png",
+        can: "/candidate/candidate2.png",
+        wakilCan: "/candidate/candidate2.png",
         value: "33.08 %",
         chart: "chart"
     },
     {
         id: 3,
-        can: "/candidate/candidate.png",
-        wakilCan: "/candidate/candidate.png",
+        can: "/candidate/candidate2.png",
+        wakilCan: "/candidate/candidate2.png",
         value: "23.10 %",
         chart: "chart"
     },
     {
         id: 4,
-        can: "/candidate/candidate.png",
-        wakilCan: "/candidate/candidate.png",
+        can: "/candidate/candidate2.png",
+        wakilCan: "/candidate/candidate2.png",
         value: "13.15 %",
         chart: "chart"
     },
     {
         id: 5,
-        can: "/candidate/candidate.png",
-        wakilCan: "/candidate/candidate.png",
+        can: "/candidate/candidate2.png",
+        wakilCan: "/candidate/candidate2.png",
         value: "12.08 %",
         chart: "chart"
     },
     {
         id: 6,
-        can: "/candidate/candidate.png",
-        wakilCan: "/candidate/candidate.png",
+        can: "/candidate/candidate2.png",
+        wakilCan: "/candidate/candidate2.png",
         value: "11.10 %",
         chart: "chart"
     },
@@ -57,9 +58,10 @@ export default function TopPairingCandidate() {
                     // borderRadius: 10,
                     // padding: 20
                 }}>
-                    <Box>
+                    {/* <Box>
                         <Text c={"white"} fz={25} fw={"bold"}>TOP PAIRING CANDIDATES</Text>
-                    </Box>
+                    </Box> */}
+                     <PageSubTitle text1='TOP PAIRING' text2='CANDIDATES' />
                     <SimpleGrid
                         cols={{ base: 1, sm: 2, lg: 2 }}
                         spacing={{ base: 10, sm: 'xl' }}

@@ -7,12 +7,12 @@ export default function CandidateSummary() {
     <>
       <Box>
         <Box
-          style={{
-            background: "rgba(0,0,0,0.3)",
-            padding: 10,
-            borderRadius: 10,
-            zIndex: 99999
-          }}
+          // style={{
+          //   background: "rgba(0,0,0,0.3)",
+          //   padding: 10,
+          //   borderRadius: 10,
+          //   zIndex: 99999
+          // }}
         >
           <Image src={"/candidate/candidate.png"} alt='canidate' maw={200} mx="auto" />
           <Box p={10}>
