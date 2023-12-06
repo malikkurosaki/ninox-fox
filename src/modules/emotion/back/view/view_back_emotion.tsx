@@ -1,31 +1,25 @@
-"use client";
-
+"use client"
 import {
   Box,
   Button,
-  Center,
-  Container,
-  Flex,
   Group,
   Paper,
   Select,
   SimpleGrid,
   Stack,
   Text,
-  UnstyledButton,
 } from "@mantine/core";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { DateInput } from "@mantine/dates";
 import { useRouter } from "next/navigation";
-import UploadData from "../components/upload_data";
 import TableData from "../components/table_data";
 import { MasterKabGetByProvince } from "@/modules/_global";
 import _ from "lodash";
 import { funGetCandidateActiveByArea } from "@/modules/candidate";
 import moment from "moment";
 import toast from "react-simple-toasts";
-
+import papa from "papaparse"
 
 /**
  * Fungsi untuk menampilkan table list Emotion.
@@ -33,9 +27,7 @@ import toast from "react-simple-toasts";
  * @returns {component} Table list Emotion sesuai dengan parameter.
  */
 
-
-
-export default function ViewBackEmotion({ param, provinsi, kabupaten, candidate, datatable }: { param: any, provinsi: any, kabupaten: any, candidate: any, datatable: any }) {
+export default function ViewBackEmotion({ param, provinsi, kabupaten, candidate, datatable, datadownload }: { param: any, provinsi: any, kabupaten: any, candidate: any, datatable: any, datadownload: any }) {
   const router = useRouter()
   const today = new Date();
 
@@ -46,8 +38,6 @@ export default function ViewBackEmotion({ param, provinsi, kabupaten, candidate,
   const [isKabupaten, setKabupaten] = useState<any>(param.idKabkot || null)
   const [isCandidate, setCandidate] = useState<any>(param.idCandidate || null)
   const [isDate, setDate] = useState<any>((_.isNull(param.date)) ? today : new Date(param.date))
-
-
 
   useEffect(() => {
     setProvinsi((param.idProvinsi == 0) ? null : param.idProvinsi)
@@ -65,7 +55,6 @@ export default function ViewBackEmotion({ param, provinsi, kabupaten, candidate,
     setDataKabupaten(dataDbKab)
     setDataCandidate(dataDbCan)
   }
-
 
   async function onKabupaten({ idKab }: { idKab: any }) {
     setKabupaten(idKab)
@@ -145,8 +134,19 @@ export default function ViewBackEmotion({ param, provinsi, kabupaten, candidate,
               borderRadius: 10
             }}>
               <Group justify="center">
-
-                <UploadData />
+                <Box
+                  style={{
+                    border: "1px dashed gray",
+                    borderRadius: 10,
+                    padding: 50,
+                    cursor: "pointer",
+                  }}
+                  onClick={() => router.push("/dashboard/emotion/upload")}
+                >
+                  <Text ta={"center"} size="xl" inline>
+                    UPLOAD DATA
+                  </Text>
+                </Box>
               </Group>
             </Box>
             {!_.isNull(datatable.title) && (
@@ -160,6 +160,18 @@ export default function ViewBackEmotion({ param, provinsi, kabupaten, candidate,
                       paddingBottom: 50,
                       backgroundColor: "gray",
                       cursor: "pointer",
+                    }}
+
+                    onClick={() => {
+                      const dataJson = datadownload.data
+
+                      const jsonData = papa.unparse(dataJson)
+                      const jsonDataUrl = "data:text/csv;charset=utf-8," + encodeURIComponent(jsonData)
+
+                      const jsonDwnloadLink = document.createElement("a")
+                      jsonDwnloadLink.href = jsonDataUrl
+                      jsonDwnloadLink.download = datadownload.title + ".csv"
+                      jsonDwnloadLink.click()
                     }}
                   >
                     <Text c={"white"} fw={"bold"} ta={"center"}>
@@ -191,11 +203,10 @@ export default function ViewBackEmotion({ param, provinsi, kabupaten, candidate,
       </Box>
       {!_.isNull(datatable.title) && (
         <Box pt={20}>
-          <TableData title={datatable.title} data={datatable.data} />
+          <TableData title={datatable.title} data={datatable.data} th={datatable.th} />
         </Box>
       )}
     </>
   );
 }
 
-// export default function ViewBackEmotion() {

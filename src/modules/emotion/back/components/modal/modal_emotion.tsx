@@ -1,29 +1,36 @@
+'use client'
 import { Alert, Box, Button, Group, Text } from "@mantine/core";
 import { useAtom } from "jotai";
-import React from "react";
+import React, { useState } from "react";
 import toast from "react-simple-toasts";
-import { useRouter } from "next/navigation";
 import { isModalEmotion } from "../../val/val_emotion";
-import 'react-simple-toasts/dist/theme/dark.css'
+import funCopyEmotion from "../../fun/copy_emotion";
 
 /**
- * Fungsi untuk menampilkan modal emotion.
- * @returns  Hasilnya angkan menampilakn pilihan button yes or no.
+ * Fungsi menampilkan modal.
+ * @returns  Hasil dari Copy data modal untuk menampilkan allert yes or no
  */
-export default function ModalEmotion() {
-  const [valOpenModal, setOpenModal] = useAtom(isModalEmotion);
-  const router = useRouter()
 
-  async function onCopy() {
-    toast("Sukses Copy Data", { theme: "dark" });
-    setOpenModal(false);
+export default function ModalCopyEmotion({ from, to, candidate, onSuccess }: { from: any, to: any, candidate: any, onSuccess: (val: any) => void }) {
+  const [openModal, setOpenModal] = useAtom(isModalEmotion);
+  const [isLoading, setLoading] = useState(false)
+
+  async function onUpload() {
+    setLoading(true)
+    await funCopyEmotion({ dateFrom: from, dateTo: to, candidate: candidate })
+    // await funLogUser({ act: "COPY DATA", desc: `User Copy Emotion Candidate (Candidate ID : ${candidate}, From ${from} To ${to})` })
+    setLoading(false)
+    toast('Success', { theme: 'dark' })
+    setOpenModal(false)
+    onSuccess(true)
   }
+
   return (
     <>
       <Box>
         <Alert color="gray" variant="outline">
           <Text fw={700} ta={"center"} mb={20} mt={20}>
-            ANDA YAKIN INGIN MELAKUKAN COPY DATA?
+            ANDA YAKIN INGIN MENGCOPY DATA EMOTION CANDIDATE?
           </Text>
           <Group justify="space-between" pt={10}>
             <Button
@@ -34,7 +41,7 @@ export default function ModalEmotion() {
             >
               NO
             </Button>
-            <Button radius={10} color="gray.7" w={150} onClick={onCopy}>
+            <Button loading={isLoading} radius={10} color="gray.7" w={150} onClick={() => onUpload()}>
               YES
             </Button>
           </Group>

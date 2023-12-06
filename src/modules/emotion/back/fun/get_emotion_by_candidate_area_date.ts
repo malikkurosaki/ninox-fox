@@ -1,8 +1,7 @@
 'use server'
-
 import { provinsiCount } from "@/modules/_global";
 import prisma from "@/modules/_global/bin/prisma"
-
+import _ from "lodash";
 
 /**
  * Fungsi untuk menampilkan emotion candidate berdasarkan area, candidate dan tanggal
@@ -11,7 +10,7 @@ import prisma from "@/modules/_global/bin/prisma"
  */
 
 export default async function funGetEmotionByCandidateAreaDate({ find }: { find: any }) {
-    let titleTrue, dataTable = <any>[], area
+    let titleTrue, dataTable = <any>[], area, th, result = <any>[]
 
     const nProv = await provinsiCount();
 
@@ -19,7 +18,7 @@ export default async function funGetEmotionByCandidateAreaDate({ find }: { find:
         if (find.tingkat == 1) {
             dataTable = await prisma.candidateEmotion.findMany({
                 where: {
-                    idCandidate: find.idCandidate,
+                    idCandidate: String(find.idCandidate),
                     isActive: true,
                     dateEmotion: new Date(find.date)
 
@@ -34,9 +33,31 @@ export default async function funGetEmotionByCandidateAreaDate({ find }: { find:
                     uncomfortable: true,
                     negative: true,
                     dissapproval: true,
-
+                    idKabkot: true,
+                    AreaKabkot: {
+                        select: {
+                            name: true
+                        }
+                    }
                 }
             })
+
+            result = dataTable.map((v: any) => ({
+                ..._.omit(v, ["AreaKabkot"]),
+                name: v.AreaKabkot.name
+            }))
+
+            result = _.map(_.groupBy(result, "idKabkot"), (v: any) => ({
+                name: _.toString(v[0].name),
+                confidence: _.sumBy(v, 'confidence'),
+                dissapproval: _.sumBy(v, 'dissapproval'),
+                negative: _.sumBy(v, 'negative'),
+                positive: _.sumBy(v, 'positive'),
+                supportive: _.sumBy(v, 'supportive'),
+                uncomfortable: _.sumBy(v, 'uncomfortable'),
+                undecided: _.sumBy(v, 'undecided'),
+                unsupportive: _.sumBy(v, 'unsupportive'),
+            }))
 
             area = await prisma.areaProvinsi.findUnique({
                 where: {
@@ -44,18 +65,51 @@ export default async function funGetEmotionByCandidateAreaDate({ find }: { find:
                 }
             })
             titleTrue = "PROVINSI " + area?.name
+            th = "KABKOT"
 
         } else if (find.tingkat == 2) {
-            dataTable = await prisma.candidate.findMany({
+            dataTable = await prisma.candidateEmotion.findMany({
                 where: {
-                    tingkat: find.tingkat,
-                    idProvinsi: find.idProvinsi,
-                    idKabkot: find.idKabkot
+                    idCandidate: String(find.idCandidate),
+                    isActive: true,
+                    dateEmotion: new Date(find.date)
+
                 },
-                orderBy: {
-                    id: 'asc'
+                select: {
+                    dateEmotion: true,
+                    confidence: true,
+                    supportive: true,
+                    positive: true,
+                    undecided: true,
+                    unsupportive: true,
+                    uncomfortable: true,
+                    negative: true,
+                    dissapproval: true,
+                    idKecamatan: true,
+                    AreaKecamatan: {
+                        select: {
+                            name: true
+                        }
+                    }
                 }
             })
+
+            result = dataTable.map((v: any) => ({
+                ..._.omit(v, ["AreaKecamatan"]),
+                name: v.AreaKecamatan.name
+            }))
+
+            result = _.map(_.groupBy(result, "idKecamatan"), (v: any) => ({
+                name: _.toString(v[0].name),
+                confidence: _.sumBy(v, 'confidence'),
+                dissapproval: _.sumBy(v, 'dissapproval'),
+                negative: _.sumBy(v, 'negative'),
+                positive: _.sumBy(v, 'positive'),
+                supportive: _.sumBy(v, 'supportive'),
+                uncomfortable: _.sumBy(v, 'uncomfortable'),
+                undecided: _.sumBy(v, 'undecided'),
+                unsupportive: _.sumBy(v, 'unsupportive'),
+            }))
 
             area = await prisma.areaKabkot.findUnique({
                 where: {
@@ -64,6 +118,7 @@ export default async function funGetEmotionByCandidateAreaDate({ find }: { find:
             })
 
             titleTrue = "" + area?.name
+            th = "KECAMATAN"
         }
     } else {
         titleTrue = null;
@@ -73,7 +128,8 @@ export default async function funGetEmotionByCandidateAreaDate({ find }: { find:
 
     const allData = {
         title: titleTrue,
-        data: dataTable
+        data: result,
+        th: th
     }
 
     return allData
