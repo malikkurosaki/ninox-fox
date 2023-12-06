@@ -30,7 +30,7 @@ export default function ModalCopy({ from, to, candidate1, candidate2, onSuccess 
       <Box>
         <Alert color="gray" variant="outline">
           <Text fw={700} ta={"center"} mb={20} mt={20}>
-            ANDA YAKIN INGIN MENGCOPY DATA EMOTION CANDIDATE?
+            ANDA YAKIN INGIN MENGCOPY DATA PAIRING?
           </Text>
           <Group justify="space-between" pt={10}>
             <Button
