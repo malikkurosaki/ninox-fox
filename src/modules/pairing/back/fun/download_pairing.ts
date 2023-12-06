@@ -14,7 +14,7 @@ export default async function funDownloadPairing({ request }: { request: any }) 
     }
 
 
-    if (request.idCandidate1 != 0 && request.idCandidate != 0) {
+    if (request.idCandidate1 != 0 && request.idCandidate2 != 0) {
         const dCandidate1 = await funGetOneCandidate({ id: request.idCandidate1 })
         const dCandidate2 = await funGetOneCandidate({ id: request.idCandidate2 })
 
