@@ -74,7 +74,7 @@ export default function AddMlAi({ params, candidate, provinsi, kabupaten }: { pa
                         required
                         label={"Provinsi"}
                         value={isProvinsi}
-                        disabled
+                        // disabled
                     />
                     <Select
                         placeholder="Pilih Kabupaten/Kota"
@@ -84,7 +84,7 @@ export default function AddMlAi({ params, candidate, provinsi, kabupaten }: { pa
                         }))}
                         label={"Kabupaten"}
                         value={isKabupaten}
-                        disabled
+                        // disabled
                     />
                 </Group>
                 <Select
