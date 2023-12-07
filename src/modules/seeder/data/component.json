@@ -1,324 +1,138 @@
 [
     {
         "id": 1,
-        "keyMenu": "md1",
-        "menu": "Emotion Editor",
-        "name": "search",
-        "label": "Pencarian Data"
+        "keyMenu": "md0",
+        "menu": "Dashboard User",
+        "owner": "user",
+        "group": "dashboardUser",
+        "link": "/summary"
     },
     {
         "id": 2,
         "keyMenu": "md1",
-        "menu": "Emotion Editor",
-        "name": "upload",
-        "label": "Upload Data"
+        "menu": "Beranda",
+        "owner": "admin",
+        "group": "dataSatu",
+        "link": "/dashboard"
     },
     {
         "id": 3,
-        "keyMenu": "md1",
+        "keyMenu": "md2",
         "menu": "Emotion Editor",
-        "name": "download",
-        "label": "Download Data"
+        "owner": "admin",
+        "group": "dataSatu",
+        "link": "/dashboard/emotion"
     },
     {
         "id": 4,
-        "keyMenu": "md1",
-        "menu": "Emotion Editor",
-        "name": "copy",
-        "label": "Copy Data"
+        "keyMenu": "md3",
+        "menu": "Regional Data Pairing",
+        "owner": "admin",
+        "group": "dataSatu",
+        "link": "/dashboard/pairing"
     },
     {
         "id": 5,
-        "keyMenu": "md1",
-        "menu": "Emotion Editor",
-        "name": "table",
-        "label": "Tabel Data"
+        "keyMenu": "md4",
+        "menu": "Audience",
+        "owner": "admin",
+        "group": "dataRegion",
+        "link": "/dashboard/audience"
     },
     {
         "id": 6,
-        "keyMenu": "md2",
-        "menu": "Regional Data Pairing",
-        "name": "search",
-        "label": "Pencarian Data"
+        "keyMenu": "md5",
+        "menu": "Public Concern Trend",
+        "owner": "admin",
+        "group": "dataRegion",
+        "link": "/dashboard/public-concern-trend"
     },
     {
         "id": 7,
-        "keyMenu": "md2",
-        "menu": "Regional Data Pairing",
-        "name": "upload",
-        "label": "Upload Data"
+        "keyMenu": "md6",
+        "menu": "Leader Trait Assessment",
+        "owner": "admin",
+        "group": "dataRegion",
+        "link": "/dashboard/leader-trait-assessment"
     },
     {
         "id": 8,
-        "keyMenu": "md2",
-        "menu": "Regional Data Pairing",
-        "name": "download",
-        "label": "Download Data"
+        "keyMenu": "md7",
+        "menu": "Region Hot Issue",
+        "owner": "admin",
+        "group": "dataRegion",
+        "link": "/dashboard/region-hot-issue"
     },
     {
         "id": 9,
-        "keyMenu": "md2",
-        "menu": "Regional Data Pairing",
-        "name": "copy",
-        "label": "Copy Data"
+        "keyMenu": "md8",
+        "menu": "STEP",
+        "owner": "admin",
+        "group": "dataDua",
+        "link": "/dashboard/step"
     },
     {
         "id": 10,
-        "keyMenu": "md2",
-        "menu": "Regional Data Pairing",
-        "name": "table",
-        "label": "Tabel Data"
+        "keyMenu": "md9",
+        "menu": "SWOT",
+        "owner": "admin",
+        "group": "dataDua",
+        "link": "/dashboard/swot"
     },
     {
         "id": 11,
-        "keyMenu": "md3",
-        "menu": "Audience",
-        "name": "search",
-        "label": "Pencarian Data"
+        "keyMenu": "md10",
+        "menu": "ML-AI",
+        "owner": "admin",
+        "group": "dataDua",
+        "link": "/dashboard/ml-ai"
     },
     {
         "id": 12,
-        "keyMenu": "md3",
-        "menu": "Audience",
-        "name": "upload",
-        "label": "Upload Data"
+        "keyMenu": "md11",
+        "menu": "Kandidat",
+        "owner": "admin",
+        "group": "dataDua",
+        "link": "/dashboard/candidate"
     },
     {
         "id": 13,
-        "keyMenu": "md3",
-        "menu": "Audience",
-        "name": "download",
-        "label": "Download Data"
+        "keyMenu": "md12",
+        "menu": "Role User",
+        "owner": "developer",
+        "group": "dataDeveloper",
+        "link": "/dashboard/role-user"
     },
     {
         "id": 14,
-        "keyMenu": "md3",
-        "menu": "Audience",
-        "name": "table",
-        "label": "Tabel Data"
+        "keyMenu": "md13",
+        "menu": "User",
+        "owner": "developer",
+        "group": "dataDeveloper",
+        "link": "/dashboard/user"
     },
     {
         "id": 15,
-        "keyMenu": "md4",
-        "menu": "Public Concern Trend",
-        "name": "search",
-        "label": "Pencarian Data"
+        "keyMenu": "md14",
+        "menu": "Log User",
+        "owner": "developer",
+        "group": "dataDeveloper",
+        "link": "/dashboard/log-user"
     },
     {
         "id": 16,
-        "keyMenu": "md4",
-        "menu": "Public Concern Trend",
-        "name": "upload",
-        "label": "Upload Data"
+        "keyMenu": "md15",
+        "menu": "Seeder",
+        "owner": "developer",
+        "group": "dataDeveloper",
+        "link": "/dashboard/seeder"
     },
     {
         "id": 17,
-        "keyMenu": "md4",
-        "menu": "Public Concern Trend",
-        "name": "download",
-        "label": "Download Data"
-    },
-    {
-        "id": 18,
-        "keyMenu": "md4",
-        "menu": "Public Concern Trend",
-        "name": "table",
-        "label": "Tabel Data"
-    },
-    {
-        "id": 19,
-        "keyMenu": "md5",
-        "menu": "Leader Trait Assessment",
-        "name": "search",
-        "label": "Pencarian Data"
-    },
-    {
-        "id": 20,
-        "keyMenu": "md5",
-        "menu": "Leader Trait Assessment",
-        "name": "upload",
-        "label": "Upload Data"
-    },
-    {
-        "id": 21,
-        "keyMenu": "md5",
-        "menu": "Leader Trait Assessment",
-        "name": "download",
-        "label": "Download Data"
-    },
-    {
-        "id": 22,
-        "keyMenu": "md5",
-        "menu": "Leader Trait Assessment",
-        "name": "table",
-        "label": "Tabel Data"
-    },
-    {
-        "id": 23,
-        "keyMenu": "md6",
-        "menu": "Region Hot Issue",
-        "name": "search",
-        "label": "Pencarian Data"
-    },
-    {
-        "id": 24,
-        "keyMenu": "md6",
-        "menu": "Region Hot Issue",
-        "name": "upload",
-        "label": "Upload Data"
-    },
-    {
-        "id": 25,
-        "keyMenu": "md6",
-        "menu": "Region Hot Issue",
-        "name": "download",
-        "label": "Download Data"
-    },
-    {
-        "id": 26,
-        "keyMenu": "md6",
-        "menu": "Region Hot Issue",
-        "name": "table",
-        "label": "Tabel Data"
-    },
-    {
-        "id": 27,
-        "keyMenu": "md7",
-        "menu": "STEP",
-        "name": "search",
-        "label": "Pencarian Data"
-    },
-    {
-        "id": 28,
-        "keyMenu": "md7",
-        "menu": "STEP",
-        "name": "add",
-        "label": "Add Data"
-    },
-    {
-        "id": 29,
-        "keyMenu": "md7",
-        "menu": "STEP",
-        "name": "table",
-        "label": "Table Data"
-    },
-    {
-        "id": 30,
-        "keyMenu": "md7",
-        "menu": "STEP",
-        "name": "edit",
-        "label": "Edit Data"
-    },
-    {
-        "id": 31,
-        "keyMenu": "md7",
-        "menu": "STEP",
-        "name": "delete",
-        "label": "Delete Data"
-    },
-    {
-        "id": 32,
-        "keyMenu": "md8",
-        "menu": "SWOT",
-        "name": "search",
-        "label": "Pencarian Data"
-    },
-    {
-        "id": 33,
-        "keyMenu": "md8",
-        "menu": "SWOT",
-        "name": "add",
-        "label": "Add Data"
-    },
-    {
-        "id": 34,
-        "keyMenu": "md8",
-        "menu": "SWOT",
-        "name": "table",
-        "label": "Table Data"
-    },
-    {
-        "id": 35,
-        "keyMenu": "md8",
-        "menu": "SWOT",
-        "name": "edit",
-        "label": "Edit Data"
-    },
-    {
-        "id": 36,
-        "keyMenu": "md8",
-        "menu": "SWOT",
-        "name": "delete",
-        "label": "Delete Data"
-    },
-    {
-        "id": 37,
-        "keyMenu": "md9",
-        "menu": "ML-AI",
-        "name": "search",
-        "label": "Pencarian Data"
-    },
-    {
-        "id": 38,
-        "keyMenu": "md9",
-        "menu": "ML-AI",
-        "name": "add",
-        "label": "Add Data"
-    },
-    {
-        "id": 39,
-        "keyMenu": "md9",
-        "menu": "ML-AI",
-        "name": "table",
-        "label": "Table Data"
-    },
-    {
-        "id": 40,
-        "keyMenu": "md9",
-        "menu": "ML-AI",
-        "name": "edit",
-        "label": "Edit Data"
-    },
-    {
-        "id": 41,
-        "keyMenu": "md9",
-        "menu": "ML-AI",
-        "name": "delete",
-        "label": "Delete Data"
-    },
-    {
-        "id": 42,
-        "keyMenu": "md10",
-        "menu": "Candidate",
-        "name": "search",
-        "label": "Pencarian Data"
-    },
-    {
-        "id": 43,
-        "keyMenu": "md10",
-        "menu": "Candidate",
-        "name": "add",
-        "label": "Add Data"
-    },
-    {
-        "id": 44,
-        "keyMenu": "md10",
-        "menu": "Candidate",
-        "name": "table",
-        "label": "Table Data"
-    },
-    {
-        "id": 45,
-        "keyMenu": "md10",
-        "menu": "Candidate",
-        "name": "edit",
-        "label": "Edit Data"
-    },
-    {
-        "id": 46,
-        "keyMenu": "md10",
-        "menu": "Candidate",
-        "name": "delete",
-        "label": "Delete Data"
+        "keyMenu": "md16",
+        "menu": "Hapus Data",
+        "owner": "developer",
+        "group": "dataDeveloper",
+        "link": "/dashboard/delete-data"
     }
 ]

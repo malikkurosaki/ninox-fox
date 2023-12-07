@@ -1,5 +1,4 @@
 "use server"
-
 import prisma from "@/modules/_global/bin/prisma"
 import { seederComponents } from ".."
 
@@ -7,6 +6,7 @@ import { seederComponents } from ".."
  * Fungsi untuk ambil data seeder component.
  * @returns hasil untuk data seeder components
  */
+
 export async function funSeederComponents() {
     for (let data of seederComponents) {
         await prisma.component.upsert({
@@ -15,17 +15,18 @@ export async function funSeederComponents() {
             },
             create: {
                 id: data.id,
-                name: data.name,
+                owner: data.owner,
                 menu: data.menu,
-                label: data.label,
-                keyMenu: data.keyMenu
+                group: data.group,
+                keyMenu: data.keyMenu,
+                link: data.link
             },
             update: {
-                id: data.id,
-                name: data.name,
+                owner: data.owner,
                 menu: data.menu,
-                label: data.label,
-                keyMenu: data.keyMenu
+                group: data.group,
+                keyMenu: data.keyMenu,
+                link: data.link
             }
         })
     }
