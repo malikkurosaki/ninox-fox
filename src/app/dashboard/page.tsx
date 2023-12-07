@@ -1,11 +1,9 @@
-
 import { candateTingkat } from "@/modules/_global/fun/fun_candidate_tingkat";
 import { kabupatenCount } from "@/modules/_global/fun/fun_kabupaten_count";
 import { kecamatanCount } from "@/modules/_global/fun/fun_kecamatan_count";
 import { kelurahanCount } from "@/modules/_global/fun/fun_kelurahan_count";
 import { provinsiCount } from "@/modules/_global/fun/fun_provinsi_count";
 import Home from "@/modules/_global/home/home";
-import { promises } from "dns";
 
 export default async function Page() {
   const pro = await provinsiCount()

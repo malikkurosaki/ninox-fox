@@ -9,6 +9,8 @@ export async function provinsiCount() {
         }
     })
 
+    console.log(ProCount)
+
     return ProCount
 
 }
