@@ -1,8 +1,6 @@
 "use client"
-
 import { Box, Button, Group, Modal, Select, SimpleGrid, Stack, Text } from '@mantine/core';
 import React, { useState } from 'react';
-import { provinsiCount } from '../fun/fun_provinsi_count';
 import { useAtom } from 'jotai';
 import { isModalBeranda } from '../val/isModalBeranda';
 import ModalBeranda from './components/modal_beranda';
@@ -11,16 +9,12 @@ import ModalBeranda from './components/modal_beranda';
  * Fungsi untuk menampilkan dashboard.
  * @returns  hasilk yang ditampilkan seperti daftar access wilayah, jumlah kandidate, jumlah wilayah
  */
+
 export default function Home({ pro, kab, kec, kel, can1, can2 }: { pro: number, kab: number, kec: number, kel: number, can1: number, can2: number }) {
-  const [isProvinsi, setProvinsi] = useState(pro)
-  const [isKab, setKab] = useState(kab)
-  const [isKec, setKec] = useState(kec)
-  const [isKel, setKel] = useState(kel)
-  const [isCand1, setCan1] = useState(can1)
-  const [isCand2, setCan2] = useState(can2)
 
   const [valOpenModal, setOpenModal] = useAtom(isModalBeranda)
 
+  console.log(pro, kab, kec, kel, can1, can2)
 
   return (
     <>
@@ -105,7 +99,7 @@ export default function Home({ pro, kab, kec, kel, can1, can2 }: { pro: number, 
                 borderRadius: 5
               }}>
                 <Text c={"white"}>PROVINSI</Text>
-                <Text ta={'center'} fw={'bold'} c={"white"} fz={70}>{isCand1}</Text>
+                <Text ta={'center'} fw={'bold'} c={"white"} fz={70}>{can1}</Text>
               </Box>
             </Box>
             <Box>
@@ -115,7 +109,7 @@ export default function Home({ pro, kab, kec, kel, can1, can2 }: { pro: number, 
                 borderRadius: 5
               }}>
                 <Text c={"white"}>KABUPATEN</Text>
-                <Text ta={'center'} fw={'bold'} c={"white"} fz={70}>{isCand2}</Text>
+                <Text ta={'center'} fw={'bold'} c={"white"} fz={70}>{can2}</Text>
               </Box>
             </Box>
           </SimpleGrid>
@@ -142,7 +136,7 @@ export default function Home({ pro, kab, kec, kel, can1, can2 }: { pro: number, 
                 borderRadius: 5
               }}>
                 <Text c={"white"}>PROVINSI</Text>
-                <Text ta={'center'} fw={'bold'} c={"white"} fz={60}>{isProvinsi}</Text>
+                <Text ta={'center'} fw={'bold'} c={"white"} fz={60}>{pro} --</Text>
               </Box>
             </Box>
             <Box>
@@ -152,7 +146,7 @@ export default function Home({ pro, kab, kec, kel, can1, can2 }: { pro: number, 
                 borderRadius: 5
               }}>
                 <Text c={"white"}>KABUPATEN</Text>
-                <Text ta={'center'} fw={'bold'} c={"white"} fz={60}>{isKab}</Text>
+                <Text ta={'center'} fw={'bold'} c={"white"} fz={60}>{kab}</Text>
               </Box>
             </Box>
             <Box>
@@ -162,7 +156,7 @@ export default function Home({ pro, kab, kec, kel, can1, can2 }: { pro: number, 
                 borderRadius: 5
               }}>
                 <Text c={"white"}>KECAMATAN</Text>
-                <Text ta={'center'} fw={'bold'} c={"white"} fz={60}>{isKec}</Text>
+                <Text ta={'center'} fw={'bold'} c={"white"} fz={60}>{kec}</Text>
               </Box>
             </Box>
             <Box>
@@ -172,7 +166,7 @@ export default function Home({ pro, kab, kec, kel, can1, can2 }: { pro: number, 
                 borderRadius: 5
               }}>
                 <Text c={"white"}>KELURAHAN</Text>
-                <Text ta={'center'} fw={'bold'} c={"white"} fz={60}>{isKel}</Text>
+                <Text ta={'center'} fw={'bold'} c={"white"} fz={60}>{kel}</Text>
               </Box>
             </Box>
           </SimpleGrid>
