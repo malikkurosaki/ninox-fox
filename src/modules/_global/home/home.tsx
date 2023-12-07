@@ -1,8 +1,11 @@
 "use client"
 
-import { Box, Group, Select, SimpleGrid, Stack, Text } from '@mantine/core';
+import { Box, Button, Group, Modal, Select, SimpleGrid, Stack, Text } from '@mantine/core';
 import React, { useState } from 'react';
 import { provinsiCount } from '../fun/fun_provinsi_count';
+import { useAtom } from 'jotai';
+import { isModalBeranda } from '../val/isModalBeranda';
+import ModalBeranda from './components/modal_beranda';
 
 /**
  * Fungsi untuk menampilkan dashboard.
@@ -16,19 +19,22 @@ export default function Home({ pro, kab, kec, kel, can1, can2 }: { pro: number, 
   const [isCand1, setCan1] = useState(can1)
   const [isCand2, setCan2] = useState(can2)
 
+  const [valOpenModal, setOpenModal] = useAtom(isModalBeranda)
+
 
   return (
     <>
       <Text fz={25} c={'#213555'} fw={'bold'}>HI ADMIN 2</Text>
       <Group>
         <Text c={"#4F709C"}>DEFAULT WILAYAH UNTUK DASHBOARD USER</Text>
-        <Select
+        {/* <Select
           placeholder="Select Wilayah"
           defaultValue={'Jawa Timur'}
           data={['Jawa Timur', 'Kalimantan Tengah', 'DKI Jakarta']}
           radius={20}
           w={200}
-        />
+        /> */}
+        <Button variant="outline" color="#4F709C" radius="xl" onClick={() => setOpenModal(true)}>JAWA TIMUR</Button>
       </Group>
       <Box pt={30}>
         <Group grow>
@@ -41,33 +47,39 @@ export default function Home({ pro, kab, kec, kel, can1, can2 }: { pro: number, 
               <Text c={"#4F709C"} fw={'bold'}>DAFTAR AKSES WILAYAH</Text>
             </Box>
             <Group grow>
-              <Box
-                style={{
-                  backgroundColor: "#4F709C",
-                  padding: 20,
-                  borderRadius: 5
-                }}
+              <SimpleGrid
+                cols={{ base: 1, sm: 3, lg: 3 }}
+                spacing={{ base: 10, sm: 'xl' }}
+                verticalSpacing={{ base: 'md', sm: 'xl' }}
               >
-                <Text c={"white"} ta={'center'}>Kalimantan Tengah</Text>
-              </Box>
-              <Box
-                style={{
-                  backgroundColor: "#4F709C",
-                  padding: 20,
-                  borderRadius: 5
-                }}
-              >
-                <Text c={"white"} ta={'center'}>DKI Jakarta</Text>
-              </Box>
-              <Box
-                style={{
-                  backgroundColor: "#4F709C",
-                  padding: 20,
-                  borderRadius: 5
-                }}
-              >
-                <Text c={"white"} ta={'center'}>Jawa Timur</Text>
-              </Box>
+                <Box
+                  style={{
+                    backgroundColor: "#4F709C",
+                    padding: 20,
+                    borderRadius: 5
+                  }}
+                >
+                  <Text c={"white"} ta={'center'}>Kalimantan Tengah</Text>
+                </Box>
+                <Box
+                  style={{
+                    backgroundColor: "#4F709C",
+                    padding: 20,
+                    borderRadius: 5
+                  }}
+                >
+                  <Text c={"white"} ta={'center'}>DKI Jakarta</Text>
+                </Box>
+                <Box
+                  style={{
+                    backgroundColor: "#4F709C",
+                    padding: 20,
+                    borderRadius: 5
+                  }}
+                >
+                  <Text c={"white"} ta={'center'}>Jawa Timur</Text>
+                </Box>
+              </SimpleGrid>
             </Group>
           </Box>
         </Group>
@@ -166,7 +178,16 @@ export default function Home({ pro, kab, kec, kel, can1, can2 }: { pro: number, 
           </SimpleGrid>
         </Box>
       </Box>
-
+      <Modal
+        opened={valOpenModal}
+        onClose={() => setOpenModal(false)}
+        centered
+        withCloseButton={false}
+        closeOnClickOutside={false}
+        size={"xl"}
+      >
+        <ModalBeranda />
+      </Modal>
     </>
 
   );
