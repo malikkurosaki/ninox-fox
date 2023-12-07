@@ -7,7 +7,7 @@ import TopPairingCandidate from './top_pairing_candidate';
 const top10 = [
   {
     id: 1,
-    provinsi: "Jawa Barat",
+    provinsi: "Denpasar",
     locked: "2.890.900",
     filtered: "1.891.891",
     confidence: "3.908.178",
@@ -17,7 +17,7 @@ const top10 = [
   },
   {
     id: 2,
-    provinsi: "Jawa Timur",
+    provinsi: "Tabanan",
     locked: "2.890.900",
     filtered: "1.891.891",
     confidence: "3.908.178",
@@ -27,7 +27,7 @@ const top10 = [
   },
   {
     id: 3,
-    provinsi: "Jawa Tengah",
+    provinsi: "Gianyar",
     locked: "2.890.900",
     filtered: "1.891.891",
     confidence: "3.908.178",
@@ -37,7 +37,7 @@ const top10 = [
   },
   {
     id: 4,
-    provinsi: "Banten",
+    provinsi: "Klungkung",
     locked: "2.890.900",
     filtered: "1.891.891",
     confidence: "3.908.178",
@@ -47,7 +47,7 @@ const top10 = [
   },
   {
     id: 5,
-    provinsi: "Jakarta",
+    provinsi: "Badung",
     locked: "2.890.900",
     filtered: "1.891.891",
     confidence: "3.908.178",
@@ -57,7 +57,7 @@ const top10 = [
   },
   {
     id: 6,
-    provinsi: "Lampung",
+    provinsi: "Karangasem",
     locked: "2.890.900",
     filtered: "1.891.891",
     confidence: "3.908.178",
@@ -67,7 +67,7 @@ const top10 = [
   },
   {
     id: 7,
-    provinsi: "Sumatera Selatan",
+    provinsi: "Bangli",
     locked: "2.890.900",
     filtered: "1.891.891",
     confidence: "3.908.178",
@@ -77,7 +77,7 @@ const top10 = [
   },
   {
     id: 8,
-    provinsi: "Sulawesi Selatan",
+    provinsi: "Buleleng",
     locked: "2.890.900",
     filtered: "1.891.891",
     confidence: "3.908.178",
@@ -87,17 +87,7 @@ const top10 = [
   },
   {
     id: 9,
-    provinsi: "Sumatera Utara",
-    locked: "2.890.900",
-    filtered: "1.891.891",
-    confidence: "3.908.178",
-    supportive: "4.890.901",
-    positive: "1.221.333",
-    negative: "2.009.009",
-  },
-  {
-    id: 10,
-    provinsi: "Bali",
+    provinsi: "Jembrana",
     locked: "2.890.900",
     filtered: "1.891.891",
     confidence: "3.908.178",
@@ -127,7 +117,7 @@ export default function TableTop10() {
             <Table.Thead c={"white"}>
               <Table.Tr >
                 <Table.Th>NO</Table.Th>
-                <Table.Th>PROVINCE</Table.Th>
+                <Table.Th>KABUPATEN / KOTA</Table.Th>
                 <Table.Th>LOCKED AUDIENCE</Table.Th>
                 <Table.Th>FILTERED AUDIENCE</Table.Th>
                 <Table.Th>CONFIDENCE</Table.Th>

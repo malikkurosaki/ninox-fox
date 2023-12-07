@@ -121,8 +121,9 @@ export default function TableData({ title, data, th }: { title: string, data: an
                         <Table.Td>{v.positive}</Table.Td>
                         <Table.Td>{v.undecided}</Table.Td>
                         <Table.Td>{v.unsupportive}</Table.Td>
+                        <Table.Td>{v.uncomfortable}</Table.Td>
                         <Table.Td>{v.negative}</Table.Td>
-                        <Table.Td>{v.disapproval}</Table.Td>
+                        <Table.Td>{v.dissapproval}</Table.Td>
                       </Table.Tr>
                     ))}
                   </Table.Tbody>
