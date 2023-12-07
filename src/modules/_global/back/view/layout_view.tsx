@@ -5,18 +5,15 @@ import {
   AppShell,
   Box,
   Burger,
-  Divider,
   Group,
   Menu,
   NavLink,
-  Skeleton,
   UnstyledButton,
   rem,
 } from "@mantine/core";
 import React, { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { FaUserCircle, FaUserTie } from "react-icons/fa";
-import { LuLayoutDashboard } from "react-icons/lu";
 import { RiLogoutCircleRLine } from "react-icons/ri";
 
 /**
@@ -91,6 +88,34 @@ export default function LayoutView({
       key: "md10",
       link: "/dashboard/candidate",
       label: "KANDIDAT",
+    },
+  ];
+
+  const dataDeveloper = [
+    {
+      key: "md11",
+      link: "/dashboard/role-user",
+      label: "ROLE USER",
+    },
+    {
+      key: "md12",
+      link: "/dashboard/user",
+      label: "USER",
+    },
+    {
+      key: "md13",
+      link: "/dashboard/log-user",
+      label: "LOG USER",
+    },
+    {
+      key: "md14",
+      link: "/dashboard/seeder",
+      label: "SEEDER",
+    },
+    {
+      key: "md15",
+      link: "/dashboard/delete-data",
+      label: "HAPUS DATA",
     },
   ];
 
@@ -222,6 +247,27 @@ export default function LayoutView({
               />
             );
           })}
+          <NavLink
+            label="DEVELOPER"
+            childrenOffset={28}
+            fw={"bolder"}
+          >
+            {dataDeveloper.map((item) => {
+              return (
+                <NavLink
+                  key={item.key}
+                  active={item.link === active}
+                  fw={item.label ? "bolder" : "normal"}
+                  label={item.label}
+                  onClick={() => {
+                    router.push(item.link);
+                  }}
+                  color="#213555"
+                  variant="filled"
+                />
+              );
+            })}
+          </NavLink>
         </AppShell.Navbar>
         <AppShell.Main bg={"#EAEAEA"}>
           <Box p={10} pl={20} pr={20}>
