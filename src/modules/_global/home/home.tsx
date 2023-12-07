@@ -14,8 +14,6 @@ export default function Home({ pro, kab, kec, kel, can1, can2 }: { pro: number, 
 
   const [valOpenModal, setOpenModal] = useAtom(isModalBeranda)
 
-  console.log(pro, kab, kec, kel, can1, can2)
-
   return (
     <>
       <Text fz={25} c={'#213555'} fw={'bold'}>HI ADMIN 2</Text>
@@ -136,7 +134,7 @@ export default function Home({ pro, kab, kec, kel, can1, can2 }: { pro: number, 
                 borderRadius: 5
               }}>
                 <Text c={"white"}>PROVINSI</Text>
-                <Text ta={'center'} fw={'bold'} c={"white"} fz={60}>{pro} --</Text>
+                <Text ta={'center'} fw={'bold'} c={"white"} fz={60}>{Intl.NumberFormat("id-ID").format(Number(pro))}</Text>
               </Box>
             </Box>
             <Box>
@@ -146,7 +144,7 @@ export default function Home({ pro, kab, kec, kel, can1, can2 }: { pro: number, 
                 borderRadius: 5
               }}>
                 <Text c={"white"}>KABUPATEN</Text>
-                <Text ta={'center'} fw={'bold'} c={"white"} fz={60}>{kab}</Text>
+                <Text ta={'center'} fw={'bold'} c={"white"} fz={60}>{Intl.NumberFormat("id-ID").format(Number(kab))}</Text>
               </Box>
             </Box>
             <Box>
@@ -156,7 +154,7 @@ export default function Home({ pro, kab, kec, kel, can1, can2 }: { pro: number, 
                 borderRadius: 5
               }}>
                 <Text c={"white"}>KECAMATAN</Text>
-                <Text ta={'center'} fw={'bold'} c={"white"} fz={60}>{kec}</Text>
+                <Text ta={'center'} fw={'bold'} c={"white"} fz={60}>{Intl.NumberFormat("id-ID").format(Number(kec))}</Text>
               </Box>
             </Box>
             <Box>
@@ -166,7 +164,7 @@ export default function Home({ pro, kab, kec, kel, can1, can2 }: { pro: number, 
                 borderRadius: 5
               }}>
                 <Text c={"white"}>KELURAHAN</Text>
-                <Text ta={'center'} fw={'bold'} c={"white"} fz={60}>{kel}</Text>
+                <Text ta={'center'} fw={'bold'} c={"white"} fz={60}>{Intl.NumberFormat("id-ID").format(Number(kel))}</Text>
               </Box>
             </Box>
           </SimpleGrid>

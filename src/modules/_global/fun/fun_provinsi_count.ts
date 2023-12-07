@@ -1,5 +1,4 @@
 "use server"
-
 import prisma from "../bin/prisma"
 
 export async function provinsiCount() {
@@ -8,8 +7,6 @@ export async function provinsiCount() {
             isActive: true,
         }
     })
-
-    console.log(ProCount)
 
     return ProCount
 
