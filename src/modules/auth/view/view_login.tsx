@@ -1,11 +1,51 @@
 "use client"
-import { WARNA } from '@/modules/_global/fun/WARNA';
-import { BackgroundImage, Box, Button, Flex, Grid, Group, PasswordInput, SimpleGrid, Stack, Text, TextInput } from '@mantine/core';
+import { BackgroundImage, Box, Button, Flex, Group, PasswordInput, Stack, Text, TextInput } from '@mantine/core';
 import React, { useState } from 'react';
 import { LuShieldCheck } from 'react-icons/lu';
+import { ViewVerification } from '..';
+import toast from 'react-simple-toasts';
+import funLogin from '../fun/login';
+import { useFocusTrap } from '@mantine/hooks';
 
 export default function ViewLogin() {
+  const focusTrapRef = useFocusTrap()
+  const [isEmail, setEmail] = useState("")
+  const [isPassword, setPassword] = useState("")
+  const [isOTP, setOTP] = useState<any>(null)
+  const [isValPhone, setValPhone] = useState<any>(null)
+  const [isUser, setUser] = useState<any>(null)
+  const [isVerif, setVerif] = useState(false)
 
+
+  async function onLogin() {
+    if (isEmail == "" || isPassword == "")
+      return toast('Please fill in completely', { theme: 'dark' })
+
+    const cek = await funLogin({ email: isEmail, pass: isPassword })
+    if (!cek.success)
+      return toast(cek.message, { theme: 'dark' })
+
+    // proses pengambilan nomer 4 digit random untuk code verfication
+    const code = Math.floor(Math.random() * 1000) + 1000
+
+    // proses pengiriman code verification melalui wa
+    const res = await fetch(`https://wa.wibudev.com/code?nom=${cek.phone}&text=${code}`)
+      .then(
+        async (res) => {
+          if (res.status == 200) {
+            toast('Verification code has been sent', { theme: 'dark' })
+            setValPhone(cek.phone)
+            setOTP(code)
+            setUser(cek.id)
+            setVerif(true)
+          } else {
+            toast('Error', { theme: 'dark' })
+          }
+        }
+      );
+  }
+
+  if (isVerif) return <ViewVerification otp={isOTP} phone={isValPhone} user={isUser} />
   return (
     <>
       <BackgroundImage src='/bgfull.png' h={"100vh"} pos={"fixed"}>
@@ -20,18 +60,20 @@ export default function ViewLogin() {
               borderRadius: 10,
             }}
             w={{ base: 300, sm: 400 }}
+            ref={focusTrapRef}
           >
-            <Box
-            >
+            <Box>
               <Text fw={"bold"} fz={30} c={"white"}>EXISTING MEMBER</Text>
               <Text fz={20} c={"white"}>Welcome Back!</Text>
             </Box>
             <Stack pt={25}>
               <TextInput
-                label={<Text fz={14} c={"white"}>Username</Text>}
+                label={<Text fz={14} c={"white"}>Email</Text>}
+                onChange={(val) => { setEmail(val.target.value) }}
               />
               <PasswordInput
                 label={<Text fz={14} c={"white"}>Password</Text>}
+                onChange={(val) => { setPassword(val.target.value) }}
               />
               <Group pt={10} justify='space-between'>
                 <Group>
@@ -46,6 +88,9 @@ export default function ViewLogin() {
                 fullWidth
                 bg={"white"}
                 c={"#005B41"}
+                onClick={() => {
+                  onLogin()
+                }}
               >
                 Login
               </Button>

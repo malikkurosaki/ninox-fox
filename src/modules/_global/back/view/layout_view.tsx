@@ -7,6 +7,7 @@ import {
   Burger,
   Group,
   Menu,
+  Modal,
   NavLink,
   UnstyledButton,
   rem,
@@ -15,6 +16,9 @@ import React, { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { FaUserCircle, FaUserTie } from "react-icons/fa";
 import { RiLogoutCircleRLine } from "react-icons/ri";
+import ModalLogout from "../component/modal_logout";
+import { useAtom } from "jotai";
+import { isModalLayout } from "../val/isModalLayout";
 
 /**
  * Fungsi untuk menampilkan template dashsboard admin.
@@ -121,6 +125,7 @@ export default function LayoutView({
 
   const router = useRouter();
   const pathname = usePathname();
+  const [valOpenModal, setOpenModal] = useAtom(isModalLayout)
   const [active, setActive] = useState("");
   useShallowEffect(() => {
     setActive(pathname);
@@ -185,7 +190,7 @@ export default function LayoutView({
                         style={{ width: rem(14), height: rem(14) }}
                       />
                     }
-                  // onClick={onLogout}
+                    onClick={() => { setOpenModal(true) }}
                   >
                     Logout
                   </Menu.Item>
@@ -275,6 +280,16 @@ export default function LayoutView({
           </Box>
         </AppShell.Main>
       </AppShell>
+
+      <Modal
+        opened={valOpenModal}
+        onClose={() => setOpenModal(false)}
+        centered
+        withCloseButton={false}
+        closeOnClickOutside={false}
+      >
+        <ModalLogout />
+      </Modal>
     </>
   );
 }
