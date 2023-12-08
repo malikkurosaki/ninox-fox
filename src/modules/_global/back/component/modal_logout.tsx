@@ -1,11 +1,10 @@
 import { Alert, Box, Button, Group, Text } from '@mantine/core';
-import React from 'react';
 import { useAtom } from 'jotai';
+import React from 'react';
+import { isModalLayout } from '../val/isModalLayout';
 import { useRouter } from 'next/navigation';
-import toast from 'react-simple-toasts';
-import { isModalLayout } from '../val/isModallayout';
-import { WARNA } from '../../fun/WARNA';
 import { funLogout } from '@/modules/auth';
+import toast from 'react-simple-toasts';
 
 /**
  * Menampilkan modal konfirmasi logout.
@@ -14,12 +13,12 @@ import { funLogout } from '@/modules/auth';
  * @returns komponen modal logout
  */
 
-export default function ModalLogoutUser() {
+export default function ModalLogout() {
   const router = useRouter()
   const [valOpenModal, setOpenModal] = useAtom(isModalLayout)
 
   async function logoutYes() {
-    // router.push(`/`)
+    // await funLogUser({ act: 'LOGOUT', desc: 'User logout' })
     setOpenModal(false)
     await funLogout()
     toast("Logout Success", { theme: "dark" })
@@ -27,21 +26,20 @@ export default function ModalLogoutUser() {
   return (
     <>
       <Box>
-        <Alert variant="filled" color={WARNA.ungu} >
+        <Alert color="gray" variant="outline">
           <Text fw={700} ta={"center"} mb={20} mt={20}>
-            ARE YOU SURE YOU WANT TO LOGOUT ???
+            ARE YOU SURE YOU WANT TO LOGOUT?
           </Text>
           <Group justify="space-between" pt={10}>
             <Button
               radius={10}
-              color={"white"}
+              color="gray.7"
               w={150}
               onClick={() => setOpenModal(false)}
-              bg={WARNA.merah}
             >
               NO
             </Button>
-            <Button radius={10} color={"white"} bg={WARNA.hijau} w={150} onClick={() => logoutYes()}>
+            <Button radius={10} color="gray.7" w={150} onClick={() => logoutYes()}>
               YES
             </Button>
           </Group>
@@ -50,3 +48,4 @@ export default function ModalLogoutUser() {
     </>
   );
 }
+

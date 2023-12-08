@@ -1,14 +1,46 @@
 "use client"
 import { Anchor, BackgroundImage, Box, Button, Flex, Grid, Group, PasswordInput, PinInput, Stack, Text, TextInput } from '@mantine/core';
-import { url } from 'inspector';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
-import { CiBoxList } from 'react-icons/ci';
-import { URL } from 'url';
-import classes from "..//components/input.module.css"
-import { LuShieldCheck } from 'react-icons/lu';
-import { WARNA } from '@/modules/_global/fun/WARNA';
+import toast from 'react-simple-toasts';
+import { funSetCookies } from '../fun/set_cookies';
 
-export default function ViewVerification() {
+export default function ViewVerification({ phone, otp, user }: { phone: any, otp: any, user: any }) {
+  const router = useRouter()
+  const [isOTP, setOTP] = useState(otp)
+  const [inputOTP, setInputOTP] = useState<any>()
+
+  async function onResend() {
+    // proses pengambilan nomer 4 digit random untuk code verfication
+    const code = Math.floor(Math.random() * 1000) + 1000
+
+    // proses pengiriman code verification melalui wa
+    const res = await fetch(`https://wa.wibudev.com/code?nom=${phone}&text=${code}`)
+      .then(
+        async (res) => {
+          if (res.status == 200) {
+            toast('Verification code has been sent', { theme: 'dark' })
+            setOTP(code)
+          } else {
+            toast('Error', { theme: 'dark' })
+          }
+        }
+      );
+  }
+
+  // fungsi untuk mengecek code verification yang telah diinputkan
+  async function getVerification() {
+    if (isOTP == inputOTP) {
+      // jika kode benar
+      const setC = await funSetCookies({ user: user })
+      // await funLogUser({ act: 'LOGIN', desc: `User login` })
+      router.push('/summary')
+      toast("Verification code is correct", { theme: "dark" })
+    } else {
+      // jika salah
+      toast("Incorrect verification code", { theme: "dark" })
+    }
+  }
 
   return (
     <>
@@ -23,7 +55,7 @@ export default function ViewVerification() {
               padding: 30,
               borderRadius: 10,
             }}
-              w={{ base: 300, sm: 400 }}
+            w={{ base: 300, sm: 400 }}
           >
             <Grid grow>
               <Grid.Col>
@@ -32,13 +64,17 @@ export default function ViewVerification() {
             </Grid>
             <Stack pt={20}>
               <Group justify="center" mt={30}>
-                <PinInput type={"number"} size='md' />
+                <PinInput type={"number"} size='md'
+                  onChange={(val) => {
+                    setInputOTP(val)
+                  }} />
               </Group>
               <Button
                 mt={30}
                 fullWidth
                 bg={"white"}
                 c={"#005B41"}
+                onClick={() => { getVerification() }}
               >
                 Submit
               </Button>
@@ -47,6 +83,7 @@ export default function ViewVerification() {
                   Didnt receive a code ? {""}
                   <Anchor c="white"
                     fz={12}
+                    onClick={() => { onResend() }}
                   >
                     Resend
                   </Anchor>
