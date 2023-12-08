@@ -1,11 +1,11 @@
 'use client'
-import { ButtonBack } from "@/modules/_global"
+import { ButtonBack, MasterKabGetByProvince } from "@/modules/_global"
 import { Box, Button, Group, Modal, Radio, Select, Stack, Text, TextInput, Textarea } from "@mantine/core"
 import ModalAddMlAi from "../component/modal_add_mlai"
 import { useAtom } from "jotai"
 import { isModalMlAi } from "../val/val_mlai"
 import { useSearchParams } from "next/navigation"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import _, { values } from "lodash"
 import toast from "react-simple-toasts"
 import { Link, RichTextEditor } from "@mantine/tiptap"
@@ -19,6 +19,7 @@ import Superscript from '@tiptap/extension-superscript';
 import SubScript from '@tiptap/extension-subscript';
 import { Color } from '@tiptap/extension-color';
 import TextStyle from '@tiptap/extension-text-style';
+import { funGetCandidateActiveByArea } from "@/modules/candidate"
 
 /**
  * Fungsi untuk menampilkan view form add mlai.
@@ -31,10 +32,27 @@ export default function AddMlAi({ params, candidate, provinsi, kabupaten }: { pa
     const query = useSearchParams()
     const [isDataCandidate, setDataCandidate] = useState(candidate)
     const [dataProvinsi, setDataProvinsi] = useState(provinsi)
-    const [dataKabupaten, setDatakabupaten] = useState<any>(kabupaten)
+    const [dataKabupaten, setDataKabupaten] = useState<any>(kabupaten)
     const [isProvinsi, setProvinsi] = useState<any>(params.idProvinsi || null)
     const [isKabupaten, setKabupaten] = useState<any>(params.idKabkot || null)
     const [isCandidate, setCandidate] = useState<any>("")
+
+    async function onProvinsi({ idProv }: { idProv: any }) {
+        setProvinsi(idProv)
+        setKabupaten(null)
+        setCandidate(null)
+        const dataDbKab = await MasterKabGetByProvince({ idProvinsi: Number(idProv) })
+        const dataDbCan = await funGetCandidateActiveByArea({ find: { idProvinsi: Number(idProv), tingkat: 1 } })
+        setDataKabupaten(dataDbKab)
+        setDataCandidate(dataDbCan)
+      }
+    
+      async function onKabupaten({ idKab }: { idKab: any }) {
+        setKabupaten(idKab)
+        setCandidate(null)
+        const dataDbCan = await funGetCandidateActiveByArea({ find: { idProvinsi: Number(isProvinsi), idKabkot: Number(idKab), tingkat: 2 } })
+        setDataCandidate(dataDbCan)
+      }
 
     const editor = useEditor({
         extensions: [
@@ -56,6 +74,11 @@ export default function AddMlAi({ params, candidate, provinsi, kabupaten }: { pa
             return toast("Data cannot be empty", { theme: "dark" });
         setOpenModal(true)
     }
+    useEffect(() => {
+        setProvinsi((params.idProvinsi == 0) ? null : params.idProvinsi)
+        setKabupaten((params.idKabkot == 0) ? null : params.idKabkot)
+        // setCandidate((params.idCandidate == 0) ? null : params.idCandidate)
+      }, [params])
 
     return (
         <>
@@ -74,7 +97,10 @@ export default function AddMlAi({ params, candidate, provinsi, kabupaten }: { pa
                         required
                         label={"Provinsi"}
                         value={isProvinsi}
-                        // disabled
+                        onChange={(val) => (
+                            onProvinsi({idProv: val})
+                        )}
+                        searchable
                     />
                     <Select
                         placeholder="Pilih Kabupaten/Kota"
@@ -84,6 +110,9 @@ export default function AddMlAi({ params, candidate, provinsi, kabupaten }: { pa
                         }))}
                         label={"Kabupaten"}
                         value={isKabupaten}
+                        onChange={(val) => (
+                            onKabupaten({idKab: val})
+                        )}
                         // disabled
                     />
                 </Group>

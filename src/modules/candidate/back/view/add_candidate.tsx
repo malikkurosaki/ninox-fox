@@ -54,8 +54,6 @@ export default function AddCandidate({ params, provinsi, kabupaten, }: { params:
         setOpenModal(true)
     }
 
-    console.log(body)
-
 
     return (
         <>

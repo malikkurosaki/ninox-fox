@@ -1,10 +1,10 @@
 'use client'
-import { ButtonBack } from "@/modules/_global"
+import { ButtonBack, MasterKabGetByProvince } from "@/modules/_global"
 import { Box, Button, Group, Modal, Radio, Select, Stack, Text, TextInput, Textarea } from "@mantine/core"
 import ModalAddStep from "../component/modal_add_step"
 import { useAtom } from "jotai"
 import { isModalStep } from "../val/val_step"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import toast from "react-simple-toasts"
 import { CiPickerEmpty } from "react-icons/ci"
 import { useEditor } from "@tiptap/react"
@@ -17,6 +17,7 @@ import SubScript from '@tiptap/extension-subscript';
 import { Color } from '@tiptap/extension-color';
 import TextStyle from '@tiptap/extension-text-style';
 import { Link, RichTextEditor } from "@mantine/tiptap"
+import { funGetCandidateActiveByArea } from "@/modules/candidate"
 
 /**
  * Fungsi untuk menampilkan view form add step.
@@ -27,9 +28,32 @@ export default function AddStep({ params, candidate, provinsi, kabupaten }: { pa
     const [openModal, setOpenModal] = useAtom(isModalStep)
     const [isDataCandidate, setDataCandidate] = useState(candidate)
     const [dataProvinsi, setDataProvinsi] = useState(provinsi)
-    const [dataKabupaten, setDatakabupaten] = useState<any>(kabupaten)
+    const [dataKabupaten, setDataKabupaten] = useState<any>(kabupaten)
     const [isProvinsi, setProvinsi] = useState<any>(params.idProvinsi || null)
     const [isKabupaten, setKabupaten] = useState<any>(params.idKabkot || null)
+    const [isCandidate, setCandidate] = useState<any>("")
+
+    async function onProvinsi({ idProv }: { idProv: any }) {
+        setProvinsi(idProv)
+        setKabupaten(null)
+        setCandidate(null)
+        const dataDbKab = await MasterKabGetByProvince({ idProvinsi: Number(idProv) })
+        const dataDbCan = await funGetCandidateActiveByArea({ find: { idProvinsi: Number(idProv), tingkat: 1 } })
+        setDataKabupaten(dataDbKab)
+        setDataCandidate(dataDbCan)
+      }
+    
+      async function onKabupaten({ idKab }: { idKab: any }) {
+        setKabupaten(idKab)
+        setCandidate(null)
+        const dataDbCan = await funGetCandidateActiveByArea({ find: { idProvinsi: Number(isProvinsi), idKabkot: Number(idKab), tingkat: 2 } })
+        setDataCandidate(dataDbCan)
+      }
+
+      useEffect(() => {
+        setProvinsi((params.idProvinsi == 0) ? null : params.idProvinsi)
+        setKabupaten((params.idKabkot == 0) ? null : params.idKabkot)
+      }, [params])
 
 
     const [isBody, setBody] = useState({
@@ -76,7 +100,8 @@ export default function AddStep({ params, candidate, provinsi, kabupaten }: { pa
                             required
                             label={"Provinsi"}
                             value={isProvinsi}
-                            disabled
+                            onChange={(val) => onProvinsi({ idProv: val })}
+                            // disabled
                         />
                         <Select
                             placeholder="Pilih Kabupaten/Kota"
@@ -86,7 +111,8 @@ export default function AddStep({ params, candidate, provinsi, kabupaten }: { pa
                             }))}
                             label={"Kabupaten"}
                             value={isKabupaten}
-                            disabled
+                            onChange={(val) => onKabupaten({ idKab: val })}
+                            // disabled
                         />
                     </Group>
                     <Select mt={20}
@@ -100,6 +126,7 @@ export default function AddStep({ params, candidate, provinsi, kabupaten }: { pa
                         label={"Kandidat"}
                         searchable
                         onChange={(val) => {
+                            setCandidate(val)
                             setBody({
                                 ...isBody,
                                 idCandidate: String(val)

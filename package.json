@@ -28,6 +28,7 @@
     "@tiptap/react": "^2.1.13",
     "@tiptap/starter-kit": "^2.1.13",
     "@types/papaparse": "^5.3.9",
+    "dangerously-set-html-content": "^1.1.0",
     "dayjs": "^1.11.10",
     "echarts": "^5.4.3",
     "echarts-for-react": "^3.0.2",
