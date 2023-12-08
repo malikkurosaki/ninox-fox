@@ -33,6 +33,5 @@ export default async function funGetOneCandidate({ id }: { id: any }) {
             AreaProvinsi: data?.AreaProvinsi?.name,
             AreaKabkot: data?.AreaKabkot?.name
         }
-    console.log(allData)
     return allData
 }
