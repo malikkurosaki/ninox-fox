@@ -1,5 +1,11 @@
-export default function Page(){
+import { MasterProvinceGetAll } from "@/modules/_global";
+import { AddConfUser } from "@/modules/user/conf";
+
+export default async function Page(){
+    const pro = await MasterProvinceGetAll()
     return(
-        <>Add User</>
+        <>
+        <AddConfUser data={pro}/>
+        </>
     )
 }
