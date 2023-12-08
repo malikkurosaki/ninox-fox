@@ -1,12 +1,14 @@
-import { AddRoleUser } from '@/modules/role_user';
+
+import { AddRoleUser } from '@/modules/user/role';
+import funGetAllComponents from '@/modules/user/role/fun/get_all_components';
 import React from 'react';
 
-function Page() {
+export default async function Page() {
+  const data = await funGetAllComponents()
   return (
     <>
-      <AddRoleUser />
+      <AddRoleUser data={data} />
     </>
   );
 }
 
-export default Page;
