@@ -11,6 +11,10 @@ import seederComponents from "./data/component.json"
 import seederUserRole from "./data/user_role.json"
 import seederUserAccess from "./data/user_access.json"
 import seederUser from "./data/user.json"
+import { funSeederComponents } from "./fun/fun_component";
+import { funSeederUserRole } from "./fun/fun_user_role";
+import { funSeederUserAccess } from "./fun/fun_user_access";
+import { funSeederUser } from "./fun/fun_user";
 
 export { SeederView }
 export { seederProvinsi }
@@ -25,3 +29,7 @@ export { seederComponents }
 export { seederUserRole }
 export { seederUserAccess }
 export { seederUser }
+export { funSeederComponents }
+export { funSeederUserRole }
+export { funSeederUserAccess }
+export { funSeederUser }
