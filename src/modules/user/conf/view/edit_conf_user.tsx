@@ -1,44 +1,39 @@
 "use client"
-import { ButtonBack } from '@/modules/_global';
-import { WARNA } from '@/modules/_global/fun/WARNA';
-import { Box, Button, Checkbox, Chip, Divider, Group, Modal, NumberInput, Select, SimpleGrid, Stack, Table, Text, TextInput } from '@mantine/core';
 import { useAtom } from 'jotai';
 import React, { useState } from 'react';
 import { isModalConf } from '../val/isModalConf';
-import toast from 'react-simple-toasts';
-import ModalConfUser from '../components/modal_conf_user';
+import { Box, Button, Checkbox, Chip, Divider, Group, Modal, NumberInput, Select, SimpleGrid, Stack, Table, Text, TextInput } from '@mantine/core';
 
-export default function AddConfUser({ data, role }: { data: any, role: any }) {
+import { ButtonBack } from '@/modules/_global';
+import toast from 'react-simple-toasts';
+
+export default function EditConfUser({ data, role, wilayah }: { data: any, role: any, wilayah: any }) {
   const [valOpenModal, setOpenModal] = useAtom(isModalConf)
-  const [isData, setData] = useState<any[]>(data)
+  const [isData, setData] = useState<any[]>(wilayah)
   const [isRole, setRole] = useState<any[]>(role)
+  const [dataUser, setDataUser] = useState(data)
   const [isWilayah, setWilayah] = useState<any>([])
   const [isAreaFront, setAreaFront] = useState('')
-
-
-  const [dataUser, setDataUser] = useState({
-    idUserRole: Number(),
-    name: "",
-    email: "",
-    password: "",
-    phone: "",
-    isAllArea: ""
-  })
+  const [isCek, setCek] = useState(data.dataUser.isAllArea)
+  const [isCekWilayah, setCekWilayah] = useState(data.dataArea.map((item: any) => (item.idProvinsi)))
+  const [isDataArea, setDataArea] = useState(data.dataArea)
 
   function validationData() {
-    if (Object.values(dataUser).includes(""))
-      return toast("The form cannot be empty", { theme: "dark" });
-    if (isWilayah.length < 1 || (isWilayah.length == 0))
-      return toast("User role cannot be empty", { theme: "dark" });
-    if (isAreaFront.length < 1 || (isAreaFront.length == 0))
-      return toast("User role cannot be empty", { theme: "dark" });
+    // if (Object.values(dataUser).includes(""))
+    //   return toast("The form cannot be empty", { theme: "dark" });
+    // if (isWilayah.length < 1 || (isWilayah.length == 0))
+    //   return toast("User role cannot be empty", { theme: "dark" });
+    // if (isAreaFront.length < 1 || (isAreaFront.length == 0))
+    //   return toast("User role cannot be empty", { theme: "dark" });
+    console.log(dataUser)
     setOpenModal(true);
   }
+  // console.log((isDataArea.filter((i: any) => i.idProvinsi == 4)[0].isFront))
   return (
     <>
       <Stack>
         <ButtonBack />
-        <Text fw={"bold"}>ADD USER</Text>
+        <Text fw={"bold"}>EDIT USER</Text>
         <Box
           style={{
             backgroundColor: "white",
@@ -63,6 +58,7 @@ export default function AddConfUser({ data, role }: { data: any, role: any }) {
                   idUserRole: val
                 })
               }
+              value={dataUser.dataUser.idUserRole}
             />
             <TextInput
               placeholder='Name'
@@ -72,6 +68,7 @@ export default function AddConfUser({ data, role }: { data: any, role: any }) {
                   name: val.target.value
                 })
               }
+              value={dataUser.dataUser.name}
             />
             <TextInput
               placeholder='Email'
@@ -81,6 +78,7 @@ export default function AddConfUser({ data, role }: { data: any, role: any }) {
                   email: val.target.value
                 })
               }
+              value={dataUser.dataUser.email}
             />
             <TextInput
               placeholder='Password'
@@ -90,6 +88,7 @@ export default function AddConfUser({ data, role }: { data: any, role: any }) {
                   password: val.target.value
                 })
               }
+              value={dataUser.dataUser.password}
             />
             <NumberInput
               placeholder='Phone'
@@ -99,13 +98,27 @@ export default function AddConfUser({ data, role }: { data: any, role: any }) {
                   phone: val
                 })
               }
+              value={dataUser.dataUser.phone}
             />
-            <Chip color="cyan" onChange={(val: any) =>
-              setDataUser({
-                ...dataUser,
-                isAllArea: val
-              })
-            } variant="outline" size="lg" radius="sm">ALL AREA</Chip>
+            <Chip color="cyan"
+              // onChange={(val: any) =>
+              //   setDataUser({
+              //     ...dataUser,
+              //     isAllArea: val
+              //   })
+              // }
+              onChange={(v) => {
+                setCek((v: any) => !v)
+                setDataUser({
+                  ...dataUser,
+                  isAllArea: v
+                })
+              }}
+              variant="outline"
+              size="lg"
+              radius="sm"
+              checked={isCek}
+            >ALL AREA</Chip>
           </SimpleGrid>
           <Box pt={40} pb={40}>
             <Divider size={"md"} />
@@ -131,13 +144,22 @@ export default function AddConfUser({ data, role }: { data: any, role: any }) {
                 <Table.Tr key={i}>
                   <Table.Td>{i + 1}</Table.Td>
                   <Table.Td>
-                    <Chip.Group multiple value={isWilayah} onChange={setWilayah}>
-                      <Chip color="cyan" variant="light" radius="sm" value={String(v.id)}>{v.name}</Chip>
+                    <Chip.Group multiple value={isWilayah} onChange={(v) => {
+                      setWilayah((v: any) => v)
+                      // setDataArea((v: any) => !v)
+                    }}>
+                      <Chip 
+                      // checked={(isDataArea.filter((i: any) => i.idProvinsi == v.id).length > 0 ? true : false)} 
+                      checked={(isDataArea.filter((i: any) => i.idProvinsi == v.id).length > 0 ? true : false)}
+                      color="cyan" variant="light" radius="sm" value={String(v.id)}>{v.name}</Chip>
                     </Chip.Group>
                   </Table.Td>
                   <Table.Td>
-                    <Chip.Group multiple={false} value={isAreaFront} onChange={setAreaFront}>
-                      <Chip value={String(v.id)}>DEFAULT</Chip>
+                    <Chip.Group 
+                    multiple={false} value={isAreaFront} onChange={setAreaFront}
+                    
+                    >
+                      <Chip checked={isDataArea.filter((i: any) => i?.idProvinsi == v.isFront)[0]} value={String(v.id)}>DEFAULT</Chip>
                     </Chip.Group>
                   </Table.Td>
 
@@ -168,16 +190,9 @@ export default function AddConfUser({ data, role }: { data: any, role: any }) {
           </Group>
         </Box>
       </Stack>
-      <Modal
-        opened={valOpenModal}
-        onClose={() => setOpenModal(false)}
-        centered
-        closeOnClickOutside={false}
-        withCloseButton={false}
-      >
-        <ModalConfUser data={dataUser} dataArea={isWilayah} isFront={isAreaFront} />
-      </Modal>
+      <pre>
+        {JSON.stringify(dataUser, null, 1)}
+      </pre>
     </>
   );
 }
-
