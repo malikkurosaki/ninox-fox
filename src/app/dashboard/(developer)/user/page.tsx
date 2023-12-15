@@ -1,9 +1,10 @@
-import { ListConfUser } from "@/modules/user/conf";
+import { ListConfUser, funGetAllConfUser } from "@/modules/user/conf";
 
-export default function Page(){
+export default async function Page(){
+    const data = await funGetAllConfUser()
     return(
         <>
-        <ListConfUser/>
+        <ListConfUser data={data}/>
         </>
     )
 }
