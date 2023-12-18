@@ -1,8 +1,8 @@
+import { PageSubTitle } from '@/modules/_global';
 import { WARNA } from '@/modules/_global/fun/WARNA';
 import { Box, Flex, Grid, Group, Image, SimpleGrid, Text } from '@mantine/core';
 import React from 'react';
 import EchartTopPairingCandidate from './echart_top_pairing_candidate';
-import PageSubTitle from '@/modules/_global/front/components/PageSubtitle';
 
 const dataCan = [
     {

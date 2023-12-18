@@ -6,9 +6,9 @@ import { DateInput } from '@mantine/dates';
 import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
 import toast from 'react-simple-toasts';
-import ModalDeleteCandidate from '../components/modal/modal_delete_candidate';
 import { useAtom } from 'jotai';
 import { isModalEmotion } from '../val/val_emotion';
+import { ModalDeleteCandidate } from '../..';
 
 export default function ViewDeleteCandidate({ param, provinsi, kabupaten, candidate, datatable }: { param: any, provinsi: any, kabupaten: any, candidate: any, datatable: any }) {
   const today = new Date();

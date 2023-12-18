@@ -1,7 +1,5 @@
-import { ActionIcon, Box, Group, ScrollArea, Table, Text } from "@mantine/core";
-import { AnyCnameRecord } from "dns";
+import { Box, ScrollArea, Table, Text } from "@mantine/core";
 import React, { useEffect, useState } from "react";
-import { MdDelete, MdEditCalendar } from "react-icons/md";
 
 const data = [
   {
