@@ -1,7 +1,15 @@
-import { Group, Title, Image, BackgroundImage } from '@mantine/core'
+import { ViewLogin } from "@/modules/auth";
+import _ from "lodash";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
-export default function Home() {
-  return (
-    <BackgroundImage w={"100%"} h={"100vh"} src='/ninox.png'/>
-  )
+export default function Page() {
+    const c = cookies().get("_cookiesNinox")
+    if (c && !_.isUndefined(c) && c.value != '') return redirect('/summary')
+
+    return (
+        <>
+            <ViewLogin />
+        </>
+    )
 }

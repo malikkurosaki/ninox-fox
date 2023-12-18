@@ -1,0 +1,47 @@
+[
+    {
+        "id": "UserDeveloper1",
+        "idUserRole": 1,
+        "name": "Dev Amalia",
+        "email": "amalia_dev@bip.com",
+        "password": "amalia@developer",
+        "phone": "628980185458",
+        "isAllArea": true
+    },
+    {
+        "id": "UserDeveloper2",
+        "idUserRole": 1,
+        "name": "Dev Lukman",
+        "email": "lukman_dev@bip.com",
+        "password": "lukman@developer",
+        "phone": "6287701790942",
+        "isAllArea": true
+    },
+    {
+        "id": "UserDeveloper3",
+        "idUserRole": 1,
+        "name": "Dev Malik",
+        "email": "malik_dev@bip.com",
+        "password": "malik@developer",
+        "phone": "6289697338821",
+        "isAllArea": true
+    },
+    {
+        "id": "UserAdmin1",
+        "idUserRole": 2,
+        "name": "Admin Amalia",
+        "email": "amalia_admin@bip.com",
+        "password": "amalia@admin",
+        "phone": "628980185458",
+        "isAllArea": true
+    },
+    {
+        "id": "UserGuest1",
+        "idUserRole": 3,
+        "name": "Guest Amalia",
+        "email": "amalia_guest@bip.com",
+        "password": "amalia@guest",
+        "phone": "628980185458",
+        "isAllArea": true
+    }
+]
