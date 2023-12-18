@@ -1,14 +1,10 @@
 "use client"
-import PageSubTitle from '@/modules/_global/front/components/PageSubtitle';
+import { PageSubTitle, WARNA } from '@/modules/_global';
 import { ActionIcon, Anchor, Box, Breadcrumbs, Button, Grid, Group, Stack, Text, TextInput } from '@mantine/core';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 import { IoCloseSharp } from "react-icons/io5"
-import DetailEchartSentimentAnalysis from '../components/detail_insights/detail_echart_sentiment_analysis';
-import DetailEchartPublicConcerns from '../components/detail_insights/detail_echart_public_concerns';
-import DetailEchartLeader from '../components/detail_insights/detail_echart_leader';
-import DetailRegionHotIssue from '../components/detail_insights/detail_region_hot_issue';
-import { WARNA } from '@/modules/_global/fun/WARNA';
+import { DetailEchartLeader, DetailEchartPublicConcerns, DetailEchartSentimentAnalysis, DetailRegionHotIssue } from '..';
 
 const dataDenpasar = [
   {

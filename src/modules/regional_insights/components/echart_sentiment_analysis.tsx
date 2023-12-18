@@ -4,8 +4,8 @@ import { EChartsOption, color } from "echarts";
 import EChartsReact from "echarts-for-react";
 import { useShallowEffect } from '@mantine/hooks';
 import { Box, Button, Center, Grid, Group, Text } from '@mantine/core';
-import { WARNA } from '@/modules/_global/fun/WARNA';
 import { useRouter } from 'next/navigation';
+import { WARNA } from '@/modules/_global';
 
 export default function EchartSentimentAnalysis() {
   const router = useRouter()

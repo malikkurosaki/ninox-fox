@@ -1,5 +1,19 @@
+import DetailEchartLeader from "./components/detail_insights/detail_echart_leader";
+import DetailEchartPublicConcerns from "./components/detail_insights/detail_echart_public_concerns";
+import DetailEchartSentimentAnalysis from "./components/detail_insights/detail_echart_sentiment_analysis";
+import DetailRegionHotIssue from "./components/detail_insights/detail_region_hot_issue";
+import EchartLeader from "./components/echart_leader";
+import EchartPublicConcerns from "./components/echart_public_concerns";
+import EchartSentimentAnalysis from "./components/echart_sentiment_analysis";
 import ViewDetailRegionalInsights from "./view/view_detail_regional_insights";
 import ViewRegionalInsights from "./view/view_regional_insights";
 
-export {ViewRegionalInsights}
-export {ViewDetailRegionalInsights}
+export { ViewRegionalInsights }
+export { ViewDetailRegionalInsights }
+export { DetailEchartLeader }
+export { DetailEchartPublicConcerns }
+export { DetailEchartSentimentAnalysis }
+export { DetailRegionHotIssue }
+export { EchartLeader }
+export { EchartPublicConcerns }
+export { EchartSentimentAnalysis }
