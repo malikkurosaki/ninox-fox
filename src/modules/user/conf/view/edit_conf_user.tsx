@@ -6,29 +6,29 @@ import { Box, Button, Checkbox, Chip, Divider, Group, Modal, NumberInput, Select
 
 import { ButtonBack } from '@/modules/_global';
 import toast from 'react-simple-toasts';
+import ModalEditConfUser from '../components/modal_edit_conf_user';
 
 export default function EditConfUser({ data, role, wilayah }: { data: any, role: any, wilayah: any }) {
   const [valOpenModal, setOpenModal] = useAtom(isModalConf)
   const [isData, setData] = useState<any[]>(wilayah)
   const [isRole, setRole] = useState<any[]>(role)
   const [dataUser, setDataUser] = useState(data)
-  const [isWilayah, setWilayah] = useState<any>([])
-  const [isAreaFront, setAreaFront] = useState('')
+  const [dataUserUpdate, setDataUserUpdate] = useState(data.dataUser)
+  const [isAreaFront, setAreaFront] = useState(data.dataFront)
   const [isCek, setCek] = useState(data.dataUser.isAllArea)
   const [isCekWilayah, setCekWilayah] = useState(data.dataArea.map((item: any) => (item.idProvinsi)))
-  const [isDataArea, setDataArea] = useState(data.dataArea)
 
   function validationData() {
-    // if (Object.values(dataUser).includes(""))
-    //   return toast("The form cannot be empty", { theme: "dark" });
-    // if (isWilayah.length < 1 || (isWilayah.length == 0))
-    //   return toast("User role cannot be empty", { theme: "dark" });
-    // if (isAreaFront.length < 1 || (isAreaFront.length == 0))
-    //   return toast("User role cannot be empty", { theme: "dark" });
-    console.log(dataUser)
+    if (Object.values(dataUserUpdate).includes(""))
+      return toast("The form cannot be empty", { theme: "dark" });
+    if (isCekWilayah.length < 1 || (isCekWilayah.length == 0))
+      return toast("User role cannot be empty", { theme: "dark" });
+    if (isAreaFront.length < 1 || (isAreaFront.length == 0))
+      return toast("User role cannot be empty", { theme: "dark" });
     setOpenModal(true);
+    console.log(dataUserUpdate)
   }
-  // console.log((isDataArea.filter((i: any) => i.idProvinsi == 4)[0].isFront))
+
   return (
     <>
       <Stack>
@@ -53,52 +53,80 @@ export default function EditConfUser({ data, role, wilayah }: { data: any, role:
                 label: role.name
               }))}
               onChange={(val: any) =>
-                setDataUser({
-                  ...dataUser,
+                setDataUserUpdate({
+                  ...dataUserUpdate,
                   idUserRole: val
                 })
               }
-              value={dataUser.dataUser.idUserRole}
+              value={dataUserUpdate.idUserRole}
             />
             <TextInput
               placeholder='Name'
-              onChange={(val) =>
-                setDataUser({
-                  ...dataUser,
+              // onChange={(val) =>
+              //   setDataUser({
+              //     ...dataUser,
+              //     name: val.target.value
+              //   })
+              // }
+              // value={dataUser.dataUser.name}
+              onChange={(val: any) =>
+                setDataUserUpdate({
+                  ...dataUserUpdate,
                   name: val.target.value
                 })
               }
-              value={dataUser.dataUser.name}
+              value={dataUserUpdate.name}
             />
             <TextInput
               placeholder='Email'
-              onChange={(val) =>
-                setDataUser({
-                  ...dataUser,
+              // onChange={(val) =>
+              //   setDataUser({
+              //     ...dataUser,
+              //     email: val.target.value
+              //   })
+              // }
+              // value={dataUser.dataUser.email}
+              onChange={(val: any) =>
+                setDataUserUpdate({
+                  ...dataUserUpdate,
                   email: val.target.value
                 })
               }
-              value={dataUser.dataUser.email}
+              value={dataUserUpdate.email}
             />
             <TextInput
               placeholder='Password'
-              onChange={(val) =>
-                setDataUser({
-                  ...dataUser,
+              // onChange={(val) =>
+              //   setDataUser({
+              //     ...dataUser,
+              //     password: val.target.value
+              //   })
+              // }
+              // value={dataUser.dataUser.password}
+              onChange={(val: any) =>
+                setDataUserUpdate({
+                  ...dataUserUpdate,
                   password: val.target.value
                 })
               }
-              value={dataUser.dataUser.password}
+              value={dataUserUpdate.password}
             />
             <NumberInput
               placeholder='Phone'
+              // onChange={(val: any) =>
+              //   setDataUser({
+              //     ...dataUser,
+              //     phone: val
+              //   })
+              // }
+              // value={dataUser.dataUser.phone}
               onChange={(val: any) =>
-                setDataUser({
-                  ...dataUser,
+                setDataUserUpdate({
+                  ...dataUserUpdate,
                   phone: val
                 })
               }
-              value={dataUser.dataUser.phone}
+              value={dataUserUpdate.phone}
             />
             <Chip color="cyan"
               // onChange={(val: any) =>
@@ -107,13 +135,22 @@ export default function EditConfUser({ data, role, wilayah }: { data: any, role:
               //     isAllArea: val
               //   })
               // }
-              onChange={(v) => {
+              // onChange={(v) => {
+              //   setCek((v: any) => !v)
+              //   setDataUser({
+              //     ...dataUser,
+              //     isAllArea: v
+              //   })
+              // }}
+              onChange={(v: any) => {
                 setCek((v: any) => !v)
-                setDataUser({
-                  ...dataUser,
+                setDataUserUpdate({
+                  ...dataUserUpdate,
                   isAllArea: v
                 })
               }}
+              value={dataUserUpdate.phone}
+
               variant="outline"
               size="lg"
               radius="sm"
@@ -144,22 +181,21 @@ export default function EditConfUser({ data, role, wilayah }: { data: any, role:
                 <Table.Tr key={i}>
                   <Table.Td>{i + 1}</Table.Td>
                   <Table.Td>
-                    <Chip.Group multiple value={isWilayah} onChange={(v) => {
-                      setWilayah((v: any) => v)
-                      // setDataArea((v: any) => !v)
-                    }}>
-                      <Chip 
-                      // checked={(isDataArea.filter((i: any) => i.idProvinsi == v.id).length > 0 ? true : false)} 
-                      checked={(isDataArea.filter((i: any) => i.idProvinsi == v.id).length > 0 ? true : false)}
-                      color="cyan" variant="light" radius="sm" value={String(v.id)}>{v.name}</Chip>
+                    <Chip.Group multiple value={isCekWilayah}
+                      onChange={setCekWilayah}
+                    >
+                      <Chip
+                        checked={isCekWilayah.includes(Number(v.id))}
+                        color="cyan" variant="light" radius="sm" value={String(v.id)}>{v.name}</Chip>
                     </Chip.Group>
                   </Table.Td>
                   <Table.Td>
-                    <Chip.Group 
-                    multiple={false} value={isAreaFront} onChange={setAreaFront}
-                    
+                    <Chip.Group
+                      multiple={false} value={isAreaFront} onChange={setAreaFront}
                     >
-                      <Chip checked={isDataArea.filter((i: any) => i?.idProvinsi == v.isFront)[0]} value={String(v.id)}>DEFAULT</Chip>
+                      <Chip
+                        checked={isAreaFront.idProvinsi == v.id ? true : false}
+                        value={String(v.id)}>DEFAULT</Chip>
                     </Chip.Group>
                   </Table.Td>
 
@@ -190,9 +226,15 @@ export default function EditConfUser({ data, role, wilayah }: { data: any, role:
           </Group>
         </Box>
       </Stack>
-      <pre>
-        {JSON.stringify(dataUser, null, 1)}
-      </pre>
+      <Modal
+        opened={valOpenModal}
+        onClose={() => setOpenModal(false)}
+        centered
+        closeOnClickOutside={false}
+        withCloseButton={false}
+      >
+        <ModalEditConfUser data={dataUserUpdate} dataArea={isCekWilayah} isFront={isAreaFront} />
+      </Modal>
     </>
   );
 }

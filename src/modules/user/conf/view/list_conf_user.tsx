@@ -80,8 +80,8 @@ export default function ListConfUser({ data }: { data: any }) {
                             <>
                               <Box key={item.idUser}>
                                 {/* <Button color={(item.isFront == true) ? 'red' : 'blue'} size="lg" mb={10}>{item.area}</Button> */}
-                                <UnstyledButton c={(item.isFront == true) ? 'red' : 'blue'} size="lg" mb={10}>{item.area}</UnstyledButton>
-                                {/* <Box
+                                {/* <UnstyledButton p={10} bg={(item.isFront == true) ? 'red' : 'blue'} size="lg" mb={10}>{item.area}</UnstyledButton> */}
+                                <Box
                                   style={{
                                     backgroundColor: `${(item.isFront == true) ? '#17B885' : '#FA5353'}`,
                                     padding: 5,
@@ -90,7 +90,7 @@ export default function ListConfUser({ data }: { data: any }) {
                                   mb={10}
                                 >
                                  <Text ta={"center"} c={"white"}>{item.area}</Text>
-                                </Box> */}
+                                </Box>
                               </Box>
                             </>
                           )

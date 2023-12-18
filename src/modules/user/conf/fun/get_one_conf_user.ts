@@ -35,11 +35,22 @@ export default async function funGetOneConfUser({ id }: { id: any }) {
         }
     })
 
+    const dataFront = await prisma.userArea.findFirst({
+        where: {
+            idUser: id,
+            isFront: true,
+        },
+        select: {
+            idProvinsi: true,
+        }
+    })
+
     const allData = {
         dataUser: data,
-        dataArea: dataArea
+        dataArea: dataArea,
+        dataFront: dataFront
     }
-    console.log(allData)
+    console.log(dataFront)
 
     return allData
 
