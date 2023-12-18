@@ -1,5 +1,5 @@
 "use client"
-import PageSubTitle from '@/modules/_global/front/components/PageSubtitle';
+import { PageSubTitle } from '@/modules/_global';
 import { Box, Flex, Grid, Image, ScrollArea, Select, Stack, Text, TextInput } from '@mantine/core';
 import React from 'react';
 import TextAnimation from 'react-typing-dynamics';
