@@ -9,8 +9,8 @@ import { GrDocumentCsv } from 'react-icons/gr';
 import toast from "react-simple-toasts"
 import papa from 'papaparse'
 import { useAtom } from "jotai"
+import { ModalUploadAudience } from "../.."
 import { isModalAudience } from "../val/val_audience"
-import ModalUploadAudience from "../components/modal_upload_audience"
 
 
 export default function ViewUploadAudience() {
