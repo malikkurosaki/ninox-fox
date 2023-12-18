@@ -16,14 +16,10 @@ import {
 } from "@mantine/core";
 import { useAtom } from "jotai";
 import { useRouter, useSearchParams } from "next/navigation";
-import { MdDelete, MdEditCalendar } from "react-icons/md";
 import { isModalSwot } from "../val/val_swot";
 import ModalDelSwot from "./modal_del_swot";
-import { CiRead, CiUnread } from "react-icons/ci";
-import { useDisclosure } from "@mantine/hooks";
 import { useEffect, useState } from "react";
 import ComponentTable from "./component_table";
-import { funGetCandidateActiveByArea } from "@/modules/candidate";
 import funGetAllSwot from "../fun/fun_get_all_swot";
 
 /**
