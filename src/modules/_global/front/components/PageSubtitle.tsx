@@ -3,7 +3,6 @@ import { Box, Divider, Group, Text, Title } from '@mantine/core';
 import { useInterval, useShallowEffect } from '@mantine/hooks';
 import _ from 'lodash';
 import React, { useState } from 'react';
-import { WARNA } from '../../fun/WARNA';
 
 /**
  * Menampilkan title page dan jam berjalan
