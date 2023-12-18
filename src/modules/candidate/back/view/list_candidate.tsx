@@ -4,9 +4,9 @@ import { Box, Button, Center, Group, Paper, Select, SimpleGrid, Stack, Text, Uns
 import { useEffect, useState } from "react"
 import TableCandidate from "../component/table_candidate"
 import { useRouter } from "next/navigation"
-import { MasterKabGetByProvince } from "@/modules/_global/fun/master_kabupaten_get_by_province"
 import toast from "react-simple-toasts"
 import _ from "lodash"
+import { MasterKabGetByProvince } from "@/modules/_global"
 
 
 /**
