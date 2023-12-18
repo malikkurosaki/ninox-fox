@@ -1,3 +1,4 @@
+"use client"
 import { Box, ScrollArea, Table, Text } from "@mantine/core";
 import React, { useEffect, useState } from "react";
 
