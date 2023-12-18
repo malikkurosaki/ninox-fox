@@ -1,5 +1,4 @@
 'use client'
-
 import { Button, Group, Select, Stack, Text } from "@mantine/core"
 import { useEffect, useState } from "react"
 import TableMlAi from "../component/table_mlai"
