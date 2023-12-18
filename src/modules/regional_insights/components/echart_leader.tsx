@@ -1,3 +1,4 @@
+"use client"
 import React, { useState } from 'react';
 import { EChartsOption, color } from "echarts";
 import EChartsReact from "echarts-for-react";
