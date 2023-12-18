@@ -3,8 +3,6 @@
 import { ActionIcon, Box, Button, Divider, Grid, Group, Pagination, Paper, ScrollArea, Select, Stack, Table, Text, TextInput } from "@mantine/core"
 import { DateInput } from "@mantine/dates";
 import { useState } from "react";
-import { AiOutlineSearch } from "react-icons/ai";
-import TableLogUser from "../component/table_log_user";
 import funGetLogUser from "../fun/get_log";
 import moment from "moment";
 

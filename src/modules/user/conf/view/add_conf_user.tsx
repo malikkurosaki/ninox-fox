@@ -1,6 +1,5 @@
 "use client"
 import { ButtonBack } from '@/modules/_global';
-import { WARNA } from '@/modules/_global/fun/WARNA';
 import { Box, Button, Checkbox, Chip, Divider, Group, Modal, NumberInput, Select, SimpleGrid, Stack, Table, Text, TextInput } from '@mantine/core';
 import { useAtom } from 'jotai';
 import React, { useState } from 'react';

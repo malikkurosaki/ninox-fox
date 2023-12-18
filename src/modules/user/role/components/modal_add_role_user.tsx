@@ -6,7 +6,6 @@ import toast from "react-simple-toasts"
 import { useRouter } from "next/navigation"
 import { isModalRoleUser } from "../val/val_role_user"
 import funAddRoleUser from "../fun/add_role_user"
-import { Component } from "react"
 import funLogUser from "../../log/fun/add_log"
 
 /**
