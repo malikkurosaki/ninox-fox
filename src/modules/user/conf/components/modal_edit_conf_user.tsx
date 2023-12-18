@@ -1,3 +1,4 @@
+'use client'
 import React from 'react';
 import { Alert, Box, Button, Group, Text } from "@mantine/core"
 import funAddConfUser from '../fun/add_conf_user';
