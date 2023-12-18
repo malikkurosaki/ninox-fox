@@ -1,3 +1,4 @@
+'use client'
 import { Alert, Box, Button, Group, Text } from '@mantine/core';
 import React from 'react';
 import { useAtom } from 'jotai';
