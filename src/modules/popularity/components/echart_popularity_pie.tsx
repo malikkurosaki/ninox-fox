@@ -2,10 +2,8 @@ import React, { useState } from 'react';
 import { EChartsOption, color } from "echarts";
 import EChartsReact from "echarts-for-react";
 import { useShallowEffect } from '@mantine/hooks';
-import * as echarts from 'echarts';
-import { WARNA } from '@/modules/_global/fun/WARNA';
-import { COLOR_EMOTION } from '@/modules/_global/fun/COLOR_EMOTION';
 import { Box, Center } from '@mantine/core';
+import { WARNA } from '@/modules/_global';
 
 export default function EchartPopularityPie() {
   const [options, setOptions] = useState<EChartsOption>({});
