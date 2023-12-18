@@ -13,7 +13,6 @@ import {
 } from "@mantine/core";
 import { CiRead, CiUnread } from "react-icons/ci";
 import { MdDelete, MdEditCalendar } from "react-icons/md";
-import TextAnimation from "react-typing-dynamics";
 import InnerHTML from 'dangerously-set-html-content'
 
 export default function ComponentTable({ v, i, onClick }: { v: any; i: any, onClick: (val: any) => void }) {
