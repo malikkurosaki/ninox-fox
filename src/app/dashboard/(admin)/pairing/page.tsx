@@ -1,7 +1,6 @@
 import { MasterKabGetByProvince, MasterProvinceGetAll } from "@/modules/_global";
 import { funGetCandidateActiveByArea } from "@/modules/candidate";
-import { ViewPairing } from "@/modules/pairing";
-import { funDownloadPairing, funGetPairingByCanAndDate } from "@/modules/pairing/back";
+import { ViewPairing, funDownloadPairing, funGetPairingByCanAndDate } from "@/modules/pairing";
 import _ from "lodash";
 import React from "react";
 

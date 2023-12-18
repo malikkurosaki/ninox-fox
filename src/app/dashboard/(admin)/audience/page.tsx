@@ -1,6 +1,5 @@
 import { MasterKabGetByProvince, MasterKecGetByKab, MasterProvinceGetAll } from "@/modules/_global";
-import { ViewAudience, funGetAudienceByArea } from "@/modules/audience";
-import { funDownloadAudience } from "@/modules/audience/back";
+import { ViewAudience, funDownloadAudience, funGetAudienceByArea } from "@/modules/audience";
 import _ from "lodash";
 import React from "react";
 

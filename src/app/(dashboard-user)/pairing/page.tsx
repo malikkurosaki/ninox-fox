@@ -1,4 +1,4 @@
-import { ViewPairingFront } from '@/modules/pairing/front';
+import { ViewPairingFront } from '@/modules/pairing';
 import React from 'react';
 
 function Page() {

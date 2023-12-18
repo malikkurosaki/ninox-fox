@@ -2,7 +2,6 @@ import { ListMlAi, funGetAllMlAi } from '@/modules/mlai';
 import React from 'react';
 import _ from 'lodash';
 import { MasterKabGetByProvince, MasterProvinceGetAll } from '@/modules/_global';
-import { funGetCandidateActiveByArea } from '@/modules/candidate';
 
 export default async function Page({ searchParams }: { searchParams: { prov: string, city: string, date: any } }) {
 

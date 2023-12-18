@@ -1,4 +1,5 @@
-import { ViewUploadEmotion } from "@/modules/emotion/back";
+import { ViewUploadEmotion } from "@/modules/emotion";
+
 
 export default function Page() {
     return (
