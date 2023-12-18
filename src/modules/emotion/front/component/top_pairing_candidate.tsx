@@ -1,3 +1,4 @@
+'use client'
 import { PageSubTitle } from '@/modules/_global';
 import { WARNA } from '@/modules/_global/fun/WARNA';
 import { Box, Flex, Grid, Group, Image, SimpleGrid, Text } from '@mantine/core';
