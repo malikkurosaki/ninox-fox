@@ -16,7 +16,7 @@ export default function Home({ pro, kab, kec, kel, can1, can2 }: { pro: number, 
 
   return (
     <>
-      <Text fz={25} c={'#213555'} fw={'bold'}>HI ADMIN 2</Text>
+      <Text fz={25} c={'#213555'} fw={'bold'}>HI BALI INDONESIA</Text>
       <Group>
         <Text c={"#4F709C"}>DEFAULT WILAYAH UNTUK DASHBOARD USER</Text>
         {/* <Select
