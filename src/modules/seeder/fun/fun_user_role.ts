@@ -18,7 +18,6 @@ export async function funSeederUserRole() {
                 name: data.name
             },
             update: {
-                id: data.id,
                 name: data.name
             }
         })

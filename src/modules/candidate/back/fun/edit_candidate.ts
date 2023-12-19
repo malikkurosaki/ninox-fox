@@ -17,7 +17,10 @@ export default async function funEditCandidate({ body, img }: { body: Candidate,
             id: body.id
         },
         data: {
-            name: body.name
+            name: body.name,
+            idProvinsi: body.idProvinsi,
+            idKabkot: body.idKabkot
+
         },
         select: {
             idProvinsi: true,

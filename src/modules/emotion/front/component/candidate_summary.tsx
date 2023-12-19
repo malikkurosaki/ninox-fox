@@ -1,4 +1,5 @@
-import { WARNA } from '@/modules/_global/fun/WARNA';
+'use client'
+import { WARNA } from '@/modules/_global';
 import { Box, Image, SimpleGrid, Stack, Text } from '@mantine/core';
 import React from 'react';
 

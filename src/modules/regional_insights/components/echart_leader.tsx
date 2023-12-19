@@ -1,3 +1,4 @@
+"use client"
 import React, { useState } from 'react';
 import { EChartsOption, color } from "echarts";
 import EChartsReact from "echarts-for-react";
@@ -13,12 +14,6 @@ export default function EchartLeader() {
 
     const loadData = () => {
         const option: EChartsOption = {
-            // title: {
-            //     text: "LEADER TRAIT ASSESSMENT",
-            //     textStyle: {
-            //         color: "white"
-            //     }
-            // },
             radiusAxis: {},
             polar: {},
             tooltip: {

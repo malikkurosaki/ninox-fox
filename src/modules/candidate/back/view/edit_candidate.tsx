@@ -1,6 +1,6 @@
 'use client'
 import { ButtonBack } from "@/modules/_global"
-import { Avatar, Box, Button, Center, Group, Modal, Paper, Stack, Text, TextInput } from "@mantine/core"
+import { Avatar, Box, Button, Center, Group, Modal, Paper, Select, SimpleGrid, Stack, Text, TextInput } from "@mantine/core"
 import { useAtom } from "jotai"
 import { isModalCandidate } from "../val/isModalCandidate"
 import ModalEditCandidate from "../component/modal_edit_candidate"
@@ -8,6 +8,7 @@ import { useRef, useState } from "react"
 import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone"
 import toast from "react-simple-toasts"
 import _ from "lodash"
+import { useRouter } from "next/navigation"
 
 /**
  * Fungsi untuk menampilkan view edit candidate.
@@ -15,15 +16,25 @@ import _ from "lodash"
  * @returns {component} view edit candidate.
  */
 
-export default function EditCandidate({ data }: { data: any }) {
+export default function EditCandidate({ data, params, provinsi, kabupaten }: { data: any, params: any, provinsi: any, kabupaten: any }) {
     const openRef = useRef<() => void>(null);
     const [openModal, setOpenModal] = useAtom(isModalCandidate)
     const [imgForm, setImgForm] = useState<FormData>()
     const [img, setIMG] = useState<any | null>(`/img/candidate/${data.img}`)
     const [dataEdit, setDataEdit] = useState({
         id: data.id,
-        name: data.name
+        name: data.name,
     })
+
+    const router = useRouter();
+    const [dataProvinsi, setDataProvinsi] = useState(provinsi)
+    const [dataKabupaten, setDatakabupaten] = useState<any>(kabupaten)
+    const [isProvinsi, setProvinsi] = useState<any>(data.idProvinsi || null)
+    const [isKabupaten, setKabupaten] = useState<any>(data.idKabkot || null)
+
+    const [isData, setIsData] = useState(data)
+
+
 
 
     function onConfirmation() {
@@ -84,7 +95,22 @@ export default function EditCandidate({ data }: { data: any }) {
                             </Center>
                         </Group>
                         <Box pt={40}>
+                            <SimpleGrid
+                                cols={{ base: 1, sm: 2, lg: 2 }}
+                                spacing={{ base: 10, sm: 'xl' }}
+                                verticalSpacing={{ base: 'md', sm: 'xl' }}
+                            >
+                                <TextInput
+                                    value={isData.AreaProvinsi}
+                                    disabled
+                                />
+                                <TextInput
+                                    value={isData.AreaKabkot}
+                                    disabled
+                                />
+                            </SimpleGrid>
                             <TextInput
+                            mt={20}
                                 placeholder="Nama Kandidat"
                                 value={dataEdit.name}
                                 onChange={(val) => {

@@ -1,4 +1,5 @@
-import { ViewUploadPairing } from "@/modules/pairing/back";
+import { ViewUploadPairing } from "@/modules/pairing";
+
 
 export default function Page() {
     return (

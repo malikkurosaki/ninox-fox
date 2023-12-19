@@ -1,10 +1,9 @@
 "use client"
-import PageSubTitle from '@/modules/_global/front/components/PageSubtitle';
-import { WARNA } from '@/modules/_global/fun/WARNA';
 import { Box, Button, Flex, Grid, Group, Image, Select, SimpleGrid, Stack, Text } from '@mantine/core';
 import React from 'react';
 import EchartPopularityLine from '../components/echart_popularity_line';
 import EchartPopularityPie from '../components/echart_popularity_pie';
+import { PageSubTitle } from '@/modules/_global';
 
 export default function ViewPopularity() {
   return (
@@ -14,13 +13,6 @@ export default function ViewPopularity() {
         <Grid gutter={'lg'}>
           <Grid.Col span={{ md: 6, lg: 6 }}>
             <Box
-            // style={{
-            //   background: "rgba(0,0,0,0.3)",
-            //   padding: 10,
-            //   borderRadius: 10
-            // }}
-            // pt={20}
-            // pb={20}
             >
               <Text ta={"center"} c={"white"} fz={25} fw={"bold"}>CALON GUBERNUR BALI 2024</Text>
               <Group justify='space-evenly' gap={30} pt={30}>

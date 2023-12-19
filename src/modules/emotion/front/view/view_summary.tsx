@@ -1,10 +1,10 @@
 "use client"
-import PageSubTitle from '@/modules/_global/front/components/PageSubtitle';
+import { PageSubTitle } from '@/modules/_global';
 import { BackgroundImage, Box, Center, Flex, Grid, Group, Image, SimpleGrid, Stack } from '@mantine/core';
 import React from 'react';
 import CandidateSummary from '../component/candidate_summary';
-import TableTop10 from '../component/table_top_10';
 import EchartCandidateSummary from '../component/echart_candidate_summary';
+import TableTop10 from '../component/table_top_10';
 import TopPairingCandidate from '../component/top_pairing_candidate';
 
 export default function ViewSummary() {

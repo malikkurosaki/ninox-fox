@@ -30,10 +30,11 @@ model CategoryLeaderTraitAssessment {
 
 model Component {
   id         Int          @id @default(autoincrement())
-  menu       String?
-  label      String?
+  menu       String? // nama menu
+  group      String? // untuk grouping menu
   keyMenu    String?
-  name       String
+  owner      String? // kepemilikan menu (user/admin/developer)
+  link       String?
   isActive   Boolean      @default(true)
   createdAt  DateTime     @default(now())
   updatedAt  DateTime     @updatedAt

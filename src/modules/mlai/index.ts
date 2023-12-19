@@ -1,4 +1,14 @@
+
+import ComponentTable from "./back/component/component_table";
+import ModalAddMlAi from "./back/component/modal_add_mlai";
+import ModalDelMlAi from "./back/component/modal_del_mlai";
+import ModalEditMlAi from "./back/component/modal_edit_mlai";
+import TableMlAi from "./back/component/table_mlai";
+import funAddMlAi from "./back/fun/fun_add_mlai";
+import funDeleteMlAi from "./back/fun/fun_delete_mlai";
+import funEditMlAi from "./back/fun/fun_edit_mlai";
 import funGetAllMlAi from "./back/fun/fun_get_all_mlai";
+import funGetOneMlAi from "./back/fun/fun_get_one_mlai";
 import AddMlAi from "./back/view/add_mlai";
 import EditMlAi from "./back/view/edit_mlai";
 import ListMlAi from "./back/view/list_mlai";
@@ -8,4 +18,13 @@ export { funGetAllMlAi }
 export { EditMlAi }
 export { AddMlAi }
 export { ListMlAi }
-export {ViewMlAi}
+export { ViewMlAi }
+export { funGetOneMlAi }
+export { ComponentTable }
+export { ModalAddMlAi }
+export { ModalDelMlAi }
+export { ModalEditMlAi }
+export { TableMlAi }
+export { funAddMlAi }
+export { funDeleteMlAi }
+export { funEditMlAi }

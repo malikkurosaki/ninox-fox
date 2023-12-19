@@ -22,7 +22,6 @@ import _ from "lodash";
 import toast from "react-simple-toasts";
 import moment from "moment";
 import funCekPairing from "../fun/cek_pairing";
-import { validateConfig } from "next/dist/server/config-shared";
 
 /**
  * Fungsi Untuk menampilkan halaman copy data.

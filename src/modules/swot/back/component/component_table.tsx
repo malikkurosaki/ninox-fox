@@ -15,7 +15,7 @@ import {
 import { CiRead, CiUnread } from "react-icons/ci";
 import { MdDelete, MdEditCalendar } from "react-icons/md";
 import { isModalValue } from "../val/val_swot";
-import TextAnimation from "react-typing-dynamics";
+import InnerHTML from 'dangerously-set-html-content'
 
 export default function ComponentTable({ v, i, onClick }: { v: any; i: any, onClick: (val: any) => void }) {
   const open = useState(false);
@@ -94,8 +94,11 @@ export default function ComponentTable({ v, i, onClick }: { v: any; i: any, onCl
                 <Text c={"white"} fw={"bold"} fz={20} mb={10}>
                   Content
                 </Text>
+                <Stack c={'white'}>
+                  <InnerHTML html={v.content} />
+                </Stack>
                 {/* <Text c={"white"} dangerouslySetInnerHTML={RubahHTML(v.content)} /> */}
-                <Text c={"white"}>
+                {/* <Text c={"white"}>
                   <TextAnimation
                     phrases={[...v.content.split('\n')]}
                     typingSpeed={0}
@@ -106,7 +109,7 @@ export default function ComponentTable({ v, i, onClick }: { v: any; i: any, onCl
                     eraseOnComplete={false}
                     isSecure={false}
                   />
-                </Text>
+                </Text> */}
               </Box>
             </Collapse>
           </Table.Td>

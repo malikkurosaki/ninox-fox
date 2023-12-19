@@ -1,19 +1,13 @@
 "use client"
 import { useDisclosure, useShallowEffect } from '@mantine/hooks';
 import React, { useState } from 'react';
-import { LuLayoutDashboard } from 'react-icons/lu';
-import { FaChartLine, FaChartPie } from 'react-icons/fa';
-import { GrBarChart } from 'react-icons/gr';
-import { MdArrowForwardIos, MdPersonSearch } from 'react-icons/md';
-import { HiChip, HiOutlineChartSquareBar } from 'react-icons/hi';
+import { MdArrowForwardIos } from 'react-icons/md';
 import { usePathname, useRouter } from 'next/navigation';
-import { ActionIcon, AppShell, AppShellNavbar, AppShellSection, Box, Burger, Button, Center, Divider, Grid, Group, Modal, NavLink, Skeleton, Stack, Text, Title, Tooltip } from '@mantine/core';
-import _, { keyBy } from 'lodash';
+import { ActionIcon, AppShell, AppShellNavbar, AppShellSection, Box, Burger, Divider, Grid, Group, Modal, NavLink, Skeleton, Stack, Text, Title, Tooltip } from '@mantine/core';
+import _ from 'lodash';
 import { DataNavbarTutup } from '../components/data_navbar_tutup';
-import { GlobalDark } from '../components/dark';
 import { WARNA } from '../../fun/WARNA';
 import { RiLogoutCircleRLine } from 'react-icons/ri';
-import { Truculenta } from 'next/font/google';
 import { AiOutlineClose } from 'react-icons/ai';
 import { DataNavbarBuka } from '../components/data_navbar_buka';
 import { useAtom } from 'jotai';
@@ -151,7 +145,7 @@ export default function LayoutViewFront({ children }: { children: React.ReactNod
                 cursor: 'pointer',
               }}
             >
-              <Group justify='center' pl={20}  onClick={() => setOpenModal(true)}>
+              <Group justify='center' pl={20} onClick={() => setOpenModal(true)}>
                 <ActionIcon variant='subtle'>
                   <RiLogoutCircleRLine size={30} color={"white"} />
                 </ActionIcon>
@@ -161,7 +155,7 @@ export default function LayoutViewFront({ children }: { children: React.ReactNod
           </AppShellNavbar>
         }
         <AppShell.Main bg={WARNA.bgGradasi}>
-        <Box p={20}>
+          <Box p={20}>
             {children}
           </Box>
         </AppShell.Main>

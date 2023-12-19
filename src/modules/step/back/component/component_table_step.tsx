@@ -1,5 +1,4 @@
 "use client";
-import { useAtom } from "jotai";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import {
@@ -14,22 +13,14 @@ import {
 } from "@mantine/core";
 import { CiRead, CiUnread } from "react-icons/ci";
 import { MdDelete, MdEditCalendar } from "react-icons/md";
-import { isModalStep, isModalvalueStep } from "../val/val_step";
-import TextAnimation from "react-typing-dynamics";
+import InnerHTML from 'dangerously-set-html-content'
 
 export default function ComponentTableStep({ v, i, onClick }: { v: any; i: any, onClick: (val: any) => void }) {
   const open = useState(false);
   const router = useRouter();
-  const [openModal, setOpenModal] = useAtom(isModalStep);
 
   function callBackDelete({ idDel }: { idDel: any }) {
     onClick(idDel)
-  }
-
-  function RubahHTML(c: any) {
-    return {
-      __html: c
-    }
   }
 
   return (
@@ -96,19 +87,9 @@ export default function ComponentTableStep({ v, i, onClick }: { v: any; i: any, 
                 <Text c={"white"} fw={"bold"} fz={20} mb={10}>
                   Content
                 </Text>
-                {/* <Text c={"white"} dangerouslySetInnerHTML={RubahHTML(v.content)} /> */}
-                <Text c={"white"}>
-                  <TextAnimation
-                    phrases={[...v.content.split('\n')]}
-                    typingSpeed={0}
-                    backspaceDelay={0}
-                    eraseDelay={0}
-                    timeComplete={0}
-                    errorProbability={0}
-                    eraseOnComplete={false}
-                    isSecure={false}
-                  />
-                </Text>
+                <Stack c={'white'}>
+                  <InnerHTML html={v.content} />
+                </Stack>
               </Box>
             </Collapse>
           </Table.Td>

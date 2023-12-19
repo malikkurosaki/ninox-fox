@@ -1,5 +1,4 @@
 'use client'
-
 import { Box, Button, Divider, Group, Paper, SimpleGrid, Stack, Text } from "@mantine/core"
 import { useState } from "react"
 import toast from "react-simple-toasts";

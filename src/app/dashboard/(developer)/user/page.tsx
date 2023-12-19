@@ -1,5 +1,11 @@
-export default function Page(){
+import { ListConfUser, funGetAllConfUser } from "@/modules/user"
+
+
+export default async function Page(){
+    const data = await funGetAllConfUser()
     return(
-        <>List User</>
+        <>
+        <ListConfUser data={data}/>
+        </>
     )
 }

@@ -1,10 +1,14 @@
-import { EditRoleUser } from '@/modules/role_user';
+
+import { EditRoleUser, funGetAllComponents, funGetOneRoleUser } from '@/modules/user';
 import React from 'react';
 
-function Page() {
+export default async function Page({params}: {params: {id: any}}) {
+
+  const data = await funGetOneRoleUser({id: params.id})
+  const dataComponents = await funGetAllComponents()
+
   return (
-    <EditRoleUser/>
+    <EditRoleUser data={data} component={dataComponents}/>
   );
 }
 
-export default Page;

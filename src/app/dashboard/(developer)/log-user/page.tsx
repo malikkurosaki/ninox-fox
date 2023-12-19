@@ -1,7 +1,11 @@
-import { UserLogView } from "@/modules/user/log";
+import { UserLogView, funGetAllUser } from "@/modules/user"
 
-export default function Page() {
+
+export default async function Page() {
+    const dUser = await funGetAllUser()
     return (
-        <><UserLogView /></>
+        <>
+        <UserLogView user={dUser} />
+        </>
     )
 }

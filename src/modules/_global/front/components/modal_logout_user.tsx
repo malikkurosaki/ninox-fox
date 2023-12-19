@@ -1,3 +1,4 @@
+'use client'
 import { Alert, Box, Button, Group, Text } from '@mantine/core';
 import React from 'react';
 import { useAtom } from 'jotai';
@@ -5,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import toast from 'react-simple-toasts';
 import { isModalLayout } from '../val/isModallayout';
 import { WARNA } from '../../fun/WARNA';
+import { funLogout } from '@/modules/auth';
 
 /**
  * Menampilkan modal konfirmasi logout.
@@ -18,9 +20,10 @@ export default function ModalLogoutUser() {
   const [valOpenModal, setOpenModal] = useAtom(isModalLayout)
 
   async function logoutYes() {
-      router.push(`/`)
-      setOpenModal(false)
-      toast("Logout Success", { theme: "dark" })
+    // router.push(`/`)
+    setOpenModal(false)
+    await funLogout()
+    toast("Logout Success", { theme: "dark" })
   }
   return (
     <>

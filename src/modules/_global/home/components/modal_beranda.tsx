@@ -1,3 +1,4 @@
+"use client"
 import { useAtom } from 'jotai';
 import React, { useState } from 'react';
 import { isModalBeranda } from '../../val/isModalBeranda';

@@ -10,13 +10,12 @@ import {
   Text,
 } from "@mantine/core";
 import React, { useEffect, useState } from "react";
-import TableDataAudience from "../components/table_data_audience";
 import { useRouter } from "next/navigation";
-import { MasterKabGetByProvince } from "@/modules/_global";
-import { MasterKecGetByKab } from "@/modules/_global/fun/master_kecamatan_get_by_kabupaten";
+import { MasterKabGetByProvince, MasterKecGetByKab } from "@/modules/_global";
 import _ from "lodash";
 import toast from "react-simple-toasts";
 import papa from "papaparse"
+import { TableDataAudience } from "../..";
 
 
 /**

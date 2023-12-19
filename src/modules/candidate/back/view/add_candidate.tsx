@@ -1,12 +1,12 @@
 'use client'
-import { ButtonBack } from "@/modules/_global"
-import { Avatar, Box, Button, Center, Group, Modal, Paper, Stack, Text, TextInput } from "@mantine/core"
+import { ButtonBack, MasterKabGetByProvince } from "@/modules/_global"
+import { Avatar, Box, Button, Center, Group, Modal, Paper, Select, SimpleGrid, Stack, Text, TextInput } from "@mantine/core"
 import { useAtom } from "jotai"
 import { isModalCandidate } from "../val/isModalCandidate"
 import ModalAddCandidate from "../component/modal_add_candidate"
 import { useRef, useState } from "react"
 import toast from "react-simple-toasts"
-import { useSearchParams } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import _ from "lodash"
 import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone"
 
@@ -15,19 +15,36 @@ import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone"
  * @returns {component} view add candidate.
  */
 
-export default function AddCandidate() {
+export default function AddCandidate({ params, provinsi, kabupaten, }: { params: any, provinsi: any, kabupaten: any }) {
     const [openModal, setOpenModal] = useAtom(isModalCandidate)
     const [img, setIMG] = useState<any | null>()
     const [imgForm, setImgForm] = useState<FormData>()
+    const router = useRouter();
+    const [dataProvinsi, setDataProvinsi] = useState(provinsi)
+    const [dataKabupaten, setDatakabupaten] = useState<any>(kabupaten)
+    const [isProvinsi, setProvinsi] = useState<any>(params.idProvinsi || null)
+    const [isKabupaten, setKabupaten] = useState<any>(params.idKabkot || null)
+
+    async function onKabupaten({ idProv }: { idProv: any }) {
+        setProvinsi(idProv)
+        setKabupaten(null)
+        const dataKab = await MasterKabGetByProvince({ idProvinsi: Number(idProv) })
+        setDatakabupaten(dataKab)
+    }
+
+    // useEffect(() => {
+    //     setProvinsi(params.idProvinsi == null ? null : params.idProvinsi)
+    //     setKabupaten(params.idKabkot == null ? null : params.idKabkot)
+    // }, [params])
 
     const query = useSearchParams()
     const openRef = useRef<() => void>(null);
     const [body, setBody] = useState({
         name: "",
         img: "",
-        idProvinsi: Number(query.get('prov')),
-        idKabkot: (query.get('city') == 'null' || query.get('city') == "" || _.isNull(query.get('city'))) ? null : Number(query.get('city')),
-        tingkat: (query.get('city') == 'null' || query.get('city') == "" || _.isNull(query.get('city'))) ? 1 : 2
+        idProvinsi: isProvinsi,
+        idKabkot: isKabupaten,
+        tingkat: (query.get('city') == "null" || query.get('city') == "" || _.isNull(query.get('city'))) ? 1 : 2
     });
 
     function onConfirmation() {
@@ -89,9 +106,56 @@ export default function AddCandidate() {
                             </Center>
                         </Group>
                         <Box pt={40}>
+                            <SimpleGrid
+                                cols={{ base: 1, sm: 2, lg: 2 }}
+                                spacing={{ base: 10, sm: 'xl' }}
+                                verticalSpacing={{ base: 'md', sm: 'xl' }}
+                            >
+                                <Select
+                                    placeholder="Pilih Provinsi"
+                                    data={dataProvinsi.map((pro: any) => ({
+                                        value: String(pro.id),
+                                        label: pro.name
+                                    }))}
+                                    required
+                                    label={"Provinsi"}
+                                    value={isProvinsi}
+                                    onChange={(val) => (
+                                        onKabupaten({ idProv: val }),
+                                        setBody({
+                                            ...body,
+                                            idProvinsi: Number(val),
+                                            idKabkot: null,
+                                            tingkat: 1
+                                        })
+                                    )}
+                                    searchable
+                                    
+                                />
+                                <Select
+                                    placeholder="Kabupaten/Kota"
+                                    data={dataKabupaten.map((kab: any) => ({
+                                        value: String(kab.id),
+                                        label: kab.name
+                                    }))}
+                                    searchable
+                                    value={isKabupaten}
+                                    onChange={(val) => (
+                                        setKabupaten(val),
+                                        setBody({
+                                            ...body,
+                                            idKabkot: Number(val),
+                                            tingkat: 2
+                                        })
+                                    )}
+                                    label={"Kabupaten"}
+                                    
+                                />
+                            </SimpleGrid>
                             <TextInput
                                 placeholder="Nama Kandidat" withAsterisk label="Nama"
                                 onChange={(val) => {
+
                                     setBody({
                                         ...body,
                                         name: val.target.value
@@ -99,7 +163,7 @@ export default function AddCandidate() {
                                 }}
                             />
                             <Group justify="flex-end">
-                                <Button bg={"gray"} mt={30} onClick={() => onConfirmation()}>SAVE</Button>
+                                <Button bg={"gray"} w={150} mt={30} onClick={() => onConfirmation()}>SAVE</Button>
                             </Group>
                         </Box>
                     </Stack>
