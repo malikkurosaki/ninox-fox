@@ -1,3 +1,4 @@
+"use client"
 import { Box, ScrollArea, Stack, Text } from '@mantine/core';
 import React from 'react';
 import TextAnimation from 'react-typing-dynamics';

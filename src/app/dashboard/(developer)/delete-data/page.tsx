@@ -1,8 +1,7 @@
 
 import { MasterKabGetByProvince, MasterProvinceGetAll } from '@/modules/_global';
 import { funGetCandidateActiveByArea } from '@/modules/candidate';
-import { ViewDeleteCandidate, funGetAllCandidate } from '@/modules/emotion';
-import { funGetEmotionByCandidateAreaDate } from '@/modules/emotion/back';
+import { ViewDeleteCandidate, funGetAllCandidate, funGetEmotionByCandidateAreaDate } from '@/modules/emotion';
 import _ from 'lodash';
 import React from 'react';
 

@@ -1,6 +1,5 @@
 import { MasterKabGetByProvince, MasterProvinceGetAll } from '@/modules/_global';
-import { ListSwot } from '@/modules/swot';
-import funGetAllSwot from '@/modules/swot/back/fun/fun_get_all_swot';
+import { ListSwot, funGetAllSwot } from '@/modules/swot';
 import _ from 'lodash';
 import React from 'react';
 

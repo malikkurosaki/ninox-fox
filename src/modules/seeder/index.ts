@@ -15,6 +15,16 @@ import { funSeederComponents } from "./fun/fun_component";
 import { funSeederUserRole } from "./fun/fun_user_role";
 import { funSeederUserAccess } from "./fun/fun_user_access";
 import { funSeederUser } from "./fun/fun_user";
+import funSeederAudience from "./fun/fun_audience";
+import { funSeederDesa } from "./fun/fun_desa";
+import { funSeederKabupaten } from "./fun/fun_kabupaten";
+import { funSeederKecamatan } from "./fun/fun_kecamatan";
+import { funSeederLeader } from "./fun/fun_leader";
+import funSeederLta from "./fun/fun_lta";
+import funSeederPct from "./fun/fun_pct";
+import { funSeederProvinsi } from "./fun/fun_provinsi";
+import { funSeederPublic } from "./fun/fun_public";
+import funSeederRhi from "./fun/fun_rhi";
 
 export { SeederView }
 export { seederProvinsi }
@@ -33,3 +43,13 @@ export { funSeederComponents }
 export { funSeederUserRole }
 export { funSeederUserAccess }
 export { funSeederUser }
+export { funSeederAudience }
+export { funSeederDesa }
+export { funSeederKabupaten }
+export { funSeederKecamatan }
+export { funSeederLeader }
+export { funSeederLta }
+export { funSeederPct }
+export { funSeederProvinsi }
+export { funSeederPublic }
+export { funSeederRhi }

@@ -1,4 +1,5 @@
-import { ListConfUser, funGetAllConfUser } from "@/modules/user/conf";
+import { ListConfUser, funGetAllConfUser } from "@/modules/user"
+
 
 export default async function Page(){
     const data = await funGetAllConfUser()

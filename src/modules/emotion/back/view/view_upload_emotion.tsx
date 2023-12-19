@@ -10,7 +10,7 @@ import toast from "react-simple-toasts"
 import papa from 'papaparse'
 import { useAtom } from "jotai"
 import { isModalEmotion } from "../val/val_emotion"
-import ModalUploadEmotion from "../components/modal/modal_upload_emotion"
+import { ModalUploadEmotion } from "../.."
 
 export default function ViewUploadEmotion() {
     const [json, setJson] = useState<any[]>([])

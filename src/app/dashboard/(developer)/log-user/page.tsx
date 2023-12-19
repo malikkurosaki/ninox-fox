@@ -1,5 +1,5 @@
-import funGetAllUser from "@/modules/user/fun/get_all_user";
-import { UserLogView } from "@/modules/user/log";
+import { UserLogView, funGetAllUser } from "@/modules/user"
+
 
 export default async function Page() {
     const dUser = await funGetAllUser()

@@ -1,8 +1,7 @@
-
-import { WARNA } from '@/modules/_global/fun/WARNA';
+'use client'
+import { WARNA } from '@/modules/_global';
 import { Box, Group, Pagination, ScrollArea, Table } from '@mantine/core';
 import React from 'react';
-import TopPairingCandidate from './top_pairing_candidate';
 
 const top10 = [
   {

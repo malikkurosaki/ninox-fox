@@ -1,4 +1,5 @@
-import { ViewUploadAudience } from "@/modules/audience/back";
+import { ViewUploadAudience } from "@/modules/audience";
+
 
 export default function Page() {
     return (

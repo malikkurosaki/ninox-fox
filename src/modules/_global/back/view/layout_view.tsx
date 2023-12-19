@@ -16,10 +16,10 @@ import React, { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { FaUserCircle, FaUserTie } from "react-icons/fa";
 import { RiLogoutCircleRLine } from "react-icons/ri";
-import ModalLogout from "../component/modal_logout";
 import { useAtom } from "jotai";
 import { isModalLayout } from "../val/isModalLayout";
 import _ from "lodash";
+import { ModalLogout } from "../..";
 
 /**
  * Fungsi untuk menampilkan template dashsboard admin.

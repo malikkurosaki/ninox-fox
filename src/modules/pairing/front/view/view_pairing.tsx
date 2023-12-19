@@ -1,9 +1,8 @@
 "use client"
-import PageSubTitle from '@/modules/_global/front/components/PageSubtitle';
 import { Box, Button, Center, Divider, Grid, Group, Image, ScrollArea, Select, SimpleGrid, Stack, Text, TextInput } from '@mantine/core';
 import React from 'react';
 import EchartPairingSentiment from '../components/echart_pairing_sentiment';
-import { WARNA } from '@/modules/_global/fun/WARNA';
+import { PageSubTitle } from '@/modules/_global';
 
 export default function ViewPairingFront() {
   return (

@@ -1,6 +1,5 @@
 import { MasterProvinceGetAll } from "@/modules/_global"
-import { EditConfUser, funGetOneConfUser } from "@/modules/user/conf"
-import funGetAllUserRole from "@/modules/user/role/fun/get_all_role"
+import { EditConfUser, funGetAllUserRole, funGetOneConfUser } from "@/modules/user"
 
 export default async function Page({ params }: { params: { id: number } }) {
     const data = await funGetOneConfUser({id: params.id})

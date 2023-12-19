@@ -1,12 +1,11 @@
 "use client"
-import PageSubTitle from '@/modules/_global/front/components/PageSubtitle';
 import { Box, Button, Grid, Group, Image, Select, Stack, Text, TextInput } from '@mantine/core';
 import React from 'react';
 import EchartSentimentAnalysis from '../components/echart_sentiment_analysis';
 import EchartPublicConcerns from '../components/echart_public_concerns';
 import EchartLeader from '../components/echart_leader';
-import { WARNA } from '@/modules/_global/fun/WARNA';
 import { useRouter } from 'next/navigation';
+import { PageSubTitle, WARNA } from '@/modules/_global';
 
 const dataKabupaten = [
   {

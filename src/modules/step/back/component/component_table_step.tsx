@@ -1,5 +1,4 @@
 "use client";
-import { useAtom } from "jotai";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import {
@@ -14,14 +13,11 @@ import {
 } from "@mantine/core";
 import { CiRead, CiUnread } from "react-icons/ci";
 import { MdDelete, MdEditCalendar } from "react-icons/md";
-import { isModalStep, isModalvalueStep } from "../val/val_step";
-import TextAnimation from "react-typing-dynamics";
 import InnerHTML from 'dangerously-set-html-content'
 
 export default function ComponentTableStep({ v, i, onClick }: { v: any; i: any, onClick: (val: any) => void }) {
   const open = useState(false);
   const router = useRouter();
-  const [openModal, setOpenModal] = useAtom(isModalStep);
 
   function callBackDelete({ idDel }: { idDel: any }) {
     onClick(idDel)

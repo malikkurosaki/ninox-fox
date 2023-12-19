@@ -1,7 +1,6 @@
 import { MasterKabGetByProvince, MasterProvinceGetAll } from "@/modules/_global";
 import { funGetCandidateActiveByArea } from "@/modules/candidate";
-import { ViewBackEmotion } from "@/modules/emotion";
-import { funDownloadEmotion, funGetEmotionByCandidateAreaDate } from "@/modules/emotion/back";
+import { ViewBackEmotion, funDownloadEmotion, funGetEmotionByCandidateAreaDate } from "@/modules/emotion";
 import _ from "lodash";
 
 export default async function Page({ searchParams }: { searchParams: { prov: any, city: any, can: any, date: any } }) {

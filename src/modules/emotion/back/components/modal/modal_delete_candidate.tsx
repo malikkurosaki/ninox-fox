@@ -1,3 +1,4 @@
+"use client"
 import { useAtom } from 'jotai';
 import React, { useState } from 'react';
 import { isModalEmotion } from '../../val/val_emotion';

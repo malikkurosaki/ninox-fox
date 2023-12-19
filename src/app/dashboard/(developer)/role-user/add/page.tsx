@@ -1,6 +1,5 @@
 
-import { AddRoleUser } from '@/modules/user/role';
-import funGetAllComponents from '@/modules/user/role/fun/get_all_components';
+import { AddRoleUser, funGetAllComponents } from '@/modules/user';
 import React from 'react';
 
 export default async function Page() {

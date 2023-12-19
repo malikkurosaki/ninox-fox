@@ -4,12 +4,11 @@ import { Avatar, Box, Button, Center, Group, Modal, Paper, Select, SimpleGrid, S
 import { useAtom } from "jotai"
 import { isModalCandidate } from "../val/isModalCandidate"
 import ModalAddCandidate from "../component/modal_add_candidate"
-import { useEffect, useRef, useState } from "react"
+import { useRef, useState } from "react"
 import toast from "react-simple-toasts"
 import { useRouter, useSearchParams } from "next/navigation"
 import _ from "lodash"
 import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone"
-import { AnyConfig } from "@tiptap/react"
 
 /**
  * Fungsi untuk menampilkan view add candidate.

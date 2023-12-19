@@ -1,3 +1,4 @@
+'use client'
 import { Avatar, Box, Group, Image, ScrollArea, Table } from "@mantine/core";
 import _ from "lodash";
 import React from "react";
