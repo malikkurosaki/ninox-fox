@@ -6,6 +6,7 @@ import { isModalCandidate } from "../val/isModalCandidate";
 import { useRouter } from "next/navigation";
 import toast from "react-simple-toasts";
 import funAddCandidate from "../fun/add_candidate";
+import { funGetAccessArea } from "@/modules/_global";
 
 
 /**
@@ -19,6 +20,11 @@ export default function ModalAddCandidate({ data, img }: { data: any, img: any }
     const router = useRouter()
 
     async function onCreateCandidate() {
+        const cek = await funGetAccessArea({ provinsi: data.idProvinsi })
+        if (!cek) {
+            setOpenModal(false)
+            return toast("Anda tidak mempunyai akses ke wilayah tersebut", { theme: "dark" })
+        }
         const create = await funAddCandidate({ body: data, img: img })
         if (!create.success)
             toast(create.message, { theme: "dark" });

@@ -29,6 +29,12 @@ export default function EditConfUser({ data, role, wilayah }: { data: any, role:
     console.log(dataUserUpdate)
   }
 
+  function pembatasanArea(val: any) {
+    if (!isCekWilayah.includes(val))
+    return toast("Pilih Sesuai Wilayah", {theme: "dark"})
+    setAreaFront(val)
+  }
+
   return (
     <>
       <Stack>
@@ -62,13 +68,6 @@ export default function EditConfUser({ data, role, wilayah }: { data: any, role:
             />
             <TextInput
               placeholder='Name'
-              // onChange={(val) =>
-              //   setDataUser({
-              //     ...dataUser,
-              //     name: val.target.value
-              //   })
-              // }
-              // value={dataUser.dataUser.name}
               onChange={(val: any) =>
                 setDataUserUpdate({
                   ...dataUserUpdate,
@@ -79,13 +78,6 @@ export default function EditConfUser({ data, role, wilayah }: { data: any, role:
             />
             <TextInput
               placeholder='Email'
-              // onChange={(val) =>
-              //   setDataUser({
-              //     ...dataUser,
-              //     email: val.target.value
-              //   })
-              // }
-              // value={dataUser.dataUser.email}
               onChange={(val: any) =>
                 setDataUserUpdate({
                   ...dataUserUpdate,
@@ -96,13 +88,6 @@ export default function EditConfUser({ data, role, wilayah }: { data: any, role:
             />
             <TextInput
               placeholder='Password'
-              // onChange={(val) =>
-              //   setDataUser({
-              //     ...dataUser,
-              //     password: val.target.value
-              //   })
-              // }
-              // value={dataUser.dataUser.password}
               onChange={(val: any) =>
                 setDataUserUpdate({
                   ...dataUserUpdate,
@@ -113,13 +98,6 @@ export default function EditConfUser({ data, role, wilayah }: { data: any, role:
             />
             <NumberInput
               placeholder='Phone'
-              // onChange={(val: any) =>
-              //   setDataUser({
-              //     ...dataUser,
-              //     phone: val
-              //   })
-              // }
-              // value={dataUser.dataUser.phone}
               onChange={(val: any) =>
                 setDataUserUpdate({
                   ...dataUserUpdate,
@@ -129,19 +107,6 @@ export default function EditConfUser({ data, role, wilayah }: { data: any, role:
               value={dataUserUpdate.phone}
             />
             <Chip color="cyan"
-              // onChange={(val: any) =>
-              //   setDataUser({
-              //     ...dataUser,
-              //     isAllArea: val
-              //   })
-              // }
-              // onChange={(v) => {
-              //   setCek((v: any) => !v)
-              //   setDataUser({
-              //     ...dataUser,
-              //     isAllArea: v
-              //   })
-              // }}
               onChange={(v: any) => {
                 setCek((v: any) => !v)
                 setDataUserUpdate({
@@ -160,6 +125,9 @@ export default function EditConfUser({ data, role, wilayah }: { data: any, role:
           <Box pt={40} pb={40}>
             <Divider size={"md"} />
           </Box >
+
+          {JSON.stringify(isCekWilayah)}
+          {JSON.stringify(isAreaFront)}
           <Text mb={10} fw={"bold"}>PILIH WILAYAH</Text>
           <Table
             withTableBorder
@@ -191,7 +159,7 @@ export default function EditConfUser({ data, role, wilayah }: { data: any, role:
                   </Table.Td>
                   <Table.Td>
                     <Chip.Group
-                      multiple={false} value={isAreaFront} onChange={setAreaFront}
+                      multiple={false} value={isAreaFront} onChange={pembatasanArea}
                     >
                       <Chip
                         checked={isAreaFront.idProvinsi == v.id ? true : false}

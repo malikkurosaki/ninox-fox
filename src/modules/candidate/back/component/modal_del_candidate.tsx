@@ -6,6 +6,7 @@ import { isModalCandidate } from "../val/isModalCandidate";
 import { useRouter } from "next/navigation";
 import toast from "react-simple-toasts";
 import funSetStatusCandidate from "../fun/set_status_candidate";
+import { funGetAccessArea } from "@/modules/_global";
 
 
 /**
@@ -14,11 +15,16 @@ import funSetStatusCandidate from "../fun/set_status_candidate";
  */
 
 
-export default function ModalDelCandidate({ data, onSuccess }: { data: any, onSuccess: (val: any) => void }) {
+export default function ModalDelCandidate({ data, provinsi, onSuccess }: { data: any, provinsi: any, onSuccess: (val: any) => void }) {
     const [openModal, setOpenModal] = useAtom(isModalCandidate)
     const router = useRouter()
 
     async function onDeleteCandidate() {
+        const cek = await funGetAccessArea({ provinsi: provinsi })
+        if (!cek) {
+            setOpenModal(false)
+            return toast("Anda tidak mempunyai akses ke wilayah tersebut", { theme: "dark" })
+        }
         const del = await funSetStatusCandidate({ dataUpdate: data })
         if (!del.success) return toast("Failed", { theme: "dark" })
         toast("Sukses", { theme: "dark" });

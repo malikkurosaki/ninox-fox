@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 import { isModalConf } from '../val/isModalConf';
 import toast from 'react-simple-toasts';
 import ModalConfUser from '../components/modal_conf_user';
+import { AnyCommands } from '@tiptap/react';
 
 export default function AddConfUser({ data, role }: { data: any, role: any }) {
   const [valOpenModal, setOpenModal] = useAtom(isModalConf)
@@ -13,6 +14,7 @@ export default function AddConfUser({ data, role }: { data: any, role: any }) {
   const [isRole, setRole] = useState<any[]>(role)
   const [isWilayah, setWilayah] = useState<any>([])
   const [isAreaFront, setAreaFront] = useState('')
+  // const [dataWilayah, setDataWilayah] = useState()
 
 
   const [dataUser, setDataUser] = useState({
@@ -28,11 +30,20 @@ export default function AddConfUser({ data, role }: { data: any, role: any }) {
     if (Object.values(dataUser).includes(""))
       return toast("The form cannot be empty", { theme: "dark" });
     if (isWilayah.length < 1 || (isWilayah.length == 0))
-      return toast("User role cannot be empty", { theme: "dark" });
+      return toast("Wilayah cannot be empty", { theme: "dark" });
     if (isAreaFront.length < 1 || (isAreaFront.length == 0))
-      return toast("User role cannot be empty", { theme: "dark" });
+      return toast("Area Front cannot be empty", { theme: "dark" });
     setOpenModal(true);
   }
+
+  // pembatasan
+  function setDefault(val: any) {
+    if (!isWilayah.includes(val))
+      return toast('Pilih Sesuai Wilayah', {theme: "dark"})
+    setAreaFront(val)
+  }
+
+
   return (
     <>
       <Stack>
@@ -135,7 +146,7 @@ export default function AddConfUser({ data, role }: { data: any, role: any }) {
                     </Chip.Group>
                   </Table.Td>
                   <Table.Td>
-                    <Chip.Group multiple={false} value={isAreaFront} onChange={setAreaFront}>
+                    <Chip.Group multiple={false} value={isAreaFront} onChange={(val) => setDefault(val)}>
                       <Chip value={String(v.id)}>DEFAULT</Chip>
                     </Chip.Group>
                   </Table.Td>

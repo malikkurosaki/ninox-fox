@@ -5,17 +5,23 @@ import { isModalMlAi } from "../val/val_mlai"
 import toast from "react-simple-toasts"
 import { useRouter } from "next/navigation"
 import funDeleteMlAi from "../fun/fun_delete_mlai"
+import { funGetAccessArea } from "@/modules/_global"
 
 /**
  * Fungsi untuk menampilkan modal konfirmasi delete ml ai.
  * @returns {component} modal konfirmasi delete ml ai.
  */
 
-export default function ModalDelMlAi({ id, onSuccess }: { id: any, onSuccess: (val: any) => void }) {
+export default function ModalDelMlAi({ id, candidate, onSuccess }: { id: any, candidate: any, onSuccess: (val: any) => void }) {
     const [openModal, setOpenModal] = useAtom(isModalMlAi)
     const router = useRouter()
 
     async function onDelMlAi() {
+        const cek = await funGetAccessArea({ candidate: candidate })
+        if (!cek) {
+            setOpenModal(false)
+            return toast("Anda tidak mempunyai akses ke wilayah tersebut", { theme: "dark" })
+        }
         const delData = await funDeleteMlAi({ id: id })
         if (!delData.success) return toast(delData.message, { theme: "dark" })
         toast("Sukses", { theme: "dark" });

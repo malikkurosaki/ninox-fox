@@ -24,6 +24,8 @@ export default function ViewEditAdminMlai({ data }: { data: any }) {
     const [openModal, setOpenModal] = useAtom(isModalRhi)
     const [isId, setId] = useState(data.id)
 
+    const [dataProvinsi, setDataProvinsi] = useState(data.idProvinsi)
+
     const editor = useEditor({
         extensions: [
             StarterKit,
@@ -51,6 +53,7 @@ export default function ViewEditAdminMlai({ data }: { data: any }) {
             <Stack mt={30}>
                 <Text fw={"bold"}>EDIT REGION HOT ISSUE</Text>
             </Stack>
+            {JSON.stringify(dataProvinsi)}
             <Box pt={30}>
                 <Stack>
                     <Group grow>
@@ -163,7 +166,7 @@ export default function ViewEditAdminMlai({ data }: { data: any }) {
                 withCloseButton={false}
                 closeOnClickOutside={false}
             >
-                <ModalEditRhi dataId={isId} content={editor?.getHTML()} />
+                <ModalEditRhi provinsi={dataProvinsi} dataId={isId} content={editor?.getHTML()} />
             </Modal>
         </>
     )

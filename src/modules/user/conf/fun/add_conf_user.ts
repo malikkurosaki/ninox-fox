@@ -9,7 +9,7 @@ export default async function funAddConfUser({data, dataArea, isFront}: {data: a
             name: data.name,
             email: data.email,
             password: data.password,
-            phone: data.phone,
+            phone: String(data.phone),
             isAllArea: data.isAllArea
         },
         select: {
