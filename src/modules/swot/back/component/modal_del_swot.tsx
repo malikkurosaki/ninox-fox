@@ -6,17 +6,23 @@ import { isModalSwot } from "../val/val_swot";
 import { useRouter } from "next/navigation";
 import toast from "react-simple-toasts";
 import funDeleteSwot from "../fun/fun_delete_swot";
+import { funGetAccessArea } from "@/modules/_global";
 
 /**
  * Fungsi untuk menampilkan modal konfirmasi delete swot.
  * @returns {component} Modal konfirmasi delete swot.
  */
 
-export default function ModalDelSwot({id, onSuccess}: {id: any, onSuccess: (val: any) => void}) {
+export default function ModalDelSwot({id, candidate, onSuccess}: {id: any, candidate: any, onSuccess: (val: any) => void}) {
     const [openModal, setOpenModal] = useAtom(isModalSwot)
     const router = useRouter()
 
     async function onDelSwot() {
+        const cek = await funGetAccessArea({ candidate: candidate })
+        if (!cek) {
+            setOpenModal(false)
+            return toast("Anda tidak mempunyai akses ke wilayah tersebut", { theme: "dark" })
+        }
         const delData = await funDeleteSwot({id: id})
         if (!delData.success) return toast(delData.message, { theme: "dark" })
         toast("Sukses", { theme: "dark" });

@@ -34,6 +34,7 @@ export default function TableSwot({ title, data, searchParam }: { title: any, da
 
 
   const [isData, setData] = useState(data)
+  const [isDataCandidate, setDataCandidate] = useState()
   const searchParams = useSearchParams()
 
   async function onLoad() {
@@ -94,6 +95,7 @@ export default function TableSwot({ title, data, searchParam }: { title: any, da
                   {isData.map((v: any, i: any) => (
                     <ComponentTable v={v} i={i} key={i} onClick={(val)=>{
                       setDataDelete(val)
+                      setDataCandidate(v.idCandidate)
                       setOpenModal(true)
                     }} />
                   ))}
@@ -111,7 +113,7 @@ export default function TableSwot({ title, data, searchParam }: { title: any, da
         withCloseButton={false}
         closeOnClickOutside={false}
       >
-        <ModalDelSwot id={dataDelete} onSuccess={() => onLoad()}/>
+        <ModalDelSwot candidate={isDataCandidate} id={dataDelete} onSuccess={() => onLoad()}/>
       </Modal>
     </>
   );
