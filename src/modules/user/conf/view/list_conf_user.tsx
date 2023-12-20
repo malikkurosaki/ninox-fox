@@ -22,7 +22,7 @@ export default function ListConfUser({ data }: { data: any }) {
     <>
       <Text fw={"bold"}>USER</Text>
       <Group justify='flex-end'>
-        <Button onClick={() => router.push("/dashboard/user/add")}>Add Conf User</Button>
+        <Button onClick={() => router.push("/dashboard/user/add")}>Add User</Button>
       </Group>
       <Box mt={20}>
         <Box
@@ -75,26 +75,14 @@ export default function ListConfUser({ data }: { data: any }) {
                         <Table.Td>{v.email}</Table.Td>
                         <Table.Td>{v.password}</Table.Td>
                         <Table.Td>{v.phone}</Table.Td>
-                        <Table.Td>{v.UserArea?.map((item: any) => {
-                          return (
-                            <>
-                              <Box key={item.idUser}>
-                                {/* <Button color={(item.isFront == true) ? 'red' : 'blue'} size="lg" mb={10}>{item.area}</Button> */}
-                                {/* <UnstyledButton p={10} bg={(item.isFront == true) ? 'red' : 'blue'} size="lg" mb={10}>{item.area}</UnstyledButton> */}
-                                <Box
-                                  style={{
-                                    backgroundColor: `${(item.isFront == true) ? '#17B885' : '#FA5353'}`,
-                                    padding: 5,
-                                    borderRadius: 5
-                                  }}
-                                  mb={10}
-                                >
-                                 <Text ta={"center"} c={"white"}>{item.area}</Text>
-                                </Box>
-                              </Box>
-                            </>
-                          )
-                        })}</Table.Td>
+                        <Table.Td>
+                          {v.UserArea.map((v: any, i: any) => (
+                            <Box key={i.idProvinsi}>
+                              <Button color={(v.isFront == true) ? 'red' : 'blue'} size="lg" mb={10}>{v.area}</Button>
+                            </Box>
+                          ))}
+
+                        </Table.Td>
                         <Table.Td>
                           <Group justify="center">
                             <Box>
@@ -141,10 +129,10 @@ export default function ListConfUser({ data }: { data: any }) {
         withCloseButton={false}
         closeOnClickOutside={false}
       >
-        <ModalDeleteConfUser id={dataDelete} 
-        onSuccess={(val) => {
-          delDataUser()
-        }} />
+        <ModalDeleteConfUser id={dataDelete}
+          onSuccess={(val) => {
+            delDataUser()
+          }} />
       </Modal>
     </>
   );
