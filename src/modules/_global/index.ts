@@ -18,6 +18,7 @@ import Home from "./home/home";
 import { MasterDesaGetByKec } from './fun/master_desa_get_by_kecamatan';
 import { WARNA } from './fun/WARNA';
 import ModalBeranda from './home/components/modal_beranda';
+import funGetAccessArea from './back/fun/get_access_area';
 
 
 export { provinsiCount }
@@ -40,3 +41,4 @@ export { COLOR_EMOTION }
 export { MasterDesaGetByKec }
 export { WARNA }
 export { ModalBeranda }
+export {funGetAccessArea}
