@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import toast from "react-simple-toasts";
 import { isModalEmotion } from "../../val/val_emotion";
 import funCopyEmotion from "../../fun/copy_emotion";
+import { funGetAccessArea } from "@/modules/_global";
 
 /**
  * Fungsi menampilkan modal.
@@ -16,6 +17,11 @@ export default function ModalCopyEmotion({ from, to, candidate, onSuccess }: { f
   const [isLoading, setLoading] = useState(false)
 
   async function onUpload() {
+    const cek = await funGetAccessArea({ candidate: candidate })
+    if (!cek) {
+        setOpenModal(false)
+        return toast("Anda tidak mempunyai akses ke wilayah tersebut", { theme: "dark" })
+    }
     setLoading(true)
     await funCopyEmotion({ dateFrom: from, dateTo: to, candidate: candidate })
     // await funLogUser({ act: "COPY DATA", desc: `User Copy Emotion Candidate (Candidate ID : ${candidate}, From ${from} To ${to})` })
