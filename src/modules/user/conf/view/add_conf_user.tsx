@@ -43,9 +43,7 @@ export default function AddConfUser({ data, role }: { data: any, role: any }) {
     //   return toast("Wilayah cannot be empty", { theme: "dark" });
     // if (isAreaFront.length < 1 || (isAreaFront.length == 0))
     //   return toast("Area Front cannot be empty", { theme: "dark" });
-    console.log(dataUser, isWilayah)
     setOpenModal(true);
-    console.log(checked)
   }
 
   // pembatasan
@@ -205,7 +203,7 @@ export default function AddConfUser({ data, role }: { data: any, role: any }) {
         closeOnClickOutside={false}
         withCloseButton={false}
       >
-        <ModalConfUser data={dataUser} dataArea={isWilayah} isFront={isAreaFront} />
+        <ModalConfUser data={dataUser} dataArea={isWilayah} />
       </Modal>
     </>
   );
