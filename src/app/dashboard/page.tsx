@@ -11,7 +11,6 @@ export default async function Page() {
 
   const valueWilayah = await funGetAreaDefault()
   const dataAreaPro = await funGetUserAreaProvinsi()
-
   return (
     <>
       <Home areaPro={dataAreaPro} pro={pro} valWilayah={valueWilayah} kab={kab} kec={kec} kel={kel} can1={gabungAll.can1} can2={gabungAll.can2} />

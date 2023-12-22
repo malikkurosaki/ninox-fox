@@ -66,7 +66,7 @@ export default function ModalBeranda({ areaPro }: { areaPro: any }) {
               value={isProvinsi}
               required
               label={"Provinsi"}
-              searchable
+              // searchable
               onChange={(val) => onProvinsi({ idProv: val })}
             />
             <Select

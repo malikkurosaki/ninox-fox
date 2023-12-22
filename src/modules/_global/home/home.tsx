@@ -20,6 +20,7 @@ export default function Home({ areaPro, pro, kab, kec, kel, can1, can2, valWilay
 
   const [valOpenModal, setOpenModal] = useAtom(isModalBeranda)
   const [isValWilayah, setValWilayah] = useState(valWilayah)
+  const [allProvinsi, setAllProvinsi] = useState(areaPro)
 
   return (
     <>
@@ -38,6 +39,7 @@ export default function Home({ areaPro, pro, kab, kec, kel, can1, can2, valWilay
             <Box pb={10}>
               <Text c={"#4F709C"} fw={'bold'}>DAFTAR AKSES WILAYAH</Text>
             </Box>
+            {/* {JSON.stringify(allProvinsi)} */}
             <Group grow>
               <SimpleGrid
                 cols={{ base: 1, sm: 3, lg: 3 }}

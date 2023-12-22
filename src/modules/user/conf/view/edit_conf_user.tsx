@@ -17,22 +17,30 @@ export default function EditConfUser({ data, role, wilayah }: { data: any, role:
   const [isAreaFront, setAreaFront] = useState(data.dataFront)
   const [isCek, setCek] = useState(data.dataUser.isAllArea)
   const [isCekWilayah, setCekWilayah] = useState(data.dataArea.map((item: any) => (item.idProvinsi)))
+  const [checked, setChecked] = useState(false);
 
   function validationData() {
-    if (Object.values(dataUserUpdate).includes(""))
-      return toast("The form cannot be empty", { theme: "dark" });
-    if (isCekWilayah.length < 1 || (isCekWilayah.length == 0))
-      return toast("User role cannot be empty", { theme: "dark" });
-    if (isAreaFront.length < 1 || (isAreaFront.length == 0))
-      return toast("User role cannot be empty", { theme: "dark" });
+    // if (Object.values(dataUserUpdate).includes(""))
+    //   return toast("The form cannot be empty", { theme: "dark" });
+    // if (isCekWilayah.length < 1 || (isCekWilayah.length == 0))
+    //   return toast("User role cannot be empty", { theme: "dark" });
+    // if (isAreaFront.length < 1 || (isAreaFront.length == 0))
+    //   return toast("User role cannot be empty", { theme: "dark" });
     setOpenModal(true);
-    console.log(dataUserUpdate)
   }
 
   function pembatasanArea(val: any) {
     if (!isCekWilayah.includes(val))
-    return toast("Pilih Sesuai Wilayah", {theme: "dark"})
+      return toast("Pilih Sesuai Wilayah", { theme: "dark" })
     setAreaFront(val)
+  }
+
+  function setDataArea(val: any) {
+    setChecked((v) => !v)
+    setDataUserUpdate({
+      ...dataUserUpdate,
+      isAllArea: val
+    })
   }
 
   return (
@@ -107,70 +115,55 @@ export default function EditConfUser({ data, role, wilayah }: { data: any, role:
               value={dataUserUpdate.phone}
             />
             <Chip color="cyan"
-              onChange={(v: any) => {
-                setCek((v: any) => !v)
-                setDataUserUpdate({
-                  ...dataUserUpdate,
-                  isAllArea: v
-                })
-              }}
-              value={dataUserUpdate.phone}
-
+              onChange={(val) => setDataArea(val)}
+              // checked={checked}
+              checked={dataUserUpdate.isAllArea}
+              // defaultChecked={dataUserUpdate.isAllArea}
               variant="outline"
               size="lg"
               radius="sm"
-              checked={isCek}
             >ALL AREA</Chip>
           </SimpleGrid>
-          <Box pt={40} pb={40}>
-            <Divider size={"md"} />
-          </Box >
-
-          {JSON.stringify(isCekWilayah)}
-          {JSON.stringify(isAreaFront)}
-          <Text mb={10} fw={"bold"}>PILIH WILAYAH</Text>
-          <Table
-            withTableBorder
-            horizontalSpacing="xl"
-          >
-            <Table.Thead>
-              <Table.Tr
-                style={{
-                  borderBottom: "1px solid #CED4D9",
-                }}
+          {!dataUserUpdate.isAllArea && (
+            <Box>
+              <Box pt={40} pb={40}>
+                <Divider size={"md"} />
+              </Box >
+              <Text mb={10} fw={"bold"}>PILIH WILAYAH</Text>
+              <Table
+                withTableBorder
+                horizontalSpacing="xl"
               >
-                <Table.Th>No</Table.Th>
-                <Table.Th>PROVINSI</Table.Th>
-                <Table.Th>FRONT</Table.Th>
-              </Table.Tr>
-            </Table.Thead>
-            <Table.Tbody>
-              {isData.map((v, i) => (
-                <Table.Tr key={i}>
-                  <Table.Td>{i + 1}</Table.Td>
-                  <Table.Td>
-                    <Chip.Group multiple value={isCekWilayah}
-                      onChange={setCekWilayah}
-                    >
-                      <Chip
-                        checked={isCekWilayah.includes(Number(v.id))}
-                        color="cyan" variant="light" radius="sm" value={String(v.id)}>{v.name}</Chip>
-                    </Chip.Group>
-                  </Table.Td>
-                  <Table.Td>
-                    <Chip.Group
-                      multiple={false} value={isAreaFront} onChange={pembatasanArea}
-                    >
-                      <Chip
-                        checked={isAreaFront.idProvinsi == v.id ? true : false}
-                        value={String(v.id)}>DEFAULT</Chip>
-                    </Chip.Group>
-                  </Table.Td>
+                <Table.Thead>
+                  <Table.Tr
+                    style={{
+                      borderBottom: "1px solid #CED4D9",
+                    }}
+                  >
+                    <Table.Th>No</Table.Th>
+                    <Table.Th>PROVINSI</Table.Th>
+                  </Table.Tr>
+                </Table.Thead>
+                <Table.Tbody>
+                  {isData.map((v, i) => (
+                    <Table.Tr key={i}>
+                      <Table.Td>{i + 1}</Table.Td>
+                      <Table.Td>
+                        <Chip.Group multiple value={isCekWilayah}
+                          onChange={setCekWilayah}
+                        >
+                          <Chip
+                            checked={isCekWilayah.includes(Number(v.id))}
+                            color="cyan" variant="light" radius="sm" value={String(v.id)}>{v.name}</Chip>
+                        </Chip.Group>
+                      </Table.Td>
 
-                </Table.Tr>
-              ))}
-            </Table.Tbody>
-          </Table>
+                    </Table.Tr>
+                  ))}
+                </Table.Tbody>
+              </Table>
+            </Box>
+          )}
           <Group justify="flex-end">
             <Box
               style={{
@@ -203,6 +196,7 @@ export default function EditConfUser({ data, role, wilayah }: { data: any, role:
       >
         <ModalEditConfUser data={dataUserUpdate} dataArea={isCekWilayah} isFront={isAreaFront} />
       </Modal>
+      {JSON.stringify(dataUserUpdate.isAllArea)}
     </>
   );
 }

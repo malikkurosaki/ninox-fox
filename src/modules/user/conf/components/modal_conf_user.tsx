@@ -7,17 +7,15 @@ import { useAtom } from 'jotai';
 import { isModalConf } from '../val/isModalConf';
 
 
-export default function ModalConfUser({data, dataArea, isFront}: {data: any, dataArea: any, isFront: any}) {
+export default function ModalConfUser({data, dataArea}: {data: any, dataArea: any}) {
   const [valOpenModal, setOpenModal] = useAtom(isModalConf)
   async function onUser() {
-    const create = await funAddConfUser({data: data, dataArea: dataArea, isFront: isFront})
+    const create = await funAddConfUser({data: data, dataArea: dataArea})
     if (!create.success) return toast(create.message, { theme: "dark" });
     // await funLogUser({act:"ADD", desc:`User Add Data Role With User`})
     toast("Sukses", { theme: "dark" });
     setOpenModal(false);
     // router.back()
-
-    console.log(data, dataArea, isFront)
 }
   return (
     <>
