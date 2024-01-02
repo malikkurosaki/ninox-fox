@@ -9,42 +9,42 @@ const dataCan = [
     {
         id: 1,
         can: "/candidate/candidate2.png",
-        wakilCan: "/candidate/candidate2.png",
+        wakilCan: "/candidate/candidate2-square.png",
         value: "43.05 %",
         chart: "chart"
     },
     {
         id: 2,
         can: "/candidate/candidate2.png",
-        wakilCan: "/candidate/candidate2.png",
+        wakilCan: "/candidate/candidate2-square.png",
         value: "33.08 %",
         chart: "chart"
     },
     {
         id: 3,
         can: "/candidate/candidate2.png",
-        wakilCan: "/candidate/candidate2.png",
+        wakilCan: "/candidate/candidate2-square.png",
         value: "23.10 %",
         chart: "chart"
     },
     {
         id: 4,
         can: "/candidate/candidate2.png",
-        wakilCan: "/candidate/candidate2.png",
+        wakilCan: "/candidate/candidate2-square.png",
         value: "13.15 %",
         chart: "chart"
     },
     {
         id: 5,
         can: "/candidate/candidate2.png",
-        wakilCan: "/candidate/candidate2.png",
+        wakilCan: "/candidate/candidate2-square.png",
         value: "12.08 %",
         chart: "chart"
     },
     {
         id: 6,
         can: "/candidate/candidate2.png",
-        wakilCan: "/candidate/candidate2.png",
+        wakilCan: "/candidate/candidate2-square.png",
         value: "11.10 %",
         chart: "chart"
     },
