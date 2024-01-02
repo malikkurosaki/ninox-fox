@@ -1,8 +1,10 @@
 "use client"
 import { PageSubTitle } from '@/modules/_global';
+import { funGetOneCandidateFront } from '@/modules/candidate';
 import { Box, Group, Image, ScrollArea, Select, Stack, Text } from '@mantine/core';
-import React from 'react';
+import React, { useState } from 'react';
 import TextAnimation from 'react-typing-dynamics';
+import { funGetMlAiFront } from '../..';
 
 const dataMl = [
   {
@@ -11,21 +13,32 @@ const dataMl = [
   },
 ]
 
-export default function ViewMlAi() {
+export default function ViewMlAi({ data, candidate, oneCandidate }: { data: any, candidate: any, oneCandidate: any }) {
+  const [isData, setData] = useState(data)
+  const [isCandidate, setCandidate] = useState(candidate)
+  const [isNameCan, setNameCan] = useState(oneCandidate.name.toUpperCase())
+  const [isImgCan, setImgCan] = useState(`/candidate/${oneCandidate.img}`)
+
+  async function chooseCandidate(value: any) {
+    const dataDB = await funGetMlAiFront({candidate: value })
+    const dataCan = await funGetOneCandidateFront({candidate: value})
+    setData(dataDB)
+    setNameCan((dataCan?.name.toUpperCase()))
+    setImgCan(`/candidate/${dataCan?.img}`)
+  }
   return (
     <>
       <PageSubTitle text1='ML-AI' text2='PROMPT RECOMENDATIONS' />
+      {/* <Stack c={"white"}>
+        <pre>
+          {JSON.stringify(isData, null, 1)}
+        </pre>
+      </Stack> */}
       <Stack pt={20}>
         <Box
-        // style={{
-        //   background: "rgba(0,0,0,0.3)",
-        //   padding: 10,
-        //   borderRadius: 10
-        // }}
-
         >
-          <Image src={"/candidate/candidate.png"} alt='canidate' maw={200} mx="auto" />
-          <Text fw={"bold"} ta={"center"} c={"white"}>I WAYAN COSTER</Text>
+          <Image src={isImgCan} bg={"white"} style={{border: "4px solid white"}} radius={"100%"} alt='canidate' maw={200} mx="auto" />
+          <Text fw={"bold"} ta={"center"} c={"white"}>{isNameCan}</Text>
         </Box>
 
         <Box pt={20}>
@@ -35,38 +48,56 @@ export default function ViewMlAi() {
               padding: 30,
               borderRadius: 10
             }}
-
           >
             <Group justify='space-between'>
               <Text c={"green"} fz={20} fw={"bold"}>SOCSTRENGTH ANALYSIS IMPROVEMENTIAL</Text>
               <Select
                 mt={10}
                 placeholder="Candidate"
-                data={['I Wayan Koster', 'I Kadek Adi', 'I Wayan Marta']}
+                data={isCandidate.map((can: any) => ({
+                  value: String(can.id),
+                  label: can.name
+                }))}
+                onChange={(val) => chooseCandidate(val)}
               />
             </Group>
             <Box pt={20}>
-            <ScrollArea h={"34vh"}>
-              {dataMl.map((item) => {
-                return (
-                  <Stack key={item.id}>
-                  <Text c={"white"} fz={14}>
-                    <TextAnimation
-                      phrases={[...item.desc.split('\n')]}
-                      typingSpeed={0}
-                      backspaceDelay={0}
-                      eraseDelay={0}
-                      timeComplete={0}
-                      errorProbability={0}
-                      eraseOnComplete={false}
-                      isSecure={false}
-                    />
-                  </Text>
-                </Stack>
-                )
-              })}
+              <ScrollArea h={"34vh"}>
+                {/* {isData.map((item) => {
+                  return (
+                    <Stack key={item.id}>
+                      <Text c={"white"} fz={14}>
+                        <TextAnimation
+                          phrases={[...item.desc.split('\n')]}
+                          typingSpeed={0}
+                          backspaceDelay={0}
+                          eraseDelay={0}
+                          timeComplete={0}
+                          errorProbability={0}
+                          eraseOnComplete={false}
+                          isSecure={false}
+                        />
+                      </Text>
+                    </Stack>
+                  )
+                })} */}
+                    <Stack >
+                      <Text c={"white"} fz={14}>
+                        {...isData.content.split('\n')}
+                        {/* <TextAnimation
+                          phrases={[...isData.content.split('\n')]}
+                          typingSpeed={0}
+                          backspaceDelay={0}
+                          eraseDelay={0}
+                          timeComplete={0}
+                          errorProbability={0}
+                          eraseOnComplete={false}
+                          isSecure={false}
+                        /> */}
+                      </Text>
+                    </Stack>
 
-            </ScrollArea>
+              </ScrollArea>
             </Box>
           </Box>
         </Box>
