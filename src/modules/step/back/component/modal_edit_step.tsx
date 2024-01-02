@@ -5,6 +5,7 @@ import { isModalStep } from "../val/val_step";
 import { useRouter } from "next/navigation";
 import toast from "react-simple-toasts";
 import funEditStep from "../fun/fun_edit_step";
+import { funGetAccessArea } from "@/modules/_global";
 
 /**
  * Fungsi untuk menampilkan modal konfirmasi edit step.
@@ -16,6 +17,11 @@ export default function ModalEditStep({ data, content }: { data: any, content: a
     const router = useRouter()
 
     async function onEditStep() {
+        const cek = await funGetAccessArea({ candidate: data.idCandidate })
+        if (!cek) {
+            setOpenModal(false)
+            return toast("Anda tidak mempunyai akses ke wilayah tersebut", { theme: "dark" })
+        }
         const edit = await funEditStep({ body: data, text: content })
         toast("Sukses", { theme: "dark" });
         setOpenModal(false);

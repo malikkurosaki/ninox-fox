@@ -25,6 +25,7 @@ export default function TableCandidate({ title, data, searchParam }: { title: st
   })
 
   const [isData, setData] = useState(data)
+  const [isDataProvinsi, setDataProvinsi] = useState()
 
   const router = useRouter();
   const searchParams = useSearchParams()
@@ -89,6 +90,7 @@ export default function TableCandidate({ title, data, searchParam }: { title: st
                         <Table.Td>
                           <Switch checked={v.isActive} size="md" onLabel="ON" offLabel="OFF" onChange={(val) => {
                             setOpenModal(true)
+                            setDataProvinsi(v.idProvinsi)
                             setDataDel({
                               ...isDataDel,
                               idCandidate: v.id,
@@ -124,7 +126,7 @@ export default function TableCandidate({ title, data, searchParam }: { title: st
         withCloseButton={false}
         closeOnClickOutside={false}
       >
-        <ModalDelCandidate data={isDataDel} onSuccess={(val) => {
+        <ModalDelCandidate provinsi={isDataProvinsi} data={isDataDel} onSuccess={(val) => {
           if (val) return onLoad();
         }} />
       </Modal>

@@ -24,6 +24,7 @@ import toast from "react-simple-toasts"
  */
 
 export default function EditStep({ data }: { data: any }) {
+    console.log(data)
     const [openModal, setOpenModal] = useAtom(isModalStep)
     const [isBody, setBody] = useState({
         id: data.id,

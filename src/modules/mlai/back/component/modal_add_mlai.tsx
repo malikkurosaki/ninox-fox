@@ -5,6 +5,7 @@ import { isModalMlAi } from "../val/val_mlai"
 import toast from "react-simple-toasts"
 import { useRouter } from "next/navigation"
 import funAddMlAi from "../fun/fun_add_mlai"
+import { funGetAccessArea } from "@/modules/_global"
 
 /**
  * Fungsi untuk menampilkan modal konfirmasi add ml ai.
@@ -16,6 +17,11 @@ export default function ModalAddMlAi({ candidate, text }: { candidate: any, text
     const router = useRouter()
 
     async function onCreateMlAi() {
+        const cek = await funGetAccessArea({ candidate: candidate })
+        if (!cek) {
+            setOpenModal(false)
+            return toast("Anda tidak mempunyai akses ke wilayah tersebut", { theme: "dark" })
+        }
         const addData = await funAddMlAi({ candidate: candidate, content: text })
         if (!addData.success) return toast(addData.message, { theme: "dark" });
         toast("Sukses", { theme: "dark" });

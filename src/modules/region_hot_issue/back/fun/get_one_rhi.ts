@@ -10,6 +10,7 @@ export default async function funGetOneRhi({ id }: { id: any }) {
         select: {
             id: true,
             description: true,
+            idProvinsi: true,
             AreaProvinsi: {
                 select: {
                     name: true
@@ -36,6 +37,7 @@ export default async function funGetOneRhi({ id }: { id: any }) {
     const result = {
         id: data?.id,
         description: data?.description,
+        idProvinsi: data?.idProvinsi,
         areaProvinsi: _.isUndefined(data?.AreaProvinsi?.name) ? null : data?.AreaProvinsi?.name,
         areaKabkot: _.isUndefined(data?.AreaKabkot?.name) ? null : data?.AreaKabkot?.name,
         areaKecamatan: _.isUndefined(data?.AreaKecamatan?.name) ? null : data?.AreaKecamatan?.name,

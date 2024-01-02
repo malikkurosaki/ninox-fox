@@ -27,7 +27,7 @@ export default function EditCandidate({ data, params, provinsi, kabupaten }: { d
     })
 
     const router = useRouter();
-    const [dataProvinsi, setDataProvinsi] = useState(provinsi)
+    const [dataProvinsi, setDataProvinsi] = useState(data.idProvinsi)
     const [dataKabupaten, setDatakabupaten] = useState<any>(kabupaten)
     const [isProvinsi, setProvinsi] = useState<any>(data.idProvinsi || null)
     const [isKabupaten, setKabupaten] = useState<any>(data.idKabkot || null)
@@ -135,7 +135,7 @@ export default function EditCandidate({ data, params, provinsi, kabupaten }: { d
                 withCloseButton={false}
                 closeOnClickOutside={false}
             >
-                <ModalEditCandidate data={dataEdit} img={imgForm} />
+                <ModalEditCandidate provinsi={dataProvinsi} data={dataEdit} img={imgForm} />
             </Modal>
         </>
     )

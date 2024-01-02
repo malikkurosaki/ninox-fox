@@ -1,32 +1,33 @@
 "use client"
 import { Box, Button, Group, Modal, Select, SimpleGrid, Stack, Text } from '@mantine/core';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAtom } from 'jotai';
 import { isModalBeranda } from '../val/isModalBeranda';
 import ModalBeranda from './components/modal_beranda';
+import { funGetAreaKabKotByProvinsi } from '..';
+import _ from 'lodash';
+import toast from 'react-simple-toasts';
+import { useRouter } from 'next/navigation';
 
 /**
  * Fungsi untuk menampilkan dashboard.
  * @returns  hasilk yang ditampilkan seperti daftar access wilayah, jumlah kandidate, jumlah wilayah
  */
 
-export default function Home({ pro, kab, kec, kel, can1, can2 }: { pro: number, kab: number, kec: number, kel: number, can1: number, can2: number }) {
+export default function Home({ areaPro, pro, kab, kec, kel, can1, can2, valWilayah }: { areaPro: any, pro: number, kab: number, kec: number, kel: number, can1: number, can2: number, valWilayah: any }) {
+
+  const router = useRouter()
 
   const [valOpenModal, setOpenModal] = useAtom(isModalBeranda)
+  const [isValWilayah, setValWilayah] = useState(valWilayah)
+  const [allProvinsi, setAllProvinsi] = useState(areaPro)
 
   return (
     <>
-      <Text fz={25} c={'#213555'} fw={'bold'}>HI BALI INDONESIA</Text>
+      <Text fz={25} c={'#213555'} fw={'bold'}>HI INDONESIA</Text>
       <Group>
         <Text c={"#4F709C"}>DEFAULT WILAYAH UNTUK DASHBOARD USER</Text>
-        {/* <Select
-          placeholder="Select Wilayah"
-          defaultValue={'Jawa Timur'}
-          data={['Jawa Timur', 'Kalimantan Tengah', 'DKI Jakarta']}
-          radius={20}
-          w={200}
-        /> */}
-        <Button variant="outline" color="#4F709C" radius="xl" onClick={() => setOpenModal(true)}>JAWA TIMUR</Button>
+        <Button variant="outline" color="#4F709C" radius="xl" onClick={() => setOpenModal(true)}>{isValWilayah}</Button>
       </Group>
       <Box pt={30}>
         <Group grow>
@@ -38,40 +39,27 @@ export default function Home({ pro, kab, kec, kel, can1, can2 }: { pro: number, 
             <Box pb={10}>
               <Text c={"#4F709C"} fw={'bold'}>DAFTAR AKSES WILAYAH</Text>
             </Box>
+            <pre>
+              {/* {JSON.stringify(allProvinsi, null, 1)} */}
+            </pre>
             <Group grow>
-              <SimpleGrid
-                cols={{ base: 1, sm: 3, lg: 3 }}
-                spacing={{ base: 10, sm: 'xl' }}
-                verticalSpacing={{ base: 'md', sm: 'xl' }}
+              {/* <SimpleGrid
+                cols={{ base: 1, sm: 4, lg: 4 }}
+
               >
-                <Box
-                  style={{
-                    backgroundColor: "#4F709C",
-                    padding: 20,
-                    borderRadius: 5
-                  }}
-                >
-                  <Text c={"white"} ta={'center'}>Kalimantan Tengah</Text>
-                </Box>
-                <Box
-                  style={{
-                    backgroundColor: "#4F709C",
-                    padding: 20,
-                    borderRadius: 5
-                  }}
-                >
-                  <Text c={"white"} ta={'center'}>DKI Jakarta</Text>
-                </Box>
-                <Box
-                  style={{
-                    backgroundColor: "#4F709C",
-                    padding: 20,
-                    borderRadius: 5
-                  }}
-                >
-                  <Text c={"white"} ta={'center'}>Jawa Timur</Text>
-                </Box>
-              </SimpleGrid>
+
+                {allProvinsi.map((v: any, i: any) => (
+                  <Box key={i}>
+                    <Box style={{
+                      backgroundColor: "#4F709C",
+                      padding: 20,
+                      borderRadius: 5
+                    }}>
+                      <Text c={"white"} fw={'bold'}>{v.name}</Text>
+                    </Box>
+                  </Box>
+                ))}
+              </SimpleGrid> */}
             </Group>
           </Box>
         </Group>
@@ -178,7 +166,7 @@ export default function Home({ pro, kab, kec, kel, can1, can2 }: { pro: number, 
         closeOnClickOutside={false}
         size={"xl"}
       >
-        <ModalBeranda />
+        <ModalBeranda areaPro={areaPro} />
       </Modal>
     </>
 

@@ -20,6 +20,7 @@ import ModalDelRoleUser from './role/components/modal_del_role_user';
 import ModalEditRoleUser from './role/components/modal_edit_role_user';
 import funAddRoleUser from './role/fun/add_role_user';
 import funUpdateRoleUser from './role/fun/update_user_role';
+import funGetUserDefaultFront from './fun/get_user_area_def_front';
 
 export { funGetAllUser }
 export { UserLogView }
@@ -47,3 +48,4 @@ export { ModalDelRoleUser }
 export { ModalEditRoleUser }
 export { funAddRoleUser }
 export { funUpdateRoleUser }
+export { funGetUserDefaultFront }

@@ -32,7 +32,7 @@ export default function CandidateSummary() {
               padding: 5,
               borderRadius: 5
             }}>
-              <Text ml={5} fz={13} c={"white"}>POSITIVE</Text>
+              <Text ml={5} fz={13} c={"white"}>POSITIF</Text>
               <Text ta={'center'} fw={'bold'} c={"white"} fz={24}>57.76%</Text>
             </Box>
           </Box>
@@ -43,7 +43,7 @@ export default function CandidateSummary() {
               padding: 5,
               borderRadius: 5
             }}>
-              <Text ml={5} fz={13} c={WARNA.hijau}>NEUTRAL</Text>
+              <Text ml={5} fz={13} c={WARNA.hijau}>NETRAL</Text>
               <Text ta={'center'} fw={'bold'} c={WARNA.hijau} fz={24}>57.76%</Text>
             </Box>
           </Box>
@@ -54,7 +54,7 @@ export default function CandidateSummary() {
               padding: 5,
               borderRadius: 5
             }}>
-              <Text ml={5} fz={13} c={"white"}>NEGATIVE</Text>
+              <Text ml={5} fz={13} c={"white"}>NEGATIF</Text>
               <Text ta={'center'} fw={'bold'} c={"white"} fz={24}>57.76%</Text>
             </Box>
           </Box>

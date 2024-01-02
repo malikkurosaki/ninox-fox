@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import toast from "react-simple-toasts";
 import { isModalPairing } from "../../val/val_modal_pairing";
 import funCopyPairing from "../../fun/copy_pairing";
+import { funGetAccessArea } from "@/modules/_global";
 
 
 /**
@@ -16,6 +17,11 @@ export default function ModalCopy({ from, to, candidate1, candidate2, onSuccess 
   const [isLoading, setLoading] = useState(false)
 
   async function onUpload() {
+    const cek = await funGetAccessArea({ candidate: candidate1 })
+    if (!cek) {
+        setOpenModal(false)
+        return toast("Anda tidak mempunyai akses ke wilayah tersebut", { theme: "dark" })
+    }
     setLoading(true)
     await funCopyPairing({ dateFrom: from, dateTo: to, candidate1: candidate1, candidate2: candidate2})
     // await funLogUser({ act: "COPY DATA", desc: `User Copy Emotion Candidate (Candidate ID : ${candidate}, From ${from} To ${to})` })

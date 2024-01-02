@@ -1,4 +1,4 @@
-import { Home, candateTingkat, kabupatenCount, kecamatanCount, kelurahanCount, provinsiCount } from "@/modules/_global";
+import { Home, MasterKabGetByProvince, candateTingkat, funGetAreaDefault, funGetAreaKabKotByProvinsi, funGetUserAreaProvinsi, kabupatenCount, kecamatanCount, kelurahanCount, provinsiCount } from "@/modules/_global";
 import _ from "lodash";
 
 export default async function Page() {
@@ -9,9 +9,11 @@ export default async function Page() {
   const kel = await kelurahanCount()
   const gabungAll = await candateTingkat();
 
+  const valueWilayah = await funGetAreaDefault()
+  const dataAreaPro = await funGetUserAreaProvinsi()
   return (
     <>
-      <Home pro={pro} kab={kab} kec={kec} kel={kel} can1={gabungAll.can1} can2={gabungAll.can2} />
+      <Home areaPro={dataAreaPro} pro={pro} valWilayah={valueWilayah} kab={kab} kec={kec} kel={kel} can1={gabungAll.can1} can2={gabungAll.can2} />
     </>
   )
 }

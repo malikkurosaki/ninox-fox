@@ -5,6 +5,7 @@ import { isModalSwot } from "../val/val_swot";
 import { useRouter } from "next/navigation";
 import toast from "react-simple-toasts";
 import funEditSwot from "../fun/fun_edit_swot";
+import { funGetAccessArea } from "@/modules/_global";
 
 /**
  * Fungsi untuk menampilkan modal konfirmasi edit swot.
@@ -16,6 +17,11 @@ export default function ModalEditSwot({ data, content }: { data: any, content: a
     const router = useRouter()
 
     async function onEditSwot() {
+        const cek = await funGetAccessArea({ candidate: data.idCandidate })
+        if (!cek) {
+            setOpenModal(false)
+            return toast("Anda tidak mempunyai akses ke wilayah tersebut", { theme: "dark" })
+        }
         const edit = await funEditSwot({ body: data, text: content })
         toast("Sukses", { theme: "dark" });
         setOpenModal(false);

@@ -6,6 +6,7 @@ import { isModalStep } from "../val/val_step";
 import { useRouter } from "next/navigation";
 import toast from "react-simple-toasts";
 import funDeleteStep from "../fun/fun_delete_step";
+import { funGetAccessArea } from "@/modules/_global";
 
 
 /**
@@ -13,11 +14,16 @@ import funDeleteStep from "../fun/fun_delete_step";
  * @returns {component} Modal konfirmasi delete step.
  */
 
-export default function ModalDelStep({id, onSuccess}: {id: any, onSuccess: (val: any) => void}) {
+export default function ModalDelStep({id, candidate, onSuccess}: {id: any, candidate: any, onSuccess: (val: any) => void}) {
     const [openModal, setOpenModal] = useAtom(isModalStep)
     const router = useRouter()
 
    async function onDelStep() {
+    const cek = await funGetAccessArea({ candidate: candidate })
+        if (!cek) {
+            setOpenModal(false)
+            return toast("Anda tidak mempunyai akses ke wilayah tersebut", { theme: "dark" })
+        }
         const delData = await funDeleteStep({id: id})
         if (!delData.success) return toast(delData.message, { theme: "dark" })
         toast("Sukses", { theme: "dark" });

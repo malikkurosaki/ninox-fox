@@ -12,7 +12,7 @@ export default async function funUpdateConfUser({data, dataArea, isFront}: {data
             name: data.name,
             email: data.email,
             password: data.password,
-            phone: data.phone,
+            phone: String(data.phone),
             isAllArea: data.isAllArea
         }
     })
