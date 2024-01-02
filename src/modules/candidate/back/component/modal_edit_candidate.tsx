@@ -1,28 +1,30 @@
 'use client'
-
 import { Alert, Box, Button, Grid, Text } from "@mantine/core"
 import { useAtom } from "jotai";
 import { isModalCandidate } from "../val/isModalCandidate";
 import { useRouter } from "next/navigation";
 import toast from "react-simple-toasts";
 import funEditCandidate from "../fun/edit_candidate";
-
+import { funGetAccessArea } from "@/modules/_global";
 
 /**
  * Fungsi untuk menampilkan modal konfirmasi edit kandidat.
  * @returns {component} Modal konfirmasi edit kandidat.
  */
 
-
-export default function ModalEditCandidate({ data }: { data: any }) {
+export default function ModalEditCandidate({ data, provinsi, img }: { data: any, provinsi: any, img: any }) {
     const [openModal, setOpenModal] = useAtom(isModalCandidate)
     const router = useRouter()
 
     async function onEditCandidate() {
-        const edit = await funEditCandidate({ body: data })
+        const cek = await funGetAccessArea({ provinsi: provinsi })
+        if (!cek) {
+            setOpenModal(false)
+            return toast("Anda tidak mempunyai akses ke wilayah tersebut", { theme: "dark" })
+        }
+        const edit = await funEditCandidate({ body: data, img: img })
         toast("Sukses", { theme: "dark" });
         setOpenModal(false);
-        router.back()
     }
 
     return (

@@ -1,31 +1,34 @@
 "use client"
-
-import { Box, Group, SimpleGrid, Stack, Text } from '@mantine/core';
-import React, { useState } from 'react';
-import { provinsiCount } from '../fun/fun_provinsi_count';
+import { Box, Button, Group, Modal, Select, SimpleGrid, Stack, Text } from '@mantine/core';
+import React, { useEffect, useState } from 'react';
+import { useAtom } from 'jotai';
+import { isModalBeranda } from '../val/isModalBeranda';
+import ModalBeranda from './components/modal_beranda';
+import { funGetAreaKabKotByProvinsi } from '..';
+import _ from 'lodash';
+import toast from 'react-simple-toasts';
+import { useRouter } from 'next/navigation';
 
 /**
  * Fungsi untuk menampilkan dashboard.
  * @returns  hasilk yang ditampilkan seperti daftar access wilayah, jumlah kandidate, jumlah wilayah
  */
-export default function Home({ pro, kab, kec, kel, can1, can2 }: { pro: number, kab: number, kec: number, kel: number, can1: number, can2: number }) {
-  const [isProvinsi, setProvinsi] = useState(pro)
-  const [isKab, setKab] = useState(kab)
-  const [isKec, setKec] = useState(kec)
-  const [isKel, setKel] = useState(kel)
-  const [isCand1, setCan1] = useState(can1)
-  const [isCand2, setCan2] = useState(can2)
 
+export default function Home({ areaPro, pro, kab, kec, kel, can1, can2, valWilayah }: { areaPro: any, pro: number, kab: number, kec: number, kel: number, can1: number, can2: number, valWilayah: any }) {
+
+  const router = useRouter()
+
+  const [valOpenModal, setOpenModal] = useAtom(isModalBeranda)
+  const [isValWilayah, setValWilayah] = useState(valWilayah)
+  const [allProvinsi, setAllProvinsi] = useState(areaPro)
 
   return (
     <>
-      <Text fz={25} c={'#213555'} fw={'bold'}>HI ADMIN 2</Text>
+      <Text fz={25} c={'#213555'} fw={'bold'}>HI INDONESIA</Text>
       <Group>
         <Text c={"#4F709C"}>DEFAULT WILAYAH UNTUK DASHBOARD USER</Text>
-        <Text c={"#4F709C"} fw={'bold'}>JAWA TIMUR</Text>
+        <Button variant="outline" color="#4F709C" radius="xl" onClick={() => setOpenModal(true)}>{isValWilayah}</Button>
       </Group>
-
-
       <Box pt={30}>
         <Group grow>
           <Box style={{
@@ -36,34 +39,27 @@ export default function Home({ pro, kab, kec, kel, can1, can2 }: { pro: number, 
             <Box pb={10}>
               <Text c={"#4F709C"} fw={'bold'}>DAFTAR AKSES WILAYAH</Text>
             </Box>
+            <pre>
+              {/* {JSON.stringify(allProvinsi, null, 1)} */}
+            </pre>
             <Group grow>
-              <Box
-                style={{
-                  backgroundColor: "#4F709C",
-                  padding: 20,
-                  borderRadius: 5
-                }}
+              {/* <SimpleGrid
+                cols={{ base: 1, sm: 4, lg: 4 }}
+
               >
-                <Text c={"white"} ta={'center'}>Kalimantan Tengah</Text>
-              </Box>
-              <Box
-                style={{
-                  backgroundColor: "#4F709C",
-                  padding: 20,
-                  borderRadius: 5
-                }}
-              >
-                <Text c={"white"} ta={'center'}>DKI Jakarta</Text>
-              </Box>
-              <Box
-                style={{
-                  backgroundColor: "#4F709C",
-                  padding: 20,
-                  borderRadius: 5
-                }}
-              >
-                <Text c={"white"} ta={'center'}>Jawa Timur</Text>
-              </Box>
+
+                {allProvinsi.map((v: any, i: any) => (
+                  <Box key={i}>
+                    <Box style={{
+                      backgroundColor: "#4F709C",
+                      padding: 20,
+                      borderRadius: 5
+                    }}>
+                      <Text c={"white"} fw={'bold'}>{v.name}</Text>
+                    </Box>
+                  </Box>
+                ))}
+              </SimpleGrid> */}
             </Group>
           </Box>
         </Group>
@@ -89,7 +85,7 @@ export default function Home({ pro, kab, kec, kel, can1, can2 }: { pro: number, 
                 borderRadius: 5
               }}>
                 <Text c={"white"}>PROVINSI</Text>
-                <Text ta={'center'} fw={'bold'} c={"white"} fz={70}>{isCand1}</Text>
+                <Text ta={'center'} fw={'bold'} c={"white"} fz={70}>{can1}</Text>
               </Box>
             </Box>
             <Box>
@@ -99,7 +95,7 @@ export default function Home({ pro, kab, kec, kel, can1, can2 }: { pro: number, 
                 borderRadius: 5
               }}>
                 <Text c={"white"}>KABUPATEN</Text>
-                <Text ta={'center'} fw={'bold'} c={"white"} fz={70}>{isCand2}</Text>
+                <Text ta={'center'} fw={'bold'} c={"white"} fz={70}>{can2}</Text>
               </Box>
             </Box>
           </SimpleGrid>
@@ -126,7 +122,7 @@ export default function Home({ pro, kab, kec, kel, can1, can2 }: { pro: number, 
                 borderRadius: 5
               }}>
                 <Text c={"white"}>PROVINSI</Text>
-                <Text ta={'center'} fw={'bold'} c={"white"} fz={60}>{isProvinsi}</Text>
+                <Text ta={'center'} fw={'bold'} c={"white"} fz={60}>{Intl.NumberFormat("id-ID").format(Number(pro))}</Text>
               </Box>
             </Box>
             <Box>
@@ -136,7 +132,7 @@ export default function Home({ pro, kab, kec, kel, can1, can2 }: { pro: number, 
                 borderRadius: 5
               }}>
                 <Text c={"white"}>KABUPATEN</Text>
-                <Text ta={'center'} fw={'bold'} c={"white"} fz={60}>{isKab}</Text>
+                <Text ta={'center'} fw={'bold'} c={"white"} fz={60}>{Intl.NumberFormat("id-ID").format(Number(kab))}</Text>
               </Box>
             </Box>
             <Box>
@@ -146,7 +142,7 @@ export default function Home({ pro, kab, kec, kel, can1, can2 }: { pro: number, 
                 borderRadius: 5
               }}>
                 <Text c={"white"}>KECAMATAN</Text>
-                <Text ta={'center'} fw={'bold'} c={"white"} fz={60}>{isKec}</Text>
+                <Text ta={'center'} fw={'bold'} c={"white"} fz={60}>{Intl.NumberFormat("id-ID").format(Number(kec))}</Text>
               </Box>
             </Box>
             <Box>
@@ -156,13 +152,22 @@ export default function Home({ pro, kab, kec, kel, can1, can2 }: { pro: number, 
                 borderRadius: 5
               }}>
                 <Text c={"white"}>KELURAHAN</Text>
-                <Text ta={'center'} fw={'bold'} c={"white"} fz={60}>{isKel}</Text>
+                <Text ta={'center'} fw={'bold'} c={"white"} fz={60}>{Intl.NumberFormat("id-ID").format(Number(kel))}</Text>
               </Box>
             </Box>
           </SimpleGrid>
         </Box>
       </Box>
-
+      <Modal
+        opened={valOpenModal}
+        onClose={() => setOpenModal(false)}
+        centered
+        withCloseButton={false}
+        closeOnClickOutside={false}
+        size={"xl"}
+      >
+        <ModalBeranda areaPro={areaPro} />
+      </Modal>
     </>
 
   );

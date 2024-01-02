@@ -1,56 +1,24 @@
 "use client"
 import { useDisclosure, useShallowEffect } from '@mantine/hooks';
 import React, { useState } from 'react';
-import { LuLayoutDashboard } from 'react-icons/lu';
-import { FaChartLine, FaChartPie } from 'react-icons/fa';
-import { GrBarChart } from 'react-icons/gr';
-import { MdPersonSearch } from 'react-icons/md';
-import { HiChip, HiOutlineChartSquareBar } from 'react-icons/hi';
+import { MdArrowForwardIos } from 'react-icons/md';
 import { usePathname, useRouter } from 'next/navigation';
-import { ActionIcon, AppShell, Burger, Center, Group, NavLink, Skeleton, Text } from '@mantine/core';
-import { keyBy } from 'lodash';
+import { ActionIcon, AppShell, AppShellNavbar, AppShellSection, Box, Burger, Divider, Grid, Group, Modal, NavLink, Skeleton, Stack, Text, Title, Tooltip } from '@mantine/core';
+import _ from 'lodash';
+import { DataNavbarTutup } from '../components/data_navbar_tutup';
+import { WARNA } from '../../fun/WARNA';
+import { RiLogoutCircleRLine } from 'react-icons/ri';
+import { AiOutlineClose } from 'react-icons/ai';
+import { DataNavbarBuka } from '../components/data_navbar_buka';
+import { useAtom } from 'jotai';
+import { isModalLayout } from '../val/isModallayout';
+import ModalLogoutUser from '../components/modal_logout_user';
 
 export default function LayoutViewFront({ children }: { children: React.ReactNode }) {
+  const [valOpenModal, setOpenModal] = useAtom(isModalLayout)
   const [opened, { toggle }] = useDisclosure();
-
-  const dataFront = [
-    {
-      key: "1",
-      link: "/summary",
-      icon: LuLayoutDashboard
-    },
-    {
-      key: "2",
-      link: "/popularity",
-      icon: FaChartLine
-    },
-    {
-      key: "3",
-      link: "/insights",
-      icon: GrBarChart
-    },
-    {
-      key: "4",
-      link: "/pairing",
-      icon: MdPersonSearch
-    },
-    {
-      key: "5",
-      link: "/step",
-      icon: FaChartPie
-    },
-    {
-      key: "6",
-      link: "/swot",
-      icon: HiOutlineChartSquareBar
-    },
-    {
-      key: "7",
-      link: "/ml-ai",
-      icon: HiChip
-    },
-
-  ]
+  const [isOpenNavbar, setOpenNavbar] = useState(true)
+  const [isNavOpt, setNavOpt] = useState({ width: 100, breakpoint: 'sm', collapsed: { mobile: isOpenNavbar } })
 
   const router = useRouter();
   const pathname = usePathname();
@@ -61,47 +29,146 @@ export default function LayoutViewFront({ children }: { children: React.ReactNod
   return (
     <>
       <AppShell
-        layout="alt"
-        header={{ height: 60 }}
-        navbar={{ width: 100, breakpoint: 'sm', collapsed: { mobile: !opened } }}
-        padding="md"
+        navbar={isNavOpt}
       >
-        <AppShell.Header>
-          <Group h="100%" px="md">
-            <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
-          </Group>
-        </AppShell.Header>
-        <AppShell.Navbar pl={23} pt={20}>
-          <Group>
-            <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
-          </Group>
-          <Group justify='flex-end' style={{
-            position: "absolute",
-            bottom: 150,
+        {isOpenNavbar &&
+          (
+            <AppShellNavbar pl={23} pt={20} bg={"#000000"} style={{
+              border: "none"
+            }}>
+              <Group>
+                <Text fw={"bold"} c={"white"}>NINOX</Text>
+                <Burger opened={opened} color="rgba(255, 255, 255, 1)" onClick={toggle} hiddenFrom="sm" size="sm" />
+              </Group>
+              <Group
+                // justify='flex-end' style={{
+                //   position: "absolute",
+                //   bottom: 130,
+                //   // bottom: "50"
+                // }}
+                pt={30}
+              >
+                <Stack align="center" p={"xs"}>
+                  {DataNavbarTutup.map((v, i) => (
+                    <Box key={i}>
+                      <Tooltip label={_.upperCase((v.label))}>
+                        <ActionIcon
+                          c={v.link === active ? "#CF0A0A" : "white"}
+                          size={30}
+                          variant="subtle"
+                          onClick={() => {
+                            router.push(v.link);
+                          }}
+                        >
+                          <v.icon size={32} />
+                        </ActionIcon>
+                      </Tooltip>
+                    </Box>
+                  ))}
+
+                </Stack>
+              </Group>
+              <Group
+                style={{
+                  position: "absolute",
+                  bottom: 30,
+                }}
+                pl={10}
+              >
+                <Group pb={40}>
+                  <ActionIcon onClick={() => {
+                    setNavOpt({ width: 250, breakpoint: 'sm', collapsed: { mobile: isOpenNavbar } })
+                    setOpenNavbar(false)
+                  }} variant='subtle' c={"white"}>
+                    <MdArrowForwardIos size={30} />
+                  </ActionIcon>
+                </Group>
+                <Group justify='center' >
+                  <ActionIcon variant='subtle' onClick={() => setOpenModal(true)}>
+                    <RiLogoutCircleRLine size={30} color={"white"} />
+                  </ActionIcon>
+                </Group>
+              </Group>
+            </AppShellNavbar>
+          )
+        }
+        {!isOpenNavbar &&
+          <AppShellNavbar pt={20} bg={"#000000"} style={{
+            border: "none"
           }}>
-            {dataFront.map((item) => {
+            <Group justify="flex-end" pr={20} pt={30}>
+              <ActionIcon onClick={() => {
+                setNavOpt({ width: 100, breakpoint: 'sm', collapsed: { mobile: isOpenNavbar } })
+                setOpenNavbar(true)
+              }} variant='subtle' c={"white"}>
+                <AiOutlineClose size={30} />
+              </ActionIcon>
+            </Group>
+            {DataNavbarBuka.map((item) => {
               return (
-                <NavLink
-                  key={item.key}
-                  active={item.link === active}
-                  fw={item.icon ? "dark" : "dark"}
-                  label={<ActionIcon variant="subtle" color="rgba(24, 2, 87, 1)" size="xl" aria-label="Settings"><item.icon size={30} /></ActionIcon>}
-                  onClick={() => {
-                    router.push(item.link);
-                  }}
-                  color="#213555"
-                  variant="filled"
+                <Box key={item.key} m={5} mt={5}>
+                  <NavLink
+                    active
+                    label={active === item.link ? (
+                      <Box>
+                        <Title order={5} onClick={() => router.push(item.link)}>
+                          {item.label}
+                        </Title>
+                        <Grid pt={5}>
+                          <Grid.Col span={3}>
+                            <Divider color={"#CF0A0A"} size="lg" />
+                          </Grid.Col>
+                        </Grid>
+                      </Box>
+                    ) : (
+                      <Box>
+                        <Text onClick={() => router.push(item.link)}>
+                          {item.label}
+                        </Text>
 
-                />
+                      </Box>
+                    )
+                    }
+                    onClick={() => {
+                      router.push(item.link);
+                    }}
+                    c={"white"}
+                    variant="subtle"
+                  />
+                </Box>
               )
-            })} 
-          </Group>
-
-        </AppShell.Navbar>
-        <AppShell.Main>
-          {children}
+            })}
+            <Group
+              style={{
+                position: "absolute",
+                bottom: 30,
+                cursor: 'pointer',
+              }}
+            >
+              <Group justify='center' pl={20} onClick={() => setOpenModal(true)}>
+                <ActionIcon variant='subtle'>
+                  <RiLogoutCircleRLine size={30} color={"white"} />
+                </ActionIcon>
+                <Text c={"white"}>LOGOUT</Text>
+              </Group>
+            </Group>
+          </AppShellNavbar>
+        }
+        <AppShell.Main bg={WARNA.bgGradasi}>
+          <Box p={20}>
+            {children}
+          </Box>
         </AppShell.Main>
       </AppShell>
+      <Modal
+        opened={valOpenModal}
+        onClose={() => setOpenModal(false)}
+        centered
+        withCloseButton={false}
+        closeOnClickOutside={false}
+      >
+        <ModalLogoutUser />
+      </Modal>
     </>
   );
 }

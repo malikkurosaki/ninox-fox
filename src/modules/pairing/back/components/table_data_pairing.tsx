@@ -1,93 +1,13 @@
-import { Avatar, Box, Group, Image, Table } from "@mantine/core";
+'use client'
+import { Avatar, Box, Group, Image, ScrollArea, Table } from "@mantine/core";
+import _ from "lodash";
 import React from "react";
 
-const data = [
-  {
-    id: 1,
-    candidate1: "I Wayan Adi",
-    candidate2: "I Komang Ayu",
-    Confidence: 22221,
-    Kabupaten: 12123,
-    Supportive: 12121,
-  },
-  {
-    id: 2,
-    candidate1: "I Wayan Adi",
-    candidate2: "I Komang Ayu",
-    Confidence: 22221,
-    Kabupaten: 12123,
-    Supportive: 12121,
-  },
-  {
-    id: 3,
-    candidate1: "I Wayan Adi",
-    candidate2: "I Komang Ayu",
-    Confidence: 22221,
-    Kabupaten: 12123,
-    Supportive: 12121,
-  },
-  {
-    id: 4,
-    candidate1: "I Wayan Adi",
-    candidate2: "I Komang Ayu",
-    Confidence: 22221,
-    Kabupaten: 12123,
-    Supportive: 12121,
-  },
-  {
-    id: 5,
-    candidate1: "I Wayan Adi",
-    candidate2: "I Komang Ayu",
-    Confidence: 22221,
-    Kabupaten: 12123,
-    Supportive: 12121,
-  },
-  {
-    id: 6,
-    candidate1: "I Wayan Adi",
-    candidate2: "I Komang Ayu",
-    Confidence: 22221,
-    Kabupaten: 12123,
-    Supportive: 12121,
-  },
-  {
-    id: 7,
-    candidate1: "I Wayan Adi",
-    candidate2: "I Komang Ayu",
-    Confidence: 22221,
-    Kabupaten: 12123,
-    Supportive: 12121,
-  },
-  {
-    id: 8,
-    candidate1: "I Wayan Adi",
-    candidate2: "I Komang Ayu",
-    Confidence: 22221,
-    Kabupaten: 12123,
-    Supportive: 12121,
-  },
-  {
-    id: 9,
-    candidate1: "I Wayan Adi",
-    candidate2: "I Komang Ayu",
-    Confidence: 22221,
-    Kabupaten: 12123,
-    Supportive: 12121,
-  },
-  {
-    id: 10,
-    candidate1: "I Wayan Adi",
-    candidate2: "I Komang Ayu",
-    Confidence: 22221,
-    Kabupaten: 12123,
-    Supportive: 12121,
-  },
-];
 /**
  * Fungsi menampilkan halaman table data pairing.
  * @returns  Hasil dari table data pairing untuk menampilkan data table
  */
-export default function TableDataPairing() {
+export default function TableDataPairing({ data, th }: { data: any, th: any }) {
   return (
     <>
       <Box
@@ -97,30 +17,47 @@ export default function TableDataPairing() {
           borderRadius: "5px",
         }}
       >
-        <Table withTableBorder horizontalSpacing="xl">
-          <Table.Thead>
-            <Table.Tr>
-              <Table.Th>ID</Table.Th>
-              <Table.Th>KANDIDAT 1</Table.Th>
-              <Table.Th>KANDIDAT 2</Table.Th>
-              <Table.Th>KABUPATEN ID</Table.Th>
-              <Table.Th>CONFIDENCE</Table.Th>
-              <Table.Th>SUPPORTIVE</Table.Th>
-            </Table.Tr>
-          </Table.Thead>
-          <Table.Tbody>
-            {data.map((v, i) => (
-              <Table.Tr key={i}>
-                <Table.Td>{v.id}</Table.Td>
-                <Table.Td>{v.candidate1}</Table.Td>
-                <Table.Td>{v.candidate2}</Table.Td>
-                <Table.Td>{v.Kabupaten}</Table.Td>
-                <Table.Td>{v.Confidence}</Table.Td>
-                <Table.Td>{v.Supportive}</Table.Td>
+        <ScrollArea>
+          <Table withTableBorder horizontalSpacing="xl">
+            <Table.Thead>
+              <Table.Tr>
+                <Table.Th>KANDIDAT 1</Table.Th>
+                <Table.Th>KANDIDAT 2</Table.Th>
+                <Table.Th>{th}</Table.Th>
+                <Table.Th>RATE</Table.Th>
+                <Table.Th>CONFIDENCE</Table.Th>
+                <Table.Th>SUPPORTIVE</Table.Th>
+                <Table.Th>POSITIVE</Table.Th>
+                <Table.Th>UNDECIDED</Table.Th>
+                <Table.Th>UNSUPPORTIVE</Table.Th>
+                <Table.Th>UNCOMFORTABLE</Table.Th>
+                <Table.Th>NEGATIVE</Table.Th>
+                <Table.Th>DISSAPPROVAL</Table.Th>
               </Table.Tr>
-            ))}
-          </Table.Tbody>
-        </Table>
+            </Table.Thead>
+            <Table.Tbody>
+              {data.map((v: any, i: any) => {
+                v.rate = v.rate.toString()
+                return (
+                  <Table.Tr key={i}>
+                    <Table.Td>{v.can1}</Table.Td>
+                    <Table.Td>{v.can2}</Table.Td>
+                    <Table.Td>{v.area}</Table.Td>
+                    <Table.Td>{v.rate}%</Table.Td>
+                    <Table.Td>{v.confidence}</Table.Td>
+                    <Table.Td>{v.supportive}</Table.Td>
+                    <Table.Td>{v.positive}</Table.Td>
+                    <Table.Td>{v.undecided}</Table.Td>
+                    <Table.Td>{v.unsupportive}</Table.Td>
+                    <Table.Td>{v.uncomfortable}</Table.Td>
+                    <Table.Td>{v.negative}</Table.Td>
+                    <Table.Td>{v.dissapproval}</Table.Td>
+                  </Table.Tr>
+                )
+              })}
+            </Table.Tbody>
+          </Table>
+        </ScrollArea>
       </Box>
     </>
   );

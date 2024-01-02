@@ -1,12 +1,12 @@
-import { ListRoleUser } from '@/modules/role_user';
+
+import { ListRoleUser, funGetAllUserRole } from '@/modules/user';
 import React from 'react';
 
-function Page() {
+export default async function Page() {
+  const data = await funGetAllUserRole()
   return (
     <>
-      <ListRoleUser />
+      <ListRoleUser data={data} />
     </>
   );
 }
-
-export default Page;

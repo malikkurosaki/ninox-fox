@@ -30,10 +30,11 @@ model CategoryLeaderTraitAssessment {
 
 model Component {
   id         Int          @id @default(autoincrement())
-  menu       String?
-  label      String?
+  menu       String? // nama menu
+  group      String? // untuk grouping menu
   keyMenu    String?
-  name       String
+  owner      String? // kepemilikan menu (user/admin/developer)
+  link       String?
   isActive   Boolean      @default(true)
   createdAt  DateTime     @default(now())
   updatedAt  DateTime     @updatedAt
@@ -282,7 +283,7 @@ model RegionHotIssues {
 }
 
 model Candidate {
-  id                Int                @id @default(autoincrement())
+  id                String             @id @default(cuid())
   AreaProvinsi      AreaProvinsi?      @relation(fields: [idProvinsi], references: [id])
   idProvinsi        Int
   AreaKabkot        AreaKabkot?        @relation(fields: [idKabkot], references: [id])
@@ -304,7 +305,7 @@ model Candidate {
 model MlAi {
   id          Int       @id @default(autoincrement())
   Candidate   Candidate @relation(fields: [idCandidate], references: [id])
-  idCandidate Int
+  idCandidate String
   category    String?
   content     String    @db.Text
   isActive    Boolean   @default(true)
@@ -315,7 +316,7 @@ model MlAi {
 model Swot {
   id          Int       @id @default(autoincrement())
   Candidate   Candidate @relation(fields: [idCandidate], references: [id])
-  idCandidate Int
+  idCandidate String
   category    String //social, weakness dll
   content     String    @db.Text
   isActive    Boolean   @default(true)
@@ -326,7 +327,7 @@ model Swot {
 model Step {
   id          Int       @id @default(autoincrement())
   Candidate   Candidate @relation(fields: [idCandidate], references: [id])
-  idCandidate Int
+  idCandidate String
   category    String //tecnology, economi dll
   sentiment   Int       @default(1) //1: positive, 2: negative
   content     String    @db.Text
@@ -362,7 +363,7 @@ model CandidateEmotion {
   AreaKelurahan AreaKelurahan? @relation(fields: [idKelurahan], references: [id])
   idKelurahan   Int?
   Candidate     Candidate      @relation(fields: [idCandidate], references: [id])
-  idCandidate   Int
+  idCandidate   String
   dateEmotion   DateTime       @db.Date
   confidence    Int
   supportive    Int
@@ -380,9 +381,9 @@ model CandidateEmotion {
 model CandidatePairing {
   id            String         @id @default(cuid())
   Candidate1    Candidate      @relation("C1ToCandidate", fields: [idCandidate1], references: [id], map: "Candidate1Map")
-  idCandidate1  Int
+  idCandidate1  String
   Candidate2    Candidate      @relation("C2ToCandidate", fields: [idCandidate2], references: [id], map: "Candidate2Map")
-  idCandidate2  Int
+  idCandidate2  String
   AreaProvinsi  AreaProvinsi?  @relation(fields: [idProvinsi], references: [id])
   idProvinsi    Int?
   AreaKabkot    AreaKabkot?    @relation(fields: [idKabkot], references: [id])

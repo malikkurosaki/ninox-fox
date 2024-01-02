@@ -10,14 +10,12 @@ import {
   Text,
 } from "@mantine/core";
 import React, { useEffect, useState } from "react";
-import UploadDataAudience from "../components/upload_data_audience";
-import TableDataAudience from "../components/table_data_audience";
 import { useRouter } from "next/navigation";
-import { MasterKabGetByProvince } from "@/modules/_global";
-import { MasterKecGetByKab } from "@/modules/_global/fun/master_kecamatan_get_by_kabupaten";
+import { MasterKabGetByProvince, MasterKecGetByKab } from "@/modules/_global";
 import _ from "lodash";
 import toast from "react-simple-toasts";
 import papa from "papaparse"
+import { TableDataAudience } from "../..";
 
 
 /**
@@ -35,7 +33,6 @@ export default function ViewAudience({ param, provinsi, kabupaten, kecamatan, da
   const [isProvinsi, setProvinsi] = useState<any>(param.idProvinsi || null)
   const [isKabupaten, setKabupaten] = useState<any>(param.idKabkot || null)
   const [isKecamatan, setKecamatan] = useState<any>(param.idKec || null)
-
 
   useEffect(() => {
     setProvinsi((param.idProvinsi == 0) ? null : param.idProvinsi)
@@ -132,8 +129,23 @@ export default function ViewAudience({ param, provinsi, kabupaten, kecamatan, da
             }}
             px={50}
           >
-            <UploadDataAudience />
-            {!_.isNull(datatable.title) &&
+            <Box
+              style={{
+                border: "1px dashed gray",
+                borderRadius: 10,
+                paddingTop: 40,
+                paddingBottom: 40,
+                paddingLeft: 30,
+                paddingRight: 30,
+                cursor: "pointer",
+              }}
+              onClick={() => router.push("/dashboard/audience/upload")}
+            >
+              <Text ta={"center"} size="xl" inline>
+                UPLOAD DATA
+              </Text>
+            </Box>
+            {param && !_.isNull(param.idProvinsi) && param.idProvinsi != 0 &&
               <Box
                 style={{
                   border: "1px dashed gray",

@@ -21,7 +21,6 @@ export default async function funGetCandidateByArea({ find }: { find: any }) {
                 where: {
                     tingkat: find.tingkat,
                     idProvinsi: find.idProvinsi,
-                    img: find.img
                 },
                 orderBy: {
                     id: 'asc'
@@ -41,7 +40,6 @@ export default async function funGetCandidateByArea({ find }: { find: any }) {
                     tingkat: find.tingkat,
                     idProvinsi: find.idProvinsi,
                     idKabkot: find.idKabkot,
-                    img: find.img
                 },
                 orderBy: {
                     id: 'asc'

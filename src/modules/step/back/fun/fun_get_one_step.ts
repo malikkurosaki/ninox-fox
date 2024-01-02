@@ -19,6 +19,7 @@ export default async function funGetOneStep({ id }: { id: any }) {
             category: true,
             content: true,
             sentiment: true,
+            idCandidate: true,
             Candidate: {
                 select: {
                     name: true,
@@ -42,6 +43,7 @@ export default async function funGetOneStep({ id }: { id: any }) {
         category: data?.category,
         sentiment: data?.sentiment,
         name: data?.Candidate.name,
+        idCandidate: data?.idCandidate,
         areaKabkot: _.isUndefined(data?.Candidate.AreaKabkot?.name) ? null : data?.Candidate.AreaKabkot?.name,
         areaProvinsi: _.isUndefined(data?.Candidate.AreaProvinsi?.name) ? null : data?.Candidate.AreaProvinsi?.name
     }

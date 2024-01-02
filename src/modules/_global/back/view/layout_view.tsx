@@ -5,19 +5,21 @@ import {
   AppShell,
   Box,
   Burger,
-  Divider,
   Group,
   Menu,
+  Modal,
   NavLink,
-  Skeleton,
   UnstyledButton,
   rem,
 } from "@mantine/core";
 import React, { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { FaUserCircle, FaUserTie } from "react-icons/fa";
-import { LuLayoutDashboard } from "react-icons/lu";
 import { RiLogoutCircleRLine } from "react-icons/ri";
+import { useAtom } from "jotai";
+import { isModalLayout } from "../val/isModalLayout";
+import _ from "lodash";
+import { ModalLogout } from "../..";
 
 /**
  * Fungsi untuk menampilkan template dashsboard admin.
@@ -25,9 +27,9 @@ import { RiLogoutCircleRLine } from "react-icons/ri";
  */
 
 export default function LayoutView({
-  children,
+  children, dataMenu, dataUser
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode, dataMenu: any, dataUser: any
 }) {
   const [opened, { toggle }] = useDisclosure();
   const dataDashboard = [
@@ -94,8 +96,37 @@ export default function LayoutView({
     },
   ];
 
+  const dataDeveloper = [
+    {
+      key: "md11",
+      link: "/dashboard/role-user",
+      label: "ROLE USER",
+    },
+    {
+      key: "md12",
+      link: "/dashboard/user",
+      label: "USER",
+    },
+    {
+      key: "md13",
+      link: "/dashboard/log-user",
+      label: "LOG USER",
+    },
+    {
+      key: "md14",
+      link: "/dashboard/seeder",
+      label: "SEEDER",
+    },
+    {
+      key: "md15",
+      link: "/dashboard/delete-data",
+      label: "HAPUS DATA",
+    },
+  ];
+
   const router = useRouter();
   const pathname = usePathname();
+  const [valOpenModal, setOpenModal] = useAtom(isModalLayout)
   const [active, setActive] = useState("");
   useShallowEffect(() => {
     setActive(pathname);
@@ -152,7 +183,7 @@ export default function LayoutView({
                       <FaUserTie style={{ width: rem(14), height: rem(14) }} />
                     }
                   >
-                    Moh Alif Al Lukman
+                    {(dataUser && dataUser.name) ? dataUser.name : 'unknown user'}
                   </Menu.Item>
                   <Menu.Item
                     leftSection={
@@ -160,7 +191,7 @@ export default function LayoutView({
                         style={{ width: rem(14), height: rem(14) }}
                       />
                     }
-                  // onClick={onLogout}
+                    onClick={() => { setOpenModal(true) }}
                   >
                     Logout
                   </Menu.Item>
@@ -170,14 +201,13 @@ export default function LayoutView({
           </Group>
         </AppShell.Header>
         <AppShell.Navbar p="md" pb={30}>
-          {dataDashboard.map((item) => {
+          {dataMenu && dataMenu.dataSatu && dataMenu.dataSatu.map((item: any) => {
             return (
               <NavLink
-                key={item.key}
+                key={item.keyMenu}
                 active={item.link === active}
-                fw={item.label ? "bolder" : "normal"}
-                label={item.label}
-                // description={item.description === active}
+                fw={item.menu ? "bolder" : "normal"}
+                label={_.upperCase(item.menu)}
                 onClick={() => {
                   router.push(item.link);
                 }}
@@ -186,34 +216,40 @@ export default function LayoutView({
               />
             );
           })}
-          <NavLink
-            label="REGION VALUE EDITOR"
-            childrenOffset={28}
-            fw={"bolder"}
-          >
-            {dataRegion.map((item) => {
-              return (
-                <NavLink
-                  key={item.key}
-                  active={item.link === active}
-                  fw={item.label ? "bolder" : "normal"}
-                  label={item.label}
-                  onClick={() => {
-                    router.push(item.link);
-                  }}
-                  color="#213555"
-                  variant="filled"
-                />
-              );
-            })}
-          </NavLink>
-          {dataDua.map((item) => {
+
+          {
+            dataMenu && dataMenu.dataRegion && (
+              <NavLink
+                label="REGION VALUE EDITOR"
+                childrenOffset={28}
+                fw={"bolder"}
+              >
+                {dataMenu && dataMenu.dataRegion && dataMenu.dataRegion.map((item: any) => {
+                  return (
+                    <NavLink
+                      key={item.keyMenu}
+                      active={item.link === active}
+                      fw={item.menu ? "bolder" : "normal"}
+                      label={_.upperCase(item.menu)}
+                      onClick={() => {
+                        router.push(item.link);
+                      }}
+                      color="#213555"
+                      variant="filled"
+                    />
+                  );
+                })}
+              </NavLink>
+            )
+          }
+
+          {dataMenu && dataMenu.dataDua && dataMenu.dataDua.map((item: any) => {
             return (
               <NavLink
-                key={item.key}
+                key={item.keyMenu}
                 active={item.link === active}
-                fw={item.label ? "bolder" : "normal"}
-                label={item.label}
+                fw={item.menu ? "bolder" : "normal"}
+                label={_.upperCase(item.menu)}
                 onClick={() => {
                   router.push(item.link);
                 }}
@@ -222,6 +258,31 @@ export default function LayoutView({
               />
             );
           })}
+          {
+            dataMenu && dataMenu.dataDeveloper && (
+              <NavLink
+                label="DEVELOPER"
+                childrenOffset={28}
+                fw={"bolder"}
+              >
+                {dataMenu && dataMenu.dataDeveloper && dataMenu.dataDeveloper.map((item: any) => {
+                  return (
+                    <NavLink
+                      key={item.keyMenu}
+                      active={item.link === active}
+                      fw={item.menu ? "bolder" : "normal"}
+                      label={_.upperCase(item.menu)}
+                      onClick={() => {
+                        router.push(item.link);
+                      }}
+                      color="#213555"
+                      variant="filled"
+                    />
+                  );
+                })}
+              </NavLink>
+            )
+          }
         </AppShell.Navbar>
         <AppShell.Main bg={"#EAEAEA"}>
           <Box p={10} pl={20} pr={20}>
@@ -229,6 +290,16 @@ export default function LayoutView({
           </Box>
         </AppShell.Main>
       </AppShell>
+
+      <Modal
+        opened={valOpenModal}
+        onClose={() => setOpenModal(false)}
+        centered
+        withCloseButton={false}
+        closeOnClickOutside={false}
+      >
+        <ModalLogout />
+      </Modal>
     </>
   );
 }

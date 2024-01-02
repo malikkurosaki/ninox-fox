@@ -1,4 +1,3 @@
-
 "use client"
 import React, { useEffect, useState } from "react";
 import {
@@ -12,7 +11,6 @@ import {
   Text,
 } from "@mantine/core";
 import { useRouter } from "next/navigation";
-import UploadRegion from "../components/upload_region";
 import TableRegion from "../components/table_region";
 import { MasterKabGetByProvince, MasterKecGetByKab } from "@/modules/_global";
 import toast from "react-simple-toasts";
@@ -130,7 +128,22 @@ export default function ViewListRegion({ param, provinsi, kabupaten, kecamatan, 
             }}
             px={50}
           >
-            <UploadRegion />
+            <Box
+              style={{
+                border: "1px dashed gray",
+                borderRadius: 10,
+                paddingTop: 40,
+                paddingBottom: 40,
+                paddingLeft: 30,
+                paddingRight: 30,
+                cursor: "pointer",
+              }}
+              onClick={() => router.push("/dashboard/region-hot-issue/upload")}
+            >
+              <Text ta={"center"} size="xl" inline>
+                UPLOAD DATA
+              </Text>
+            </Box>
             {!_.isNull(datatable.title) &&
               <Box
                 style={{

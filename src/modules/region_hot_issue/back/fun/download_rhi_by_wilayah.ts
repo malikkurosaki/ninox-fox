@@ -1,5 +1,4 @@
 'use server'
-
 import { provinsiCount } from "@/modules/_global";
 import prisma from "@/modules/_global/bin/prisma"
 import _ from "lodash"
@@ -29,6 +28,11 @@ export default async function funDownloadRHI({ find }: { find: any }) {
                 select: {
                     id: true,
                     description: true,
+                    AreaProvinsi: {
+                        select: {
+                            name: true
+                        }
+                    },
                     AreaKabkot: {
                         select: {
                             name: true
@@ -38,8 +42,11 @@ export default async function funDownloadRHI({ find }: { find: any }) {
             })
 
             dataTable = dataTable.map((v: any) => ({
-                ..._.omit(v, ["description", "AreaKabkot"]),
+                ..._.omit(v, ["description", "AreaProvinsi", "AreaKabkot"]),
+                Provinsi: v.AreaProvinsi.name,
                 Kabkot: v.AreaKabkot.name,
+                Kecamatan: "",
+                Kelurahan: "",
                 description: v.description
             }))
 
@@ -63,6 +70,16 @@ export default async function funDownloadRHI({ find }: { find: any }) {
                 select: {
                     id: true,
                     description: true,
+                    AreaProvinsi: {
+                        select: {
+                            name: true
+                        }
+                    },
+                    AreaKabkot: {
+                        select: {
+                            name: true
+                        }
+                    },
                     AreaKecamatan: {
                         select: {
                             name: true
@@ -72,8 +89,11 @@ export default async function funDownloadRHI({ find }: { find: any }) {
             })
 
             dataTable = dataTable.map((v: any) => ({
-                ..._.omit(v, ["description", "AreaKecamatan"]),
+                ..._.omit(v, ["description", "AreaProvinsi", "AreaKabkot", "AreaKecamatan"]),
+                Provinsi: v.AreaProvinsi.name,
+                Kabkot: v.AreaKabkot.name,
                 Kecamatan: v.AreaKecamatan.name,
+                Kelurahan: "",
                 description: v.description
             }))
 
@@ -97,6 +117,21 @@ export default async function funDownloadRHI({ find }: { find: any }) {
                 select: {
                     id: true,
                     description: true,
+                    AreaProvinsi: {
+                        select: {
+                            name: true
+                        }
+                    },
+                    AreaKabkot: {
+                        select: {
+                            name: true
+                        }
+                    },
+                    AreaKecamatan: {
+                        select: {
+                            name: true
+                        }
+                    },
                     AreaKelurahan: {
                         select: {
                             name: true
@@ -106,7 +141,10 @@ export default async function funDownloadRHI({ find }: { find: any }) {
             })
 
             dataTable = dataTable.map((v: any) => ({
-                ..._.omit(v, ["description", "AreaKelurahan"]),
+                ..._.omit(v, ["description", "AreaProvinsi", "AreaKabkot", "AreaKecamatan", "AreaKelurahan"]),
+                Provinsi: v.AreaProvinsi.name,
+                Kabkot: v.AreaKabkot.name,
+                Kecamatan: v.AreaKecamatan.name,
                 Kelurahan: v.AreaKelurahan.name,
                 description: v.description
             }))

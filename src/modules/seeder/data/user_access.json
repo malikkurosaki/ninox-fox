@@ -86,147 +86,67 @@
     },
     {
         "id": 18,
-        "idUserRole": 1,
-        "idComponent": 18
+        "idUserRole": 2,
+        "idComponent": 1
     },
     {
         "id": 19,
-        "idUserRole": 1,
-        "idComponent": 19
+        "idUserRole": 2,
+        "idComponent": 2
     },
     {
         "id": 20,
-        "idUserRole": 1,
-        "idComponent": 20
+        "idUserRole": 2,
+        "idComponent": 3
     },
     {
         "id": 21,
-        "idUserRole": 1,
-        "idComponent": 21
+        "idUserRole": 2,
+        "idComponent": 4
     },
     {
         "id": 22,
-        "idUserRole": 1,
-        "idComponent": 22
+        "idUserRole": 2,
+        "idComponent": 5
     },
     {
         "id": 23,
-        "idUserRole": 1,
-        "idComponent": 23
+        "idUserRole": 2,
+        "idComponent": 6
     },
     {
         "id": 24,
-        "idUserRole": 1,
-        "idComponent": 24
+        "idUserRole": 2,
+        "idComponent": 7
     },
     {
         "id": 25,
-        "idUserRole": 1,
-        "idComponent": 25
+        "idUserRole": 2,
+        "idComponent": 8
     },
     {
         "id": 26,
-        "idUserRole": 1,
-        "idComponent": 26
+        "idUserRole": 2,
+        "idComponent": 9
     },
     {
         "id": 27,
-        "idUserRole": 1,
-        "idComponent": 27
+        "idUserRole": 2,
+        "idComponent": 10
     },
     {
         "id": 28,
-        "idUserRole": 1,
-        "idComponent": 28
+        "idUserRole": 2,
+        "idComponent": 11
     },
     {
         "id": 29,
-        "idUserRole": 1,
-        "idComponent": 29
+        "idUserRole": 2,
+        "idComponent": 12
     },
     {
         "id": 30,
-        "idUserRole": 1,
-        "idComponent": 30
-    },
-    {
-        "id": 31,
-        "idUserRole": 1,
-        "idComponent": 31
-    },
-    {
-        "id": 32,
-        "idUserRole": 1,
-        "idComponent": 32
-    },
-    {
-        "id": 33,
-        "idUserRole": 1,
-        "idComponent": 33
-    },
-    {
-        "id": 34,
-        "idUserRole": 1,
-        "idComponent": 34
-    },
-    {
-        "id": 35,
-        "idUserRole": 1,
-        "idComponent": 35
-    },
-    {
-        "id": 36,
-        "idUserRole": 1,
-        "idComponent": 36
-    },
-    {
-        "id": 37,
-        "idUserRole": 1,
-        "idComponent": 37
-    },
-    {
-        "id": 38,
-        "idUserRole": 1,
-        "idComponent": 38
-    },
-    {
-        "id": 39,
-        "idUserRole": 1,
-        "idComponent": 39
-    },
-    {
-        "id": 40,
-        "idUserRole": 1,
-        "idComponent": 40
-    },
-    {
-        "id": 41,
-        "idUserRole": 1,
-        "idComponent": 41
-    },
-    {
-        "id": 42,
-        "idUserRole": 1,
-        "idComponent": 42
-    },
-    {
-        "id": 43,
-        "idUserRole": 1,
-        "idComponent": 43
-    },
-    {
-        "id": 44,
-        "idUserRole": 1,
-        "idComponent": 44
-    },
-    {
-        "id": 45,
-        "idUserRole": 1,
-        "idComponent": 45
-    },
-    {
-        "id": 46,
-        "idUserRole": 1,
-        "idComponent": 46
+        "idUserRole": 3,
+        "idComponent": 1
     }
 ]

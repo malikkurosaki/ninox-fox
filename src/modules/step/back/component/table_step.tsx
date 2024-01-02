@@ -1,15 +1,11 @@
 "use client";
 
 import {
-  ActionIcon,
   Box,
   Button,
   Center,
-  Collapse,
-  Divider,
   Group,
   Modal,
-  Pagination,
   ScrollArea,
   Table,
   Text,
@@ -17,13 +13,9 @@ import {
 import { useAtom } from "jotai";
 import { isModalStep } from "../val/val_step";
 import { useRouter, useSearchParams } from "next/navigation";
-import { MdDelete, MdEditCalendar } from "react-icons/md";
-import { CiRead } from "react-icons/ci";
 import ModalDelStep from "./modal_del_step";
-import { useDisclosure } from "@mantine/hooks";
 import ComponentTableStep from "./component_table_step";
 import { useEffect, useState } from "react";
-import { funGetCandidateActiveByArea } from "@/modules/candidate";
 import { funGetAllStap } from "../..";
 
 /**
@@ -37,6 +29,7 @@ export default function TableStep({ title, data, searchParam }: { title: any, da
   const [dataDelete, setDataDelete] = useState(Number)
 
   const [isData, setData] = useState(data)
+  const [isDataCandidate, setDataCandidate] = useState()
   const searchParams = useSearchParams()
 
   async function onLoad() {
@@ -98,6 +91,7 @@ export default function TableStep({ title, data, searchParam }: { title: any, da
                   {isData.map((v: any, i: any) => (
                     <ComponentTableStep v={v} i={i} key={i} onClick={(val) => {
                       setDataDelete(val)
+                      setDataCandidate(v.idCandidate)
                       setOpenModal(true)
                     }} />
                   ))}
@@ -115,7 +109,7 @@ export default function TableStep({ title, data, searchParam }: { title: any, da
         withCloseButton={false}
         closeOnClickOutside={false}
       >
-    <ModalDelStep id={dataDelete} onSuccess={() => onLoad()}/>
+        <ModalDelStep candidate={isDataCandidate} id={dataDelete} onSuccess={() => onLoad()} />
       </Modal>
     </>
   );

@@ -18,6 +18,7 @@ export default async function funGetOneSwot({ id }: { id: any }) {
             id: true,
             category: true,
             content: true,
+            idCandidate: true,
             Candidate: {
                 select: {
                     name: true,
@@ -40,6 +41,7 @@ export default async function funGetOneSwot({ id }: { id: any }) {
         content: data?.content,
         category: data?.category,
         name: data?.Candidate.name,
+        idCandidate : data?.idCandidate,
         areaKabkot: _.isUndefined(data?.Candidate.AreaKabkot?.name) ? null : data?.Candidate.AreaKabkot?.name,
         areaProvinsi: _.isUndefined(data?.Candidate.AreaProvinsi?.name) ? null : data?.Candidate.AreaProvinsi?.name
     }

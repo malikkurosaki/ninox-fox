@@ -10,6 +10,7 @@ import {
   Text,
 } from "@mantine/core";
 import React, { useEffect, useState } from "react";
+import ComponentTableRHI from "./component_table_rhi";
 
 /**
  * Fungsi untuk mendapatkan nilai dari table.
@@ -52,40 +53,14 @@ export default function TableRegion({ title, data, th }: { title: string, data: 
                         <Center>NO</Center>
                       </Table.Th>
                       <Table.Th>{th}</Table.Th>
+                      <Table.Th>
+                        <Center>Aksi</Center>
+                      </Table.Th>
                     </Table.Tr>
                   </Table.Thead>
-                  <Table.Tbody>
-                    {isData.map((v: any, i: any) => (
-                      <Table.Tr key={i}>
-                        <Table.Td>
-                          <Center>{i + 1}</Center>
-                        </Table.Td>
-                        <Table.Td>
-                          <Accordion transitionDuration={1000}>
-                            <Accordion.Item key={v.description} value={v.description} style={{
-                              border: "none",
-                            }}>
-                              <Accordion.Control style={{
-                                borderRadius: 10,
-
-                              }}>
-                                {v.name}
-                              </Accordion.Control>
-                              <Accordion.Panel>
-                                <Box style={{
-                                  backgroundColor: "gray",
-                                  padding: 20,
-                                  borderRadius: 10
-                                }}>
-                                  <Text c={"white"}>{v.description}</Text>
-                                </Box>
-                              </Accordion.Panel>
-                            </Accordion.Item>
-                          </Accordion>
-                        </Table.Td>
-                      </Table.Tr>
-                    ))}
-                  </Table.Tbody>
+                  {isData.map((v: any, i: any) => (
+                    <ComponentTableRHI v={v} i={i} key={i} />
+                  ))}
                 </Table>
               </ScrollArea>
             </Box>

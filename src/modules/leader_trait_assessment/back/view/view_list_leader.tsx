@@ -1,4 +1,3 @@
-
 "use client"
 import React, { useEffect, useState } from "react";
 import {
@@ -123,52 +122,57 @@ export default function ViewListLeader({ datadownload, param, provinsi, kabupate
             </Paper>
           </Box>
           <Group
-            justify="center"
-            grow
+            justify="left"
             style={{
               backgroundColor: "white",
               borderRadius: 10,
-              padding: 20,
             }}
+            px={50}
           >
             <Box
               style={{
                 border: "1px dashed gray",
                 borderRadius: 10,
-                padding: 40,
+                paddingTop: 40,
+                paddingBottom: 40,
+                paddingLeft: 30,
+                paddingRight: 30,
                 cursor: "pointer",
               }}
               onClick={() => router.push("/dashboard/leader-trait-assessment/upload")}
             >
               <Text ta={"center"} size="xl" inline>
-                UPLOAD
+                UPLOAD DATA
               </Text>
             </Box>
 
+            {
+              param && !_.isNull(param.idProvinsi) && param.idProvinsi != 0 &&
+              <Box
+                style={{
+                  border: "1px dashed gray",
+                  borderRadius: 10,
+                  padding: 40,
+                  cursor: "pointer",
+                }}
+                onClick={() => {
+                  const dataJson = datadownload.data
 
-            <Box
-              style={{
-                border: "1px dashed gray",
-                borderRadius: 10,
-                padding: 40,
-                cursor: "pointer",
-              }}
-              onClick={() => {
-                const dataJson = datadownload.data
+                  const jsonData = papa.unparse(dataJson)
+                  const jsonDataUrl = "data:text/csv;charset=utf-8," + encodeURIComponent(jsonData)
 
-                const jsonData = papa.unparse(dataJson)
-                const jsonDataUrl = "data:text/csv;charset=utf-8," + encodeURIComponent(jsonData)
+                  const jsonDwnloadLink = document.createElement("a")
+                  jsonDwnloadLink.href = jsonDataUrl
+                  jsonDwnloadLink.download = datadownload.title
+                  jsonDwnloadLink.click()
+                }}
+              >
+                <Text ta={"center"} size="xl" inline>
+                  DOWNLOAD
+                </Text>
+              </Box>
+            }
 
-                const jsonDwnloadLink = document.createElement("a")
-                jsonDwnloadLink.href = jsonDataUrl
-                jsonDwnloadLink.download = datadownload.title
-                jsonDwnloadLink.click()
-              }}
-            >
-              <Text ta={"center"} size="xl" inline>
-                DOWNLOAD
-              </Text>
-            </Box>
           </Group>
         </SimpleGrid>
       </Box>

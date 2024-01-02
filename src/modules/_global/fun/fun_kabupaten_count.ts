@@ -1,4 +1,3 @@
-import { AreaKabkot } from './../../../../node_modules/.prisma/client/index.d';
 "use server"
 
 import prisma from "../bin/prisma"

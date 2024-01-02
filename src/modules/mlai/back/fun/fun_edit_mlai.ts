@@ -1,17 +1,15 @@
-
 "use server"
-
 import prisma from "@/modules/_global/bin/prisma"
 import { MlAi } from "@prisma/client"
 import { revalidatePath } from "next/cache"
 
-export default async function funEditMlAi({ body }: { body: MlAi }) {
+export default async function funEditMlAi({ body, text }: { body: MlAi, text: any }) {
     const data = await prisma.mlAi.update({
         where: {
             id: body.id,
         },
         data: {
-            content: body.content,
+            content: text,
         },
         select: {
             Candidate: {

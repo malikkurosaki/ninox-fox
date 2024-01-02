@@ -4,10 +4,19 @@ import { MantineProvider, ColorSchemeScript } from '@mantine/core';
 import { theme } from '../../theme';
 import "@mantine/dates/styles.css";
 import 'react-simple-toasts/dist/theme/dark.css'
+import {Poppins} from "next/font/google"
+import '@mantine/tiptap/styles.css';
+
+
+export const poppins = Poppins({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--poppins-default'
+});
 
 export const metadata = {
-  title: 'Ninox-Fox',
-  description: 'Ninox-Fox Project',
+  title: 'Ninox - Fox',
+  description: 'Ninox - Fox',
 };
 
 export default function RootLayout({ children }: { children: any }) {
@@ -21,7 +30,7 @@ export default function RootLayout({ children }: { children: any }) {
           content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=yes"
         />
       </head>
-      <body>
+      <body style={poppins.style}>
         <MantineProvider theme={theme}>{children}</MantineProvider>
       </body>
     </html>

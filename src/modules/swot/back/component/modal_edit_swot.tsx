@@ -1,23 +1,28 @@
 'use client'
-
 import { Alert, Box, Button, Group, Text } from "@mantine/core"
 import { useAtom } from "jotai";
 import { isModalSwot } from "../val/val_swot";
 import { useRouter } from "next/navigation";
 import toast from "react-simple-toasts";
 import funEditSwot from "../fun/fun_edit_swot";
+import { funGetAccessArea } from "@/modules/_global";
 
 /**
  * Fungsi untuk menampilkan modal konfirmasi edit swot.
  * @returns {component} Modal konfirmasi edit swot.
  */
 
-export default function ModalEditSwot({ data }: { data: any }) {
+export default function ModalEditSwot({ data, content }: { data: any, content: any }) {
     const [openModal, setOpenModal] = useAtom(isModalSwot)
     const router = useRouter()
 
     async function onEditSwot() {
-        const edit = await funEditSwot({body: data})
+        const cek = await funGetAccessArea({ candidate: data.idCandidate })
+        if (!cek) {
+            setOpenModal(false)
+            return toast("Anda tidak mempunyai akses ke wilayah tersebut", { theme: "dark" })
+        }
+        const edit = await funEditSwot({ body: data, text: content })
         toast("Sukses", { theme: "dark" });
         setOpenModal(false);
         router.back()

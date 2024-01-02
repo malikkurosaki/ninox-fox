@@ -1,5 +1,4 @@
 "use server"
-
 import prisma from "@/modules/_global/bin/prisma"
 import { Step } from "@prisma/client"
 import { revalidatePath } from "next/cache"
@@ -9,19 +8,19 @@ import { revalidatePath } from "next/cache"
  * @param {Step} body - berisi idcandidate, category, content, sentiment
  * @returns success - true 
  */
-export default async function funAddStep({body}: {body: Step}) {
+export default async function funAddStep({ body, content }: { body: Step, content: any }) {
     const data = await prisma.step.create({
         data: {
-            idCandidate: Number(body.idCandidate),
+            idCandidate: body.idCandidate,
             category: body.category,
-            content: body.content,
+            content: content,
             sentiment: Number(body.sentiment)
         }
     })
 
     const area = await prisma.candidate.findUnique({
         where: {
-            id: Number(body.idCandidate)
+            id: body.idCandidate
         }
     })
     revalidatePath("dashboard/step?prov" + area?.idProvinsi + "&city" + area?.idKabkot)

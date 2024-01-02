@@ -1,5 +1,4 @@
 'use client'
-
 import { Button, Group, Select, Stack, Text } from "@mantine/core"
 import { useEffect, useState } from "react"
 import TableMlAi from "../component/table_mlai"
@@ -58,7 +57,7 @@ export default function ListMlAi({ params, provinsi, kabupaten, datatable }: { p
                     )}
                     searchable
                 />
-                <Select 
+                <Select
                     placeholder="Pilih Kabupaten/Kota"
                     data={dataKabupaten.map((kab: any) => ({
                         value: String(kab.id),
@@ -75,7 +74,7 @@ export default function ListMlAi({ params, provinsi, kabupaten, datatable }: { p
                 </Button>
             </Group>
             {!_.isNull(datatable.title) &&
-            <TableMlAi title={datatable.title} data={datatable.data} searchParam={params}/>
+                <TableMlAi title={datatable.title} data={datatable.data} searchParam={params} />
             }
         </>
     )

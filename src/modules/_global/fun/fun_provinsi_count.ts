@@ -1,5 +1,4 @@
 "use server"
-
 import prisma from "../bin/prisma"
 
 export async function provinsiCount() {
