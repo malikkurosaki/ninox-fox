@@ -45,6 +45,24 @@ export default function ViewSummary() {
           </Grid.Col>
         </Grid>
 
+        {/* <Grid gutter={40}>
+          <Grid.Col span={{ base: 4, md: 4, lg: 4 }}>
+            <CandidateSummary />
+          </Grid.Col>
+          <Grid.Col span={{ base: 8, md: 8, lg: 8 }}>
+              <EchartCandidateSummary />
+          </Grid.Col>
+        </Grid>
+        <Box
+        style={{
+          padding: 20,
+          border: "1px solid #13022A",
+          borderRadius: 10
+        }}
+        >
+        <Image alt='peta' src={"/peta.png"}/>
+        </Box> */}
+
         <Box pt={10}>
           <TableTop10 />
         </Box>
