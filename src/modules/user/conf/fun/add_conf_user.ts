@@ -1,5 +1,4 @@
 "use server"
-
 import { MasterKabGetByProvince } from "@/modules/_global"
 import prisma from "@/modules/_global/bin/prisma"
 import _ from "lodash"
@@ -25,7 +24,6 @@ export default async function funAddConfUser({ data, dataArea }: { data: any, da
                 data: {
                     idUser: user.id,
                     idProvinsi: Number(i),
-                    // isFront: (isFront == Number(i) ? true : false)
                     isFront: (i == 1 ? true : false)
                 }
             })
@@ -43,20 +41,11 @@ export default async function funAddConfUser({ data, dataArea }: { data: any, da
             })
         }
     } else {
-        let arr = []
-
-        // await prisma.userArea.create({
-        //     data: {
-        //         idUser: user.id,
-        //         idProvinsi: Number(1),
-        //         isFront: true
-        //     }
-        // })
         for (let i = 1; i <= 38; i++) {
             await prisma.userArea.create({
                 data: {
                     idUser: user.id,
-                    idProvinsi: Number(arr.push(i)),
+                    idProvinsi: Number(i),
                     isFront: (i == 1 ? true : false)
                 }
             })
@@ -75,8 +64,6 @@ export default async function funAddConfUser({ data, dataArea }: { data: any, da
             })
         }
     }
-
-    revalidatePath("/dashboard/user")
 
     return {
         success: true,
