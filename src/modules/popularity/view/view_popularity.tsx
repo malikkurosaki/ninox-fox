@@ -21,8 +21,8 @@ export default function ViewPopularity() {
                   <Text mt={20} c={"white"} ta={"center"}>I WAYAN COSTER</Text>
                 </Box>
                 <Box>
-                  <Image src={"/candidate/candidate.png"} alt="candidate" h={200} w="auto" />
-                  <Text mt={20} c={"white"} ta={"center"}> WAKIL I WAYAN COSTER</Text>
+                  <Image src={"/candidate/candidate2-round.png"} alt="candidate" h={200} w="auto" />
+                  <Text mt={20} c={"white"} ta={"center"}> I NYOMAN GIRI</Text>
                 </Box>
               </Group>
 
