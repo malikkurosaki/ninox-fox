@@ -24,7 +24,7 @@ export default function Home({ areaPro, pro, kab, kec, kel, can1, can2, valWilay
 
   return (
     <>
-      <Text fz={25} c={'#213555'} fw={'bold'}>HI BALI INDONESIA</Text>
+      <Text fz={25} c={'#213555'} fw={'bold'}>HI INDONESIA</Text>
       <Group>
         <Text c={"#4F709C"}>DEFAULT WILAYAH UNTUK DASHBOARD USER</Text>
         <Button variant="outline" color="#4F709C" radius="xl" onClick={() => setOpenModal(true)}>{isValWilayah}</Button>
@@ -39,41 +39,27 @@ export default function Home({ areaPro, pro, kab, kec, kel, can1, can2, valWilay
             <Box pb={10}>
               <Text c={"#4F709C"} fw={'bold'}>DAFTAR AKSES WILAYAH</Text>
             </Box>
-            {/* {JSON.stringify(allProvinsi)} */}
+            <pre>
+              {/* {JSON.stringify(allProvinsi, null, 1)} */}
+            </pre>
             <Group grow>
-              <SimpleGrid
-                cols={{ base: 1, sm: 3, lg: 3 }}
-                spacing={{ base: 10, sm: 'xl' }}
-                verticalSpacing={{ base: 'md', sm: 'xl' }}
+              {/* <SimpleGrid
+                cols={{ base: 1, sm: 4, lg: 4 }}
+
               >
-                <Box
-                  style={{
-                    backgroundColor: "#4F709C",
-                    padding: 20,
-                    borderRadius: 5
-                  }}
-                >
-                  <Text c={"white"} ta={'center'}>Kalimantan Tengah</Text>
-                </Box>
-                <Box
-                  style={{
-                    backgroundColor: "#4F709C",
-                    padding: 20,
-                    borderRadius: 5
-                  }}
-                >
-                  <Text c={"white"} ta={'center'}>DKI Jakarta</Text>
-                </Box>
-                <Box
-                  style={{
-                    backgroundColor: "#4F709C",
-                    padding: 20,
-                    borderRadius: 5
-                  }}
-                >
-                  <Text c={"white"} ta={'center'}>Jawa Timur</Text>
-                </Box>
-              </SimpleGrid>
+
+                {allProvinsi.map((v: any, i: any) => (
+                  <Box key={i}>
+                    <Box style={{
+                      backgroundColor: "#4F709C",
+                      padding: 20,
+                      borderRadius: 5
+                    }}>
+                      <Text c={"white"} fw={'bold'}>{v.name}</Text>
+                    </Box>
+                  </Box>
+                ))}
+              </SimpleGrid> */}
             </Group>
           </Box>
         </Group>
