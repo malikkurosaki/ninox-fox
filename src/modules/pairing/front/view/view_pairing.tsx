@@ -47,8 +47,8 @@ export default function ViewPairingFront() {
                     </Box>
                   </Center>
                   <Box p={10}>
-                    <Image src={"/candidate/candidate.png"} alt='canidate' maw={200} mx="auto" />
-                    <Text fw={"bold"} ta={"center"} c={"white"}>I WAYAN COSTER</Text>
+                    <Image src={"/candidate/candidate2-round.png"} alt='canidate' maw={200} mx="auto" />
+                    <Text fw={"bold"} ta={"center"} c={"white"}>I NYOMAN GIRI</Text>
                   </Box>
                 </SimpleGrid>
               </Box>
