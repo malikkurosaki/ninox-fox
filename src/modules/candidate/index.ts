@@ -1,3 +1,4 @@
+import { funGetUserDefaultFront } from '@/modules/user';
 import ListCandidates from "./back/view/list_candidate";
 import AddCandidate from "./back/view/add_candidate";
 import EditCandidate from "./back/view/edit_candidate";
@@ -25,3 +26,4 @@ export { TableCandidate }
 export { funAddCandidate }
 export { funEditCandidate }
 export { funSetStatusCandidate }
+export { funGetUserDefaultFront }

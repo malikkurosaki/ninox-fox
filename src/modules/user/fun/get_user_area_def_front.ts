@@ -23,7 +23,7 @@ export default async function funGetUserDefaultFront() {
     return {
         idProvinsi: dataArea?.idProvinsi,
         idKabkot: dataArea?.idKabkot,
-        tingkat: (dataArea?.idKabkot == null) ? 2 : 1
+        tingkat: (dataArea?.idKabkot == null) ? 1 : 2
     }
 
 }
