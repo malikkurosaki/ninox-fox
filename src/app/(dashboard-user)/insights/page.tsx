@@ -3,7 +3,7 @@ import { ViewRegionalInsights } from '@/modules/regional_insights';
 import React from 'react';
 
 export default async function Page() {
-  const dCandidate = await funGetAllCandidateFront()
+  // const dCandidate = await funGetAllCandidateFront()
 
   // console.log(dCandidate)
 
