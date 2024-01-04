@@ -38,7 +38,7 @@ export default function ViewMlAi() {
 
           >
             <Group justify='space-between'>
-              <Text c={"green"} fz={20} fw={"bold"}>SOCSTRENGTH ANALYSIS IMPROVEMENTIAL</Text>
+              <Text c={"green"} fz={20} fw={"bold"}>STRENGTH ANALYSIS IMPROVEMENT</Text>
               <Select
                 mt={10}
                 placeholder="Candidate"
