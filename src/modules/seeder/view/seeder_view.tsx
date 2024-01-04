@@ -16,6 +16,7 @@ import funSeederAudience from "../fun/fun_audience";
 import funSeederPct from "../fun/fun_pct";
 import funSeederLta from "../fun/fun_lta";
 import funSeederRhi from "../fun/fun_rhi";
+import funSeederUserArea from "../fun/fun_user_area";
 
 /**
  * Fungsi untuk menampilkan view halaman seeder.
@@ -76,6 +77,12 @@ export default function SeederView() {
     }
 
     // DATA LAINYA
+    async function onSeederUserArea() {
+        setLoading(true)
+        const res = await funSeederUserArea()
+        if (res?.success) return setLoading(false), toast(res?.message, { theme: "dark" })
+    }
+
     async function onLeader() {
         setLoading(true)
         const res = await funSeederLeader()
@@ -158,6 +165,7 @@ export default function SeederView() {
                         <Group justify="center" gap="md" grow my={15}>
                             {/* <Button bg={"gray"} loading={loading} onClick={onLeader}>CATEGORY LEADER TRAIT ASSESSMENT</Button> */}
                             {/* <Button bg={"gray"} loading={loading} onClick={onPublic}>CATEGORY PUBLIC CONCERN TREND</Button> */}
+                            <Button bg={"gray"} loading={loading} onClick={onSeederUserArea}>USER AREA</Button>
                             <Button bg={"gray"} loading={loading} onClick={onAudience}>VALUE AUDIENCE</Button>
                             <Button bg={"gray"} loading={loading} onClick={onPCTFix}>VALUE PUBLIC CONCERN TREND</Button>
                         </Group>

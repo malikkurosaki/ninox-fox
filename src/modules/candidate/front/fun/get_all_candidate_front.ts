@@ -11,6 +11,9 @@ export default async function funGetAllCandidateFront() {
             idProvinsi: Number(def.idProvinsi),
             idKabkot: def.idKabkot,
             tingkat: def.tingkat
+        },
+        orderBy: {
+            name: 'asc'
         }
     })
 
