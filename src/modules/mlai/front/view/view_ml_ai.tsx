@@ -32,7 +32,8 @@ export default function ViewMlAi({ data, candidate, oneCandidate }: { data: any,
   }
   return (
     <>
-      <PageSubTitle text1='ML-AI' text2='PROMPT RECOMENDATIONS' />
+      {/* <PageSubTitle text1='ML-AI' text2='PROMPT RECOMENDATIONS' /> */}
+      <PageSubTitle text1='REKOMENDASI CEPAT' text2='ML-AI' />
       <Stack pt={20}>
         <Box
         >
@@ -49,10 +50,10 @@ export default function ViewMlAi({ data, candidate, oneCandidate }: { data: any,
             }}
           >
             <Group justify='space-between'>
-              <Text c={"green"} fz={20} fw={"bold"}>STRENGTH ANALYSIS IMPROVEMENT</Text>
+              <Text c={"green"} fz={20} fw={"bold"}>PENINGKATAN ANALISIS KEKUATAN</Text>
               <Select
                 mt={10}
-                placeholder="Candidate"
+                placeholder="Kandidat"
                 data={listCandidate.map((can: any) => ({
                   value: String(can.id),
                   label: can.name
