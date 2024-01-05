@@ -182,7 +182,7 @@ export default function EchartPairingSentiment() {
             >
               <Group justify='space-between'>
                 <Text fz={25} ml={20} fw={"bold"} c={"white"}>{item.name}</Text>
-                <Text fz={16} mr={20}  c={"white"}>SENTIMENT ANALYSIS</Text>
+                <Text fz={16} mr={20}  c={"white"}>ANALISIS SENTIMEN</Text>
               </Group>
               <EChartsReact style={{ height: 500, width: "100%"}} option={options} />
             </Box>
