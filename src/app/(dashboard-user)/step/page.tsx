@@ -1,10 +1,13 @@
-import { ViewStep } from '@/modules/step';
+import { funGetAllCandidateFront, funGetOneCandidateFront } from '@/modules/candidate';
+import { ViewStep, funGetStepFront } from '@/modules/step';
 import React from 'react';
 
-function Page() {
+export default async function Page() {
+  const data = await funGetStepFront({})
+  const can = await funGetAllCandidateFront()
+  const oneCandidate = await funGetOneCandidateFront({})
+
   return (
-    <ViewStep/>
+    <ViewStep data={data} candidate={can} oneCandidate={oneCandidate} />
   );
 }
-
-export default Page;

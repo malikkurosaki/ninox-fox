@@ -73,7 +73,7 @@ export default function EditStep({ data }: { data: any }) {
                     placeholder="Pilih Kategori"
                     withAsterisk
                     label="Kategori"
-                    data={["STRENGTH", "WEAKNESS", "OPPORTUNITY", "THREAT"]}
+                    data={["SOSIAL", "TEKNOLOGI", "EKONOMI", "POLITIK"]}
                     value={isBody.category}
                     onChange={(val) => {
                         setBody({

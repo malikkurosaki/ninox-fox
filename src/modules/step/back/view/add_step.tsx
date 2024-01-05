@@ -136,7 +136,7 @@ export default function AddStep({ params, candidate, provinsi, kabupaten }: { pa
                 </Stack>
                 <Select mt={20}
                     placeholder="Pilih Kategori"
-                    data={["STRENGTH", "WEAKNESS", "OPPORTUNITY", "THREAT"]}
+                    data={["SOSIAL", "TEKNOLOGI", "EKONOMI", "POLITIK"]}
                     label={"Kategori"}
                     required
                     onChange={(val) => {
