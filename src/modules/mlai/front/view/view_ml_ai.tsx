@@ -28,7 +28,7 @@ export default function ViewMlAi({ data, candidate, oneCandidate }: { data: any,
     const dataCan = await funGetOneCandidateFront({ candidate: value })
     setData(dataDB)
     setNameCan((dataCan?.name.toUpperCase()))
-    setImgCan(`/candidate/${dataCan?.img}`)
+    setImgCan(`/img/candidate/${dataCan?.img}`)
   }
   return (
     <>
