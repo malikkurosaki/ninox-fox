@@ -20,7 +20,7 @@ export default function ViewPairingFront() {
       >
         <Group justify='flex-end'
         >
-          <TextInput w={300} mt={20} placeholder='Search' />
+          <TextInput w={300} mt={20} placeholder='Cari' />
         </Group>
       </Box>
       <Stack pt={20}>
@@ -57,13 +57,19 @@ export default function ViewPairingFront() {
               </Group>
               <Select
                 mt={20}
-                placeholder="Candidate"
+                placeholder="Kandidat 1"
                 data={['I Wayan Koster', 'I Kadek Adi', 'I Wayan Marta']}
               />
-              <Button fullWidth mt={20} c={"dark"} bg={"white"}>GENERATE</Button>
+              <Select
+                mt={20}
+                placeholder="Kandidat 2"
+                data={['I Wayan Koster', 'I Kadek Adi', 'I Wayan Marta']}
+              />
+              <Button fullWidth mt={20} c={"dark"} bg={"white"}>HASIL</Button>
 
               <Box pt={45}>
-                <Text ta={"center"} fz={20} c={"white"}>SUCCESS PROBABILITY PROJECTION</Text>
+                {/* <Text ta={"center"} fz={20} c={"white"}>SUCCESS PROBABILITY PROJECTION</Text> */}
+                <Text ta={"center"} fz={20} c={"white"}>PROBABILITAS KESUKSESAN</Text>
               </Box>
               <Box pt={10}>
                 <Text ta={"center"} fz={70} fw={"bold"} c={"green"}>64.89 %</Text>
@@ -72,7 +78,6 @@ export default function ViewPairingFront() {
 
           </Grid.Col>
           <Grid.Col span={{ md: 7, lg: 7 }}>
-
             <ScrollArea h={"74vh"}>
               <EchartPairingSentiment />
             </ScrollArea>
