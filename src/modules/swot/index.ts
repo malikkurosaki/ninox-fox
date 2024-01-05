@@ -12,7 +12,8 @@ import funGetOneSwot from "./back/fun/fun_get_one_swot";
 import AddSwot from "./back/view/add_swot";
 import EditSwot from "./back/view/edit_swot";
 import ListSwot from "./back/view/list_swot";
-import ViewSwot from "./view/view_swot";
+import funGetSwotFront from "./front/fun/get_swot_front";
+import ViewSwot from "./front/view/view_swot";
 
 
 export { EditSwot }
@@ -29,3 +30,4 @@ export { TableSwot }
 export { funAddSwotf }
 export { funDeleteSwot }
 export { funEditSwot }
+export { funGetSwotFront }

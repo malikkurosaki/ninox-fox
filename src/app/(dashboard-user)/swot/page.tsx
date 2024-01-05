@@ -1,12 +1,16 @@
-import { ViewSwot } from '@/modules/swot';
+import { funGetAllCandidateFront, funGetOneCandidateFront } from '@/modules/candidate';
+import { ViewSwot, funGetSwotFront } from '@/modules/swot';
 import React from 'react';
 
-function Page() {
+export default async function Page() {
+  const data = await funGetSwotFront({})
+  const can = await funGetAllCandidateFront()
+  const oneCandidate = await funGetOneCandidateFront({})
+
   return (
     <>
-    <ViewSwot/>
+      <ViewSwot data={data} candidate={can} oneCandidate={oneCandidate} />
     </>
   );
 }
 
-export default Page;
