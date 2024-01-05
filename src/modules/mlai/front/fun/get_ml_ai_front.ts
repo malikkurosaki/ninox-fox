@@ -33,7 +33,7 @@ export default async function funGetMlAiFront({ candidate }: { candidate?: any }
     }else{
         const data = await prisma.mlAi.findMany({
             where: {
-                idCandidate: candidate,
+                idCandidate: candidateReal,
                 isActive: true,
             },
         })
