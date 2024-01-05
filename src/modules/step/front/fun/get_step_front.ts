@@ -1,9 +1,8 @@
-"use server"
+'use server'
 import prisma from "@/modules/_global/bin/prisma"
 import { funGetUserDefaultFront } from "@/modules/user"
 
-export default async function funGetMlAiFront({ candidate }: { candidate?: any }) {
-
+export default async function funGetStepFront({ candidate }: { candidate?: any }) {
     const def = await funGetUserDefaultFront()
     const can = await prisma.candidate.findFirst({
         where: {
@@ -20,7 +19,7 @@ export default async function funGetMlAiFront({ candidate }: { candidate?: any }
         }
     })
 
-    let candidateReal = null
+    let candidateReal = null, allData = {}
 
     if (candidate == null) {
         candidateReal = can?.id
@@ -28,17 +27,21 @@ export default async function funGetMlAiFront({ candidate }: { candidate?: any }
         candidateReal = candidate
     }
 
-    if(candidateReal == null) {
-        return null
-    }else{
-        const data = await prisma.mlAi.findMany({
+    if (candidateReal != null) {
+        const data = await prisma.step.findMany({
             where: {
                 idCandidate: candidateReal,
                 isActive: true,
             },
         })
 
-        return data
+        allData = {
+            sosial: data.filter((v: any) => v.category === "SOSIAL"),
+            teknologi: data.filter((v: any) => v.category === "TEKNOLOGI"),
+            ekonomi: data.filter((v: any) => v.category === "EKONOMI"),
+            politik: data.filter((v: any) => v.category === "POLITIK")
+        }
     }
-    
+
+    return allData
 }

@@ -13,6 +13,7 @@ import funAddCandidate from "./back/fun/add_candidate";
 import funEditCandidate from "./back/fun/edit_candidate";
 import funSetStatusCandidate from "./back/fun/set_status_candidate";
 import { funGetOneCandidateFront } from './front/fun/get_one_candidate_front';
+import funGetAllCandidateFront from './front/fun/get_all_candidate_front';
 
 export { funGetCandidateActiveByArea }
 export { funGetOneCandidate }
@@ -28,4 +29,5 @@ export { funAddCandidate }
 export { funEditCandidate }
 export { funSetStatusCandidate }
 export { funGetUserDefaultFront }
-export {funGetOneCandidateFront}
+export { funGetOneCandidateFront }
+export { funGetAllCandidateFront }

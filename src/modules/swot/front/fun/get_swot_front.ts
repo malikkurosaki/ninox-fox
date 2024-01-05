@@ -1,9 +1,8 @@
-"use server"
+'use server'
 import prisma from "@/modules/_global/bin/prisma"
 import { funGetUserDefaultFront } from "@/modules/user"
 
-export default async function funGetMlAiFront({ candidate }: { candidate?: any }) {
-
+export default async function funGetSwotFront({ candidate }: { candidate?: any }) {
     const def = await funGetUserDefaultFront()
     const can = await prisma.candidate.findFirst({
         where: {
@@ -28,17 +27,16 @@ export default async function funGetMlAiFront({ candidate }: { candidate?: any }
         candidateReal = candidate
     }
 
-    if(candidateReal == null) {
+    if (candidateReal == null) {
         return null
-    }else{
-        const data = await prisma.mlAi.findMany({
+    } else {
+        const data = await prisma.swot.findMany({
             where: {
                 idCandidate: candidateReal,
                 isActive: true,
             },
         })
-
         return data
+
     }
-    
 }
