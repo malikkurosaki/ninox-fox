@@ -1,38 +1,11 @@
 "use client"
 import { PageSubTitle } from '@/modules/_global';
-import { Box, Flex, Grid, Image, ScrollArea, Select, Stack, Text, TextInput } from '@mantine/core';
+import { Box, Flex, Grid, Image, ScrollArea, Select, SimpleGrid, Stack, Text, TextInput } from '@mantine/core';
 import _ from 'lodash';
 import React, { useState } from 'react';
 import TextAnimation from 'react-typing-dynamics';
 import { funGetStepFront } from '../..';
 import { funGetOneCandidateFront } from '@/modules/candidate';
-
-const dataStep = [
-  {
-    id: 1,
-    title: 'SOCIAL',
-    positive: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.',
-    negative: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.',
-  },
-  {
-    id: 2,
-    title: 'TECHNOLOGY',
-    positive: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.',
-    negative: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.',
-  },
-  {
-    id: 3,
-    title: 'ECONOMY',
-    positive: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.',
-    negative: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.',
-  },
-  {
-    id: 4,
-    title: 'POLITIC',
-    positive: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.',
-    negative: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.',
-  },
-]
 
 export default function ViewStep({ data, candidate, oneCandidate }: { data: any, candidate: any, oneCandidate: any }) {
   const [isData, setData] = useState(data)
@@ -54,7 +27,6 @@ export default function ViewStep({ data, candidate, oneCandidate }: { data: any,
 
   return (
     <>
-      {/* <PageSubTitle text1='STEP' text2='ASSESSMENT' /> */}
       <PageSubTitle text1='PENILAIAN' text2='STEP' />
       <Grid gutter={30}>
         <Grid.Col span={{ md: 3, lg: 3 }}>
@@ -96,90 +68,92 @@ export default function ViewStep({ data, candidate, oneCandidate }: { data: any,
                   _.keys(isData).map((v, i) => (
                     <Box key={i} pb={20}>
                       <Text fw={"bold"} c={"white"} fz={25} >{_.upperCase(v)}</Text>
-                      <Grid>
-                        <Grid.Col span={{ md: 6, lg: 6 }}>
-                          <Box
-                            style={{
-                              background: "rgba(0,0,0,0.3)",
-                              padding: 10,
-                              borderRadius: 10
-                            }}
-                          >
-                            <Box pb={10}>
-                              <Text fw={"bold"} c={"green"}>POSITIF</Text>
-                            </Box>
-                            {(() => {
-                              const datanya = _.groupBy(
-                                isData[v],
-                                (v3) => v3.sentiment
-                              )["1"];
-
-                              if (!datanya) return <></>;
-                              return (
-                                <>
-                                  <ScrollArea h={200}>
-                                    <Stack pl={10}>
-                                      <Text c={"white"} fz={14}>
-                                        <TextAnimation
-                                          phrases={[...datanya[_.random(0, datanya.length - 1)].content.split('\n')]}
-                                          typingSpeed={0}
-                                          backspaceDelay={0}
-                                          eraseDelay={0}
-                                          timeComplete={0}
-                                          errorProbability={0}
-                                          eraseOnComplete={false}
-                                          isSecure={false}
-                                        />
-                                      </Text>
-                                    </Stack>
-                                  </ScrollArea>
-                                </>
-                              )
-                            })()}
+                      <SimpleGrid
+                        cols={{ base: 1, sm: 2, lg: 2 }}
+                        spacing={{ base: 10, sm: 'xl' }}
+                        verticalSpacing={{ base: 'md', sm: 'xl' }}
+                      >
+                        <Box
+                          style={{
+                            background: "rgba(0,0,0,0.3)",
+                            padding: 10,
+                            borderRadius: 10
+                          }}
+                          h={250}
+                        >
+                          <Box pb={10}>
+                            <Text fw={"bold"} c={"green"}>POSITIF</Text>
                           </Box>
-                        </Grid.Col>
-                        <Grid.Col span={{ md: 6, lg: 6 }}>
-                          <Box
-                            style={{
-                              background: "rgba(0,0,0,0.3)",
-                              padding: 10,
-                              borderRadius: 10
-                            }}
-                          >
-                            <Box pb={10}>
-                              <Text fw={"bold"} c={"red"}>NEGATIF</Text>
-                            </Box>
-                            {(() => {
-                              const datanya = _.groupBy(
-                                isData[v],
-                                (v3) => v3.sentiment
-                              )["2"];
+                          {(() => {
+                            const datanya = _.groupBy(
+                              isData[v],
+                              (v3) => v3.sentiment
+                            )["1"];
 
-                              if (!datanya) return <></>;
-                              return (
-                                <>
-                                  <ScrollArea h={200}>
-                                    <Stack pl={10}>
-                                      <Text c={"white"} fz={14}>
-                                        <TextAnimation
-                                          phrases={[...datanya[_.random(0, datanya.length - 1)].content.split('\n')]}
-                                          typingSpeed={0}
-                                          backspaceDelay={0}
-                                          eraseDelay={0}
-                                          timeComplete={0}
-                                          errorProbability={0}
-                                          eraseOnComplete={false}
-                                          isSecure={false}
-                                        />
-                                      </Text>
-                                    </Stack>
-                                  </ScrollArea>
-                                </>
-                              )
-                            })()}
+                            if (!datanya) return <></>;
+                            return (
+                              <>
+                                <ScrollArea h={200}>
+                                  <Stack pl={10}>
+                                    <Text c={"white"} fz={14}>
+                                      <TextAnimation
+                                        phrases={[...datanya[_.random(0, datanya.length - 1)].content.split('\n')]}
+                                        typingSpeed={0}
+                                        backspaceDelay={0}
+                                        eraseDelay={0}
+                                        timeComplete={0}
+                                        errorProbability={0}
+                                        eraseOnComplete={false}
+                                        isSecure={false}
+                                      />
+                                    </Text>
+                                  </Stack>
+                                </ScrollArea>
+                              </>
+                            )
+                          })()}
+                        </Box>
+                        <Box
+                          style={{
+                            background: "rgba(0,0,0,0.3)",
+                            padding: 10,
+                            borderRadius: 10
+                          }}
+                          h={250}
+                        >
+                          <Box pb={10}>
+                            <Text fw={"bold"} c={"red"}>NEGATIF</Text>
                           </Box>
-                        </Grid.Col>
-                      </Grid>
+                          {(() => {
+                            const datanya = _.groupBy(
+                              isData[v],
+                              (v3) => v3.sentiment
+                            )["2"];
+
+                            if (!datanya) return <></>;
+                            return (
+                              <>
+                                <ScrollArea h={200}>
+                                  <Stack pl={10}>
+                                    <Text c={"white"} fz={14}>
+                                      <TextAnimation
+                                        phrases={[...datanya[_.random(0, datanya.length - 1)].content.split('\n')]}
+                                        typingSpeed={0}
+                                        backspaceDelay={0}
+                                        eraseDelay={0}
+                                        timeComplete={0}
+                                        errorProbability={0}
+                                        eraseOnComplete={false}
+                                        isSecure={false}
+                                      />
+                                    </Text>
+                                  </Stack>
+                                </ScrollArea>
+                              </>
+                            )
+                          })()}
+                        </Box>
+                      </SimpleGrid>
                     </Box>
                   ))
                 }
