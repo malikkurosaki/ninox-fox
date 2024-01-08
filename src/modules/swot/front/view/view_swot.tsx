@@ -99,45 +99,41 @@ export default function ViewSwot({ data, candidate, oneCandidate }: { data: any,
             {
               _.keys(isData).map((item: any, i: any) => (
                 <Box key={i} pb={20}>
-                  <Grid>
-                    <Grid.Col span={{ md: 12, lg: 12 }}>
-                      <Box
-                        style={{
-                          background: "rgba(0,0,0,0.3)",
-                          padding: 10,
-                          borderRadius: 10
-                        }}
-                      >
-                        <Box pb={10}>
-                          <Text fw={"bold"} c={"green"}>{item}</Text>
-                        </Box>
-                        {(() => {
-                          const datanya = isData[item]
-                          if (datanya)
-                            return (
-                              <>
-                                <ScrollArea h={150}>
-                                  <Stack pl={10}>
-                                    <Text c={"white"} fz={14}>
-                                      <TextAnimation
-                                        phrases={[...datanya[_.random(0, datanya.length - 1)].content.split('\n')]}
-                                        typingSpeed={0}
-                                        backspaceDelay={0}
-                                        eraseDelay={0}
-                                        timeComplete={0}
-                                        errorProbability={0}
-                                        eraseOnComplete={false}
-                                        isSecure={false}
-                                      />
-                                    </Text>
-                                  </Stack>
-                                </ScrollArea>
-                              </>
-                            )
-                        })()}
-                      </Box>
-                    </Grid.Col>
-                  </Grid>
+                  <Box
+                    style={{
+                      background: "rgba(0,0,0,0.3)",
+                      padding: 10,
+                      borderRadius: 10
+                    }}
+                  >
+                    <Box pb={10}>
+                      <Text fw={"bold"} c={"green"}>{item}</Text>
+                    </Box>
+                    {(() => {
+                      const datanya = isData[item]
+                      if (datanya)
+                        return (
+                          <>
+                            <ScrollArea h={150} w={"a"}>
+                              <Stack pl={10}>
+                                <Text c={"white"} fz={14}>
+                                  <TextAnimation
+                                    phrases={[...datanya[_.random(0, datanya.length - 1)].content.split('\n')]}
+                                    typingSpeed={0}
+                                    backspaceDelay={0}
+                                    eraseDelay={0}
+                                    timeComplete={0}
+                                    errorProbability={0}
+                                    eraseOnComplete={false}
+                                    isSecure={false}
+                                  />
+                                </Text>
+                              </Stack>
+                            </ScrollArea>
+                          </>
+                        )
+                    })()}
+                  </Box>
                 </Box>
               ))
             }
