@@ -9,6 +9,7 @@ import DetailEchartLeader from '../components/detail_insights/detail_echart_lead
 // import DetailRegionHotIssue from '../components/detail_insights/detail_region_hot_issue';
 import { PageSubTitle, WARNA } from '@/modules/_global';
 import { DetailRegionHotIssue } from '..';
+import _ from 'lodash';
 
 const dataDenpasar = [
   {
@@ -30,7 +31,7 @@ const dataDenpasar = [
 ]
 
 
-export default function ViewDetailRegionalInsights() {
+export default function ViewDetailRegionalInsights({ emotion, area, audience, pct, lta, rhi }: { emotion: any, area: any, audience: any, pct: any, lta: any, rhi: any }) {
   const router = useRouter()
   return (
     <>
@@ -40,11 +41,11 @@ export default function ViewDetailRegionalInsights() {
         position: "sticky",
         top: 0,
         zIndex: 99,
-       paddingTop: 10,
-       paddingBottom: 10
+        paddingTop: 10,
+        paddingBottom: 10
       }}>
         <Group justify='space-between'>
-          <Text fz={26} fw={"bold"} c={"white"}>DENPASAR</Text>
+          <Text fz={26} fw={"bold"} c={"white"}>{_.upperCase(area)}</Text>
           <Group>
             <TextInput placeholder='SEARCH' mr={30} />
             <ActionIcon variant="subtle" color='white' aria-label="back" onClick={() => router.push("/insights")}>
@@ -54,26 +55,26 @@ export default function ViewDetailRegionalInsights() {
         </Group>
       </Box>
       <Stack pt={20}>
-        {dataDenpasar.map((item) => {
+        {emotion.map((item: any, i: any) => {
           return (
             <Box key={item.id} pb={30}>
               <Box pt={10}>
-                <Text fz={22} fw={"bold"} c={"white"}>{item.name}</Text>
+                <Text fz={22} fw={"bold"} c={"white"}>{_.upperCase(item.name)}</Text>
               </Box>
               <Grid gutter={25}>
                 <Grid.Col span={{ md: 6, lg: 6 }}>
-                  <DetailEchartSentimentAnalysis />
+                  <DetailEchartSentimentAnalysis dataEmotion={item} dataLocked={audience} />
                 </Grid.Col>
                 <Grid.Col span={{ md: 6, lg: 6 }}>
-                  <DetailEchartPublicConcerns />
+                  <DetailEchartPublicConcerns dataPct={pct.filter((v: any) => v.idArea === item.id)} />
                 </Grid.Col>
               </Grid>
               <Grid gutter={25} pt={25}>
                 <Grid.Col span={{ md: 5, lg: 5 }}>
-                  <DetailEchartLeader />
+                  <DetailEchartLeader dataLta={lta.filter((v: any) => v.idArea === item.id)} />
                 </Grid.Col>
                 <Grid.Col span={{ md: 7, lg: 7 }}>
-                  <DetailRegionHotIssue />
+                  <DetailRegionHotIssue data={rhi.filter((v: any) => v.idArea === item.id)} />
                 </Grid.Col>
               </Grid>
             </Box>

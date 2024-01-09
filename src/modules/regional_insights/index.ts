@@ -1,14 +1,11 @@
-
 import DetailRegionHotIssue from "./components/detail_insights/detail_region_hot_issue";
+import funGetEmotionDetailRegional from "./fun/get_emotion_detail_regional";
+import funGetEmotionRegionalInsight from "./fun/get_emotion_regional_insight";
 import ViewDetailRegionalInsights from "./view/view_detail_regional_insights";
 import ViewRegionalInsights from "./view/view_regional_insights";
 
 export { ViewRegionalInsights }
 export { ViewDetailRegionalInsights }
-// export { DetailEchartLeader }
-// export { DetailEchartPublicConcerns }
-// export { DetailEchartSentimentAnalysis }
-export {DetailRegionHotIssue}
-// export { EchartLeader }
-// export { EchartPublicConcerns }
-// export { EchartSentimentAnalysis }
+export { DetailRegionHotIssue }
+export { funGetEmotionRegionalInsight }
+export { funGetEmotionDetailRegional }

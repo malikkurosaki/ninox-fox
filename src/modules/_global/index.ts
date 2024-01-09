@@ -1,5 +1,5 @@
 import { isModalBeranda } from './val/isModalBeranda';
-import { COLOR_EMOTION } from './fun/COLOR_EMOTION';
+import { COLOR_EMOTION, COLOR_PCT } from './fun/COLOR_EMOTION';
 import { LayoutViewFront } from '@/modules/_global/front';
 import { LayoutView, funGetAccessAdmin } from "./back";
 import { ButtonBack } from "./back";
@@ -22,6 +22,8 @@ import funGetAccessArea from './back/fun/get_access_area';
 import funGetAreaDefault from './home/fan/get_area_default';
 import funGetAreaKabKotByProvinsi from './home/fan/get_area_kabkot_by_provinsi';
 import funGetUserAreaProvinsi from './home/fan/get_area_provinsi';
+import funGetOneKabkot from './fun/fun_get_one_kabkot';
+import funGetOneKecamatan from './fun/fun_get_one_kecamatan';
 
 
 export { provinsiCount }
@@ -44,7 +46,10 @@ export { COLOR_EMOTION }
 export { MasterDesaGetByKec }
 export { WARNA }
 export { ModalBeranda }
-export {funGetAccessArea}
-export {funGetAreaDefault}
-export {funGetAreaKabKotByProvinsi}
-export {funGetUserAreaProvinsi}
+export { funGetAccessArea }
+export { funGetAreaDefault }
+export { funGetAreaKabKotByProvinsi }
+export { funGetUserAreaProvinsi }
+export { COLOR_PCT }
+export { funGetOneKabkot }
+export { funGetOneKecamatan }
