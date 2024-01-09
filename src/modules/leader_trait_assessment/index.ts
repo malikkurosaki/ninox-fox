@@ -5,6 +5,7 @@ import funDownloadLTA from "./back/fun/download_lta_by_area";
 import ModalUploadLta from "./back/components/modal_upload_lta";
 import TableLeader from "./back/components/table_leader";
 import funUploadLta from "./back/fun/upload_lta";
+import funGetLtaFront from "./front/fun/get_lta_front";
 
 export { ViewListLeader }
 export { ViewUploadLeader }
@@ -13,3 +14,4 @@ export { funDownloadLTA }
 export { ModalUploadLta }
 export { TableLeader }
 export { funUploadLta }
+export { funGetLtaFront }

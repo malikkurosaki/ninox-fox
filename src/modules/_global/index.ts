@@ -1,5 +1,5 @@
 import { isModalBeranda } from './val/isModalBeranda';
-import { COLOR_EMOTION } from './fun/COLOR_EMOTION';
+import { COLOR_EMOTION, COLOR_PCT } from './fun/COLOR_EMOTION';
 import { LayoutViewFront } from '@/modules/_global/front';
 import { LayoutView, funGetAccessAdmin } from "./back";
 import { ButtonBack } from "./back";
@@ -44,7 +44,8 @@ export { COLOR_EMOTION }
 export { MasterDesaGetByKec }
 export { WARNA }
 export { ModalBeranda }
-export {funGetAccessArea}
-export {funGetAreaDefault}
-export {funGetAreaKabKotByProvinsi}
-export {funGetUserAreaProvinsi}
+export { funGetAccessArea }
+export { funGetAreaDefault }
+export { funGetAreaKabKotByProvinsi }
+export { funGetUserAreaProvinsi }
+export { COLOR_PCT }
