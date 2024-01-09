@@ -4,27 +4,49 @@ import { EChartsOption, color } from "echarts";
 import EChartsReact from "echarts-for-react";
 import { useShallowEffect } from '@mantine/hooks';
 import { Box } from '@mantine/core';
+import _ from 'lodash';
+import { COLOR_PCT } from '@/modules/_global';
 
-export default function DetailEchartPublicConcerns() {
-  const [options, setOptions] = useState<EChartsOption>({});
+export default function DetailEchartPublicConcerns({ dataPct }: { dataPct: any }) {
+  const [options, setOptions] = useState<EChartsOption>({})
+  const [dataChart, setDataChart] = useState<any>()
 
   useShallowEffect(() => {
-    loadData()
-  }, [])
+    setDataChart({
+      infrastruktur: Number(dataPct[0].infrastruktur),
+      keadilan_sosial: Number(dataPct[0].keadilanSosial),
+      kemiskinan: Number(dataPct[0].kemiskinan),
+      lapangan_pekerjaan: Number(dataPct[0].lapanganPekerjaan),
+      layanan_kesehatan: Number(dataPct[0].layananKesehatan),
+      pendidikan: Number(dataPct[0].pendidikan),
+    })
 
-  const loadData = () => {
+    loadData(dataChart)
+
+
+  }, [dataPct, dataChart])
+
+
+  const loadData = (dataLoad: any) => {
     const option: EChartsOption = {
       title: {
-        text: "PUBLIC CONCERNS TRENDS",
-          textStyle: {
-            color: "white",
-            fontSize: 15
-          }
+        text: "TREN PERHATIAN PUBLIK",
+        textStyle: {
+          color: "white",
+          fontSize: 15
+        }
       },
       tooltip: {
         trigger: "axis",
         axisPointer: {
           type: "shadow",
+        },
+        formatter: function (params: any) {
+          return (
+            _.upperCase(params[0].name) +
+            " : " +
+            Intl.NumberFormat().format(params[0].value)
+          );
         },
       },
       grid: {
@@ -36,7 +58,7 @@ export default function DetailEchartPublicConcerns() {
       yAxis: [
         {
           type: "category",
-          data: ['Education', 'Health Services', 'Infrastructure', 'Poverty', 'Social Justice', 'Jobs'],
+          data: _.keys(dataLoad).map((v) => (v)).filter((v) => v != "name" && v != "idArea"),
           axisTick: {
             alignWithLabel: true,
           },
@@ -44,6 +66,11 @@ export default function DetailEchartPublicConcerns() {
             color: "white",
             fontSize: "12",
             fontWeight: "bold",
+            formatter: function (params: any) {
+              return (
+                _.startCase(params)
+              );
+            },
           },
         },
       ],
@@ -62,45 +89,16 @@ export default function DetailEchartPublicConcerns() {
           name: "Direct",
           type: "bar",
           barWidth: "60%",
-          data: [
-            {
-              value: 78,
+          data: Object.keys(dataLoad ?? []).map(
+            (v: any, i: any) =>
+            ({
+              name: v,
+              value: dataLoad[v],
               itemStyle: {
-                color: "#6ABD45"
-              }
-            },
-            {
-              value: 35,
-              itemStyle: {
-                color: "#98CC6F"
-              }
-            },
-            {
-              value: 58,
-              name: 'Positive',
-              itemStyle: {
-                color: "#C6E2B7"
-              }
-            },
-            {
-              value: 44,
-              itemStyle: {
-                color: "#FFFFFF"
-              }
-            },
-            {
-              value: 30,
-              itemStyle: {
-                color: "#F9BEBF",
-              }
-            },
-            {
-              value: 30,
-              itemStyle: {
-                color: "#F37D80",
-              }
-            },
-          ],
+                color: COLOR_PCT[i],
+              },
+            })
+          ),
         },
       ],
     };

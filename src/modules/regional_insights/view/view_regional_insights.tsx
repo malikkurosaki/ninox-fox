@@ -6,6 +6,8 @@ import EchartPublicConcerns from '../components/echart_public_concerns';
 import EchartLeader from '../components/echart_leader';
 import { useRouter } from 'next/navigation';
 import { PageSubTitle, WARNA } from '@/modules/_global';
+import { funGetEmotionRegionalInsight } from '..';
+import _ from 'lodash';
 
 const dataKabupaten = [
   {
@@ -51,7 +53,12 @@ export default function ViewRegionalInsights({ candidate, emotion, audience, pct
   const [listCandidate, setListCandidate] = useState(candidate)
   const [isCandidate, setCandidate] = useState(candidate[0]?.id)
   const [isData, setData] = useState(emotion)
-  
+
+  async function onGenerate() {
+    const dataLoad = await funGetEmotionRegionalInsight({ candidate: isCandidate })
+    setData(dataLoad)
+  }
+
   return (
     <>
       <PageSubTitle text1='WAWASAN' text2='REGIONAL' />
@@ -75,18 +82,18 @@ export default function ViewRegionalInsights({ candidate, emotion, audience, pct
                 label: can.name
               }))}
               value={isCandidate}
-            // onChange={(val) => chooseCandidate(val)}
+              onChange={(val) => setCandidate(val)}
             />
-            <Button c={"dark"} bg={"white"}>HASIL</Button>
+            <Button c={"dark"} bg={"white"} onClick={onGenerate}>HASIL</Button>
           </Group>
         </Box>
         {isData.map((item: any, i: any) => {
           return (
             <Box key={item.id} pt={20}>
               <Group justify='space-between' pb={10}>
-                <Text fz={26} fw={"bold"} c={"white"}>{item.name}</Text>
+                <Text fz={26} fw={"bold"} c={"white"}>{_.upperCase(item.name)}</Text>
                 <Box>
-                  <Button w={130} c={"dark"} bg={"white"} onClick={() => router.push("/insights/detail/1")}>DETAIL</Button>
+                  <Button w={130} c={"dark"} bg={"white"} onClick={() => router.push("/insights/"+isCandidate+"/"+item.id+"")}>DETAIL</Button>
                 </Box>
               </Group>
               <EchartSentimentAnalysis dataEmotion={item} dataLocked={audience} />

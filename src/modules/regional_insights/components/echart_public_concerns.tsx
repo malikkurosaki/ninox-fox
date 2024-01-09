@@ -55,7 +55,7 @@ export default function EchartPublicConcerns({ dataPct }: { dataPct: any }) {
       yAxis: [
         {
           type: "category",
-          data: _.keys(dataLoad).map((v) => (v)).filter((v) => v != "name" && v != "idProvinsi"),
+          data: _.keys(dataLoad).map((v) => (v)).filter((v) => v != "name" && v != "idArea"),
           axisTick: {
             alignWithLabel: true,
           },

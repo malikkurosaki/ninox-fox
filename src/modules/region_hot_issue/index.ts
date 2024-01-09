@@ -10,6 +10,7 @@ import funUploadRhi from "./back/fun/upload_rhi";
 import ViewEditAdminMlai from "./back/view/view_edit_rhi";
 import ViewListRegion from "./back/view/view_list_region";
 import ViewUploadRhi from "./back/view/view_upload_rhi";
+import funGetRhiFront from "./front/fun/get_rhi_front";
 
 
 export { ViewListRegion }
@@ -24,3 +25,4 @@ export { ModalUploadRhi }
 export { TableRegion }
 export { funEditRhi }
 export { funUploadRhi }
+export { funGetRhiFront }

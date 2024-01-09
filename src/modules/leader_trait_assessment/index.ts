@@ -6,6 +6,7 @@ import ModalUploadLta from "./back/components/modal_upload_lta";
 import TableLeader from "./back/components/table_leader";
 import funUploadLta from "./back/fun/upload_lta";
 import funGetLtaFront from "./front/fun/get_lta_front";
+import funGetLtaDetailFront from "./front/fun/get_lta_detail_front";
 
 export { ViewListLeader }
 export { ViewUploadLeader }
@@ -15,3 +16,4 @@ export { ModalUploadLta }
 export { TableLeader }
 export { funUploadLta }
 export { funGetLtaFront }
+export { funGetLtaDetailFront }

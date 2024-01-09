@@ -22,6 +22,8 @@ import funGetAccessArea from './back/fun/get_access_area';
 import funGetAreaDefault from './home/fan/get_area_default';
 import funGetAreaKabKotByProvinsi from './home/fan/get_area_kabkot_by_provinsi';
 import funGetUserAreaProvinsi from './home/fan/get_area_provinsi';
+import funGetOneKabkot from './fun/fun_get_one_kabkot';
+import funGetOneKecamatan from './fun/fun_get_one_kecamatan';
 
 
 export { provinsiCount }
@@ -49,3 +51,5 @@ export { funGetAreaDefault }
 export { funGetAreaKabKotByProvinsi }
 export { funGetUserAreaProvinsi }
 export { COLOR_PCT }
+export { funGetOneKabkot }
+export { funGetOneKecamatan }
