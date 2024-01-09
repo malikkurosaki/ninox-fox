@@ -119,11 +119,11 @@ export default function ViewSwot({ data, candidate, oneCandidate }: { data: any,
                                 <Text c={"white"} fz={14}>
                                   <TextAnimation
                                     phrases={[...datanya[_.random(0, datanya.length - 1)].content.split('\n')]}
-                                    typingSpeed={0}
-                                    backspaceDelay={0}
-                                    eraseDelay={0}
-                                    timeComplete={0}
-                                    errorProbability={0}
+                                    typingSpeed={(i == 0) ? 0 : Number(datanya.id ? Math.floor(Math.random() * 1 + 0) : Math.floor(Math.random() * 1 + 5))}
+                                    backspaceDelay={Number(datanya.id ? Math.floor(Math.random() * 899999 + 100000) : Math.floor(Math.random() * 899999 + 100000))}
+                                    eraseDelay={Number(datanya.id ? Math.floor(Math.random() * 899999 + 100000) : Math.floor(Math.random() * 899999 + 100000))}
+                                    timeComplete={Number(datanya.id ? Math.floor(Math.random() * 899999 + 100000) : Math.floor(Math.random() * 899999 + 100000))}
+                                    errorProbability={Number(datanya.id ? 0 : 0.1)}
                                     eraseOnComplete={false}
                                     isSecure={false}
                                   />
