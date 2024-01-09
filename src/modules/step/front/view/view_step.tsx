@@ -98,11 +98,11 @@ export default function ViewStep({ data, candidate, oneCandidate }: { data: any,
                                     <Text c={"white"} fz={14}>
                                       <TextAnimation
                                         phrases={[...datanya[_.random(0, datanya.length - 1)].content.split('\n')]}
-                                        typingSpeed={0}
-                                        backspaceDelay={0}
-                                        eraseDelay={0}
-                                        timeComplete={0}
-                                        errorProbability={0}
+                                        typingSpeed={(i == 0) ? 0 : Number(datanya.length - 1 ? Math.floor(Math.random() * 1 + 0) : Math.floor(Math.random() * 1 + 5))}
+                                        backspaceDelay={Number(datanya.length - 1 ? Math.floor(Math.random() * 899999 + 100000) : Math.floor(Math.random() * 899999 + 100000))}
+                                        eraseDelay={Number(datanya.length - 1 ? Math.floor(Math.random() * 899999 + 100000) : Math.floor(Math.random() * 899999 + 100000))}
+                                        timeComplete={Number(datanya.length - 1 ? Math.floor(Math.random() * 899999 + 100000) : Math.floor(Math.random() * 899999 + 100000))}
+                                        errorProbability={Number(datanya.length - 1 ? 0 : 0.1)}
                                         eraseOnComplete={false}
                                         isSecure={false}
                                       />
@@ -133,16 +133,21 @@ export default function ViewStep({ data, candidate, oneCandidate }: { data: any,
                             if (!datanya) return <></>;
                             return (
                               <>
+                              {/* <Stack c={"red"}>
+                                <pre>
+                                {JSON.stringify(datanya, null, 1)}
+                                </pre>
+                              </Stack> */}
                                 <ScrollArea h={200}>
                                   <Stack pl={10}>
                                     <Text c={"white"} fz={14}>
                                       <TextAnimation
                                         phrases={[...datanya[_.random(0, datanya.length - 1)].content.split('\n')]}
                                         typingSpeed={0}
-                                        backspaceDelay={0}
+                                        backspaceDelay={1000}
                                         eraseDelay={0}
-                                        timeComplete={0}
-                                        errorProbability={0}
+                                        timeComplete={3000}
+                                        errorProbability={0.3}
                                         eraseOnComplete={false}
                                         isSecure={false}
                                       />
