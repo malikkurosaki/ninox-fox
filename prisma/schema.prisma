@@ -393,7 +393,7 @@ model CandidatePairing {
   idKabkot      Int?
   AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
   idKecamatan   Int?
-  rate          Decimal
+  rate          Float
   dateEmotion   DateTime       @db.Date
   confidence    Int
   supportive    Int
