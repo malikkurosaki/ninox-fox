@@ -21,7 +21,7 @@ export default async function funUploadPairing({ body }: { body: any }) {
                     idCandidate2: i.idCandidate2,
                     idProvinsi: Number(i.idProvinsi),
                     idKabkot: Number(i.idKabkot),
-                    idKecamatan: Number(i.idKecamatan),
+                    idKecamatan: (i.idKecamatan == '' ? null : Number(i.idKecamatan)),
                     dateEmotion: new Date(i.date),
                     rate: Number(i.rate),
                     confidence: Number(i.confidence),
@@ -41,8 +41,8 @@ export default async function funUploadPairing({ body }: { body: any }) {
                     id: i.id
                 },
                 data: {
-                    idCandidate1: i.idCandidate1,
-                    idCandidate2: i.idCandidate2,
+                    // idCandidate1: i.idCandidate1,
+                    // idCandidate2: i.idCandidate2,
                     rate: Number(i.rate),
                     confidence: Number(i.confidence),
                     supportive: Number(i.supportive),
