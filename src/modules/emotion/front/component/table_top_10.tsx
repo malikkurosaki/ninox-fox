@@ -1,7 +1,8 @@
 'use client'
-import { WARNA } from '@/modules/_global';
+import { COLOR_EMOTION, WARNA } from '@/modules/_global';
 import { Box, Group, Pagination, ScrollArea, Table } from '@mantine/core';
-import React from 'react';
+import _, { ceil } from 'lodash';
+import React, { useState } from 'react';
 
 const top10 = [
   {
@@ -96,12 +97,24 @@ const top10 = [
   },
 ]
 
-
 /**
  * Fungsi untuk menampilkan top 10.
  * @returns {component} menampilakn top 10.
  */
-export default function TableTop10() {
+
+export default function TableTop10({ emotion, tingkat, locked }: { emotion: any, tingkat: any, locked: any }) {
+  const [isData, setData] = useState(_.slice(emotion, 0, 10))
+  const [totalPage, setTotalPage] = useState(ceil(emotion.length / 10))
+  const [valPage, setPage] = useState(1)
+  let noAwal = valPage * 10 - 9;
+
+  async function onPaging(p: any) {
+    const start = (10 * p) - 10;
+    const end = start + 10;
+    const dataNow = _.slice(emotion, start, end)
+    setPage(p)
+    setData(dataNow)
+  }
 
   return (
     <>
@@ -116,26 +129,34 @@ export default function TableTop10() {
             <Table.Thead c={"white"}>
               <Table.Tr >
                 <Table.Th>NO</Table.Th>
-                <Table.Th>KABUPATEN / KOTA</Table.Th>
+                <Table.Th w={250}>{(tingkat == 2) ? 'KECAMATAN' : 'KABUPATEN / KOTA'}</Table.Th>
                 <Table.Th>LOCKED AUDIENCE</Table.Th>
                 <Table.Th>FILTERED AUDIENCE</Table.Th>
                 <Table.Th>CONFIDENCE</Table.Th>
                 <Table.Th>SUPPORTIVE</Table.Th>
                 <Table.Th>POSITIVE</Table.Th>
+                <Table.Th>UNDECIDED</Table.Th>
+                <Table.Th>UNSUPPORTIVE</Table.Th>
+                <Table.Th>UNCOMFORTABLE</Table.Th>
                 <Table.Th>NEGATIVE</Table.Th>
+                <Table.Th>DISAPPROVAL</Table.Th>
               </Table.Tr>
             </Table.Thead>
             <Table.Tbody c={"white"} >
-              {top10.map((v, i) => (
+              {isData.map((v: any, i: any) => (
                 <Table.Tr key={i}>
-                  <Table.Td>{i + 1}</Table.Td>
-                  <Table.Td>{v.provinsi}</Table.Td>
-                  <Table.Td c={"white"}>{v.locked}</Table.Td>
-                  <Table.Td c={"white"}>{v.filtered}</Table.Td>
-                  <Table.Td c={WARNA.hijau}>{v.confidence}</Table.Td>
-                  <Table.Td c={"#98CC6F"}>{v.supportive}</Table.Td>
-                  <Table.Td c={"#C6E2B7"}>{v.positive}</Table.Td>
-                  <Table.Td c={WARNA.merah}>{v.negative}</Table.Td>
+                  <Table.Td align='center'>{noAwal++}</Table.Td>
+                  <Table.Td>{v.name}</Table.Td>
+                  <Table.Td align='right' c={"white"}>{Intl.NumberFormat("id-ID").format(Number(locked.filter((i: any) => i.idArea === v.idArea)[0].value))}</Table.Td>
+                  <Table.Td align='right' c={"white"}>{Intl.NumberFormat("id-ID").format(Number(v.filtered))}</Table.Td>
+                  <Table.Td align='right' c={COLOR_EMOTION[0].color}>{Intl.NumberFormat("id-ID").format(Number(v.confidence))}</Table.Td>
+                  <Table.Td align='right' c={COLOR_EMOTION[1].color}>{Intl.NumberFormat("id-ID").format(Number(v.supportive))}</Table.Td>
+                  <Table.Td align='right' c={COLOR_EMOTION[2].color}>{Intl.NumberFormat("id-ID").format(Number(v.positive))}</Table.Td>
+                  <Table.Td align='right' c={COLOR_EMOTION[3].color}>{Intl.NumberFormat("id-ID").format(Number(v.undecided))}</Table.Td>
+                  <Table.Td align='right' c={COLOR_EMOTION[4].color}>{Intl.NumberFormat("id-ID").format(Number(v.unsupportive))}</Table.Td>
+                  <Table.Td align='right' c={COLOR_EMOTION[5].color}>{Intl.NumberFormat("id-ID").format(Number(v.uncomfortable))}</Table.Td>
+                  <Table.Td align='right' c={COLOR_EMOTION[6].color}>{Intl.NumberFormat("id-ID").format(Number(v.negative))}</Table.Td>
+                  <Table.Td align='right' c={COLOR_EMOTION[7].color}>{Intl.NumberFormat("id-ID").format(Number(v.dissapproval))}</Table.Td>
                 </Table.Tr>
               ))}
             </Table.Tbody>
@@ -144,12 +165,14 @@ export default function TableTop10() {
       </Box>
       <Box pt={20}>
         <Group justify='flex-end'>
-          <Pagination total={10} color="#A0ADA6" />
+          <Pagination
+            total={totalPage}
+            color="rgba(70, 5, 120, 1)"
+            value={valPage}
+            onChange={(val) => onPaging(val)}
+          />
         </Group>
       </Box>
-
-
-
     </>
   );
 }
