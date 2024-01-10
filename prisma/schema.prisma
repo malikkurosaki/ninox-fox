@@ -179,6 +179,8 @@ model UserArea {
   idKecamatan   Int?
   AreaKelurahan AreaKelurahan? @relation(fields: [idKelurahan], references: [id])
   idKelurahan   Int?
+  Candidate     Candidate?     @relation(fields: [idCandidate], references: [id])
+  idCandidate   String?
   isFront       Boolean        @default(false)
   isActive      Boolean        @default(true)
   createdAt     DateTime       @default(now())
@@ -300,6 +302,7 @@ model Candidate {
   CandidateEmotion  CandidateEmotion[]
   CandidatePairing  CandidatePairing[] @relation("C1ToCandidate")
   Candidate2Pairing CandidatePairing[] @relation("C2ToCandidate")
+  UserArea          UserArea[]
 }
 
 model MlAi {
