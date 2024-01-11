@@ -6,8 +6,8 @@ import { useShallowEffect } from '@mantine/hooks';
 import { Box, Center } from '@mantine/core';
 import { WARNA } from '@/modules/_global';
 
-export default function EchartPopularityPie() {
-  const [options, setOptions] = useState<EChartsOption>({});
+export default function EchartPopularityPie({ data }: { data: any }) {
+  const [options, setOptions] = useState<EChartsOption>({})
 
   useShallowEffect(() => {
     loadData()
@@ -132,14 +132,14 @@ export default function EchartPopularityPie() {
 
   return (
     <>
-    <Box pt={20}>
+      <Box pt={20}>
         <Center>
-        <EChartsReact style={{
-          height: 400,
-          width: 400,
-        }} option={options} />
+          <EChartsReact style={{
+            height: 400,
+            width: 400,
+          }} option={options} />
         </Center>
-    </Box>
+      </Box>
     </>
   );
 }

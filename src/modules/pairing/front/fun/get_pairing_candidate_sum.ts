@@ -19,7 +19,8 @@ export default async function funGetPairingCandidateSummary() {
                 idProvinsi: Number(def.idProvinsi),
                 idKabkot: def.idKabkot,
                 tingkat: def.tingkat
-            }
+            },
+            dateEmotion: new Date()
         },
         select: {
             rate: true,
@@ -83,6 +84,6 @@ export default async function funGetPairingCandidateSummary() {
     }
 
     const top = _.slice(records, 0, 6)
-    
+
     return top
 }

@@ -1,10 +1,13 @@
-import { ViewPopularity } from '@/modules/popularity';
+import { funGetAllCandidateFront } from '@/modules/candidate';
+import { ViewPopularity, funGetPopularityToday } from '@/modules/popularity';
 import React from 'react';
 
-function Page() {
+export default async function Page() {
+  const can = await funGetAllCandidateFront()
+  const dataPairingToday = await funGetPopularityToday({})
+
   return (
-    <ViewPopularity />
+    <ViewPopularity candidate={can} pairingToday={dataPairingToday} />
   );
 }
 
-export default Page;
