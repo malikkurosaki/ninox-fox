@@ -57,12 +57,17 @@ export default function ViewPairingFront() {
               </Group>
               <Select
                 mt={20}
-                placeholder="Candidate"
+                placeholder="Candidate 1"
+                data={['I Wayan Koster', 'I Kadek Adi', 'I Wayan Marta']}
+              />
+              <Select
+                mt={10}
+                placeholder="Candidate 2"
                 data={['I Wayan Koster', 'I Kadek Adi', 'I Wayan Marta']}
               />
               <Button fullWidth mt={20} c={"dark"} bg={"white"}>GENERATE</Button>
 
-              <Box pt={45}>
+              <Box pt={20}>
                 <Text ta={"center"} fz={20} c={"white"}>SUCCESS PROBABILITY PROJECTION</Text>
               </Box>
               <Box pt={10}>
