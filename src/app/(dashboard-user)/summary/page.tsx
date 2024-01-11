@@ -13,9 +13,8 @@ export default async function Page() {
   const dataChart = await funGetEmotionChart({ candidate: oneCandidate?.id, startDate: moment(new Date()).subtract(7, "days").format("YYYY-MM-DD"), endDate: moment(new Date()).format("YYYY-MM-DD") })
   const dataLocked = await funGetAudienceFront()
   const dataPairingCandidate = await funGetPairingCandidateSummary()
-  // const dataPairingChart
 
   return (
-    <ViewSummary oneCandidate={oneCandidate} emoTable={dataEmotion} emoPersen={dataPersen} emoChart={dataChart} locked={dataLocked} />
+    <ViewSummary oneCandidate={oneCandidate} emoTable={dataEmotion} emoPersen={dataPersen} emoChart={dataChart} locked={dataLocked} pairingCandidate={dataPairingCandidate} />
   );
 }

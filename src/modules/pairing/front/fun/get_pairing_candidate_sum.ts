@@ -37,6 +37,9 @@ export default async function funGetPairingCandidateSummary() {
                     img: true,
                 }
             }
+        },
+        orderBy: {
+            rate: 'desc'
         }
     })
 
@@ -69,7 +72,7 @@ export default async function funGetPairingCandidateSummary() {
                     idCandidate1: groupedItems[item][elm][0].idCandidate1,
                     nameCandidate1: groupedItems[item][elm][0].nameCandidate1,
                     imgCandidate1: groupedItems[item][elm][0].imgCandidate1,
-                    isModalCandidate2: groupedItems[item][elm][0].idCandidate2,
+                    idCandidate2: groupedItems[item][elm][0].idCandidate2,
                     nameCandidate2: groupedItems[item][elm][0].nameCandidate2,
                     imgCandidate2: groupedItems[item][elm][0].imgCandidate2,
                     rate: groupedItems[item][elm][0].rate
@@ -79,5 +82,7 @@ export default async function funGetPairingCandidateSummary() {
         }
     }
 
-    return records
+    const top = _.slice(records, 0, 6)
+    
+    return top
 }
