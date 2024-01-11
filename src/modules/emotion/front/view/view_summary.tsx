@@ -7,7 +7,7 @@ import EchartCandidateSummary from '../component/echart_candidate_summary';
 import TableTop10 from '../component/table_top_10';
 import TopPairingCandidate from '../component/top_pairing_candidate';
 
-export default function ViewSummary({ oneCandidate, emoTable, emoPersen, emoChart, locked }: { oneCandidate: any, emoTable: any, emoPersen: any, emoChart: any, locked: any }) {
+export default function ViewSummary({ oneCandidate, emoTable, emoPersen, emoChart, locked, pairingCandidate }: { oneCandidate: any, emoTable: any, emoPersen: any, emoChart: any, locked: any, pairingCandidate: any }) {
 
   return (
     <>
@@ -68,7 +68,7 @@ export default function ViewSummary({ oneCandidate, emoTable, emoPersen, emoChar
           <TableTop10 emotion={emoTable} tingkat={oneCandidate?.tingkat} locked={locked} />
         </Box>
         <Box pt={30}>
-          <TopPairingCandidate />
+          <TopPairingCandidate pairingCandidate={pairingCandidate} />
         </Box>
       </Stack>
 
