@@ -10,7 +10,7 @@ export default function ViewKeagamaan() {
       <Stack>
         <PageSubTitle text1='DATA' text2='KEAGAMAAN' />
       </Stack>
-      <Box pt={10}>
+      <Box pt={20}>
         <Group justify='flex-end'>
           <Select radius={"md"} placeholder='Provinsi' />
           <Select radius={"md"} placeholder='Kabupaten/Kota' />

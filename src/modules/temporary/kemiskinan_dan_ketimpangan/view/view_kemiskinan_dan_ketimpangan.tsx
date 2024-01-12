@@ -9,7 +9,7 @@ export default function ViewKemiskinanDanKetimpangan() {
   return (
     <>
       <Stack>
-        <PageSubTitle text1='DATA' text2='INFRASTRUKTUR PERTANIAN' />
+        <PageSubTitle text1='DATA' text2='KEMISKINAN DAN KETIMPANGAN' />
       </Stack>
       <Box
         style={{

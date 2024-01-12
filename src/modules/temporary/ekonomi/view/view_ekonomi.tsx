@@ -49,8 +49,7 @@ export default function ViewEkonomi() {
                 padding: 20
               }}
             >
-              <EchartPublicConcerns/>
-              {/* <ChartBangunanPermanen/> */}
+              <ChartBangunanPermanen/>
             </Box>
             <Box
               style={{
@@ -59,7 +58,7 @@ export default function ViewEkonomi() {
                 padding: 20
               }}
             >
-              {/* <ChartBangunanSemiPermanen/> */}
+              <ChartBangunanSemiPermanen/>
             </Box>
           </SimpleGrid>
           <Box pt={15}>
@@ -73,7 +72,7 @@ export default function ViewEkonomi() {
                   padding: 20
                 }}
               >
-                {/* <ChartTanpaBangunanTerdekat/> */}
+                <ChartTanpaBangunanTerdekat/>
               </Box>
             </SimpleGrid>
           </Box>
@@ -99,7 +98,7 @@ export default function ViewEkonomi() {
               padding: 20
             }}
           >
-            {/* <ChartLembagaKeuangan/> */}
+            <ChartLembagaKeuangan/>
           </Box>
         </SimpleGrid>
       </Box>

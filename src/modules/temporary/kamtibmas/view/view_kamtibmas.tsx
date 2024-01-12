@@ -78,7 +78,7 @@ export default function ViewKamtibmas() {
       <Stack>
         <PageSubTitle text1='DATA' text2='KAMTIBMAS' />
       </Stack>
-      <Box pt={10}>
+      <Box pt={20}>
         <Group justify='flex-end'>
           <Select radius={"md"} placeholder='Provinsi' />
           <Select radius={"md"} placeholder='Kabupaten/Kota' />
