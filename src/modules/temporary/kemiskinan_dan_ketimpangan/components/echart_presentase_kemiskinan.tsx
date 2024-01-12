@@ -30,7 +30,7 @@ export default function EchartPresentaseKemiskinan() {
       tooltip: {},
       dataset: {
         source: [
-          ['data', 'Kemiskinan(Percentage)'],
+          ['data', 'Kemiskinan'],
           ['Denpasar', 43],
         ]
       },

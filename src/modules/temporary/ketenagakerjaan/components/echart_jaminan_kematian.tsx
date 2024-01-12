@@ -15,7 +15,7 @@ export default function EchartJaminanKematian() {
   async function loadData() {
     const option: EChartsOption = {
       title: {
-        text: "KEPIMILIKAN JAMINAN KEMATIAN",
+        text: "KEPEMILIKAN JAMINAN KEMATIAN",
         textStyle: {
           color: "white",
           fontSize: 13,

@@ -15,7 +15,7 @@ export default function EchartJaminanKesehatan() {
   async function loadData() {
     const option: EChartsOption = {
       title: {
-        text: "KEPIMILIKAN JAMINAN KESEHATAN",
+        text: "KEPEMILIKAN JAMINAN KESEHATAN",
         textStyle: {
           color: "white",
           fontSize: 13,

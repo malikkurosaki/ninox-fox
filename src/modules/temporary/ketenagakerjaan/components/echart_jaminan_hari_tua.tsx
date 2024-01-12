@@ -15,7 +15,7 @@ export default function EchartJaminanHariTua() {
   async function loadData() {
     const option: EChartsOption = {
       title: {
-        text: "KEPIMILIKAN JAMINAN HARI TUA",
+        text: "KEPEMILIKAN JAMINAN HARI TUA",
         textStyle: {
           color: "white",
           fontSize: 13,
