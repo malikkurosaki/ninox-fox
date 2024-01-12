@@ -15,7 +15,7 @@ export default function EchartJaminanPensiun() {
   async function loadData() {
     const option: EChartsOption = {
       title: {
-        text: "KEPIMILIKAN JAMINAN PENSIUN",
+        text: "KEPEMILIKAN JAMINAN PENSIUN",
         textStyle: {
           color: "white",
           fontSize: 13,

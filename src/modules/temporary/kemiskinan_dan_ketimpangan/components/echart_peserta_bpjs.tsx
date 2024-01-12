@@ -30,7 +30,7 @@ export default function EchartPesertaBpjs() {
       tooltip: {},
       dataset: {
         source: [
-          ['data', 'Peserta BPJS Kesehatan(Percentage)'],
+          ['data', 'Peserta BPJS Kesehatan'],
           ['Denpasar', 53],
         ]
       },

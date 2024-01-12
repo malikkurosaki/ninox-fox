@@ -15,7 +15,7 @@ export default function EchartJaminanKecelakaanKerja() {
   async function loadData() {
     const option: EChartsOption = {
       title: {
-        text: "KEPIMILIKAN JAMINAN KECELAKAAN KERJA",
+        text: "KEPEMILIKAN JAMINAN KECELAKAAN KERJA",
         textStyle: {
           color: "white",
           fontSize: 13,
