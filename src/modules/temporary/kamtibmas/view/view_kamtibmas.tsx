@@ -5,6 +5,12 @@ import EChartsReact from 'echarts-for-react';
 import React, { useState } from 'react';
 import { PageSubTitle } from '@/modules/_global';
 import { Box, Group, Select, Stack, Text } from '@mantine/core';
+import EchartIntensitasPencurian from '../components/echart_intensitas_pencurian';
+import EchartPencurianKekerasan from '../components/echart_pencurian_kekerasan';
+import EchartKejahatanPenipuan from '../components/echart_kejahatan_penipuan';
+import EchartKejahatahPenganiayaan from '../components/echart_kejahatah_penganiayaan';
+import EchartKejahatanPerkosaan from '../components/echart_kejahatan_perkosaan';
+import EchartPeredaranNarkoba from '../components/echart_peredaran_narkoba';
 
 export default function ViewKamtibmas() {
   const [options, setOptions] = useState<EChartsOption>({});
@@ -16,7 +22,7 @@ export default function ViewKamtibmas() {
   async function loadData() {
     const option: EChartsOption = {
       title: {
-        text: "INTESITAS KEJAHATAN MENURUT KAB/KOTA",
+        text: "KEJADIAN PERKELAHIAN MASSAL",
         textStyle: {
           color: "white",
           fontSize: 13,
@@ -88,7 +94,7 @@ export default function ViewKamtibmas() {
       <Box pt={40}>
         <Box pb={20}>
           <Text c={"white"} fw={'bold'} fz={20}>
-            KEPEMILIKAN JAMINAN SOSIAL TENAGA KERJA KAB/KOTA
+            INTESITAS KEJAHATAN MENURUT KAB/KOTA
           </Text>
         </Box>
         <Box
@@ -102,6 +108,96 @@ export default function ViewKamtibmas() {
             pt={10}
           >
             <EChartsReact style={{ height: 400 }} option={options} />
+          </Box>
+        </Box>
+        <Box pt={15}>
+          <Box
+            style={{
+              backgroundColor: "rgba(0,0,0,0.3)",
+              borderRadius: 10,
+              padding: 20
+            }}
+          >
+            <Box
+              pt={10}
+            >
+              <EchartIntensitasPencurian />
+            </Box>
+          </Box>
+        </Box>
+        <Box pt={15}>
+          <Box
+            style={{
+              backgroundColor: "rgba(0,0,0,0.3)",
+              borderRadius: 10,
+              padding: 20
+            }}
+          >
+            <Box
+              pt={10}
+            >
+              <EchartPencurianKekerasan/>
+            </Box>
+          </Box>
+        </Box>
+        <Box pt={15}>
+          <Box
+            style={{
+              backgroundColor: "rgba(0,0,0,0.3)",
+              borderRadius: 10,
+              padding: 20
+            }}
+          >
+            <Box
+              pt={10}
+            >
+              <EchartKejahatanPenipuan/>
+            </Box>
+          </Box>
+        </Box>
+        <Box pt={15}>
+          <Box
+            style={{
+              backgroundColor: "rgba(0,0,0,0.3)",
+              borderRadius: 10,
+              padding: 20
+            }}
+          >
+            <Box
+              pt={10}
+            >
+              <EchartKejahatahPenganiayaan/>
+            </Box>
+          </Box>
+        </Box>
+        <Box pt={15}>
+          <Box
+            style={{
+              backgroundColor: "rgba(0,0,0,0.3)",
+              borderRadius: 10,
+              padding: 20
+            }}
+          >
+            <Box
+              pt={10}
+            >
+              <EchartKejahatanPerkosaan/>
+            </Box>
+          </Box>
+        </Box>
+        <Box pt={15}>
+          <Box
+            style={{
+              backgroundColor: "rgba(0,0,0,0.3)",
+              borderRadius: 10,
+              padding: 20
+            }}
+          >
+            <Box
+              pt={10}
+            >
+              <EchartPeredaranNarkoba/>
+            </Box>
           </Box>
         </Box>
       </Box>
