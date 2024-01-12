@@ -5,12 +5,30 @@ import EchartPopularityLine from '../components/echart_popularity_line';
 import EchartPopularityPie from '../components/echart_popularity_pie';
 import { PageSubTitle } from '@/modules/_global';
 import _ from 'lodash';
+import { funGetPopularityToday, funGetRateChart } from '..';
+import moment from 'moment';
 
-export default function ViewPopularity({ candidate, pairingToday }: { candidate: any, pairingToday: any }) {
+export default function ViewPopularity({ candidate, pairingToday, chartRate }: { candidate: any, pairingToday: any, chartRate: any }) {
   const [isPairingToday, setPairingToday] = useState(pairingToday)
   const [isCandidate1, setCandidate1] = useState(pairingToday.pairingCandidate.idCandidate1)
   const [isCandidate2, setCandidate2] = useState(pairingToday.pairingCandidate.idCandidate2)
+  const [isPieChart, setPieChart] = useState(isPairingToday.chart)
+  const [isRateChart, setRateChart] = useState(chartRate)
 
+  async function onGenerate() {
+    const data = await funGetPopularityToday({ candidate1: isCandidate1, candidate2: isCandidate2 })
+    setPairingToday(data)
+    setPieChart(data.chart)
+
+    const dataRate = await funGetRateChart({
+      candidate1: data.pairingCandidate.idCandidate1,
+      candidate2: data.pairingCandidate.idCandidate2,
+      startDate: moment(new Date()).subtract(7, "days").format("YYYY-MM-DD"),
+      endDate: moment(new Date()).format("YYYY-MM-DD")
+    })
+
+    setRateChart(dataRate)
+  }
 
   return (
     <>
@@ -47,6 +65,7 @@ export default function ViewPopularity({ candidate, pairingToday }: { candidate:
                   label: can.name
                 }))}
                 value={isCandidate1}
+                onChange={(val) => { setCandidate1(val) }}
               />
               <Select
                 placeholder="Kandidat 2"
@@ -55,21 +74,22 @@ export default function ViewPopularity({ candidate, pairingToday }: { candidate:
                   label: can.name
                 }))}
                 value={isCandidate2}
+                onChange={(val) => { setCandidate2(val) }}
               />
-              <Button fullWidth bg={"white"} c={"dark"}>HASIL</Button>
+              <Button fullWidth bg={"white"} c={"dark"} onClick={onGenerate}>HASIL</Button>
             </SimpleGrid>
             <Box pt={50}>
               <Text ta={"center"} c={"white"} fw={"bold"} fz={30}>PROBABILITAS KESUKSESAN</Text>
-              <Text ta={"center"} c={"#1EBA1B"} fw={"bold"} fz={120}>{isPairingToday.rate} %</Text>
+              <Text ta={"center"} c={"#1EBA1B"} fw={"bold"} fz={120}>{(_.isUndefined(isPairingToday.rate) ? '00.00' : isPairingToday.rate)} %</Text>
             </Box>
           </Grid.Col>
         </Grid>
         <Grid gutter={30}>
           <Grid.Col span={{ md: 7, lg: 7 }}>
-            <EchartPopularityLine />
+            <EchartPopularityLine data={isRateChart} candidate={isPairingToday.pairingCandidate} />
           </Grid.Col>
           <Grid.Col span={{ md: 5, lg: 5 }}>
-            <EchartPopularityPie data={isPairingToday.chart}/>
+            <EchartPopularityPie data={isPieChart} />
           </Grid.Col>
         </Grid>
       </Stack>
