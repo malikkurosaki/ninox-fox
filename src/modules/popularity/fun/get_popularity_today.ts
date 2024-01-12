@@ -5,7 +5,7 @@ import { funGetUserDefaultFront } from "@/modules/user"
 import _ from 'lodash'
 
 export default async function funGetPopularityToday({ candidate1, candidate2 }: { candidate1?: any, candidate2?: any }) {
-    let dataCandidate
+    let dataCandidate, data = <any>[]
     const def = await funGetUserDefaultFront()
 
     if (!_.isNull(candidate1) && !_.isNull(candidate2) && !_.isUndefined(candidate1) && !_.isUndefined(candidate2)) {
@@ -69,13 +69,16 @@ export default async function funGetPopularityToday({ candidate1, candidate2 }: 
         }
     }
 
-    const data = await prisma.candidatePairing.findMany({
-        where: {
-            idCandidate1: dataCandidate.idCandidate1,
-            idCandidate2: dataCandidate.idCandidate2,
-            dateEmotion: new Date()
-        }
-    })
+
+    if (!_.isUndefined(dataCandidate.idCandidate1) && !_.isUndefined(dataCandidate.idCandidate2)) {
+        data = await prisma.candidatePairing.findMany({
+            where: {
+                idCandidate1: dataCandidate.idCandidate1,
+                idCandidate2: dataCandidate.idCandidate2,
+                dateEmotion: new Date()
+            }
+        })
+    }
 
     const format = _.map(_.groupBy(data, "idProvinsi"), (v: any) => ({
         rate: v[0].rate,
@@ -100,19 +103,19 @@ export default async function funGetPopularityToday({ candidate1, candidate2 }: 
     }))
 
     const persen = {
-        confidence: Number(((format[0].confidence / format[0].total) * 100).toFixed(2)),
-        dissapproval: Number(((format[0].dissapproval / format[0].total) * 100).toFixed(2)),
-        negative: Number(((format[0].negative / format[0].total) * 100).toFixed(2)),
-        positive: Number(((format[0].positive / format[0].total) * 100).toFixed(2)),
-        supportive: Number(((format[0].supportive / format[0].total) * 100).toFixed(2)),
-        uncomfortable: Number(((format[0].uncomfortable / format[0].total) * 100).toFixed(2)),
-        undecided: Number(((format[0].undecided / format[0].total) * 100).toFixed(2)),
-        unsupportive: Number(((format[0].unsupportive / format[0].total) * 100).toFixed(2)),
+        confidence: Number(((format[0]?.confidence / format[0]?.total) * 100).toFixed(2)),
+        supportive: Number(((format[0]?.supportive / format[0]?.total) * 100).toFixed(2)),
+        positive: Number(((format[0]?.positive / format[0]?.total) * 100).toFixed(2)),
+        undecided: Number(((format[0]?.undecided / format[0]?.total) * 100).toFixed(2)),
+        unsupportive: Number(((format[0]?.unsupportive / format[0]?.total) * 100).toFixed(2)),
+        uncomfortable: Number(((format[0]?.uncomfortable / format[0]?.total) * 100).toFixed(2)),
+        negative: Number(((format[0]?.negative / format[0]?.total) * 100).toFixed(2)),
+        dissapproval: Number(((format[0]?.dissapproval / format[0]?.total) * 100).toFixed(2)),
     }
 
     const allData = {
         pairingCandidate: dataCandidate,
-        rate: format[0].rate,
+        rate: format[0]?.rate,
         chart: persen
     }
 
