@@ -4,7 +4,7 @@ import React from 'react';
 function Page() {
   return (
     <>
-    {/* <ViewPertanian/> */}
+    <ViewPertanian/>
     </>
   );
 }

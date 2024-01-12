@@ -5,7 +5,7 @@ function Page() {
   return (
     <>
     
-    {/* <ViewKamtibmas/> */}
+    <ViewKamtibmas/>
     </>
   );
 }

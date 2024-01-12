@@ -5,7 +5,7 @@ function Page() {
   return (
     <>
     
-    {/* <ViewKemiskinanDanKetimpangan/> */}
+    <ViewKemiskinanDanKetimpangan/>
     </>
   );
 }
