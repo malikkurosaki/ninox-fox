@@ -15,7 +15,7 @@ export default function ChartBangunanPermanen() {
   async function loadData() {
     const option: EChartsOption = {
       title: {
-        text: "KEMUDAHAN UNTUK MENCAPAI KE PASAR DENGAN BANGUNAN PERMANEN",
+        text: "KEMUDAHAN KE PASAR DENGAN BANGUNAN PERMANEN",
         textStyle: {
           color: "white",
           fontSize: 13,

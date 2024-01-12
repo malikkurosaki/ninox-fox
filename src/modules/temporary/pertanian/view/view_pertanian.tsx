@@ -36,6 +36,7 @@ export default function ViewPertanian() {
             </Text>
           </Box>
         </Box>
+        <Box pt={10}>
         <SimpleGrid
           cols={{ base: 1, sm: 1, lg: 1 }}
         >
@@ -80,6 +81,7 @@ export default function ViewPertanian() {
           </Box>
         </SimpleGrid>
       </Box>
+        </Box>
     </>
   );
 }

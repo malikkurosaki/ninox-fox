@@ -30,7 +30,7 @@ export default function EchartFasilitasDalamDesa() {
       tooltip: {},
       dataset: {
         source: [
-          ['data', 'Fasilitas Derada Dalam Desa'],
+          ['data', 'Fasilitas Berada Dalam Desa'],
           ['Denpasar', 280],
         ]
       },

@@ -85,7 +85,7 @@ export default function ViewKamtibmas() {
           <Select radius={"md"} placeholder='Kecamatan' />
         </Group>
       </Box>
-      <Box pt={30}>
+      <Box pt={40}>
         <Box pb={20}>
           <Text c={"white"} fw={'bold'} fz={20}>
             KEPEMILIKAN JAMINAN SOSIAL TENAGA KERJA KAB/KOTA

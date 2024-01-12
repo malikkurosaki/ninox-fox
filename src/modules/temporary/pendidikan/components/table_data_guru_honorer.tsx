@@ -6,21 +6,26 @@ const dataGuru = [
   {
     id: 1,
     daerah: "Denpasar",
+    persentase: '34%'
   },
   {
     id: 2,
+     persentase: '64%',
     daerah: "Jembrana",
   },
   {
     id: 3,
+     persentase: '84%',
     daerah: "Bangli",
   },
   {
     id: 4,
+     persentase: '24%',
     daerah: "Badung",
   },
   {
     id: 5,
+     persentase: '44%',
     daerah: "Giayar",
   }
 ]
@@ -57,12 +62,9 @@ export default function TableDataGuruHonorer() {
                   </Table.Td>
                   <Table.Td>{v.daerah}</Table.Td>
                   <Table.Td>
-                    <Group justify="space-between" >
+                    <Group justify="flex-end" >
                       <Text fz="sm" c="dimmed">
-                        Progress
-                      </Text>
-                      <Text fz="sm" c="dimmed">
-                        62%
+                        {v.persentase}
                       </Text>
                     </Group>
                     <Progress value={62} mt={5} color={"#FBA500"} />

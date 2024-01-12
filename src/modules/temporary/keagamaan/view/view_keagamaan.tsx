@@ -25,21 +25,21 @@ export default function ViewKeagamaan() {
             </Text>
           </Box>
         </Box>
-        <SimpleGrid
-          cols={{ base: 1, sm: 1, lg: 1 }}
-          spacing={{ base: 10, sm: 'xl' }}
-          verticalSpacing={{ base: 'md', sm: 'xl' }}
-        >
-          <Box
-            style={{
-              backgroundColor: "rgba(0,0,0,0.3)",
-              borderRadius: 10,
-              padding: 20
-            }}
+        <Box pt={10}>
+          <SimpleGrid
+            cols={{ base: 1, sm: 1, lg: 1 }}
           >
-            <EchartRumahIbadah/>
-          </Box>
-        </SimpleGrid>
+            <Box
+              style={{
+                backgroundColor: "rgba(0,0,0,0.3)",
+                borderRadius: 10,
+                padding: 20
+              }}
+            >
+              <EchartRumahIbadah />
+            </Box>
+          </SimpleGrid>
+        </Box>
       </Box>
     </>
   );
