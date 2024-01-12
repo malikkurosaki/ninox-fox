@@ -33,9 +33,9 @@ export default function ViewPendidikan() {
           <Select radius={"md"} placeholder='Kecamatan' />
         </Group>
       </Box>
-      <Box pt={40}>
+      <Box pt={30}>
         <Box>
-          <Box pb={10}>
+          <Box pb={20}>
             <Text c={"white"} fw={'bold'} fz={20}>
               RATA-RATA JARAK KE FASILITAS PENDIDIKAN KECAMATAN
             </Text>

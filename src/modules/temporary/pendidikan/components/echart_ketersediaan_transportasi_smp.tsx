@@ -30,7 +30,7 @@ export default function EchartKetersediaanTransportasiSmp() {
       tooltip: {},
       dataset: {
         source: [
-          ['data', 'Fasilitas Derada Dalam Desa', 'Ya'],
+          ['data', 'Fasilitas Berada Dalam Desa', 'Ya'],
           ['Denpasar', 80, 231],
         ]
       },
