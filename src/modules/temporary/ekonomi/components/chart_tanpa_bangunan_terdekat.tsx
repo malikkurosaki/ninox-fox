@@ -14,13 +14,6 @@ export default function ChartTanpaBangunanTerdekat() {
 
   async function loadData() {
     const option: EChartsOption = {
-      title: {
-        text: "KEMUDAHAN UNTUK MENCAPAI KE PASAR TANPA BANGUNAN TERDEKAT",
-        textStyle: {
-          color: "white",
-          fontSize: 13,
-        }
-      },
       legend: {
         bottom: "0%",
         textStyle: {
@@ -30,8 +23,12 @@ export default function ChartTanpaBangunanTerdekat() {
       tooltip: {},
       dataset: {
         source: [
-          ['data', 'Sangat Mudah', 'Mudah', 'Sangat sulit'],
-          ['Denpasar', 13, 52, 10],
+          ['data', 'Jumlah Pasang dengan bangunan permanen', 'Jumlah Pasar dengan bangunan semi permanen', 'Jumlah Pasar tanpa bangunan'],
+          ['Denpasar', 233, 23, 15],
+          ['Badung', 31, 11, 9],
+          ['Giayar', 10, 1, 16],
+          ['Buleleng', 233, 8, 2],
+          ['Kelungkung', 300, 1, 0],
         ]
       },
       xAxis: [
@@ -64,9 +61,7 @@ export default function ChartTanpaBangunanTerdekat() {
           }
         },
         {
-          type: 'bar', itemStyle: {
-            color: "green"
-          }
+          type: 'bar'
         },
         {
           type: 'bar'

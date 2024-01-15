@@ -23,12 +23,12 @@ export default function EchartAksesFasilitasKesehatan() {
       tooltip: {},
       dataset: {
         source: [
-          ['data',  'Mudah','Sangat Mudah'],
-          ['Denpasar', 200, 211],
-          ['Badung', 12, 212],
-          ['Giayar', 32, 33],
-          ['Buleleng', 23, 32],
-          ['Kelungkung', 44, 43],
+          ['data', 'Rumah Sakit', 'Rumah Bersalin', 'Rumah Sakit Bersalin', 'Tempat Praktek Bidan', 'Apotek', 'Puskesmas dengan Rawat Inap', 'Puskesmas tanpa Rawat Inap'],
+          ['Denpasar', 280, 231, 121, 90, 233, 23, 15],
+          ['Badung', 12, 212, 88, 283, 31, 11, 9],
+          ['Giayar', 32, 33, 1, 300, 10, 1,16],
+          ['Buleleng', 23, 32, 32, 232, 233, 8,2],
+          ['Kelungkung', 44, 43, 2, 10, 300, 1, 0],
         ]
       },
       xAxis: [
@@ -56,16 +56,29 @@ export default function EchartAksesFasilitasKesehatan() {
       ],
       series: [
         {
-        type: 'bar', itemStyle: {
-          color: "orange"
-        }
-      },
+          type: 'bar', itemStyle: {
+            color: "orange"
+          }
+        },
         {
-        type: 'bar', itemStyle: {
-          color: "green"
-        }
-      },
-    ]
+          type: 'bar'
+        },
+        {
+          type: 'bar'
+        },
+        {
+          type: 'bar'
+        },
+        {
+          type: 'bar'
+        },
+        {
+          type: 'bar'
+        },
+        {
+          type: 'bar'
+        },
+      ]
     };
     setOptions(option)
   }
