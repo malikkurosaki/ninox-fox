@@ -94,7 +94,7 @@ export default function ViewKamtibmas() {
       <Box pt={40}>
         <Box pb={20}>
           <Text c={"white"} fw={'bold'} fz={20}>
-            INTESITAS KEJAHATAN MENURUT KAB/KOTA
+            INTENSITAS KEJAHATAN MENURUT KAB/KOTA
           </Text>
         </Box>
         <Box
