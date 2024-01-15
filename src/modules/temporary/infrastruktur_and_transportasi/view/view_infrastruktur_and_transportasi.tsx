@@ -63,7 +63,7 @@ export default function ViewInfrastrukturAndTransportasi() {
           <Box>
             <Box pb={10}>
               <Text c={"white"} fw={'bold'} fz={20}>
-                DATA PENGANGGURAN MENURUT KAB/KOTA
+                DATA ANGKA KECELAKAAN LALU LINTAS MENURUT KECAMATAN
               </Text>
             </Box>
           </Box>

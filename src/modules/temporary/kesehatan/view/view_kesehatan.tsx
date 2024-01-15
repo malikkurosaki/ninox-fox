@@ -94,7 +94,7 @@ export default function ViewKesehatan() {
         <Box pt={40}>
           <Box pb={10}>
             <Text c={"white"} fw={'bold'} fz={20}>
-              AKSES FASILITAS KESEHATAN MENURUT KECAMATAN
+              JUMLAH FASILITAS KESEHATAN MENURUT KECAMATAN
             </Text>
           </Box>
           <Box

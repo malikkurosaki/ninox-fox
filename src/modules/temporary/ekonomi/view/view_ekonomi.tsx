@@ -36,10 +36,11 @@ export default function ViewEkonomi() {
         >
           <Box pb={20}>
             <Text c={"white"} fw={'bold'} fz={20}>
-              KEMUDAHAN MENGAKSES PASAR BERDASARKAN JENIS BANGUNAN MENURUT KAB/KOTA
+              {/* KEMUDAHAN MENGAKSES PASAR BERDASARKAN JENIS BANGUNAN MENURUT KAB/KOTA */}
+              JUMLAH PASAR BERDASARKAN JENIS BANGUNAN MENURUT KECAMATAN
             </Text>
           </Box>
-          <SimpleGrid
+          {/* <SimpleGrid
             cols={{ base: 1, sm: 2, lg: 2 }}
           >
             <Box
@@ -60,7 +61,7 @@ export default function ViewEkonomi() {
             >
               <ChartBangunanSemiPermanen/>
             </Box>
-          </SimpleGrid>
+          </SimpleGrid> */}
           <Box pt={15}>
             <SimpleGrid
               cols={{ base: 1, sm: 1, lg: 1 }}
