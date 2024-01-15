@@ -51,7 +51,7 @@ export default function ViewPertanian() {
           </Box>
         </SimpleGrid>
       </Box>
-      <Box pt={15}>
+      {/* <Box pt={15}>
         <SimpleGrid
           cols={{ base: 1, sm: 1, lg: 1 }}
         >
@@ -65,7 +65,7 @@ export default function ViewPertanian() {
             <EchartJalanBermotorRoda4 />
           </Box>
         </SimpleGrid>
-      </Box>
+      </Box> */}
       <Box pt={15}>
         <SimpleGrid
           cols={{ base: 1, sm: 1, lg: 1 }}
