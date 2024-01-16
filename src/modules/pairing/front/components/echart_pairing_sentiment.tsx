@@ -36,7 +36,7 @@ const dataKabupaten = [
   },
   {
     id: 8,
-    name: "KELUNGKUNG"
+    name: "KLUNGKUNG"
   },
   {
     id: 9,

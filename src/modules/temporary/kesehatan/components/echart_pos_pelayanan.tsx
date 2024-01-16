@@ -28,7 +28,7 @@ export default function EchartPosPelayanan() {
           ['Badung', 12, 212],
           ['Giayar', 32, 33],
           ['Buleleng', 23, 32],
-          ['Kelungkung', 44, 43],
+          ['Klungkung', 44, 43],
         ]
       },
       xAxis: [
