@@ -28,7 +28,7 @@ export default function EchartJarakPendidikan() {
           ['Badung', 12, 21, 31 , 11],
           ['Giayar', 32, 33, 10 , 1],
           ['Buleleng', 23, 32, 32, 8],
-          ['Kelungkung', 44, 43, 2, 1],
+          ['Klungkung', 44, 43, 2, 1],
         ]
       },
       xAxis: [
