@@ -28,7 +28,7 @@ export default function EchartRumahIbadah() {
           ['Badung', 12, 212, 88, 283, 31 , 11],
           ['Giayar', 32, 33, 1,300, 10 , 1],
           ['Buleleng', 23, 32, 32, 232, 233, 8],
-          ['Kelungkung', 44, 43, 2, 10, 300, 1],
+          ['Klungkung', 44, 43, 2, 10, 300, 1],
         ]
       },
       xAxis: [

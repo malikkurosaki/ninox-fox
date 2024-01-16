@@ -28,7 +28,7 @@ export default function EchartAksesFasilitasKesehatan() {
           ['Badung', 12, 212, 88, 283, 31, 11, 9],
           ['Giayar', 32, 33, 1, 300, 10, 1,16],
           ['Buleleng', 23, 32, 32, 232, 233, 8,2],
-          ['Kelungkung', 44, 43, 2, 10, 300, 1, 0],
+          ['Klungkung', 44, 43, 2, 10, 300, 1, 0],
         ]
       },
       xAxis: [
