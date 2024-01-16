@@ -23,12 +23,12 @@ export default function ChartTanpaBangunanTerdekat() {
       tooltip: {},
       dataset: {
         source: [
-          ['data', 'Jumlah Pasang dengan bangunan permanen', 'Jumlah Pasar dengan bangunan semi permanen', 'Jumlah Pasar tanpa bangunan'],
+          ['data', 'Jumlah Pasar dengan bangunan permanen', 'Jumlah Pasar dengan bangunan semi permanen', 'Jumlah Pasar tanpa bangunan'],
           ['Denpasar', 233, 23, 15],
           ['Badung', 31, 11, 9],
           ['Giayar', 10, 1, 16],
           ['Buleleng', 233, 8, 2],
-          ['Kelungkung', 300, 1, 0],
+          ['Klungkung', 300, 1, 0],
         ]
       },
       xAxis: [

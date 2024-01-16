@@ -23,12 +23,12 @@ export default function ChartLembagaKeuangan() {
       tooltip: {},
       dataset: {
         source: [
-          ['data', 'Jumlah Bank Umum Pemerinta', 'Jumlah Bank Umum Swasta', 'Jumlah Bank Pengkreditan Rakyat', 'Jumlah koperasi Simpan Pinjam'],
+          ['data', 'Jumlah Bank Umum Pemerintah', 'Jumlah Bank Umum Swasta', 'Jumlah Bank Pengkreditan Rakyat', 'Jumlah koperasi Simpan Pinjam'],
           ['Denpasar', 121, 90, 233,  23],
           ['Badung', 12, 22, 31 , 11],
           ['Giayar', 32, 33, 10 , 1],
           ['Buleleng', 23, 32, 32, 8],
-          ['Kelungkung', 44, 43, 10, 1],
+          ['Klungkung', 44, 43, 10, 1],
         ]
       },
       xAxis: [
