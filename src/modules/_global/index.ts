@@ -1,7 +1,7 @@
 import { isModalBeranda } from './val/isModalBeranda';
 import { COLOR_EMOTION, COLOR_PCT } from './fun/COLOR_EMOTION';
 import { LayoutViewFront } from '@/modules/_global/front';
-import { LayoutView, funGetAccessAdmin } from "./back";
+import { LayoutView, ViewWilayah, funGetAccessAdmin } from "./back";
 import { ButtonBack } from "./back";
 import ModalLogout from "./back/component/modal_logout";
 import PageSubTitle from "./front/components/PageSubtitle";
@@ -55,3 +55,4 @@ export { COLOR_PCT }
 export { funGetOneKabkot }
 export { funGetOneKecamatan }
 export { funGetAreaByDefault }
+export { ViewWilayah }
