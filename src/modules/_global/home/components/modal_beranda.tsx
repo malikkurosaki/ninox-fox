@@ -7,37 +7,46 @@ import toast from 'react-simple-toasts';
 import _ from 'lodash';
 import { MasterKabGetByProvince, funGetAreaKabKotByProvinsi } from '../..';
 import funUpdateUserArea from '../fan/update_user_area_front';
+import { funGetCandidateActiveByArea } from '@/modules/candidate';
 
-
-export default function ModalBeranda({ areaPro }: { areaPro: any }) {
+export default function ModalBeranda({ areaPro, onSuccess }: { areaPro: any, onSuccess: (val: any) => void }) {
   const [valOpenModal, setOpenModal] = useAtom(isModalBeranda)
   const [dataProvinsi, setDataProvinsi] = useState(areaPro)
   const [dataKabupaten, setDataKabupaten] = useState<any>([])
+  const [dataCandidate, setDataCandidate] = useState<any>([])
   const [isProvinsi, setProvinsi] = useState(null)
   const [isKabupaten, setKabupaten] = useState(null)
+  const [isCandidate, setCandidate] = useState<any>(null)
   const [loadingData, setLoadingData] = useState(false)
 
   async function defaultWilayah() {
     if (_.isNull(isProvinsi)) return toast("Silahkan pilih provinsi", { theme: "dark" })
+    if (_.isNull(isCandidate)) return toast("Silahkan pilih kandidat", { theme: "dark" })
     setLoadingData(true)
-  const data = await funUpdateUserArea({provinsi: isProvinsi, kabkot: isKabupaten})
+    const data = await funUpdateUserArea({ provinsi: isProvinsi, kabkot: isKabupaten, candidate: isCandidate })
     toast('Success', { theme: 'dark' })
     setLoadingData(false)
     setOpenModal(false)
+    onSuccess(true)
   }
+
   async function onProvinsi({ idProv }: { idProv: any }) {
     setProvinsi(idProv)
     setKabupaten(null)
+    setCandidate(null)
     const dataDbKab = await MasterKabGetByProvince({ idProvinsi: Number(idProv) })
+    const dataDbCan = await funGetCandidateActiveByArea({ find: { idProvinsi: Number(idProv), tingkat: 1 } })
     setDataKabupaten(dataDbKab)
+    setDataCandidate(dataDbCan)
   }
 
   async function onKabupaten({ idKab }: { idKab: any }) {
     setKabupaten(idKab)
+    setCandidate(null)
+    const dataDbCan = await funGetCandidateActiveByArea({ find: { idProvinsi: Number(isProvinsi), idKabkot: Number(idKab), tingkat: 2 } })
+    setDataCandidate(dataDbCan)
   }
 
-
-  // return <>aaa</>
 
   return (
     <>
@@ -79,6 +88,25 @@ export default function ModalBeranda({ areaPro }: { areaPro: any }) {
               label="Kabupaten/Kota"
               searchable
               onChange={(val) => onKabupaten({ idKab: val })}
+            />
+          </SimpleGrid>
+          <SimpleGrid
+            cols={{ base: 1, sm: 1, lg: 1 }}
+            spacing={{ base: 12, sm: 'xl' }}
+            verticalSpacing={{ base: 'md', sm: 'xl' }}
+            pt={20}
+          >
+            <Select
+              placeholder="Pilih Kandidat"
+              data={dataCandidate.map((can: any) => ({
+                value: String(can.id),
+                label: can.name
+              }))}
+              value={isCandidate}
+              required
+              label={"Kandidat"}
+              searchable
+              onChange={(val) => setCandidate(val)}
             />
           </SimpleGrid>
           <SimpleGrid

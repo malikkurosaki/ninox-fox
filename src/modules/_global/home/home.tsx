@@ -4,32 +4,33 @@ import React, { useEffect, useState } from 'react';
 import { useAtom } from 'jotai';
 import { isModalBeranda } from '../val/isModalBeranda';
 import ModalBeranda from './components/modal_beranda';
-import { funGetAreaKabKotByProvinsi } from '..';
+import { funGetAreaDefault, funGetAreaKabKotByProvinsi } from '..';
 import _ from 'lodash';
-import toast from 'react-simple-toasts';
-import { useRouter } from 'next/navigation';
 
 /**
  * Fungsi untuk menampilkan dashboard.
  * @returns  hasilk yang ditampilkan seperti daftar access wilayah, jumlah kandidate, jumlah wilayah
  */
 
-export default function Home({ areaPro, pro, kab, kec, kel, can1, can2, valWilayah }: { areaPro: any, pro: number, kab: number, kec: number, kel: number, can1: number, can2: number, valWilayah: any }) {
-
-  const router = useRouter()
+export default function Home({ areaPro, pro, kab, kec, kel, can1, can2, valWilayah, user }: { areaPro: any, pro: number, kab: number, kec: number, kel: number, can1: number, can2: number, valWilayah: any, user: any }) {
 
   const [valOpenModal, setOpenModal] = useAtom(isModalBeranda)
   const [isValWilayah, setValWilayah] = useState(valWilayah)
   const [allProvinsi, setAllProvinsi] = useState(areaPro)
 
+  async function onReload() {
+    const valueWilayah = await funGetAreaDefault()
+    setValWilayah(valueWilayah)
+  }
+
   return (
     <>
-      <Text fz={25} c={'#213555'} fw={'bold'}>HI INDONESIA</Text>
+      <Text fz={25} c={'#213555'} fw={'bold'}>Hello, {(user && user.name) ? user.name : 'unknown user'}!</Text>
       <Group>
         <Text c={"#4F709C"}>DEFAULT WILAYAH UNTUK DASHBOARD USER</Text>
         <Button variant="outline" color="#4F709C" radius="xl" onClick={() => setOpenModal(true)}>{isValWilayah}</Button>
       </Group>
-      <Box pt={30}>
+      {/* <Box pt={30}>
         <Group grow>
           <Box style={{
             backgroundColor: "white",
@@ -39,31 +40,11 @@ export default function Home({ areaPro, pro, kab, kec, kel, can1, can2, valWilay
             <Box pb={10}>
               <Text c={"#4F709C"} fw={'bold'}>DAFTAR AKSES WILAYAH</Text>
             </Box>
-            <pre>
-              {/* {JSON.stringify(allProvinsi, null, 1)} */}
-            </pre>
             <Group grow>
-              {/* <SimpleGrid
-                cols={{ base: 1, sm: 4, lg: 4 }}
-
-              >
-
-                {allProvinsi.map((v: any, i: any) => (
-                  <Box key={i}>
-                    <Box style={{
-                      backgroundColor: "#4F709C",
-                      padding: 20,
-                      borderRadius: 5
-                    }}>
-                      <Text c={"white"} fw={'bold'}>{v.name}</Text>
-                    </Box>
-                  </Box>
-                ))}
-              </SimpleGrid> */}
             </Group>
           </Box>
         </Group>
-      </Box>
+      </Box> */}
       <Box pt={30}>
         <Box style={{
           backgroundColor: "white",
@@ -166,7 +147,7 @@ export default function Home({ areaPro, pro, kab, kec, kel, can1, can2, valWilay
         closeOnClickOutside={false}
         size={"xl"}
       >
-        <ModalBeranda areaPro={areaPro} />
+        <ModalBeranda areaPro={areaPro} onSuccess={() => { onReload() }} />
       </Modal>
     </>
 
