@@ -29,7 +29,7 @@ import papa from "papaparse"
 
 
 
-export default function ViewPairing({ param, provinsi, kabupaten, candidate, datatable, dataDownload }: { param: any, provinsi: any, kabupaten: any, candidate: any, datatable: any, dataDownload: any}) {
+export default function ViewPairing({ param, provinsi, kabupaten, candidate, datatable, dataDownload }: { param: any, provinsi: any, kabupaten: any, candidate: any, datatable: any, dataDownload: any }) {
   const router = useRouter()
   const today = new Date();
 
@@ -103,7 +103,7 @@ export default function ViewPairing({ param, provinsi, kabupaten, candidate, dat
                     value: String(pro.id),
                     label: pro.name
                   }))}
-                  value={isProvinsi}
+                  value={(!_.isNull(isProvinsi) ? String(isProvinsi) : null)}
                   required
                   label={"Provinsi"}
                   searchable
@@ -115,7 +115,7 @@ export default function ViewPairing({ param, provinsi, kabupaten, candidate, dat
                     value: String(kab.id),
                     label: kab.name
                   }))}
-                  value={isKabupaten}
+                  value={(!_.isNull(isKabupaten) ? String(isKabupaten) : null)}
                   label="Kabupaten/Kota"
                   searchable
                   onChange={(val) => onKabupaten({ idKab: val })}
@@ -163,77 +163,83 @@ export default function ViewPairing({ param, provinsi, kabupaten, candidate, dat
             </Paper>
           </Box>
           <Box>
-            <Box
-              style={{
-                backgroundColor: "white",
-                padding: 27,
-                borderRadius: 10,
-              }}
-            >
-              <Center>
+
+            <Group justify="space-between" grow>
+              <Box>
                 <Box
                   style={{
-                    border: "1px dashed gray",
                     borderRadius: 10,
-                    padding: 50,
+                    padding: 30,
+                    paddingTop: 50,
+                    paddingBottom: 50,
+                    backgroundColor: "gray",
                     cursor: "pointer",
                   }}
+
                   onClick={() => router.push("/dashboard/pairing/upload")}
                 >
-                  <Text ta={"center"} size="xl" inline>
+                  <Text c={"white"} fw={"bold"} ta={"center"}>
                     UPLOAD DATA
                   </Text>
                 </Box>
-              </Center>
-            </Box>
-            {(param.idProvinsi > 0) &&
-              <Group justify="space-between" grow pt={30}>
-                <Box>
-                  <Box
-                    style={{
-                      borderRadius: 10,
-                      padding: 30,
-                      paddingTop: 50,
-                      paddingBottom: 50,
-                      backgroundColor: "gray",
-                      cursor: "pointer",
-                    }}
-
-                    onClick={() => {
-                      const dataJson = dataDownload.data
-
-                      const jsonData = papa.unparse(dataJson)
-                      const jsonDataUrl = "data:text/csv;charset=utf-8," + encodeURIComponent(jsonData)
-
-                      const jsonDwnloadLink = document.createElement("a")
-                      jsonDwnloadLink.href = jsonDataUrl
-                      jsonDwnloadLink.download = dataDownload.title + ".csv"
-                      jsonDwnloadLink.click()
+              </Box>
+              <Box>
+                <Box
+                  style={{
+                    borderRadius: 10,
+                    padding: 30,
+                    paddingTop: 50,
+                    paddingBottom: 50,
+                    backgroundColor: "gray",
+                    cursor: "pointer",
                   }}
-                  >
-                    <Text c={"white"} fw={"bold"} ta={"center"}>
-                      DOWNLOAD
-                    </Text>
-                  </Box>
+                  onClick={() => router.push("pairing/copy-data")}
+                >
+                  <Text c={"white"} fw={"bold"} ta={"center"}>
+                    COPY DATA
+                  </Text>
                 </Box>
-                <Box>
-                  <Box
-                    style={{
-                      borderRadius: 10,
-                      padding: 30,
-                      paddingTop: 50,
-                      paddingBottom: 50,
-                      backgroundColor: "gray",
-                      cursor: "pointer",
-                    }}
-                    onClick={() => router.push("pairing/copy-data")}
-                  >
-                    <Text c={"white"} fw={"bold"} ta={"center"}>
-                      COPY DATA
-                    </Text>
-                  </Box>
+              </Box>
+            </Group>
+
+            {(param.idProvinsi > 0) &&
+              <Box mt={30}>
+                <Box
+                  style={{
+                    backgroundColor: "white",
+                    padding: 27,
+                    borderRadius: 10,
+                  }}
+                >
+                  <Center>
+                    <Box
+                      style={{
+                        border: "1px dashed gray",
+                        borderRadius: 10,
+                        padding: 50,
+                        cursor: "pointer",
+                      }}
+
+                      onClick={() => {
+                        const dataJson = dataDownload.data
+
+                        const jsonData = papa.unparse(dataJson)
+                        const jsonDataUrl = "data:text/csv;charset=utf-8," + encodeURIComponent(jsonData)
+
+                        const jsonDwnloadLink = document.createElement("a")
+                        jsonDwnloadLink.href = jsonDataUrl
+                        jsonDwnloadLink.download = dataDownload.title + ".csv"
+                        jsonDwnloadLink.click()
+                      }}
+
+                    >
+                      <Text ta={"center"} size="xl" inline>
+                        DOWNLOAD
+                      </Text>
+                    </Box>
+                  </Center>
                 </Box>
-              </Group>
+              </Box>
             }
           </Box>
         </SimpleGrid>
