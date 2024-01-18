@@ -3,7 +3,6 @@ import { useAtom } from 'jotai';
 import React, { useState } from 'react';
 import { isModalConf } from '../val/isModalConf';
 import { Box, Button, Checkbox, Chip, Divider, Group, Modal, NumberInput, Select, SimpleGrid, Stack, Table, Text, TextInput } from '@mantine/core';
-
 import { ButtonBack } from '@/modules/_global';
 import toast from 'react-simple-toasts';
 import ModalEditConfUser from '../components/modal_edit_conf_user';
@@ -20,12 +19,12 @@ export default function EditConfUser({ data, role, wilayah }: { data: any, role:
   const [checked, setChecked] = useState(false);
 
   function validationData() {
-    // if (Object.values(dataUserUpdate).includes(""))
-    //   return toast("The form cannot be empty", { theme: "dark" });
-    // if (isCekWilayah.length < 1 || (isCekWilayah.length == 0))
-    //   return toast("User role cannot be empty", { theme: "dark" });
-    // if (isAreaFront.length < 1 || (isAreaFront.length == 0))
-    //   return toast("User role cannot be empty", { theme: "dark" });
+    if (Object.values(dataUserUpdate).includes("") || Object.values(dataUserUpdate).includes(null))
+      return toast("The form cannot be empty", { theme: "dark" });
+    if (isCekWilayah.length < 1 || (isCekWilayah.length == 0))
+      return toast("User role cannot be empty", { theme: "dark" });
+    if (isAreaFront.length < 1 || (isAreaFront.length == 0))
+      return toast("User role cannot be empty", { theme: "dark" });
     setOpenModal(true);
   }
 
@@ -72,7 +71,7 @@ export default function EditConfUser({ data, role, wilayah }: { data: any, role:
                   idUserRole: val
                 })
               }
-              value={dataUserUpdate.idUserRole}
+              value={String(dataUserUpdate.idUserRole)}
             />
             <TextInput
               placeholder='Name'
@@ -196,7 +195,6 @@ export default function EditConfUser({ data, role, wilayah }: { data: any, role:
       >
         <ModalEditConfUser data={dataUserUpdate} dataArea={isCekWilayah} isFront={isAreaFront} />
       </Modal>
-      {JSON.stringify(dataUserUpdate.isAllArea)}
     </>
   );
 }

@@ -31,11 +31,7 @@ export default function EditCandidate({ data, params, provinsi, kabupaten }: { d
     const [dataKabupaten, setDatakabupaten] = useState<any>(kabupaten)
     const [isProvinsi, setProvinsi] = useState<any>(data.idProvinsi || null)
     const [isKabupaten, setKabupaten] = useState<any>(data.idKabkot || null)
-
     const [isData, setIsData] = useState(data)
-
-
-
 
     function onConfirmation() {
         if (dataEdit.name === "")
@@ -110,7 +106,7 @@ export default function EditCandidate({ data, params, provinsi, kabupaten }: { d
                                 />
                             </SimpleGrid>
                             <TextInput
-                            mt={20}
+                                mt={20}
                                 placeholder="Nama Kandidat"
                                 value={dataEdit.name}
                                 onChange={(val) => {

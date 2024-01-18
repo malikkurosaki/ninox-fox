@@ -17,15 +17,13 @@ export default function ModalEditConfUser({data, dataArea, isFront}: {data: any,
     toast("Sukses", { theme: "dark" });
     setOpenModal(false);
     // router.back()
-
-    console.log(data, dataArea, isFront)
 }
   return (
     <>
       <Box>
         <Alert color="gray" variant="outline">
           <Text fw={700} ta={"center"} mb={20} mt={20}>
-            ANDA YAKIN INGIN MENAMBAH USER?
+            ANDA YAKIN INGIN MENGEDIT USER?
           </Text>
           <Group justify="space-between" pt={10}>
             <Button
