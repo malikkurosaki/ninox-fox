@@ -31,7 +31,8 @@ export default function EchartKelasIbuHamilKkMiskin() {
       dataset: {
         source: [
           ['data', 'Tidak Ada', 'Ya'],
-          ['Denpasar', 43, 22],
+          // ['Denpasar', 43, 22],
+          ['Denpasar', 0, 0],
         ]
       },
       xAxis: [

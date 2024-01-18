@@ -1,6 +1,9 @@
 "use client"
 import { Box, Group, Progress, ScrollArea, Table, Text } from '@mantine/core';
-import React from 'react';
+import { useShallowEffect } from '@mantine/hooks';
+import { EChartsOption } from 'echarts';
+import EChartsReact from 'echarts-for-react';
+import React, { useState } from 'react';
 
 const dataGuru = [
   {
@@ -31,11 +34,71 @@ const dataGuru = [
 ]
 
 export default function TableDataGuruTersertifikasi() {
+  const [options, setOptions] = useState<EChartsOption>({});
+
+  useShallowEffect(() => {
+    loadData()
+  }, [])
+
+  async function loadData() {
+    const option: EChartsOption = {
+      legend: {
+        bottom: "0%",
+        textStyle: {
+          color: "white"
+        }
+      },
+      tooltip: {},
+      dataset: {
+        source: [
+          ['data', 'Jumlah Guru Tersertifikasi'],
+          // ['Denpasar',121, 90, 233,  23],
+          ['Denpasar', 18520],
+          // ['Badung', 12, 21, 31 , 11],
+          // ['Giayar', 32, 33, 10 , 1],
+          // ['Buleleng', 23, 32, 32, 8],
+          // ['Klungkung', 44, 43, 2, 1],
+        ]
+      },
+      xAxis: [
+        {
+          type: 'category',
+          axisLabel: {
+            color: "white",
+          }
+        }
+      ],
+      yAxis: [
+        {
+          type: 'value',
+          show: true,
+          splitLine: {
+            lineStyle: {
+              color: "gray",
+              opacity: 0.1
+            }
+          },
+          axisLabel: {
+            color: "white"
+          },
+        }
+      ],
+      series: [
+        {
+          type: 'bar', itemStyle: {
+            color: "orange"
+          }
+        }
+      ]
+    };
+    setOptions(option)
+  }
+
   return (
     <>
       <Box pb={10}>
         <Text c={"white"} fw={'bold'} fz={20}>
-          DATA GURU TERSERTIFIKASI MENURUT KAB/KOTA
+          DATA GURU TERSERTIFIKASI KOTA DENPASAR
         </Text>
       </Box>
       <Box
@@ -45,7 +108,7 @@ export default function TableDataGuruTersertifikasi() {
           padding: 20
         }}
       >
-        <ScrollArea>
+        {/* <ScrollArea>
           <Table withRowBorders={false} >
             <Table.Thead c={"white"}>
               <Table.Tr >
@@ -73,7 +136,8 @@ export default function TableDataGuruTersertifikasi() {
               ))}
             </Table.Tbody>
           </Table>
-        </ScrollArea>
+        </ScrollArea> */}
+        <EChartsReact style={{ height: 400 }} option={options} />
       </Box>
     </>
   );

@@ -31,7 +31,8 @@ export default function EchartJaminanHariTua() {
       dataset: {
         source: [
           ['data', 'Tidak', 'Ya', 'Tidak Tahu'],
-          ['Denpasar', 43, 22, 33],
+          // ['Denpasar', 43, 22, 33],
+          ['Denpasar', 0, 0, 0],
         ]
       },
       xAxis: [

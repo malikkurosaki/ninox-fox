@@ -12,7 +12,7 @@ export default function ViewPertanian() {
       <Stack>
         <PageSubTitle text1='DATA' text2='INFRASTRUKTUR PERTANIAN' />
       </Stack>
-      <Box
+      {/* <Box
         style={{
           backgroundColor: "#05363D",
           position: "sticky",
@@ -27,12 +27,12 @@ export default function ViewPertanian() {
           <Select radius={"md"} placeholder='Kabupaten/Kota' />
           <Select radius={"md"} placeholder='Kecamatan' />
         </Group>
-      </Box>
+      </Box> */}
       <Box pt={30}>
         <Box>
           <Box pb={10}>
             <Text c={"white"} fw={'bold'} fz={20}>
-              INFRASTRUKTUR PERTANIAN MENURUT KAB/KOTA
+              INFRASTRUKTUR PERTANIAN KOTA DENPASAR
             </Text>
           </Box>
         </Box>

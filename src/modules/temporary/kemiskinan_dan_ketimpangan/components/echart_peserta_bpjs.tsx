@@ -15,7 +15,7 @@ export default function EchartPesertaBpjs() {
   async function loadData() {
     const option: EChartsOption = {
       title: {
-        text: "PESERTA BPJS KESEHATAN MENURUT KAB/KOTA",
+        text: "PESERTA BPJS KESEHATAN KOTA DENPASAR",
         textStyle: {
           color: "white",
           fontSize: 13,
@@ -31,7 +31,8 @@ export default function EchartPesertaBpjs() {
       dataset: {
         source: [
           ['data', 'Peserta BPJS Kesehatan'],
-          ['Denpasar', 53],
+          // ['Denpasar', 53],
+          ['Denpasar', 0],
         ]
       },
       xAxis: [

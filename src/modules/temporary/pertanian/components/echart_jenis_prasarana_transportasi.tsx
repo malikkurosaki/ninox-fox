@@ -31,7 +31,8 @@ export default function EchartJenisPrasaranaTransportasi() {
       dataset: {
         source: [
           ['data', 'Diperkeras(kerikil, batu, dll)', 'Aspal/beton', 'Tidak Terdefinisi', 'Tanah'],
-          ['Denpasar', 12, 90, 33,  23],
+          // ['Denpasar', 12, 90, 33,  23],
+          ['Denpasar', 0, 0, 0, 0],
         ]
       },
       xAxis: [

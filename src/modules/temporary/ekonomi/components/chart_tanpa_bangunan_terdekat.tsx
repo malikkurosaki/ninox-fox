@@ -24,11 +24,12 @@ export default function ChartTanpaBangunanTerdekat() {
       dataset: {
         source: [
           ['data', 'Jumlah Pasar dengan bangunan permanen', 'Jumlah Pasar dengan bangunan semi permanen', 'Jumlah Pasar tanpa bangunan'],
-          ['Denpasar', 233, 23, 15],
-          ['Badung', 31, 11, 9],
-          ['Giayar', 10, 1, 16],
-          ['Buleleng', 233, 8, 2],
-          ['Klungkung', 300, 1, 0],
+          // ['Denpasar', 233, 23, 15],
+          ['Denpasar', 67, 12, 0],
+          // ['Badung', 31, 11, 9],
+          // ['Giayar', 10, 1, 16],
+          // ['Buleleng', 233, 8, 2],
+          // ['Klungkung', 300, 1, 0],
         ]
       },
       xAxis: [

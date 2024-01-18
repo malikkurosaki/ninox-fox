@@ -31,7 +31,8 @@ export default function EchartPenggunaanSungai() {
       dataset: {
         source: [
           ['data', 'Tidak', 'Ya', 'Tidak terdefinisi'],
-          ['Denpasar', 41, 100, 33,],
+          // ['Denpasar', 41, 100, 33,],
+          ['Denpasar', 0, 0, 0,],
         ]
       },
       xAxis: [

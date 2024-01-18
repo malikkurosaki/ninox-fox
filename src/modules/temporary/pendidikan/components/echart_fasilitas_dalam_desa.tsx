@@ -31,7 +31,8 @@ export default function EchartFasilitasDalamDesa() {
       dataset: {
         source: [
           ['data', 'Fasilitas Berada Dalam Desa'],
-          ['Denpasar', 280],
+          // ['Denpasar', 280],
+          ['Denpasar', 0],
         ]
       },
       xAxis: [
