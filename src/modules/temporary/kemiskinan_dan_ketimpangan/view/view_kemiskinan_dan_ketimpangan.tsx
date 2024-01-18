@@ -11,7 +11,7 @@ export default function ViewKemiskinanDanKetimpangan() {
       <Stack>
         <PageSubTitle text1='DATA' text2='KEMISKINAN DAN KETIMPANGAN' />
       </Stack>
-      <Box
+      {/* <Box
         style={{
           backgroundColor: "#05363D",
           position: "sticky",
@@ -26,7 +26,7 @@ export default function ViewKemiskinanDanKetimpangan() {
           <Select radius={"md"} placeholder='Kabupaten/Kota' />
           <Select radius={"md"} placeholder='Kecamatan' />
         </Group>
-      </Box>
+      </Box> */}
       <Box pt={30}>
         <SimpleGrid
           cols={{ base: 1, sm: 1, lg: 1 }}

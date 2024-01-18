@@ -31,7 +31,8 @@ export default function EchartJaminanKesehatan() {
       dataset: {
         source: [
           ['data', 'Tidak', 'Ya'],
-          ['Denpasar', 43, 22],
+          // ['Denpasar', 43, 22],
+          ['Denpasar', 0, 0],
         ]
       },
       xAxis: [

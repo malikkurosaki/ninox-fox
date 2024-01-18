@@ -24,11 +24,12 @@ export default function EchartJarakPendidikan() {
       dataset: {
         source: [
           ['data', 'Jarat ke SD Terdekat', 'Jarat ke SMP Terdekat', 'Jarat ke SMK Terdekat', 'Jarat ke SMA Terdekat'],
-          ['Denpasar',121, 90, 233,  23],
-          ['Badung', 12, 21, 31 , 11],
-          ['Giayar', 32, 33, 10 , 1],
-          ['Buleleng', 23, 32, 32, 8],
-          ['Klungkung', 44, 43, 2, 1],
+          // ['Denpasar',121, 90, 233,  23],
+          ['Denpasar', 0, 0, 0, 0],
+          // ['Badung', 12, 21, 31 , 11],
+          // ['Giayar', 32, 33, 10 , 1],
+          // ['Buleleng', 23, 32, 32, 8],
+          // ['Klungkung', 44, 43, 2, 1],
         ]
       },
       xAxis: [

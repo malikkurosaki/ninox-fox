@@ -15,7 +15,7 @@ export default function ViewEkonomi() {
       <Stack>
         <PageSubTitle text1='DATA' text2='EKONOMI' />
       </Stack>
-      <Box
+      {/* <Box
         style={{
           backgroundColor: "#05363D",
           position: "sticky",
@@ -30,14 +30,14 @@ export default function ViewEkonomi() {
           <Select radius={"md"} placeholder='Kabupaten/Kota' />
           <Select radius={"md"} placeholder='Kecamatan' />
         </Group>
-      </Box>
+      </Box> */}
       <Box pt={30}>
         <Box
         >
           <Box pb={20}>
             <Text c={"white"} fw={'bold'} fz={20}>
-              {/* KEMUDAHAN MENGAKSES PASAR BERDASARKAN JENIS BANGUNAN MENURUT KAB/KOTA */}
-              JUMLAH PASAR BERDASARKAN JENIS BANGUNAN MENURUT KECAMATAN
+              {/* KEMUDAHAN MENGAKSES PASAR BERDASARKAN JENIS BANGUNAN KOTA DENPASAR */}
+              JUMLAH PASAR BERDASARKAN JENIS BANGUNAN DI KOTA DENPASAR
             </Text>
           </Box>
           {/* <SimpleGrid
@@ -83,7 +83,7 @@ export default function ViewEkonomi() {
         <Box>
           <Box pb={10}>
             <Text c={"white"} fw={'bold'} fz={20}>
-              KETERSEDIAAN LEMBAGA KEUANGAN MENURUT KECAMATAN
+              KETERSEDIAAN LEMBAGA KEUANGAN KOTA DENPASAR
             </Text>
           </Box>
         </Box>

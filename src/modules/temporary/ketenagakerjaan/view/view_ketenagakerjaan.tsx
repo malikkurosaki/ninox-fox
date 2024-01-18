@@ -15,7 +15,7 @@ export default function ViewKetenagakerjaan() {
       <Stack>
         <PageSubTitle text1='DATA' text2='KETENAGAKERJAAN' />
       </Stack>
-      <Box
+      {/* <Box
         style={{
           backgroundColor: "#05363D",
           position: "sticky",
@@ -30,14 +30,14 @@ export default function ViewKetenagakerjaan() {
           <Select radius={"md"} placeholder='Kabupaten/Kota' />
           <Select radius={"md"} placeholder='Kecamatan' />
         </Group>
-      </Box>
+      </Box> */}
       <Box pt={30}>
         <Box>
           <Box
           >
             <Box pb={20}>
               <Text c={"white"} fw={'bold'} fz={20}>
-                KEPEMILIKAN JAMINAN SOSIAL TENAGA KERJA KAB/KOTA
+                KEPEMILIKAN JAMINAN SOSIAL TENAGA KERJA KOTA DENPASAR
               </Text>
             </Box>
             <SimpleGrid
@@ -109,7 +109,7 @@ export default function ViewKetenagakerjaan() {
         <Box>
           <Box pb={10}>
             <Text c={"white"} fw={'bold'} fz={20}>
-              DATA PENGANGGURAN MENURUT KAB/KOTA
+              DATA PENGANGGURAN KOTA DENPASAR
             </Text>
           </Box>
         </Box>

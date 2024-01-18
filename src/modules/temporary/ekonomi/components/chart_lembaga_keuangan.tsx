@@ -24,11 +24,12 @@ export default function ChartLembagaKeuangan() {
       dataset: {
         source: [
           ['data', 'Jumlah Bank Umum Pemerintah', 'Jumlah Bank Umum Swasta', 'Jumlah Bank Pengkreditan Rakyat', 'Jumlah koperasi Simpan Pinjam'],
-          ['Denpasar', 121, 90, 233,  23],
-          ['Badung', 12, 22, 31 , 11],
-          ['Giayar', 32, 33, 10 , 1],
-          ['Buleleng', 23, 32, 32, 8],
-          ['Klungkung', 44, 43, 10, 1],
+          // ['Denpasar', 121, 90, 233,  23],
+          ['Denpasar', 106, 83, 34,  307],
+          // ['Badung', 12, 22, 31 , 11],
+          // ['Giayar', 32, 33, 10 , 1],
+          // ['Buleleng', 23, 32, 32, 8],
+          // ['Klungkung', 44, 43, 10, 1],
         ]
       },
       xAxis: [

@@ -30,8 +30,8 @@ export default function EchartKejahatanPerkosaan() {
       tooltip: {},
       dataset: {
         source: [
-          ['data', 'Menurun', 'Meningkat'],
-          ['Denpasar', 13, 52],
+          ['data', 'Sama Saja', 'Menurun', 'Meningkat'],
+          ['Denpasar', 0, 0, 0],
         ]
       },
       xAxis: [
@@ -58,6 +58,11 @@ export default function EchartKejahatanPerkosaan() {
         }
       ],
       series: [
+        {
+          type: 'bar', itemStyle: {
+            color: "gray"
+          }
+        },
         {
           type: 'bar', itemStyle: {
             color: "green"
