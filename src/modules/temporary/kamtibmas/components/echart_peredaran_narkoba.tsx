@@ -31,7 +31,8 @@ export default function EchartPeredaranNarkoba() {
       dataset: {
         source: [
           ['data', 'Sama saja', 'Menurun', 'Meningkat'],
-          ['Denpasar', 13, 52, 10],
+          // ['Denpasar', 13, 52, 10],
+          ['Denpasar', 0, 0, 0],
         ]
       },
       xAxis: [

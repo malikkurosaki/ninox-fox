@@ -16,7 +16,7 @@ export default function ViewKesehatan() {
       <Stack>
         <PageSubTitle text1='DATA' text2='KESEHATAN' />
       </Stack>
-      <Box
+      {/* <Box
         style={{
           backgroundColor: "#05363D",
           position: "sticky",
@@ -31,11 +31,11 @@ export default function ViewKesehatan() {
           <Select radius={"md"} placeholder='Kabupaten/Kota' />
           <Select radius={"md"} placeholder='Kecamatan' />
         </Group>
-      </Box>
+      </Box> */}
       <Box pt={30}>
         <Box pb={20}>
           <Text c={"white"} fw={'bold'} fz={20}>
-            KETERSEDIAAN LAYANAN PECEGAHAN STUNTING KAB/KOTA
+            KETERSEDIAAN LAYANAN PECEGAHAN STUNTING KOTA DENPASAR
           </Text>
         </Box>
         <SimpleGrid
@@ -78,7 +78,7 @@ export default function ViewKesehatan() {
         <Box pt={40}>
           <Box pb={10}>
             <Text c={"white"} fw={'bold'} fz={20}>
-              JUMLAH POS PELAYANAN KESEHATAN KECAMATAN
+              JUMLAH POS PELAYANAN KESEHATAN KOTA DENPASAR
             </Text>
           </Box>
           <Box
@@ -94,7 +94,7 @@ export default function ViewKesehatan() {
         <Box pt={40}>
           <Box pb={10}>
             <Text c={"white"} fw={'bold'} fz={20}>
-              JUMLAH FASILITAS KESEHATAN MENURUT KECAMATAN
+              JUMLAH FASILITAS KESEHATAN KOTA DENPASAR
             </Text>
           </Box>
           <Box
@@ -110,7 +110,7 @@ export default function ViewKesehatan() {
         <Box pt={40}>
           <Box pb={10}>
             <Text c={"white"} fw={'bold'} fz={20}>
-              RATA-RATA JARAK KE FASILITAS KESEHATAN MENURUT KECAMATAN
+              RATA-RATA JARAK KE FASILITAS KESEHATAN KOTA DENPASAR
             </Text>
           </Box>
           <Box
@@ -126,7 +126,7 @@ export default function ViewKesehatan() {
         <Box pt={40}>
           <Box pb={10}>
             <Text c={"white"} fw={'bold'} fz={20}>
-              JUMLAH DOKTER MENURUT KECAMATAN
+              JUMLAH DOKTER KOTA DENPASAR
             </Text>
           </Box>
           <Box
@@ -136,7 +136,7 @@ export default function ViewKesehatan() {
               padding: 20
             }}
           >
-            <EchartJumlahDokter/>
+            <EchartJumlahDokter />
           </Box>
         </Box>
       </Box>

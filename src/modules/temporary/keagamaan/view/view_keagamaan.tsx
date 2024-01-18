@@ -10,18 +10,18 @@ export default function ViewKeagamaan() {
       <Stack>
         <PageSubTitle text1='DATA' text2='KEAGAMAAN' />
       </Stack>
-      <Box pt={20}>
+      {/* <Box pt={20}>
         <Group justify='flex-end'>
           <Select radius={"md"} placeholder='Provinsi' />
           <Select radius={"md"} placeholder='Kabupaten/Kota' />
           <Select radius={"md"} placeholder='Kecamatan' />
         </Group>
-      </Box>
+      </Box> */}
       <Box pt={40}>
         <Box>
           <Box pb={10}>
             <Text c={"white"} fw={'bold'} fz={20}>
-              JUMLAH RUMAH IBADAH MENURUT KAB/KOTA
+              JUMLAH RUMAH IBADAH KOTA DENPASAR
             </Text>
           </Box>
         </Box>

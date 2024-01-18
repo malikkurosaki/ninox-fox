@@ -24,7 +24,8 @@ export default function EchartDataKecelakaan() {
       dataset: {
         source: [
           ['data', 'Angka Kecelakaan Lalu Lintas (Unit)'],
-          ['Denpasar', 23.3],
+          // ['Denpasar', 23.3],
+          ['Denpasar', 31],
         ]
       },
       xAxis: [

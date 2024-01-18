@@ -24,11 +24,12 @@ export default function EchartAksesFasilitasKesehatan() {
       dataset: {
         source: [
           ['data', 'Rumah Sakit', 'Rumah Bersalin', 'Rumah Sakit Bersalin', 'Tempat Praktek Bidan', 'Apotek', 'Puskesmas dengan Rawat Inap', 'Puskesmas tanpa Rawat Inap'],
-          ['Denpasar', 280, 231, 121, 90, 233, 23, 15],
-          ['Badung', 12, 212, 88, 283, 31, 11, 9],
-          ['Giayar', 32, 33, 1, 300, 10, 1,16],
-          ['Buleleng', 23, 32, 32, 232, 233, 8,2],
-          ['Klungkung', 44, 43, 2, 10, 300, 1, 0],
+          // ['Denpasar', 280, 231, 121, 90, 233, 23, 15],
+          ['Denpasar', 15, 0, 1, 0, 42, 2, 4],
+          // ['Badung', 12, 212, 88, 283, 31, 11, 9],
+          // ['Giayar', 32, 33, 1, 300, 10, 1,16],
+          // ['Buleleng', 23, 32, 32, 232, 233, 8,2],
+          // ['Klungkung', 44, 43, 2, 10, 300, 1, 0],
         ]
       },
       xAxis: [

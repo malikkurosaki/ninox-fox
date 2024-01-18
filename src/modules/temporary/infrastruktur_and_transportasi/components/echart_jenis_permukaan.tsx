@@ -31,7 +31,9 @@ export default function EchartJenisPermukaan() {
       dataset: {
         source: [
           ['data', 'Aspal/Beton', 'Diperkeras(krikil, batu, Dll)'],
-          ['Denpasar', 43.3, 85.8, 93.7],
+          // ['Denpasar', 43.3, 85.8, 93.7],
+          ['Denpasar', 0, 0],
+
         ]
       },
       xAxis: [

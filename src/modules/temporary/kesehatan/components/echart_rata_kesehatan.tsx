@@ -24,11 +24,12 @@ export default function EchartRataKesehatan() {
       dataset: {
         source: [
           ['data', 'Jarak tedekat menuju Tempat praktek bidan', 'Jarak terdekat menuju Puskesmas tanpa rawat inap', 'Jarak terdekat menuju Puskesmas dengan rawat inap', 'Jarak terdekat menuju Rumah sakit'],
-          ['Denpasar', 200, 211, 781, 161],
-          ['Badung', 12, 212, 32, 345],
-          ['Giayar', 32, 33, 61, 21],
-          ['Buleleng', 23, 32, 67, 11],
-          ['Klungkung', 44, 43, 90, 100],
+          ['Denpasar', 0, 0, 0, 0],
+          // ['Denpasar', 200, 211, 781, 161],
+          // ['Badung', 12, 212, 32, 345],
+          // ['Giayar', 32, 33, 61, 21],
+          // ['Buleleng', 23, 32, 67, 11],
+          // ['Klungkung', 44, 43, 90, 100],
         ]
       },
       xAxis: [
