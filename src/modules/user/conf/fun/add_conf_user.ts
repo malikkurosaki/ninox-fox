@@ -56,7 +56,7 @@ export default async function funAddConfUser({ data, dataArea }: { data: any, da
                 idUser: user.id,
                 idProvinsi: v.idProvinsi,
                 idKabkot: v.id,
-                isFront: true
+                isFront: false
             }));
 
             await prisma.userArea.createMany({

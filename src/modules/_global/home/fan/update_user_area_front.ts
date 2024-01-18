@@ -4,6 +4,7 @@ import prisma from "../../bin/prisma"
 import { unsealData } from "iron-session"
 import { pwd_key_config } from "../../bin/val_global"
 import _ from "lodash"
+import { revalidatePath } from "next/cache"
 
 export default async function funUpdateUserArea({ provinsi, kabkot, candidate }: { provinsi: any, kabkot: any, candidate: any }) {
     const c = cookies().get("_cookiesNinox")
@@ -32,6 +33,8 @@ export default async function funUpdateUserArea({ provinsi, kabkot, candidate }:
             idCandidate: candidate
         }
     })
+
+    revalidatePath('/dashboard/user')
 
     return {
         success: true,
