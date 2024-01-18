@@ -30,8 +30,9 @@ export default function EchartAnakButaKkMiskin() {
       tooltip: {},
       dataset: {
         source: [
-          ['data',  'Tidak','Ya'],
-          ['Denpasar', 43, 55],
+          ['data', 'Tidak', 'Ya'],
+          // ['Denpasar', 43, 55],
+          ['Denpasar', 0, 0],
         ]
       },
       xAxis: [
@@ -59,16 +60,16 @@ export default function EchartAnakButaKkMiskin() {
       ],
       series: [
         {
-        type: 'bar', itemStyle: {
-          color: "red"
-        }
-      },
+          type: 'bar', itemStyle: {
+            color: "red"
+          }
+        },
         {
-        type: 'bar', itemStyle: {
-          color: "green"
-        }
-      },
-    ]
+          type: 'bar', itemStyle: {
+            color: "green"
+          }
+        },
+      ]
     };
     setOptions(option)
   }

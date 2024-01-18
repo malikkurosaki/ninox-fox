@@ -24,7 +24,8 @@ export default function EchartDataPengangguran() {
       dataset: {
         source: [
           ['data', '2022', '2023', '2024'],
-          ['Denpasar', 192, 222, 343],
+          // ['Denpasar', 192, 222, 343],
+          ['Denpasar', 0, 0, 0],
         ]
       },
       xAxis: [

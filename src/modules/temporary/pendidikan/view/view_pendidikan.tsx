@@ -17,7 +17,7 @@ export default function ViewPendidikan() {
       <Stack>
         <PageSubTitle text1='DATA' text2='PENDIDIKAN' />
       </Stack>
-      <Box
+      {/* <Box
         style={{
           backgroundColor: "#05363D",
           position: "sticky",
@@ -32,12 +32,12 @@ export default function ViewPendidikan() {
           <Select radius={"md"} placeholder='Kabupaten/Kota' />
           <Select radius={"md"} placeholder='Kecamatan' />
         </Group>
-      </Box>
+      </Box> */}
       <Box pt={30}>
         <Box>
           <Box pb={20}>
             <Text c={"white"} fw={'bold'} fz={20}>
-              RATA-RATA JARAK KE FASILITAS PENDIDIKAN KECAMATAN
+              RATA-RATA JARAK KE FASILITAS PENDIDIKAN KOTA DENPASAR
             </Text>
           </Box>
         </Box>
@@ -60,12 +60,12 @@ export default function ViewPendidikan() {
           <Box>
             <Box pb={10}>
               <Text c={"white"} fw={'bold'} fz={20}>
-                KETERSEDIAAN TRANSPORTASI MENJANGKAU FASILITAS PENDIDIKAN KAB/KOTA
+                KETERSEDIAAN TRANSPORTASI MENJANGKAU FASILITAS PENDIDIKAN KOTA DENPASAR
               </Text>
             </Box>
           </Box>
           <SimpleGrid
-            cols={{ base: 1, sm: 2, lg: 2 }}
+            cols={{ base: 1, sm: 1, lg: 1 }}
           >
             <Box
               style={{
@@ -76,7 +76,7 @@ export default function ViewPendidikan() {
             >
               <EchartFasilitasDalamDesa />
             </Box>
-            <Box
+            {/* <Box
               style={{
                 backgroundColor: "rgba(0,0,0,0.3)",
                 borderRadius: 10,
@@ -102,14 +102,14 @@ export default function ViewPendidikan() {
               }}
             >
               <EchartKetersediaanTransportasiSmk />
-            </Box>
+            </Box> */}
           </SimpleGrid>
         </Box>
         <Box pt={40}>
           <TableDataGuruTersertifikasi />
         </Box>
         <Box pt={40}>
-          <TableDataGuruHonorer/>
+          <TableDataGuruHonorer />
         </Box>
       </Box>
     </>

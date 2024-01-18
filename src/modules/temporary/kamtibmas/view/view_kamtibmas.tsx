@@ -4,7 +4,7 @@ import { EChartsOption } from 'echarts';
 import EChartsReact from 'echarts-for-react';
 import React, { useState } from 'react';
 import { PageSubTitle } from '@/modules/_global';
-import { Box, Group, Select, Stack, Text } from '@mantine/core';
+import { Box, Group, Select, SimpleGrid, Stack, Text } from '@mantine/core';
 import EchartIntensitasPencurian from '../components/echart_intensitas_pencurian';
 import EchartPencurianKekerasan from '../components/echart_pencurian_kekerasan';
 import EchartKejahatanPenipuan from '../components/echart_kejahatan_penipuan';
@@ -38,7 +38,8 @@ export default function ViewKamtibmas() {
       dataset: {
         source: [
           ['data', 'Tidak', 'ya'],
-          ['Denpasar', 121, 90],
+          // ['Denpasar', 121, 90],
+          ['Denpasar', 0, 0],
         ]
       },
       xAxis: [
@@ -84,33 +85,20 @@ export default function ViewKamtibmas() {
       <Stack>
         <PageSubTitle text1='DATA' text2='KAMTIBMAS' />
       </Stack>
-      <Box pt={20}>
+      {/* <Box pt={20}>
         <Group justify='flex-end'>
           <Select radius={"md"} placeholder='Provinsi' />
           <Select radius={"md"} placeholder='Kabupaten/Kota' />
           <Select radius={"md"} placeholder='Kecamatan' />
         </Group>
-      </Box>
+      </Box> */}
       <Box pt={40}>
         <Box pb={20}>
           <Text c={"white"} fw={'bold'} fz={20}>
-            INTENSITAS KEJAHATAN MENURUT KAB/KOTA
+            INTENSITAS KEJAHATAN KOTA DENPASAR
           </Text>
         </Box>
-        <Box
-          style={{
-            backgroundColor: "rgba(0,0,0,0.3)",
-            borderRadius: 10,
-            padding: 20
-          }}
-        >
-          <Box
-            pt={10}
-          >
-            <EChartsReact style={{ height: 400 }} option={options} />
-          </Box>
-        </Box>
-        <Box pt={15}>
+        <SimpleGrid cols={{ base: 1, sm: 2, lg: 2 }} mb={20}>
           <Box
             style={{
               backgroundColor: "rgba(0,0,0,0.3)",
@@ -118,14 +106,23 @@ export default function ViewKamtibmas() {
               padding: 20
             }}
           >
-            <Box
-              pt={10}
-            >
+            <Box pt={10}>
+              <EChartsReact style={{ height: 400 }} option={options} />
+            </Box>
+          </Box>
+          <Box
+            style={{
+              backgroundColor: "rgba(0,0,0,0.3)",
+              borderRadius: 10,
+              padding: 20
+            }}>
+            <Box pt={10}>
               <EchartIntensitasPencurian />
             </Box>
           </Box>
-        </Box>
-        <Box pt={15}>
+        </SimpleGrid>
+
+        <SimpleGrid cols={{ base: 1, sm: 2, lg: 2 }} mb={20}>
           <Box
             style={{
               backgroundColor: "rgba(0,0,0,0.3)",
@@ -133,14 +130,10 @@ export default function ViewKamtibmas() {
               padding: 20
             }}
           >
-            <Box
-              pt={10}
-            >
-              <EchartPencurianKekerasan/>
+            <Box pt={10} >
+              <EchartPencurianKekerasan />
             </Box>
           </Box>
-        </Box>
-        <Box pt={15}>
           <Box
             style={{
               backgroundColor: "rgba(0,0,0,0.3)",
@@ -148,14 +141,13 @@ export default function ViewKamtibmas() {
               padding: 20
             }}
           >
-            <Box
-              pt={10}
-            >
-              <EchartKejahatanPenipuan/>
+            <Box pt={10} >
+              <EchartKejahatanPenipuan />
             </Box>
           </Box>
-        </Box>
-        <Box pt={15}>
+        </SimpleGrid>
+
+        <SimpleGrid cols={{ base: 1, sm: 2, lg: 2 }} >
           <Box
             style={{
               backgroundColor: "rgba(0,0,0,0.3)",
@@ -163,14 +155,10 @@ export default function ViewKamtibmas() {
               padding: 20
             }}
           >
-            <Box
-              pt={10}
-            >
-              <EchartKejahatahPenganiayaan/>
+            <Box pt={10} >
+              <EchartKejahatahPenganiayaan />
             </Box>
           </Box>
-        </Box>
-        <Box pt={15}>
           <Box
             style={{
               backgroundColor: "rgba(0,0,0,0.3)",
@@ -178,13 +166,11 @@ export default function ViewKamtibmas() {
               padding: 20
             }}
           >
-            <Box
-              pt={10}
-            >
-              <EchartKejahatanPerkosaan/>
+            <Box pt={10} >
+              <EchartKejahatanPerkosaan />
             </Box>
           </Box>
-        </Box>
+        </SimpleGrid>
         <Box pt={15}>
           <Box
             style={{
@@ -196,7 +182,7 @@ export default function ViewKamtibmas() {
             <Box
               pt={10}
             >
-              <EchartPeredaranNarkoba/>
+              <EchartPeredaranNarkoba />
             </Box>
           </Box>
         </Box>

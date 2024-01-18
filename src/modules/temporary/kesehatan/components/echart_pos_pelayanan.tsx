@@ -24,11 +24,12 @@ export default function EchartPosPelayanan() {
       dataset: {
         source: [
           ['data',  'Jumlah pos pembinaan terpadu','Jumlah posyandu aktif'],
-          ['Denpasar', 280, 231],
-          ['Badung', 12, 212],
-          ['Giayar', 32, 33],
-          ['Buleleng', 23, 32],
-          ['Klungkung', 44, 43],
+          // ['Denpasar', 280, 231],
+          ['Denpasar', 459, 208],
+          // ['Badung', 12, 212],
+          // ['Giayar', 32, 33],
+          // ['Buleleng', 23, 32],
+          // ['Klungkung', 44, 43],
         ]
       },
       xAxis: [

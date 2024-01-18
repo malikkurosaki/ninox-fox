@@ -24,11 +24,12 @@ export default function EchartJumlahDokter() {
       dataset: {
         source: [
           ['data',  'Tenaga dokter pria yang tinggal menetap di desa kelurahan','Tenaga dokter wanita yang tinggal menetap di desa kelurahan'],
-          ['Denpasar', 200, 211],
-          ['Badung', 12, 212],
-          ['Giayar', 32, 33],
-          ['Buleleng', 23, 32],
-          ['Klungkung', 44, 43],
+          ['Denpasar', 0, 0],
+          // ['Denpasar', 200, 211],
+          // ['Badung', 12, 212],
+          // ['Giayar', 32, 33],
+          // ['Buleleng', 23, 32],
+          // ['Klungkung', 44, 43],
         ]
       },
       xAxis: [

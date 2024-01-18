@@ -15,7 +15,7 @@ export default function EchartPresentaseKemiskinan() {
   async function loadData() {
     const option: EChartsOption = {
       title: {
-        text: "PERSENTASE KEMISKINAN MENURUT KAB/KOTA",
+        text: "PERSENTASE KEMISKINAN KOTA DENPASAR",
         textStyle: {
           color: "white",
           fontSize: 13,
@@ -31,7 +31,8 @@ export default function EchartPresentaseKemiskinan() {
       dataset: {
         source: [
           ['data', 'Kemiskinan'],
-          ['Denpasar', 43],
+          // ['Denpasar', 43],
+          ['Denpasar', 0],
         ]
       },
       xAxis: [

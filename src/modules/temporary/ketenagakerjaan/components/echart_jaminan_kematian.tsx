@@ -31,7 +31,8 @@ export default function EchartJaminanKematian() {
       dataset: {
         source: [
           ['data', 'Tidak', 'Ya', 'Tidak Tahu'],
-          ['Denpasar', 33, 21, 13],
+          // ['Denpasar', 33, 21, 13],
+          ['Denpasar', 0, 0, 0],
         ]
       },
       xAxis: [

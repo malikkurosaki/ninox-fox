@@ -31,7 +31,8 @@ export default function EchartJalanDarat() {
       dataset: {
         source: [
           ['data', 'Sepanjangan tahun'],
-          ['Denpasar', 43],
+          // ['Denpasar', 43],
+          ['Denpasar', 0],
         ]
       },
       xAxis: [

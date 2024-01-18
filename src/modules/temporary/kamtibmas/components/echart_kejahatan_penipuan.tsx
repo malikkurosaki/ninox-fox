@@ -31,7 +31,8 @@ export default function EchartKejahatanPenipuan() {
       dataset: {
         source: [
           ['data', 'Sama saja', 'Menurun', 'Meningkat'],
-          ['Denpasar', 13, 62, 13],
+          // ['Denpasar', 13, 62, 13],
+          ['Denpasar', 0, 0, 0],
         ]
       },
       xAxis: [
