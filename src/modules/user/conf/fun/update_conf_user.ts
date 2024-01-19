@@ -3,7 +3,7 @@ import { MasterKabGetByProvince } from "@/modules/_global"
 import prisma from "@/modules/_global/bin/prisma"
 import _ from "lodash"
 
-export default async function funUpdateConfUser({ data, dataArea, isFront }: { data: any, dataArea: any, isFront: any }) {
+export default async function funUpdateConfUser({ data, dataArea }: { data: any, dataArea: any }) {
     await prisma.user.update({
         where: {
             id: data.id
@@ -30,7 +30,8 @@ export default async function funUpdateConfUser({ data, dataArea, isFront }: { d
                 data: {
                     idUser: data.id,
                     idProvinsi: Number(i),
-                    isFront: (isFront == Number(i) ? true : false)
+                    // isFront: (isFront == Number(i) ? true : false)
+                    isFront: (i == 1 ? true : false)
                 }
             })
         }

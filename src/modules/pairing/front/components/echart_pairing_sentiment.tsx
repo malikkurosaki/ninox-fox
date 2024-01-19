@@ -83,7 +83,7 @@ export default function EchartPairingSentiment({ data }: { data: any }) {
       xAxis: [
         {
           type: 'category',
-          data: ['Confidence', 'Supportive', 'Positive', 'Undecided', 'Unsupportive', 'Uncomfortable', 'Negative', 'Disapproval'],
+          data: ['Percaya Diri', 'Mendukung', 'Positif', 'Tidak Memilih', 'Tidak Mendukung', 'Tidak Nyaman', 'Negatif', 'Tidak Setuju'],
           axisLabel: {
             rotate: 45,
             color: "white",

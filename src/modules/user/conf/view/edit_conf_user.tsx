@@ -11,10 +11,7 @@ export default function EditConfUser({ data, role, wilayah }: { data: any, role:
   const [valOpenModal, setOpenModal] = useAtom(isModalConf)
   const [isData, setData] = useState<any[]>(wilayah)
   const [isRole, setRole] = useState<any[]>(role)
-  const [dataUser, setDataUser] = useState(data)
   const [dataUserUpdate, setDataUserUpdate] = useState(data.dataUser)
-  const [isAreaFront, setAreaFront] = useState(data.dataFront)
-  const [isCek, setCek] = useState(data.dataUser.isAllArea)
   const [isCekWilayah, setCekWilayah] = useState(data.dataArea.map((item: any) => (item.idProvinsi)))
   const [checked, setChecked] = useState(false);
 
@@ -23,16 +20,9 @@ export default function EditConfUser({ data, role, wilayah }: { data: any, role:
       return toast("The form cannot be empty", { theme: "dark" });
     if (isCekWilayah.length < 1 || (isCekWilayah.length == 0))
       return toast("User role cannot be empty", { theme: "dark" });
-    if (isAreaFront.length < 1 || (isAreaFront.length == 0))
-      return toast("User role cannot be empty", { theme: "dark" });
     setOpenModal(true);
   }
 
-  function pembatasanArea(val: any) {
-    if (!isCekWilayah.includes(val))
-      return toast("Pilih Sesuai Wilayah", { theme: "dark" })
-    setAreaFront(val)
-  }
 
   function setDataArea(val: any) {
     setChecked((v) => !v)
@@ -193,7 +183,7 @@ export default function EditConfUser({ data, role, wilayah }: { data: any, role:
         closeOnClickOutside={false}
         withCloseButton={false}
       >
-        <ModalEditConfUser data={dataUserUpdate} dataArea={isCekWilayah} isFront={isAreaFront} />
+        <ModalEditConfUser data={dataUserUpdate} dataArea={isCekWilayah} />
       </Modal>
     </>
   );

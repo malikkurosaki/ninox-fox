@@ -9,6 +9,16 @@ import _ from 'lodash';
 
 export default function EchartPopularityPie({ data }: { data: any }) {
   const [options, setOptions] = useState<EChartsOption>({})
+  const [bahasa, setBahasa] = useState<any>({
+    confidence: 'Percaya Diri',
+    supportive: 'Mendukung',
+    positive: 'Positif',
+    undecided: 'Tidak Memilih',
+    unsupportive: 'Tidak Mendukung',
+    uncomfortable: 'Tidak Nyaman',
+    negative: 'Negatif',
+    dissapproval: 'Tidak Setuju',
+  })
 
   useShallowEffect(() => {
     loadData(data)
@@ -21,7 +31,7 @@ export default function EchartPopularityPie({ data }: { data: any }) {
           color: "white",
         },
         show: true,
-        right: "0%",
+        right: "-1%",
         top: "25%",
         orient: "vertical",
       },
@@ -114,7 +124,7 @@ export default function EchartPopularityPie({ data }: { data: any }) {
           data: Object.keys(dataEmotion ?? []).map(
             (v: any) =>
             ({
-              name: v,
+              name: bahasa[String(v)],
               value: dataEmotion[v],
               itemStyle: {
                 color:

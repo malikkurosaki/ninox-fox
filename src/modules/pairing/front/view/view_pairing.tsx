@@ -34,7 +34,7 @@ export default function ViewPairingFront({ candidate, data, area }: { candidate:
 
   return (
     <>
-      <PageSubTitle text1='REGIONAL' text2='DATA PAIRING' />
+      <PageSubTitle text1='DATA PASANGAN' text2='REGIONAL' />
       <Box
         style={{
           // backgroundColor: WARNA.ungu,
