@@ -80,7 +80,7 @@ export default function ViewPopularity({ candidate, pairingToday, chartRate }: {
             </SimpleGrid>
             <Box pt={50}>
               <Text ta={"center"} c={"white"} fw={"bold"} fz={30}>PROBABILITAS KESUKSESAN</Text>
-              <Text ta={"center"} c={"#1EBA1B"} fw={"bold"} fz={120}>{(_.isUndefined(isPairingToday.rate) ? '00.00' : isPairingToday.rate)} %</Text>
+              <Text ta={"center"} c={"#228be6"} fw={"bold"} fz={120}>{(_.isUndefined(isPairingToday.rate) ? '00.00' : isPairingToday.rate)} %</Text>
             </Box>
           </Grid.Col>
         </Grid>

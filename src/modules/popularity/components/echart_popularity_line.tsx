@@ -85,7 +85,7 @@ export default function EchartPopularityLine({ data, candidate }: { data: any, c
                         ? []
                         : dataChart!.map((v: any) => v.rate),
                     type: 'line',
-                    color: WARNA.hijau,
+                    color: '#228be6',
                     showSymbol: false,
                     areaStyle: {
                         opacity: 1,
@@ -96,7 +96,7 @@ export default function EchartPopularityLine({ data, candidate }: { data: any, c
                             },
                             {
                                 offset: 1,
-                                color: 'rgba(4,60,24,1)'
+                                color: 'rgba(34,139,230,1)'
                             }
                         ])
                     },

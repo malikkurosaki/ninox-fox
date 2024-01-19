@@ -130,16 +130,16 @@ export default function TableTop10({ emotion, tingkat, locked }: { emotion: any,
               <Table.Tr >
                 <Table.Th>NO</Table.Th>
                 <Table.Th w={250}>{(tingkat == 2) ? 'KECAMATAN' : 'KABUPATEN / KOTA'}</Table.Th>
-                <Table.Th>LOCKED AUDIENCE</Table.Th>
-                <Table.Th>FILTERED AUDIENCE</Table.Th>
-                <Table.Th>CONFIDENCE</Table.Th>
-                <Table.Th>SUPPORTIVE</Table.Th>
-                <Table.Th>POSITIVE</Table.Th>
-                <Table.Th>UNDECIDED</Table.Th>
-                <Table.Th>UNSUPPORTIVE</Table.Th>
-                <Table.Th>UNCOMFORTABLE</Table.Th>
-                <Table.Th>NEGATIVE</Table.Th>
-                <Table.Th>DISAPPROVAL</Table.Th>
+                <Table.Th>SUARA TERKUNCI</Table.Th>
+                <Table.Th>SUARA TERFILTER</Table.Th>
+                <Table.Th>PERCAYA DIRI</Table.Th>
+                <Table.Th>MENDUKUNG</Table.Th>
+                <Table.Th>POSITIF</Table.Th>
+                <Table.Th>TIDAK MEMILIH</Table.Th>
+                <Table.Th>TIDAK MENDUKUNG</Table.Th>
+                <Table.Th>TIDAK NYAMAN</Table.Th>
+                <Table.Th>NEGATIF</Table.Th>
+                <Table.Th>TIDAK SETUJU</Table.Th>
               </Table.Tr>
             </Table.Thead>
             <Table.Tbody c={"white"} >

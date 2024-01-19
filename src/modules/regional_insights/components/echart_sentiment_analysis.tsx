@@ -55,7 +55,7 @@ export default function EchartSentimentAnalysis({ dataEmotion, dataLocked }: { d
       xAxis: [
         {
           type: 'category',
-          data: ['Confidence', 'Supportive', 'Positive', 'Undecided', 'Unsupportive', 'Uncomfortable', 'Negative', 'Disapproval'],
+          data: ['Percaya Diri', 'Mendukung', 'Positif', 'Tidak Memilih', 'Tidak Mendukung', 'Tidak Nyaman', 'Negatif', 'Tidak Setuju'],
           axisLabel: {
             rotate: 45,
             color: "white",
@@ -121,11 +121,11 @@ export default function EchartSentimentAnalysis({ dataEmotion, dataLocked }: { d
         <Group justify='space-between'>
           <Group pl={30}>
             <Box>
-              <Text c={WARNA.merah_emotion} fz={15}>Locked Audience</Text>
+              <Text c={WARNA.merah_emotion} fz={15}>Suara Terkunci</Text>
               <Text ta={'center'} c={WARNA.hijau_emotion} fz={25} fw={'bold'}>{Intl.NumberFormat("id-ID").format(Number(locked))}</Text>
             </Box>
             <Box mr={20}>
-              <Text c={WARNA.merah_emotion} fz={15}>Filtered Audience</Text>
+              <Text c={WARNA.merah_emotion} fz={15}>Suara Terfilter</Text>
               <Text ta={'center'} c={WARNA.hijau_emotion} fz={25} fw={'bold'}>{Intl.NumberFormat("id-ID").format(Number(dataEmotion.filtered))}</Text>
             </Box>
           </Group>

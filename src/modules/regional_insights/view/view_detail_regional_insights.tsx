@@ -35,7 +35,7 @@ export default function ViewDetailRegionalInsights({ emotion, area, audience, pc
   const router = useRouter()
   return (
     <>
-      <PageSubTitle text1='DETAIL REGIONAL' text2='INSIGHTS' />
+      <PageSubTitle text1='DETAIL WAWASAN' text2='REGIONAL' />
       <Box pt={20} style={{
         backgroundColor: WARNA.ungu,
         position: "sticky",
@@ -47,7 +47,7 @@ export default function ViewDetailRegionalInsights({ emotion, area, audience, pc
         <Group justify='space-between'>
           <Text fz={26} fw={"bold"} c={"white"}>{_.upperCase(area)}</Text>
           <Group>
-            <TextInput placeholder='SEARCH' mr={30} />
+            <TextInput placeholder='CARI' mr={30} />
             <ActionIcon variant="subtle" color='white' aria-label="back" onClick={() => router.push("/insights")}>
               <IoCloseSharp size={30} />
             </ActionIcon>
@@ -55,7 +55,7 @@ export default function ViewDetailRegionalInsights({ emotion, area, audience, pc
         </Group>
       </Box>
       <Stack pt={20}>
-        {emotion.map((item: any, i: any) => {
+        {emotion && emotion.map((item: any, i: any) => {
           return (
             <Box key={item.id} pb={30}>
               <Box pt={10}>
