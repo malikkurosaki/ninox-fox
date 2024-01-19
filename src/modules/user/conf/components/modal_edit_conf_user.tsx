@@ -8,16 +8,16 @@ import { isModalConf } from '../val/isModalConf';
 import funUpdateConfUser from '../fun/update_conf_user';
 
 
-export default function ModalEditConfUser({data, dataArea, isFront}: {data: any, dataArea: any, isFront: any}) {
+export default function ModalEditConfUser({ data, dataArea }: { data: any, dataArea: any }) {
   const [valOpenModal, setOpenModal] = useAtom(isModalConf)
   async function onUser() {
-    const create = await funUpdateConfUser({data: data, dataArea: dataArea, isFront: isFront})
+    const create = await funUpdateConfUser({ data: data, dataArea: dataArea })
     if (!create.success) return toast(create.message, { theme: "dark" });
     // await funLogUser({act:"ADD", desc:`User Add Data Role With User`})
     toast("Sukses", { theme: "dark" });
     setOpenModal(false);
     // router.back()
-}
+  }
   return (
     <>
       <Box>
