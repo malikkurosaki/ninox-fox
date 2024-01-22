@@ -1,5 +1,4 @@
 "use server"
-
 import prisma from "@/modules/_global/bin/prisma"
 
 export default async function funGetOneConfUser({ id }: { id: any }) {
@@ -50,7 +49,6 @@ export default async function funGetOneConfUser({ id }: { id: any }) {
         dataArea: dataArea,
         dataFront: dataFront
     }
-    console.log(dataFront)
 
     return allData
 

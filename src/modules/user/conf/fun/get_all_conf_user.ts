@@ -19,6 +19,9 @@ export default async function funGetAllConfUser() {
                     name: true
                 }
             }
+        },
+        orderBy: {
+            createdAt: 'asc'
         }
     })
 
@@ -54,7 +57,7 @@ export default async function funGetAllConfUser() {
 
     const dataOmitArea = dataArea.map((item) => ({
         ..._.omit(item, ["AreaProvinsi", "AreaKabkot", "Candidate"]),
-        area: (item.AreaKabkot == undefined)? item.AreaProvinsi?.name : item.AreaKabkot?.name,
+        area: (item.AreaKabkot == undefined) ? item.AreaProvinsi?.name : item.AreaKabkot?.name,
         candidate: item.Candidate?.name,
     }))
 
