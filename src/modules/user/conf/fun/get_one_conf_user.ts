@@ -1,5 +1,6 @@
 "use server"
 import prisma from "@/modules/_global/bin/prisma"
+import _ from "lodash"
 
 export default async function funGetOneConfUser({ id }: { id: any }) {
     const data = await prisma.user.findUnique({
@@ -26,13 +27,13 @@ export default async function funGetOneConfUser({ id }: { id: any }) {
             idProvinsi: true,
             idUser: true,
             isFront: true,
-            // AreaProvinsi: {
-            //     select: {
-            //         name: true
-            //     }
-            // }
         }
     })
+
+    const dataAreaFix = _.map(_.groupBy(dataArea, "idProvinsi"), (v: any) => ({
+        idProvinsi: String(v[0].idProvinsi),
+        idUser: v[0].idUser,
+    }))
 
     const dataFront = await prisma.userArea.findFirst({
         where: {
@@ -46,7 +47,7 @@ export default async function funGetOneConfUser({ id }: { id: any }) {
 
     const allData = {
         dataUser: data,
-        dataArea: dataArea,
+        dataArea: dataAreaFix,
         dataFront: dataFront
     }
 
