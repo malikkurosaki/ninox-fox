@@ -53,12 +53,15 @@ export default function ListConfUser({ data }: { data: any }) {
                       }}
                     >
                       <Table.Th>Role User</Table.Th>
-                      <Table.Th >Name</Table.Th>
+                      <Table.Th>Name</Table.Th>
                       <Table.Th>Email</Table.Th>
                       <Table.Th>Password</Table.Th>
                       <Table.Th>Phone</Table.Th>
-                      <Table.Th>Default Area</Table.Th>
-                      <Table.Th>Default Kandidat</Table.Th>
+                      <Table.Th>
+                        <Center>
+                          Default
+                        </Center>
+                      </Table.Th>
                       <Table.Th>
                         <Center>
                           Action
@@ -74,8 +77,13 @@ export default function ListConfUser({ data }: { data: any }) {
                         <Table.Td>{v.email}</Table.Td>
                         <Table.Td>{v.password}</Table.Td>
                         <Table.Td>{v.phone}</Table.Td>
-                        <Table.Td>{v.userArea && v.userArea.area}</Table.Td>
-                        <Table.Td>{v.userArea && v.userArea.candidate}</Table.Td>
+                        <Table.Td>
+                          <Center>
+                            <Button variant='subtle' onClick={() => { router.push(`/dashboard/user/default/${v.id}`) }}>
+                              {v.userArea && v.userArea.area} - {(v.userArea && v.userArea.candidate) ? v.userArea.candidate : 'NULL'}
+                            </Button>
+                          </Center>
+                        </Table.Td>
                         <Table.Td>
                           <Group justify="center">
                             <Box>

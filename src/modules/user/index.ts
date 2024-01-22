@@ -1,4 +1,4 @@
-import { AddConfUser } from '@/modules/user/conf';
+import { AddConfUser, DefaultConfUser } from '@/modules/user/conf';
 import { EditConfUser, funGetOneConfUser } from '@/modules/user/conf';
 import { ListConfUser, funGetAllConfUser } from '@/modules/user/conf';
 import { AddRoleUser, ListRoleUser, EditRoleUser } from '@/modules/user/role';
@@ -49,3 +49,4 @@ export { ModalEditRoleUser }
 export { funAddRoleUser }
 export { funUpdateRoleUser }
 export { funGetUserDefaultFront }
+export { DefaultConfUser }

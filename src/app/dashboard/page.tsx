@@ -11,7 +11,7 @@ export default async function Page() {
   const gabungAll = await candateTingkat()
   const dataUser = await funGetUserByCookies()
   const valueWilayah = await funGetAreaDefault()
-  const dataAreaPro = await funGetUserAreaProvinsi()
+  const dataAreaPro = await funGetUserAreaProvinsi({})
 
   return (
     <>

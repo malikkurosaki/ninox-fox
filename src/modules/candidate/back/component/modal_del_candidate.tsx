@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import toast from "react-simple-toasts";
 import funSetStatusCandidate from "../fun/set_status_candidate";
 import { funGetAccessArea } from "@/modules/_global";
+import { funLogUser } from "@/modules/user";
 
 
 /**
@@ -27,6 +28,7 @@ export default function ModalDelCandidate({ data, provinsi, onSuccess }: { data:
         }
         const del = await funSetStatusCandidate({ dataUpdate: data })
         if (!del.success) return toast("Failed", { theme: "dark" })
+        await funLogUser({ act: 'UPD', desc: `User mengubah status kandidat`, idContent: data.idCandidate, tbContent: 'candidate' })
         toast("Sukses", { theme: "dark" });
         setOpenModal(false);
         onSuccess(true);

@@ -79,14 +79,16 @@ model User {
 }
 
 model UserLog {
-  id          String   @id @default(cuid())
-  User        User     @relation(fields: [idUser], references: [id])
-  idUser      String
-  activity    String
-  description String   @db.Text
-  isActive    Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id           String   @id @default(cuid())
+  User         User     @relation(fields: [idUser], references: [id])
+  idUser       String
+  activity     String
+  description  String   @db.Text
+  idContent    String?  @db.Text
+  tableContent String?  @db.Text
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }
 
 model AreaProvinsi {

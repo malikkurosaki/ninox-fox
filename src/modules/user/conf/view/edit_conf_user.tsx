@@ -138,7 +138,8 @@ export default function EditConfUser({ data, role, wilayah }: { data: any, role:
                     <Table.Tr key={i}>
                       <Table.Td>{i + 1}</Table.Td>
                       <Table.Td>
-                        <Chip.Group multiple value={isCekWilayah}
+                        <Chip.Group multiple
+                          value={isCekWilayah}
                           onChange={setCekWilayah}
                         >
                           <Chip
@@ -170,7 +171,7 @@ export default function EditConfUser({ data, role, wilayah }: { data: any, role:
               onClick={validationData}
             >
               <Group>
-                <Text fw={"bold"} c={"white"}>UPLOAD</Text>
+                <Text fw={"bold"} c={"white"}>SAVE</Text>
               </Group>
             </Box>
           </Group>

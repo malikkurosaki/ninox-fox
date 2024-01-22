@@ -6,14 +6,21 @@ import { pwd_key_config } from "../../bin/val_global"
 import _ from "lodash"
 import { revalidatePath } from "next/cache"
 
-export default async function funUpdateUserArea({ provinsi, kabkot, candidate }: { provinsi: any, kabkot: any, candidate: any }) {
+export default async function funUpdateUserArea({ provinsi, kabkot, candidate, user }: { provinsi: any, kabkot: any, candidate: any, user?: any }) {
+    let userfix
+
     const c = cookies().get("_cookiesNinox")
     const dataCookies = await unsealData(c!.value, { password: pwd_key_config as string })
 
+    if (!_.isNull(user) && !_.isUndefined(user)) {
+        userfix = user
+    } else {
+        userfix = dataCookies
+    }
+
     const dataAll = await prisma.userArea.updateMany({
         where: {
-            idUser: String(dataCookies),
-
+            idUser: String(userfix)
         },
         data: {
             isFront: false,
@@ -24,7 +31,7 @@ export default async function funUpdateUserArea({ provinsi, kabkot, candidate }:
 
     await prisma.userArea.updateMany({
         where: {
-            idUser: String(dataCookies),
+            idUser: String(userfix),
             idProvinsi: Number(provinsi),
             idKabkot: (_.isNull(kabkot)) ? null : Number(kabkot)
         },

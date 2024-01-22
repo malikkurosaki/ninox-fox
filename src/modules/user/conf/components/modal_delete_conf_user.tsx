@@ -19,7 +19,7 @@ export default function ModalDeleteConfUser({ id, onSuccess }: { id: any, onSucc
   async function delRole() {
     const del = await funDeleteConfUser({ id: id })
     if (!del.success) return toast(del.message, { theme: "dark" })
-    await funLogUser({ act: "DELETE", desc: `User Delete Data User (ID: ${id})` })
+    // await funLogUser({ act: "DELETE", desc: `User Delete Data User (ID: ${id})` })
     toast("Success", { theme: "dark" });
     setOpenModal(false);
     onSuccess(del.delData)
