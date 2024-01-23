@@ -15,7 +15,7 @@ export default function EchartPresentaseKemiskinan() {
   async function loadData() {
     const option: EChartsOption = {
       title: {
-        text: "PERSENTASE KEMISKINAN KOTA DENPASAR",
+        text: "DATA KEMISKINAN KOTA DENPASAR",
         textStyle: {
           color: "white",
           fontSize: 13,
@@ -32,7 +32,7 @@ export default function EchartPresentaseKemiskinan() {
         source: [
           ['data', 'Kemiskinan'],
           // ['Denpasar', 43],
-          ['Denpasar', 0],
+          ['Denpasar', 2487],
         ]
       },
       xAxis: [
@@ -47,7 +47,7 @@ export default function EchartPresentaseKemiskinan() {
         {
           type: 'value',
           show: true,
-          max: "100",
+          max: "3000",
           splitLine: {
             lineStyle: {
               color: "gray",
@@ -55,7 +55,7 @@ export default function EchartPresentaseKemiskinan() {
             }
           },
           axisLabel: {
-            formatter: `{value}% `,
+            formatter: `{value} `,
             color: "white"
           },
         }
