@@ -47,6 +47,7 @@ export default function EchartPeredaranNarkoba() {
         {
           type: 'value',
           show: true,
+          max: "100",
           splitLine: {
             lineStyle: {
               color: "gray",

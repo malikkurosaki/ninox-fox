@@ -55,7 +55,7 @@ export default function EchartPesertaBpjs() {
             }
           },
           axisLabel: {
-            formatter: `{value}% `,
+            formatter: `{value}`,
             color: "white"
           },
         }
