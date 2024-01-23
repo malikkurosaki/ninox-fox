@@ -12,7 +12,7 @@ import { funGetAccessArea } from "@/modules/_global"
  * @returns {component} modal konfirmasi add ml ai.
  */
 
-export default function ModalAddMlAi({ candidate, text }: { candidate: any, text: any }) {
+export default function ModalAddMlAi({ candidate, text, onSuccess }: { candidate: any, text: any, onSuccess: (val: any) => void }) {
     const [openModal, setOpenModal] = useAtom(isModalMlAi)
     const router = useRouter()
 
@@ -23,10 +23,10 @@ export default function ModalAddMlAi({ candidate, text }: { candidate: any, text
             return toast("Anda tidak mempunyai akses ke wilayah tersebut", { theme: "dark" })
         }
         const addData = await funAddMlAi({ candidate: candidate, content: text })
-        if (!addData.success) return toast(addData.message, { theme: "dark" });
-        toast("Sukses", { theme: "dark" });
-        setOpenModal(false);
-        router.back()
+        if (!addData.success) return toast(addData.message, { theme: "dark" })
+        toast("Sukses", { theme: "dark" })
+        setOpenModal(false)
+        onSuccess(true)
     }
 
 

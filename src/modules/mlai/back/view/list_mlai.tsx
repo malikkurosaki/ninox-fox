@@ -51,7 +51,7 @@ export default function ListMlAi({ params, provinsi, kabupaten, datatable }: { p
                     }))}
                     required
                     label={"Provinsi"}
-                    value={isProvinsi}
+                    value={String(isProvinsi)}
                     onChange={(val) => (
                         onKabupaten({ idProv: val })
                     )}
@@ -64,7 +64,7 @@ export default function ListMlAi({ params, provinsi, kabupaten, datatable }: { p
                         label: kab.name
                     }))}
                     label={"Kabupaten"}
-                    value={isKabupaten}
+                    value={String(isKabupaten)}
                     onChange={(val) => (
                         setKabupaten(val)
                     )}

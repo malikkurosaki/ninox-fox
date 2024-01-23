@@ -25,7 +25,6 @@ export default function ModalEditMlAi({ data, content }: { data: any, content: a
         const edit = await funEditMlAi({ body: data, text: content })
         toast("Sukses", { theme: "dark" });
         setOpenModal(false);
-        router.back()
     }
 
     return (
