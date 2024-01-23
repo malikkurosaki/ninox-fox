@@ -47,6 +47,7 @@ export default function EchartJaminanPensiun() {
         {
           type: 'value',
           show: true,
+          max: "100",
           splitLine: {
             lineStyle: {
               color: "gray",

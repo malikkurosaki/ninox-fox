@@ -72,6 +72,7 @@ export default function TableDataGuruHonorer() {
         {
           type: 'value',
           show: true,
+          max: "100",
           splitLine: {
             lineStyle: {
               color: "gray",

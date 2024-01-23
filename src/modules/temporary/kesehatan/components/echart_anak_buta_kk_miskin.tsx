@@ -47,6 +47,7 @@ export default function EchartAnakButaKkMiskin() {
         {
           type: 'value',
           show: true,
+          max: "100",
           splitLine: {
             lineStyle: {
               color: "gray",
