@@ -9,6 +9,7 @@ export default async function funAddMlAi({ candidate, content }: { candidate: st
       content: content
     },
     select: {
+      id: true,
       Candidate: {
         select: {
           name: true,
@@ -31,6 +32,7 @@ export default async function funAddMlAi({ candidate, content }: { candidate: st
 
   return {
     success: true,
+    data: data.id,
     message: "Success"
   }
 }

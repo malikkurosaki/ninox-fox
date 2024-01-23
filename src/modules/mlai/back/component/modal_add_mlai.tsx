@@ -6,6 +6,7 @@ import toast from "react-simple-toasts"
 import { useRouter } from "next/navigation"
 import funAddMlAi from "../fun/fun_add_mlai"
 import { funGetAccessArea } from "@/modules/_global"
+import { funLogUser } from "@/modules/user"
 
 /**
  * Fungsi untuk menampilkan modal konfirmasi add ml ai.
@@ -24,6 +25,7 @@ export default function ModalAddMlAi({ candidate, text, onSuccess }: { candidate
         }
         const addData = await funAddMlAi({ candidate: candidate, content: text })
         if (!addData.success) return toast(addData.message, { theme: "dark" })
+        await funLogUser({ act: 'ADD', desc: `User menambah data ML-AI`, idContent: addData.data, tbContent: 'mlai' })
         toast("Sukses", { theme: "dark" })
         setOpenModal(false)
         onSuccess(true)
