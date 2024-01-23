@@ -54,6 +54,7 @@ export default function ViewKamtibmas() {
         {
           type: 'value',
           show: true,
+          max: "100",
           splitLine: {
             lineStyle: {
               color: "gray",
