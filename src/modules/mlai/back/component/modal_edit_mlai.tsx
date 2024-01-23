@@ -6,6 +6,7 @@ import toast from "react-simple-toasts"
 import { useRouter } from "next/navigation"
 import funEditMlAi from "../fun/fun_edit_mlai"
 import { funGetAccessArea } from "@/modules/_global"
+import { funLogUser } from "@/modules/user"
 
 /**
  * Fungsi untuk menampilkan modal konfirmasi edit ml ai.
@@ -23,9 +24,9 @@ export default function ModalEditMlAi({ data, content }: { data: any, content: a
             return toast("Anda tidak mempunyai akses ke wilayah tersebut", { theme: "dark" })
         }
         const edit = await funEditMlAi({ body: data, text: content })
+        await funLogUser({ act: 'UPD', desc: `User mengubah data ML-AI`, idContent: data.id, tbContent: 'mlai' })
         toast("Sukses", { theme: "dark" });
         setOpenModal(false);
-        router.back()
     }
 
     return (
