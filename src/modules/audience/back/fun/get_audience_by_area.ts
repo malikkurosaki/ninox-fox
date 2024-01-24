@@ -29,6 +29,9 @@ export default async function funGetAudienceByArea({ find }: { find: any }) {
                             name: true
                         }
                     }
+                },
+                orderBy: {
+                    id: 'asc'
                 }
             })
 
@@ -63,6 +66,9 @@ export default async function funGetAudienceByArea({ find }: { find: any }) {
                             name: true
                         }
                     }
+                },
+                orderBy: {
+                    id: 'asc'
                 }
             })
 
@@ -96,6 +102,9 @@ export default async function funGetAudienceByArea({ find }: { find: any }) {
                             name: true,
                         }
                     }
+                },
+                orderBy: {
+                    id: 'asc'
                 }
             })
 
@@ -124,6 +133,9 @@ export default async function funGetAudienceByArea({ find }: { find: any }) {
                         name: true
                     }
                 }
+            },
+            orderBy: {
+                id: 'asc'
             }
         })
 
@@ -139,7 +151,7 @@ export default async function funGetAudienceByArea({ find }: { find: any }) {
 
         titleTrue = "SELURUH INDONESIA"
         // dataTable = []
-        th= "PROVINSI"
+        th = "PROVINSI"
     }
 
     const allData = {
