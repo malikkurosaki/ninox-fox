@@ -61,7 +61,7 @@ export default function ViewListLeader({ datadownload, param, provinsi, kabupate
   }
 
   function onProccess() {
-    if (_.isNull(isProvinsi)) return toast("Silahkan pilih provinsi", { theme: "dark" })
+    // if (_.isNull(isProvinsi)) return toast("Silahkan pilih provinsi", { theme: "dark" })
     router.replace('/dashboard/leader-trait-assessment?prov=' + isProvinsi + '&city=' + isKabupaten + '&kec=' + isKecamatan)
   }
 
@@ -84,8 +84,7 @@ export default function ViewListLeader({ datadownload, param, provinsi, kabupate
                     value: String(pro.id),
                     label: pro.name
                   }))}
-                  value={isProvinsi}
-                  required
+                  value={(_.isNull(isProvinsi)) ? null : String(isProvinsi)}
                   label={"Provinsi"}
                   searchable
                   onChange={(val) => onProvinsi({ idProv: val })}
@@ -96,7 +95,7 @@ export default function ViewListLeader({ datadownload, param, provinsi, kabupate
                     value: String(kab.id),
                     label: kab.name
                   }))}
-                  value={isKabupaten}
+                  value={(_.isNull(isKabupaten)) ? null : String(isKabupaten)}
                   label="Kabupaten/Kota"
                   searchable
                   onChange={(val) => onKabupaten({ idKab: val })}
@@ -107,7 +106,7 @@ export default function ViewListLeader({ datadownload, param, provinsi, kabupate
                     value: String(kec.id),
                     label: kec.name
                   }))}
-                  value={isKecamatan}
+                  value={(_.isNull(isKecamatan)) ? null : String(isKecamatan)}
                   label="Kecamatan"
                   searchable
                   onChange={(val) => setKecamatan(val)}

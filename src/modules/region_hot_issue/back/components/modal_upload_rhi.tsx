@@ -26,7 +26,7 @@ export default function ModalUploadRhi({ data, onSuccess }: { data: any, onSucce
             return toast("Anda tidak mempunyai akses ke wilayah tersebut", { theme: "dark" })
         }
         await funUploadRhi({ body: data })
-        await funLogUser({ act: 'UPL', desc: `User mengupload data Region Hot Issue`, idContent: '-', tbContent: 'regionhotissues' })
+        await funLogUser({ act: 'UPL', desc: `User mengupload data Region Hot Issue`, idContent: '-', tbContent: 'rhi' })
         setLoading(false)
         toast('Success', { theme: 'dark' })
         setOpenModal(false)

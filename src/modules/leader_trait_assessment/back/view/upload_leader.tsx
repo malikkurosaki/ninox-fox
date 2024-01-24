@@ -12,7 +12,6 @@ import { useAtom } from 'jotai';
 import { isModalLta } from '../val/val_lta';
 import ModalUploadLta from '../components/modal_upload_lta';
 
-
 /**
  * Fungsi untuk upload leader.
  * @returns {Component} hasil untuk menampilkan upload leader
@@ -20,7 +19,7 @@ import ModalUploadLta from '../components/modal_upload_lta';
 export function ViewUploadLeader() {
   const [json, setJson] = useState<any[]>([])
   const [openModal, setOpenModal] = useAtom(isModalLta)
-
+  const [isLoading, setLoading] = useState(false)
 
   async function onLoad(data: any) {
     if (data.length > 0) {
@@ -67,6 +66,7 @@ export function ViewUploadLeader() {
         >
           <Text fw={"bold"} c={"white"} mb={20}>UPLOAD DATA LEADER TRAIT ASSESSMENT</Text>
           <Dropzone
+            loading={isLoading}
             style={{
               border: "1px dashed",
               color: "white",
@@ -74,9 +74,11 @@ export function ViewUploadLeader() {
               cursor: "pointer"
             }}
             onDrop={async (files: any) => {
+              setLoading(true)
               const csv_file = Buffer.from(await files[0].arrayBuffer()).toString()
               const { data } = papa.parse(csv_file, { header: true, })
               onLoad(data)
+              setLoading(false)
             }}
             onReject={(files: any) => {
               toast("success")
@@ -185,9 +187,8 @@ export function ViewUploadLeader() {
                   </Box>
                 </Box>
                 <Group justify="flex-end">
-                  <Box
+                  <Button
                     style={{
-                      padding: 10,
                       borderRadius: 5,
                       paddingLeft: 20,
                       paddingRight: 20,
@@ -206,7 +207,7 @@ export function ViewUploadLeader() {
                       <AiOutlineUpload size={25} color={"white"} />
                       <Text fw={"bold"} c={"white"}>UPLOAD</Text>
                     </Group>
-                  </Box>
+                  </Button>
                 </Group>
               </>
             )

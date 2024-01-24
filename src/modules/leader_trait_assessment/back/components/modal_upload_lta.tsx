@@ -5,6 +5,8 @@ import toast from "react-simple-toasts"
 import { isModalLta } from "../val/val_lta"
 import funUploadLta from "../fun/upload_lta"
 import { useState } from "react"
+import { funLogUser } from "@/modules/user"
+import { funGetAccessArea, funGetIdprovByName } from "@/modules/_global"
 
 export default function ModalUploadLta({ data, onSuccess }: { data: any, onSuccess: (val: any) => void }) {
     const [openModal, setOpenModal] = useAtom(isModalLta)
@@ -12,12 +14,22 @@ export default function ModalUploadLta({ data, onSuccess }: { data: any, onSucce
 
     async function onUpload() {
         setLoading(true)
-        await funUploadLta({ body: data })
-        // await funLogUser({ act: "UPLOAD", desc: `User Uploads Data Leader Trait Assessment` })
-        setLoading(false)
-        toast('Success', { theme: 'dark' })
+        const prov = await funGetIdprovByName({ name: data[0]?.Provinsi })
+        if (prov == null) {
+            setOpenModal(false)
+            return toast("Nama provinsi salah", { theme: "dark" })
+        }
+        const cek = await funGetAccessArea({ provinsi: prov?.id })
+        if (!cek) {
+            return toast("Anda tidak mempunyai akses ke wilayah tersebut", { theme: "dark" })
+        } else {
+            await funUploadLta({ body: data })
+            await funLogUser({ act: 'UPL', desc: `User mengupload data Leader Trait Assessment`, idContent: '-', tbContent: 'lta' })
+            setLoading(false)
+            toast('Success', { theme: 'dark' })
+            onSuccess(true)
+        }
         setOpenModal(false)
-        onSuccess(true)
     }
 
     return (
