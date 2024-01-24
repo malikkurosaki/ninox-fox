@@ -13,7 +13,6 @@ import {
 } from "@mantine/core";
 import { CiRead, CiUnread } from "react-icons/ci";
 import { MdDelete, MdEditCalendar } from "react-icons/md";
-import InnerHTML from 'dangerously-set-html-content'
 
 export default function ComponentTableStep({ v, i, onClick }: { v: any; i: any, onClick: (val: any) => void }) {
   const open = useState(false);
@@ -88,7 +87,7 @@ export default function ComponentTableStep({ v, i, onClick }: { v: any; i: any, 
                   Content
                 </Text>
                 <Stack c={'white'}>
-                  <InnerHTML html={v.content} />
+                  <Box dangerouslySetInnerHTML={{ __html: v.content }} />
                 </Stack>
               </Box>
             </Collapse>

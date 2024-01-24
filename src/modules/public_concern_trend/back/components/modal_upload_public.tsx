@@ -5,6 +5,8 @@ import toast from "react-simple-toasts"
 import { isModalPct } from "../val/val_public"
 import { useState } from "react"
 import funUploadPct from "../fun/upload_pct"
+import { funGetAccessArea, funGetIdprovByName } from "@/modules/_global"
+import { funLogUser } from "@/modules/user"
 
 export default function ModalUploadPct({ data, onSuccess }: { data: any, onSuccess: (val: any) => void }) {
     const [openModal, setOpenModal] = useAtom(isModalPct)
@@ -12,8 +14,18 @@ export default function ModalUploadPct({ data, onSuccess }: { data: any, onSucce
 
     async function onUpload() {
         setLoading(true)
+        const prov = await funGetIdprovByName({ name: data[0]?.Provinsi })
+        if (prov == null) {
+            setLoading(false)
+            return toast("Nama provinsi salah", { theme: "dark" })
+        }
+        const cek = await funGetAccessArea({ provinsi: prov?.id })
+        if (!cek) {
+            setLoading(false)
+            return toast("Anda tidak mempunyai akses ke wilayah tersebut", { theme: "dark" })
+        }
         await funUploadPct({ body: data })
-        // await funLogUser({ act: "UPLOAD", desc: `User Uploads Data Public Concerns Trends` })
+        await funLogUser({ act: 'UPL', desc: `User mengupload data Public Concern Trends`, idContent: '-', tbContent: 'pct' })
         setLoading(false)
         toast('Success', { theme: 'dark' })
         setOpenModal(false)

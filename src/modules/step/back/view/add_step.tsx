@@ -18,6 +18,7 @@ import { Color } from '@tiptap/extension-color';
 import TextStyle from '@tiptap/extension-text-style';
 import { Link, RichTextEditor } from "@mantine/tiptap"
 import { funGetCandidateActiveByArea } from "@/modules/candidate"
+import _ from "lodash"
 
 /**
  * Fungsi untuk menampilkan view form add step.
@@ -31,29 +32,38 @@ export default function AddStep({ params, candidate, provinsi, kabupaten }: { pa
     const [dataKabupaten, setDataKabupaten] = useState<any>(kabupaten)
     const [isProvinsi, setProvinsi] = useState<any>(params.idProvinsi || null)
     const [isKabupaten, setKabupaten] = useState<any>(params.idKabkot || null)
-    const [isCandidate, setCandidate] = useState<any>("")
+    const [isCandidate, setCandidate] = useState<any>(null)
+    const [isCategory, setCategory] = useState<any>(null)
 
     async function onProvinsi({ idProv }: { idProv: any }) {
         setProvinsi(idProv)
         setKabupaten(null)
         setCandidate(null)
+        setBody({
+            ...isBody,
+            idCandidate: ''
+        })
         const dataDbKab = await MasterKabGetByProvince({ idProvinsi: Number(idProv) })
         const dataDbCan = await funGetCandidateActiveByArea({ find: { idProvinsi: Number(idProv), tingkat: 1 } })
         setDataKabupaten(dataDbKab)
         setDataCandidate(dataDbCan)
-      }
-    
-      async function onKabupaten({ idKab }: { idKab: any }) {
+    }
+
+    async function onKabupaten({ idKab }: { idKab: any }) {
         setKabupaten(idKab)
         setCandidate(null)
+        setBody({
+            ...isBody,
+            idCandidate: ''
+        })
         const dataDbCan = await funGetCandidateActiveByArea({ find: { idProvinsi: Number(isProvinsi), idKabkot: Number(idKab), tingkat: 2 } })
         setDataCandidate(dataDbCan)
-      }
+    }
 
-      useEffect(() => {
-        setProvinsi((params.idProvinsi == 0) ? null : params.idProvinsi)
-        setKabupaten((params.idKabkot == 0) ? null : params.idKabkot)
-      }, [params])
+    // useEffect(() => {
+    //     setProvinsi((params.idProvinsi == 0) ? null : params.idProvinsi)
+    //     setKabupaten((params.idKabkot == 0) ? null : params.idKabkot)
+    // }, [params])
 
 
     const [isBody, setBody] = useState({
@@ -78,8 +88,8 @@ export default function AddStep({ params, candidate, provinsi, kabupaten }: { pa
     });
 
     function onConfirmation() {
-        if (Object.values(isBody).includes("") || editor?.getHTML() == '<p></p>')
-            return toast("Data cannot be empty", { theme: "dark" });
+        if (Object.values(isBody).includes("") || editor?.getHTML() == '' || editor?.getHTML() == '<p></p>')
+            return toast("Form cannot be empty", { theme: "dark" });
         setOpenModal(true)
     }
     return (
@@ -101,7 +111,7 @@ export default function AddStep({ params, candidate, provinsi, kabupaten }: { pa
                             label={"Provinsi"}
                             value={isProvinsi}
                             onChange={(val) => onProvinsi({ idProv: val })}
-                            // disabled
+                        // disabled
                         />
                         <Select
                             placeholder="Pilih Kabupaten/Kota"
@@ -112,7 +122,7 @@ export default function AddStep({ params, candidate, provinsi, kabupaten }: { pa
                             label={"Kabupaten"}
                             value={isKabupaten}
                             onChange={(val) => onKabupaten({ idKab: val })}
-                            // disabled
+                        // disabled
                         />
                     </Group>
                     <Select mt={20}
@@ -122,14 +132,14 @@ export default function AddStep({ params, candidate, provinsi, kabupaten }: { pa
                             label: can.name
                         }))}
                         required
-                        value={String(isBody.idCandidate)}
+                        value={isCandidate}
                         label={"Kandidat"}
                         searchable
                         onChange={(val) => {
                             setCandidate(val)
                             setBody({
                                 ...isBody,
-                                idCandidate: String(val)
+                                idCandidate: (_.isNull(val)) ? '' : String(val)
                             })
                         }}
                     />
@@ -139,10 +149,12 @@ export default function AddStep({ params, candidate, provinsi, kabupaten }: { pa
                     data={["SOSIAL", "TEKNOLOGI", "EKONOMI", "POLITIK"]}
                     label={"Kategori"}
                     required
+                    value={isCategory}
                     onChange={(val) => {
+                        setCategory(val)
                         setBody({
                             ...isBody,
-                            category: String(val)
+                            category: (_.isNull(val)) ? '' : String(val)
                         })
                     }}
                 />
@@ -257,7 +269,19 @@ export default function AddStep({ params, candidate, provinsi, kabupaten }: { pa
                 withCloseButton={false}
                 closeOnClickOutside={false}
             >
-                <ModalAddStep data={isBody} text={editor?.getHTML()} />
+                <ModalAddStep data={isBody} text={editor?.getHTML()} onSuccess={() => {
+                    editor?.commands.setContent('<p></p>')
+                    setCategory(null)
+                    setProvinsi(null)
+                    setKabupaten(null)
+                    setCandidate(null)
+                    setBody({
+                        ...isBody,
+                        idCandidate: '',
+                        category: '',
+                        sentiment: '1'
+                    })
+                }} />
             </Modal>
         </>
     )

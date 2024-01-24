@@ -78,19 +78,7 @@ export default function ComponentTableRHI({ v, i }: { v: any; i: any }) {
                                 <Text c={"white"} fw={"bold"} fz={20} mb={10}>
                                     Content
                                 </Text>
-                                {/* <Text c={"white"} dangerouslySetInnerHTML={RubahHTML(v.content)} /> */}
-                                <Text c={"white"}>
-                                    <TextAnimation
-                                        phrases={[...v.description.split('\n')]}
-                                        typingSpeed={0}
-                                        backspaceDelay={0}
-                                        eraseDelay={0}
-                                        timeComplete={0}
-                                        errorProbability={0}
-                                        eraseOnComplete={false}
-                                        isSecure={false}
-                                    />
-                                </Text>
+                                <Box c={"white"} dangerouslySetInnerHTML={{ __html: v.description }} />
                             </Box>
                         </Collapse>
                     </Table.Td>
