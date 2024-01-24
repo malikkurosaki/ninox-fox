@@ -15,6 +15,9 @@ export default async function funAddStep({ body, content }: { body: Step, conten
             category: body.category,
             content: content,
             sentiment: Number(body.sentiment)
+        },
+        select: {
+            id: true
         }
     })
 
@@ -27,6 +30,7 @@ export default async function funAddStep({ body, content }: { body: Step, conten
 
     return {
         success: true,
+        data: data.id,
         message: "Success"
     }
 }

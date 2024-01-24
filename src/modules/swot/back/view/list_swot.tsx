@@ -56,7 +56,7 @@ export default function ListSwot({ params, provinsi, kabupaten, datatable }: { p
                     required
                     label={"Provinsi"}
                     searchable
-                    value={String(isProvinsi)}
+                    value={(_.isNull(isProvinsi)) ? null : String(isProvinsi)}
                     onChange={(val) => (
                         onKabupaten({ idProv: val })
                     )}
@@ -68,7 +68,7 @@ export default function ListSwot({ params, provinsi, kabupaten, datatable }: { p
                         value: String(kab.id),
                         label: kab.name,
                     }))}
-                    value={String(isKabupaten)}
+                    value={(_.isNull(isKabupaten)) ? null : String(isKabupaten)}
                     onChange={(val) => (
                         setKabupaten(val)
                     )}
