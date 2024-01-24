@@ -25,6 +25,7 @@ import funGetUserAreaProvinsi from './home/fan/get_area_provinsi';
 import funGetOneKabkot from './fun/fun_get_one_kabkot';
 import funGetOneKecamatan from './fun/fun_get_one_kecamatan';
 import funGetAreaByDefault from './fun/get_area_by_default';
+import funGetIdprovByName from './back/fun/get_idprov_by_name';
 
 
 export { provinsiCount }
@@ -56,3 +57,4 @@ export { funGetOneKabkot }
 export { funGetOneKecamatan }
 export { funGetAreaByDefault }
 export { ViewWilayah }
+export { funGetIdprovByName }
