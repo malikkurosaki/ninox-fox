@@ -16,20 +16,22 @@ export default function ModalUploadLta({ data, onSuccess }: { data: any, onSucce
         setLoading(true)
         const prov = await funGetIdprovByName({ name: data[0]?.Provinsi })
         if (prov == null) {
-            setOpenModal(false)
+            setLoading(false)
             return toast("Nama provinsi salah", { theme: "dark" })
         }
         const cek = await funGetAccessArea({ provinsi: prov?.id })
         if (!cek) {
+            setLoading(false)
             return toast("Anda tidak mempunyai akses ke wilayah tersebut", { theme: "dark" })
         } else {
             await funUploadLta({ body: data })
             await funLogUser({ act: 'UPL', desc: `User mengupload data Leader Trait Assessment`, idContent: '-', tbContent: 'lta' })
             setLoading(false)
             toast('Success', { theme: 'dark' })
+            setOpenModal(false)
             onSuccess(true)
         }
-        setOpenModal(false)
+        
     }
 
     return (
