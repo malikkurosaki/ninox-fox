@@ -15,7 +15,6 @@ import {
 import { CiRead, CiUnread } from "react-icons/ci";
 import { MdDelete, MdEditCalendar } from "react-icons/md";
 import { isModalValue } from "../val/val_swot";
-import InnerHTML from 'dangerously-set-html-content'
 
 export default function ComponentTable({ v, i, onClick }: { v: any; i: any, onClick: (val: any) => void }) {
   const open = useState(false);
@@ -24,12 +23,6 @@ export default function ComponentTable({ v, i, onClick }: { v: any; i: any, onCl
 
   function callBackDelete({ idDel }: { idDel: any }) {
     onClick(idDel)
-  }
-
-  function RubahHTML(c: any) {
-    return {
-      __html: c
-    }
   }
 
   return (
@@ -95,21 +88,8 @@ export default function ComponentTable({ v, i, onClick }: { v: any; i: any, onCl
                   Content
                 </Text>
                 <Stack c={'white'}>
-                  <InnerHTML html={v.content} />
+                  <Box dangerouslySetInnerHTML={{ __html: v.content }} />
                 </Stack>
-                {/* <Text c={"white"} dangerouslySetInnerHTML={RubahHTML(v.content)} /> */}
-                {/* <Text c={"white"}>
-                  <TextAnimation
-                    phrases={[...v.content.split('\n')]}
-                    typingSpeed={0}
-                    backspaceDelay={0}
-                    eraseDelay={0}
-                    timeComplete={0}
-                    errorProbability={0}
-                    eraseOnComplete={false}
-                    isSecure={false}
-                  />
-                </Text> */}
               </Box>
             </Collapse>
           </Table.Td>
