@@ -31,31 +31,36 @@ export default function AddSwot({ params, candidate, provinsi, kabupaten }: { pa
     const [isDataCandidate, setDataCandidate] = useState(candidate)
     const [dataProvinsi, setDataProvinsi] = useState(provinsi)
     const [dataKabupaten, setDataKabupaten] = useState<any>(kabupaten)
-    const [isProvinsi, setProvinsi] = useState<any>(params.idProvinsi || null)
-    const [isKabupaten, setKabupaten] = useState<any>(params.idKabkot || null)
-    const [isCandidate, setCandidate] = useState<any>("")
+    const [isProvinsi, setProvinsi] = useState<any>(null)
+    const [isKabupaten, setKabupaten] = useState<any>(null)
+    const [isCandidate, setCandidate] = useState<any>(null)
+    const [isCategory, setCategory] = useState<any>(null)
 
     async function onProvinsi({ idProv }: { idProv: any }) {
         setProvinsi(idProv)
         setKabupaten(null)
         setCandidate(null)
+        setBody({
+            ...isBody,
+            idCandidate: ""
+        })
         const dataDbKab = await MasterKabGetByProvince({ idProvinsi: Number(idProv) })
         const dataDbCan = await funGetCandidateActiveByArea({ find: { idProvinsi: Number(idProv), tingkat: 1 } })
         setDataKabupaten(dataDbKab)
         setDataCandidate(dataDbCan)
-      }
-    
-      async function onKabupaten({ idKab }: { idKab: any }) {
+    }
+
+    async function onKabupaten({ idKab }: { idKab: any }) {
         setKabupaten(idKab)
         setCandidate(null)
         const dataDbCan = await funGetCandidateActiveByArea({ find: { idProvinsi: Number(isProvinsi), idKabkot: Number(idKab), tingkat: 2 } })
         setDataCandidate(dataDbCan)
-      }
+    }
 
-      useEffect(() => {
-        setProvinsi((params.idProvinsi == 0) ? null : params.idProvinsi)
-        setKabupaten((params.idKabkot == 0) ? null : params.idKabkot)
-      }, [params])
+    // useEffect(() => {
+    //     setProvinsi((params.idProvinsi == 0) ? null : params.idProvinsi)
+    //     setKabupaten((params.idKabkot == 0) ? null : params.idKabkot)
+    // }, [params])
 
 
 
@@ -81,7 +86,7 @@ export default function AddSwot({ params, candidate, provinsi, kabupaten }: { pa
 
     function onConfirmation() {
         if (Object.values(isBody).includes("") || editor?.getHTML() == '<p></p>')
-            return toast("Data cannot be empty", { theme: "dark" });
+            return toast("Form cannot be empty", { theme: "dark" });
         setOpenModal(true)
     }
 
@@ -102,10 +107,10 @@ export default function AddSwot({ params, candidate, provinsi, kabupaten }: { pa
                         required
                         label={"Provinsi"}
                         value={isProvinsi}
-                        onChange={(val) =>(
-                            onProvinsi({idProv: val})
+                        onChange={(val) => (
+                            onProvinsi({ idProv: val })
                         )}
-                        // disabled
+                    // disabled
                     />
                     <Select
                         placeholder="Pilih Kabupaten/Kota"
@@ -116,9 +121,9 @@ export default function AddSwot({ params, candidate, provinsi, kabupaten }: { pa
                         label={"Kabupaten"}
                         value={isKabupaten}
                         onChange={(val) => (
-                            onKabupaten({idKab: val})
+                            onKabupaten({ idKab: val })
                         )}
-                        // disabled
+                    // disabled
                     />
                 </Group>
                 <Select mt={20}
@@ -128,11 +133,11 @@ export default function AddSwot({ params, candidate, provinsi, kabupaten }: { pa
                         label: can.name
                     }))}
                     required
-                    value={String(isBody.idCandidate)}
+                    value={isCandidate}
                     label={"Kandidat"}
                     searchable
                     onChange={(val) => {
-                        setCandidate(val),
+                        setCandidate(val)
                         setBody({
                             ...isBody,
                             idCandidate: (_.isNull(val)) ? "" : val
@@ -142,12 +147,14 @@ export default function AddSwot({ params, candidate, provinsi, kabupaten }: { pa
                 <Select mt={20}
                     placeholder="Pilih Kategori"
                     required
+                    value={isCategory}
                     data={["STRENGTH", "WEAKNESS", "OPPORTUNITY", "THREAT"]}
                     label={"Kategori"}
                     onChange={(val) => {
+                        setCategory(val)
                         setBody({
                             ...isBody,
-                            category: String(val)
+                            category: (_.isNull(val)) ? "" : String(val)
                         })
                     }}
                 />
@@ -251,7 +258,18 @@ export default function AddSwot({ params, candidate, provinsi, kabupaten }: { pa
                 withCloseButton={false}
                 closeOnClickOutside={false}
             >
-                <ModalAddSwot data={isBody} text={editor?.getHTML()} />
+                <ModalAddSwot data={isBody} text={editor?.getHTML()} onSuccess={() => {
+                    setKabupaten(null)
+                    setCandidate(null)
+                    setProvinsi(null)
+                    setCategory(null)
+                    setBody({
+                        ...isBody,
+                        idCandidate: "",
+                        category: ""
+                    })
+                    editor?.commands.setContent('<p></p>')
+                }} />
             </Modal>
         </>
     )
