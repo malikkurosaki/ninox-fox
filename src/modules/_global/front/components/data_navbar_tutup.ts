@@ -1,4 +1,4 @@
-import { MdFreeCancellation, MdGrading, MdHub, MdJoinLeft, MdLiveTv, MdOutlineStarBorderPurple500, MdOutlineStars, MdStorage, MdVerifiedUser } from "react-icons/md";
+import { MdFreeCancellation, MdGrading, MdHub, MdJoinLeft, MdLiveTv, MdOutlineSocialDistance, MdOutlineStarBorderPurple500, MdOutlineStars, MdStorage, MdVerifiedUser } from "react-icons/md";
 
 export const DataNavbarTutup = [
   {
@@ -43,5 +43,11 @@ export const DataNavbarTutup = [
     icon: MdHub,
     label: "ML-AI"
   },
+  {
+      key: "8",
+      link: "/data-sosial-ekonomi/ketenagakerjaan",
+      icon: MdOutlineSocialDistance,
+      label: "Data Ekonomi Sosial"
+    },
 
 ]
