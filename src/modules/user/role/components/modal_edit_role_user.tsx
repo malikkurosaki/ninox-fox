@@ -1,11 +1,11 @@
 'use client'
-
 import { Alert, Box, Button, Group, Text } from "@mantine/core"
 import { useAtom } from "jotai"
 import toast from "react-simple-toasts"
 import { useRouter } from "next/navigation"
 import { isModalRoleUser } from "../val/val_role_user"
 import funUpdateRoleUser from "../fun/update_user_role"
+import { funLogUser } from "../.."
 
 /**
  * Fungsi untuk menampilkan modal konfirmasi Edit Role User.
@@ -20,9 +20,8 @@ export default function ModalEditRoleUser({ name, component, id }: { name: any, 
         const edit = await funUpdateRoleUser({ name: name, component: component, id: id })
         if (!edit.success) return toast(edit.message, { theme: "dark" });
         toast("Sukses", { theme: "dark" });
+        await funLogUser({ act: 'UPD', desc: `User mengubah data Role User`, idContent: id, tbContent: 'roleuser' })
         setOpenModal(false);
-        // router.back()
-        console.log( name, component, id )
     }
 
 

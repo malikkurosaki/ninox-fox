@@ -5,6 +5,7 @@ import { isModalConf } from "../val/isModalConf";
 import { useState } from "react";
 import toast from "react-simple-toasts";
 import funUpdateUserArea from "@/modules/_global/home/fan/update_user_area_front";
+import { funLogUser } from "../..";
 
 export default function ModalUpdateDefaultUser({ prov, kab, can, user }: { prov: any, kab: any, can: any, user: any }) {
     const [valOpenModal, setOpenModal] = useAtom(isModalConf)
@@ -13,6 +14,7 @@ export default function ModalUpdateDefaultUser({ prov, kab, can, user }: { prov:
     async function onUser() {
         setLoadingData(true)
         const data = await funUpdateUserArea({ provinsi: prov, kabkot: kab, candidate: can, user: user })
+        await funLogUser({ act: 'UPD', desc: `User mengubah data default User`, idContent: user, tbContent: 'user-area' })
         toast('Success', { theme: 'dark' })
         setLoadingData(false)
         setOpenModal(false)

@@ -6,12 +6,14 @@ import toast from "react-simple-toasts";
 import { isModalPairing } from "../../val/val_modal_pairing";
 import funCopyPairing from "../../fun/copy_pairing";
 import { funGetAccessArea } from "@/modules/_global";
-
+import { funLogUser } from "@/modules/user";
+import moment from "moment";
 
 /**
  * Fungsi menampilkan modal.
  * @returns  Hasil dari Copy data modal untuk menampilkan allert yes or no
  */
+
 export default function ModalCopy({ from, to, candidate1, candidate2, onSuccess }: { from: any, to: any, candidate1: any, candidate2: any, onSuccess: (val: any) => void }) {
   const [openModal, setOpenModal] = useAtom(isModalPairing);
   const [isLoading, setLoading] = useState(false)
@@ -19,12 +21,12 @@ export default function ModalCopy({ from, to, candidate1, candidate2, onSuccess 
   async function onUpload() {
     const cek = await funGetAccessArea({ candidate: candidate1 })
     if (!cek) {
-        setOpenModal(false)
-        return toast("Anda tidak mempunyai akses ke wilayah tersebut", { theme: "dark" })
+      setOpenModal(false)
+      return toast("Anda tidak mempunyai akses ke wilayah tersebut", { theme: "dark" })
     }
     setLoading(true)
-    await funCopyPairing({ dateFrom: from, dateTo: to, candidate1: candidate1, candidate2: candidate2})
-    // await funLogUser({ act: "COPY DATA", desc: `User Copy Emotion Candidate (Candidate ID : ${candidate}, From ${from} To ${to})` })
+    await funCopyPairing({ dateFrom: from, dateTo: to, candidate1: candidate1, candidate2: candidate2 })
+    await funLogUser({ act: 'CPY', desc: `User mengcopy data Pairing (${candidate1} & ${candidate2} - ${moment(from).format('DD/MM/YY')} to ${moment(to).format('DD/MM/YY')})`, idContent: '-', tbContent: 'pairing' })
     setLoading(false)
     toast('Success', { theme: 'dark' })
     setOpenModal(false)

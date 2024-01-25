@@ -30,8 +30,8 @@ export default async function funGetAccessArea({ provinsi, candidate }: { provin
             isAllArea: true,
         }
     })
-    
-    
+
+
     if (dataUser?.isAllArea == true) {
         return true
     }
@@ -47,7 +47,7 @@ export default async function funGetAccessArea({ provinsi, candidate }: { provin
                 idProvinsi: true
             }
         })
-        
+
         provinsi = dataCandidate?.idProvinsi
     }
 
@@ -55,7 +55,7 @@ export default async function funGetAccessArea({ provinsi, candidate }: { provin
 
     const dataArea = await prisma.userArea.count({
         where: {
-            idProvinsi: provinsi,
+            idProvinsi: Number(provinsi),
             idUser: dataUser?.id
         },
     })
