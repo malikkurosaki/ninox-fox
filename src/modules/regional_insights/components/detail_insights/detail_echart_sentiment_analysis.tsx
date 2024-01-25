@@ -5,20 +5,38 @@ import EChartsReact from "echarts-for-react";
 import { useShallowEffect } from '@mantine/hooks';
 import { Box, Button, Center, Grid, Group, Text } from '@mantine/core';
 import { WARNA } from '@/modules/_global/fun/WARNA';
-import { useRouter } from 'next/navigation';
+import { COLOR_EMOTION } from '@/modules/_global';
+import _ from 'lodash';
 
-export default function DetailEchartSentimentAnalysis() {
-  const router = useRouter()
-  const [options, setOptions] = useState<EChartsOption>({});
+export default function DetailEchartSentimentAnalysis({ dataEmotion, dataLocked }: { dataEmotion: any, dataLocked: any }) {
+  const [options, setOptions] = useState<EChartsOption>({})
+  const [dataChart, setDataChart] = useState<any>()
+
+  const locked = dataLocked
+    .filter((v: any) => v.idArea === dataEmotion.id)
+    .map((itm: any) => Number(itm.value))
 
   useShallowEffect(() => {
-    loadData()
-  }, [])
+    setDataChart(
+      {
+        confidence: Number(dataEmotion.confidence),
+        supportive: Number(dataEmotion.supportive),
+        positive: Number(dataEmotion.positive),
+        undecided: Number(dataEmotion.undecided),
+        unsupportive: Number(dataEmotion.unsupportive),
+        uncomfortable: Number(dataEmotion.uncomfortable),
+        negative: Number(dataEmotion.negative),
+        dissapproval: Number(dataEmotion.dissapproval),
+      }
+    )
 
-  const loadData = () => {
+    loadData(dataChart)
+  }, [dataEmotion, dataChart])
+
+  const loadData = (dataLoad: any) => {
     const option: EChartsOption = {
       title: {
-        text: "SENTIMENT ANALYSIS",
+        text: "ANALISIS SENTIMEN",
         textStyle: {
           color: "white",
           fontSize: 15
@@ -39,7 +57,7 @@ export default function DetailEchartSentimentAnalysis() {
       xAxis: [
         {
           type: 'category',
-          data: ['Confidence', 'Supportive', 'Positive', 'Undecided', 'Unsupportive', 'Uncomfortable', 'Negative', 'Disapproval'],
+          data: ['Percaya Diri', 'Mendukung', 'Positif', 'Tidak Memilih', 'Tidak Mendukung', 'Tidak Nyaman', 'Negatif', 'Tidak Setuju'],
           axisLabel: {
             rotate: 45,
             color: "white",
@@ -57,7 +75,6 @@ export default function DetailEchartSentimentAnalysis() {
         {
           type: 'value',
           show: true,
-          max: "100",
           splitLine: {
             lineStyle: {
               color: "gray",
@@ -65,7 +82,7 @@ export default function DetailEchartSentimentAnalysis() {
             }
           },
           axisLabel: {
-            formatter: `{value}% `,
+            formatter: `{value}`,
             color: "white"
           },
         }
@@ -75,64 +92,18 @@ export default function DetailEchartSentimentAnalysis() {
           name: 'Direct',
           type: 'bar',
           barWidth: '70%',
-          data: [
-            {
-              value: 78,
-              name: 'Confidence',
+          data: Object.keys(dataLoad ?? []).map(
+            (v: any) =>
+            ({
+              name: v,
+              value: dataLoad[v],
               itemStyle: {
-                color: "#6ABD45"
-              }
-            },
-            {
-              value: 35,
-              name: 'Supportive',
-              itemStyle: {
-                color: "#98CC6F"
-              }
-            },
-            {
-              value: 58,
-              name: 'Positive',
-              itemStyle: {
-                color: "#C6E2B7"
-              }
-            },
-            {
-              value: 44,
-              name: 'Undecided',
-              itemStyle: {
-                color: "#FFFFFF"
-              }
-            },
-            {
-              value: 30,
-              name: 'Unsupportive',
-              itemStyle: {
-                color: "#F9BEBF",
-              }
-            },
-            {
-              value: 30,
-              name: 'Uncomfortable',
-              itemStyle: {
-                color: "#F37D80",
-              }
-            },
-            {
-              value: 23,
-              name: 'Negative',
-              itemStyle: {
-                color: "#ED2024",
-              }
-            },
-            {
-              value: 45,
-              name: 'Disapproval',
-              itemStyle: {
-                color: "#8A171A",
-              }
-            },
-          ],
+                color:
+                  COLOR_EMOTION.find((v2) => _.lowerCase(v2.name) == v)
+                    ?.color ?? "gray",
+              },
+            })
+          ),
         }
       ]
     };
@@ -151,13 +122,13 @@ export default function DetailEchartSentimentAnalysis() {
         <EChartsReact style={{ height: 300, }} option={options} />
         <Group justify='space-between'>
           <Group pl={30}>
-            <Box mr={20}>
-              <Text c={WARNA.merah_emotion} fz={15}>Filtered Audience</Text>
-              <Text ta={'center'} c={WARNA.hijau_emotion} fz={25} fw={'bold'}>2.801.891</Text>
-            </Box>
             <Box>
-              <Text c={WARNA.merah_emotion} fz={15}>Locked Audience</Text>
-              <Text ta={'center'} c={WARNA.hijau_emotion} fz={25} fw={'bold'}>3.810.901</Text>
+              <Text c={WARNA.merah_emotion} fz={15}>Suara Terkunci</Text>
+              <Text ta={'center'} c={WARNA.hijau_emotion} fz={25} fw={'bold'}>{Intl.NumberFormat("id-ID").format(Number(locked))}</Text>
+            </Box>
+            <Box mr={20}>
+              <Text c={WARNA.merah_emotion} fz={15}>Suara Terfilter</Text>
+              <Text ta={'center'} c={WARNA.hijau_emotion} fz={25} fw={'bold'}>{Intl.NumberFormat("id-ID").format(Number(dataEmotion.filtered))}</Text>
             </Box>
           </Group>
         </Group>

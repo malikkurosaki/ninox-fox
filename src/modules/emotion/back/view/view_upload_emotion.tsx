@@ -15,6 +15,7 @@ import { ModalUploadEmotion } from "../.."
 export default function ViewUploadEmotion() {
     const [json, setJson] = useState<any[]>([])
     const [openModal, setOpenModal] = useAtom(isModalEmotion)
+    const [isLoading, setLoading] = useState(false)
 
 
     async function onLoad(data: any) {
@@ -68,6 +69,7 @@ export default function ViewUploadEmotion() {
                 >
                     <Text fw={"bold"} c={"white"} mb={20}>UPLOAD DATA EMOTION</Text>
                     <Dropzone
+                        loading={isLoading}
                         style={{
                             border: "1px dashed",
                             color: "white",
@@ -75,9 +77,11 @@ export default function ViewUploadEmotion() {
                             cursor: "pointer"
                         }}
                         onDrop={async (files: any) => {
+                            setLoading(true)
                             const csv_file = Buffer.from(await files[0].arrayBuffer()).toString()
                             const { data } = papa.parse(csv_file, { header: true, })
                             onLoad(data)
+                            setLoading(false)
                         }}
                         onReject={(files: any) => {
                             toast("success")

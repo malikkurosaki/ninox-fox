@@ -16,6 +16,7 @@ import { isModalAudience } from "../val/val_audience"
 export default function ViewUploadAudience() {
     const [json, setJson] = useState<any[]>([])
     const [openModal, setOpenModal] = useAtom(isModalAudience)
+    const [isLoading, setLoading] = useState(false)
 
     // fungsi load data csv
     async function onLoad(data: any) {
@@ -52,6 +53,7 @@ export default function ViewUploadAudience() {
                 >
                     <Text fw={"bold"} c={"white"} mb={20}>UPLOAD DATA AUDIENCE</Text>
                     <Dropzone
+                        loading={isLoading}
                         style={{
                             border: "1px dashed",
                             color: "white",
@@ -59,9 +61,11 @@ export default function ViewUploadAudience() {
                             cursor: "pointer"
                         }}
                         onDrop={async (files: any) => {
+                            setLoading(true)
                             const csv_file = Buffer.from(await files[0].arrayBuffer()).toString()
                             const { data } = papa.parse(csv_file, { header: true, })
                             onLoad(data)
+                            setLoading(false)
                         }}
                         onReject={(files: any) => {
                             toast("success")

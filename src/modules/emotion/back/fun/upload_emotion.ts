@@ -1,5 +1,4 @@
 'use server'
-
 import prisma from "@/modules/_global/bin/prisma";
 import moment from "moment";
 import { revalidatePath } from "next/cache";
@@ -14,24 +13,38 @@ export default async function funUploadEmotion({ body }: { body: any }) {
         city = i.idKabkot
 
         if (i.id == "") {
-            await prisma.candidateEmotion.create({
-                data: {
+            const cek = await prisma.candidateEmotion.count({
+                where: {
                     idCandidate: i.idCandidate,
+                    dateEmotion: new Date(i.date),
                     idProvinsi: Number(i.idProvinsi),
                     idKabkot: Number(i.idKabkot),
                     idKecamatan: Number(i.idKecamatan),
                     idKelurahan: Number(i.idKelurahan),
-                    dateEmotion: new Date(i.date),
-                    confidence: Number(i.confidence),
-                    supportive: Number(i.supportive),
-                    positive: Number(i.positive),
-                    undecided: Number(i.undecided),
-                    unsupportive: Number(i.unsupportive),
-                    uncomfortable: Number(i.uncomfortable),
-                    negative: Number(i.negative),
-                    dissapproval: Number(i.dissapproval)
                 }
-            });
+            })
+
+            if (cek == 0) {
+                await prisma.candidateEmotion.create({
+                    data: {
+                        idCandidate: i.idCandidate,
+                        idProvinsi: Number(i.idProvinsi),
+                        idKabkot: Number(i.idKabkot),
+                        idKecamatan: Number(i.idKecamatan),
+                        idKelurahan: Number(i.idKelurahan),
+                        dateEmotion: new Date(i.date),
+                        confidence: Number(i.confidence),
+                        supportive: Number(i.supportive),
+                        positive: Number(i.positive),
+                        undecided: Number(i.undecided),
+                        unsupportive: Number(i.unsupportive),
+                        uncomfortable: Number(i.uncomfortable),
+                        negative: Number(i.negative),
+                        dissapproval: Number(i.dissapproval)
+                    }
+                });
+            }
+
         } else {
             await prisma.candidateEmotion.update({
                 where: {

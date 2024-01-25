@@ -1,16 +1,17 @@
 "use client"
 import { PageSubTitle } from '@/modules/_global';
 import { BackgroundImage, Box, Center, Flex, Grid, Group, Image, SimpleGrid, Stack } from '@mantine/core';
-import React from 'react';
+import React, { useState } from 'react';
 import CandidateSummary from '../component/candidate_summary';
 import EchartCandidateSummary from '../component/echart_candidate_summary';
 import TableTop10 from '../component/table_top_10';
 import TopPairingCandidate from '../component/top_pairing_candidate';
 
-export default function ViewSummary() {
+export default function ViewSummary({ oneCandidate, emoTable, emoPersen, emoChart, locked, pairingCandidate }: { oneCandidate: any, emoTable: any, emoPersen: any, emoChart: any, locked: any, pairingCandidate: any }) {
+
   return (
     <>
-      <PageSubTitle text1='EMOTIONAL' text2='SPECTRUM CHART' />
+      <PageSubTitle text1='GRAFIK' text2='SPEKTRUM EMOSI' />
       <Stack pt={20}>
         {/* <SimpleGrid
           cols={{ base: 1, sm: 3, lg: 3 }}
@@ -32,7 +33,7 @@ export default function ViewSummary() {
 
         <Grid gutter={40}>
           <Grid.Col span={{ base: 4, md: 4, lg: 4 }}>
-            <CandidateSummary />
+            <CandidateSummary candidate={oneCandidate} persen={emoPersen} />
           </Grid.Col>
           <Grid.Col span={{ base: 3, md: 3, lg: 3 }}>
             <Center>
@@ -41,7 +42,7 @@ export default function ViewSummary() {
             </Center>
           </Grid.Col>
           <Grid.Col span={{ base: 5, md: 5, lg: 5 }}>
-              <EchartCandidateSummary />
+            <EchartCandidateSummary data={emoChart} candidate={oneCandidate} />
           </Grid.Col>
         </Grid>
 
@@ -64,10 +65,10 @@ export default function ViewSummary() {
         </Box> */}
 
         <Box pt={10}>
-          <TableTop10 />
+          <TableTop10 emotion={emoTable} tingkat={oneCandidate?.tingkat} locked={locked} />
         </Box>
         <Box pt={30}>
-          <TopPairingCandidate />
+          <TopPairingCandidate pairingCandidate={pairingCandidate} />
         </Box>
       </Stack>
 

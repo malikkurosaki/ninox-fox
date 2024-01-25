@@ -4,22 +4,32 @@ import { EChartsOption, color } from "echarts";
 import EChartsReact from "echarts-for-react";
 import { useShallowEffect } from '@mantine/hooks';
 import { Box, Text } from '@mantine/core';
+import _ from 'lodash';
+import { COLOR_EMOTION } from '@/modules/_global';
 
-export default function DetailEchartLeader() {
-  const [options, setOptions] = useState<EChartsOption>({});
+export default function DetailEchartLeader({ dataLta }: { dataLta: any }) {
+  const [options, setOptions] = useState<EChartsOption>({})
+  const [dataChart, setDataChart] = useState<any>()
 
   useShallowEffect(() => {
-    loadData()
-  }, [])
+    setDataChart({
+      pekerja_keras: dataLta[0].pekerjaKeras,
+      cerdas: dataLta[0].cerdas,
+      jujur: dataLta[0].jujur,
+      merakyat: dataLta[0].merakyat,
+      tegas: dataLta[0].tegas,
+      berpengalaman_memimpin: dataLta[0].berpengalamanMemimpin,
+      berprestasi: dataLta[0].berprestasi,
+      latar_belakang_militer: dataLta[0].latarBelakangMiliter,
+      agamis: dataLta[0].agamis,
+    })
 
-  const loadData = () => {
+    loadData(dataChart)
+
+  }, [dataChart, dataLta]);
+
+  const loadData = (dataLoad: any) => {
     const option: EChartsOption = {
-      // title: {
-      //     text: "LEADER TRAIT ASSESSMENT",
-      //     textStyle: {
-      //         color: "white"
-      //     }
-      // },
       radiusAxis: {},
       polar: {},
       tooltip: {
@@ -27,16 +37,22 @@ export default function DetailEchartLeader() {
         axisPointer: {
           type: "shadow",
         },
+        formatter: function (params: any) {
+          return _.upperCase(params[0].name) + " : " + params[0].value + "%";
+        },
       },
       angleAxis: {
         type: "category",
-        data: ['Honest', 'Military Background', 'Religius', 'Achievement', 'Leading Experience', 'Smart', 'Firm', 'Hard Worker', 'Populist'],
+        data: _.keys(dataLoad).map((v) => (v)).filter((v) => v != "name" && v != "idArea"),
         axisTick: {
           alignWithLabel: true,
         },
         axisLabel: {
           color: "white",
           fontSize: "10",
+          formatter: function (params: any) {
+            return _.startCase(params);
+          },
         },
         startAngle: 60,
       },
@@ -46,99 +62,23 @@ export default function DetailEchartLeader() {
           type: "bar",
           coordinateSystem: "polar",
           barWidth: 80,
-          data: [
-            {
-              value: 78,
-              name: 'Confidence',
+          data: Object.keys(dataLoad ?? []).map(
+            (v: any, i: any) =>
+            ({
+              name: v,
+              value: dataLoad[v],
               itemStyle: {
-                color: "#6ABD45",
-                shadowBlur: 20,
-                shadowOffsetX: 0,
-                shadowColor: "rgba(0, 0, 0, 0.5)",
-
-              }
-            },
-            {
-              value: 35,
-              name: 'Supportive',
-              itemStyle: {
-                color: "#98CC6F",
-                shadowBlur: 20,
-                shadowOffsetX: 0,
-                shadowColor: "rgba(0, 0, 0, 0.5)",
-              }
-            },
-            {
-              value: 58,
-              name: 'Positive',
-              itemStyle: {
-                color: "#C6E2B7",
-                shadowBlur: 20,
-                shadowOffsetX: 0,
-                shadowColor: "rgba(0, 0, 0, 0.5)",
-              }
-            },
-            {
-              value: 44,
-              name: 'Undecided',
-              itemStyle: {
-                color: "#FFFFFF",
-                shadowBlur: 20,
-                shadowOffsetX: 0,
-                shadowColor: "rgba(0, 0, 0, 0.5)",
-              }
-            },
-            {
-              value: 47,
-              name: 'Unsupportive',
-              itemStyle: {
-                color: "#F9BEBF",
-                shadowBlur: 20,
-                shadowOffsetX: 0,
-                shadowColor: "rgba(0, 0, 0, 0.5)",
-              }
-            },
-            {
-              value: 36,
-              name: 'Uncomfortable',
-              itemStyle: {
-                color: "#F37D80",
-                shadowBlur: 20,
-                shadowOffsetX: 0,
-                shadowColor: "rgba(0, 0, 0, 0.5)",
-              }
-            },
-            {
-              value: 76,
-              name: 'Negative',
-              itemStyle: {
-                color: "#ED2024",
-                shadowBlur: 20,
-                shadowOffsetX: 0,
-                shadowColor: "rgba(0, 0, 0, 0.5)",
-              }
-            },
-            {
-              value: 45,
-              name: 'Disapproval',
-              itemStyle: {
-                color: "#8A171A",
-                shadowBlur: 20,
-                shadowOffsetX: 0,
-                shadowColor: "rgba(0, 0, 0, 0.5)",
-              }
-            },
-            {
-              value: 55,
-              name: 'Disapproval',
-              itemStyle: {
-                color: "#1ABD45",
-                shadowBlur: 20,
-                shadowOffsetX: 0,
-                shadowColor: "rgba(0, 0, 0, 0.5)",
-              }
-            },
-          ],
+                color:
+                  COLOR_EMOTION.find((v2) => v2.id == String(i))
+                    ?.color ?? "gray",
+              },
+            })
+          ),
+          itemStyle: {
+            shadowBlur: 20,
+            shadowOffsetX: 0,
+            shadowColor: "rgba(0, 0, 0, 0.5)",
+          },
         },
       ],
     };
@@ -153,7 +93,7 @@ export default function DetailEchartLeader() {
           borderRadius: 10
         }}
       >
-        <Text fz={16} fw={"bold"} c={"white"}>LEADER TRAIT ASSESSMENT</Text>
+        <Text fz={16} fw={"bold"} c={"white"}>PENILAIAN SIFAT PEMIMPIN</Text>
         <EChartsReact style={{ height: 300, }} option={options} />
       </Box>
     </>

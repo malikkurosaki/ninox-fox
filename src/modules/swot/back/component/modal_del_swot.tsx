@@ -1,5 +1,4 @@
 'use client'
-
 import { Alert, Box, Button, Group, Text } from "@mantine/core"
 import { useAtom } from "jotai";
 import { isModalSwot } from "../val/val_swot";
@@ -7,6 +6,7 @@ import { useRouter } from "next/navigation";
 import toast from "react-simple-toasts";
 import funDeleteSwot from "../fun/fun_delete_swot";
 import { funGetAccessArea } from "@/modules/_global";
+import { funLogUser } from "@/modules/user";
 
 /**
  * Fungsi untuk menampilkan modal konfirmasi delete swot.
@@ -25,6 +25,7 @@ export default function ModalDelSwot({id, candidate, onSuccess}: {id: any, candi
         }
         const delData = await funDeleteSwot({id: id})
         if (!delData.success) return toast(delData.message, { theme: "dark" })
+        await funLogUser({ act: 'DEL', desc: `User menghapus data SWOT`, idContent: id, tbContent: 'swot' })
         toast("Sukses", { theme: "dark" });
         setOpenModal(false);
         onSuccess(true)

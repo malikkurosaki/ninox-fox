@@ -50,7 +50,7 @@ const dataCan = [
     },
 ]
 
-export default function TopPairingCandidate() {
+export default function TopPairingCandidate({ pairingCandidate }: { pairingCandidate: any }) {
     return (
         <>
             <Box>
@@ -62,15 +62,15 @@ export default function TopPairingCandidate() {
                     {/* <Box>
                         <Text c={"white"} fz={25} fw={"bold"}>TOP PAIRING CANDIDATES</Text>
                     </Box> */}
-                     <PageSubTitle text1='TOP PAIRING' text2='CANDIDATES' />
+                    <PageSubTitle text1='PASANGAN KANDIDAT' text2='TERATAS' />
                     <SimpleGrid
                         cols={{ base: 1, sm: 2, lg: 2 }}
                         spacing={{ base: 10, sm: 'xl' }}
                         pt={10}
                     >
-                        {dataCan.map((item) => {
+                        {pairingCandidate.map((item:any, i:any) => {
                             return (
-                                <Box key={item.id}>
+                                <Box key={i}>
                                     <Box style={{
                                         backgroundColor: "rgba(0,0,0,0.3)",
                                         borderRadius: 10,
@@ -79,18 +79,18 @@ export default function TopPairingCandidate() {
                                         <Grid gutter={0}>
                                             <Grid.Col span={{ md: 6, lg: 6 }}>
                                                 <Box pt={"3vh"}>
-                                                    <Group justify='center'>
-                                                        <Image alt='sdsd' src={item.can} maw={100} mx="auto" />
-                                                        <Image alt='sdsd' src={item.wakilCan} maw={100} mx="auto" />
+                                                    <Group justify='space-around'>
+                                                        <Image alt='Kandidat 1' src={`/img/candidate/${item.imgCandidate1}`} radius={'7%'} maw={100} mx="auto" />
+                                                        <Image alt='Kandidat 2' src={`/img/candidate/${item.imgCandidate2}`} radius={'7%'} maw={100} mx="auto" />
                                                     </Group>
                                                     <Box pt={20}>
-                                                        <Text ta={"center"} c={"white"} fw={"bold"} fz={35}>{item.value}</Text>
+                                                        <Text ta={"center"} c={"white"} fw={"bold"} fz={35}>{item.rate} %</Text>
                                                     </Box>
                                                 </Box>
 
                                             </Grid.Col>
                                             <Grid.Col span={{ md: 6, lg: 6 }}>
-                                                <EchartTopPairingCandidate />
+                                                <EchartTopPairingCandidate candidate1={item.idCandidate1} candidate2={item.idCandidate2} />
                                             </Grid.Col>
                                         </Grid>
                                     </Box>

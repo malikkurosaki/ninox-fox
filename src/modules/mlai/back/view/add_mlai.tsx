@@ -33,8 +33,8 @@ export default function AddMlAi({ params, candidate, provinsi, kabupaten }: { pa
     const [isDataCandidate, setDataCandidate] = useState(candidate)
     const [dataProvinsi, setDataProvinsi] = useState(provinsi)
     const [dataKabupaten, setDataKabupaten] = useState<any>(kabupaten)
-    const [isProvinsi, setProvinsi] = useState<any>(params.idProvinsi || null)
-    const [isKabupaten, setKabupaten] = useState<any>(params.idKabkot || null)
+    const [isProvinsi, setProvinsi] = useState<any>(null)
+    const [isKabupaten, setKabupaten] = useState<any>(null)
     const [isCandidate, setCandidate] = useState<any>("")
 
     async function onProvinsi({ idProv }: { idProv: any }) {
@@ -70,13 +70,13 @@ export default function AddMlAi({ params, candidate, provinsi, kabupaten }: { pa
     });
 
     function onConfirmation() {
-        if (isCandidate == "" || editor?.getHTML() == '<p></p>')
-            return toast("Data cannot be empty", { theme: "dark" });
+        if (isCandidate == "" || _.isNull(isCandidate) || editor?.getHTML() == '<p></p>')
+            return toast("Form cannot be empty", { theme: "dark" });
         setOpenModal(true)
     }
     useEffect(() => {
-        setProvinsi((params.idProvinsi == 0) ? null : params.idProvinsi)
-        setKabupaten((params.idKabkot == 0) ? null : params.idKabkot)
+        // setProvinsi((params.idProvinsi == 0) ? null : params.idProvinsi)
+        // setKabupaten((params.idKabkot == 0) ? null : params.idKabkot)
         // setCandidate((params.idCandidate == 0) ? null : params.idCandidate)
       }, [params])
 
@@ -230,7 +230,14 @@ export default function AddMlAi({ params, candidate, provinsi, kabupaten }: { pa
                 withCloseButton={false}
                 closeOnClickOutside={false}
             >
-                <ModalAddMlAi candidate={isCandidate} text={editor?.getHTML()} />
+                <ModalAddMlAi candidate={isCandidate} text={editor?.getHTML()}
+                onSuccess={()=>{
+                    editor?.commands.setContent('<p></p>')
+                    setProvinsi(null)
+                    setKabupaten(null)
+                    setCandidate(null)
+                }}
+                 />
             </Modal>
         </>
     )

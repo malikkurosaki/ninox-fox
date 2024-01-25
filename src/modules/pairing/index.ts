@@ -11,6 +11,9 @@ import funCekPairing from './back/fun/cek_pairing';
 import funCopyPairing from './back/fun/copy_pairing';
 import funUploadPairing from './back/fun/upload_pairing';
 import EchartPairingSentiment from './front/components/echart_pairing_sentiment';
+import funGetPairingCandidateSummary from './front/fun/get_pairing_candidate_sum';
+import funGetPairingChartSummary from './front/fun/get_pairing_chart_sum';
+import funGetPairingRegional from './front/fun/get_pairing_regional';
 
 export { ViewPairing }
 export { ViewCopyDataPairing }
@@ -25,3 +28,6 @@ export { funCekPairing }
 export { funCopyPairing }
 export { funUploadPairing }
 export { EchartPairingSentiment }
+export { funGetPairingCandidateSummary }
+export { funGetPairingChartSummary }
+export { funGetPairingRegional }

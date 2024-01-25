@@ -36,6 +36,9 @@ export default async function funGetLtaByArea({ find }: { find: any }) {
                             name: true
                         }
                     }
+                },
+                orderBy: {
+                    id: 'asc'
                 }
             })
 
@@ -86,6 +89,9 @@ export default async function funGetLtaByArea({ find }: { find: any }) {
                             name: true
                         }
                     }
+                },
+                orderBy: {
+                    id: 'asc'
                 }
             })
 
@@ -135,6 +141,9 @@ export default async function funGetLtaByArea({ find }: { find: any }) {
                             name: true,
                         }
                     }
+                },
+                orderBy: {
+                    id: 'asc'
                 }
             })
 
@@ -170,6 +179,9 @@ export default async function funGetLtaByArea({ find }: { find: any }) {
                         name: true
                     }
                 }
+            },
+            orderBy: {
+                id: 'asc'
             }
         })
 

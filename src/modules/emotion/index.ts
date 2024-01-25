@@ -12,6 +12,9 @@ import funCekEmotion from './back/fun/cek_emotion';
 import funCopyEmotion from './back/fun/copy_emotion';
 import funDelCandidate from './back/fun/delete_candidate';
 import funUploadEmotion from './back/fun/upload_emotion';
+import funGetEmotionTable from './front/fun/get_emotion_table';
+import funGetEmotionPersen from './front/fun/get_emotion_persen';
+import funGetEmotionChart from './front/fun/get_emotion_chart';
 
 
 export { ViewBackEmotion }
@@ -30,5 +33,7 @@ export { funCekEmotion }
 export { funCopyEmotion }
 export { funDelCandidate }
 export { funUploadEmotion }
-
+export { funGetEmotionTable }
+export { funGetEmotionPersen }
+export { funGetEmotionChart }
 

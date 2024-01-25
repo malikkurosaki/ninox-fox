@@ -18,12 +18,9 @@ import { useAtom } from 'jotai';
 import { isModalRhi } from '../val/val_rhi';
 import ModalEditRhi from '../components/modal_edit_rhi';
 
-
-
 export default function ViewEditAdminMlai({ data }: { data: any }) {
     const [openModal, setOpenModal] = useAtom(isModalRhi)
     const [isId, setId] = useState(data.id)
-
     const [dataProvinsi, setDataProvinsi] = useState(data.idProvinsi)
 
     const editor = useEditor({
@@ -42,7 +39,7 @@ export default function ViewEditAdminMlai({ data }: { data: any }) {
     });
 
     function onConfirmation() {
-        if (editor?.getHTML() == '<p></p>')
+        if (editor?.getHTML() == '<p></p>' || editor?.getHTML() == '')
             return toast("Data cannot be empty", { theme: "dark" });
         setOpenModal(true)
     }
@@ -53,7 +50,6 @@ export default function ViewEditAdminMlai({ data }: { data: any }) {
             <Stack mt={30}>
                 <Text fw={"bold"}>EDIT REGION HOT ISSUE</Text>
             </Stack>
-            {JSON.stringify(dataProvinsi)}
             <Box pt={30}>
                 <Stack>
                     <Group grow>

@@ -12,6 +12,7 @@ import funGetOneMlAi from "./back/fun/fun_get_one_mlai";
 import AddMlAi from "./back/view/add_mlai";
 import EditMlAi from "./back/view/edit_mlai";
 import ListMlAi from "./back/view/list_mlai";
+import funGetMlAiFront from "./front/fun/get_ml_ai_front";
 import ViewMlAi from "./front/view/view_ml_ai";
 
 export { funGetAllMlAi }
@@ -28,3 +29,4 @@ export { TableMlAi }
 export { funAddMlAi }
 export { funDeleteMlAi }
 export { funEditMlAi }
+export {funGetMlAiFront}

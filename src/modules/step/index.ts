@@ -1,4 +1,3 @@
-
 import ComponentTableStep from "./back/component/component_table_step";
 import ModalAddStep from "./back/component/modal_add_step";
 import ModalDelStep from "./back/component/modal_del_step";
@@ -10,6 +9,7 @@ import funGetOneStep from "./back/fun/fun_get_one_step";
 import AddStep from "./back/view/add_step";
 import EditStep from "./back/view/edit_step";
 import ListStep from "./back/view/list_step";
+import funGetStepFront from "./front/fun/get_step_front";
 import ViewStep from "./front/view/view_step";
 
 export { ListStep }
@@ -24,3 +24,4 @@ export { ModalDelStep }
 export { ModalEditStep }
 export { TableStep }
 export { funDeleteStep }
+export { funGetStepFront }

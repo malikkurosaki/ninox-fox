@@ -4,6 +4,8 @@ import { EChartsOption, color } from "echarts";
 import EChartsReact from "echarts-for-react";
 import { useShallowEffect } from '@mantine/hooks';
 import { Box, Group, Text } from '@mantine/core';
+import _ from 'lodash';
+import { COLOR_EMOTION } from '@/modules/_global';
 
 const dataKabupaten = [
   {
@@ -44,14 +46,27 @@ const dataKabupaten = [
   },
 ]
 
-export default function EchartPairingSentiment() {
-  const [options, setOptions] = useState<EChartsOption>({});
+export default function EchartPairingSentiment({ data }: { data: any }) {
+  const [options, setOptions] = useState<EChartsOption>({})
+  const [dataChart, setDataChart] = useState<any>()
 
   useShallowEffect(() => {
-    loadData()
-  }, [])
+    setDataChart({
+      confidence: data.confidence,
+      supportive: data.supportive,
+      positive: data.positive,
+      undecided: data.undecided,
+      unsupportive: data.unsupportive,
+      uncomfortable: data.uncomfortable,
+      negative: data.negative,
+      dissapproval: data.dissapproval,
+    })
 
-  const loadData = () => {
+    loadData(dataChart)
+
+  }, [dataChart, data])
+
+  const loadData = (dataLoad: any) => {
     const option: EChartsOption = {
       tooltip: {
         trigger: 'axis',
@@ -68,7 +83,7 @@ export default function EchartPairingSentiment() {
       xAxis: [
         {
           type: 'category',
-          data: ['Confidence', 'Supportive', 'Positive', 'Undecided', 'Unsupportive', 'Uncomfortable', 'Negative', 'Disapproval'],
+          data: ['Percaya Diri', 'Mendukung', 'Positif', 'Tidak Memilih', 'Tidak Mendukung', 'Tidak Nyaman', 'Negatif', 'Tidak Setuju'],
           axisLabel: {
             rotate: 45,
             color: "white",
@@ -94,8 +109,10 @@ export default function EchartPairingSentiment() {
             }
           },
           axisLabel: {
-            formatter: `{value}% `,
-            color: "white"
+            color: "white",
+            formatter: (a: any) => {
+              return `${a}%`;
+            },
           },
         }
       ],
@@ -104,64 +121,18 @@ export default function EchartPairingSentiment() {
           name: 'Direct',
           type: 'bar',
           barWidth: '70%',
-          data: [
-            {
-              value: 78,
-              name: 'Confidence',
+          data: Object.keys(dataChart ?? []).map(
+            (v: any) =>
+            ({
+              name: v,
+              value: dataChart[v],
               itemStyle: {
-                color: "#6ABD45"
-              }
-            },
-            {
-              value: 35,
-              name: 'Supportive',
-              itemStyle: {
-                color: "#98CC6F"
-              }
-            },
-            {
-              value: 58,
-              name: 'Positive',
-              itemStyle: {
-                color: "#C6E2B7"
-              }
-            },
-            {
-              value: 44,
-              name: 'Undecided',
-              itemStyle: {
-                color: "#FFFFFF"
-              }
-            },
-            {
-              value: 30,
-              name: 'Unsupportive',
-              itemStyle: {
-                color: "#F9BEBF",
-              }
-            },
-            {
-              value: 30,
-              name: 'Uncomfortable',
-              itemStyle: {
-                color: "#F37D80",
-              }
-            },
-            {
-              value: 23,
-              name: 'Negative',
-              itemStyle: {
-                color: "#ED2024",
-              }
-            },
-            {
-              value: 45,
-              name: 'Disapproval',
-              itemStyle: {
-                color: "#8A171A",
-              }
-            },
-          ],
+                color:
+                  COLOR_EMOTION.find((v2) => _.lowerCase(v2.name) == v)
+                    ?.color ?? "gray",
+              },
+            })
+          ),
         }
       ]
     };
@@ -170,25 +141,20 @@ export default function EchartPairingSentiment() {
 
   return (
     <>
-      {dataKabupaten.map((item) => {
-        return (
-          <Box key={item.id} mb={30}>
-            <Box
-              style={{
-                background: "rgba(0,0,0,0.3)",
-                padding: 10,
-                borderRadius: 10
-              }}
-            >
-              <Group justify='space-between'>
-                <Text fz={25} ml={20} fw={"bold"} c={"white"}>{item.name}</Text>
-                <Text fz={16} mr={20}  c={"white"}>SENTIMENT ANALYSIS</Text>
-              </Group>
-              <EChartsReact style={{ height: 500, width: "100%"}} option={options} />
-            </Box>
-          </Box>
-        )
-      })}
+      <Box
+        style={{
+          background: "rgba(0,0,0,0.3)",
+          padding: 10,
+          borderRadius: 10
+        }}
+      >
+        <Group justify='space-between'>
+          <Text fz={25} ml={20} fw={"bold"} c={"white"}>{_.upperCase(data.name)}</Text>
+          <Text fz={16} mr={20} c={"white"}>ANALISIS SENTIMEN</Text>
+        </Group>
+        <EChartsReact style={{ height: 500, width: "100%" }} option={options} />
+      </Box>
+
     </>
   );
 }

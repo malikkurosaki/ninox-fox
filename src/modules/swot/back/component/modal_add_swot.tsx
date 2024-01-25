@@ -2,19 +2,18 @@
 import { Alert, Box, Button, Group, Text } from "@mantine/core"
 import { useAtom } from "jotai";
 import { isModalSwot } from "../val/val_swot";
-import { useRouter } from "next/navigation";
 import toast from "react-simple-toasts";
 import funAddSwotf from "../fun/fun_add_swot";
 import { funGetAccessArea } from "@/modules/_global";
+import { funLogUser } from "@/modules/user";
 
 /**
  * Fungsi untuk menampilkan modal konfirmasi add swot.
  * @returns {component} Modal konfirmasi add swot.
  */
 
-export default function ModalAddSwot({ data, text }: { data: any, text: any }) {
+export default function ModalAddSwot({ data, text, onSuccess }: { data: any, text: any, onSuccess: (val: any) => void }) {
     const [openModal, setOpenModal] = useAtom(isModalSwot)
-    const router = useRouter()
 
     async function onCreateSwot() {
         const cek = await funGetAccessArea({ candidate: data.idCandidate })
@@ -24,9 +23,10 @@ export default function ModalAddSwot({ data, text }: { data: any, text: any }) {
         }
         const addData = await funAddSwotf({ body: data, content: text })
         if (!addData.success) return toast(addData.message, { theme: "dark" });
-        toast("Success", { theme: "dark" });
-        setOpenModal(false);
-        router.back()
+        await funLogUser({ act: 'ADD', desc: `User menambah data SWOT`, idContent: addData.data, tbContent: 'swot' })
+        toast("Success", { theme: "dark" })
+        setOpenModal(false)
+        onSuccess(true)
     }
 
     return (
