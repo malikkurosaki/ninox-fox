@@ -27,8 +27,6 @@ import papa from "papaparse"
  * @returns {component} Table list pairing sesuai dengan parameter.
  */
 
-
-
 export default function ViewPairing({ param, provinsi, kabupaten, candidate, datatable, dataDownload }: { param: any, provinsi: any, kabupaten: any, candidate: any, datatable: any, dataDownload: any }) {
   const router = useRouter()
   const today = new Date();
@@ -222,7 +220,6 @@ export default function ViewPairing({ param, provinsi, kabupaten, candidate, dat
 
                       onClick={() => {
                         const dataJson = dataDownload.data
-
                         const jsonData = papa.unparse(dataJson)
                         const jsonDataUrl = "data:text/csv;charset=utf-8," + encodeURIComponent(jsonData)
 

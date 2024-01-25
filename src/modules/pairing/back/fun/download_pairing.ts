@@ -71,7 +71,7 @@ export default async function funDownloadPairing({ request }: { request: any }) 
                 candidate2: dCandidate2?.name,
                 provinsi: v.AreaProvinsi.name,
                 kabkot: v.AreaKabkot.name,
-                kecamatan: v.AreaKecamatan?.name,
+                kecamatan: (v.AreaKecamatan && v.AreaKecamatan?.name),
                 date: moment(request.date).format('YYYY-MM-DD'),
                 rate: v.rate,
                 confidence: v.confidence,
