@@ -19,6 +19,9 @@ export default async function funUploadPairing({ body }: { body: any }) {
                     idCandidate1: i.idCandidate1,
                     idCandidate2: i.idCandidate2,
                     dateEmotion: new Date(i.date),
+                    idProvinsi: Number(i.idProvinsi),
+                    idKabkot: Number(i.idKabkot),
+                    idKecamatan: (i.idKecamatan == '' ? null : Number(i.idKecamatan)),
                 }
             })
 
