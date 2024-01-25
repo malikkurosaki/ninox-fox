@@ -25,7 +25,7 @@ export default function AddRoleUser({ data }: { data: any }) {
     if (Object.values(isName).includes(""))
       return toast("The form cannot be empty", { theme: "dark" });
     if (value.length < 1 || (value.length == 0))
-      return toast("User role cannot be empty", { theme: "dark" });
+      return toast("You have to choose the menu", { theme: "dark" });
     setOpenModal(true);
   }
 
@@ -80,7 +80,10 @@ export default function AddRoleUser({ data }: { data: any }) {
         closeOnClickOutside={false}
         withCloseButton={false}
       >
-        <ModalAddRoleUser isName={isName} value={value} />
+        <ModalAddRoleUser isName={isName} value={value} onSuccess={(val) => {
+          setValue([])
+          setName("")
+        }} />
       </Modal>
     </>
   );
