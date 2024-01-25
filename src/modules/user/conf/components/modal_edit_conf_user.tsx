@@ -1,23 +1,22 @@
 'use client'
 import React from 'react';
 import { Alert, Box, Button, Group, Text } from "@mantine/core"
-import funAddConfUser from '../fun/add_conf_user';
 import toast from 'react-simple-toasts';
 import { useAtom } from 'jotai';
 import { isModalConf } from '../val/isModalConf';
 import funUpdateConfUser from '../fun/update_conf_user';
-
+import { funLogUser } from '../..';
 
 export default function ModalEditConfUser({ data, dataArea }: { data: any, dataArea: any }) {
   const [valOpenModal, setOpenModal] = useAtom(isModalConf)
   async function onUser() {
     const create = await funUpdateConfUser({ data: data, dataArea: dataArea })
     if (!create.success) return toast(create.message, { theme: "dark" });
-    // await funLogUser({act:"ADD", desc:`User Add Data Role With User`})
+    await funLogUser({ act: 'UPD', desc: `User mengubah data User`, idContent: data.id, tbContent: 'user' })
     toast("Sukses", { theme: "dark" });
     setOpenModal(false);
-    // router.back()
   }
+
   return (
     <>
       <Box>

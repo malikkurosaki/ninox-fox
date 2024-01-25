@@ -85,6 +85,7 @@ export default function AddConfUser({ data, role }: { data: any, role: any }) {
                 value: String(role.id),
                 label: role.name
               }))}
+              value={String(dataUser.idUserRole)}
               onChange={(val: any) =>
                 setDataUser({
                   ...dataUser,
@@ -94,6 +95,7 @@ export default function AddConfUser({ data, role }: { data: any, role: any }) {
             />
             <TextInput
               placeholder='Name'
+              value={dataUser.name}
               onChange={(val) =>
                 setDataUser({
                   ...dataUser,
@@ -103,6 +105,7 @@ export default function AddConfUser({ data, role }: { data: any, role: any }) {
             />
             <TextInput
               placeholder='Email'
+              value={dataUser.email}
               onChange={(val) =>
                 setDataUser({
                   ...dataUser,
@@ -112,6 +115,7 @@ export default function AddConfUser({ data, role }: { data: any, role: any }) {
             />
             <TextInput
               placeholder='Password'
+              value={dataUser.password}
               onChange={(val) =>
                 setDataUser({
                   ...dataUser,
@@ -121,6 +125,7 @@ export default function AddConfUser({ data, role }: { data: any, role: any }) {
             />
             <NumberInput
               placeholder='Phone'
+              value={dataUser.phone}
               onChange={(val: any) =>
                 setDataUser({
                   ...dataUser,
@@ -133,45 +138,45 @@ export default function AddConfUser({ data, role }: { data: any, role: any }) {
               variant="outline" size="lg" radius="sm">ALL AREA</Chip>
           </SimpleGrid>
           {!dataUser.isAllArea && (
-          <Box>
-          <Box pt={40} pb={40}>
-            <Divider size={"md"} />
-          </Box >
-            <Text mb={10} fw={"bold"}>PILIH WILAYAH</Text>
-            <Table
-              withTableBorder
-              horizontalSpacing="xl"
-            >
-              <Table.Thead>
-                <Table.Tr
-                  style={{
-                    borderBottom: "1px solid #CED4D9",
-                  }}
-                >
-                  <Table.Th>No</Table.Th>
-                  <Table.Th>PROVINSI</Table.Th>
-                </Table.Tr>
-              </Table.Thead>
-              <Table.Tbody>
-                {isData.map((v, i) => (
-                  <Table.Tr key={i}>
-                    <Table.Td>{i + 1}</Table.Td>
-                    <Table.Td>
-                      <Chip.Group multiple value={isWilayah} onChange={setWilayah}>
-                        <Chip color="cyan" variant="light" radius="sm" value={String(v.id)}>{v.name}</Chip>
-                      </Chip.Group>
-                    </Table.Td>
-                    {/* <Table.Td>
+            <Box>
+              <Box pt={40} pb={40}>
+                <Divider size={"md"} />
+              </Box >
+              <Text mb={10} fw={"bold"}>PILIH WILAYAH</Text>
+              <Table
+                withTableBorder
+                horizontalSpacing="xl"
+              >
+                <Table.Thead>
+                  <Table.Tr
+                    style={{
+                      borderBottom: "1px solid #CED4D9",
+                    }}
+                  >
+                    <Table.Th>No</Table.Th>
+                    <Table.Th>PROVINSI</Table.Th>
+                  </Table.Tr>
+                </Table.Thead>
+                <Table.Tbody>
+                  {isData.map((v, i) => (
+                    <Table.Tr key={i}>
+                      <Table.Td>{i + 1}</Table.Td>
+                      <Table.Td>
+                        <Chip.Group multiple value={isWilayah} onChange={setWilayah}>
+                          <Chip color="cyan" variant="light" radius="sm" value={String(v.id)}>{v.name}</Chip>
+                        </Chip.Group>
+                      </Table.Td>
+                      {/* <Table.Td>
                     <Chip.Group multiple={false} value={isAreaFront} onChange={(val) => setDefault(val)}>
                       <Chip value={String(v.id)}>DEFAULT</Chip>
                     </Chip.Group>
                   </Table.Td> */}
 
-                  </Table.Tr>
-                ))}
-              </Table.Tbody>
-            </Table>
-          </Box>
+                    </Table.Tr>
+                  ))}
+                </Table.Tbody>
+              </Table>
+            </Box>
           )}
         </Box>
         <Group justify="flex-end">
@@ -203,7 +208,19 @@ export default function AddConfUser({ data, role }: { data: any, role: any }) {
         closeOnClickOutside={false}
         withCloseButton={false}
       >
-        <ModalConfUser data={dataUser} dataArea={isWilayah} />
+        <ModalConfUser data={dataUser} dataArea={isWilayah} onSuccess={() => {
+          setWilayah([])
+          setDataUser({
+            ...dataUser,
+            idUserRole: Number(),
+            name: "",
+            email: "",
+            password: "",
+            phone: "",
+            isAllArea: false
+          })
+          setDataArea(false)
+        }} />
       </Modal>
     </>
   );

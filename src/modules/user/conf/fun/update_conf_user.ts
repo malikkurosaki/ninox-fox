@@ -25,13 +25,14 @@ export default async function funUpdateConfUser({ data, dataArea }: { data: any,
     })
 
     if (!data.isAllArea) {
+        let a = 1
         for (let i of dataArea) {
             await prisma.userArea.create({
                 data: {
                     idUser: data.id,
                     idProvinsi: Number(i),
                     // isFront: (isFront == Number(i) ? true : false)
-                    isFront: (i == 1 ? true : false)
+                    isFront: (a == 1 ? true : false)
                 }
             })
             const kab = await MasterKabGetByProvince({ idProvinsi: Number(i) })
@@ -46,6 +47,8 @@ export default async function funUpdateConfUser({ data, dataArea }: { data: any,
             await prisma.userArea.createMany({
                 data: wilayahTrue
             })
+
+            a + 1
         }
     } else {
         for (let i = 1; i <= 38; i++) {
