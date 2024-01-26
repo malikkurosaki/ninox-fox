@@ -28,7 +28,10 @@ export default function EchartTopPairingCandidate({ candidate1, candidate2 }: { 
         trigger: 'axis',
         axisPointer: {
           type: 'shadow'
-        }
+        },
+        formatter: function (params: any) {
+          return params[0].value + "%";
+        },
       },
       grid: {
         left: '3%',
@@ -66,7 +69,7 @@ export default function EchartTopPairingCandidate({ candidate1, candidate2 }: { 
           },
           axisLabel: {
             formatter: (a: any) => {
-              return `${a} %`;
+              return `${a}%`;
             },
             color: "white"
           },
@@ -80,7 +83,8 @@ export default function EchartTopPairingCandidate({ candidate1, candidate2 }: { 
           data: !dataChart
             ? []
             : dataChart!.map((v: any) => v.rate),
-          color: WARNA.hijau_emotion
+          // color: WARNA.hijau_emotion
+          color: '#228be6'
         }
       ]
     };
