@@ -75,7 +75,6 @@ export default function ViewRegionalInsights({ candidate, emotion, audience, pct
         >
           <Group justify='flex-end'>
             <Select
-              mt={10}
               placeholder="Kandidat"
               data={listCandidate.map((can: any) => ({
                 value: String(can.id),

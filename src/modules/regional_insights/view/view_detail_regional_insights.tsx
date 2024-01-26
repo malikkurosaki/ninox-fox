@@ -70,7 +70,7 @@ export default function ViewDetailRegionalInsights({ emotion, area, audience, pc
               value={isWilayah}
               onChange={(val) => setFilter(val)}
             />
-            <ActionIcon variant="subtle" color='white' aria-label="back" onClick={() => router.push("/insights")}>
+            <ActionIcon variant="subtle" color='white' aria-label="back" onClick={() => router.back()}>
               <IoCloseSharp size={30} />
             </ActionIcon>
           </Group>

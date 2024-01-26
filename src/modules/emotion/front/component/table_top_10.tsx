@@ -1,6 +1,6 @@
 'use client'
 import { COLOR_EMOTION, WARNA } from '@/modules/_global';
-import { Box, Group, Pagination, ScrollArea, Table } from '@mantine/core';
+import { Box, Center, Group, Pagination, ScrollArea, Table } from '@mantine/core';
 import _, { ceil } from 'lodash';
 import React, { useState } from 'react';
 
@@ -130,16 +130,16 @@ export default function TableTop10({ emotion, tingkat, locked }: { emotion: any,
               <Table.Tr >
                 <Table.Th>NO</Table.Th>
                 <Table.Th w={250}>{(tingkat == 2) ? 'KECAMATAN' : 'KABUPATEN / KOTA'}</Table.Th>
-                <Table.Th>SUARA TERKUNCI</Table.Th>
-                <Table.Th>SUARA TERFILTER</Table.Th>
-                <Table.Th>PERCAYA DIRI</Table.Th>
-                <Table.Th>MENDUKUNG</Table.Th>
-                <Table.Th>POSITIF</Table.Th>
-                <Table.Th>TIDAK MEMILIH</Table.Th>
-                <Table.Th>TIDAK MENDUKUNG</Table.Th>
-                <Table.Th>TIDAK NYAMAN</Table.Th>
-                <Table.Th>NEGATIF</Table.Th>
-                <Table.Th>TIDAK SETUJU</Table.Th>
+                <Table.Th ta={'center'}> SUARA TERKUNCI </Table.Th>
+                <Table.Th ta={'center'}> SUARA TERFILTER </Table.Th>
+                <Table.Th ta={'center'}> PERCAYA DIRI </Table.Th>
+                <Table.Th ta={'center'}> MENDUKUNG </Table.Th>
+                <Table.Th ta={'center'}> POSITIF </Table.Th>
+                <Table.Th ta={'center'}> TIDAK MEMILIH </Table.Th>
+                <Table.Th ta={'center'}> TIDAK MENDUKUNG </Table.Th>
+                <Table.Th ta={'center'}> TIDAK NYAMAN </Table.Th>
+                <Table.Th ta={'center'}> NEGATIF </Table.Th>
+                <Table.Th ta={'center'}> TIDAK SETUJU </Table.Th>
               </Table.Tr>
             </Table.Thead>
             <Table.Tbody c={"white"} >
