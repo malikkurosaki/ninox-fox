@@ -30,9 +30,9 @@ export default function EchartKejahatanPenipuan() {
       tooltip: {},
       dataset: {
         source: [
-          ['data', 'Sama saja', 'Menurun', 'Meningkat'],
+          ['data', 'Menurun', 'Meningkat'],
           // ['Denpasar', 13, 62, 13],
-          ['Denpasar', 0, 0, 0],
+          ['Denpasar', 28.2, 23.4],
         ]
       },
       xAxis: [
@@ -47,7 +47,7 @@ export default function EchartKejahatanPenipuan() {
         {
           type: 'value',
           show: true,
-          max: "100",
+          max: "50",
           splitLine: {
             lineStyle: {
               color: "gray",
@@ -60,11 +60,6 @@ export default function EchartKejahatanPenipuan() {
         }
       ],
       series: [
-        {
-          type: 'bar', itemStyle: {
-            color: "gray"
-          }
-        },
         {
           type: 'bar', itemStyle: {
             color: "green"
