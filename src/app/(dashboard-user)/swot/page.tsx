@@ -1,11 +1,12 @@
-import { funGetAllCandidateFront, funGetOneCandidateFront } from '@/modules/candidate';
+import { funGetAllCandidateFront, funGetOneCandidateFront, funGetUserDefaultFront } from '@/modules/candidate';
 import { ViewSwot, funGetSwotFront } from '@/modules/swot';
 import React from 'react';
 
 export default async function Page() {
-  const data = await funGetSwotFront({})
+  const canDef = await funGetUserDefaultFront()
+  const data = await funGetSwotFront({ candidate: canDef.idCandidate })
   const can = await funGetAllCandidateFront()
-  const oneCandidate = await funGetOneCandidateFront({})
+  const oneCandidate = await funGetOneCandidateFront({ candidate: canDef.idCandidate })
 
   return (
     <>

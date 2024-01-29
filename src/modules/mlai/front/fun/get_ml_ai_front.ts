@@ -1,6 +1,7 @@
 "use server"
 import prisma from "@/modules/_global/bin/prisma"
 import { funGetUserDefaultFront } from "@/modules/user"
+import _ from "lodash"
 
 export default async function funGetMlAiFront({ candidate }: { candidate?: any }) {
 
@@ -22,15 +23,15 @@ export default async function funGetMlAiFront({ candidate }: { candidate?: any }
 
     let candidateReal = null
 
-    if (candidate == null) {
+    if (_.isNull(candidate) || _.isUndefined(candidate)) {
         candidateReal = can?.id
     } else {
         candidateReal = candidate
     }
 
-    if(candidateReal == null) {
+    if (candidateReal == null) {
         return null
-    }else{
+    } else {
         const data = await prisma.mlAi.findMany({
             where: {
                 idCandidate: candidateReal,
@@ -40,5 +41,5 @@ export default async function funGetMlAiFront({ candidate }: { candidate?: any }
 
         return data
     }
-    
+
 }
