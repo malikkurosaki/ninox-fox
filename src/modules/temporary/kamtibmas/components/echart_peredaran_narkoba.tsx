@@ -30,9 +30,9 @@ export default function EchartPeredaranNarkoba() {
       tooltip: {},
       dataset: {
         source: [
-          ['data', 'Sama saja', 'Menurun', 'Meningkat'],
+          ['data', 'Menurun', 'Meningkat'],
           // ['Denpasar', 13, 52, 10],
-          ['Denpasar', 0, 0, 0],
+          ['Denpasar', 6, 5.2],
         ]
       },
       xAxis: [
@@ -47,7 +47,7 @@ export default function EchartPeredaranNarkoba() {
         {
           type: 'value',
           show: true,
-          max: "100",
+          max: "10",
           splitLine: {
             lineStyle: {
               color: "gray",
@@ -60,11 +60,6 @@ export default function EchartPeredaranNarkoba() {
         }
       ],
       series: [
-        {
-          type: 'bar', itemStyle: {
-            color: "gray"
-          }
-        },
         {
           type: 'bar', itemStyle: {
             color: "green"
