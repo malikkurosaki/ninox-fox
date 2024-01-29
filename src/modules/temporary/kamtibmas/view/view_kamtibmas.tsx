@@ -37,9 +37,9 @@ export default function ViewKamtibmas() {
       tooltip: {},
       dataset: {
         source: [
-          ['data', 'Tidak', 'ya'],
+          ['data', 'Menurun', 'Meningkat'],
           // ['Denpasar', 121, 90],
-          ['Denpasar', 0, 0],
+          ['Denpasar',  3.3, 2.7],
         ]
       },
       xAxis: [
@@ -54,7 +54,7 @@ export default function ViewKamtibmas() {
         {
           type: 'value',
           show: true,
-          max: "100",
+          max: "10",
           splitLine: {
             lineStyle: {
               color: "gray",
@@ -69,12 +69,12 @@ export default function ViewKamtibmas() {
       series: [
         {
           type: 'bar', itemStyle: {
-            color: "red"
+            color: "green"
           }
         },
         {
           type: 'bar', itemStyle: {
-            color: "green"
+            color: "red"
           }
         },
       ]

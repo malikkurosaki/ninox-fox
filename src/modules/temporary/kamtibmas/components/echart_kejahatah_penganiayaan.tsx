@@ -30,8 +30,8 @@ export default function EchartKejahatahPenganiayaan() {
       tooltip: {},
       dataset: {
         source: [
-          ['data', 'Sama saja', 'Menurun', 'Meningkat'],
-          ['Denpasar', 0, 0, 0],
+          ['data', 'Menurun', 'Meningkat'],
+          ['Denpasar', 0, 0],
         ]
       },
       xAxis: [
@@ -59,11 +59,6 @@ export default function EchartKejahatahPenganiayaan() {
         }
       ],
       series: [
-        {
-          type: 'bar', itemStyle: {
-            color: "gray"
-          }
-        },
         {
           type: 'bar', itemStyle: {
             color: "green"

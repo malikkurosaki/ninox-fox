@@ -30,9 +30,9 @@ export default function EchartPencurianKekerasan() {
       tooltip: {},
       dataset: {
         source: [
-          ['data', 'Sama saja', 'Menurun', 'Meningkat'],
+          ['data', 'Menurun', 'Meningkat'],
           // ['Denpasar', 42],
-          ['Denpasar', 0, 0, 0],
+          ['Denpasar', 0, 0],
         ]
       },
       xAxis: [
@@ -60,11 +60,6 @@ export default function EchartPencurianKekerasan() {
         }
       ],
       series: [
-        {
-          type: 'bar', itemStyle: {
-            color: "gray"
-          }
-        },
         {
           type: 'bar', itemStyle: {
             color: "green"
