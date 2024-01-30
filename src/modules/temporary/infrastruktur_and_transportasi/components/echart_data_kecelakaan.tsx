@@ -25,7 +25,7 @@ export default function EchartDataKecelakaan() {
         source: [
           ['data', 'Angka Kecelakaan Lalu Lintas (Unit)'],
           // ['Denpasar', 23.3],
-          ['Denpasar', 31],
+          ['Denpasar', 760],
         ]
       },
       xAxis: [
@@ -39,6 +39,7 @@ export default function EchartDataKecelakaan() {
       yAxis: [
         {
           type: 'value',
+          max: 1000,
           show: true,
           splitLine: {
             lineStyle: {
