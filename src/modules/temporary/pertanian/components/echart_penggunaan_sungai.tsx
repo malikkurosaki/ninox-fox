@@ -27,27 +27,38 @@ export default function EchartPenggunaanSungai() {
           color: "white"
         }
       },
-      tooltip: {},
-      dataset: {
-        source: [
-          ['data', 'Tidak', 'Ya', 'Tidak terdefinisi'],
-          // ['Denpasar', 41, 100, 33,],
-          ['Denpasar', 0, 0, 0,],
-        ]
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow'
+        },
+        formatter: (a: any) => {
+          return `
+          <p>${a[0].data.name} : <strong> ${a[0].data.value} juta m³</strong></p>
+          `;
+        },
       },
+      // dataset: {
+      //   source: [
+      //     ['data', 'Tidak', 'Ya'],
+      //     // ['Denpasar', 41, 100, 33,],
+      //     ['Denpasar', 420, 340,],
+      //   ]
+      // },
       xAxis: [
         {
           type: 'category',
           axisLabel: {
             color: "white",
-          }
+          },
+          data: ['Tidak', 'Ya'],
         }
       ],
       yAxis: [
         {
           type: 'value',
           show: true,
-          max: "100",
+          // max: "100",
           splitLine: {
             lineStyle: {
               color: "gray",
@@ -55,25 +66,47 @@ export default function EchartPenggunaanSungai() {
             }
           },
           axisLabel: {
-            color: "white"
+            color: "white",
+            formatter: `{value} juta m³`,
           },
         }
       ],
+      // series: [
+      //   {
+      //     type: 'bar', itemStyle: {
+      //       color: "red"
+      //     }
+      //   },
+      //   {
+      //     type: 'bar', itemStyle: {
+      //       color: "green"
+      //     }
+      //   },
+      // ]
       series: [
         {
-          type: 'bar', itemStyle: {
-            color: "red"
-          }
-        },
-        {
-          type: 'bar', itemStyle: {
-            color: "green"
-          }
-        },
-        {
-          type: 'bar', itemStyle: {
-            color: "orange"
-          }
+          // name: 'Denpasar',
+          type: 'bar',
+          stack: 'total',
+          emphasis: {
+            focus: 'series',
+          },
+          data: [
+            {
+              value: 340,
+              name: 'Ya',
+              itemStyle: {
+                color: "green"
+              }
+            },
+            {
+              value: 420,
+              name: 'Tidak',
+              itemStyle: {
+                color: "red"
+              }
+            },
+          ],
         },
       ]
     };
