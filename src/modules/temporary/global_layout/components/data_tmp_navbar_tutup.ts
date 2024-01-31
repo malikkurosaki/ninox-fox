@@ -10,7 +10,7 @@ export const DataTmpNavbarTutup = [
     },
     {
       key: "2",
-      link: "/data-sosial-ekonomi/infratruktur-transportasi",
+      link: "/data-sosial-ekonomi/infrastruktur-transportasi",
       icon: MdOutlineLocalShipping,
       label: "Infrastruktur dan Transportasi"
     },

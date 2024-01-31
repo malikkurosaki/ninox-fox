@@ -1,5 +1,5 @@
 import { MasterProvinceGetAll } from '@/modules/_global';
-import { ViewEkonomi } from '@/modules/temporary';
+import { ViewInfrastrukturAndTransportasi } from '@/modules/temporary';
 import React from 'react';
 
 export default async function Page() {
@@ -7,7 +7,7 @@ export default async function Page() {
 
   return (
     <>
-      <ViewEkonomi prov={dataProv} />
+      <ViewInfrastrukturAndTransportasi prov={dataProv} />
     </>
   );
 }

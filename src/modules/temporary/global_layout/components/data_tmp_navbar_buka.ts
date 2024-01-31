@@ -10,7 +10,7 @@ export const DataTmpNavbarBuka = [
     },
     {
       key: "2",
-      link: "/data-sosial-ekonomi/infratruktur-transportasi",
+      link: "/data-sosial-ekonomi/infrastruktur-transportasi",
       icon: MdStorage,
       label: "INFRASTRUKTUR & TRANSPORTASI"
     },

@@ -1,12 +1,13 @@
+import { MasterProvinceGetAll } from '@/modules/_global';
 import { ViewPendidikan } from '@/modules/temporary';
 import React from 'react';
 
-function Page() {
+export default async function Page() {
+  const dataProv = await MasterProvinceGetAll()
+
   return (
     <>
-    <ViewPendidikan/>
+      <ViewPendidikan prov={dataProv} />
     </>
   );
 }
-
-export default Page;

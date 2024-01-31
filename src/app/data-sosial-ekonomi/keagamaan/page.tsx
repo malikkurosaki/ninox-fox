@@ -1,13 +1,14 @@
+import { MasterProvinceGetAll } from '@/modules/_global';
 import { ViewKeagamaan } from '@/modules/temporary';
 import React from 'react';
 
-function Page() {
+export default async function Page() {
+  const dataProv = await MasterProvinceGetAll()
+
   return (
     <>
-    
-    <ViewKeagamaan/>
+      <ViewKeagamaan prov={dataProv} />
     </>
   );
 }
 
-export default Page;
