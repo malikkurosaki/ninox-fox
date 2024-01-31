@@ -1,7 +1,7 @@
 "use client"
-import React from 'react';
-import { Box, Grid, Group, Select, SimpleGrid, Stack, Text } from '@mantine/core';
-import { PageSubTitle } from '@/modules/_global';
+import React, { useState } from 'react';
+import { Box, Button, Grid, Group, Select, SimpleGrid, Stack, Text } from '@mantine/core';
+import { MasterKabGetByProvince, MasterKecGetByKab, PageSubTitle } from '@/modules/_global';
 import EchartJarakPendidikan from '../components/echart_jarak_pendidikan';
 import EchartFasilitasDalamDesa from '../components/echart_fasilitas_dalam_desa';
 import EchartKetersediaanTransportasiSmp from '../components/echart_ketersediaan_transportasi_smp';
@@ -9,15 +9,38 @@ import EchartKetersediaanTransportasiSma from '../components/echart_ketersediaan
 import EchartKetersediaanTransportasiSmk from '../components/echart_ketersediaan_transportasi_smk';
 import TableDataGuruTersertifikasi from '../components/table_data_guru_tersertifikasi';
 import TableDataGuruHonorer from '../components/table_data_guru_honorer';
+import _ from 'lodash';
 
 
-export default function ViewPendidikan() {
+export default function ViewPendidikan({ prov }: { prov: any }) {
+  const [isProvinsi, setProvinsi] = useState<any>(null)
+  const [isKabupaten, setKabupaten] = useState<any>(null)
+  const [isKecamatan, setKecamatan] = useState<any>(null)
+  const [dataKabupaten, setDataKabupaten] = useState<any>([])
+  const [dataKecamatan, setDataKecamatan] = useState<any>([])
+
+  async function onProvinsi(id: any) {
+    setProvinsi(id)
+    setKabupaten(null)
+    setKecamatan(null)
+    const dataKabNew = await MasterKabGetByProvince({ idProvinsi: Number(id) })
+    setDataKabupaten(dataKabNew)
+    setDataKecamatan([])
+  }
+
+  async function onKabupaten(id: any) {
+    setKabupaten(id)
+    setKecamatan(null)
+    const dataKecNew = await MasterKecGetByKab({ idKabkot: id })
+    setDataKecamatan(dataKecNew)
+  }
+
   return (
     <>
       <Stack>
         <PageSubTitle text1='DATA' text2='PENDIDIKAN' />
       </Stack>
-      {/* <Box
+      <Box
         style={{
           backgroundColor: "#05363D",
           position: "sticky",
@@ -28,11 +51,39 @@ export default function ViewPendidikan() {
         }}
       >
         <Group justify='flex-end' pt={10} >
-          <Select radius={"md"} placeholder='Provinsi' />
-          <Select radius={"md"} placeholder='Kabupaten/Kota' />
-          <Select radius={"md"} placeholder='Kecamatan' />
+          <Select
+            radius={"md"}
+            placeholder='Provinsi'
+            data={prov.map((pro: any) => ({
+              value: String(pro.id),
+              label: pro.name
+            }))}
+            onChange={(val) => { onProvinsi(val) }}
+            value={isProvinsi}
+          />
+          <Select
+            radius={"md"}
+            placeholder='Kabupaten/Kota'
+            data={dataKabupaten.map((kab: any) => ({
+              value: String(kab.id),
+              label: kab.name
+            }))}
+            onChange={(val) => { onKabupaten(val) }}
+            value={isKabupaten}
+          />
+          <Select
+            radius={"md"}
+            placeholder='Kecamatan'
+            data={dataKecamatan.map((kec: any) => ({
+              value: String(kec.id),
+              label: _.upperCase(kec.name)
+            }))}
+            onChange={(val) => { setKecamatan(val) }}
+            value={isKecamatan}
+          />
+          <Button>SUBMIT</Button>
         </Group>
-      </Box> */}
+      </Box>
       <Box pt={30}>
         <Box>
           <Box pb={20}>
