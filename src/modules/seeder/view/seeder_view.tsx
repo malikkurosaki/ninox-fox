@@ -17,6 +17,7 @@ import funSeederPct from "../fun/fun_pct";
 import funSeederLta from "../fun/fun_lta";
 import funSeederRhi from "../fun/fun_rhi";
 import funSeederUserArea from "../fun/fun_user_area";
+import funSeederSosialEkonomi from "../fun/fun_sosial_ekonomi";
 
 /**
  * Fungsi untuk menampilkan view halaman seeder.
@@ -117,6 +118,12 @@ export default function SeederView() {
         if (res?.success) return setLoading(false), toast(res?.message, { theme: "dark" })
     }
 
+    async function onSosialEkonomi() {
+        setLoading(true)
+        const res = await funSeederSosialEkonomi()
+        if (res?.success) return setLoading(false), toast(res?.message, { theme: "dark" })
+    }
+
 
 
     return (
@@ -160,7 +167,7 @@ export default function SeederView() {
                 </SimpleGrid>
                 <Box mt={30}>
                     <Paper shadow="xs" p="lg">
-                        <Text fw={"bold"}>DATA LAINNYA...</Text>
+                        <Text fw={"bold"}>DATA LAINNYA</Text>
                         <Divider mt={10} mb={30} />
                         <Group justify="center" gap="md" grow my={15}>
                             {/* <Button bg={"gray"} loading={loading} onClick={onLeader}>CATEGORY LEADER TRAIT ASSESSMENT</Button> */}
@@ -172,6 +179,7 @@ export default function SeederView() {
                         <Group justify="center" gap="md" grow my={15}>
                             <Button bg={"gray"} loading={loading} onClick={onLTAFix}>VALUE LEADER TRAIT ASSESSMENT</Button>
                             <Button bg={"gray"} loading={loading} onClick={onRHIFix}>VALUE REGION HOT ISSUES</Button>
+                            <Button bg={"gray"} loading={loading} onClick={onSosialEkonomi}>DATA SOSIAL EKONOMI</Button>
                         </Group>
                     </Paper>
                 </Box>

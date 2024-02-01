@@ -45,7 +45,7 @@ export default async function funGetAccessAdmin() {
 
     const dataGroup = _.groupBy(
         dataOmit, (v) => v.group
-      )
+    )
 
     return dataGroup
 

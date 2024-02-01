@@ -14,12 +14,10 @@ export async function funSeederUserAccess() {
                 id: data.id
             },
             create: {
-                id: data.id,
                 idComponent: data.idComponent,
                 idUserRole: data.idUserRole
             },
             update: {
-                id: data.id,
                 idComponent: data.idComponent,
                 idUserRole: data.idUserRole
             }
