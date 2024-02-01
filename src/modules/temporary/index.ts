@@ -6,7 +6,16 @@ import ViewKamtibmas from "./kamtibmas/view/view_kamtibmas";
 import ViewKeagamaan from "./keagamaan/view/view_keagamaan";
 import ViewKemiskinanDanKetimpangan from "./kemiskinan_dan_ketimpangan/view/view_kemiskinan_dan_ketimpangan";
 import ViewKesehatan from "./kesehatan/view/view_kesehatan";
-import ViewKetenagakerjaan from "./ketenagakerjaan/view/view_ketenagakerjaan";
+import funDownloadJaminanKecelakaanKerja from "./ketenagakerjaan/back/fun/download_jaminan_kecelakaan_kerja";
+import funDownloadJaminanKesehatan from "./ketenagakerjaan/back/fun/download_jaminan_kesehatan";
+import funGetJaminanKesehatan from "./ketenagakerjaan/back/fun/get_jaminan_kesehatan";
+import ViewJaminanHariTua from "./ketenagakerjaan/back/view/view_jaminan_hari_tua";
+import ViewJaminanKecelakaanKerja from "./ketenagakerjaan/back/view/view_jaminan_kecelakaan_kerja";
+import ViewJaminanKematian from "./ketenagakerjaan/back/view/view_jaminan_kematian";
+import ViewJaminanKesehatan from "./ketenagakerjaan/back/view/view_jaminan_kesehatan";
+import ViewJaminanPensiun from "./ketenagakerjaan/back/view/view_jaminan_pensiun";
+import ViewPengangguran from "./ketenagakerjaan/back/view/view_pengangguran";
+import ViewKetenagakerjaan from "./ketenagakerjaan/front/view/view_ketenagakerjaan";
 import ViewPendidikan from "./pendidikan/view/view_pendidikan";
 import ViewPertanian from "./pertanian/view/view_pertanian";
 
@@ -20,4 +29,13 @@ export { ViewKamtibmas }
 export { ViewEkonomi }
 export { ViewPertanian }
 export { ViewKemiskinanDanKetimpangan }
-export {ChartBangunanPermanen}
+export { ChartBangunanPermanen }
+export { ViewJaminanKesehatan }
+export { ViewJaminanKecelakaanKerja }
+export { ViewJaminanKematian }
+export { ViewJaminanHariTua }
+export { ViewJaminanPensiun }
+export { ViewPengangguran }
+export { funDownloadJaminanKesehatan }
+export { funGetJaminanKesehatan }
+export { funDownloadJaminanKecelakaanKerja }
