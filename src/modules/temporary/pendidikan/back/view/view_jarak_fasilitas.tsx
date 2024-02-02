@@ -3,10 +3,10 @@ import { MasterKabGetByProvince } from "@/modules/_global"
 import { useState } from "react"
 import { Box, Button, Group, Paper, Select, SimpleGrid, Stack, Text } from "@mantine/core"
 import papa from "papaparse"
-import funGetPengangguran from "../fun/get_pengangguran"
-import TablePengangguran from "../component/table_pengangguran"
+import funGetJarakFasilitas from "../fun/get_jarak_fasilitas"
+import TableJarakFasilitas from "../component/table_jarak_fasilitas"
 
-export default function ViewPengangguran({ provinsi, download, table }: { provinsi: any, download: any, table: any }) {
+export default function ViewJarakFasilitas({ provinsi, download, table }: { provinsi: any, download: any, table: any }) {
     const [isProvinsi, setProvinsi] = useState<any>(null)
     const [isKabupaten, setKabupaten] = useState<any>(null)
     const [dataKabupaten, setDataKabupaten] = useState<any>([])
@@ -20,14 +20,14 @@ export default function ViewPengangguran({ provinsi, download, table }: { provin
     }
 
     async function onProses() {
-        const loadData = await funGetPengangguran({ provinsi: isProvinsi, kab: isKabupaten })
+        const loadData = await funGetJarakFasilitas({ provinsi: isProvinsi, kab: isKabupaten })
         setDataTable(loadData)
     }
 
     return (
         <>
             <Stack>
-                <Text fw={"bold"}>KETENAGAKERJAAN - PENGANGGURAN</Text>
+                <Text fw={"bold"}>PENDIDIKAN - RATA RATA JARAK FASILITAS</Text>
             </Stack>
             <Box pt={30}>
                 <SimpleGrid
@@ -121,7 +121,7 @@ export default function ViewPengangguran({ provinsi, download, table }: { provin
                 </SimpleGrid>
             </Box>
             <Box pt={30}>
-                <TablePengangguran data={dataTable.data} title={dataTable.title} th={dataTable.thTitle} />
+                <TableJarakFasilitas data={dataTable.data} title={dataTable.title} th={dataTable.thTitle} />
             </Box>
         </>
     )

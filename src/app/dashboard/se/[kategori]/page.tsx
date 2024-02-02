@@ -1,6 +1,5 @@
 import { MasterProvinceGetAll } from "@/modules/_global"
-import { ViewJaminanHariTua, ViewJaminanKecelakaanKerja, ViewJaminanKematian, ViewJaminanKesehatan, ViewJaminanPensiun, ViewPengangguran, funDownloadJaminanKecelakaanKerja, funDownloadJaminanKesehatan, funGetJaminanKesehatan } from "@/modules/temporary"
-import funGetJaminanKecelakaanKerja from "@/modules/temporary/ketenagakerjaan/back/fun/get_jaminan_kecelakaan_kerja"
+import { ViewGuruTersertifikasi, ViewJalanDilaluiKendaraan, ViewJalanKakiKurang4Jam, ViewJaminanHariTua, ViewJaminanKecelakaanKerja, ViewJaminanKematian, ViewJaminanKesehatan, ViewJaminanPensiun, ViewJarakFasilitas, ViewKecelakaan, ViewPengangguran, ViewPermukaanJalan, ViewRumahIbadah, funDownloadGuruTersertifikasi, funDownloadJalanDilaluiKendaraan, funDownloadJalanKakiKurang4Jam, funDownloadJaminanHariTua, funDownloadJaminanKecelakaanKerja, funDownloadJaminanKematian, funDownloadJaminanKesehatan, funDownloadJaminanPensiun, funDownloadJarakFasilitas, funDownloadKecelakaan, funDownloadPengangguran, funDownloadPermukaanJalan, funDownloadRumahIbadah, funGetGuruTersertifikasi, funGetJalanDilaluiKendaraan, funGetJalanKakiKurang4Jam, funGetJaminanHariTua, funGetJaminanKecelakaanKerja, funGetJaminanKematian, funGetJaminanKesehatan, funGetJaminanPensiun, funGetJarakFasilitas, funGetKecelakaan, funGetPengangguran, funGetPermukaanJalan, funGetRumahIbadah } from "@/modules/temporary"
 
 export default async function Page({ params }: { params: { kategori: any } }) {
     const prov = await MasterProvinceGetAll()
@@ -20,28 +19,84 @@ export default async function Page({ params }: { params: { kategori: any } }) {
             <ViewJaminanKecelakaanKerja provinsi={prov} download={dataDownload} table={dataTable} />
         </>)
     }
-    if (params.kategori == "jaminan-kematian")
-        return (<><ViewJaminanKematian /></>)
-    if (params.kategori == "jaminan-hari-tua")
-        return (<><ViewJaminanHariTua /></>)
-    if (params.kategori == "jaminan-pensiun")
-        return (<><ViewJaminanPensiun /></>)
-    if (params.kategori == "pengangguran")
-        return (<><ViewPengangguran /></>)
-    if (params.kategori == "permukaan-jalan")
-        return (<></>)
-    if (params.kategori == "jalan-dilalui-kendaraan")
-        return (<></>)
-    if (params.kategori == "kecelakaan")
-        return (<></>)
-    if (params.kategori == "rumah-ibadah")
-        return (<></>)
-    if (params.kategori == "jarak-fasilitas")
-        return (<></>)
-    if (params.kategori == "jalan-kaki-kurang-4-jam")
-        return (<></>)
-    if (params.kategori == "guru-tersertifikasi")
-        return (<></>)
+    if (params.kategori == "jaminan-kematian") {
+        const dataDownload = await funDownloadJaminanKematian()
+        const dataTable = await funGetJaminanKematian({})
+        return (<>
+            <ViewJaminanKematian provinsi={prov} download={dataDownload} table={dataTable} />
+        </>)
+    }
+    if (params.kategori == "jaminan-hari-tua") {
+        const dataDownload = await funDownloadJaminanHariTua()
+        const dataTable = await funGetJaminanHariTua({})
+        return (<>
+            <ViewJaminanHariTua provinsi={prov} download={dataDownload} table={dataTable} />
+        </>)
+    }
+    if (params.kategori == "jaminan-pensiun") {
+        const dataDownload = await funDownloadJaminanPensiun()
+        const dataTable = await funGetJaminanPensiun({})
+        return (<>
+            <ViewJaminanPensiun provinsi={prov} download={dataDownload} table={dataTable} />
+        </>)
+    }
+    if (params.kategori == "pengangguran") {
+        const dataDownload = await funDownloadPengangguran()
+        const dataTable = await funGetPengangguran({})
+        return (<>
+            <ViewPengangguran provinsi={prov} download={dataDownload} table={dataTable} />
+        </>)
+    }
+    if (params.kategori == "permukaan-jalan") {
+        const dataDownload = await funDownloadPermukaanJalan()
+        const dataTable = await funGetPermukaanJalan({})
+        return (<>
+            <ViewPermukaanJalan provinsi={prov} download={dataDownload} table={dataTable} />
+        </>)
+    }
+    if (params.kategori == "jalan-dilalui-kendaraan") {
+        const dataDownload = await funDownloadJalanDilaluiKendaraan()
+        const dataTable = await funGetJalanDilaluiKendaraan({})
+        return (<>
+            <ViewJalanDilaluiKendaraan provinsi={prov} download={dataDownload} table={dataTable} />
+        </>)
+    }
+    if (params.kategori == "kecelakaan") {
+        const dataDownload = await funDownloadKecelakaan()
+        const dataTable = await funGetKecelakaan({})
+        return (<>
+            <ViewKecelakaan provinsi={prov} download={dataDownload} table={dataTable} />
+        </>)
+    }
+    if (params.kategori == "rumah-ibadah") {
+        const dataDownload = await funDownloadRumahIbadah()
+        const dataTable = await funGetRumahIbadah({})
+        return (<>
+            <ViewRumahIbadah provinsi={prov} download={dataDownload} table={dataTable} />
+        </>)
+    }
+    if (params.kategori == "jarak-fasilitas") {
+        const dataDownload = await funDownloadJarakFasilitas()
+        const dataTable = await funGetJarakFasilitas({})
+        return (<>
+            <ViewJarakFasilitas provinsi={prov} download={dataDownload} table={dataTable} />
+        </>)
+    }
+    if (params.kategori == "jalan-kaki-kurang-4-jam") {
+        const dataDownload = await funDownloadJalanKakiKurang4Jam()
+        const dataTable = await funGetJalanKakiKurang4Jam({})
+        return (<>
+            <ViewJalanKakiKurang4Jam provinsi={prov} download={dataDownload} table={dataTable} />
+        </>)
+    }
+    if (params.kategori == "guru-tersertifikasi") {
+        const dataDownload = await funDownloadGuruTersertifikasi()
+        const dataTable = await funGetGuruTersertifikasi({})
+        return (<>
+            <ViewGuruTersertifikasi provinsi={prov} download={dataDownload} table={dataTable} />
+        </>)
+    }
+
     if (params.kategori == "guru-honorer")
         return (<></>)
     if (params.kategori == "kelas-ibu-hamil")
