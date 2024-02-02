@@ -1,6 +1,5 @@
 import { MasterProvinceGetAll } from "@/modules/_global"
-import { ViewJaminanHariTua, ViewJaminanKecelakaanKerja, ViewJaminanKematian, ViewJaminanKesehatan, ViewJaminanPensiun, ViewPengangguran, funDownloadJaminanKecelakaanKerja, funDownloadJaminanKesehatan, funGetJaminanKesehatan } from "@/modules/temporary"
-import funGetJaminanKecelakaanKerja from "@/modules/temporary/ketenagakerjaan/back/fun/get_jaminan_kecelakaan_kerja"
+import { ViewJaminanHariTua, ViewJaminanKecelakaanKerja, ViewJaminanKematian, ViewJaminanKesehatan, ViewJaminanPensiun, ViewPengangguran, funDownloadJaminanHariTua, funDownloadJaminanKecelakaanKerja, funDownloadJaminanKematian, funDownloadJaminanKesehatan, funDownloadJaminanPensiun, funDownloadPengangguran, funGetJaminanHariTua, funGetJaminanKecelakaanKerja, funGetJaminanKematian, funGetJaminanKesehatan, funGetJaminanPensiun, funGetPengangguran } from "@/modules/temporary"
 
 export default async function Page({ params }: { params: { kategori: any } }) {
     const prov = await MasterProvinceGetAll()
@@ -20,14 +19,34 @@ export default async function Page({ params }: { params: { kategori: any } }) {
             <ViewJaminanKecelakaanKerja provinsi={prov} download={dataDownload} table={dataTable} />
         </>)
     }
-    if (params.kategori == "jaminan-kematian")
-        return (<><ViewJaminanKematian /></>)
-    if (params.kategori == "jaminan-hari-tua")
-        return (<><ViewJaminanHariTua /></>)
-    if (params.kategori == "jaminan-pensiun")
-        return (<><ViewJaminanPensiun /></>)
-    if (params.kategori == "pengangguran")
-        return (<><ViewPengangguran /></>)
+    if (params.kategori == "jaminan-kematian") {
+        const dataDownload = await funDownloadJaminanKematian()
+        const dataTable = await funGetJaminanKematian({})
+        return (<>
+            <ViewJaminanKematian provinsi={prov} download={dataDownload} table={dataTable} />
+        </>)
+    }
+    if (params.kategori == "jaminan-hari-tua") {
+        const dataDownload = await funDownloadJaminanHariTua()
+        const dataTable = await funGetJaminanHariTua({})
+        return (<>
+            <ViewJaminanHariTua provinsi={prov} download={dataDownload} table={dataTable} />
+        </>)
+    }
+    if (params.kategori == "jaminan-pensiun") {
+        const dataDownload = await funDownloadJaminanPensiun()
+        const dataTable = await funGetJaminanPensiun({})
+        return (<>
+            <ViewJaminanPensiun provinsi={prov} download={dataDownload} table={dataTable} />
+        </>)
+    }
+    if (params.kategori == "pengangguran") {
+        const dataDownload = await funDownloadPengangguran()
+        const dataTable = await funGetPengangguran({})
+        return (<>
+            <ViewPengangguran provinsi={prov} download={dataDownload} table={dataTable} />
+        </>)
+    }
     if (params.kategori == "permukaan-jalan")
         return (<></>)
     if (params.kategori == "jalan-dilalui-kendaraan")
