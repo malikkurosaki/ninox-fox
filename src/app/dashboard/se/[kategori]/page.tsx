@@ -1,5 +1,5 @@
 import { MasterProvinceGetAll } from "@/modules/_global"
-import { ViewJaminanHariTua, ViewJaminanKecelakaanKerja, ViewJaminanKematian, ViewJaminanKesehatan, ViewJaminanPensiun, ViewPengangguran, funDownloadJaminanHariTua, funDownloadJaminanKecelakaanKerja, funDownloadJaminanKematian, funDownloadJaminanKesehatan, funDownloadJaminanPensiun, funDownloadPengangguran, funGetJaminanHariTua, funGetJaminanKecelakaanKerja, funGetJaminanKematian, funGetJaminanKesehatan, funGetJaminanPensiun, funGetPengangguran } from "@/modules/temporary"
+import { ViewJalanDilaluiKendaraan, ViewJaminanHariTua, ViewJaminanKecelakaanKerja, ViewJaminanKematian, ViewJaminanKesehatan, ViewJaminanPensiun, ViewKecelakaan, ViewPengangguran, ViewPermukaanJalan, funDownloadJalanDilaluiKendaraan, funDownloadJaminanHariTua, funDownloadJaminanKecelakaanKerja, funDownloadJaminanKematian, funDownloadJaminanKesehatan, funDownloadJaminanPensiun, funDownloadKecelakaan, funDownloadPengangguran, funDownloadPermukaanJalan, funGetJalanDilaluiKendaraan, funGetJaminanHariTua, funGetJaminanKecelakaanKerja, funGetJaminanKematian, funGetJaminanKesehatan, funGetJaminanPensiun, funGetKecelakaan, funGetPengangguran, funGetPermukaanJalan } from "@/modules/temporary"
 
 export default async function Page({ params }: { params: { kategori: any } }) {
     const prov = await MasterProvinceGetAll()
@@ -47,12 +47,27 @@ export default async function Page({ params }: { params: { kategori: any } }) {
             <ViewPengangguran provinsi={prov} download={dataDownload} table={dataTable} />
         </>)
     }
-    if (params.kategori == "permukaan-jalan")
-        return (<></>)
-    if (params.kategori == "jalan-dilalui-kendaraan")
-        return (<></>)
-    if (params.kategori == "kecelakaan")
-        return (<></>)
+    if (params.kategori == "permukaan-jalan") {
+        const dataDownload = await funDownloadPermukaanJalan()
+        const dataTable = await funGetPermukaanJalan({})
+        return (<>
+            <ViewPermukaanJalan provinsi={prov} download={dataDownload} table={dataTable} />
+        </>)
+    }
+    if (params.kategori == "jalan-dilalui-kendaraan"){
+        const dataDownload = await funDownloadJalanDilaluiKendaraan()
+        const dataTable = await funGetJalanDilaluiKendaraan({})
+        return (<>
+            <ViewJalanDilaluiKendaraan provinsi={prov} download={dataDownload} table={dataTable}/>
+        </>)
+    }
+    if (params.kategori == "kecelakaan"){
+        const dataDownload = await funDownloadKecelakaan()
+        const dataTable = await funGetKecelakaan({})
+        return (<>
+            <ViewKecelakaan provinsi={prov} download={dataDownload} table={dataTable}/>
+        </>)
+    }
     if (params.kategori == "rumah-ibadah")
         return (<></>)
     if (params.kategori == "jarak-fasilitas")
