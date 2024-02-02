@@ -8,7 +8,7 @@ import React, { useEffect, useState } from "react";
  * @returns  Hasil menampilkan tabel beserta valuenya.
  */
 
-export default function TableKecelakaan({ title, data, th }: { title: string, data: any, th: any }) {
+export default function TableJarakFasilitas({ title, data, th }: { title: string, data: any, th: any }) {
     const [isData, setData] = useState(data)
 
     useShallowEffect(() => {
@@ -42,7 +42,10 @@ export default function TableKecelakaan({ title, data, th }: { title: string, da
                                         <Table.Tr>
                                             <Table.Th>NO</Table.Th>
                                             <Table.Th>{th}</Table.Th>
-                                            <Table.Th>VALUE</Table.Th>
+                                            <Table.Th>Jarak ke SD Terdekat</Table.Th>
+                                            <Table.Th>Jarak ke SMP Terdekat</Table.Th>
+                                            <Table.Th>Jarak ke SMA Terdekat</Table.Th>
+                                            <Table.Th>Jarak ke SMK Terdekat</Table.Th>
                                         </Table.Tr>
                                     </Table.Thead>
                                     <Table.Tbody>
@@ -50,7 +53,10 @@ export default function TableKecelakaan({ title, data, th }: { title: string, da
                                             <Table.Tr key={i}>
                                                 <Table.Td>{i + 1}</Table.Td>
                                                 <Table.Td>{v.name}</Table.Td>
-                                                <Table.Td>{v.value}</Table.Td>
+                                                <Table.Td>{v.sd}</Table.Td>
+                                                <Table.Td>{v.smp}</Table.Td>
+                                                <Table.Td>{v.sma}</Table.Td>
+                                                <Table.Td>{v.smk}</Table.Td>
                                             </Table.Tr>
                                         ))}
                                     </Table.Tbody>

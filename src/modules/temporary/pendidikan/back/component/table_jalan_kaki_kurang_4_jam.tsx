@@ -8,7 +8,7 @@ import React, { useEffect, useState } from "react";
  * @returns  Hasil menampilkan tabel beserta valuenya.
  */
 
-export default function TableKecelakaan({ title, data, th }: { title: string, data: any, th: any }) {
+export default function TableJalanKakiKurang4Jam({ title, data, th }: { title: string, data: any, th: any }) {
     const [isData, setData] = useState(data)
 
     useShallowEffect(() => {
@@ -42,7 +42,7 @@ export default function TableKecelakaan({ title, data, th }: { title: string, da
                                         <Table.Tr>
                                             <Table.Th>NO</Table.Th>
                                             <Table.Th>{th}</Table.Th>
-                                            <Table.Th>VALUE</Table.Th>
+                                            <Table.Th>Fasilitas Berada Dalam Desa</Table.Th>
                                         </Table.Tr>
                                     </Table.Thead>
                                     <Table.Tbody>

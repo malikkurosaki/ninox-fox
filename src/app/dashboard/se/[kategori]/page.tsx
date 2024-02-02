@@ -1,5 +1,5 @@
 import { MasterProvinceGetAll } from "@/modules/_global"
-import { ViewJalanDilaluiKendaraan, ViewJaminanHariTua, ViewJaminanKecelakaanKerja, ViewJaminanKematian, ViewJaminanKesehatan, ViewJaminanPensiun, ViewKecelakaan, ViewPengangguran, ViewPermukaanJalan, funDownloadJalanDilaluiKendaraan, funDownloadJaminanHariTua, funDownloadJaminanKecelakaanKerja, funDownloadJaminanKematian, funDownloadJaminanKesehatan, funDownloadJaminanPensiun, funDownloadKecelakaan, funDownloadPengangguran, funDownloadPermukaanJalan, funGetJalanDilaluiKendaraan, funGetJaminanHariTua, funGetJaminanKecelakaanKerja, funGetJaminanKematian, funGetJaminanKesehatan, funGetJaminanPensiun, funGetKecelakaan, funGetPengangguran, funGetPermukaanJalan } from "@/modules/temporary"
+import { ViewGuruTersertifikasi, ViewJalanDilaluiKendaraan, ViewJalanKakiKurang4Jam, ViewJaminanHariTua, ViewJaminanKecelakaanKerja, ViewJaminanKematian, ViewJaminanKesehatan, ViewJaminanPensiun, ViewJarakFasilitas, ViewKecelakaan, ViewPengangguran, ViewPermukaanJalan, ViewRumahIbadah, funDownloadGuruTersertifikasi, funDownloadJalanDilaluiKendaraan, funDownloadJalanKakiKurang4Jam, funDownloadJaminanHariTua, funDownloadJaminanKecelakaanKerja, funDownloadJaminanKematian, funDownloadJaminanKesehatan, funDownloadJaminanPensiun, funDownloadJarakFasilitas, funDownloadKecelakaan, funDownloadPengangguran, funDownloadPermukaanJalan, funDownloadRumahIbadah, funGetGuruTersertifikasi, funGetJalanDilaluiKendaraan, funGetJalanKakiKurang4Jam, funGetJaminanHariTua, funGetJaminanKecelakaanKerja, funGetJaminanKematian, funGetJaminanKesehatan, funGetJaminanPensiun, funGetJarakFasilitas, funGetKecelakaan, funGetPengangguran, funGetPermukaanJalan, funGetRumahIbadah } from "@/modules/temporary"
 
 export default async function Page({ params }: { params: { kategori: any } }) {
     const prov = await MasterProvinceGetAll()
@@ -54,28 +54,49 @@ export default async function Page({ params }: { params: { kategori: any } }) {
             <ViewPermukaanJalan provinsi={prov} download={dataDownload} table={dataTable} />
         </>)
     }
-    if (params.kategori == "jalan-dilalui-kendaraan"){
+    if (params.kategori == "jalan-dilalui-kendaraan") {
         const dataDownload = await funDownloadJalanDilaluiKendaraan()
         const dataTable = await funGetJalanDilaluiKendaraan({})
         return (<>
-            <ViewJalanDilaluiKendaraan provinsi={prov} download={dataDownload} table={dataTable}/>
+            <ViewJalanDilaluiKendaraan provinsi={prov} download={dataDownload} table={dataTable} />
         </>)
     }
-    if (params.kategori == "kecelakaan"){
+    if (params.kategori == "kecelakaan") {
         const dataDownload = await funDownloadKecelakaan()
         const dataTable = await funGetKecelakaan({})
         return (<>
-            <ViewKecelakaan provinsi={prov} download={dataDownload} table={dataTable}/>
+            <ViewKecelakaan provinsi={prov} download={dataDownload} table={dataTable} />
         </>)
     }
-    if (params.kategori == "rumah-ibadah")
-        return (<></>)
-    if (params.kategori == "jarak-fasilitas")
-        return (<></>)
-    if (params.kategori == "jalan-kaki-kurang-4-jam")
-        return (<></>)
-    if (params.kategori == "guru-tersertifikasi")
-        return (<></>)
+    if (params.kategori == "rumah-ibadah") {
+        const dataDownload = await funDownloadRumahIbadah()
+        const dataTable = await funGetRumahIbadah({})
+        return (<>
+            <ViewRumahIbadah provinsi={prov} download={dataDownload} table={dataTable} />
+        </>)
+    }
+    if (params.kategori == "jarak-fasilitas") {
+        const dataDownload = await funDownloadJarakFasilitas()
+        const dataTable = await funGetJarakFasilitas({})
+        return (<>
+            <ViewJarakFasilitas provinsi={prov} download={dataDownload} table={dataTable} />
+        </>)
+    }
+    if (params.kategori == "jalan-kaki-kurang-4-jam") {
+        const dataDownload = await funDownloadJalanKakiKurang4Jam()
+        const dataTable = await funGetJalanKakiKurang4Jam({})
+        return (<>
+            <ViewJalanKakiKurang4Jam provinsi={prov} download={dataDownload} table={dataTable} />
+        </>)
+    }
+    if (params.kategori == "guru-tersertifikasi") {
+        const dataDownload = await funDownloadGuruTersertifikasi()
+        const dataTable = await funGetGuruTersertifikasi({})
+        return (<>
+            <ViewGuruTersertifikasi provinsi={prov} download={dataDownload} table={dataTable} />
+        </>)
+    }
+
     if (params.kategori == "guru-honorer")
         return (<></>)
     if (params.kategori == "kelas-ibu-hamil")
