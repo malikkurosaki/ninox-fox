@@ -1,5 +1,5 @@
 import { MasterProvinceGetAll } from "@/modules/_global"
-import { ViewGuruHonorer, ViewGuruTersertifikasi, ViewJalanDilaluiKendaraan, ViewJalanKakiKurang4Jam, ViewJaminanHariTua, ViewJaminanKecelakaanKerja, ViewJaminanKematian, ViewJaminanKesehatan, ViewJaminanPensiun, ViewJarakFasilitas, ViewKecelakaan, ViewPengangguran, ViewPermukaanJalan, ViewRumahIbadah, funDownloadGuruHonorer, funDownloadGuruTersertifikasi, funDownloadJalanDilaluiKendaraan, funDownloadJalanKakiKurang4Jam, funDownloadJaminanHariTua, funDownloadJaminanKecelakaanKerja, funDownloadJaminanKematian, funDownloadJaminanKesehatan, funDownloadJaminanPensiun, funDownloadJarakFasilitas, funDownloadKecelakaan, funDownloadPengangguran, funDownloadPermukaanJalan, funDownloadRumahIbadah, funGetGuruHonorer, funGetGuruTersertifikasi, funGetJalanDilaluiKendaraan, funGetJalanKakiKurang4Jam, funGetJaminanHariTua, funGetJaminanKecelakaanKerja, funGetJaminanKematian, funGetJaminanKesehatan, funGetJaminanPensiun, funGetJarakFasilitas, funGetKecelakaan, funGetPengangguran, funGetPermukaanJalan, funGetRumahIbadah } from "@/modules/temporary"
+import { ViewFasilitas, ViewGuruHonorer, ViewGuruTersertifikasi, ViewIbuHamilDariKeluargaMiskin, ViewJalanDilaluiKendaraan, ViewJalanKakiKurang4Jam, ViewJaminanHariTua, ViewJaminanKecelakaanKerja, ViewJaminanKematian, ViewJaminanKesehatan, ViewJaminanPensiun, ViewJaminanUntukBaduta, ViewJarakFasilitas, ViewJumlahDokter, ViewKecelakaan, ViewKelasIbuHamil, ViewPengangguran, ViewPermukaanJalan, ViewPosPelayanan, ViewRataRataJarakFasilitas, ViewRumahIbadah, funDownloadFasilitas, funDownloadGuruHonorer, funDownloadGuruTersertifikasi, funDownloadIbuHamilDariKeluargaMiskin, funDownloadJalanDilaluiKendaraan, funDownloadJalanKakiKurang4Jam, funDownloadJaminanHariTua, funDownloadJaminanKecelakaanKerja, funDownloadJaminanKematian, funDownloadJaminanKesehatan, funDownloadJaminanPensiun, funDownloadJaminanUntukBaduta, funDownloadJarakFasilitas, funDownloadJumlahDokter, funDownloadKecelakaan, funDownloadKelasIbuHamil, funDownloadPengangguran, funDownloadPermukaanJalan, funDownloadPosPelayanan, funDownloadRataRataJarakFasilitas, funDownloadRumahIbadah, funGetFasilitas, funGetGuruHonorer, funGetGuruTersertifikasi, funGetIbuHamilDariKeluargaMiskin, funGetJalanDilaluiKendaraan, funGetJalanKakiKurang4Jam, funGetJaminanHariTua, funGetJaminanKecelakaanKerja, funGetJaminanKematian, funGetJaminanKesehatan, funGetJaminanPensiun, funGetJaminanUntukBaduta, funGetJarakFasilitas, funGetJumlahDokter, funGetKecelakaan, funGetKelasIbuHamil, funGetPengangguran, funGetPermukaanJalan, funGetPosPelayanan, funGetRataRataJarakFasilitas, funGetRumahIbadah } from "@/modules/temporary"
 
 export default async function Page({ params }: { params: { kategori: any } }) {
     const prov = await MasterProvinceGetAll()
@@ -104,20 +104,55 @@ export default async function Page({ params }: { params: { kategori: any } }) {
             <ViewGuruHonorer provinsi={prov} download={dataDownload} table={dataTable} />
         </>)
     }
-    if (params.kategori == "kelas-ibu-hamil")
-        return (<></>)
-    if (params.kategori == "ibu-hamil-dari-keluarga-miskin")
-        return (<></>)
-    if (params.kategori == "jaminan-untuk-baduta")
-        return (<></>)
-    if (params.kategori == "pos-pelayanan")
-        return (<></>)
-    if (params.kategori == "fasilitas")
-        return (<></>)
-    if (params.kategori == "rata-rata-jarak-fasilitas")
-        return (<></>)
-    if (params.kategori == "jumlah-dokter")
-        return (<></>)
+    if (params.kategori == "kelas-ibu-hamil") {
+        const dataDownload = await funDownloadKelasIbuHamil()
+        const dataTable = await funGetKelasIbuHamil({})
+        return (<>
+            <ViewKelasIbuHamil provinsi={prov} download={dataDownload} table={dataTable} />
+        </>)
+    }
+    if (params.kategori == "ibu-hamil-dari-keluarga-miskin") {
+        const dataDownload = await funDownloadIbuHamilDariKeluargaMiskin()
+        const dataTable = await funGetIbuHamilDariKeluargaMiskin({})
+        return (<>
+            <ViewIbuHamilDariKeluargaMiskin provinsi={prov} download={dataDownload} table={dataTable} />
+        </>)
+    }
+    if (params.kategori == "jaminan-untuk-baduta") {
+        const dataDownload = await funDownloadJaminanUntukBaduta()
+        const dataTable = await funGetJaminanUntukBaduta({})
+        return (<>
+            <ViewJaminanUntukBaduta provinsi={prov} download={dataDownload} table={dataTable} />
+        </>)
+    }
+    if (params.kategori == "pos-pelayanan") {
+        const dataDownload = await funDownloadPosPelayanan()
+        const dataTable = await funGetPosPelayanan({})
+        return (<>
+            <ViewPosPelayanan provinsi={prov} download={dataDownload} table={dataTable} />
+        </>)
+    }
+    if (params.kategori == "fasilitas") {
+        const dataDownload = await funDownloadFasilitas()
+        const dataTable = await funGetFasilitas({})
+        return (<>
+            <ViewFasilitas provinsi={prov} download={dataDownload} table={dataTable} />
+        </>)
+    }
+    if (params.kategori == "rata-rata-jarak-fasilitas") {
+        const dataDownload = await funDownloadRataRataJarakFasilitas()
+        const dataTable = await funGetRataRataJarakFasilitas({})
+        return (<>
+            <ViewRataRataJarakFasilitas provinsi={prov} download={dataDownload} table={dataTable} />
+        </>)
+    }
+    if (params.kategori == "jumlah-dokter") {
+        const dataDownload = await funDownloadJumlahDokter()
+        const dataTable = await funGetJumlahDokter({})
+        return (<>
+            <ViewJumlahDokter provinsi={prov} download={dataDownload} table={dataTable} />
+        </>)
+    }
     if (params.kategori == "perkelahian")
         return (<></>)
     if (params.kategori == "pencurian")
