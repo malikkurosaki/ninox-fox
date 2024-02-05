@@ -1,5 +1,5 @@
 import { MasterProvinceGetAll } from "@/modules/_global"
-import { ViewGuruTersertifikasi, ViewJalanDilaluiKendaraan, ViewJalanKakiKurang4Jam, ViewJaminanHariTua, ViewJaminanKecelakaanKerja, ViewJaminanKematian, ViewJaminanKesehatan, ViewJaminanPensiun, ViewJarakFasilitas, ViewKecelakaan, ViewPengangguran, ViewPermukaanJalan, ViewRumahIbadah, funDownloadGuruTersertifikasi, funDownloadJalanDilaluiKendaraan, funDownloadJalanKakiKurang4Jam, funDownloadJaminanHariTua, funDownloadJaminanKecelakaanKerja, funDownloadJaminanKematian, funDownloadJaminanKesehatan, funDownloadJaminanPensiun, funDownloadJarakFasilitas, funDownloadKecelakaan, funDownloadPengangguran, funDownloadPermukaanJalan, funDownloadRumahIbadah, funGetGuruTersertifikasi, funGetJalanDilaluiKendaraan, funGetJalanKakiKurang4Jam, funGetJaminanHariTua, funGetJaminanKecelakaanKerja, funGetJaminanKematian, funGetJaminanKesehatan, funGetJaminanPensiun, funGetJarakFasilitas, funGetKecelakaan, funGetPengangguran, funGetPermukaanJalan, funGetRumahIbadah } from "@/modules/temporary"
+import { ViewGuruHonorer, ViewGuruTersertifikasi, ViewJalanDilaluiKendaraan, ViewJalanKakiKurang4Jam, ViewJaminanHariTua, ViewJaminanKecelakaanKerja, ViewJaminanKematian, ViewJaminanKesehatan, ViewJaminanPensiun, ViewJarakFasilitas, ViewKecelakaan, ViewPengangguran, ViewPermukaanJalan, ViewRumahIbadah, funDownloadGuruHonorer, funDownloadGuruTersertifikasi, funDownloadJalanDilaluiKendaraan, funDownloadJalanKakiKurang4Jam, funDownloadJaminanHariTua, funDownloadJaminanKecelakaanKerja, funDownloadJaminanKematian, funDownloadJaminanKesehatan, funDownloadJaminanPensiun, funDownloadJarakFasilitas, funDownloadKecelakaan, funDownloadPengangguran, funDownloadPermukaanJalan, funDownloadRumahIbadah, funGetGuruHonorer, funGetGuruTersertifikasi, funGetJalanDilaluiKendaraan, funGetJalanKakiKurang4Jam, funGetJaminanHariTua, funGetJaminanKecelakaanKerja, funGetJaminanKematian, funGetJaminanKesehatan, funGetJaminanPensiun, funGetJarakFasilitas, funGetKecelakaan, funGetPengangguran, funGetPermukaanJalan, funGetRumahIbadah } from "@/modules/temporary"
 
 export default async function Page({ params }: { params: { kategori: any } }) {
     const prov = await MasterProvinceGetAll()
@@ -97,8 +97,13 @@ export default async function Page({ params }: { params: { kategori: any } }) {
         </>)
     }
 
-    if (params.kategori == "guru-honorer")
-        return (<></>)
+    if (params.kategori == "guru-honorer") {
+        const dataDownload = await funDownloadGuruHonorer()
+        const dataTable = await funGetGuruHonorer({})
+        return (<>
+            <ViewGuruHonorer provinsi={prov} download={dataDownload} table={dataTable} />
+        </>)
+    }
     if (params.kategori == "kelas-ibu-hamil")
         return (<></>)
     if (params.kategori == "ibu-hamil-dari-keluarga-miskin")

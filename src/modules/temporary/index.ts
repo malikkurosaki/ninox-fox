@@ -37,12 +37,15 @@ import ViewJaminanKesehatan from "./ketenagakerjaan/back/view/view_jaminan_keseh
 import ViewJaminanPensiun from "./ketenagakerjaan/back/view/view_jaminan_pensiun";
 import ViewPengangguran from "./ketenagakerjaan/back/view/view_pengangguran";
 import ViewKetenagakerjaan from "./ketenagakerjaan/front/view/view_ketenagakerjaan";
+import funDownloadGuruHonorer from "./pendidikan/back/fun/download_guru_honorer";
 import funDownloadGuruTersertifikasi from "./pendidikan/back/fun/download_guru_tersertifikasi";
 import funDownloadJalanKakiKurang4Jam from "./pendidikan/back/fun/download_jalan_kaki_kurang_4_jam";
 import funDownloadJarakFasilitas from "./pendidikan/back/fun/download_jarak_fasilitas";
+import funGetGuruHonorer from "./pendidikan/back/fun/get_guru_honorer";
 import funGetGuruTersertifikasi from "./pendidikan/back/fun/get_guru_tersertifikasi";
 import funGetJalanKakiKurang4Jam from "./pendidikan/back/fun/get_jalan_kaki_kurang_4_jam";
 import funGetJarakFasilitas from "./pendidikan/back/fun/get_jarak_fasilitas";
+import ViewGuruHonorer from "./pendidikan/back/view/view_guru_honorer";
 import ViewGuruTersertifikasi from "./pendidikan/back/view/view_guru_tersertifikasi";
 import ViewJalanKakiKurang4Jam from "./pendidikan/back/view/view_jalan_kaki_kurang_4_jam";
 import ViewJarakFasilitas from "./pendidikan/back/view/view_jarak_fasilitas";
@@ -99,3 +102,6 @@ export { funDownloadJalanKakiKurang4Jam }
 export { ViewGuruTersertifikasi }
 export { funGetGuruTersertifikasi }
 export { funDownloadGuruTersertifikasi }
+export { ViewGuruHonorer }
+export { funDownloadGuruHonorer }
+export { funGetGuruHonorer }
