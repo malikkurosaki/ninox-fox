@@ -43,7 +43,13 @@ import funDownloadRumahIbadah from "./keagamaan/back/fun/download_rumah_ibadah";
 import funGetRumahIbadah from "./keagamaan/back/fun/get_rumah_ibadah";
 import ViewRumahIbadah from "./keagamaan/back/view/view_rumah_ibadah";
 import ViewKeagamaan from "./keagamaan/front/view/view_keagamaan";
-import ViewKemiskinanDanKetimpangan from "./kemiskinan_dan_ketimpangan/view/view_kemiskinan_dan_ketimpangan";
+import funDownloadBpjs from "./kemiskinan_dan_ketimpangan/back/fun/download_bpjs";
+import funDownloadDataKemiskinan from "./kemiskinan_dan_ketimpangan/back/fun/download_data_kemiskinan";
+import funGetBpjs from "./kemiskinan_dan_ketimpangan/back/fun/get_bpjs";
+import funGetDataKemiskinan from "./kemiskinan_dan_ketimpangan/back/fun/get_data_kemiskinan";
+import ViewBpjs from "./kemiskinan_dan_ketimpangan/back/view/view_bpjs";
+import ViewDataKemiskinan from "./kemiskinan_dan_ketimpangan/back/view/view_data_kemiskinan";
+import ViewKemiskinanDanKetimpangan from "./kemiskinan_dan_ketimpangan/front/view/view_kemiskinan_dan_ketimpangan";
 import funDownloadFasilitas from "./kesehatan/back/fun/download_fasilitas";
 import funDownloadIbuHamilDariKeluargaMiskin from "./kesehatan/back/fun/download_ibu_hamil_dari_keluarga_miskin";
 import funDownloadJaminanUntukBaduta from "./kesehatan/back/fun/download_jaminan_untuk_baduta";
@@ -213,3 +219,9 @@ export { funGetJenisPrasarana }
 export { ViewIrigasi }
 export { funDownloadIrigasi }
 export { funGetIrigasi }
+export { ViewDataKemiskinan }
+export { funDownloadDataKemiskinan }
+export { funGetDataKemiskinan }
+export { ViewBpjs }
+export { funDownloadBpjs }
+export { funGetBpjs }
