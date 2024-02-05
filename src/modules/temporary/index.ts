@@ -98,7 +98,13 @@ import ViewGuruTersertifikasi from "./pendidikan/back/view/view_guru_tersertifik
 import ViewJalanKakiKurang4Jam from "./pendidikan/back/view/view_jalan_kaki_kurang_4_jam";
 import ViewJarakFasilitas from "./pendidikan/back/view/view_jarak_fasilitas";
 import ViewPendidikan from "./pendidikan/front/view/view_pendidikan";
-import ViewPertanian from "./pertanian/view/view_pertanian";
+import funDownloadIrigasi from "./pertanian/back/fun/download_irigasi";
+import funDownloadJenisPrasarana from "./pertanian/back/fun/download_jenis_prasarana";
+import funGetIrigasi from "./pertanian/back/fun/get_irigasi";
+import funGetJenisPrasarana from "./pertanian/back/fun/get_jenis_prasarana";
+import ViewIrigasi from "./pertanian/back/view/view_irigasi";
+import ViewJenisPrasarana from "./pertanian/back/view/view_jenis_prasarana";
+import ViewPertanian from "./pertanian/front/view/view_pertanian";
 
 export { ViewLayoutTmp }
 export { ViewKetenagakerjaan }
@@ -201,3 +207,9 @@ export { funGetJumlahPasar }
 export { ViewLembagaKeuangan }
 export { funDownloadLembagaKeuangan }
 export { funGetLembagaKeuangan }
+export { ViewJenisPrasarana }
+export { funDownloadJenisPrasarana }
+export { funGetJenisPrasarana }
+export { ViewIrigasi }
+export { funDownloadIrigasi }
+export { funGetIrigasi }

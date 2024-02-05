@@ -1,5 +1,5 @@
 import { MasterProvinceGetAll } from "@/modules/_global"
-import { ViewFasilitas, ViewGuruHonorer, ViewGuruTersertifikasi, ViewIbuHamilDariKeluargaMiskin, ViewJalanDilaluiKendaraan, ViewJalanKakiKurang4Jam, ViewJaminanHariTua, ViewJaminanKecelakaanKerja, ViewJaminanKematian, ViewJaminanKesehatan, ViewJaminanPensiun, ViewJaminanUntukBaduta, ViewJarakFasilitas, ViewJumlahDokter, ViewJumlahPasar, ViewKecelakaan, ViewKelasIbuHamil, ViewLembagaKeuangan, ViewNarkoba, ViewPencurian, ViewPencurianDanKekerasan, ViewPengangguran, ViewPenganiayaan, ViewPenipuanDanPenggelapan, ViewPerkelahian, ViewPerkosaan, ViewPermukaanJalan, ViewPosPelayanan, ViewRataRataJarakFasilitas, ViewRumahIbadah, funDownloadFasilitas, funDownloadGuruHonorer, funDownloadGuruTersertifikasi, funDownloadIbuHamilDariKeluargaMiskin, funDownloadJalanDilaluiKendaraan, funDownloadJalanKakiKurang4Jam, funDownloadJaminanHariTua, funDownloadJaminanKecelakaanKerja, funDownloadJaminanKematian, funDownloadJaminanKesehatan, funDownloadJaminanPensiun, funDownloadJaminanUntukBaduta, funDownloadJarakFasilitas, funDownloadJumlahDokter, funDownloadJumlahPasar, funDownloadKecelakaan, funDownloadKelasIbuHamil, funDownloadLembagaKeuangan, funDownloadNarkoba, funDownloadPencurian, funDownloadPencurianDanKekerasan, funDownloadPengangguran, funDownloadPenganiayaan, funDownloadPenipuanDanPenggelapan, funDownloadPerkelahian, funDownloadPerkosaan, funDownloadPermukaanJalan, funDownloadPosPelayanan, funDownloadRataRataJarakFasilitas, funDownloadRumahIbadah, funGetFasilitas, funGetGuruHonorer, funGetGuruTersertifikasi, funGetIbuHamilDariKeluargaMiskin, funGetJalanDilaluiKendaraan, funGetJalanKakiKurang4Jam, funGetJaminanHariTua, funGetJaminanKecelakaanKerja, funGetJaminanKematian, funGetJaminanKesehatan, funGetJaminanPensiun, funGetJaminanUntukBaduta, funGetJarakFasilitas, funGetJumlahDokter, funGetJumlahPasar, funGetKecelakaan, funGetKelasIbuHamil, funGetLembagaKeuangan, funGetNarkoba, funGetPencurian, funGetPencurianDanKekerasan, funGetPengangguran, funGetPenganiayaan, funGetPenipuanDanPenggelapan, funGetPerkelahian, funGetPerkosaan, funGetPermukaanJalan, funGetPosPelayanan, funGetRataRataJarakFasilitas, funGetRumahIbadah } from "@/modules/temporary"
+import { ViewFasilitas, ViewGuruHonorer, ViewGuruTersertifikasi, ViewIbuHamilDariKeluargaMiskin, ViewIrigasi, ViewJalanDilaluiKendaraan, ViewJalanKakiKurang4Jam, ViewJaminanHariTua, ViewJaminanKecelakaanKerja, ViewJaminanKematian, ViewJaminanKesehatan, ViewJaminanPensiun, ViewJaminanUntukBaduta, ViewJarakFasilitas, ViewJenisPrasarana, ViewJumlahDokter, ViewJumlahPasar, ViewKecelakaan, ViewKelasIbuHamil, ViewLembagaKeuangan, ViewNarkoba, ViewPencurian, ViewPencurianDanKekerasan, ViewPengangguran, ViewPenganiayaan, ViewPenipuanDanPenggelapan, ViewPerkelahian, ViewPerkosaan, ViewPermukaanJalan, ViewPosPelayanan, ViewRataRataJarakFasilitas, ViewRumahIbadah, funDownloadFasilitas, funDownloadGuruHonorer, funDownloadGuruTersertifikasi, funDownloadIbuHamilDariKeluargaMiskin, funDownloadIrigasi, funDownloadJalanDilaluiKendaraan, funDownloadJalanKakiKurang4Jam, funDownloadJaminanHariTua, funDownloadJaminanKecelakaanKerja, funDownloadJaminanKematian, funDownloadJaminanKesehatan, funDownloadJaminanPensiun, funDownloadJaminanUntukBaduta, funDownloadJarakFasilitas, funDownloadJenisPrasarana, funDownloadJumlahDokter, funDownloadJumlahPasar, funDownloadKecelakaan, funDownloadKelasIbuHamil, funDownloadLembagaKeuangan, funDownloadNarkoba, funDownloadPencurian, funDownloadPencurianDanKekerasan, funDownloadPengangguran, funDownloadPenganiayaan, funDownloadPenipuanDanPenggelapan, funDownloadPerkelahian, funDownloadPerkosaan, funDownloadPermukaanJalan, funDownloadPosPelayanan, funDownloadRataRataJarakFasilitas, funDownloadRumahIbadah, funGetFasilitas, funGetGuruHonorer, funGetGuruTersertifikasi, funGetIbuHamilDariKeluargaMiskin, funGetIrigasi, funGetJalanDilaluiKendaraan, funGetJalanKakiKurang4Jam, funGetJaminanHariTua, funGetJaminanKecelakaanKerja, funGetJaminanKematian, funGetJaminanKesehatan, funGetJaminanPensiun, funGetJaminanUntukBaduta, funGetJarakFasilitas, funGetJenisPrasarana, funGetJumlahDokter, funGetJumlahPasar, funGetKecelakaan, funGetKelasIbuHamil, funGetLembagaKeuangan, funGetNarkoba, funGetPencurian, funGetPencurianDanKekerasan, funGetPengangguran, funGetPenganiayaan, funGetPenipuanDanPenggelapan, funGetPerkelahian, funGetPerkosaan, funGetPermukaanJalan, funGetPosPelayanan, funGetRataRataJarakFasilitas, funGetRumahIbadah } from "@/modules/temporary"
 
 export default async function Page({ params }: { params: { kategori: any } }) {
     const prov = await MasterProvinceGetAll()
@@ -216,10 +216,20 @@ export default async function Page({ params }: { params: { kategori: any } }) {
             <ViewLembagaKeuangan provinsi={prov} download={dataDownload} table={dataTable} />
         </>)
     }
-    if (params.kategori == "jenis-prasarana-transportasi")
-        return (<></>)
-    if (params.kategori == "irigasi")
-        return (<></>)
+    if (params.kategori == "jenis-prasarana-transportasi") {
+        const dataDownload = await funDownloadJenisPrasarana()
+        const dataTable = await funGetJenisPrasarana({})
+        return (<>
+            <ViewJenisPrasarana provinsi={prov} download={dataDownload} table={dataTable} />
+        </>)
+    }
+    if (params.kategori == "irigasi") {
+        const dataDownload = await funDownloadIrigasi()
+        const dataTable = await funGetIrigasi({})
+        return (<>
+            <ViewIrigasi provinsi={prov} download={dataDownload} table={dataTable} />
+        </>)
+    }
     if (params.kategori == "data-kemiskinan")
         return (<></>)
     if (params.kategori == "bpjs")
