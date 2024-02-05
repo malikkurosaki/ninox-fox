@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import ChartBangunanSemiPermanen from '../components/chart_bangunan_semi_permanen';
 import ChartTanpaBangunanTerdekat from '../components/chart_tanpa_bangunan_terdekat';
 import ChartLembagaKeuangan from '../components/chart_lembaga_keuangan';
-import { ChartBangunanPermanen } from '../..';
+import { ChartBangunanPermanen } from '../../..';
 import EchartPublicConcerns from '@/modules/regional_insights/components/echart_public_concerns';
 import _ from 'lodash';
 
