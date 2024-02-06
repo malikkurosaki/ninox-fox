@@ -5,8 +5,10 @@ import { Box, Button, Group, Paper, Select, SimpleGrid, Stack, Text } from "@man
 import papa from "papaparse"
 import funGetJalanDilaluiKendaraan from "../fun/get_jalan_dilalui_kendaraan"
 import TableJalanDilaluiKendaraan from "../component/table_jalan_dilalui_kendaraan"
+import { useRouter } from "next/navigation"
 
 export default function ViewJalanDilaluiKendaraan({ provinsi, download, table }: { provinsi: any, download: any, table: any }) {
+    const router = useRouter()
     const [isProvinsi, setProvinsi] = useState<any>(null)
     const [isKabupaten, setKabupaten] = useState<any>(null)
     const [dataKabupaten, setDataKabupaten] = useState<any>([])
@@ -87,8 +89,8 @@ export default function ViewJalanDilaluiKendaraan({ provinsi, download, table }:
                                 paddingRight: 30,
                                 cursor: "pointer",
                             }}
-                        // onClick={() => router.push("/dashboard/audience/upload")}
-                        >
+                            onClick={() => router.push("/dashboard/se/upload/jalan-dilalui-kendaraan")}
+                            >
                             <Text ta={"center"} size="xl" inline>
                                 UPLOAD DATA
                             </Text>
