@@ -5,8 +5,10 @@ import { Box, Button, Group, Paper, Select, SimpleGrid, Stack, Text } from "@man
 import papa from "papaparse"
 import funGetRumahIbadah from "../fun/get_rumah_ibadah"
 import TableRumahIbadah from "../component/table_rumah_ibadah"
+import { useRouter } from "next/navigation"
 
 export default function ViewRumahIbadah({ provinsi, download, table }: { provinsi: any, download: any, table: any }) {
+    const router = useRouter()
     const [isProvinsi, setProvinsi] = useState<any>(null)
     const [isKabupaten, setKabupaten] = useState<any>(null)
     const [dataKabupaten, setDataKabupaten] = useState<any>([])
@@ -87,7 +89,7 @@ export default function ViewRumahIbadah({ provinsi, download, table }: { provins
                                 paddingRight: 30,
                                 cursor: "pointer",
                             }}
-                        // onClick={() => router.push("/dashboard/audience/upload")}
+                            onClick={() => router.push("/dashboard/se/upload/rumah-ibadah")}
                         >
                             <Text ta={"center"} size="xl" inline>
                                 UPLOAD DATA
