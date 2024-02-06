@@ -1,4 +1,4 @@
-import { ViewPermukaanJalan, ViewUploadJalanDilaluiKendaraan, ViewUploadJaminanHariTua, ViewUploadJaminanKecelakaanKerja, ViewUploadJaminanKematian, ViewUploadJaminanKesehatan, ViewUploadJaminanPensiun, ViewUploadKecelakaan, ViewUploadPengangguran, ViewUploadPermukaanJalan } from "@/modules/temporary"
+import { ViewPermukaanJalan, ViewUploadJalanDilaluiKendaraan, ViewUploadJaminanHariTua, ViewUploadJaminanKecelakaanKerja, ViewUploadJaminanKematian, ViewUploadJaminanKesehatan, ViewUploadJaminanPensiun, ViewUploadKecelakaan, ViewUploadPengangguran, ViewUploadPermukaanJalan, ViewUploadRumahIbadah } from "@/modules/temporary"
 
 export default function Page({ params }: { params: { kategori: any } }) {
 
@@ -49,6 +49,7 @@ export default function Page({ params }: { params: { kategori: any } }) {
     }
     if (params.kategori == "rumah-ibadah") {
         return (<>
+            <ViewUploadRumahIbadah />
         </>)
     }
     if (params.kategori == "jarak-fasilitas") {

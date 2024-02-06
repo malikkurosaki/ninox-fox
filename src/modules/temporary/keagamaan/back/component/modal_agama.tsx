@@ -5,10 +5,8 @@ import toast from "react-simple-toasts"
 import { useState } from "react"
 import { funLogUser } from "@/modules/user"
 import _ from "lodash"
-import { isModalTransportasi } from "../val/val_transportasi"
-import funUploadPermukaanJalan from "../fun/upload_permukaan_jalan"
-import funUploadJalanDilaluiKendaraan from "../fun/upload_jalan_dilalui_kendaraan"
-import funUploadKecelakaan from "../fun/upload_kecelakaan"
+import { isModalAgama } from "../val/val_keagamaan"
+import funUploadRumahIbadah from "../fun/upload_rumah_ibadah"
 
 /**
  * Menampilkan modal konfirmasi upload data audience
@@ -19,20 +17,17 @@ import funUploadKecelakaan from "../fun/upload_kecelakaan"
  * @returns komponen modal upload data audience
  */
 
-export default function ModalUploadTransportasi({ kategori, data, onSuccess }: { kategori: any, data: any, onSuccess: (val: any) => void }) {
-    const [openModal, setOpenModal] = useAtom(isModalTransportasi)
+export default function ModalUploadAgama({ kategori, data, onSuccess }: { kategori: any, data: any, onSuccess: (val: any) => void }) {
+    const [openModal, setOpenModal] = useAtom(isModalAgama)
     const [isLoading, setLoading] = useState(false)
 
     async function onUpload() {
         setLoading(true)
-        if (kategori == 'permukaan jalan') {
-            await funUploadPermukaanJalan({ body: data })
-        } else if (kategori == 'jalan dilalui kendaraan') {
-            await funUploadJalanDilaluiKendaraan({ body: data })
-        } else if (kategori == 'kecelakaan') {
-            await funUploadKecelakaan({ body: data })
+        if (kategori == 'rumah ibadah') {
+            await funUploadRumahIbadah({ body: data })
         }
-        await funLogUser({ act: 'UPL', desc: `User mengupload data ${kategori}`, idContent: '-', tbContent: `se_transportasi` })
+
+        await funLogUser({ act: 'UPL', desc: `User mengupload data ${kategori}`, idContent: '-', tbContent: `se_agama` })
         setLoading(false)
         toast('Success', { theme: 'dark' })
         setOpenModal(false)

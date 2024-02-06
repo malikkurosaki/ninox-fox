@@ -44,6 +44,7 @@ import ViewPerkosaan from "./kamtibmas/back/view/view_perkosaan";
 import ViewKamtibmas from "./kamtibmas/front/view/view_kamtibmas";
 import funDownloadRumahIbadah from "./keagamaan/back/fun/download_rumah_ibadah";
 import funGetRumahIbadah from "./keagamaan/back/fun/get_rumah_ibadah";
+import ViewUploadRumahIbadah from "./keagamaan/back/view/upload_rumah_ibadah";
 import ViewRumahIbadah from "./keagamaan/back/view/view_rumah_ibadah";
 import ViewKeagamaan from "./keagamaan/front/view/view_keagamaan";
 import funDownloadBpjs from "./kemiskinan_dan_ketimpangan/back/fun/download_bpjs";
@@ -243,3 +244,4 @@ export { ViewUploadPengangguran }
 export { ViewUploadPermukaanJalan }
 export { ViewUploadJalanDilaluiKendaraan }
 export { ViewUploadKecelakaan }
+export { ViewUploadRumahIbadah }
