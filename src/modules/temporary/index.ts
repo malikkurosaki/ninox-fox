@@ -109,6 +109,7 @@ import funGetGuruHonorer from "./pendidikan/back/fun/get_guru_honorer";
 import funGetGuruTersertifikasi from "./pendidikan/back/fun/get_guru_tersertifikasi";
 import funGetJalanKakiKurang4Jam from "./pendidikan/back/fun/get_jalan_kaki_kurang_4_jam";
 import funGetJarakFasilitas from "./pendidikan/back/fun/get_jarak_fasilitas";
+import ViewUploadJarakFasilitas from "./pendidikan/back/view/upload_jarak_fasilitas";
 import ViewGuruHonorer from "./pendidikan/back/view/view_guru_honorer";
 import ViewGuruTersertifikasi from "./pendidikan/back/view/view_guru_tersertifikasi";
 import ViewJalanKakiKurang4Jam from "./pendidikan/back/view/view_jalan_kaki_kurang_4_jam";
@@ -245,3 +246,4 @@ export { ViewUploadPermukaanJalan }
 export { ViewUploadJalanDilaluiKendaraan }
 export { ViewUploadKecelakaan }
 export { ViewUploadRumahIbadah }
+export { ViewUploadJarakFasilitas }

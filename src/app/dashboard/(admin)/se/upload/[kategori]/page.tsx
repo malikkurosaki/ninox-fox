@@ -1,4 +1,4 @@
-import { ViewPermukaanJalan, ViewUploadJalanDilaluiKendaraan, ViewUploadJaminanHariTua, ViewUploadJaminanKecelakaanKerja, ViewUploadJaminanKematian, ViewUploadJaminanKesehatan, ViewUploadJaminanPensiun, ViewUploadKecelakaan, ViewUploadPengangguran, ViewUploadPermukaanJalan, ViewUploadRumahIbadah } from "@/modules/temporary"
+import { ViewPermukaanJalan, ViewUploadJalanDilaluiKendaraan, ViewUploadJaminanHariTua, ViewUploadJaminanKecelakaanKerja, ViewUploadJaminanKematian, ViewUploadJaminanKesehatan, ViewUploadJaminanPensiun, ViewUploadJarakFasilitas, ViewUploadKecelakaan, ViewUploadPengangguran, ViewUploadPermukaanJalan, ViewUploadRumahIbadah } from "@/modules/temporary"
 
 export default function Page({ params }: { params: { kategori: any } }) {
 
@@ -54,6 +54,7 @@ export default function Page({ params }: { params: { kategori: any } }) {
     }
     if (params.kategori == "jarak-fasilitas") {
         return (<>
+            <ViewUploadJarakFasilitas />
         </>)
     }
     if (params.kategori == "jalan-kaki-kurang-4-jam") {
@@ -64,7 +65,6 @@ export default function Page({ params }: { params: { kategori: any } }) {
         return (<>
         </>)
     }
-
     if (params.kategori == "guru-honorer") {
         return (<>
         </>)
