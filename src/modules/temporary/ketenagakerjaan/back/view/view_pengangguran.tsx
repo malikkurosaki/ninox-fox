@@ -5,8 +5,10 @@ import { Box, Button, Group, Paper, Select, SimpleGrid, Stack, Text } from "@man
 import papa from "papaparse"
 import funGetPengangguran from "../fun/get_pengangguran"
 import TablePengangguran from "../component/table_pengangguran"
+import { useRouter } from "next/navigation"
 
 export default function ViewPengangguran({ provinsi, download, table }: { provinsi: any, download: any, table: any }) {
+    const router = useRouter()
     const [isProvinsi, setProvinsi] = useState<any>(null)
     const [isKabupaten, setKabupaten] = useState<any>(null)
     const [dataKabupaten, setDataKabupaten] = useState<any>([])
@@ -87,7 +89,7 @@ export default function ViewPengangguran({ provinsi, download, table }: { provin
                                 paddingRight: 30,
                                 cursor: "pointer",
                             }}
-                        // onClick={() => router.push("/dashboard/audience/upload")}
+                            onClick={() => router.push("/dashboard/se/upload/pengangguran")}
                         >
                             <Text ta={"center"} size="xl" inline>
                                 UPLOAD DATA

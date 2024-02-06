@@ -5,8 +5,10 @@ import { useState } from "react"
 import papa from "papaparse"
 import TableJaminanKesehatan from "../component/table_jaminan_kesehatan"
 import funGetJaminanKesehatan from "../fun/get_jaminan_kesehatan"
+import { useRouter } from "next/navigation"
 
 export default function ViewJaminanKesehatan({ provinsi, download, table }: { provinsi: any, download: any, table: any }) {
+    const router = useRouter()
     const [isProvinsi, setProvinsi] = useState<any>(null)
     const [isKabupaten, setKabupaten] = useState<any>(null)
     const [dataKabupaten, setDataKabupaten] = useState<any>([])
@@ -87,7 +89,7 @@ export default function ViewJaminanKesehatan({ provinsi, download, table }: { pr
                                 paddingRight: 30,
                                 cursor: "pointer",
                             }}
-                        // onClick={() => router.push("/dashboard/audience/upload")}
+                        onClick={() => router.push("/dashboard/se/upload/jaminan-kesehatan")}
                         >
                             <Text ta={"center"} size="xl" inline>
                                 UPLOAD DATA

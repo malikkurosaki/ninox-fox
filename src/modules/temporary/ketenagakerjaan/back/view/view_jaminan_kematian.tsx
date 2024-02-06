@@ -3,11 +3,13 @@ import { MasterKabGetByProvince } from "@/modules/_global"
 import { useState } from "react"
 import { Box, Button, Group, Paper, Select, SimpleGrid, Stack, Text } from "@mantine/core"
 import papa from "papaparse"
-import funGetJaminanKecelakaanKerja from "../fun/get_jaminan_kecelakaan_kerja"
 import TableJaminanKematian from "../component/table_jaminan_kematian"
+import { useRouter } from "next/navigation"
+import funGetJaminanKematian from "../fun/get_jaminan_kematian"
 
 
 export default function ViewJaminanKematian({ provinsi, download, table }: { provinsi: any, download: any, table: any }) {
+    const router = useRouter()
     const [isProvinsi, setProvinsi] = useState<any>(null)
     const [isKabupaten, setKabupaten] = useState<any>(null)
     const [dataKabupaten, setDataKabupaten] = useState<any>([])
@@ -21,7 +23,7 @@ export default function ViewJaminanKematian({ provinsi, download, table }: { pro
     }
 
     async function onProses() {
-        const loadData = await funGetJaminanKecelakaanKerja({ provinsi: isProvinsi, kab: isKabupaten })
+        const loadData = await funGetJaminanKematian({ provinsi: isProvinsi, kab: isKabupaten })
         setDataTable(loadData)
     }
 
@@ -88,7 +90,7 @@ export default function ViewJaminanKematian({ provinsi, download, table }: { pro
                                 paddingRight: 30,
                                 cursor: "pointer",
                             }}
-                        // onClick={() => router.push("/dashboard/audience/upload")}
+                            onClick={() => router.push("/dashboard/se/upload/jaminan-kematian")}
                         >
                             <Text ta={"center"} size="xl" inline>
                                 UPLOAD DATA

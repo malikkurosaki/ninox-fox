@@ -84,6 +84,12 @@ import funGetJaminanKematian from "./ketenagakerjaan/back/fun/get_jaminan_kemati
 import funGetJaminanKesehatan from "./ketenagakerjaan/back/fun/get_jaminan_kesehatan";
 import funGetJaminanPensiun from "./ketenagakerjaan/back/fun/get_jaminan_pensiun";
 import funGetPengangguran from "./ketenagakerjaan/back/fun/get_pengangguran";
+import ViewUploadJaminanHariTua from "./ketenagakerjaan/back/view/upload_jaminan_hari_tua";
+import ViewUploadJaminanKecelakaanKerja from "./ketenagakerjaan/back/view/upload_jaminan_kecelakaan_kerja";
+import ViewUploadJaminanKematian from "./ketenagakerjaan/back/view/upload_jaminan_kematian";
+import ViewUploadJaminanKesehatan from "./ketenagakerjaan/back/view/upload_jaminan_kesehatan";
+import ViewUploadJaminanPensiun from "./ketenagakerjaan/back/view/upload_jaminan_pensiun";
+import ViewUploadPengangguran from "./ketenagakerjaan/back/view/upload_pengangguran";
 import ViewJaminanHariTua from "./ketenagakerjaan/back/view/view_jaminan_hari_tua";
 import ViewJaminanKecelakaanKerja from "./ketenagakerjaan/back/view/view_jaminan_kecelakaan_kerja";
 import ViewJaminanKematian from "./ketenagakerjaan/back/view/view_jaminan_kematian";
@@ -225,3 +231,9 @@ export { funGetDataKemiskinan }
 export { ViewBpjs }
 export { funDownloadBpjs }
 export { funGetBpjs }
+export { ViewUploadJaminanKesehatan }
+export { ViewUploadJaminanKecelakaanKerja }
+export { ViewUploadJaminanKematian }
+export { ViewUploadJaminanHariTua }
+export { ViewUploadJaminanPensiun }
+export { ViewUploadPengangguran }

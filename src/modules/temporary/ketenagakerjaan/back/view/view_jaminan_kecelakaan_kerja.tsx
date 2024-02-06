@@ -5,8 +5,10 @@ import { Box, Button, Group, Paper, Select, SimpleGrid, Stack, Text } from "@man
 import papa from "papaparse"
 import TableJaminanKecelakaanKerja from "../component/table_jaminan_kecelakaan_kerja"
 import funGetJaminanKecelakaanKerja from "../fun/get_jaminan_kecelakaan_kerja"
+import { useRouter } from "next/navigation"
 
 export default function ViewJaminanKecelakaanKerja({ provinsi, download, table }: { provinsi: any, download: any, table: any }) {
+    const router = useRouter()
     const [isProvinsi, setProvinsi] = useState<any>(null)
     const [isKabupaten, setKabupaten] = useState<any>(null)
     const [dataKabupaten, setDataKabupaten] = useState<any>([])
@@ -87,7 +89,7 @@ export default function ViewJaminanKecelakaanKerja({ provinsi, download, table }
                                 paddingRight: 30,
                                 cursor: "pointer",
                             }}
-                        // onClick={() => router.push("/dashboard/audience/upload")}
+                            onClick={() => router.push("/dashboard/se/upload/jaminan-kecelakaan-kerja")}
                         >
                             <Text ta={"center"} size="xl" inline>
                                 UPLOAD DATA
