@@ -1,4 +1,4 @@
-import { ViewPermukaanJalan, ViewUploadJalanDilaluiKendaraan, ViewUploadJaminanHariTua, ViewUploadJaminanKecelakaanKerja, ViewUploadJaminanKematian, ViewUploadJaminanKesehatan, ViewUploadJaminanPensiun, ViewUploadJarakFasilitas, ViewUploadKecelakaan, ViewUploadPengangguran, ViewUploadPermukaanJalan, ViewUploadRumahIbadah } from "@/modules/temporary"
+import { ViewPermukaanJalan, ViewUploadGuruHonorer, ViewUploadGuruTersertifikasi, ViewUploadJalanDilaluiKendaraan, ViewUploadJalanKakiKurang4Jam, ViewUploadJaminanHariTua, ViewUploadJaminanKecelakaanKerja, ViewUploadJaminanKematian, ViewUploadJaminanKesehatan, ViewUploadJaminanPensiun, ViewUploadJarakFasilitas, ViewUploadKecelakaan, ViewUploadPengangguran, ViewUploadPermukaanJalan, ViewUploadRumahIbadah } from "@/modules/temporary"
 
 export default function Page({ params }: { params: { kategori: any } }) {
 
@@ -59,14 +59,17 @@ export default function Page({ params }: { params: { kategori: any } }) {
     }
     if (params.kategori == "jalan-kaki-kurang-4-jam") {
         return (<>
+            <ViewUploadJalanKakiKurang4Jam />
         </>)
     }
     if (params.kategori == "guru-tersertifikasi") {
         return (<>
+            <ViewUploadGuruTersertifikasi />
         </>)
     }
     if (params.kategori == "guru-honorer") {
         return (<>
+            <ViewUploadGuruHonorer />
         </>)
     }
     if (params.kategori == "kelas-ibu-hamil") {
