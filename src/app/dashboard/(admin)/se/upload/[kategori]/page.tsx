@@ -1,4 +1,4 @@
-import { ViewPermukaanJalan, ViewUploadFasilitas, ViewUploadGuruHonorer, ViewUploadGuruTersertifikasi, ViewUploadIbuHamilDariKeluargaMiskin, ViewUploadIrigasi, ViewUploadJalanDilaluiKendaraan, ViewUploadJalanKakiKurang4Jam, ViewUploadJaminanHariTua, ViewUploadJaminanKecelakaanKerja, ViewUploadJaminanKematian, ViewUploadJaminanKesehatan, ViewUploadJaminanPensiun, ViewUploadJaminanUntukBaduta, ViewUploadJarakFasilitas, ViewUploadJenisPrasaranaTransportasi, ViewUploadJumlahDokter, ViewUploadJumlahPasar, ViewUploadKecelakaan, ViewUploadKelasIbuHamil, ViewUploadLembagaKeuangan, ViewUploadNarkoba, ViewUploadPencurian, ViewUploadPencurianDanKekerasan, ViewUploadPengangguran, ViewUploadPenganiayaan, ViewUploadPenipuanDanPenggelapan, ViewUploadPerkelahian, ViewUploadPerkosaan, ViewUploadPermukaanJalan, ViewUploadPosPelayanan, ViewUploadRataRataJarakFasilitas, ViewUploadRumahIbadah } from "@/modules/temporary"
+import { ViewPermukaanJalan, ViewUploadBpjs, ViewUploadDataKemiskinan, ViewUploadFasilitas, ViewUploadGuruHonorer, ViewUploadGuruTersertifikasi, ViewUploadIbuHamilDariKeluargaMiskin, ViewUploadIrigasi, ViewUploadJalanDilaluiKendaraan, ViewUploadJalanKakiKurang4Jam, ViewUploadJaminanHariTua, ViewUploadJaminanKecelakaanKerja, ViewUploadJaminanKematian, ViewUploadJaminanKesehatan, ViewUploadJaminanPensiun, ViewUploadJaminanUntukBaduta, ViewUploadJarakFasilitas, ViewUploadJenisPrasaranaTransportasi, ViewUploadJumlahDokter, ViewUploadJumlahPasar, ViewUploadKecelakaan, ViewUploadKelasIbuHamil, ViewUploadLembagaKeuangan, ViewUploadNarkoba, ViewUploadPencurian, ViewUploadPencurianDanKekerasan, ViewUploadPengangguran, ViewUploadPenganiayaan, ViewUploadPenipuanDanPenggelapan, ViewUploadPerkelahian, ViewUploadPerkosaan, ViewUploadPermukaanJalan, ViewUploadPosPelayanan, ViewUploadRataRataJarakFasilitas, ViewUploadRumahIbadah } from "@/modules/temporary"
 
 export default function Page({ params }: { params: { kategori: any } }) {
 
@@ -159,15 +159,17 @@ export default function Page({ params }: { params: { kategori: any } }) {
     }
     if (params.kategori == "irigasi") {
         return (<>
-            <ViewUploadIrigasi/>
+            <ViewUploadIrigasi />
         </>)
     }
     if (params.kategori == "data-kemiskinan") {
         return (<>
+            <ViewUploadDataKemiskinan />
         </>)
     }
     if (params.kategori == "bpjs") {
         return (<>
+            <ViewUploadBpjs />
         </>)
     }
 }
