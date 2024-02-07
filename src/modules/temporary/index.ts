@@ -68,6 +68,13 @@ import funGetJumlahDokter from "./kesehatan/back/fun/get_jumlah_dokter";
 import funGetKelasIbuHamil from "./kesehatan/back/fun/get_kelas_ibu_hamil";
 import funGetPosPelayanan from "./kesehatan/back/fun/get_pos_pelayanan";
 import funGetRataRataJarakFasilitas from "./kesehatan/back/fun/get_rata_rata_jarak_fasilitas";
+import ViewUploadFasilitas from "./kesehatan/back/view/upload_fasilitas";
+import ViewUploadIbuHamilDariKeluargaMiskin from "./kesehatan/back/view/upload_ibu_hamil_dari_keluarga_miskin";
+import ViewUploadJaminanUntukBaduta from "./kesehatan/back/view/upload_jaminan_untuk_baduta";
+import ViewUploadJumlahDokter from "./kesehatan/back/view/upload_jumlah_dokter";
+import ViewUploadKelasIbuHamil from "./kesehatan/back/view/upload_kelas_ibu_hamil";
+import ViewUploadPosPelayanan from "./kesehatan/back/view/upload_pos_pelayanan";
+import ViewUploadRataRataJarakFasilitas from "./kesehatan/back/view/upload_rata_rata_jarak_fasilitas";
 import ViewFasilitas from "./kesehatan/back/view/view_fasilitas";
 import ViewIbuHamilDariKeluargaMiskin from "./kesehatan/back/view/view_ibu_hamil_dari_kaluarga_miskin";
 import ViewJaminanUntukBaduta from "./kesehatan/back/view/view_jaminan_untuk_baduta";
@@ -253,3 +260,10 @@ export { ViewUploadJarakFasilitas }
 export { ViewUploadJalanKakiKurang4Jam }
 export { ViewUploadGuruTersertifikasi }
 export { ViewUploadGuruHonorer }
+export { ViewUploadKelasIbuHamil }
+export { ViewUploadIbuHamilDariKeluargaMiskin }
+export { ViewUploadJaminanUntukBaduta }
+export { ViewUploadPosPelayanan }
+export { ViewUploadFasilitas }
+export { ViewUploadRataRataJarakFasilitas }
+export { ViewUploadJumlahDokter }

@@ -1,4 +1,4 @@
-import { ViewPermukaanJalan, ViewUploadGuruHonorer, ViewUploadGuruTersertifikasi, ViewUploadJalanDilaluiKendaraan, ViewUploadJalanKakiKurang4Jam, ViewUploadJaminanHariTua, ViewUploadJaminanKecelakaanKerja, ViewUploadJaminanKematian, ViewUploadJaminanKesehatan, ViewUploadJaminanPensiun, ViewUploadJarakFasilitas, ViewUploadKecelakaan, ViewUploadPengangguran, ViewUploadPermukaanJalan, ViewUploadRumahIbadah } from "@/modules/temporary"
+import { ViewPermukaanJalan, ViewUploadFasilitas, ViewUploadGuruHonorer, ViewUploadGuruTersertifikasi, ViewUploadIbuHamilDariKeluargaMiskin, ViewUploadJalanDilaluiKendaraan, ViewUploadJalanKakiKurang4Jam, ViewUploadJaminanHariTua, ViewUploadJaminanKecelakaanKerja, ViewUploadJaminanKematian, ViewUploadJaminanKesehatan, ViewUploadJaminanPensiun, ViewUploadJaminanUntukBaduta, ViewUploadJarakFasilitas, ViewUploadJumlahDokter, ViewUploadKecelakaan, ViewUploadKelasIbuHamil, ViewUploadPengangguran, ViewUploadPermukaanJalan, ViewUploadPosPelayanan, ViewUploadRataRataJarakFasilitas, ViewUploadRumahIbadah } from "@/modules/temporary"
 
 export default function Page({ params }: { params: { kategori: any } }) {
 
@@ -74,30 +74,37 @@ export default function Page({ params }: { params: { kategori: any } }) {
     }
     if (params.kategori == "kelas-ibu-hamil") {
         return (<>
+            <ViewUploadKelasIbuHamil />
         </>)
     }
     if (params.kategori == "ibu-hamil-dari-keluarga-miskin") {
         return (<>
+            <ViewUploadIbuHamilDariKeluargaMiskin />
         </>)
     }
     if (params.kategori == "jaminan-untuk-baduta") {
         return (<>
+            <ViewUploadJaminanUntukBaduta />
         </>)
     }
     if (params.kategori == "pos-pelayanan") {
         return (<>
+            <ViewUploadPosPelayanan />
         </>)
     }
     if (params.kategori == "fasilitas") {
         return (<>
+            <ViewUploadFasilitas />
         </>)
     }
     if (params.kategori == "rata-rata-jarak-fasilitas") {
         return (<>
+            <ViewUploadRataRataJarakFasilitas />
         </>)
     }
     if (params.kategori == "jumlah-dokter") {
         return (<>
+            <ViewUploadJumlahDokter />
         </>)
     }
     if (params.kategori == "perkelahian") {
