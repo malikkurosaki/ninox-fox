@@ -138,6 +138,8 @@ import funDownloadIrigasi from "./pertanian/back/fun/download_irigasi";
 import funDownloadJenisPrasarana from "./pertanian/back/fun/download_jenis_prasarana";
 import funGetIrigasi from "./pertanian/back/fun/get_irigasi";
 import funGetJenisPrasarana from "./pertanian/back/fun/get_jenis_prasarana";
+import ViewUploadIrigasi from "./pertanian/back/view/upload_irigasi";
+import ViewUploadJenisPrasaranaTransportasi from "./pertanian/back/view/upload_jenis_prasarana";
 import ViewIrigasi from "./pertanian/back/view/view_irigasi";
 import ViewJenisPrasarana from "./pertanian/back/view/view_jenis_prasarana";
 import ViewPertanian from "./pertanian/front/view/view_pertanian";
@@ -285,3 +287,5 @@ export { ViewUploadPerkosaan }
 export { ViewUploadNarkoba }
 export { ViewUploadJumlahPasar }
 export { ViewUploadLembagaKeuangan }
+export { ViewUploadJenisPrasaranaTransportasi }
+export { ViewUploadIrigasi }

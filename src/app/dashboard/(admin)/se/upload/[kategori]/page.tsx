@@ -1,4 +1,4 @@
-import { ViewPermukaanJalan, ViewUploadFasilitas, ViewUploadGuruHonorer, ViewUploadGuruTersertifikasi, ViewUploadIbuHamilDariKeluargaMiskin, ViewUploadJalanDilaluiKendaraan, ViewUploadJalanKakiKurang4Jam, ViewUploadJaminanHariTua, ViewUploadJaminanKecelakaanKerja, ViewUploadJaminanKematian, ViewUploadJaminanKesehatan, ViewUploadJaminanPensiun, ViewUploadJaminanUntukBaduta, ViewUploadJarakFasilitas, ViewUploadJumlahDokter, ViewUploadJumlahPasar, ViewUploadKecelakaan, ViewUploadKelasIbuHamil, ViewUploadLembagaKeuangan, ViewUploadNarkoba, ViewUploadPencurian, ViewUploadPencurianDanKekerasan, ViewUploadPengangguran, ViewUploadPenganiayaan, ViewUploadPenipuanDanPenggelapan, ViewUploadPerkelahian, ViewUploadPerkosaan, ViewUploadPermukaanJalan, ViewUploadPosPelayanan, ViewUploadRataRataJarakFasilitas, ViewUploadRumahIbadah } from "@/modules/temporary"
+import { ViewPermukaanJalan, ViewUploadFasilitas, ViewUploadGuruHonorer, ViewUploadGuruTersertifikasi, ViewUploadIbuHamilDariKeluargaMiskin, ViewUploadIrigasi, ViewUploadJalanDilaluiKendaraan, ViewUploadJalanKakiKurang4Jam, ViewUploadJaminanHariTua, ViewUploadJaminanKecelakaanKerja, ViewUploadJaminanKematian, ViewUploadJaminanKesehatan, ViewUploadJaminanPensiun, ViewUploadJaminanUntukBaduta, ViewUploadJarakFasilitas, ViewUploadJenisPrasaranaTransportasi, ViewUploadJumlahDokter, ViewUploadJumlahPasar, ViewUploadKecelakaan, ViewUploadKelasIbuHamil, ViewUploadLembagaKeuangan, ViewUploadNarkoba, ViewUploadPencurian, ViewUploadPencurianDanKekerasan, ViewUploadPengangguran, ViewUploadPenganiayaan, ViewUploadPenipuanDanPenggelapan, ViewUploadPerkelahian, ViewUploadPerkosaan, ViewUploadPermukaanJalan, ViewUploadPosPelayanan, ViewUploadRataRataJarakFasilitas, ViewUploadRumahIbadah } from "@/modules/temporary"
 
 export default function Page({ params }: { params: { kategori: any } }) {
 
@@ -154,10 +154,12 @@ export default function Page({ params }: { params: { kategori: any } }) {
     }
     if (params.kategori == "jenis-prasarana-transportasi") {
         return (<>
+            <ViewUploadJenisPrasaranaTransportasi />
         </>)
     }
     if (params.kategori == "irigasi") {
         return (<>
+            <ViewUploadIrigasi/>
         </>)
     }
     if (params.kategori == "data-kemiskinan") {
