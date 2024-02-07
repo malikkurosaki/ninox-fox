@@ -5,8 +5,10 @@ import { useState } from "react"
 import papa from "papaparse"
 import funGetPenganiayaan from "../fun/get_penganiayaan"
 import TablePenganiayaan from "../component/table_penganiayaan"
+import { useRouter } from "next/navigation"
 
 export default function ViewPenganiayaan({ provinsi, download, table }: { provinsi: any, download: any, table: any }) {
+    const router = useRouter()
     const [isProvinsi, setProvinsi] = useState<any>(null)
     const [isKabupaten, setKabupaten] = useState<any>(null)
     const [dataKabupaten, setDataKabupaten] = useState<any>([])
@@ -87,7 +89,7 @@ export default function ViewPenganiayaan({ provinsi, download, table }: { provin
                                 paddingRight: 30,
                                 cursor: "pointer",
                             }}
-                        // onClick={() => router.push("/dashboard/audience/upload")}
+                            onClick={() => router.push("/dashboard/se/upload/penganiayaan")}
                         >
                             <Text ta={"center"} size="xl" inline>
                                 UPLOAD DATA

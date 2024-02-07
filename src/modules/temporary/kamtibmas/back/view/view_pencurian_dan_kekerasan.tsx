@@ -5,8 +5,10 @@ import { useState } from "react"
 import papa from "papaparse"
 import funGetPencurianDanKekerasan from "../fun/get_pencurian_dan_kekerasan"
 import TablePencurianDanKekerasan from "../component/table_pencurian_dan_kekerasan"
+import { useRouter } from "next/navigation"
 
 export default function ViewPencurianDanKekerasan({ provinsi, download, table }: { provinsi: any, download: any, table: any }) {
+    const router = useRouter()
     const [isProvinsi, setProvinsi] = useState<any>(null)
     const [isKabupaten, setKabupaten] = useState<any>(null)
     const [dataKabupaten, setDataKabupaten] = useState<any>([])
@@ -87,7 +89,7 @@ export default function ViewPencurianDanKekerasan({ provinsi, download, table }:
                                 paddingRight: 30,
                                 cursor: "pointer",
                             }}
-                        // onClick={() => router.push("/dashboard/audience/upload")}
+                            onClick={() => router.push("/dashboard/se/upload/pencurian-dan-kekerasan")}
                         >
                             <Text ta={"center"} size="xl" inline>
                                 UPLOAD DATA

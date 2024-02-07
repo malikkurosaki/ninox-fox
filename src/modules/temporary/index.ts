@@ -34,6 +34,13 @@ import funGetPenganiayaan from "./kamtibmas/back/fun/get_penganiayaan";
 import funGetPenipuanDanPenggelapan from "./kamtibmas/back/fun/get_penipuan_dan_penggelapan";
 import funGetPerkelahian from "./kamtibmas/back/fun/get_perkelahian";
 import funGetPerkosaan from "./kamtibmas/back/fun/get_perkosaan";
+import ViewUploadNarkoba from "./kamtibmas/back/view/upload_narkoba";
+import ViewUploadPencurian from "./kamtibmas/back/view/upload_pencurian";
+import ViewUploadPencurianDanKekerasan from "./kamtibmas/back/view/upload_pencurian_dan_kekerasan";
+import ViewUploadPenganiayaan from "./kamtibmas/back/view/upload_penganiayaan";
+import ViewUploadPenipuanDanPenggelapan from "./kamtibmas/back/view/upload_penipuan_dan_penggelapan";
+import ViewUploadPerkelahian from "./kamtibmas/back/view/upload_perkelahian";
+import ViewUploadPerkosaan from "./kamtibmas/back/view/upload_perkosaan";
 import ViewNarkoba from "./kamtibmas/back/view/view_narkoba";
 import ViewPencurian from "./kamtibmas/back/view/view_pencurian";
 import ViewPencurianDanKekerasan from "./kamtibmas/back/view/view_pencurian_dan_kekerasan";
@@ -267,3 +274,10 @@ export { ViewUploadPosPelayanan }
 export { ViewUploadFasilitas }
 export { ViewUploadRataRataJarakFasilitas }
 export { ViewUploadJumlahDokter }
+export { ViewUploadPerkelahian }
+export { ViewUploadPencurian }
+export { ViewUploadPencurianDanKekerasan }
+export { ViewUploadPenipuanDanPenggelapan }
+export { ViewUploadPenganiayaan }
+export { ViewUploadPerkosaan }
+export { ViewUploadNarkoba }
