@@ -5,8 +5,10 @@ import { useState } from "react"
 import papa from "papaparse"
 import funGetJenisPrasarana from "../fun/get_jenis_prasarana"
 import TableJenisPrasarana from "../component/table_jenis_prasarana"
+import { useRouter } from "next/navigation"
 
 export default function ViewJenisPrasarana({ provinsi, download, table }: { provinsi: any, download: any, table: any }) {
+    const router = useRouter()
     const [isProvinsi, setProvinsi] = useState<any>(null)
     const [isKabupaten, setKabupaten] = useState<any>(null)
     const [dataKabupaten, setDataKabupaten] = useState<any>([])
@@ -87,7 +89,7 @@ export default function ViewJenisPrasarana({ provinsi, download, table }: { prov
                                 paddingRight: 30,
                                 cursor: "pointer",
                             }}
-                        // onClick={() => router.push("/dashboard/audience/upload")}
+                            onClick={() => router.push("/dashboard/se/upload/jenis-prasarana-transportasi")}
                         >
                             <Text ta={"center"} size="xl" inline>
                                 UPLOAD DATA

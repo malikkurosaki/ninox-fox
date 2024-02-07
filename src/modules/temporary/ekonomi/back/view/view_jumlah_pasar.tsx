@@ -5,8 +5,10 @@ import { useState } from "react"
 import papa from "papaparse"
 import funGetJumlahPasar from "../fun/get_jumlah_pasar"
 import TableJumlahPasar from "../component/table_jumlah_pasar"
+import { useRouter } from "next/navigation"
 
 export default function ViewJumlahPasar({ provinsi, download, table }: { provinsi: any, download: any, table: any }) {
+    const router = useRouter()
     const [isProvinsi, setProvinsi] = useState<any>(null)
     const [isKabupaten, setKabupaten] = useState<any>(null)
     const [dataKabupaten, setDataKabupaten] = useState<any>([])
@@ -87,7 +89,7 @@ export default function ViewJumlahPasar({ provinsi, download, table }: { provins
                                 paddingRight: 30,
                                 cursor: "pointer",
                             }}
-                        // onClick={() => router.push("/dashboard/audience/upload")}
+                            onClick={() => router.push("/dashboard/se/upload/jumlah-pasar")}
                         >
                             <Text ta={"center"} size="xl" inline>
                                 UPLOAD DATA

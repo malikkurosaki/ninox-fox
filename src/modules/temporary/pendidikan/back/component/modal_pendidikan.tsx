@@ -7,6 +7,9 @@ import { funLogUser } from "@/modules/user"
 import _ from "lodash"
 import { isModalPendidikan } from "../val/val_pendidikan"
 import funUploadJarakFasilitas from "../fun/upload_jarak_fasilitas"
+import funUploadJalanKakiKurang4Jam from "../fun/upload_jalan_kaki_kurang_4_jam"
+import funUploadGuruTersertifikasi from "../fun/upload_guru_tersertifikasi"
+import funUploadGuruHonorer from "../fun/upload_guru_honorer"
 
 /**
  * Menampilkan modal konfirmasi upload data audience
@@ -26,11 +29,11 @@ export default function ModalUploadPendidikan({ kategori, data, onSuccess }: { k
         if (kategori == 'jarak fasilitas') {
             await funUploadJarakFasilitas({ body: data })
         } else if (kategori == 'jalan kaki kurang 4 jam') {
-            // await funUploadRumahIbadah({ body: data })
+            await funUploadJalanKakiKurang4Jam({ body: data })
         } else if (kategori == 'guru tersertifikasi') {
-            // await funUploadRumahIbadah({ body: data })
+            await funUploadGuruTersertifikasi({ body: data })
         } else if (kategori == 'guru honorer') {
-            // await funUploadRumahIbadah({ body: data })
+            await funUploadGuruHonorer({ body: data })
         }
 
         await funLogUser({ act: 'UPL', desc: `User mengupload data ${kategori}`, idContent: '-', tbContent: `se_pendidikan` })

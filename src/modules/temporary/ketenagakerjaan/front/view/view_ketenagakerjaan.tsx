@@ -9,15 +9,28 @@ import EchartJaminanHariTua from '../components/echart_jaminan_hari_tua';
 import EchartJaminanPensiun from '../components/echart_jaminan_pensiun';
 import EchartDataPengangguran from '../components/echart_data_pengangguran';
 import _ from 'lodash';
+import funGetFrontJaminanKesehatan from '../fun/get_jaminan_kesehatan';
+import funGetFrontJaminanKecelakaanKerja from '../fun/get_jaminan_kecelakaan_kerja';
+import funGetFrontJaminanKematian from '../fun/get_jaminan_kematian';
+import funGetFrontJaminanHariTua from '../fun/get_jaminan_hari_tua';
+import funGetFrontJaminanPensiun from '../fun/get_jaminan_pensiun';
+import funGetFrontPengangguran from '../fun/get_pengangguran';
 
-export default function ViewKetenagakerjaan({ prov }: { prov: any }) {
-  const [isProvinsi, setProvinsi] = useState<any>(null)
+export default function ViewKetenagakerjaan({ prov, kab, jaminan_kesehatan, jaminan_kecelakaan_kerja, jaminan_kematian, jaminan_hari_tua, jaminan_pensiun, pengangguran }: { prov: any, kab: any, jaminan_kesehatan: any, jaminan_kecelakaan_kerja: any, jaminan_kematian: any, jaminan_hari_tua: any, jaminan_pensiun: any, pengangguran: any }) {
+  const [isProvinsi, setProvinsi] = useState<any>("1")
   const [isKabupaten, setKabupaten] = useState<any>(null)
   const [isKecamatan, setKecamatan] = useState<any>(null)
-  const [dataKabupaten, setDataKabupaten] = useState<any>([])
+  const [dataKabupaten, setDataKabupaten] = useState<any>(kab)
   const [dataKecamatan, setDataKecamatan] = useState<any>([])
+  const [dataJaminanKesehatan, setDataJaminanKesehatan] = useState(jaminan_kesehatan)
+  const [dataJaminanKecelakaanKerja, setDataJaminanKecelakaanKerja] = useState(jaminan_kecelakaan_kerja)
+  const [dataJaminanKematian, setDataJaminanKematian] = useState(jaminan_kematian)
+  const [dataJaminanHariTua, setDataJaminanHariTua] = useState(jaminan_hari_tua)
+  const [dataJaminanPensiun, setDataJaminanPensiun] = useState(jaminan_pensiun)
+  const [dataPengangguran, setDataPengangguran] = useState(pengangguran)
 
   async function onProvinsi(id: any) {
+    if (id == null) { id = 1 }
     setProvinsi(id)
     setKabupaten(null)
     setKecamatan(null)
@@ -31,6 +44,26 @@ export default function ViewKetenagakerjaan({ prov }: { prov: any }) {
     setKecamatan(null)
     const dataKecNew = await MasterKecGetByKab({ idKabkot: id })
     setDataKecamatan(dataKecNew)
+  }
+
+  async function onGenerate() {
+    const dataLoad1 = await funGetFrontJaminanKesehatan({ prov: isProvinsi, kab: isKabupaten, kec: isKecamatan })
+    setDataJaminanKesehatan(dataLoad1)
+
+    const dataLoad2 = await funGetFrontJaminanKecelakaanKerja({ prov: isProvinsi, kab: isKabupaten, kec: isKecamatan })
+    setDataJaminanKecelakaanKerja(dataLoad2)
+
+    const dataLoad3 = await funGetFrontJaminanKematian({ prov: isProvinsi, kab: isKabupaten, kec: isKecamatan })
+    setDataJaminanKematian(dataLoad3)
+
+    const dataLoad4 = await funGetFrontJaminanHariTua({ prov: isProvinsi, kab: isKabupaten, kec: isKecamatan })
+    setDataJaminanHariTua(dataLoad4)
+
+    const dataLoad5 = await funGetFrontJaminanPensiun({ prov: isProvinsi, kab: isKabupaten, kec: isKecamatan })
+    setDataJaminanPensiun(dataLoad5)
+
+    const dataLoad6 = await funGetFrontPengangguran({ prov: isProvinsi, kab: isKabupaten, kec: isKecamatan })
+    setDataPengangguran(dataLoad6)
   }
 
   return (
@@ -79,7 +112,7 @@ export default function ViewKetenagakerjaan({ prov }: { prov: any }) {
             onChange={(val) => { setKecamatan(val) }}
             value={isKecamatan}
           />
-          <Button>SUBMIT</Button>
+          <Button onClick={onGenerate}>SUBMIT</Button>
         </Group>
       </Box>
       <Box pt={30}>
@@ -88,7 +121,7 @@ export default function ViewKetenagakerjaan({ prov }: { prov: any }) {
           >
             <Box pb={20}>
               <Text c={"white"} fw={'bold'} fz={20}>
-                KEPEMILIKAN JAMINAN SOSIAL TENAGA KERJA KOTA DENPASAR
+                KEPEMILIKAN JAMINAN SOSIAL TENAGA KERJA
               </Text>
             </Box>
             <SimpleGrid
@@ -101,7 +134,7 @@ export default function ViewKetenagakerjaan({ prov }: { prov: any }) {
                   padding: 20
                 }}
               >
-                <EchartJaminanKesehatan />
+                <EchartJaminanKesehatan data={dataJaminanKesehatan} />
               </Box>
               <Box
                 style={{
@@ -110,7 +143,7 @@ export default function ViewKetenagakerjaan({ prov }: { prov: any }) {
                   padding: 20
                 }}
               >
-                <EchartJaminanKecelakaanKerja />
+                <EchartJaminanKecelakaanKerja data={dataJaminanKecelakaanKerja} />
               </Box>
             </SimpleGrid>
             <Box pt={15}>
@@ -124,7 +157,7 @@ export default function ViewKetenagakerjaan({ prov }: { prov: any }) {
                     padding: 20
                   }}
                 >
-                  <EchartJaminanKematian />
+                  <EchartJaminanKematian data={dataJaminanKematian} />
                 </Box>
                 <Box
                   style={{
@@ -133,7 +166,7 @@ export default function ViewKetenagakerjaan({ prov }: { prov: any }) {
                     padding: 20
                   }}
                 >
-                  <EchartJaminanHariTua />
+                  <EchartJaminanHariTua data={dataJaminanHariTua} />
                 </Box>
               </SimpleGrid>
             </Box>
@@ -148,7 +181,7 @@ export default function ViewKetenagakerjaan({ prov }: { prov: any }) {
                     padding: 20
                   }}
                 >
-                  <EchartJaminanPensiun />
+                  <EchartJaminanPensiun data={dataJaminanPensiun} />
                 </Box>
               </SimpleGrid>
             </Box>
@@ -176,7 +209,7 @@ export default function ViewKetenagakerjaan({ prov }: { prov: any }) {
               padding: 20
             }}
           >
-            <EchartDataPengangguran />
+            <EchartDataPengangguran data={dataPengangguran}/>
           </Box>
         </SimpleGrid>
       </Box>

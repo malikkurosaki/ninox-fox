@@ -5,8 +5,10 @@ import { Box, Button, Group, Paper, Select, SimpleGrid, Stack, Text } from "@man
 import papa from "papaparse"
 import funGetJalanKakiKurang4Jam from "../fun/get_jalan_kaki_kurang_4_jam"
 import TableJalanKakiKurang4Jam from "../component/table_jalan_kaki_kurang_4_jam"
+import { useRouter } from "next/navigation"
 
 export default function ViewJalanKakiKurang4Jam({ provinsi, download, table }: { provinsi: any, download: any, table: any }) {
+    const router = useRouter()
     const [isProvinsi, setProvinsi] = useState<any>(null)
     const [isKabupaten, setKabupaten] = useState<any>(null)
     const [dataKabupaten, setDataKabupaten] = useState<any>([])
@@ -87,7 +89,7 @@ export default function ViewJalanKakiKurang4Jam({ provinsi, download, table }: {
                                 paddingRight: 30,
                                 cursor: "pointer",
                             }}
-                        // onClick={() => router.push("/dashboard/audience/upload")}
+                            onClick={() => router.push("/dashboard/se/upload/jalan-kaki-kurang-4-jam")}
                         >
                             <Text ta={"center"} size="xl" inline>
                                 UPLOAD DATA
