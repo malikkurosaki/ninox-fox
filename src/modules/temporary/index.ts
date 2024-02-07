@@ -2,6 +2,8 @@ import funDownloadJumlahPasar from "./ekonomi/back/fun/download_jumlah_pasar";
 import funDownloadLembagaKeuangan from "./ekonomi/back/fun/download_lembaga_keuangan";
 import funGetJumlahPasar from "./ekonomi/back/fun/get_jumlah_pasar";
 import funGetLembagaKeuangan from "./ekonomi/back/fun/get_lembaga_keuangan";
+import ViewUploadJumlahPasar from "./ekonomi/back/view/upload_jumlah_pasar";
+import ViewUploadLembagaKeuangan from "./ekonomi/back/view/upload_lembaga_keuangan";
 import ViewJumlahPasar from "./ekonomi/back/view/view_jumlah_pasar";
 import ViewLembagaKeuangan from "./ekonomi/back/view/view_lembaga_keuangan";
 import ChartBangunanPermanen from "./ekonomi/front/components/chart_bangunan_permanen";
@@ -281,3 +283,5 @@ export { ViewUploadPenipuanDanPenggelapan }
 export { ViewUploadPenganiayaan }
 export { ViewUploadPerkosaan }
 export { ViewUploadNarkoba }
+export { ViewUploadJumlahPasar }
+export { ViewUploadLembagaKeuangan }
