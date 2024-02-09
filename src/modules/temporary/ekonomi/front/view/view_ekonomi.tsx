@@ -5,18 +5,21 @@ import React, { useState } from 'react';
 import ChartBangunanSemiPermanen from '../components/chart_bangunan_semi_permanen';
 import ChartTanpaBangunanTerdekat from '../components/chart_tanpa_bangunan_terdekat';
 import ChartLembagaKeuangan from '../components/chart_lembaga_keuangan';
-import { ChartBangunanPermanen } from '../../..';
+import { ChartBangunanPermanen, funGetFrontJumlahPasar, funGetFrontLembagaKeuangan } from '../../..';
 import EchartPublicConcerns from '@/modules/regional_insights/components/echart_public_concerns';
 import _ from 'lodash';
 
-export default function ViewEkonomi({ prov }: { prov: any }) {
-  const [isProvinsi, setProvinsi] = useState<any>(null)
+export default function ViewEkonomi({ prov, kab, jumlah_pasar, lembaga_keuangan }: { prov: any, kab: any, jumlah_pasar: any, lembaga_keuangan: any }) {
+  const [isProvinsi, setProvinsi] = useState<any>("1")
   const [isKabupaten, setKabupaten] = useState<any>(null)
   const [isKecamatan, setKecamatan] = useState<any>(null)
-  const [dataKabupaten, setDataKabupaten] = useState<any>([])
+  const [dataKabupaten, setDataKabupaten] = useState<any>(kab)
   const [dataKecamatan, setDataKecamatan] = useState<any>([])
+  const [dataJumlahPasar, setDataJumlahPasar] = useState(jumlah_pasar)
+  const [dataLembagaKeuangan, setDataLembagaKeuangan] = useState(lembaga_keuangan)
 
   async function onProvinsi(id: any) {
+    if (id == null) { id = 1 }
     setProvinsi(id)
     setKabupaten(null)
     setKecamatan(null)
@@ -30,6 +33,15 @@ export default function ViewEkonomi({ prov }: { prov: any }) {
     setKecamatan(null)
     const dataKecNew = await MasterKecGetByKab({ idKabkot: id })
     setDataKecamatan(dataKecNew)
+  }
+
+  async function onGenerate() {
+    const dataLoad1 = await funGetFrontJumlahPasar({ prov: isProvinsi, kab: isKabupaten, kec: isKecamatan })
+    setDataJumlahPasar(dataLoad1)
+
+    const dataLoad2 = await funGetFrontLembagaKeuangan({ prov: isProvinsi, kab: isKabupaten, kec: isKecamatan })
+    setDataLembagaKeuangan(dataLoad2)
+
   }
 
   if (typeof window !== 'undefined')
@@ -79,7 +91,7 @@ export default function ViewEkonomi({ prov }: { prov: any }) {
               onChange={(val) => { setKecamatan(val) }}
               value={isKecamatan}
             />
-            <Button>SUBMIT</Button>
+            <Button onClick={onGenerate}>SUBMIT</Button>
           </Group>
         </Box>
         <Box pt={30}>
@@ -88,7 +100,7 @@ export default function ViewEkonomi({ prov }: { prov: any }) {
             <Box pb={20}>
               <Text c={"white"} fw={'bold'} fz={20}>
                 {/* KEMUDAHAN MENGAKSES PASAR BERDASARKAN JENIS BANGUNAN KOTA DENPASAR */}
-                JUMLAH PASAR BERDASARKAN JENIS BANGUNAN DI KOTA DENPASAR
+                JUMLAH PASAR BERDASARKAN JENIS BANGUNAN
               </Text>
             </Box>
             {/* <SimpleGrid
@@ -124,7 +136,7 @@ export default function ViewEkonomi({ prov }: { prov: any }) {
                     padding: 20
                   }}
                 >
-                  <ChartTanpaBangunanTerdekat />
+                  <ChartTanpaBangunanTerdekat data={dataJumlahPasar} />
                 </Box>
               </SimpleGrid>
             </Box>
@@ -134,7 +146,7 @@ export default function ViewEkonomi({ prov }: { prov: any }) {
           <Box>
             <Box pb={10}>
               <Text c={"white"} fw={'bold'} fz={20}>
-                KETERSEDIAAN LEMBAGA KEUANGAN KOTA DENPASAR
+                KETERSEDIAAN LEMBAGA KEUANGAN
               </Text>
             </Box>
           </Box>
@@ -150,7 +162,7 @@ export default function ViewEkonomi({ prov }: { prov: any }) {
                 padding: 20
               }}
             >
-              <ChartLembagaKeuangan />
+              <ChartLembagaKeuangan data={dataLembagaKeuangan}/>
             </Box>
           </SimpleGrid>
         </Box>

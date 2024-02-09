@@ -41,10 +41,9 @@ export default function EchartRataKesehatan({ data }: { data: any }) {
       xAxis: [
         {
           type: 'category',
-          data: ['Jarak tedekat menuju Tempat praktek bidan', 'Jarak terdekat menuju Puskesmas tanpa rawat inap', 'Jarak terdekat menuju Puskesmas dengan rawat inap', 'Jarak terdekat menuju Rumah sakit'],
+          data: ['Jarak tedekat menuju \n Tempat praktek bidan', 'Jarak terdekat menuju \n Puskesmas tanpa rawat inap', 'Jarak terdekat menuju \n Puskesmas dengan rawat inap', 'Jarak terdekat \n menuju Rumah sakit'],
           axisLabel: {
             color: "white",
-            rotate: 45,
             // fontSize: 10
           }
         }

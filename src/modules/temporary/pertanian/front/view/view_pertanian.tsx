@@ -6,15 +6,20 @@ import EchartJenisPrasaranaTransportasi from '../components/echart_jenis_prasara
 import EchartJalanBermotorRoda4 from '../components/echart_jalan_bermotor_roda_4';
 import EchartPenggunaanSungai from '../components/echart_penggunaan_sungai';
 import _ from 'lodash';
+import funGetFrontJenisPrasaranaTransportasi from '../fun/get_jenis_prasarana_transportasi';
+import funGetFrontIrigasi from '../fun/get_irigasi';
 
-export default function ViewPertanian({ prov }: { prov: any }) {
-  const [isProvinsi, setProvinsi] = useState<any>(null)
+export default function ViewPertanian({ prov, kab, jenis_prasarana, irigasi }: { prov: any, kab: any, jenis_prasarana: any, irigasi: any }) {
+  const [isProvinsi, setProvinsi] = useState<any>("1")
   const [isKabupaten, setKabupaten] = useState<any>(null)
   const [isKecamatan, setKecamatan] = useState<any>(null)
-  const [dataKabupaten, setDataKabupaten] = useState<any>([])
+  const [dataKabupaten, setDataKabupaten] = useState<any>(kab)
   const [dataKecamatan, setDataKecamatan] = useState<any>([])
+  const [dataJenisPrasarana, setDataJenisPrasarana] = useState(jenis_prasarana)
+  const [dataIrigasi, setDataIrigasi] = useState(irigasi)
 
   async function onProvinsi(id: any) {
+    if (id == null) { id = 1 }
     setProvinsi(id)
     setKabupaten(null)
     setKecamatan(null)
@@ -28,6 +33,14 @@ export default function ViewPertanian({ prov }: { prov: any }) {
     setKecamatan(null)
     const dataKecNew = await MasterKecGetByKab({ idKabkot: id })
     setDataKecamatan(dataKecNew)
+  }
+
+  async function onGenerate() {
+    const dataLoad1 = await funGetFrontJenisPrasaranaTransportasi({ prov: isProvinsi, kab: isKabupaten, kec: isKecamatan })
+    setDataJenisPrasarana(dataLoad1)
+
+    const dataLoad2 = await funGetFrontIrigasi({ prov: isProvinsi, kab: isKabupaten, kec: isKecamatan })
+    setDataIrigasi(dataLoad2)
   }
 
   return (
@@ -76,7 +89,7 @@ export default function ViewPertanian({ prov }: { prov: any }) {
             onChange={(val) => { setKecamatan(val) }}
             value={isKecamatan}
           />
-          <Button>SUBMIT</Button>
+          <Button onClick={onGenerate}>SUBMIT</Button>
         </Group>
       </Box>
       <Box pt={30}>
@@ -98,7 +111,7 @@ export default function ViewPertanian({ prov }: { prov: any }) {
                 padding: 20
               }}
             >
-              <EchartJenisPrasaranaTransportasi />
+              <EchartJenisPrasaranaTransportasi data={dataJenisPrasarana} />
             </Box>
           </SimpleGrid>
         </Box>
@@ -128,7 +141,7 @@ export default function ViewPertanian({ prov }: { prov: any }) {
                 padding: 20
               }}
             >
-              <EchartPenggunaanSungai />
+              <EchartPenggunaanSungai data={dataIrigasi}/>
             </Box>
           </SimpleGrid>
         </Box>

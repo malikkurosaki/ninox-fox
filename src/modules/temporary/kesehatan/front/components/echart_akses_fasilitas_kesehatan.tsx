@@ -44,10 +44,9 @@ export default function EchartAksesFasilitasKesehatan({ data }: { data: any }) {
       xAxis: [
         {
           type: 'category',
-          data: ['Rumah Sakit', 'Rumah Bersalin', 'Rumah Sakit Bersalin', 'Tempat Praktek Bidan', 'Apotek', 'Puskesmas dengan Rawat Inap', 'Puskesmas tanpa Rawat Inap'],
+          data: ['Rumah Sakit', 'Rumah Bersalin', 'Rumah Sakit \n Bersalin', 'Tempat Praktek \n Bidan', 'Apotek', 'Puskesmas dengan \n Rawat Inap', 'Puskesmas tanpa \n Rawat Inap'],
           axisLabel: {
             color: "white",
-            rotate: 45,
           }
         }
       ],
