@@ -1,18 +1,29 @@
 "use client"
+import { COLOR_SOSIAL_EKONOMI } from '@/modules/_global';
 import { Box } from '@mantine/core';
 import { useShallowEffect } from '@mantine/hooks';
 import { EChartsOption } from 'echarts';
 import EChartsReact from 'echarts-for-react';
+import _ from 'lodash';
 import React, { useState } from 'react';
 
-export default function EchartRataKesehatan() {
-  const [options, setOptions] = useState<EChartsOption>({});
+export default function EchartRataKesehatan({ data }: { data: any }) {
+  const [options, setOptions] = useState<EChartsOption>({})
+  const [dataChart, setDataChart] = useState<any>()
 
   useShallowEffect(() => {
-    loadData()
-  }, [])
+    setDataChart(
+      {
+        jarak_terdekat_menuju_tempat_praktek_bidan: Number(data[0].bidan),
+        jarak_terdekat_menuju_puskesmas_tanpa_rawat_inap: Number(data[0].puskesmasTanpaRawatInap),
+        jarak_terdekat_menuju_puskesmas_dengan_rawat_inap: Number(data[0].puskesmasDgRawatInap),
+        jarak_terdekat_menuju_rumah_sakit: Number(data[0].rumahSakit)
+      }
+    )
+    loadData(dataChart)
+  }, [data, dataChart])
 
-  async function loadData() {
+  async function loadData(dataLoad: any) {
     const option: EChartsOption = {
       legend: {
         bottom: "0%",
@@ -21,22 +32,20 @@ export default function EchartRataKesehatan() {
         }
       },
       tooltip: {},
-      dataset: {
-        source: [
-          ['data', 'Jarak tedekat menuju Tempat praktek bidan', 'Jarak terdekat menuju Puskesmas tanpa rawat inap', 'Jarak terdekat menuju Puskesmas dengan rawat inap', 'Jarak terdekat menuju Rumah sakit'],
-          ['Denpasar', 0, 0, 0, 0],
-          // ['Denpasar', 200, 211, 781, 161],
-          // ['Badung', 12, 212, 32, 345],
-          // ['Giayar', 32, 33, 61, 21],
-          // ['Buleleng', 23, 32, 67, 11],
-          // ['Klungkung', 44, 43, 90, 100],
-        ]
-      },
+      // dataset: {
+      //   source: [
+      //     ['data', 'Jarak tedekat menuju Tempat praktek bidan', 'Jarak terdekat menuju Puskesmas tanpa rawat inap', 'Jarak terdekat menuju Puskesmas dengan rawat inap', 'Jarak terdekat menuju Rumah sakit'],
+      //     ['Denpasar', 0, 0, 0, 0],
+      //   ]
+      // },
       xAxis: [
         {
           type: 'category',
+          data: ['Jarak tedekat menuju Tempat praktek bidan', 'Jarak terdekat menuju Puskesmas tanpa rawat inap', 'Jarak terdekat menuju Puskesmas dengan rawat inap', 'Jarak terdekat menuju Rumah sakit'],
           axisLabel: {
             color: "white",
+            rotate: 45,
+            // fontSize: 10
           }
         }
       ],
@@ -44,7 +53,6 @@ export default function EchartRataKesehatan() {
         {
           type: 'value',
           show: true,
-          max: "100",
           splitLine: {
             lineStyle: {
               color: "gray",
@@ -58,21 +66,20 @@ export default function EchartRataKesehatan() {
       ],
       series: [
         {
-          type: 'bar', itemStyle: {
-            color: "orange"
-          }
-        },
-        {
-          type: 'bar', itemStyle: {
-            color: "green"
-          }
-        },
-        {
-          type: 'bar'
-        },
-        {
-          type: 'bar'
-        },
+          // name: 'Nama Kota',
+          type: 'bar',
+          barWidth: '70%',
+          data: Object.keys(dataLoad ?? []).map(
+            (v: any, i: any) =>
+            ({
+              name: _.upperCase(v),
+              value: dataLoad[v],
+              itemStyle: {
+                color: COLOR_SOSIAL_EKONOMI[i]
+              },
+            })
+          ),
+        }
       ]
     };
     setOptions(option)
