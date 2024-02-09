@@ -58,6 +58,7 @@ import funDownloadRumahIbadah from "./keagamaan/back/fun/download_rumah_ibadah";
 import funGetRumahIbadah from "./keagamaan/back/fun/get_rumah_ibadah";
 import ViewUploadRumahIbadah from "./keagamaan/back/view/upload_rumah_ibadah";
 import ViewRumahIbadah from "./keagamaan/back/view/view_rumah_ibadah";
+import funGetFrontRumahIbadah from "./keagamaan/front/fun/get_rumah_ibadah";
 import ViewKeagamaan from "./keagamaan/front/view/view_keagamaan";
 import funDownloadBpjs from "./kemiskinan_dan_ketimpangan/back/fun/download_bpjs";
 import funDownloadDataKemiskinan from "./kemiskinan_dan_ketimpangan/back/fun/download_data_kemiskinan";
@@ -311,3 +312,4 @@ export { funGetFrontPengangguran }
 export { funGetFrontPermukaanJalan }
 export { funGetFrontJalanDilaluiKendaraan }
 export { funGetFrontKecelakaan }
+export { funGetFrontRumahIbadah }

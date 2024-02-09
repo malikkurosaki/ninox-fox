@@ -1,5 +1,5 @@
 import { isModalBeranda } from './val/isModalBeranda';
-import { COLOR_EMOTION, COLOR_PCT } from './fun/COLOR_EMOTION';
+import { COLOR_EMOTION, COLOR_PCT, COLOR_SOSIAL_EKONOMI } from './fun/COLOR_EMOTION';
 import { LayoutViewFront } from '@/modules/_global/front';
 import { LayoutView, ViewWilayah, funGetAccessAdmin } from "./back";
 import { ButtonBack } from "./back";
@@ -58,3 +58,4 @@ export { funGetOneKecamatan }
 export { funGetAreaByDefault }
 export { ViewWilayah }
 export { funGetIdprovByName }
+export { COLOR_SOSIAL_EKONOMI }

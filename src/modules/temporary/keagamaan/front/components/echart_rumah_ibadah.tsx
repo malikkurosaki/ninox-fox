@@ -1,18 +1,31 @@
 "use client"
+import { COLOR_SOSIAL_EKONOMI } from '@/modules/_global';
 import { Box } from '@mantine/core';
 import { useShallowEffect } from '@mantine/hooks';
 import { EChartsOption } from 'echarts';
 import EChartsReact from 'echarts-for-react';
+import _ from 'lodash';
 import React, { useState } from 'react';
 
-export default function EchartRumahIbadah() {
-  const [options, setOptions] = useState<EChartsOption>({});
+export default function EchartRumahIbadah({ data }: { data: any }) {
+  const [options, setOptions] = useState<EChartsOption>({})
+  const [dataChart, setDataChart] = useState<any>()
 
   useShallowEffect(() => {
-    loadData()
-  }, [])
+    setDataChart(
+      {
+        masjid: Number(data[0].masjid),
+        gerejaKhatolik: Number(data[0].gerejaKhatolik),
+        gerejaProtestan: Number(data[0].gerejaProtestan),
+        pura: Number(data[0].pura),
+        wihara: Number(data[0].wihara),
+        kelenteng: Number(data[0].kelenteng),
+      }
+    )
+    loadData(dataChart)
+  }, [data, dataChart])
 
-  async function loadData() {
+  async function loadData(dataLoad: any) {
     const option: EChartsOption = {
       legend: {
         bottom: "0%",
@@ -21,21 +34,16 @@ export default function EchartRumahIbadah() {
         }
       },
       tooltip: {},
-      dataset: {
-        source: [
-          // ['data', 'Masjid', 'Mushalla', 'Gereja Katholik', 'Pura', 'Wihara', 'Klenteng'],
-          ['data', 'Masjid', 'Gereja Khatolik', 'Gereja Protestan', 'Pura', 'Wihara', 'Klenteng'],
-          // ['Denpasar', 280, 231, 121, 90, 233,  23],
-          ['Denpasar', 29, 5, 183, 941, 18,  0],
-          // ['Badung', 12, 212, 88, 283, 31 , 11],
-          // ['Giayar', 32, 33, 1,300, 10 , 1],
-          // ['Buleleng', 23, 32, 32, 232, 233, 8],
-          // ['Klungkung', 44, 43, 2, 10, 300, 1],
-        ]
-      },
+      // dataset: {
+      //   source: [
+      //     ['data', 'Masjid', 'Gereja Khatolik', 'Gereja Protestan', 'Pura', 'Wihara', 'Klenteng'],
+      //     ['Denpasar', 29, 5, 183, 941, 18, 0],
+      //   ]
+      // },
       xAxis: [
         {
           type: 'category',
+          data: ['Masjid', 'Gereja Khatolik', 'Gereja Protestan', 'Pura', 'Wihara', 'Kelenteng'],
           axisLabel: {
             color: "white",
           }
@@ -58,25 +66,20 @@ export default function EchartRumahIbadah() {
       ],
       series: [
         {
-          type: 'bar', itemStyle: {
-            color: "orange"
-          }
-        },
-        {
-          type: 'bar'
-        },
-        {
-          type: 'bar'
-        },
-        {
-          type: 'bar'
-        },
-        {
-          type: 'bar'
-        },
-        {
-          type: 'bar'
-        },
+          // name: 'Nama Kota',
+          type: 'bar',
+          barWidth: '70%',
+          data: Object.keys(dataLoad ?? []).map(
+            (v: any, i: any) =>
+            ({
+              name: _.upperCase(v),
+              value: dataLoad[v],
+              itemStyle: {
+                color: COLOR_SOSIAL_EKONOMI[i]
+              },
+            })
+          ),
+        }
       ]
     };
     setOptions(option)

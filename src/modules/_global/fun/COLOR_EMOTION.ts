@@ -58,3 +58,12 @@ export const COLOR_PCT = [
   "#652939",
   "#9c3341"
 ]
+
+export const COLOR_SOSIAL_EKONOMI=[
+  "#ffa500",
+  "#5470c6",
+  "#92cc76",
+  "#fac858",
+  "#ef6666",
+  "#73c0de"
+]
