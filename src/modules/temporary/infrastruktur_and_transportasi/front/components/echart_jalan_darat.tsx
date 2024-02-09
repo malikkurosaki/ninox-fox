@@ -3,16 +3,23 @@ import { Box } from '@mantine/core';
 import { useShallowEffect } from '@mantine/hooks';
 import { EChartsOption } from 'echarts';
 import EChartsReact from 'echarts-for-react';
+import _ from 'lodash';
 import React, { useState } from 'react';
 
-export default function EchartJalanDarat() {
-  const [options, setOptions] = useState<EChartsOption>({});
+export default function EchartJalanDarat({ data }: { data: any }) {
+  const [options, setOptions] = useState<EChartsOption>({})
+  const [dataChart, setDataChart] = useState<any>()
 
   useShallowEffect(() => {
-    loadData()
-  }, [])
+    setDataChart(
+      {
+        value: Number(data[0].value)
+      }
+    )
+    loadData(dataChart)
+  }, [data, dataChart])
 
-  async function loadData() {
+  async function loadData(dataLoad: any) {
     const option: EChartsOption = {
       title: {
         text: "JALAN DARAT DAPAT DILALUI KENDARAAN BERMOTOR RODA 4 ATAU LEBIH",
@@ -28,16 +35,17 @@ export default function EchartJalanDarat() {
         }
       },
       tooltip: {},
-      dataset: {
-        source: [
-          ['data', 'Sepanjangan tahun'],
-          // ['Denpasar', 43],
-          ['Denpasar', 0],
-        ]
-      },
+      // dataset: {
+      //   source: [
+      //     ['data', 'Sepanjangan tahun'],
+      //     // ['Denpasar', 43],
+      //     ['Denpasar', 0],
+      //   ]
+      // },
       xAxis: [
         {
           type: 'category',
+          data: ['Sepanjangan tahun'],
           axisLabel: {
             color: "white",
           }
@@ -47,7 +55,6 @@ export default function EchartJalanDarat() {
         {
           type: 'value',
           show: true,
-          max: "100",
           splitLine: {
             lineStyle: {
               color: "gray",
@@ -59,11 +66,23 @@ export default function EchartJalanDarat() {
           },
         }
       ],
-      series: [{
-        type: 'bar', itemStyle: {
-          color: "orange"
+      series: [
+        {
+          // name: 'Nama Kota',
+          type: 'bar',
+          barWidth: '70%',
+          data: Object.keys(dataLoad ?? []).map(
+            (v: any) =>
+            ({
+              name: _.upperCase(v),
+              value: dataLoad[v],
+              itemStyle: {
+                color: (v == 'value') ? "orange" : undefined
+              },
+            })
+          ),
         }
-      }]
+      ]
     };
     setOptions(option)
   }

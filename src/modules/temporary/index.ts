@@ -21,6 +21,9 @@ import ViewUploadPermukaanJalan from "./infrastruktur_and_transportasi/back/view
 import ViewJalanDilaluiKendaraan from "./infrastruktur_and_transportasi/back/view/view_jalan_dilalui_kendaraan";
 import ViewKecelakaan from "./infrastruktur_and_transportasi/back/view/view_kecelakaan";
 import ViewPermukaanJalan from "./infrastruktur_and_transportasi/back/view/view_permukaan_jalan";
+import funGetFrontJalanDilaluiKendaraan from "./infrastruktur_and_transportasi/front/fun/get_jalan_dilalui_kendaraan";
+import funGetFrontKecelakaan from "./infrastruktur_and_transportasi/front/fun/get_kecelakaan";
+import funGetFrontPermukaanJalan from "./infrastruktur_and_transportasi/front/fun/get_permukaan_jalan";
 import ViewInfrastrukturAndTransportasi from "./infrastruktur_and_transportasi/front/view/view_infrastruktur_and_transportasi";
 import funDownloadNarkoba from "./kamtibmas/back/fun/download_narkoba";
 import funDownloadPencurian from "./kamtibmas/back/fun/download_pencurian";
@@ -305,3 +308,6 @@ export { funGetFrontJaminanKematian }
 export { funGetFrontJaminanHariTua }
 export { funGetFrontJaminanPensiun }
 export { funGetFrontPengangguran }
+export { funGetFrontPermukaanJalan }
+export { funGetFrontJalanDilaluiKendaraan }
+export { funGetFrontKecelakaan }

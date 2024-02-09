@@ -2,20 +2,26 @@
 import { MasterKabGetByProvince, MasterKecGetByKab, PageSubTitle } from '@/modules/_global';
 import { Box, Button, Group, Select, SimpleGrid, Stack, Text } from '@mantine/core';
 import React, { useState } from 'react';
-import EchartJaminanKesehatan from '../components/echart_jenis_permukaan';
 import EchartJenisPermukaan from '../components/echart_jenis_permukaan';
 import EchartJalanDarat from '../components/echart_jalan_darat';
 import EchartDataKecelakaan from '../components/echart_data_kecelakaan';
 import _ from 'lodash';
+import funGetFrontPermukaanJalan from '../fun/get_permukaan_jalan';
+import funGetFrontJalanDilaluiKendaraan from '../fun/get_jalan_dilalui_kendaraan';
+import funGetFrontKecelakaan from '../fun/get_kecelakaan';
 
-export default function ViewInfrastrukturAndTransportasi({ prov }: { prov: any }) {
-  const [isProvinsi, setProvinsi] = useState<any>(null)
+export default function ViewInfrastrukturAndTransportasi({ prov, kab, permukaan_jalan, jalan_dilalui_kendaraan, kecelakaan }: { prov: any, kab: any, permukaan_jalan: any, jalan_dilalui_kendaraan: any, kecelakaan: any }) {
+  const [isProvinsi, setProvinsi] = useState<any>("1")
   const [isKabupaten, setKabupaten] = useState<any>(null)
   const [isKecamatan, setKecamatan] = useState<any>(null)
-  const [dataKabupaten, setDataKabupaten] = useState<any>([])
+  const [dataKabupaten, setDataKabupaten] = useState<any>(kab)
   const [dataKecamatan, setDataKecamatan] = useState<any>([])
+  const [dataPermukaanJalan, setDataPermukaanJalan] = useState(permukaan_jalan)
+  const [dataJalanDilaluiKendaraan, setDataJalanDilaluiKendaraan] = useState(jalan_dilalui_kendaraan)
+  const [dataKecelakaan, setDataKecelakaan] = useState(kecelakaan)
 
   async function onProvinsi(id: any) {
+    if (id == null) { id = 1 }
     setProvinsi(id)
     setKabupaten(null)
     setKecamatan(null)
@@ -29,6 +35,17 @@ export default function ViewInfrastrukturAndTransportasi({ prov }: { prov: any }
     setKecamatan(null)
     const dataKecNew = await MasterKecGetByKab({ idKabkot: id })
     setDataKecamatan(dataKecNew)
+  }
+
+  async function onGenerate() {
+    const dataLoad1 = await funGetFrontPermukaanJalan({ prov: isProvinsi, kab: isKabupaten, kec: isKecamatan })
+    setDataPermukaanJalan(dataLoad1)
+
+    const dataLoad2 = await funGetFrontJalanDilaluiKendaraan({ prov: isProvinsi, kab: isKabupaten, kec: isKecamatan })
+    setDataJalanDilaluiKendaraan(dataLoad2)
+
+    const dataLoad3 = await funGetFrontKecelakaan({ prov: isProvinsi, kab: isKabupaten, kec: isKecamatan })
+    setDataKecelakaan(dataLoad3)
   }
 
   return (
@@ -77,7 +94,7 @@ export default function ViewInfrastrukturAndTransportasi({ prov }: { prov: any }
             onChange={(val) => { setKecamatan(val) }}
             value={isKecamatan}
           />
-          <Button>SUBMIT</Button>
+          <Button onClick={onGenerate}>SUBMIT</Button>
         </Group>
       </Box>
       <Box pt={30}>
@@ -97,7 +114,7 @@ export default function ViewInfrastrukturAndTransportasi({ prov }: { prov: any }
                 padding: 20
               }}
             >
-              <EchartJenisPermukaan />
+              <EchartJenisPermukaan data={dataPermukaanJalan} />
             </Box>
             <Box
               style={{
@@ -106,7 +123,7 @@ export default function ViewInfrastrukturAndTransportasi({ prov }: { prov: any }
                 padding: 20
               }}
             >
-              <EchartJalanDarat />
+              <EchartJalanDarat data={dataJalanDilaluiKendaraan} />
             </Box>
           </SimpleGrid>
         </Box>
@@ -130,7 +147,7 @@ export default function ViewInfrastrukturAndTransportasi({ prov }: { prov: any }
                 padding: 20
               }}
             >
-              <EchartDataKecelakaan />
+              <EchartDataKecelakaan data={dataKecelakaan} />
             </Box>
           </SimpleGrid>
         </Box>
