@@ -1,18 +1,29 @@
 "use client"
+import { COLOR_SOSIAL_EKONOMI } from '@/modules/_global';
 import { Box } from '@mantine/core';
 import { useShallowEffect } from '@mantine/hooks';
 import { EChartsOption } from 'echarts';
 import EChartsReact from 'echarts-for-react';
+import _ from 'lodash';
 import React, { useState } from 'react';
 
-export default function EchartJarakPendidikan() {
-  const [options, setOptions] = useState<EChartsOption>({});
+export default function EchartJarakPendidikan({ data }: { data: any }) {
+  const [options, setOptions] = useState<EChartsOption>({})
+  const [dataChart, setDataChart] = useState<any>()
 
   useShallowEffect(() => {
-    loadData()
-  }, [])
+    setDataChart(
+      {
+        jarak_ke_SD_terdekat: Number(data[0].sd),
+        jarak_ke_SMP_terdekat: Number(data[0].smp),
+        jarak_ke_SMA_terdekat: Number(data[0].sma),
+        jarak_ke_SMK_terdekat: Number(data[0].smk)
+      }
+    )
+    loadData(dataChart)
+  }, [data, dataChart])
 
-  async function loadData() {
+  async function loadData(dataLoad: any) {
     const option: EChartsOption = {
       legend: {
         bottom: "0%",
@@ -21,20 +32,16 @@ export default function EchartJarakPendidikan() {
         }
       },
       tooltip: {},
-      dataset: {
-        source: [
-          ['data', 'Jarat ke SD Terdekat', 'Jarat ke SMP Terdekat', 'Jarat ke SMK Terdekat', 'Jarat ke SMA Terdekat'],
-          // ['Denpasar',121, 90, 233,  23],
-          ['Denpasar', 0, 0, 0, 0],
-          // ['Badung', 12, 21, 31 , 11],
-          // ['Giayar', 32, 33, 10 , 1],
-          // ['Buleleng', 23, 32, 32, 8],
-          // ['Klungkung', 44, 43, 2, 1],
-        ]
-      },
+      // dataset: {
+      //   source: [
+      //     ['data', 'Jarat ke SD Terdekat', 'Jarat ke SMP Terdekat', 'Jarat ke SMK Terdekat', 'Jarat ke SMA Terdekat'],
+      //     ['Denpasar', 0, 0, 0, 0],
+      //   ]
+      // },
       xAxis: [
         {
           type: 'category',
+          data: ['Jarat ke SD Terdekat', 'Jarat ke SMP Terdekat', 'Jarat ke SMA Terdekat', 'Jarat ke SMK Terdekat'],
           axisLabel: {
             color: "white",
           }
@@ -44,7 +51,6 @@ export default function EchartJarakPendidikan() {
         {
           type: 'value',
           show: true,
-          max: "100",
           splitLine: {
             lineStyle: {
               color: "gray",
@@ -58,19 +64,20 @@ export default function EchartJarakPendidikan() {
       ],
       series: [
         {
-          type: 'bar', itemStyle: {
-            color: "orange"
-          }
-        },
-        {
-          type: 'bar'
-        },
-        {
-          type: 'bar'
-        },
-        {
-          type: 'bar'
-        },
+          // name: 'Nama Kota',
+          type: 'bar',
+          barWidth: '70%',
+          data: Object.keys(dataLoad ?? []).map(
+            (v: any, i: any) =>
+            ({
+              name: _.upperCase(v),
+              value: dataLoad[v],
+              itemStyle: {
+                color: COLOR_SOSIAL_EKONOMI[i]
+              },
+            })
+          ),
+        }
       ]
     };
     setOptions(option)

@@ -21,6 +21,9 @@ import ViewUploadPermukaanJalan from "./infrastruktur_and_transportasi/back/view
 import ViewJalanDilaluiKendaraan from "./infrastruktur_and_transportasi/back/view/view_jalan_dilalui_kendaraan";
 import ViewKecelakaan from "./infrastruktur_and_transportasi/back/view/view_kecelakaan";
 import ViewPermukaanJalan from "./infrastruktur_and_transportasi/back/view/view_permukaan_jalan";
+import funGetFrontJalanDilaluiKendaraan from "./infrastruktur_and_transportasi/front/fun/get_jalan_dilalui_kendaraan";
+import funGetFrontKecelakaan from "./infrastruktur_and_transportasi/front/fun/get_kecelakaan";
+import funGetFrontPermukaanJalan from "./infrastruktur_and_transportasi/front/fun/get_permukaan_jalan";
 import ViewInfrastrukturAndTransportasi from "./infrastruktur_and_transportasi/front/view/view_infrastruktur_and_transportasi";
 import funDownloadNarkoba from "./kamtibmas/back/fun/download_narkoba";
 import funDownloadPencurian from "./kamtibmas/back/fun/download_pencurian";
@@ -55,6 +58,7 @@ import funDownloadRumahIbadah from "./keagamaan/back/fun/download_rumah_ibadah";
 import funGetRumahIbadah from "./keagamaan/back/fun/get_rumah_ibadah";
 import ViewUploadRumahIbadah from "./keagamaan/back/view/upload_rumah_ibadah";
 import ViewRumahIbadah from "./keagamaan/back/view/view_rumah_ibadah";
+import funGetFrontRumahIbadah from "./keagamaan/front/fun/get_rumah_ibadah";
 import ViewKeagamaan from "./keagamaan/front/view/view_keagamaan";
 import funDownloadBpjs from "./kemiskinan_dan_ketimpangan/back/fun/download_bpjs";
 import funDownloadDataKemiskinan from "./kemiskinan_dan_ketimpangan/back/fun/download_data_kemiskinan";
@@ -141,6 +145,10 @@ import ViewGuruHonorer from "./pendidikan/back/view/view_guru_honorer";
 import ViewGuruTersertifikasi from "./pendidikan/back/view/view_guru_tersertifikasi";
 import ViewJalanKakiKurang4Jam from "./pendidikan/back/view/view_jalan_kaki_kurang_4_jam";
 import ViewJarakFasilitas from "./pendidikan/back/view/view_jarak_fasilitas";
+import funGetFrontGuruHonorer from "./pendidikan/front/fun/get_guru_honorer";
+import funGetFrontGuruTersertifikasi from "./pendidikan/front/fun/get_guru_tersertifikasi";
+import funGetFrontJalanKakiKurang4Jam from "./pendidikan/front/fun/get_jalan_kaki_kurang_4_jam";
+import funGetFrontJarakFasilitas from "./pendidikan/front/fun/get_jarak_fasilitas";
 import ViewPendidikan from "./pendidikan/front/view/view_pendidikan";
 import funDownloadIrigasi from "./pertanian/back/fun/download_irigasi";
 import funDownloadJenisPrasarana from "./pertanian/back/fun/download_jenis_prasarana";
@@ -305,3 +313,11 @@ export { funGetFrontJaminanKematian }
 export { funGetFrontJaminanHariTua }
 export { funGetFrontJaminanPensiun }
 export { funGetFrontPengangguran }
+export { funGetFrontPermukaanJalan }
+export { funGetFrontJalanDilaluiKendaraan }
+export { funGetFrontKecelakaan }
+export { funGetFrontRumahIbadah }
+export { funGetFrontJarakFasilitas }
+export { funGetFrontJalanKakiKurang4Jam }
+export { funGetFrontGuruTersertifikasi }
+export { funGetFrontGuruHonorer }

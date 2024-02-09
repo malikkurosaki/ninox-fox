@@ -4,15 +4,18 @@ import { Box, Button, Group, Select, SimpleGrid, Stack, Text } from '@mantine/co
 import React, { useState } from 'react';
 import EchartRumahIbadah from '../components/echart_rumah_ibadah';
 import _ from 'lodash';
+import funGetFrontRumahIbadah from '../fun/get_rumah_ibadah';
 
-export default function ViewKeagamaan({ prov }: { prov: any }) {
-  const [isProvinsi, setProvinsi] = useState<any>(null)
+export default function ViewKeagamaan({ prov, kab, rumah_ibadah }: { prov: any, kab: any, rumah_ibadah: any }) {
+  const [isProvinsi, setProvinsi] = useState<any>("1")
   const [isKabupaten, setKabupaten] = useState<any>(null)
   const [isKecamatan, setKecamatan] = useState<any>(null)
-  const [dataKabupaten, setDataKabupaten] = useState<any>([])
+  const [dataKabupaten, setDataKabupaten] = useState<any>(kab)
   const [dataKecamatan, setDataKecamatan] = useState<any>([])
+  const [dataRumahIbadah, setDataRumahIbadah] = useState(rumah_ibadah)
 
   async function onProvinsi(id: any) {
+    if (id == null) { id = 1 }
     setProvinsi(id)
     setKabupaten(null)
     setKecamatan(null)
@@ -26,6 +29,11 @@ export default function ViewKeagamaan({ prov }: { prov: any }) {
     setKecamatan(null)
     const dataKecNew = await MasterKecGetByKab({ idKabkot: id })
     setDataKecamatan(dataKecNew)
+  }
+
+  async function onGenerate() {
+    const dataLoad1 = await funGetFrontRumahIbadah({ prov: isProvinsi, kab: isKabupaten, kec: isKecamatan })
+    setDataRumahIbadah(dataLoad1)
   }
 
   return (
@@ -74,14 +82,14 @@ export default function ViewKeagamaan({ prov }: { prov: any }) {
             onChange={(val) => { setKecamatan(val) }}
             value={isKecamatan}
           />
-          <Button>SUBMIT</Button>
+          <Button onClick={onGenerate}>SUBMIT</Button>
         </Group>
       </Box>
       <Box pt={40}>
         <Box>
           <Box pb={10}>
             <Text c={"white"} fw={'bold'} fz={20}>
-              JUMLAH RUMAH IBADAH KOTA DENPASAR
+              JUMLAH RUMAH IBADAH
             </Text>
           </Box>
         </Box>
@@ -96,7 +104,7 @@ export default function ViewKeagamaan({ prov }: { prov: any }) {
                 padding: 20
               }}
             >
-              <EchartRumahIbadah />
+              <EchartRumahIbadah data={dataRumahIbadah}/>
             </Box>
           </SimpleGrid>
         </Box>

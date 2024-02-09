@@ -3,16 +3,24 @@ import { Box } from '@mantine/core';
 import { useShallowEffect } from '@mantine/hooks';
 import { EChartsOption } from 'echarts';
 import EChartsReact from 'echarts-for-react';
+import _ from 'lodash';
 import React, { useState } from 'react';
 
-export default function EchartJenisPermukaan() {
-  const [options, setOptions] = useState<EChartsOption>({});
+export default function EchartJenisPermukaan({ data }: { data: any }) {
+  const [options, setOptions] = useState<EChartsOption>({})
+  const [dataChart, setDataChart] = useState<any>()
 
   useShallowEffect(() => {
-    loadData()
-  }, [])
+    setDataChart(
+      {
+        aspal: Number(data[0].aspal),
+        diperkeras: Number(data[0].diperkeras),
+      }
+    )
+    loadData(dataChart)
+  }, [data, dataChart])
 
-  async function loadData() {
+  async function loadData(dataLoad: any) {
     const option: EChartsOption = {
       title: {
         text: "JENIS PERMUKAAN JALAN YANG TERLUAS",
@@ -28,17 +36,18 @@ export default function EchartJenisPermukaan() {
         }
       },
       tooltip: {},
-      dataset: {
-        source: [
-          ['data', 'Aspal/Beton', 'Diperkeras(krikil, batu, Dll)'],
-          // ['Denpasar', 43.3, 85.8, 93.7],
-          ['Denpasar', 0, 0],
+      // dataset: {
+      //   source: [
+      //     ['data', 'Aspal/Beton', 'Diperkeras(krikil, batu, Dll)'],
+      //     // ['Denpasar', 43.3, 85.8, 93.7],
+      //     ['Denpasar', 0, 0],
 
-        ]
-      },
+      //   ]
+      // },
       xAxis: [
         {
           type: 'category',
+          data: ['Aspal/Beton', 'Diperkeras(krikil, batu, Dll)'],
           axisLabel: {
             color: "white",
           }
@@ -48,7 +57,6 @@ export default function EchartJenisPermukaan() {
         {
           type: 'value',
           show: true,
-          max: "100",
           splitLine: {
             lineStyle: {
               color: "gray",
@@ -62,11 +70,20 @@ export default function EchartJenisPermukaan() {
       ],
       series: [
         {
-          type: 'bar', itemStyle: {
-            color: "orange"
-          }
-        },
-        { type: 'bar' }
+          // name: 'Nama Kota',
+          type: 'bar',
+          barWidth: '70%',
+          data: Object.keys(dataLoad ?? []).map(
+            (v: any) =>
+            ({
+              name: _.upperCase(v),
+              value: dataLoad[v],
+              itemStyle: {
+                color: (v == 'aspal') ? "orange": undefined
+              },
+            })
+          ),
+        }
       ]
     };
     setOptions(option)
