@@ -1,46 +1,26 @@
 "use client"
+import { COLOR_SOSIAL_EKONOMI } from '@/modules/_global';
 import { Box, Group, Progress, ScrollArea, Table, Text } from '@mantine/core';
 import { useShallowEffect } from '@mantine/hooks';
 import { EChartsOption } from 'echarts';
 import EChartsReact from 'echarts-for-react';
+import _ from 'lodash';
 import React, { useState } from 'react';
 
-const dataGuru = [
-  {
-    id: 1,
-    daerah: "Denpasar",
-    persentase: '34%'
-  },
-  {
-    id: 2,
-     persentase: '64%',
-    daerah: "Jembrana",
-  },
-  {
-    id: 3,
-     persentase: '84%',
-    daerah: "Bangli",
-  },
-  {
-    id: 4,
-     persentase: '24%',
-    daerah: "Badung",
-  },
-  {
-    id: 5,
-     persentase: '44%',
-    daerah: "Giayar",
-  }
-]
-
-export default function TableDataGuruHonorer() {
-  const [options, setOptions] = useState<EChartsOption>({});
+export default function TableDataGuruHonorer({ data }: { data: any }) {
+  const [options, setOptions] = useState<EChartsOption>({})
+  const [dataChart, setDataChart] = useState<any>()
 
   useShallowEffect(() => {
-    loadData()
-  }, [])
+    setDataChart(
+      {
+        jumlah_guru_honorer: Number(data[0].value)
+      }
+    )
+    loadData(dataChart)
+  }, [data, dataChart])
 
-  async function loadData() {
+  async function loadData(dataLoad: any) {
     const option: EChartsOption = {
       legend: {
         bottom: "0%",
@@ -49,20 +29,16 @@ export default function TableDataGuruHonorer() {
         }
       },
       tooltip: {},
-      dataset: {
-        source: [
-          ['data', 'Jumlah Guru Honorer'],
-          // ['Denpasar',121, 90, 233,  23],
-          ['Denpasar', 0],
-          // ['Badung', 12, 21, 31 , 11],
-          // ['Giayar', 32, 33, 10 , 1],
-          // ['Buleleng', 23, 32, 32, 8],
-          // ['Klungkung', 44, 43, 2, 1],
-        ]
-      },
+      // dataset: {
+      //   source: [
+      //     ['data', 'Jumlah Guru Honorer'],
+      //     ['Denpasar', 0],
+      //   ]
+      // },
       xAxis: [
         {
           type: 'category',
+          data: ['Jumlah Guru Honorer'],
           axisLabel: {
             color: "white",
           }
@@ -72,7 +48,6 @@ export default function TableDataGuruHonorer() {
         {
           type: 'value',
           show: true,
-          max: "100",
           splitLine: {
             lineStyle: {
               color: "gray",
@@ -86,9 +61,19 @@ export default function TableDataGuruHonorer() {
       ],
       series: [
         {
-          type: 'bar', itemStyle: {
-            color: "orange"
-          }
+          // name: 'Nama Kota',
+          type: 'bar',
+          barWidth: '70%',
+          data: Object.keys(dataLoad ?? []).map(
+            (v: any, i: any) =>
+            ({
+              name: _.upperCase(v),
+              value: dataLoad[v],
+              itemStyle: {
+                color: COLOR_SOSIAL_EKONOMI[i]
+              },
+            })
+          ),
         }
       ]
     };
@@ -99,7 +84,7 @@ export default function TableDataGuruHonorer() {
     <>
       <Box pb={10}>
         <Text c={"white"} fw={'bold'} fz={20}>
-          DATA GURU HONORER KOTA DENPASAR
+          DATA GURU HONORER
         </Text>
       </Box>
       <Box

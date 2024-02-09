@@ -10,16 +10,25 @@ import EchartKetersediaanTransportasiSmk from '../components/echart_ketersediaan
 import TableDataGuruTersertifikasi from '../components/table_data_guru_tersertifikasi';
 import TableDataGuruHonorer from '../components/table_data_guru_honorer';
 import _ from 'lodash';
+import funGetFrontJarakFasilitas from '../fun/get_jarak_fasilitas';
+import funGetFrontJalanKakiKurang4Jam from '../fun/get_jalan_kaki_kurang_4_jam';
+import funGetFrontGuruTersertifikasi from '../fun/get_guru_tersertifikasi';
+import funGetFrontGuruHonorer from '../fun/get_guru_honorer';
 
 
-export default function ViewPendidikan({ prov }: { prov: any }) {
-  const [isProvinsi, setProvinsi] = useState<any>(null)
+export default function ViewPendidikan({ prov, kab, jarak_fasilitas, jalan_kaki, guru_tersertifikasi, guru_honorer }: { prov: any, kab: any, jarak_fasilitas: any, jalan_kaki: any, guru_tersertifikasi: any, guru_honorer: any }) {
+  const [isProvinsi, setProvinsi] = useState<any>("1")
   const [isKabupaten, setKabupaten] = useState<any>(null)
   const [isKecamatan, setKecamatan] = useState<any>(null)
-  const [dataKabupaten, setDataKabupaten] = useState<any>([])
+  const [dataKabupaten, setDataKabupaten] = useState<any>(kab)
   const [dataKecamatan, setDataKecamatan] = useState<any>([])
+  const [dataJarakFasilitas, setDataJarakFasilitas] = useState(jarak_fasilitas)
+  const [dataJalanKaki, setDataJalanKaki] = useState(jalan_kaki)
+  const [dataGuruTersertifikasi, setDataGuruTersertifikasi] = useState(guru_tersertifikasi)
+  const [dataGuruHonorer, setDataGuruHonorer] = useState(guru_honorer)
 
   async function onProvinsi(id: any) {
+    if (id == null) { id = 1 }
     setProvinsi(id)
     setKabupaten(null)
     setKecamatan(null)
@@ -33,6 +42,20 @@ export default function ViewPendidikan({ prov }: { prov: any }) {
     setKecamatan(null)
     const dataKecNew = await MasterKecGetByKab({ idKabkot: id })
     setDataKecamatan(dataKecNew)
+  }
+
+  async function onGenerate() {
+    const dataLoad1 = await funGetFrontJarakFasilitas({ prov: isProvinsi, kab: isKabupaten, kec: isKecamatan })
+    setDataJarakFasilitas(dataLoad1)
+
+    const dataLoad2 = await funGetFrontJalanKakiKurang4Jam({ prov: isProvinsi, kab: isKabupaten, kec: isKecamatan })
+    setDataJalanKaki(dataLoad2)
+
+    const dataLoad3 = await funGetFrontGuruTersertifikasi({ prov: isProvinsi, kab: isKabupaten, kec: isKecamatan })
+    setDataGuruTersertifikasi(dataLoad3)
+
+    const dataLoad4 = await funGetFrontGuruHonorer({ prov: isProvinsi, kab: isKabupaten, kec: isKecamatan })
+    setDataGuruHonorer(dataLoad4)
   }
 
   return (
@@ -81,14 +104,14 @@ export default function ViewPendidikan({ prov }: { prov: any }) {
             onChange={(val) => { setKecamatan(val) }}
             value={isKecamatan}
           />
-          <Button>SUBMIT</Button>
+          <Button onClick={onGenerate}>SUBMIT</Button>
         </Group>
       </Box>
       <Box pt={30}>
         <Box>
           <Box pb={20}>
             <Text c={"white"} fw={'bold'} fz={20}>
-              RATA-RATA JARAK KE FASILITAS PENDIDIKAN KOTA DENPASAR
+              RATA-RATA JARAK KE FASILITAS PENDIDIKAN
             </Text>
           </Box>
         </Box>
@@ -104,14 +127,14 @@ export default function ViewPendidikan({ prov }: { prov: any }) {
               padding: 20
             }}
           >
-            <EchartJarakPendidikan />
+            <EchartJarakPendidikan data={dataJarakFasilitas} />
           </Box>
         </SimpleGrid>
         <Box pt={40}>
           <Box>
             <Box pb={10}>
               <Text c={"white"} fw={'bold'} fz={20}>
-                KETERSEDIAAN TRANSPORTASI MENJANGKAU FASILITAS PENDIDIKAN KOTA DENPASAR
+                KETERSEDIAAN TRANSPORTASI MENJANGKAU FASILITAS PENDIDIKAN
               </Text>
             </Box>
           </Box>
@@ -125,7 +148,7 @@ export default function ViewPendidikan({ prov }: { prov: any }) {
                 padding: 20
               }}
             >
-              <EchartFasilitasDalamDesa />
+              <EchartFasilitasDalamDesa data={dataJalanKaki} />
             </Box>
             {/* <Box
               style={{
@@ -157,10 +180,10 @@ export default function ViewPendidikan({ prov }: { prov: any }) {
           </SimpleGrid>
         </Box>
         <Box pt={40}>
-          <TableDataGuruTersertifikasi />
+          <TableDataGuruTersertifikasi data={dataGuruTersertifikasi} />
         </Box>
         <Box pt={40}>
-          <TableDataGuruHonorer />
+          <TableDataGuruHonorer data={dataGuruHonorer}/>
         </Box>
       </Box>
     </>
