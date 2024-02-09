@@ -10,15 +10,30 @@ import EchartAksesFasilitasKesehatan from '../components/echart_akses_fasilitas_
 import EchartRataKesehatan from '../components/echart_rata_kesehatan';
 import EchartJumlahDokter from '../components/echart_jumlah_dokter';
 import _ from 'lodash';
+import funGetFrontKelasIbuHamil from '../fun/get_kelas_ibu_hamil';
+import funGetFrontIbuHamilDariKeluargaMiskin from '../fun/get_ibu_hamil_dari_keluarga_miskin';
+import funGetFrontJaminanUntukBaduta from '../fun/get_jaminan_untuk_baduta';
+import funGetFrontPosPelayanan from '../fun/get_pos_pelayanan';
+import funGetFrontFasilitas from '../fun/get_fasilitas';
+import funGetFrontRataRataJarakFasilitas from '../fun/get_rata_rata_jarak_fasilitas';
+import funGetFrontJumlahDokter from '../fun/get_jumlah_dokter';
 
-export default function ViewKesehatan({ prov }: { prov: any }) {
-  const [isProvinsi, setProvinsi] = useState<any>(null)
+export default function ViewKesehatan({ prov, kab, kelas_ibu_hamil, ibu_hamil_miskin, jaminan_untuk_baduta, pos_pelayanan, fasilitas, rata_rata_jarak_fasilitas, jumlah_dokter }: { prov: any, kab: any, kelas_ibu_hamil: any, ibu_hamil_miskin: any, jaminan_untuk_baduta: any, pos_pelayanan: any, fasilitas: any, rata_rata_jarak_fasilitas: any, jumlah_dokter: any }) {
+  const [isProvinsi, setProvinsi] = useState<any>("1")
   const [isKabupaten, setKabupaten] = useState<any>(null)
   const [isKecamatan, setKecamatan] = useState<any>(null)
-  const [dataKabupaten, setDataKabupaten] = useState<any>([])
+  const [dataKabupaten, setDataKabupaten] = useState<any>(kab)
   const [dataKecamatan, setDataKecamatan] = useState<any>([])
+  const [dataKelasIbuHamil, setDataKelasIbuHamil] = useState(kelas_ibu_hamil)
+  const [dataIbuHamilDrKeluargaMiskin, setDataIbuHamilDrKeluargaMiskin] = useState(ibu_hamil_miskin)
+  const [dataJaminanUntukBaduta, setDataJaminanUntukBaduta] = useState(jaminan_untuk_baduta)
+  const [dataPosPelayanan, setDataPosPelayanan] = useState(pos_pelayanan)
+  const [dataFasilitas, setDataFasilitas] = useState(fasilitas)
+  const [dataRataRataJarakFasilitas, setDataRataRataJarakFasilitas] = useState(rata_rata_jarak_fasilitas)
+  const [dataJumlahDokter, setDataJumlahDokter] = useState(jumlah_dokter)
 
   async function onProvinsi(id: any) {
+    if (id == null) { id = 1 }
     setProvinsi(id)
     setKabupaten(null)
     setKecamatan(null)
@@ -32,6 +47,30 @@ export default function ViewKesehatan({ prov }: { prov: any }) {
     setKecamatan(null)
     const dataKecNew = await MasterKecGetByKab({ idKabkot: id })
     setDataKecamatan(dataKecNew)
+  }
+
+  async function onGenerate() {
+    const dataLoad1 = await funGetFrontKelasIbuHamil({ prov: isProvinsi, kab: isKabupaten, kec: isKecamatan })
+    setDataKelasIbuHamil(dataLoad1)
+
+    const dataLoad2 = await funGetFrontIbuHamilDariKeluargaMiskin({ prov: isProvinsi, kab: isKabupaten, kec: isKecamatan })
+    setDataIbuHamilDrKeluargaMiskin(dataLoad2)
+
+    const dataLoad3 = await funGetFrontJaminanUntukBaduta({ prov: isProvinsi, kab: isKabupaten, kec: isKecamatan })
+    setDataJaminanUntukBaduta(dataLoad3)
+
+    const dataLoad4 = await funGetFrontPosPelayanan({ prov: isProvinsi, kab: isKabupaten, kec: isKecamatan })
+    setDataPosPelayanan(dataLoad4)
+
+    const dataLoad5 = await funGetFrontFasilitas({ prov: isProvinsi, kab: isKabupaten, kec: isKecamatan })
+    setDataFasilitas(dataLoad5)
+
+    const dataLoad6 = await funGetFrontRataRataJarakFasilitas({ prov: isProvinsi, kab: isKabupaten, kec: isKecamatan })
+    setDataRataRataJarakFasilitas(dataLoad6)
+
+    const dataLoad7 = await funGetFrontJumlahDokter({ prov: isProvinsi, kab: isKabupaten, kec: isKecamatan })
+    setDataJumlahDokter(dataLoad7)
+
   }
 
   return (
@@ -80,13 +119,13 @@ export default function ViewKesehatan({ prov }: { prov: any }) {
             onChange={(val) => { setKecamatan(val) }}
             value={isKecamatan}
           />
-          <Button>SUBMIT</Button>
+          <Button onClick={onGenerate}>SUBMIT</Button>
         </Group>
       </Box>
       <Box pt={30}>
         <Box pb={20}>
           <Text c={"white"} fw={'bold'} fz={20}>
-            KETERSEDIAAN LAYANAN PECEGAHAN STUNTING KOTA DENPASAR
+            KETERSEDIAAN LAYANAN PECEGAHAN STUNTING
           </Text>
         </Box>
         <SimpleGrid
@@ -99,7 +138,7 @@ export default function ViewKesehatan({ prov }: { prov: any }) {
               padding: 20
             }}
           >
-            <EchartKelasIbuHamil />
+            <EchartKelasIbuHamil data={dataKelasIbuHamil} />
           </Box>
           <Box
             style={{
@@ -108,7 +147,7 @@ export default function ViewKesehatan({ prov }: { prov: any }) {
               padding: 20
             }}
           >
-            <EchartKelasIbuHamilKkMiskin />
+            <EchartKelasIbuHamilKkMiskin data={dataIbuHamilDrKeluargaMiskin} />
           </Box>
         </SimpleGrid>
         <Box pt={15}>
@@ -122,14 +161,14 @@ export default function ViewKesehatan({ prov }: { prov: any }) {
                 padding: 20
               }}
             >
-              <EchartAnakButaKkMiskin />
+              <EchartAnakButaKkMiskin data={dataJaminanUntukBaduta} />
             </Box>
           </SimpleGrid>
         </Box>
         <Box pt={40}>
           <Box pb={10}>
             <Text c={"white"} fw={'bold'} fz={20}>
-              JUMLAH POS PELAYANAN KESEHATAN KOTA DENPASAR
+              JUMLAH POS PELAYANAN KESEHATAN
             </Text>
           </Box>
           <Box
@@ -139,13 +178,13 @@ export default function ViewKesehatan({ prov }: { prov: any }) {
               padding: 20
             }}
           >
-            <EchartPosPelayanan />
+            <EchartPosPelayanan data={dataPosPelayanan} />
           </Box>
         </Box>
         <Box pt={40}>
           <Box pb={10}>
             <Text c={"white"} fw={'bold'} fz={20}>
-              JUMLAH FASILITAS KESEHATAN KOTA DENPASAR
+              JUMLAH FASILITAS KESEHATAN
             </Text>
           </Box>
           <Box
@@ -155,13 +194,13 @@ export default function ViewKesehatan({ prov }: { prov: any }) {
               padding: 20
             }}
           >
-            <EchartAksesFasilitasKesehatan />
+            <EchartAksesFasilitasKesehatan data={dataFasilitas} />
           </Box>
         </Box>
         <Box pt={40}>
           <Box pb={10}>
             <Text c={"white"} fw={'bold'} fz={20}>
-              RATA-RATA JARAK KE FASILITAS KESEHATAN KOTA DENPASAR
+              RATA-RATA JARAK KE FASILITAS KESEHATAN
             </Text>
           </Box>
           <Box
@@ -171,13 +210,13 @@ export default function ViewKesehatan({ prov }: { prov: any }) {
               padding: 20
             }}
           >
-            <EchartRataKesehatan />
+            <EchartRataKesehatan data={dataRataRataJarakFasilitas} />
           </Box>
         </Box>
         <Box pt={40}>
           <Box pb={10}>
             <Text c={"white"} fw={'bold'} fz={20}>
-              JUMLAH DOKTER KOTA DENPASAR
+              JUMLAH DOKTER
             </Text>
           </Box>
           <Box
@@ -187,7 +226,7 @@ export default function ViewKesehatan({ prov }: { prov: any }) {
               padding: 20
             }}
           >
-            <EchartJumlahDokter />
+            <EchartJumlahDokter data={dataJumlahDokter} />
           </Box>
         </Box>
       </Box>

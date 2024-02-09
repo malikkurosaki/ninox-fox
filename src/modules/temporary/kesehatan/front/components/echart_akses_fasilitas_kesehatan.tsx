@@ -1,18 +1,32 @@
 "use client"
+import { COLOR_SOSIAL_EKONOMI } from '@/modules/_global';
 import { Box } from '@mantine/core';
 import { useShallowEffect } from '@mantine/hooks';
 import { EChartsOption } from 'echarts';
 import EChartsReact from 'echarts-for-react';
+import _ from 'lodash';
 import React, { useState } from 'react';
 
-export default function EchartAksesFasilitasKesehatan() {
-  const [options, setOptions] = useState<EChartsOption>({});
+export default function EchartAksesFasilitasKesehatan({ data }: { data: any }) {
+  const [options, setOptions] = useState<EChartsOption>({})
+  const [dataChart, setDataChart] = useState<any>()
 
   useShallowEffect(() => {
-    loadData()
-  }, [])
+    setDataChart(
+      {
+        rumah_sakit: Number(data[0].rumahSakit),
+        rumah_bersalin: Number(data[0].rumahBersalin),
+        rumah_sakit_bersalin: Number(data[0].rumahSakitBersalin),
+        tempat_praktek_bidan: Number(data[0].bidan),
+        apotek: Number(data[0].apotek),
+        puskesmas_dengan_rawat_inap: Number(data[0].puskesmasDgRawatInap),
+        puskesmas_tanpa_rawat_inap: Number(data[0].puskesmasTnpRawatInap)
+      }
+    )
+    loadData(dataChart)
+  }, [data, dataChart])
 
-  async function loadData() {
+  async function loadData(dataLoad: any) {
     const option: EChartsOption = {
       legend: {
         bottom: "0%",
@@ -21,20 +35,16 @@ export default function EchartAksesFasilitasKesehatan() {
         }
       },
       tooltip: {},
-      dataset: {
-        source: [
-          ['data', 'Rumah Sakit', 'Rumah Bersalin', 'Rumah Sakit Bersalin', 'Tempat Praktek Bidan', 'Apotek', 'Puskesmas dengan Rawat Inap', 'Puskesmas tanpa Rawat Inap'],
-          // ['Denpasar', 280, 231, 121, 90, 233, 23, 15],
-          ['Denpasar', 15, 0, 1, 0, 42, 2, 4],
-          // ['Badung', 12, 212, 88, 283, 31, 11, 9],
-          // ['Giayar', 32, 33, 1, 300, 10, 1,16],
-          // ['Buleleng', 23, 32, 32, 232, 233, 8,2],
-          // ['Klungkung', 44, 43, 2, 10, 300, 1, 0],
-        ]
-      },
+      // dataset: {
+      //   source: [
+      //     ['data', 'Rumah Sakit', 'Rumah Bersalin', 'Rumah Sakit Bersalin', 'Tempat Praktek Bidan', 'Apotek', 'Puskesmas dengan Rawat Inap', 'Puskesmas tanpa Rawat Inap'],
+      //     ['Denpasar', 15, 0, 1, 0, 42, 2, 4],
+      //   ]
+      // },
       xAxis: [
         {
           type: 'category',
+          data: ['Rumah Sakit', 'Rumah Bersalin', 'Rumah Sakit \n Bersalin', 'Tempat Praktek \n Bidan', 'Apotek', 'Puskesmas dengan \n Rawat Inap', 'Puskesmas tanpa \n Rawat Inap'],
           axisLabel: {
             color: "white",
           }
@@ -57,28 +67,20 @@ export default function EchartAksesFasilitasKesehatan() {
       ],
       series: [
         {
-          type: 'bar', itemStyle: {
-            color: "orange"
-          }
-        },
-        {
-          type: 'bar'
-        },
-        {
-          type: 'bar'
-        },
-        {
-          type: 'bar'
-        },
-        {
-          type: 'bar'
-        },
-        {
-          type: 'bar'
-        },
-        {
-          type: 'bar'
-        },
+          // name: 'Nama Kota',
+          type: 'bar',
+          barWidth: '70%',
+          data: Object.keys(dataLoad ?? []).map(
+            (v: any, i: any) =>
+            ({
+              name: _.upperCase(v),
+              value: dataLoad[v],
+              itemStyle: {
+                color: COLOR_SOSIAL_EKONOMI[i]
+              },
+            })
+          ),
+        }
       ]
     };
     setOptions(option)

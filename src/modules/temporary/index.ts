@@ -7,6 +7,8 @@ import ViewUploadLembagaKeuangan from "./ekonomi/back/view/upload_lembaga_keuang
 import ViewJumlahPasar from "./ekonomi/back/view/view_jumlah_pasar";
 import ViewLembagaKeuangan from "./ekonomi/back/view/view_lembaga_keuangan";
 import ChartBangunanPermanen from "./ekonomi/front/components/chart_bangunan_permanen";
+import funGetFrontJumlahPasar from "./ekonomi/front/fun/get_jumlah_pasar";
+import funGetFrontLembagaKeuangan from "./ekonomi/front/fun/get_lembaga_keuangan";
 import ViewEkonomi from "./ekonomi/front/view/view_ekonomi";
 import ViewLayoutTmp from "./global_layout/view/view_layout_tmp";
 import funDownloadJalanDilaluiKendaraan from "./infrastruktur_and_transportasi/back/fun/download_jalan_dilalui_kendaraan";
@@ -97,6 +99,13 @@ import ViewJumlahDokter from "./kesehatan/back/view/view_jumlah_dokter";
 import ViewKelasIbuHamil from "./kesehatan/back/view/view_kelas_ibu_hamil";
 import ViewPosPelayanan from "./kesehatan/back/view/view_pos_pelayanan";
 import ViewRataRataJarakFasilitas from "./kesehatan/back/view/view_rata_rata_jarak_fasilitas";
+import funGetFrontFasilitas from "./kesehatan/front/fun/get_fasilitas";
+import funGetFrontIbuHamilDariKeluargaMiskin from "./kesehatan/front/fun/get_ibu_hamil_dari_keluarga_miskin";
+import funGetFrontJaminanUntukBaduta from "./kesehatan/front/fun/get_jaminan_untuk_baduta";
+import funGetFrontJumlahDokter from "./kesehatan/front/fun/get_jumlah_dokter";
+import funGetFrontKelasIbuHamil from "./kesehatan/front/fun/get_kelas_ibu_hamil";
+import funGetFrontPosPelayanan from "./kesehatan/front/fun/get_pos_pelayanan";
+import funGetFrontRataRataJarakFasilitas from "./kesehatan/front/fun/get_rata_rata_jarak_fasilitas";
 import ViewKesehatan from "./kesehatan/front/view/view_kesehatan";
 import funDownloadJaminanHariTua from "./ketenagakerjaan/back/fun/download_jaminan_hari_tua";
 import funDownloadJaminanKecelakaanKerja from "./ketenagakerjaan/back/fun/download_jaminan_kecelakaan_kerja";
@@ -158,6 +167,8 @@ import ViewUploadIrigasi from "./pertanian/back/view/upload_irigasi";
 import ViewUploadJenisPrasaranaTransportasi from "./pertanian/back/view/upload_jenis_prasarana";
 import ViewIrigasi from "./pertanian/back/view/view_irigasi";
 import ViewJenisPrasarana from "./pertanian/back/view/view_jenis_prasarana";
+import funGetFrontIrigasi from "./pertanian/front/fun/get_irigasi";
+import funGetFrontJenisPrasaranaTransportasi from "./pertanian/front/fun/get_jenis_prasarana_transportasi";
 import ViewPertanian from "./pertanian/front/view/view_pertanian";
 
 export { ViewLayoutTmp }
@@ -321,3 +332,14 @@ export { funGetFrontJarakFasilitas }
 export { funGetFrontJalanKakiKurang4Jam }
 export { funGetFrontGuruTersertifikasi }
 export { funGetFrontGuruHonorer }
+export { funGetFrontKelasIbuHamil }
+export { funGetFrontIbuHamilDariKeluargaMiskin }
+export { funGetFrontJaminanUntukBaduta }
+export { funGetFrontPosPelayanan }
+export { funGetFrontFasilitas }
+export { funGetFrontRataRataJarakFasilitas }
+export { funGetFrontJumlahDokter }
+export { funGetFrontJumlahPasar }
+export { funGetFrontLembagaKeuangan }
+export { funGetFrontJenisPrasaranaTransportasi }
+export { funGetFrontIrigasi }

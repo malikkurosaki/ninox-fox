@@ -1,18 +1,27 @@
 "use client"
+import { COLOR_SOSIAL_EKONOMI } from '@/modules/_global';
 import { Box } from '@mantine/core';
 import { useShallowEffect } from '@mantine/hooks';
 import { EChartsOption } from 'echarts';
 import EChartsReact from 'echarts-for-react';
+import _ from 'lodash';
 import React, { useState } from 'react';
 
-export default function EchartPosPelayanan() {
-  const [options, setOptions] = useState<EChartsOption>({});
+export default function EchartPosPelayanan({ data }: { data: any }) {
+  const [options, setOptions] = useState<EChartsOption>({})
+  const [dataChart, setDataChart] = useState<any>()
 
   useShallowEffect(() => {
-    loadData()
-  }, [])
+    setDataChart(
+      {
+        jumlah_pos_pembinaan_terpadu: Number(data[0].terpadu),
+        jumlah_posyandu_aktif: Number(data[0].aktif)
+      }
+    )
+    loadData(dataChart)
+  }, [data, dataChart])
 
-  async function loadData() {
+  async function loadData(dataLoad: any) {
     const option: EChartsOption = {
       legend: {
         bottom: "0%",
@@ -21,20 +30,16 @@ export default function EchartPosPelayanan() {
         }
       },
       tooltip: {},
-      dataset: {
-        source: [
-          ['data',  'Jumlah pos pembinaan terpadu','Jumlah posyandu aktif'],
-          // ['Denpasar', 280, 231],
-          ['Denpasar', 459, 208],
-          // ['Badung', 12, 212],
-          // ['Giayar', 32, 33],
-          // ['Buleleng', 23, 32],
-          // ['Klungkung', 44, 43],
-        ]
-      },
+      // dataset: {
+      //   source: [
+      //     ['data', 'Jumlah pos pembinaan terpadu', 'Jumlah posyandu aktif'],
+      //     ['Denpasar', 459, 208],
+      //   ]
+      // },
       xAxis: [
         {
           type: 'category',
+          data:['Jumlah pos pembinaan terpadu', 'Jumlah posyandu aktif'],
           axisLabel: {
             color: "white",
           }
@@ -57,16 +62,21 @@ export default function EchartPosPelayanan() {
       ],
       series: [
         {
-        type: 'bar', itemStyle: {
-          color: "orange"
+          // name: 'Nama Kota',
+          type: 'bar',
+          barWidth: '70%',
+          data: Object.keys(dataLoad ?? []).map(
+            (v: any, i:any) =>
+            ({
+              name: _.upperCase(v),
+              value: dataLoad[v],
+              itemStyle: {
+                color: COLOR_SOSIAL_EKONOMI[i]
+              },
+            })
+          ),
         }
-      },
-        {
-        type: 'bar', itemStyle: {
-          color: "green"
-        }
-      },
-    ]
+      ]
     };
     setOptions(option)
   }
