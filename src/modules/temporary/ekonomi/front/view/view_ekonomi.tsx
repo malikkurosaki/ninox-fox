@@ -99,7 +99,7 @@ export default function ViewEkonomi({ prov, kab, jumlah_pasar, lembaga_keuangan 
           >
             <Box pb={20}>
               <Text c={"white"} fw={'bold'} fz={20}>
-                {/* KEMUDAHAN MENGAKSES PASAR BERDASARKAN JENIS BANGUNAN KOTA DENPASAR */}
+                {/* KEMUDAHAN MENGAKSES PASAR BERDASARKAN JENIS BANGUNAN*/}
                 JUMLAH PASAR BERDASARKAN JENIS BANGUNAN
               </Text>
             </Box>

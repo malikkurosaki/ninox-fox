@@ -96,7 +96,7 @@ export default function ViewPertanian({ prov, kab, jenis_prasarana, irigasi }: {
         <Box>
           <Box pb={10}>
             <Text c={"white"} fw={'bold'} fz={20}>
-              INFRASTRUKTUR PERTANIAN KOTA DENPASAR
+              INFRASTRUKTUR PERTANIAN
             </Text>
           </Box>
         </Box>

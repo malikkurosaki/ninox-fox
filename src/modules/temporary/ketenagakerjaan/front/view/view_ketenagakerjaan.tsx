@@ -193,7 +193,7 @@ export default function ViewKetenagakerjaan({ prov, kab, jaminan_kesehatan, jami
         <Box>
           <Box pb={10}>
             <Text c={"white"} fw={'bold'} fz={20}>
-              DATA PENGANGGURAN KOTA DENPASAR
+              DATA PENGANGGURAN
             </Text>
           </Box>
         </Box>
