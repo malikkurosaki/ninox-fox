@@ -4,10 +4,10 @@ import React from 'react';
 
 export default async function Page() {
   const dataProv = await MasterProvinceGetAll()
-  const dataKab = await MasterKabGetByProvince({ idProvinsi: 1 })
-  const dataPermukaanJalan = await funGetFrontPermukaanJalan({ prov: 1, kab: null, kec: null })
-  const dataJalanDilaluiKendaraan = await funGetFrontJalanDilaluiKendaraan({ prov: 1, kab: null, kec: null })
-  const dataKecelakaan = await funGetFrontKecelakaan({ prov: 1, kab: null, kec: null })
+  const dataKab = await MasterKabGetByProvince({ idProvinsi: 17 })
+  const dataPermukaanJalan = await funGetFrontPermukaanJalan({ prov: 17, kab: null, kec: null })
+  const dataJalanDilaluiKendaraan = await funGetFrontJalanDilaluiKendaraan({ prov: 17, kab: null, kec: null })
+  const dataKecelakaan = await funGetFrontKecelakaan({ prov: 17, kab: null, kec: null })
 
   return (
     <>

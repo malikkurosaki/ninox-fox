@@ -9,7 +9,7 @@ import funGetFrontDataKemiskinan from '../fun/get_data_kemiskinan';
 import funGetFrontBpjs from '../fun/get_bpjs';
 
 export default function ViewKemiskinanDanKetimpangan({ prov, kab, data_kemiskinan, data_bpjs }: { prov: any, kab: any, data_kemiskinan: any, data_bpjs: any }) {
-  const [isProvinsi, setProvinsi] = useState<any>("1")
+  const [isProvinsi, setProvinsi] = useState<any>("17")
   const [isKabupaten, setKabupaten] = useState<any>(null)
   const [isKecamatan, setKecamatan] = useState<any>(null)
   const [dataKabupaten, setDataKabupaten] = useState<any>(kab)

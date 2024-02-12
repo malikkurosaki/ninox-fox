@@ -17,7 +17,7 @@ import funGetFrontJaminanPensiun from '../fun/get_jaminan_pensiun';
 import funGetFrontPengangguran from '../fun/get_pengangguran';
 
 export default function ViewKetenagakerjaan({ prov, kab, jaminan_kesehatan, jaminan_kecelakaan_kerja, jaminan_kematian, jaminan_hari_tua, jaminan_pensiun, pengangguran }: { prov: any, kab: any, jaminan_kesehatan: any, jaminan_kecelakaan_kerja: any, jaminan_kematian: any, jaminan_hari_tua: any, jaminan_pensiun: any, pengangguran: any }) {
-  const [isProvinsi, setProvinsi] = useState<any>("1")
+  const [isProvinsi, setProvinsi] = useState<any>("17")
   const [isKabupaten, setKabupaten] = useState<any>(null)
   const [isKecamatan, setKecamatan] = useState<any>(null)
   const [dataKabupaten, setDataKabupaten] = useState<any>(kab)

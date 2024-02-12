@@ -4,9 +4,9 @@ import React from 'react';
 
 export default async function Page() {
   const dataProv = await MasterProvinceGetAll()
-  const dataKab = await MasterKabGetByProvince({ idProvinsi: 1 })
-  const dataKemiskinan = await funGetFrontDataKemiskinan({ prov: 1, kab: null, kec: null })
-  const dataBpjs = await funGetFrontBpjs({ prov: 1, kab: null, kec: null })
+  const dataKab = await MasterKabGetByProvince({ idProvinsi: 17 })
+  const dataKemiskinan = await funGetFrontDataKemiskinan({ prov: 17, kab: null, kec: null })
+  const dataBpjs = await funGetFrontBpjs({ prov: 17, kab: null, kec: null })
 
   return (
     <>

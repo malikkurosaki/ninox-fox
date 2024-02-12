@@ -3,7 +3,7 @@ import prisma from "@/modules/_global/bin/prisma"
 import _ from 'lodash'
 
 export default async function funDownloadPenipuanDanPenggelapan() {
-    const data = await prisma.sE_Keamanan_Perkelahian.findMany({
+    const data = await prisma.sE_Keamanan_PenipuanDanPenggelapan.findMany({
         select: {
             id: true,
             idProvinsi: true,

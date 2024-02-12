@@ -4,13 +4,13 @@ import React from 'react';
 
 export default async function Page() {
   const dataProv = await MasterProvinceGetAll()
-  const dataKab = await MasterKabGetByProvince({ idProvinsi: 1 })
-  const dataJaminanKesehatan = await funGetFrontJaminanKesehatan({ prov: 1, kab: null, kec: null })
-  const dataJaminanKecelakaanKerja = await funGetFrontJaminanKecelakaanKerja({ prov: 1, kab: null, kec: null })
-  const dataJaminanKematian = await funGetFrontJaminanKematian({ prov: 1, kab: null, kec: null })
-  const dataJaminanHariTua = await funGetFrontJaminanHariTua({ prov: 1, kab: null, kec: null })
-  const dataJaminanPensiun = await funGetFrontJaminanPensiun({ prov: 1, kab: null, kec: null })
-  const dataPengangguran = await funGetFrontPengangguran({ prov: 1, kab: null, kec: null })
+  const dataKab = await MasterKabGetByProvince({ idProvinsi: 17 })
+  const dataJaminanKesehatan = await funGetFrontJaminanKesehatan({ prov: 17, kab: null, kec: null })
+  const dataJaminanKecelakaanKerja = await funGetFrontJaminanKecelakaanKerja({ prov: 17, kab: null, kec: null })
+  const dataJaminanKematian = await funGetFrontJaminanKematian({ prov: 17, kab: null, kec: null })
+  const dataJaminanHariTua = await funGetFrontJaminanHariTua({ prov: 17, kab: null, kec: null })
+  const dataJaminanPensiun = await funGetFrontJaminanPensiun({ prov: 17, kab: null, kec: null })
+  const dataPengangguran = await funGetFrontPengangguran({ prov: 17, kab: null, kec: null })
 
   return (
     <>
