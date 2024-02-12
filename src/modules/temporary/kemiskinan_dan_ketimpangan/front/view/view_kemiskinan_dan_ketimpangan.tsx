@@ -5,15 +5,20 @@ import React, { useState } from 'react';
 import EchartPresentaseKemiskinan from '../components/echart_presentase_kemiskinan';
 import EchartPesertaBpjs from '../components/echart_peserta_bpjs';
 import _ from 'lodash';
+import funGetFrontDataKemiskinan from '../fun/get_data_kemiskinan';
+import funGetFrontBpjs from '../fun/get_bpjs';
 
-export default function ViewKemiskinanDanKetimpangan({ prov }: { prov: any }) {
-  const [isProvinsi, setProvinsi] = useState<any>(null)
+export default function ViewKemiskinanDanKetimpangan({ prov, kab, data_kemiskinan, data_bpjs }: { prov: any, kab: any, data_kemiskinan: any, data_bpjs: any }) {
+  const [isProvinsi, setProvinsi] = useState<any>("1")
   const [isKabupaten, setKabupaten] = useState<any>(null)
   const [isKecamatan, setKecamatan] = useState<any>(null)
-  const [dataKabupaten, setDataKabupaten] = useState<any>([])
+  const [dataKabupaten, setDataKabupaten] = useState<any>(kab)
   const [dataKecamatan, setDataKecamatan] = useState<any>([])
+  const [dataKemiskinan, setDataKemiskinan] = useState(data_kemiskinan)
+  const [dataBpjs, setDataBpjs] = useState(data_bpjs)
 
   async function onProvinsi(id: any) {
+    if (id == null) { id = 1 }
     setProvinsi(id)
     setKabupaten(null)
     setKecamatan(null)
@@ -27,6 +32,15 @@ export default function ViewKemiskinanDanKetimpangan({ prov }: { prov: any }) {
     setKecamatan(null)
     const dataKecNew = await MasterKecGetByKab({ idKabkot: id })
     setDataKecamatan(dataKecNew)
+  }
+
+  async function onGenerate() {
+    const dataLoad1 = await funGetFrontDataKemiskinan({ prov: isProvinsi, kab: isKabupaten, kec: isKecamatan })
+    setDataKemiskinan(dataLoad1)
+
+    const dataLoad2 = await funGetFrontBpjs({ prov: isProvinsi, kab: isKabupaten, kec: isKecamatan })
+    setDataBpjs(dataLoad2)
+
   }
 
   return (
@@ -75,7 +89,7 @@ export default function ViewKemiskinanDanKetimpangan({ prov }: { prov: any }) {
             onChange={(val) => { setKecamatan(val) }}
             value={isKecamatan}
           />
-          <Button>SUBMIT</Button>
+          <Button onClick={onGenerate}>SUBMIT</Button>
         </Group>
       </Box>
       <Box pt={30}>
@@ -89,7 +103,7 @@ export default function ViewKemiskinanDanKetimpangan({ prov }: { prov: any }) {
               padding: 20
             }}
           >
-            <EchartPresentaseKemiskinan />
+            <EchartPresentaseKemiskinan data={dataKemiskinan} />
           </Box>
         </SimpleGrid>
       </Box>
@@ -104,7 +118,7 @@ export default function ViewKemiskinanDanKetimpangan({ prov }: { prov: any }) {
               padding: 20
             }}
           >
-            <EchartPesertaBpjs />
+            <EchartPesertaBpjs data={dataBpjs} />
           </Box>
         </SimpleGrid>
       </Box>
