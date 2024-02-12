@@ -1,5 +1,4 @@
 'use client'
-
 import { Alert, Box, Button, Group, Text } from "@mantine/core"
 import { useAtom } from "jotai"
 import toast from "react-simple-toasts"
@@ -13,19 +12,18 @@ import funLogUser from "../../log/fun/add_log"
  * @returns {component} modal konfirmasi add role user.
  */
 
-export default function ModalAddRoleUser({isName, value,}: {isName: any, value: any}) {
+export default function ModalAddRoleUser({ isName, value, onSuccess }: { isName: any, value: any, onSuccess: (val: any) => void }) {
     const [openModal, setOpenModal] = useAtom(isModalRoleUser)
     const router = useRouter()
 
     async function onRoleUser() {
-        const create = await funAddRoleUser({name: isName, component: value})
+        const create = await funAddRoleUser({ name: isName, component: value })
         if (!create.success) return toast(create.message, { theme: "dark" });
-        await funLogUser({act:"ADD", desc:`User Add Data Role With User`})
+        await funLogUser({ act: 'ADD', desc: `User menambah data Role User`, idContent: create.data, tbContent: 'roleuser' })
         toast("Sukses", { theme: "dark" });
         setOpenModal(false);
+        onSuccess(true)
         // router.back()
-
-        console.log(isName, value)
     }
 
 

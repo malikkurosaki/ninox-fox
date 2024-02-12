@@ -2,19 +2,18 @@
 import { Alert, Box, Button, Group, Text } from "@mantine/core"
 import { useAtom } from "jotai";
 import { isModalStep } from "../val/val_step";
-import { useRouter } from "next/navigation";
 import toast from "react-simple-toasts";
 import funAddStep from "../fun/fun_add_step";
 import { funGetAccessArea } from "@/modules/_global";
+import { funLogUser } from "@/modules/user";
 
 /**
  * Fungsi untuk menampilkan modal konfirmasi add step.
  * @returns {component} Modal konfirmasi add step.
  */
 
-export default function ModalAddStep({ data, text }: { data: any, text: any }) {
+export default function ModalAddStep({ data, text, onSuccess }: { data: any, text: any, onSuccess: (val: any) => void }) {
     const [openModal, setOpenModal] = useAtom(isModalStep)
-    const router = useRouter()
 
     async function onCreateStep() {
         const cek = await funGetAccessArea({ candidate: data.idCandidate })
@@ -24,9 +23,10 @@ export default function ModalAddStep({ data, text }: { data: any, text: any }) {
         }
         const addData = await funAddStep({ body: data, content: text })
         if (!addData.success) return toast(addData.message, { theme: "dark" });
-        toast("Success", { theme: "dark" });
-        setOpenModal(false);
-        router.back()
+        await funLogUser({ act: 'ADD', desc: `User menambah data STEP`, idContent: addData.data, tbContent: 'step' })
+        toast("Success", { theme: "dark" })
+        setOpenModal(false)
+        onSuccess(true)
     }
 
     return (

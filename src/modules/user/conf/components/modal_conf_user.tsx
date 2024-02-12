@@ -5,18 +5,18 @@ import funAddConfUser from '../fun/add_conf_user';
 import toast from 'react-simple-toasts';
 import { useAtom } from 'jotai';
 import { isModalConf } from '../val/isModalConf';
+import { funLogUser } from '../..';
 
-
-export default function ModalConfUser({data, dataArea}: {data: any, dataArea: any}) {
+export default function ModalConfUser({ data, dataArea, onSuccess }: { data: any, dataArea: any, onSuccess: (val: any) => void }) {
   const [valOpenModal, setOpenModal] = useAtom(isModalConf)
   async function onUser() {
-    const create = await funAddConfUser({data: data, dataArea: dataArea})
+    const create = await funAddConfUser({ data: data, dataArea: dataArea })
     if (!create.success) return toast(create.message, { theme: "dark" });
-    // await funLogUser({act:"ADD", desc:`User Add Data Role With User`})
-    toast("Sukses", { theme: "dark" });
-    setOpenModal(false);
-    // router.back()
-}
+    await funLogUser({ act: 'ADD', desc: `User menambah data User`, idContent: create.data, tbContent: 'user' })
+    toast("Sukses", { theme: "dark" })
+    setOpenModal(false)
+    onSuccess(true)
+  }
   return (
     <>
       <Box>

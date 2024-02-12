@@ -17,6 +17,7 @@ import Color from "@tiptap/extension-color"
 import TextAlign from "@tiptap/extension-text-align"
 import { CiPickerEmpty } from "react-icons/ci"
 import toast from "react-simple-toasts"
+import _ from "lodash"
 
 /**
  * Fungsi untuk menampilkan view form edit swot.
@@ -49,7 +50,7 @@ export default function EditSwot({ data }: { data: any }) {
 
     function onConfirmation() {
         if (Object.values(isBody).includes("") || Object.values(isBody).includes(null) || editor?.getHTML() == '<p></p>')
-            return toast("Data cannot be empty", { theme: "dark" });
+            return toast("Form cannot be empty", { theme: "dark" });
         setOpenModal(true)
     }
 
@@ -76,7 +77,7 @@ export default function EditSwot({ data }: { data: any }) {
                     onChange={(val) => {
                         setBody({
                             ...isBody,
-                            category: String(val)
+                            category: (_.isNull(val)) ? "" : String(val)
                         })
                     }}
                 />

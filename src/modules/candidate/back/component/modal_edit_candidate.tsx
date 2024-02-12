@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import toast from "react-simple-toasts";
 import funEditCandidate from "../fun/edit_candidate";
 import { funGetAccessArea } from "@/modules/_global";
+import { funLogUser } from "@/modules/user";
 
 /**
  * Fungsi untuk menampilkan modal konfirmasi edit kandidat.
@@ -23,6 +24,7 @@ export default function ModalEditCandidate({ data, provinsi, img }: { data: any,
             return toast("Anda tidak mempunyai akses ke wilayah tersebut", { theme: "dark" })
         }
         const edit = await funEditCandidate({ body: data, img: img })
+        await funLogUser({ act: 'UPD', desc: `User mengubah data kandidat`, idContent: data.id, tbContent: 'candidate' })
         toast("Sukses", { theme: "dark" });
         setOpenModal(false);
     }

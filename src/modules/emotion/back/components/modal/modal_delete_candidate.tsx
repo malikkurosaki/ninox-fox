@@ -5,6 +5,9 @@ import { isModalEmotion } from '../../val/val_emotion';
 import funDelCandidate from '../../fun/delete_candidate';
 import toast from 'react-simple-toasts';
 import { Alert, Box, Button, Group, Text } from '@mantine/core';
+import { funGetAccessArea } from '@/modules/_global';
+import { funLogUser } from '@/modules/user';
+import moment from 'moment';
 
 export default function ModalDeleteCandidate({ isCandidate, isDateCan, onSuccess }: { isCandidate: any, isDateCan: any, onSuccess: (val: any) => void }) {
 
@@ -13,12 +16,17 @@ export default function ModalDeleteCandidate({ isCandidate, isDateCan, onSuccess
 
   async function delDataCan() {
     setLoading(true)
+    const cek = await funGetAccessArea({ candidate: isCandidate })
+    if (!cek) {
+      setOpenModal(false)
+      return toast("Anda tidak mempunyai akses ke wilayah tersebut", { theme: "dark" })
+    }
+
     await funDelCandidate({ candidate: isCandidate, dateCan: isDateCan })
+    await funLogUser({ act: 'DEL', desc: `User mengupload data Emotion (${isCandidate} - ${moment(isDateCan).format('DD/MM/YYYY')})`, idContent: '-', tbContent: 'emotion' })
     setLoading(false)
     onSuccess(true)
     toast("Success", { theme: "dark" });
-    console.log(isCandidate)
-    console.log(isDateCan)
     setOpenModal(false)
   }
 

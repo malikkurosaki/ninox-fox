@@ -43,6 +43,7 @@ export default async function funAddCandidate({ body, img }: { body: Candidate, 
 
     return {
         success: true,
+        data: data.id,
         message: "Success"
     }
 

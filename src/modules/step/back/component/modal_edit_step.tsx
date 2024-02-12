@@ -2,10 +2,10 @@
 import { Alert, Box, Button, Group, Text } from "@mantine/core"
 import { useAtom } from "jotai";
 import { isModalStep } from "../val/val_step";
-import { useRouter } from "next/navigation";
 import toast from "react-simple-toasts";
 import funEditStep from "../fun/fun_edit_step";
 import { funGetAccessArea } from "@/modules/_global";
+import { funLogUser } from "@/modules/user";
 
 /**
  * Fungsi untuk menampilkan modal konfirmasi edit step.
@@ -14,7 +14,6 @@ import { funGetAccessArea } from "@/modules/_global";
 
 export default function ModalEditStep({ data, content }: { data: any, content: any }) {
     const [openModal, setOpenModal] = useAtom(isModalStep)
-    const router = useRouter()
 
     async function onEditStep() {
         const cek = await funGetAccessArea({ candidate: data.idCandidate })
@@ -23,9 +22,9 @@ export default function ModalEditStep({ data, content }: { data: any, content: a
             return toast("Anda tidak mempunyai akses ke wilayah tersebut", { theme: "dark" })
         }
         const edit = await funEditStep({ body: data, text: content })
+        await funLogUser({ act: 'UPD', desc: `User mengubah data STEP`, idContent: data.id, tbContent: 'step' })
         toast("Sukses", { theme: "dark" });
         setOpenModal(false);
-        router.back()
     }
 
     return (

@@ -1,12 +1,17 @@
-import { ViewPertanian } from '@/modules/temporary';
+import { MasterKabGetByProvince, MasterProvinceGetAll } from '@/modules/_global';
+import { ViewPertanian, funGetFrontIrigasi, funGetFrontJenisPrasaranaTransportasi } from '@/modules/temporary';
 import React from 'react';
 
-function Page() {
+export default async function Page() {
+  const dataProv = await MasterProvinceGetAll()
+  const dataKab = await MasterKabGetByProvince({ idProvinsi: 17 })
+  const dataJenisPrasarana = await funGetFrontJenisPrasaranaTransportasi({ prov: 17, kab: null, kec: null })
+  const dataIrigasi = await funGetFrontIrigasi({ prov: 17, kab: null, kec: null })
+
   return (
     <>
-    <ViewPertanian/>
+      <ViewPertanian prov={dataProv} kab={dataKab} jenis_prasarana={dataJenisPrasarana} irigasi={dataIrigasi}/>
     </>
   );
 }
 
-export default Page;

@@ -59,7 +59,7 @@ function ViewPublic({ param, provinsi, kabupaten, kecamatan, datatable, datadown
   }
 
   function onProccess() {
-    if (_.isNull(isProvinsi)) return toast("Silahkan pilih provinsi", { theme: "dark" })
+    // if (_.isNull(isProvinsi)) return toast("Silahkan pilih provinsi", { theme: "dark" })
     router.replace('/dashboard/public-concern-trend?prov=' + isProvinsi + '&city=' + isKabupaten + '&kec=' + isKecamatan)
   }
 
@@ -83,8 +83,7 @@ function ViewPublic({ param, provinsi, kabupaten, kecamatan, datatable, datadown
                     value: String(pro.id),
                     label: pro.name
                   }))}
-                  value={isProvinsi}
-                  required
+                  value={(_.isNull(isProvinsi)) ? null : String(isProvinsi)}
                   label={"Provinsi"}
                   searchable
                   onChange={(val) => onProvinsi({ idProv: val })}
@@ -95,7 +94,7 @@ function ViewPublic({ param, provinsi, kabupaten, kecamatan, datatable, datadown
                     value: String(kab.id),
                     label: kab.name
                   }))}
-                  value={isKabupaten}
+                  value={(_.isNull(isKabupaten)) ? null : String(isKabupaten)}
                   label="Kabupaten/Kota"
                   searchable
                   onChange={(val) => onKabupaten({ idKab: val })}
@@ -106,7 +105,7 @@ function ViewPublic({ param, provinsi, kabupaten, kecamatan, datatable, datadown
                     value: String(kec.id),
                     label: kec.name
                   }))}
-                  value={isKecamatan}
+                  value={(_.isNull(isKecamatan)) ? null : String(isKecamatan)}
                   label="Kecamatan"
                   searchable
                   onChange={(val) => setKecamatan(val)}

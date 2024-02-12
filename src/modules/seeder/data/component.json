@@ -134,5 +134,13 @@
         "owner": "developer",
         "group": "dataDeveloper",
         "link": "/dashboard/delete-data"
+    },
+    {
+        "id": 18,
+        "keyMenu": "md17",
+        "menu": "Data Sosial Ekonomi",
+        "owner": "admin",
+        "group": "dataSosialEkonomi",
+        "link": "/dashboard/se/"
     }
 ]
