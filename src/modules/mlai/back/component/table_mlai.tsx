@@ -60,7 +60,7 @@ export default function TableMlAi({ title, data, searchParam }: { title: any, da
               {title}
             </Text>
             <Button bg={"gray"} onClick={() => router.push("ml-ai/add?prov=" + searchParams.get('prov') + '&city=' + searchParams.get('city'))}>
-              TAMBAH MLAI
+              TAMBAH ML-AI
             </Button>
           </Group>
           <Box pt={20}>

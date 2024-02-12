@@ -32,11 +32,6 @@ export default function AddCandidate({ params, provinsi, kabupaten, }: { params:
         setDatakabupaten(dataKab)
     }
 
-    // useEffect(() => {
-    //     setProvinsi(params.idProvinsi == null ? null : params.idProvinsi)
-    //     setKabupaten(params.idKabkot == null ? null : params.idKabkot)
-    // }, [params])
-
     const query = useSearchParams()
     const openRef = useRef<() => void>(null);
     const [body, setBody] = useState({
@@ -130,7 +125,7 @@ export default function AddCandidate({ params, provinsi, kabupaten, }: { params:
                                         })
                                     )}
                                     searchable
-                                    
+
                                 />
                                 <Select
                                     placeholder="Kabupaten/Kota"
@@ -149,11 +144,12 @@ export default function AddCandidate({ params, provinsi, kabupaten, }: { params:
                                         })
                                     )}
                                     label={"Kabupaten"}
-                                    
+
                                 />
                             </SimpleGrid>
                             <TextInput
                                 placeholder="Nama Kandidat" withAsterisk label="Nama"
+                                value={body.name}
                                 onChange={(val) => {
 
                                     setBody({
@@ -176,7 +172,19 @@ export default function AddCandidate({ params, provinsi, kabupaten, }: { params:
                 withCloseButton={false}
                 closeOnClickOutside={false}
             >
-                <ModalAddCandidate data={body} img={imgForm} />
+                <ModalAddCandidate data={body} img={imgForm} onSuccess={() => {
+                    setIMG(null)
+                    setKabupaten(null)
+                    setProvinsi(null)
+                    setBody({
+                        ...body,
+                        name: "",
+                        img: "",
+                        idProvinsi: null,
+                        idKabkot: null,
+                        tingkat: 1
+                    })
+                }} />
             </Modal>
         </>
     )

@@ -1,12 +1,21 @@
-import { ViewKesehatan } from '@/modules/temporary';
+import { MasterKabGetByProvince, MasterProvinceGetAll } from '@/modules/_global';
+import { ViewKesehatan, funGetFrontFasilitas, funGetFrontIbuHamilDariKeluargaMiskin, funGetFrontJaminanUntukBaduta, funGetFrontJumlahDokter, funGetFrontKelasIbuHamil, funGetFrontPosPelayanan, funGetFrontRataRataJarakFasilitas } from '@/modules/temporary';
 import React from 'react';
 
-function Page() {
+export default async function Page() {
+  const dataProv = await MasterProvinceGetAll()
+  const dataKab = await MasterKabGetByProvince({ idProvinsi: 17 })
+  const dataKelasIbuHamil = await funGetFrontKelasIbuHamil({ prov: 17, kab: null, kec: null })
+  const dataIbuHamilDrKeluargaMiskin = await funGetFrontIbuHamilDariKeluargaMiskin({ prov: 17, kab: null, kec: null })
+  const dataJaminanUntukBaduta = await funGetFrontJaminanUntukBaduta({ prov: 17, kab: null, kec: null })
+  const dataPosPelayanan = await funGetFrontPosPelayanan({ prov: 17, kab: null, kec: null })
+  const dataFasilitas = await funGetFrontFasilitas({ prov: 17, kab: null, kec: null })
+  const dataRataRataJarakFasilitas = await funGetFrontRataRataJarakFasilitas({ prov: 17, kab: null, kec: null })
+  const dataJumlahDokter = await funGetFrontJumlahDokter({ prov: 17, kab: null, kec: null })
+
   return (
     <>
-    <ViewKesehatan/>
+      <ViewKesehatan prov={dataProv} kab={dataKab} kelas_ibu_hamil={dataKelasIbuHamil} ibu_hamil_miskin={dataIbuHamilDrKeluargaMiskin} jaminan_untuk_baduta={dataJaminanUntukBaduta} pos_pelayanan={dataPosPelayanan} fasilitas={dataFasilitas} rata_rata_jarak_fasilitas={dataRataRataJarakFasilitas} jumlah_dokter={dataJumlahDokter}/>
     </>
   );
 }
-
-export default Page;

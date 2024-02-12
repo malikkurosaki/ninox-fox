@@ -19,12 +19,13 @@ export default async function funAddConfUser({ data, dataArea }: { data: any, da
         }
     })
     if (!data.isAllArea) {
+        let a = 1
         for (let i of dataArea) {
             await prisma.userArea.create({
                 data: {
                     idUser: user.id,
                     idProvinsi: Number(i),
-                    isFront: (i == 1 ? true : false)
+                    isFront: (a == 1 ? true : false)
                 }
             })
             const kab = await MasterKabGetByProvince({ idProvinsi: Number(i) })
@@ -39,6 +40,8 @@ export default async function funAddConfUser({ data, dataArea }: { data: any, da
             await prisma.userArea.createMany({
                 data: wilayahTrue
             })
+
+            a + 1
         }
     } else {
         for (let i = 1; i <= 38; i++) {
@@ -56,7 +59,7 @@ export default async function funAddConfUser({ data, dataArea }: { data: any, da
                 idUser: user.id,
                 idProvinsi: v.idProvinsi,
                 idKabkot: v.id,
-                isFront: true
+                isFront: false
             }));
 
             await prisma.userArea.createMany({
@@ -65,8 +68,11 @@ export default async function funAddConfUser({ data, dataArea }: { data: any, da
         }
     }
 
+    revalidatePath("/dashboard/user")
+
     return {
         success: true,
+        data: user.id,
         message: "Success"
     }
 }

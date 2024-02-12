@@ -90,7 +90,7 @@ export default function ViewBackEmotion({ param, provinsi, kabupaten, candidate,
                     value: String(pro.id),
                     label: pro.name
                   }))}
-                  value={isProvinsi}
+                  value={(!_.isNull(isProvinsi) ? String(isProvinsi) : null)}
                   required
                   label={"Provinsi"}
                   searchable
@@ -102,7 +102,7 @@ export default function ViewBackEmotion({ param, provinsi, kabupaten, candidate,
                     value: String(kab.id),
                     label: kab.name
                   }))}
-                  value={isKabupaten}
+                  value={!_.isNull(isKabupaten) ? String(isKabupaten) : null}
                   label="Kabupaten/Kota"
                   searchable
                   onChange={(val) => onKabupaten({ idKab: val })}
@@ -128,75 +128,80 @@ export default function ViewBackEmotion({ param, provinsi, kabupaten, candidate,
             </Paper>
           </Box>
           <Box>
-            <Box style={{
-              backgroundColor: "white",
-              padding: 16,
-              borderRadius: 10
-            }}>
-              <Group justify="center">
+            <Group justify="space-between" grow>
+              <Box>
                 <Box
                   style={{
-                    border: "1px dashed gray",
                     borderRadius: 10,
-                    padding: 50,
+                    padding: 30,
+                    paddingTop: 50,
+                    paddingBottom: 50,
+                    backgroundColor: "gray",
                     cursor: "pointer",
                   }}
+
                   onClick={() => router.push("/dashboard/emotion/upload")}
                 >
-                  <Text ta={"center"} size="xl" inline>
+                  <Text c={"white"} fw={"bold"} ta={"center"}>
                     UPLOAD DATA
                   </Text>
                 </Box>
-              </Group>
-            </Box>
+              </Box>
+              <Box>
+                <Box
+                  style={{
+                    borderRadius: 10,
+                    padding: 30,
+                    paddingTop: 50,
+                    paddingBottom: 50,
+                    backgroundColor: "gray",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => router.push("emotion/copy-data")}
+                >
+                  <Text c={"white"} fw={"bold"} ta={"center"}>
+                    COPY DATA
+                  </Text>
+                </Box>
+
+              </Box>
+            </Group>
             {!_.isNull(datatable.title) && (
-              <Group justify="space-between" grow pt={30}>
-                <Box>
-                  <Box
-                    style={{
-                      borderRadius: 10,
-                      padding: 30,
-                      paddingTop: 50,
-                      paddingBottom: 50,
-                      backgroundColor: "gray",
-                      cursor: "pointer",
-                    }}
+              <Box pt={30}>
+                <Box style={{
+                  backgroundColor: "white",
+                  padding: 16,
+                  borderRadius: 10
+                }}>
+                  <Group justify="center">
+                    <Box
+                      style={{
+                        border: "1px dashed gray",
+                        borderRadius: 10,
+                        padding: 50,
+                        cursor: "pointer",
+                      }}
 
-                    onClick={() => {
-                      const dataJson = datadownload.data
 
-                      const jsonData = papa.unparse(dataJson)
-                      const jsonDataUrl = "data:text/csv;charset=utf-8," + encodeURIComponent(jsonData)
+                      onClick={() => {
+                        const dataJson = datadownload.data
 
-                      const jsonDwnloadLink = document.createElement("a")
-                      jsonDwnloadLink.href = jsonDataUrl
-                      jsonDwnloadLink.download = datadownload.title + ".csv"
-                      jsonDwnloadLink.click()
-                    }}
-                  >
-                    <Text c={"white"} fw={"bold"} ta={"center"}>
-                      DOWNLOAD
-                    </Text>
-                  </Box>
+                        const jsonData = papa.unparse(dataJson)
+                        const jsonDataUrl = "data:text/csv;charset=utf-8," + encodeURIComponent(jsonData)
+
+                        const jsonDwnloadLink = document.createElement("a")
+                        jsonDwnloadLink.href = jsonDataUrl
+                        jsonDwnloadLink.download = datadownload.title + ".csv"
+                        jsonDwnloadLink.click()
+                      }}
+                    >
+                      <Text ta={"center"} size="xl" inline>
+                        DOWNLOAD
+                      </Text>
+                    </Box>
+                  </Group>
                 </Box>
-                <Box>
-                  <Box
-                    style={{
-                      borderRadius: 10,
-                      padding: 30,
-                      paddingTop: 50,
-                      paddingBottom: 50,
-                      backgroundColor: "gray",
-                      cursor: "pointer",
-                    }}
-                    onClick={() => router.push("emotion/copy-data")}
-                  >
-                    <Text c={"white"} fw={"bold"} ta={"center"}>
-                      COPY DATA
-                    </Text>
-                  </Box>
-                </Box>
-              </Group>
+              </Box>
             )}
           </Box>
         </SimpleGrid>

@@ -5,6 +5,7 @@ import { Alert, Box, Button, Group, Text } from '@mantine/core';
 import toast from 'react-simple-toasts';
 import { isModalRoleUser } from '../val/val_role_user';
 import funDelRoleUser from '../fun/delete_user_role';
+import { funLogUser } from '../..';
 
 /**
  * Fungsi untuk menampilkan Modal Delete User Role.
@@ -19,6 +20,7 @@ export default function ModalDelRoleUser({ id, onSuccess }: { id: any, onSuccess
     const del = await funDelRoleUser({ id: id })
     if (!del.success) return toast(del.message, { theme: "dark" })
     toast("Success", { theme: "dark" });
+    await funLogUser({ act: 'DEL', desc: `User menghapus data Role User`, idContent: id, tbContent: 'roleuser' })
     setOpenModal(false);
     onSuccess(del.delData)
   }

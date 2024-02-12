@@ -83,7 +83,7 @@ export default function ViewListRegion({ param, provinsi, kabupaten, kecamatan, 
                     value: String(pro.id),
                     label: pro.name
                   }))}
-                  value={isProvinsi}
+                  value={(_.isNull(isProvinsi)) ? null : String(isProvinsi)}
                   required
                   label={"Provinsi"}
                   searchable
@@ -95,7 +95,7 @@ export default function ViewListRegion({ param, provinsi, kabupaten, kecamatan, 
                     value: String(kab.id),
                     label: kab.name
                   }))}
-                  value={isKabupaten}
+                  value={(_.isNull(isKabupaten)) ? null : String(isKabupaten)}
                   label="Kabupaten/Kota"
                   searchable
                   onChange={(val) => onKabupaten({ idKab: val })}
@@ -106,7 +106,7 @@ export default function ViewListRegion({ param, provinsi, kabupaten, kecamatan, 
                     value: String(kec.id),
                     label: kec.name
                   }))}
-                  value={isKecamatan}
+                  value={(_.isNull(isKecamatan)) ? null : String(isKecamatan)}
                   label="Kecamatan"
                   searchable
                   onChange={(val) => setKecamatan(val)}

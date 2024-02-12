@@ -52,13 +52,16 @@ export default function ListConfUser({ data }: { data: any }) {
                         borderBottom: "1px solid #CED4D9",
                       }}
                     >
-                      <Table.Th>No</Table.Th>
                       <Table.Th>Role User</Table.Th>
-                      <Table.Th >Name</Table.Th>
+                      <Table.Th>Name</Table.Th>
                       <Table.Th>Email</Table.Th>
                       <Table.Th>Password</Table.Th>
                       <Table.Th>Phone</Table.Th>
-                      {/* <Table.Th>Area Provinsi</Table.Th> */}
+                      <Table.Th>
+                        <Center>
+                          Default
+                        </Center>
+                      </Table.Th>
                       <Table.Th>
                         <Center>
                           Action
@@ -69,20 +72,18 @@ export default function ListConfUser({ data }: { data: any }) {
                   <Table.Tbody>
                     {isData.map((v, i) => (
                       <Table.Tr key={i}>
-                        <Table.Td>{i + 1}</Table.Td>
-                        <Table.Td>{v.UserRole.name}</Table.Td>
+                        <Table.Td>{v.userRole}</Table.Td>
                         <Table.Td>{v.name}</Table.Td>
                         <Table.Td>{v.email}</Table.Td>
                         <Table.Td>{v.password}</Table.Td>
                         <Table.Td>{v.phone}</Table.Td>
-                        {/* <Table.Td>
-                          {v.UserArea.map((v: any, i: any) => (
-                            <Box key={i.idProvinsi}>
-                              <Button color={(v.isFront == true) ? 'red' : 'blue'} size="lg" mb={10}>{v.area}</Button>
-                            </Box>
-                          ))}
-
-                        </Table.Td> */}
+                        <Table.Td>
+                          <Center>
+                            <Button variant='subtle' onClick={() => { router.push(`/dashboard/user/default/${v.id}`) }}>
+                              {v.userArea && v.userArea.area} - {(v.userArea && v.userArea.candidate) ? v.userArea.candidate : 'NULL'}
+                            </Button>
+                          </Center>
+                        </Table.Td>
                         <Table.Td>
                           <Group justify="center">
                             <Box>

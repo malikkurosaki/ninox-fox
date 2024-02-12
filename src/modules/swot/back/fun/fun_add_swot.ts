@@ -17,6 +17,7 @@ export default async function funAddSwotf({ body, content }: { body: Swot, conte
             content: content
         },
         select: {
+            id: true,
             Candidate: {
                 select: {
                     name: true,
@@ -38,6 +39,7 @@ export default async function funAddSwotf({ body, content }: { body: Swot, conte
 
     return {
         success: true,
+        data: data.id,
         message: "Success"
     }
 }

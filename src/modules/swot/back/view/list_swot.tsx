@@ -1,5 +1,4 @@
 'use client'
-
 import { Button, Group, Select, Stack, Text } from "@mantine/core"
 import { useRouter } from "next/navigation";
 import TableSwot from "../component/table_swot";
@@ -57,7 +56,7 @@ export default function ListSwot({ params, provinsi, kabupaten, datatable }: { p
                     required
                     label={"Provinsi"}
                     searchable
-                    value={isProvinsi}
+                    value={(_.isNull(isProvinsi)) ? null : String(isProvinsi)}
                     onChange={(val) => (
                         onKabupaten({ idProv: val })
                     )}
@@ -69,7 +68,7 @@ export default function ListSwot({ params, provinsi, kabupaten, datatable }: { p
                         value: String(kab.id),
                         label: kab.name,
                     }))}
-                    value={isKabupaten}
+                    value={(_.isNull(isKabupaten)) ? null : String(isKabupaten)}
                     onChange={(val) => (
                         setKabupaten(val)
                     )}

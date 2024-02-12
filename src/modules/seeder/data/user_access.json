@@ -148,5 +148,15 @@
         "id": 30,
         "idUserRole": 3,
         "idComponent": 1
+    },
+    {
+        "id": 31,
+        "idUserRole": 1,
+        "idComponent": 18
+    },
+    {
+        "id": 32,
+        "idUserRole": 2,
+        "idComponent": 18
     }
 ]

@@ -1,5 +1,4 @@
 'use server'
-
 import prisma from "@/modules/_global/bin/prisma"
 
 export default async function funGetOneCandidate({ id }: { id: any }) {
@@ -12,6 +11,7 @@ export default async function funGetOneCandidate({ id }: { id: any }) {
             idKabkot: true,
             idProvinsi: true,
             name: true,
+            img: true,
             AreaProvinsi: {
                 select: {
                     name: true
@@ -25,13 +25,14 @@ export default async function funGetOneCandidate({ id }: { id: any }) {
         }
     })
 
-    const allData ={
-            name: data?.name,
-            id: data?.id,
-            idKabkot: data?.idKabkot,
-            idProvinsi: data?.idProvinsi,
-            AreaProvinsi: data?.AreaProvinsi?.name,
-            AreaKabkot: data?.AreaKabkot?.name
-        }
+    const allData = {
+        name: data?.name,
+        id: data?.id,
+        idKabkot: data?.idKabkot,
+        idProvinsi: data?.idProvinsi,
+        AreaProvinsi: data?.AreaProvinsi?.name,
+        AreaKabkot: data?.AreaKabkot?.name,
+        img: data?.img
+    }
     return allData
 }

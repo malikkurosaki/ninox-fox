@@ -5,6 +5,9 @@ import toast from "react-simple-toasts"
 import { useState } from "react"
 import { isModalPairing } from "../../val/val_modal_pairing"
 import funUploadPairing from "../../fun/upload_pairing"
+import { funLogUser } from "@/modules/user"
+import { funGetAccessArea } from "@/modules/_global"
+import moment from "moment"
 
 export default function ModalUploadPairing({ data, onSuccess }: { data: any, onSuccess: (val: any) => void }) {
     const [openModal, setOpenModal] = useAtom(isModalPairing)
@@ -12,8 +15,13 @@ export default function ModalUploadPairing({ data, onSuccess }: { data: any, onS
 
     async function onUpload() {
         setLoading(true)
+        const cek = await funGetAccessArea({ provinsi: data[0].idProvinsi })
+        if (!cek) {
+            setLoading(false)
+            return toast("Anda tidak mempunyai akses ke wilayah tersebut", { theme: "dark" })
+        }
         await funUploadPairing({ body: data })
-        // await funLogUser({ act: "UPLOAD", desc: `User Uploads Data Public Concerns Trends` })
+        await funLogUser({ act: 'UPL', desc: `User mengupload data Pairing (${data[0].idCandidate1} & ${data[0].idCandidate2} - ${moment(data[0].date).format('DD/MM/YYYY')})`, idContent: '-', tbContent: 'pairing' })
         setLoading(false)
         toast('Success', { theme: 'dark' })
         setOpenModal(false)

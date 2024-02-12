@@ -16,13 +16,15 @@ export default async function funGetUserDefaultFront() {
         select: {
             id: true,
             idKabkot: true,
-            idProvinsi: true
+            idProvinsi: true,
+            idCandidate: true,
         }
     })
 
     return {
         idProvinsi: dataArea?.idProvinsi,
         idKabkot: dataArea?.idKabkot,
+        idCandidate: dataArea?.idCandidate,
         tingkat: (dataArea?.idKabkot == null) ? 1 : 2
     }
 

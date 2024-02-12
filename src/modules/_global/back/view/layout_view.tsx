@@ -1,17 +1,6 @@
 "use client";
 import { useDisclosure, useShallowEffect } from "@mantine/hooks";
-import {
-  ActionIcon,
-  AppShell,
-  Box,
-  Burger,
-  Group,
-  Menu,
-  Modal,
-  NavLink,
-  UnstyledButton,
-  rem,
-} from "@mantine/core";
+import { ActionIcon, AppShell, Box, Burger, Group, Menu, Modal, NavLink, ScrollArea, UnstyledButton, rem, } from "@mantine/core";
 import React, { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { FaUserCircle, FaUserTie } from "react-icons/fa";
@@ -26,102 +15,281 @@ import { ModalLogout } from "../..";
  * @returns component untuk template dashboard
  */
 
-export default function LayoutView({
-  children, dataMenu, dataUser
-}: {
-  children: React.ReactNode, dataMenu: any, dataUser: any
-}) {
+export default function LayoutView({ children, dataMenu, dataUser }: { children: React.ReactNode, dataMenu: any, dataUser: any }) {
   const [opened, { toggle }] = useDisclosure();
-  const dataDashboard = [
+  const dataSosialEkonomi = [
     {
-      key: "md0",
-      link: "/dashboard",
-      label: "BERANDA",
+      "id": 18,
+      "keyMenu": "md17",
+      "menu": "Ketenagakerjaan - Jaminan Kesehatan",
+      "owner": "admin",
+      "group": "dataSosialEkonomi",
+      "link": "/dashboard/se/jaminan-kesehatan"
     },
     {
-      key: "md1",
-      link: "/dashboard/emotion",
-      label: "EMOTION EDITOR",
+      "id": 19,
+      "keyMenu": "md18",
+      "menu": "Ketenagakerjaan - Jaminan Kecelakaan Kerja",
+      "owner": "admin",
+      "group": "dataSosialEkonomi",
+      "link": "/dashboard/se/jaminan-kecelakaan-kerja"
     },
     {
-      key: "md2",
-      link: "/dashboard/pairing",
-      label: "REGIONAL DATA PAIRING",
-    },
-  ];
-
-  const dataRegion = [
-    {
-      key: "md3",
-      link: "/dashboard/audience",
-      label: "AUDIENCE",
+      "id": 20,
+      "keyMenu": "md19",
+      "menu": "Ketenagakerjaan - Jaminan Kematian",
+      "owner": "admin",
+      "group": "dataSosialEkonomi",
+      "link": "/dashboard/se/jaminan-kematian"
     },
     {
-      key: "md4",
-      link: "/dashboard/public-concern-trend",
-      label: "PUBLIC CONCERNS TRENDS",
+      "id": 21,
+      "keyMenu": "md20",
+      "menu": "Ketenagakerjaan - Jaminan Hari Tua",
+      "owner": "admin",
+      "group": "dataSosialEkonomi",
+      "link": "/dashboard/se/jaminan-hari-tua"
     },
     {
-      key: "md5",
-      link: "/dashboard/leader-trait-assessment",
-      label: "LEADER TRAIT ASSESSMENT",
+      "id": 22,
+      "keyMenu": "md21",
+      "menu": "Ketenagakerjaan - Jaminan Pensiun",
+      "owner": "admin",
+      "group": "dataSosialEkonomi",
+      "link": "/dashboard/se/jaminan-pensiun"
     },
     {
-      key: "md6",
-      link: "/dashboard/region-hot-issue",
-      label: "REGION HOT ISSUE",
-    },
-  ];
-
-  const dataDua = [
-    {
-      key: "md7",
-      link: "/dashboard/step",
-      label: "STEP",
+      "id": 23,
+      "keyMenu": "md22",
+      "menu": "Ketenagakerjaan - Pengangguran",
+      "owner": "admin",
+      "group": "dataSosialEkonomi",
+      "link": "/dashboard/se/pengangguran"
     },
     {
-      key: "md8",
-      link: "/dashboard/swot",
-      label: "SWOT",
+      "id": 24,
+      "keyMenu": "md23",
+      "menu": "Transportasi - Permukaan Jalan",
+      "owner": "admin",
+      "group": "dataSosialEkonomi",
+      "link": "/dashboard/se/permukaan-jalan"
     },
     {
-      key: "md9",
-      link: "/dashboard/ml-ai",
-      label: "ML - AI",
+      "id": 25,
+      "keyMenu": "md24",
+      "menu": "Transportasi - Jalan Dilalui Kendaraan",
+      "owner": "admin",
+      "group": "dataSosialEkonomi",
+      "link": "/dashboard/se/jalan-dilalui-kendaraan"
     },
     {
-      key: "md10",
-      link: "/dashboard/candidate",
-      label: "KANDIDAT",
-    },
-  ];
-
-  const dataDeveloper = [
-    {
-      key: "md11",
-      link: "/dashboard/role-user",
-      label: "ROLE USER",
+      "id": 26,
+      "keyMenu": "md25",
+      "menu": "Transportasi - Kecelakaan",
+      "owner": "admin",
+      "group": "dataSosialEkonomi",
+      "link": "/dashboard/se/kecelakaan"
     },
     {
-      key: "md12",
-      link: "/dashboard/user",
-      label: "USER",
+      "id": 27,
+      "keyMenu": "md26",
+      "menu": "Agama - Rumah Ibadah",
+      "owner": "admin",
+      "group": "dataSosialEkonomi",
+      "link": "/dashboard/se/rumah-ibadah"
     },
     {
-      key: "md13",
-      link: "/dashboard/log-user",
-      label: "LOG USER",
+      "id": 28,
+      "keyMenu": "md27",
+      "menu": "Pendidikan - Jarak Fasilitas",
+      "owner": "admin",
+      "group": "dataSosialEkonomi",
+      "link": "/dashboard/se/jarak-fasilitas"
     },
     {
-      key: "md14",
-      link: "/dashboard/seeder",
-      label: "SEEDER",
+      "id": 29,
+      "keyMenu": "md28",
+      "menu": "Pendidikan - Jalan Kaki < 4 Jam",
+      "owner": "admin",
+      "group": "dataSosialEkonomi",
+      "link": "/dashboard/se/jalan-kaki-kurang-4-jam"
     },
     {
-      key: "md15",
-      link: "/dashboard/delete-data",
-      label: "HAPUS DATA",
+      "id": 30,
+      "keyMenu": "md29",
+      "menu": "Pendidikan - Guru Tersertifikasi",
+      "owner": "admin",
+      "group": "dataSosialEkonomi",
+      "link": "/dashboard/se/guru-tersertifikasi"
     },
+    {
+      "id": 31,
+      "keyMenu": "md30",
+      "menu": "Pendidikan - Guru Honorer",
+      "owner": "admin",
+      "group": "dataSosialEkonomi",
+      "link": "/dashboard/se/guru-honorer"
+    },
+    {
+      "id": 32,
+      "keyMenu": "md31",
+      "menu": "Kesehatan - Kelas Ibu Hamil",
+      "owner": "admin",
+      "group": "dataSosialEkonomi",
+      "link": "/dashboard/se/kelas-ibu-hamil"
+    },
+    {
+      "id": 33,
+      "keyMenu": "md32",
+      "menu": "Kesehatan - Ibu Hamil Dari Keluarga Miskin",
+      "owner": "admin",
+      "group": "dataSosialEkonomi",
+      "link": "/dashboard/se/ibu-hamil-dari-keluarga-miskin"
+    },
+    {
+      "id": 34,
+      "keyMenu": "md33",
+      "menu": "Kesehatan - Jaminan Untuk BADUTA",
+      "owner": "admin",
+      "group": "dataSosialEkonomi",
+      "link": "/dashboard/se/jaminan-untuk-baduta"
+    },
+    {
+      "id": 35,
+      "keyMenu": "md34",
+      "menu": "Kesehatan - Pos Pelayanan",
+      "owner": "admin",
+      "group": "dataSosialEkonomi",
+      "link": "/dashboard/se/pos-pelayanan"
+    },
+    {
+      "id": 36,
+      "keyMenu": "md35",
+      "menu": "Kesehatan - Fasilitas",
+      "owner": "admin",
+      "group": "dataSosialEkonomi",
+      "link": "/dashboard/se/fasilitas"
+    },
+    {
+      "id": 37,
+      "keyMenu": "md36",
+      "menu": "Kesehatan - Rata Rata Jarak Fasilitas",
+      "owner": "admin",
+      "group": "dataSosialEkonomi",
+      "link": "/dashboard/se/rata-rata-jarak-fasilitas"
+    },
+    {
+      "id": 38,
+      "keyMenu": "md37",
+      "menu": "Kesehatan - Jumlah Dokter",
+      "owner": "admin",
+      "group": "dataSosialEkonomi",
+      "link": "/dashboard/se/jumlah-dokter"
+    },
+    {
+      "id": 39,
+      "keyMenu": "md38",
+      "menu": "Keamanan - Perkelahian",
+      "owner": "admin",
+      "group": "dataSosialEkonomi",
+      "link": "/dashboard/se/perkelahian"
+    },
+    {
+      "id": 40,
+      "keyMenu": "md39",
+      "menu": "Keamanan - Pencurian",
+      "owner": "admin",
+      "group": "dataSosialEkonomi",
+      "link": "/dashboard/se/pencurian"
+    },
+    {
+      "id": 41,
+      "keyMenu": "md40",
+      "menu": "Keamanan - Pencurian dan Kekerasan",
+      "owner": "admin",
+      "group": "dataSosialEkonomi",
+      "link": "/dashboard/se/pencurian-dan-kekerasan"
+    },
+    {
+      "id": 42,
+      "keyMenu": "md41",
+      "menu": "Keamanan - Penipuan dan Penggelapan",
+      "owner": "admin",
+      "group": "dataSosialEkonomi",
+      "link": "/dashboard/se/penipuan-dan-penggelapan"
+    },
+    {
+      "id": 43,
+      "keyMenu": "md42",
+      "menu": "Keamanan - Penganiayaan",
+      "owner": "admin",
+      "group": "dataSosialEkonomi",
+      "link": "/dashboard/se/penganiayaan"
+    },
+    {
+      "id": 44,
+      "keyMenu": "md43",
+      "menu": "Keamanan - Perkosaan",
+      "owner": "admin",
+      "group": "dataSosialEkonomi",
+      "link": "/dashboard/se/perkosaan"
+    },
+    {
+      "id": 45,
+      "keyMenu": "md44",
+      "menu": "Keamanan - Narkoba",
+      "owner": "admin",
+      "group": "dataSosialEkonomi",
+      "link": "/dashboard/se/narkoba"
+    },
+    {
+      "id": 46,
+      "keyMenu": "md45",
+      "menu": "Ekonomi - Jumlah Pasar",
+      "owner": "admin",
+      "group": "dataSosialEkonomi",
+      "link": "/dashboard/se/jumlah-pasar"
+    },
+    {
+      "id": 47,
+      "keyMenu": "md46",
+      "menu": "Ekonomi - Lembaga Keuangan",
+      "owner": "admin",
+      "group": "dataSosialEkonomi",
+      "link": "/dashboard/se/lembaga-keuangan"
+    },
+    {
+      "id": 48,
+      "keyMenu": "md47",
+      "menu": "Pertanian - Jenis Prasarana Transportasi",
+      "owner": "admin",
+      "group": "dataSosialEkonomi",
+      "link": "/dashboard/se/jenis-prasarana-transportasi"
+    },
+    {
+      "id": 49,
+      "keyMenu": "md48",
+      "menu": "Pertanian - Irigasi",
+      "owner": "admin",
+      "group": "dataSosialEkonomi",
+      "link": "/dashboard/se/irigasi"
+    },
+    {
+      "id": 50,
+      "keyMenu": "md49",
+      "menu": "Kemiskinan - Data Kemiskinan",
+      "owner": "admin",
+      "group": "dataSosialEkonomi",
+      "link": "/dashboard/se/data-kemiskinan"
+    },
+    {
+      "id": 51,
+      "keyMenu": "md50",
+      "menu": "Kemiskinan - BPJS",
+      "owner": "admin",
+      "group": "dataSosialEkonomi",
+      "link": "/dashboard/se/bpjs"
+    }
   ];
 
   const router = useRouter();
@@ -201,36 +369,78 @@ export default function LayoutView({
           </Group>
         </AppShell.Header>
         <AppShell.Navbar p="md" pb={30}>
-          {dataMenu && dataMenu.dataSatu && dataMenu.dataSatu.map((item: any) => {
-            return (
-              <NavLink
-                key={item.keyMenu}
-                active={item.link === active}
-                fw={item.menu ? "bolder" : "normal"}
-                label={_.upperCase(item.menu)}
-                onClick={() => {
-                  router.push(item.link);
-                }}
-                color="#213555"
-                variant="filled"
-              />
-            );
-          })}
+          <ScrollArea>
+            {dataMenu && dataMenu.dataSatu && dataMenu.dataSatu.map((item: any) => {
+              return (
+                <NavLink
+                  key={item.keyMenu}
+                  active={item.link === active}
+                  fw={item.menu ? "bolder" : "normal"}
+                  label={_.upperCase(item.menu)}
+                  onClick={() => {
+                    router.push(item.link);
+                  }}
+                  color="#213555"
+                  variant="filled"
+                />
+              );
+            })}
 
-          {
-            dataMenu && dataMenu.dataRegion && (
+            {
+              dataMenu && dataMenu.dataRegion && (
+                <NavLink
+                  label="REGION VALUE EDITOR"
+                  childrenOffset={28}
+                  fw={"bolder"}
+                >
+                  {dataMenu && dataMenu.dataRegion && dataMenu.dataRegion.map((item: any) => {
+                    return (
+                      <NavLink
+                        key={item.keyMenu}
+                        active={item.link === active}
+                        fw={item.menu ? "bolder" : "normal"}
+                        label={_.upperCase(item.menu)}
+                        onClick={() => {
+                          router.push(item.link);
+                        }}
+                        color="#213555"
+                        variant="filled"
+                      />
+                    );
+                  })}
+                </NavLink>
+              )
+            }
+
+            {dataMenu && dataMenu.dataDua && dataMenu.dataDua.map((item: any) => {
+              return (
+                <NavLink
+                  key={item.keyMenu}
+                  active={item.link === active}
+                  fw={item.menu ? "bolder" : "normal"}
+                  label={_.upperCase(item.menu)}
+                  onClick={() => {
+                    router.push(item.link);
+                  }}
+                  color="#213555"
+                  variant="filled"
+                />
+              );
+            })}
+
+            {dataMenu && dataMenu.dataSosialEkonomi && (
               <NavLink
-                label="REGION VALUE EDITOR"
+                label="DATA SOSIAL EKONOMI"
                 childrenOffset={28}
                 fw={"bolder"}
               >
-                {dataMenu && dataMenu.dataRegion && dataMenu.dataRegion.map((item: any) => {
+                {dataMenu && dataMenu.dataSosialEkonomi && dataSosialEkonomi.map((item: any) => {
                   return (
                     <NavLink
                       key={item.keyMenu}
                       active={item.link === active}
                       fw={item.menu ? "bolder" : "normal"}
-                      label={_.upperCase(item.menu)}
+                      label={item.menu}
                       onClick={() => {
                         router.push(item.link);
                       }}
@@ -240,49 +450,33 @@ export default function LayoutView({
                   );
                 })}
               </NavLink>
-            )
-          }
-
-          {dataMenu && dataMenu.dataDua && dataMenu.dataDua.map((item: any) => {
-            return (
-              <NavLink
-                key={item.keyMenu}
-                active={item.link === active}
-                fw={item.menu ? "bolder" : "normal"}
-                label={_.upperCase(item.menu)}
-                onClick={() => {
-                  router.push(item.link);
-                }}
-                color="#213555"
-                variant="filled"
-              />
-            );
-          })}
-          {
-            dataMenu && dataMenu.dataDeveloper && (
-              <NavLink
-                label="DEVELOPER"
-                childrenOffset={28}
-                fw={"bolder"}
-              >
-                {dataMenu && dataMenu.dataDeveloper && dataMenu.dataDeveloper.map((item: any) => {
-                  return (
-                    <NavLink
-                      key={item.keyMenu}
-                      active={item.link === active}
-                      fw={item.menu ? "bolder" : "normal"}
-                      label={_.upperCase(item.menu)}
-                      onClick={() => {
-                        router.push(item.link);
-                      }}
-                      color="#213555"
-                      variant="filled"
-                    />
-                  );
-                })}
-              </NavLink>
-            )
-          }
+            )}
+            {
+              dataMenu && dataMenu.dataDeveloper && (
+                <NavLink
+                  label="DEVELOPER"
+                  childrenOffset={28}
+                  fw={"bolder"}
+                >
+                  {dataMenu && dataMenu.dataDeveloper && dataMenu.dataDeveloper.map((item: any) => {
+                    return (
+                      <NavLink
+                        key={item.keyMenu}
+                        active={item.link === active}
+                        fw={item.menu ? "bolder" : "normal"}
+                        label={_.upperCase(item.menu)}
+                        onClick={() => {
+                          router.push(item.link);
+                        }}
+                        color="#213555"
+                        variant="filled"
+                      />
+                    );
+                  })}
+                </NavLink>
+              )
+            }
+          </ScrollArea>
         </AppShell.Navbar>
         <AppShell.Main bg={"#EAEAEA"}>
           <Box p={10} pl={20} pr={20}>
