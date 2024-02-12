@@ -17,7 +17,7 @@ import funGetFrontGuruHonorer from '../fun/get_guru_honorer';
 
 
 export default function ViewPendidikan({ prov, kab, jarak_fasilitas, jalan_kaki, guru_tersertifikasi, guru_honorer }: { prov: any, kab: any, jarak_fasilitas: any, jalan_kaki: any, guru_tersertifikasi: any, guru_honorer: any }) {
-  const [isProvinsi, setProvinsi] = useState<any>("1")
+  const [isProvinsi, setProvinsi] = useState<any>("17")
   const [isKabupaten, setKabupaten] = useState<any>(null)
   const [isKecamatan, setKecamatan] = useState<any>(null)
   const [dataKabupaten, setDataKabupaten] = useState<any>(kab)

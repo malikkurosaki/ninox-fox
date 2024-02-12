@@ -4,8 +4,8 @@ import React from 'react';
 
 export default async function Page() {
   const dataProv = await MasterProvinceGetAll()
-  const dataKab = await MasterKabGetByProvince({ idProvinsi: 1 })
-  const dataRumahIbadah = await funGetFrontRumahIbadah({ prov: 1, kab: null, kec: null })
+  const dataKab = await MasterKabGetByProvince({ idProvinsi: 17 })
+  const dataRumahIbadah = await funGetFrontRumahIbadah({ prov: 17, kab: null, kec: null })
 
   return (
     <>

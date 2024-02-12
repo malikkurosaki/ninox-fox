@@ -11,7 +11,7 @@ import funGetFrontJalanDilaluiKendaraan from '../fun/get_jalan_dilalui_kendaraan
 import funGetFrontKecelakaan from '../fun/get_kecelakaan';
 
 export default function ViewInfrastrukturAndTransportasi({ prov, kab, permukaan_jalan, jalan_dilalui_kendaraan, kecelakaan }: { prov: any, kab: any, permukaan_jalan: any, jalan_dilalui_kendaraan: any, kecelakaan: any }) {
-  const [isProvinsi, setProvinsi] = useState<any>("1")
+  const [isProvinsi, setProvinsi] = useState<any>("17")
   const [isKabupaten, setKabupaten] = useState<any>(null)
   const [isKecamatan, setKecamatan] = useState<any>(null)
   const [dataKabupaten, setDataKabupaten] = useState<any>(kab)

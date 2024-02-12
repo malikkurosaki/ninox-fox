@@ -7,7 +7,7 @@ import _ from 'lodash';
 import funGetFrontRumahIbadah from '../fun/get_rumah_ibadah';
 
 export default function ViewKeagamaan({ prov, kab, rumah_ibadah }: { prov: any, kab: any, rumah_ibadah: any }) {
-  const [isProvinsi, setProvinsi] = useState<any>("1")
+  const [isProvinsi, setProvinsi] = useState<any>("17")
   const [isKabupaten, setKabupaten] = useState<any>(null)
   const [isKecamatan, setKecamatan] = useState<any>(null)
   const [dataKabupaten, setDataKabupaten] = useState<any>(kab)

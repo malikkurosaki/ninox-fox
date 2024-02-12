@@ -10,7 +10,7 @@ import EchartPublicConcerns from '@/modules/regional_insights/components/echart_
 import _ from 'lodash';
 
 export default function ViewEkonomi({ prov, kab, jumlah_pasar, lembaga_keuangan }: { prov: any, kab: any, jumlah_pasar: any, lembaga_keuangan: any }) {
-  const [isProvinsi, setProvinsi] = useState<any>("1")
+  const [isProvinsi, setProvinsi] = useState<any>("17")
   const [isKabupaten, setKabupaten] = useState<any>(null)
   const [isKecamatan, setKecamatan] = useState<any>(null)
   const [dataKabupaten, setDataKabupaten] = useState<any>(kab)

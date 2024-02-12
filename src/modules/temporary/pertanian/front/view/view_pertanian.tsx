@@ -10,7 +10,7 @@ import funGetFrontJenisPrasaranaTransportasi from '../fun/get_jenis_prasarana_tr
 import funGetFrontIrigasi from '../fun/get_irigasi';
 
 export default function ViewPertanian({ prov, kab, jenis_prasarana, irigasi }: { prov: any, kab: any, jenis_prasarana: any, irigasi: any }) {
-  const [isProvinsi, setProvinsi] = useState<any>("1")
+  const [isProvinsi, setProvinsi] = useState<any>("17")
   const [isKabupaten, setKabupaten] = useState<any>(null)
   const [isKecamatan, setKecamatan] = useState<any>(null)
   const [dataKabupaten, setDataKabupaten] = useState<any>(kab)

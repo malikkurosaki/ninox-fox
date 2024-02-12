@@ -35,7 +35,17 @@ export default function EchartPenggunaanSungai({ data }: { data: any }) {
           color: "white"
         }
       },
-      tooltip: {},
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow'
+        },
+        formatter: (a: any) => {
+          return `
+          <p>${a[0].data.name} : <strong> ${a[0].data.value} juta m³</strong></p>
+          `;
+        },
+      },
       // dataset: {
       //   source: [
       //     ['data', 'Tidak', 'Ya', 'Tidak terdefinisi'],
@@ -62,6 +72,7 @@ export default function EchartPenggunaanSungai({ data }: { data: any }) {
             }
           },
           axisLabel: {
+            formatter: `{value} juta m³`,
             color: "white"
           },
         }

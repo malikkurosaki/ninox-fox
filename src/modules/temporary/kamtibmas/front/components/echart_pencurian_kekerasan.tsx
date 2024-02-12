@@ -42,7 +42,7 @@ export default function EchartPencurianKekerasan({ data }: { data: any }) {
         },
         formatter: (a: any) => {
           return `
-          <p>${a[0].data.name} : <strong> ${a[0].data.value}%</strong></p>
+          <p>${a[0].data.name} : <strong> ${a[0].data.value}</strong></p>
           `;
         },
       },
@@ -65,7 +65,6 @@ export default function EchartPencurianKekerasan({ data }: { data: any }) {
         {
           type: 'value',
           show: true,
-          max: "100",
           splitLine: {
             lineStyle: {
               color: "gray",
@@ -73,7 +72,7 @@ export default function EchartPencurianKekerasan({ data }: { data: any }) {
             }
           },
           axisLabel: {
-            formatter: `{value}%`,
+            formatter: `{value}`,
             color: "white"
           },
         }
