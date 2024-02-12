@@ -101,7 +101,7 @@ export default function ViewInfrastrukturAndTransportasi({ prov, kab, permukaan_
         <Box>
           <Box pb={20}>
             <Text c={"white"} fw={'bold'} fz={20}>
-              INFRASTRUKTUR DESA / KELURAHAN DI KOTA DENPASAR
+              INFRASTRUKTUR
             </Text>
           </Box>
           <SimpleGrid
@@ -131,7 +131,7 @@ export default function ViewInfrastrukturAndTransportasi({ prov, kab, permukaan_
           <Box>
             <Box pb={10}>
               <Text c={"white"} fw={'bold'} fz={20}>
-                DATA ANGKA KECELAKAAN LALU LINTAS KOTA DENPASAR
+                DATA ANGKA KECELAKAAN LALU LINTAS
               </Text>
             </Box>
           </Box>

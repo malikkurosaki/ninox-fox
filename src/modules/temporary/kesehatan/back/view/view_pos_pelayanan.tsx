@@ -29,7 +29,7 @@ export default function ViewPosPelayanan({ provinsi, download, table }: { provin
     return (
         <>
             <Stack>
-                <Text fw={"bold"}>KESEHATAN - JUMLAH POS PELAYANAN KESEHATAN KOTA DENPASAR</Text>
+                <Text fw={"bold"}>KESEHATAN - JUMLAH POS PELAYANAN KESEHATAN</Text>
             </Stack>
             <Box pt={30}>
                 <SimpleGrid

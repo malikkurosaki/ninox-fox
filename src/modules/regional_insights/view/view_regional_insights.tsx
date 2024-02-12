@@ -86,7 +86,7 @@ export default function ViewRegionalInsights({ candidate, emotion, audience, pct
             <Button c={"dark"} bg={"white"} onClick={onGenerate}>HASIL</Button>
           </Group>
         </Box>
-        {isData.map((item: any, i: any) => {
+        {isData && isData.map((item: any, i: any) => {
           return (
             <Box key={item.id} pt={20}>
               <Group justify='space-between' pb={10}>
