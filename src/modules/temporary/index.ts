@@ -70,6 +70,8 @@ import ViewUploadBpjs from "./kemiskinan_dan_ketimpangan/back/view/upload_bpjs";
 import ViewUploadDataKemiskinan from "./kemiskinan_dan_ketimpangan/back/view/upload_data_kemiskinan";
 import ViewBpjs from "./kemiskinan_dan_ketimpangan/back/view/view_bpjs";
 import ViewDataKemiskinan from "./kemiskinan_dan_ketimpangan/back/view/view_data_kemiskinan";
+import funGetFrontBpjs from "./kemiskinan_dan_ketimpangan/front/fun/get_bpjs";
+import funGetFrontDataKemiskinan from "./kemiskinan_dan_ketimpangan/front/fun/get_data_kemiskinan";
 import ViewKemiskinanDanKetimpangan from "./kemiskinan_dan_ketimpangan/front/view/view_kemiskinan_dan_ketimpangan";
 import funDownloadFasilitas from "./kesehatan/back/fun/download_fasilitas";
 import funDownloadIbuHamilDariKeluargaMiskin from "./kesehatan/back/fun/download_ibu_hamil_dari_keluarga_miskin";
@@ -343,3 +345,5 @@ export { funGetFrontJumlahPasar }
 export { funGetFrontLembagaKeuangan }
 export { funGetFrontJenisPrasaranaTransportasi }
 export { funGetFrontIrigasi }
+export { funGetFrontDataKemiskinan }
+export { funGetFrontBpjs }
