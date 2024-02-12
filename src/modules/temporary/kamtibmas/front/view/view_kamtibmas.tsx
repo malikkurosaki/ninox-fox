@@ -1,7 +1,4 @@
 "use client"
-import { useShallowEffect } from '@mantine/hooks';
-import { EChartsOption } from 'echarts';
-import EChartsReact from 'echarts-for-react';
 import React, { useState } from 'react';
 import { MasterKabGetByProvince, MasterKecGetByKab, PageSubTitle } from '@/modules/_global';
 import { Box, Button, Group, Select, SimpleGrid, Stack, Text } from '@mantine/core';
@@ -12,16 +9,31 @@ import EchartKejahatahPenganiayaan from '../components/echart_kejahatah_pengania
 import EchartKejahatanPerkosaan from '../components/echart_kejahatan_perkosaan';
 import EchartPeredaranNarkoba from '../components/echart_peredaran_narkoba';
 import _ from 'lodash';
+import EchartPerkelahianMassal from '../components/echart_perkelahian_massal';
+import funGetFrontPerkelahian from '../fun/get_perkelahian';
+import funGetFrontPencurian from '../fun/get_pencurian';
+import funGetFrontPencurianDanKekerasan from '../fun/get_pencurian_dan_kekerasan';
+import funGetFrontPenipuanDanPenggelapan from '../fun/get_penipuan_dan_penggelapan';
+import funGetFrontPenganiayaan from '../fun/get_penganiayaan';
+import funGetFrontPerkosaan from '../fun/get_perkosaan';
+import funGetFrontNarkoba from '../fun/get_narkoba';
 
-export default function ViewKamtibmas({ prov }: { prov: any }) {
-  const [options, setOptions] = useState<EChartsOption>({});
-  const [isProvinsi, setProvinsi] = useState<any>(null)
+export default function ViewKamtibmas({ prov, kab, perkelahian, pencurian, pencurian_dan_kekerasan, penipuan_dan_penggelapan, penganiayaan, perkosaan, narkoba }: { prov: any, kab: any, perkelahian: any, pencurian: any, pencurian_dan_kekerasan: any, penipuan_dan_penggelapan: any, penganiayaan: any, perkosaan: any, narkoba: any }) {
+  const [isProvinsi, setProvinsi] = useState<any>("1")
   const [isKabupaten, setKabupaten] = useState<any>(null)
   const [isKecamatan, setKecamatan] = useState<any>(null)
-  const [dataKabupaten, setDataKabupaten] = useState<any>([])
+  const [dataKabupaten, setDataKabupaten] = useState<any>(kab)
   const [dataKecamatan, setDataKecamatan] = useState<any>([])
+  const [dataPerkelahian, setDataPerkelahian] = useState(perkelahian)
+  const [dataPencurian, setDataPencurian] = useState(pencurian)
+  const [dataPencurianDanKekerasan, setDataPencurianDanKekerasan] = useState(pencurian_dan_kekerasan)
+  const [dataPenipuanDanPenggelapan, setDataPenipuanDanPenggelapan] = useState(penipuan_dan_penggelapan)
+  const [dataPenganiayaan, setDataPenganiayaan] = useState(penganiayaan)
+  const [dataPerkosaan, setDataPerkosaan] = useState(perkosaan)
+  const [dataNarkoba, setDataNarkoba] = useState(narkoba)
 
   async function onProvinsi(id: any) {
+    if (id == null) { id = 1 }
     setProvinsi(id)
     setKabupaten(null)
     setKecamatan(null)
@@ -37,72 +49,29 @@ export default function ViewKamtibmas({ prov }: { prov: any }) {
     setDataKecamatan(dataKecNew)
   }
 
-  useShallowEffect(() => {
-    loadData()
-  }, [])
+  async function onGenerate() {
+    const dataLoad1 = await funGetFrontPerkelahian({ prov: isProvinsi, kab: isKabupaten, kec: isKecamatan })
+    setDataPerkelahian(dataLoad1)
 
-  async function loadData() {
-    const option: EChartsOption = {
-      title: {
-        text: "KEJADIAN PERKELAHIAN MASSAL",
-        textStyle: {
-          color: "white",
-          fontSize: 13,
-        }
-      },
-      legend: {
-        bottom: "0%",
-        textStyle: {
-          color: "white"
-        }
-      },
-      tooltip: {},
-      dataset: {
-        source: [
-          ['data', 'Tidak', 'ya'],
-          // ['Denpasar', 121, 90],
-          ['Denpasar', 0, 0],
-        ]
-      },
-      xAxis: [
-        {
-          type: 'category',
-          axisLabel: {
-            color: "white",
-          }
-        }
-      ],
-      yAxis: [
-        {
-          type: 'value',
-          show: true,
-          max: "100",
-          splitLine: {
-            lineStyle: {
-              color: "gray",
-              opacity: 0.1
-            }
-          },
-          axisLabel: {
-            color: "white"
-          },
-        }
-      ],
-      series: [
-        {
-          type: 'bar', itemStyle: {
-            color: "red"
-          }
-        },
-        {
-          type: 'bar', itemStyle: {
-            color: "green"
-          }
-        },
-      ]
-    };
-    setOptions(option)
+    const dataLoad2 = await funGetFrontPencurian({ prov: isProvinsi, kab: isKabupaten, kec: isKecamatan })
+    setDataPencurian(dataLoad2)
+
+    const dataLoad3 = await funGetFrontPencurianDanKekerasan({ prov: isProvinsi, kab: isKabupaten, kec: isKecamatan })
+    setDataPencurianDanKekerasan(dataLoad3)
+
+    const dataLoad4 = await funGetFrontPenipuanDanPenggelapan({ prov: isProvinsi, kab: isKabupaten, kec: isKecamatan })
+    setDataPenipuanDanPenggelapan(dataLoad4)
+
+    const dataLoad5 = await funGetFrontPenganiayaan({ prov: isProvinsi, kab: isKabupaten, kec: isKecamatan })
+    setDataPenganiayaan(dataLoad5)
+
+    const dataLoad6 = await funGetFrontPerkosaan({ prov: isProvinsi, kab: isKabupaten, kec: isKecamatan })
+    setDataPerkosaan(dataLoad6)
+
+    const dataLoad7 = await funGetFrontNarkoba({ prov: isProvinsi, kab: isKabupaten, kec: isKecamatan })
+    setDataNarkoba(dataLoad7)
   }
+
   return (
     <>
       <Stack>
@@ -149,13 +118,13 @@ export default function ViewKamtibmas({ prov }: { prov: any }) {
             onChange={(val) => { setKecamatan(val) }}
             value={isKecamatan}
           />
-          <Button>SUBMIT</Button>
+          <Button onClick={onGenerate}>SUBMIT</Button>
         </Group>
       </Box>
       <Box pt={40}>
         <Box pb={20}>
           <Text c={"white"} fw={'bold'} fz={20}>
-            INTENSITAS KEJAHATAN KOTA DENPASAR
+            INTENSITAS KEJAHATAN
           </Text>
         </Box>
         <SimpleGrid cols={{ base: 1, sm: 2, lg: 2 }} mb={20}>
@@ -167,7 +136,7 @@ export default function ViewKamtibmas({ prov }: { prov: any }) {
             }}
           >
             <Box pt={10}>
-              <EChartsReact style={{ height: 400 }} option={options} />
+              <EchartPerkelahianMassal data={dataPerkelahian} />
             </Box>
           </Box>
           <Box
@@ -177,7 +146,7 @@ export default function ViewKamtibmas({ prov }: { prov: any }) {
               padding: 20
             }}>
             <Box pt={10}>
-              <EchartIntensitasPencurian />
+              <EchartIntensitasPencurian data={dataPencurian} />
             </Box>
           </Box>
         </SimpleGrid>
@@ -191,7 +160,7 @@ export default function ViewKamtibmas({ prov }: { prov: any }) {
             }}
           >
             <Box pt={10} >
-              <EchartPencurianKekerasan />
+              <EchartPencurianKekerasan data={dataPencurianDanKekerasan} />
             </Box>
           </Box>
           <Box
@@ -202,7 +171,7 @@ export default function ViewKamtibmas({ prov }: { prov: any }) {
             }}
           >
             <Box pt={10} >
-              <EchartKejahatanPenipuan />
+              <EchartKejahatanPenipuan data={dataPenipuanDanPenggelapan} />
             </Box>
           </Box>
         </SimpleGrid>
@@ -216,7 +185,7 @@ export default function ViewKamtibmas({ prov }: { prov: any }) {
             }}
           >
             <Box pt={10} >
-              <EchartKejahatahPenganiayaan />
+              <EchartKejahatahPenganiayaan data={dataPenganiayaan} />
             </Box>
           </Box>
           <Box
@@ -227,7 +196,7 @@ export default function ViewKamtibmas({ prov }: { prov: any }) {
             }}
           >
             <Box pt={10} >
-              <EchartKejahatanPerkosaan />
+              <EchartKejahatanPerkosaan data={dataPerkosaan} />
             </Box>
           </Box>
         </SimpleGrid>
@@ -242,7 +211,7 @@ export default function ViewKamtibmas({ prov }: { prov: any }) {
             <Box
               pt={10}
             >
-              <EchartPeredaranNarkoba />
+              <EchartPeredaranNarkoba data={dataNarkoba} />
             </Box>
           </Box>
         </Box>

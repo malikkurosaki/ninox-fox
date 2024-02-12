@@ -6,7 +6,7 @@ import EChartsReact from 'echarts-for-react';
 import _ from 'lodash';
 import React, { useState } from 'react';
 
-export default function EchartKejahatanPenipuan({ data }: { data: any }) {
+export default function EchartPerkelahianMassal({ data }: { data: any }) {
   const [options, setOptions] = useState<EChartsOption>({})
   const [dataChart, setDataChart] = useState<any>()
 
@@ -23,7 +23,7 @@ export default function EchartKejahatanPenipuan({ data }: { data: any }) {
   async function loadData(dataLoad: any) {
     const option: EChartsOption = {
       title: {
-        text: "INTENSITAS KEJAHATAN PENIPUAN/PENGGELAPAN",
+        text: "KEJADIAN PERKELAHIAN MASSAL",
         textStyle: {
           color: "white",
           fontSize: 13,
@@ -42,15 +42,15 @@ export default function EchartKejahatanPenipuan({ data }: { data: any }) {
         },
         formatter: (a: any) => {
           return `
-          <p>${a[0].data.name} : <strong> ${a[0].data.value}%</strong></p>
-          `;
+                  <p>${a[0].data.name} : <strong> ${a[0].data.value}%</strong></p>
+                  `;
         },
       },
       // dataset: {
-      //   source: [
-      //     ['data', 'Sama saja', 'Menurun', 'Meningkat'],
-      //     ['Denpasar', 0, 0, 0],
-      //   ]
+      //     source: [
+      //         ['data', 'Tidak', 'ya'],
+      //         ['Denpasar', 0, 0],
+      //     ]
       // },
       xAxis: [
         {
@@ -65,7 +65,7 @@ export default function EchartKejahatanPenipuan({ data }: { data: any }) {
         {
           type: 'value',
           show: true,
-          max: "100",
+          max: 100,
           splitLine: {
             lineStyle: {
               color: "gray",

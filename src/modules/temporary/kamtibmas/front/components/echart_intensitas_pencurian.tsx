@@ -3,16 +3,24 @@ import { Box } from '@mantine/core';
 import { useShallowEffect } from '@mantine/hooks';
 import { EChartsOption } from 'echarts';
 import EChartsReact from 'echarts-for-react';
+import _ from 'lodash';
 import React, { useState } from 'react';
 
-export default function EchartIntensitasPencurian() {
-  const [options, setOptions] = useState<EChartsOption>({});
+export default function EchartIntensitasPencurian({ data }: { data: any }) {
+  const [options, setOptions] = useState<EChartsOption>({})
+  const [dataChart, setDataChart] = useState<any>()
 
   useShallowEffect(() => {
-    loadData()
-  }, [])
+    setDataChart(
+      {
+        meningkat: Number(data[0].meningkat),
+        menurun: Number(data[0].menurun)
+      }
+    )
+    loadData(dataChart)
+  }, [data, dataChart])
 
-  async function loadData() {
+  async function loadData(dataLoad: any) {
     const option: EChartsOption = {
       title: {
         text: "INTENSITAS PENCURIAN",
@@ -27,17 +35,27 @@ export default function EchartIntensitasPencurian() {
           color: "white"
         }
       },
-      tooltip: {},
-      dataset: {
-        source: [
-          ['data', 'Sama saja', 'Menurun', 'Meningkat'],
-          // ['Denpasar', 13, 52, 10],
-          ['Denpasar', 0, 0, 0],
-        ]
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow'
+        },
+        formatter: (a: any) => {
+          return `
+          <p>${a[0].data.name} : <strong> ${a[0].data.value}%</strong></p>
+          `;
+        },
       },
+      // dataset: {
+      //   source: [
+      //     ['data', 'Sama saja', 'Menurun', 'Meningkat'],
+      //     ['Denpasar', 0, 0, 0],
+      //   ]
+      // },
       xAxis: [
         {
           type: 'category',
+          data: ['Meningkat', 'Menurun'],
           axisLabel: {
             color: "white",
           }
@@ -55,26 +73,27 @@ export default function EchartIntensitasPencurian() {
             }
           },
           axisLabel: {
+            formatter: `{value}%`,
             color: "white"
           },
         }
       ],
       series: [
         {
-          type: 'bar', itemStyle: {
-            color: "gray"
-          }
-        },
-        {
-          type: 'bar', itemStyle: {
-            color: "green"
-          }
-        },
-        {
-          type: 'bar', itemStyle: {
-            color: "red"
-          }
-        },
+          // name: 'Nama Kota',
+          type: 'bar',
+          barWidth: '70%',
+          data: Object.keys(dataLoad ?? []).map(
+            (v: any, i: any) =>
+            ({
+              name: _.upperCase(v),
+              value: dataLoad[v],
+              itemStyle: {
+                color: (v == 'meningkat') ? 'red' : 'green'
+              },
+            })
+          ),
+        }
       ]
     };
     setOptions(option)

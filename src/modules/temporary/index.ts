@@ -55,6 +55,13 @@ import ViewPenganiayaan from "./kamtibmas/back/view/view_penganiayaan";
 import ViewPenipuanDanPenggelapan from "./kamtibmas/back/view/view_penipuan_dan_penggelapan";
 import ViewPerkelahian from "./kamtibmas/back/view/view_perkelahian";
 import ViewPerkosaan from "./kamtibmas/back/view/view_perkosaan";
+import funGetFrontNarkoba from "./kamtibmas/front/fun/get_narkoba";
+import funGetFrontPencurian from "./kamtibmas/front/fun/get_pencurian";
+import funGetFrontPencurianDanKekerasan from "./kamtibmas/front/fun/get_pencurian_dan_kekerasan";
+import funGetFrontPenganiayaan from "./kamtibmas/front/fun/get_penganiayaan";
+import funGetFrontPenipuanDanPenggelapan from "./kamtibmas/front/fun/get_penipuan_dan_penggelapan";
+import funGetFrontPerkelahian from "./kamtibmas/front/fun/get_perkelahian";
+import funGetFrontPerkosaan from "./kamtibmas/front/fun/get_perkosaan";
 import ViewKamtibmas from "./kamtibmas/front/view/view_kamtibmas";
 import funDownloadRumahIbadah from "./keagamaan/back/fun/download_rumah_ibadah";
 import funGetRumahIbadah from "./keagamaan/back/fun/get_rumah_ibadah";
@@ -347,3 +354,10 @@ export { funGetFrontJenisPrasaranaTransportasi }
 export { funGetFrontIrigasi }
 export { funGetFrontDataKemiskinan }
 export { funGetFrontBpjs }
+export { funGetFrontPerkelahian }
+export { funGetFrontPencurian }
+export { funGetFrontPencurianDanKekerasan }
+export { funGetFrontPenipuanDanPenggelapan }
+export { funGetFrontPenganiayaan }
+export { funGetFrontPerkosaan }
+export { funGetFrontNarkoba }
