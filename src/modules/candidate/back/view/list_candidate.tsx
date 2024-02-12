@@ -1,5 +1,4 @@
 'use client'
-
 import { Box, Button, Center, Group, Paper, Select, SimpleGrid, Stack, Text, UnstyledButton } from "@mantine/core"
 import { useEffect, useState } from "react"
 import TableCandidate from "../component/table_candidate"
@@ -8,13 +7,11 @@ import toast from "react-simple-toasts"
 import _ from "lodash"
 import { MasterKabGetByProvince } from "@/modules/_global"
 
-
 /**
  * Fungsi untuk menampilkan select wilayah.
  * @param {string} title - judul
  * @returns {component} Select wilayah.
  */
-
 
 export default function ListCandidates({ param, provinsi, kabupaten, datatable }: { param: any, provinsi: any, kabupaten: any, datatable: any }) {
 
@@ -23,7 +20,6 @@ export default function ListCandidates({ param, provinsi, kabupaten, datatable }
     const [dataKab, setDataKab] = useState<any>(kabupaten)
     const [isProvinsi, setProvinsi] = useState<any>(param.idProvinsi || null)
     const [isKabupaten, setKabupaten] = useState<any>(param.idKabkot || null)
-
 
     async function onKabupaten({ idProv }: { idProv: any }) {
         setProvinsi(idProv)
@@ -58,7 +54,7 @@ export default function ListCandidates({ param, provinsi, kabupaten, datatable }
                     searchable
                     label="Provinsi"
                     required
-                    value={isProvinsi}
+                    value={(!_.isNull(isProvinsi) ? String(isProvinsi) : null)}
                     onChange={(val) => {
                         onKabupaten({ idProv: val })
                     }}
@@ -70,7 +66,7 @@ export default function ListCandidates({ param, provinsi, kabupaten, datatable }
                         value: String(kab.id),
                         label: kab.name
                     }))}
-                    value={isKabupaten}
+                    value={(!_.isNull(isKabupaten) ? String(isKabupaten) : null)}
                     onChange={(val) => {
                         setKabupaten(val)
                     }}

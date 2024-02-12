@@ -13,7 +13,7 @@ import React, { useState } from 'react';
 
 export const PageSubTitle = ({ text1, text2 }: { text1: string, text2: string }) => {
   const now = new Date();
-  const bulan = now.toLocaleString('default', { month: 'long' })
+  const bulan = now.toLocaleString('id-ID', { month: 'long' })
   const [isDateFull, setDateFull] = useState("")
 
   // fungsi interval untuk update jam setiap 1 menit

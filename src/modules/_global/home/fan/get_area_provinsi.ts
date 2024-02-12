@@ -6,14 +6,26 @@ import prisma from "../../bin/prisma"
 import _ from "lodash"
 import { MasterProvinceGetAll } from "../.."
 
-export default async function funGetUserAreaProvinsi() {
+export default async function funGetUserAreaProvinsi({ idUser }: { idUser?: any }) {
+    let kondisi,idUserFix
+
     const c = cookies().get("_cookiesNinox")
     const dataCookies = await unsealData(c!.value, { password: pwd_key_config as string })
 
-    const user = await prisma.user.findUnique({
-        where: {
+    if (!_.isNull(idUser) && !_.isUndefined(idUser)) {
+        kondisi = {
+            id: String(idUser)
+        }
+        idUserFix = idUser
+    } else {
+        kondisi = {
             id: String(dataCookies)
         }
+        idUserFix = String(dataCookies)
+    }
+
+    const user = await prisma.user.findUnique({
+        where: kondisi
     })
 
     if (user?.isAllArea == true) {
@@ -23,13 +35,13 @@ export default async function funGetUserAreaProvinsi() {
             idProvinsi: v.id,
             name: v.name
         }))
-        
+
         return allData
 
     } else {
         const data = await prisma.userArea.findMany({
             where: {
-                idUser: String(dataCookies),
+                idUser: String(idUserFix),
                 isActive: true
             },
             select: {

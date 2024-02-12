@@ -24,7 +24,6 @@ import toast from "react-simple-toasts"
  */
 
 export default function EditStep({ data }: { data: any }) {
-    console.log(data)
     const [openModal, setOpenModal] = useAtom(isModalStep)
     const [isBody, setBody] = useState({
         id: data.id,
@@ -51,7 +50,7 @@ export default function EditStep({ data }: { data: any }) {
 
     function onConfirmation() {
         if (Object.values(isBody).includes("") || Object.values(isBody).includes(null) || editor?.getHTML() == '<p></p>')
-            return toast("Data cannot be empty", { theme: "dark" });
+            return toast("Form cannot be empty", { theme: "dark" });
         setOpenModal(true)
     }
 
@@ -73,7 +72,7 @@ export default function EditStep({ data }: { data: any }) {
                     placeholder="Pilih Kategori"
                     withAsterisk
                     label="Kategori"
-                    data={["STRENGTH", "WEAKNESS", "OPPORTUNITY", "THREAT"]}
+                    data={["SOSIAL", "TEKNOLOGI", "EKONOMI", "POLITIK"]}
                     value={isBody.category}
                     onChange={(val) => {
                         setBody({

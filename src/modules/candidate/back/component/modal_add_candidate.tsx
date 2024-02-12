@@ -1,5 +1,4 @@
 'use client'
-
 import { Alert, Box, Button, Grid, Text } from "@mantine/core"
 import { useAtom } from "jotai";
 import { isModalCandidate } from "../val/isModalCandidate";
@@ -7,15 +6,14 @@ import { useRouter } from "next/navigation";
 import toast from "react-simple-toasts";
 import funAddCandidate from "../fun/add_candidate";
 import { funGetAccessArea } from "@/modules/_global";
-
+import { funLogUser } from "@/modules/user";
 
 /**
  * Fungsi untuk menampilkan modal konfirmasi add kandidat.
  * @returns {component} Modal konfirmasi add kandidat.
  */
 
-
-export default function ModalAddCandidate({ data, img }: { data: any, img: any }) {
+export default function ModalAddCandidate({ data, img, onSuccess }: { data: any, img: any, onSuccess: (val: any) => void }) {
     const [openModal, setOpenModal] = useAtom(isModalCandidate)
     const router = useRouter()
 
@@ -28,9 +26,10 @@ export default function ModalAddCandidate({ data, img }: { data: any, img: any }
         const create = await funAddCandidate({ body: data, img: img })
         if (!create.success)
             toast(create.message, { theme: "dark" });
+        await funLogUser({ act: 'ADD', desc: `User menambah data kandidat`, idContent: create.data, tbContent: 'candidate' })
         toast("Sukses", { theme: "dark" });
         setOpenModal(false);
-        router.back()
+        onSuccess(true)
     }
 
     return (

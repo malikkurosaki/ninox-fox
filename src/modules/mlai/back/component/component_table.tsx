@@ -23,12 +23,6 @@ export default function ComponentTable({ v, i, onClick }: { v: any; i: any, onCl
     onClick(idDel)
   }
 
-  function RubahHTML(c: any) {
-    return {
-      __html: c
-    }
-  }
-
   return (
     <>
       <Table.Tbody key={i}>
@@ -91,7 +85,7 @@ export default function ComponentTable({ v, i, onClick }: { v: any; i: any, onCl
                   Content
                 </Text>
                 <Stack c={'white'}>
-                  <InnerHTML html={v.content} />
+                  <Box dangerouslySetInnerHTML={{ __html: v.content }} />
                 </Stack>
                 {/* <Text style={{ fontSize: '16', color: "white" }} dangerouslySetInnerHTML={RubahHTML(v.content)} /> */}
                 {/* <Text c={"white"}>

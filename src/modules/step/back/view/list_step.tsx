@@ -1,5 +1,4 @@
 'use client'
-
 import { Button, Group, Select, Stack, Text } from "@mantine/core"
 import TableStep from "../component/table_step"
 import { useRouter } from "next/navigation";
@@ -51,7 +50,7 @@ export default function ListStep({ params, provinsi, kabupaten, datatable }: { p
                         label: val.name,
                     }))}
                     required
-                    value={isProvinsi}
+                    value={(_.isNull(isProvinsi)) ? null : String(isProvinsi)}
                     onChange={(val) => (
                         onKabupaten({ idProv: val })
                     )}
@@ -66,7 +65,7 @@ export default function ListStep({ params, provinsi, kabupaten, datatable }: { p
                         value: String(val.id),
                         label: val.name,
                     }))}
-                    value={isKabupaten}
+                    value={(_.isNull(isKabupaten)) ? null : String(isKabupaten)}
                     onChange={(val) => (
                         setKabupaten(val)
                     )}
@@ -76,7 +75,7 @@ export default function ListStep({ params, provinsi, kabupaten, datatable }: { p
                 </Button>
             </Group>
             {!_.isNull(datatable.title) &&
-            <TableStep title={datatable.title} data={datatable.data} searchParam={params}/>
+                <TableStep title={datatable.title} data={datatable.data} searchParam={params} />
             }
         </>
     )

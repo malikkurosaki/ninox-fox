@@ -1,5 +1,4 @@
 "use server"
-
 import prisma from "@/modules/_global/bin/prisma"
 import { revalidatePath } from "next/cache"
 
@@ -15,6 +14,7 @@ export default async function funDeleteConfUser({ id }: { id: any }) {
             id: true,
         }
     })
+    
     revalidatePath("/dashboard/user")
 
     return {
