@@ -14,11 +14,18 @@ export default async function funGetFrontRataRataJarakFasilitas({ prov, kab, kec
                     idProvinsi: Number(prov)
                 }
             })
+
+            const count = await prisma.sE_Kesehatan_RataRataJarakFasilitas.count({
+                where: {
+                    idProvinsi: Number(prov)
+                }
+            })
+
             const dataTable = _.map(_.groupBy(data, "idProvinsi"), (v: any) => ({
-                bidan: _.sumBy(v, 'bidan'),
-                puskesmasDgRawatInap: _.sumBy(v, 'puskesmasDgRawatInap'),
-                puskesmasTanpaRawatInap: _.sumBy(v, 'puskesmasTanpaRawatInap'),
-                rumahSakit: _.sumBy(v, 'rumahSakit')
+                bidan: _.round((_.sumBy(v, 'bidan')) / count, 2),
+                puskesmasDgRawatInap: _.round((_.sumBy(v, 'puskesmasDgRawatInap')) / count, 2),
+                puskesmasTanpaRawatInap: _.round((_.sumBy(v, 'puskesmasTanpaRawatInap')) / count, 2),
+                rumahSakit: _.round((_.sumBy(v, 'rumahSakit')) / count, 2)
             }))
 
             return dataTable
@@ -30,11 +37,19 @@ export default async function funGetFrontRataRataJarakFasilitas({ prov, kab, kec
                     idKabkot: Number(kab)
                 }
             })
+
+            const count = await prisma.sE_Kesehatan_RataRataJarakFasilitas.count({
+                where: {
+                    idProvinsi: Number(prov),
+                    idKabkot: Number(kab)
+                }
+            })
+
             const dataTable = _.map(_.groupBy(data, "idKabkot"), (v: any) => ({
-                bidan: _.sumBy(v, 'bidan'),
-                puskesmasDgRawatInap: _.sumBy(v, 'puskesmasDgRawatInap'),
-                puskesmasTanpaRawatInap: _.sumBy(v, 'puskesmasTanpaRawatInap'),
-                rumahSakit: _.sumBy(v, 'rumahSakit')
+                bidan: _.round((_.sumBy(v, 'bidan')) / count, 2),
+                puskesmasDgRawatInap: _.round((_.sumBy(v, 'puskesmasDgRawatInap')) / count, 2),
+                puskesmasTanpaRawatInap: _.round((_.sumBy(v, 'puskesmasTanpaRawatInap')) / count, 2),
+                rumahSakit: _.round((_.sumBy(v, 'rumahSakit')) / count, 2)
             }))
 
             return dataTable
@@ -47,11 +62,20 @@ export default async function funGetFrontRataRataJarakFasilitas({ prov, kab, kec
                     idKecamatan: Number(kec)
                 }
             })
+
+            const count = await prisma.sE_Kesehatan_RataRataJarakFasilitas.count({
+                where: {
+                    idProvinsi: Number(prov),
+                    idKabkot: Number(kab),
+                    idKecamatan: Number(kec)
+                }
+            })
+
             const dataTable = _.map(_.groupBy(data, "idKecamatan"), (v: any) => ({
-                bidan: _.sumBy(v, 'bidan'),
-                puskesmasDgRawatInap: _.sumBy(v, 'puskesmasDgRawatInap'),
-                puskesmasTanpaRawatInap: _.sumBy(v, 'puskesmasTanpaRawatInap'),
-                rumahSakit: _.sumBy(v, 'rumahSakit')
+                bidan: _.round((_.sumBy(v, 'bidan')) / count, 2),
+                puskesmasDgRawatInap: _.round((_.sumBy(v, 'puskesmasDgRawatInap')) / count, 2),
+                puskesmasTanpaRawatInap: _.round((_.sumBy(v, 'puskesmasTanpaRawatInap')) / count, 2),
+                rumahSakit: _.round((_.sumBy(v, 'rumahSakit')) / count, 2)
             }))
 
             return dataTable

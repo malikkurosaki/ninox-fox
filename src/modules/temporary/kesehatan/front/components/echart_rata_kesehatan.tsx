@@ -31,7 +31,17 @@ export default function EchartRataKesehatan({ data }: { data: any }) {
           color: "white"
         }
       },
-      tooltip: {},
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow'
+        },
+        formatter: (a: any) => {
+          return `
+          <p>${a[0].data.name} : <strong> ${a[0].data.value} KM</strong></p>
+          `;
+        },
+      },
       // dataset: {
       //   source: [
       //     ['data', 'Jarak tedekat menuju Tempat praktek bidan', 'Jarak terdekat menuju Puskesmas tanpa rawat inap', 'Jarak terdekat menuju Puskesmas dengan rawat inap', 'Jarak terdekat menuju Rumah sakit'],
@@ -59,6 +69,7 @@ export default function EchartRataKesehatan({ data }: { data: any }) {
             }
           },
           axisLabel: {
+            formatter: `{value} km`,
             color: "white"
           },
         }

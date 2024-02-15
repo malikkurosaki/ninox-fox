@@ -33,7 +33,7 @@ export default async function funGetDataKemiskinan({ provinsi, kab }: { provinsi
             }))
 
             dataTable = _.map(_.groupBy(dataTable, "idKabkot"), (v: any) => ({
-                value: _.sumBy(v, 'value'),
+                value: _.round((_.sumBy(v, 'value')) / v.length, 2),
                 name: v[0].name
             }))
 
@@ -100,7 +100,7 @@ export default async function funGetDataKemiskinan({ provinsi, kab }: { provinsi
         }))
 
         dataTable = _.map(_.groupBy(dataTable, "idProvinsi"), (v: any) => ({
-            value: _.sumBy(v, 'value'),
+            value: _.round((_.sumBy(v, 'value')) / v.length, 2),
             name: v[0].name
         }))
 
