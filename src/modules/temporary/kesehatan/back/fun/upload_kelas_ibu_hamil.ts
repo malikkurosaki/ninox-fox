@@ -1,5 +1,6 @@
 'use server'
 import prisma from "@/modules/_global/bin/prisma";
+import _ from "lodash";
 import { revalidatePath } from "next/cache";
 
 /**
@@ -18,8 +19,8 @@ export default async function funUploadKelasIbuHamil({ body }: { body: any }) {
                 id: Number(i.id)
             },
             data: {
-                ya: Number(i.Ya),
-                tidakAda: Number(i.TidakAda),
+                ya: (_.isNaN(Number(i.Ya))) ? 0 :  Number(i.Ya),
+                tidakAda: (_.isNaN(Number(i.TidakAda))) ? 0 :  Number(i.TidakAda),
             }
         });
     }

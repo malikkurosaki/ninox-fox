@@ -50,7 +50,7 @@ export default function TableDataKemiskinan({ title, data, th }: { title: string
                                             <Table.Tr key={i}>
                                                 <Table.Td>{i + 1}</Table.Td>
                                                 <Table.Td>{v.name}</Table.Td>
-                                                <Table.Td>{v.value}</Table.Td>
+                                                <Table.Td>{v.value} %</Table.Td>
                                             </Table.Tr>
                                         ))}
                                     </Table.Tbody>

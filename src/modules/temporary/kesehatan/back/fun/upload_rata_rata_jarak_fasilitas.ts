@@ -1,5 +1,6 @@
 'use server'
 import prisma from "@/modules/_global/bin/prisma";
+import _ from "lodash";
 import { revalidatePath } from "next/cache";
 
 /**
@@ -18,10 +19,10 @@ export default async function funUploadRataRataJarakFasilitas({ body }: { body: 
                 id: Number(i.id)
             },
             data: {
-                bidan: Number(i.JarakTerdekatMenujuBidan),
-                puskesmasDgRawatInap: Number(i.JarakTerdekatMenujuPuskesmasDenganRawatInap),
-                puskesmasTanpaRawatInap: Number(i.JarakTerdekatMenujuPuskesmasTanpaRawatInap),
-                rumahSakit: Number(i.JarakTerdekatMenujuRumahSakit),
+                bidan: (_.isNaN(Number(i.JarakTerdekatMenujuBidan))) ? 0 : Number(i.JarakTerdekatMenujuBidan),
+                puskesmasDgRawatInap: (_.isNaN(Number(i.JarakTerdekatMenujuPuskesmasDenganRawatInap))) ? 0 : Number(i.JarakTerdekatMenujuPuskesmasDenganRawatInap),
+                puskesmasTanpaRawatInap: (_.isNaN(Number(i.JarakTerdekatMenujuPuskesmasTanpaRawatInap))) ? 0 : Number(i.JarakTerdekatMenujuPuskesmasTanpaRawatInap),
+                rumahSakit: (_.isNaN(Number(i.JarakTerdekatMenujuRumahSakit))) ? 0 : Number(i.JarakTerdekatMenujuRumahSakit),
             }
         });
     }

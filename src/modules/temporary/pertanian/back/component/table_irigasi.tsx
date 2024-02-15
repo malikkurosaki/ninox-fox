@@ -51,8 +51,8 @@ export default function TableIrigasi({ title, data, th }: { title: string, data:
                                             <Table.Tr key={i}>
                                                 <Table.Td>{i + 1}</Table.Td>
                                                 <Table.Td>{v.name}</Table.Td>
-                                                <Table.Td>{v.ya}</Table.Td>
-                                                <Table.Td>{v.tidak}</Table.Td>
+                                                <Table.Td>{v.ya} juta m³</Table.Td>
+                                                <Table.Td>{v.tidak} juta m³</Table.Td>
                                             </Table.Tr>
                                         ))}
                                     </Table.Tbody>
