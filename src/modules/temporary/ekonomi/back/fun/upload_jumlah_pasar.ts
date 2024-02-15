@@ -1,5 +1,6 @@
 'use server'
 import prisma from "@/modules/_global/bin/prisma";
+import _ from "lodash";
 import { revalidatePath } from "next/cache";
 
 /**
@@ -18,9 +19,9 @@ export default async function funUploadJumlahPasar({ body }: { body: any }) {
                 id: Number(i.id)
             },
             data: {
-                bangunanPermanen: Number(i.JumlahPasarDenganBangunanPermanen),
-                bangunanSemiPermanen: Number(i.JumlahPasarDenganBangunanSemiPermanen),
-                tanpaBangunan: Number(i.JumlahPasarTanpaBangunan),
+                bangunanPermanen:(_.isNaN(Number(i.JumlahPasarDenganBangunanPermanen))) ? 0 : Number(i.JumlahPasarDenganBangunanPermanen),
+                bangunanSemiPermanen: (_.isNaN(Number(i.JumlahPasarDenganBangunanSemiPermanen))) ? 0 :  Number(i.JumlahPasarDenganBangunanSemiPermanen),
+                tanpaBangunan: (_.isNaN(Number(i.JumlahPasarTanpaBangunan))) ? 0 : Number(i.JumlahPasarTanpaBangunan),
             }
         });
     }
