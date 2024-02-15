@@ -35,7 +35,17 @@ export default function EchartPresentaseKemiskinan({ data }: { data: any }) {
           color: "white"
         }
       },
-      tooltip: {},
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow'
+        },
+        formatter: (a: any) => {
+          return `
+          <p>Kemiskinan : <strong> ${a[0].data.value}%</strong></p>
+          `;
+        },
+      },
       // dataset: {
       //   source: [
       //     ['data', 'Kemiskinan'],
@@ -55,6 +65,7 @@ export default function EchartPresentaseKemiskinan({ data }: { data: any }) {
         {
           type: 'value',
           show: true,
+          max: 100,
           splitLine: {
             lineStyle: {
               color: "gray",
@@ -62,7 +73,7 @@ export default function EchartPresentaseKemiskinan({ data }: { data: any }) {
             }
           },
           axisLabel: {
-            formatter: `{value} `,
+            formatter: `{value} %`,
             color: "white"
           },
         }
