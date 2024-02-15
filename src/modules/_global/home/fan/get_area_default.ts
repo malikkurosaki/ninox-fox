@@ -22,87 +22,85 @@ export default async function funGetAreaDefault() {
         }
     })
 
-    let data, hasil
+    let data, hasil = "-"
 
-    if (dataArea?.idKabkot == null) {
-        data = await prisma.userArea.findFirst({
-            where: {
-                idUser: String(dataCookies),
-                isFront: true
-            },
-            select: {
-                AreaProvinsi: {
-                    select: {
-                        name: true
-                    }
+    if (dataArea) {
+        if (dataArea?.idKabkot == null) {
+            data = await prisma.userArea.findFirst({
+                where: {
+                    idUser: String(dataCookies),
+                    isFront: true
                 },
-                Candidate: {
-                    select: {
-                        name: true
+                select: {
+                    AreaProvinsi: {
+                        select: {
+                            name: true
+                        }
+                    },
+                    Candidate: {
+                        select: {
+                            name: true
+                        }
                     }
                 }
+            })
+            if (!_.isUndefined(data?.Candidate?.name)) {
+                hasil = data?.AreaProvinsi?.name + ' - ' + _.upperCase(data?.Candidate?.name)
+            } else {
+                const kandidat = await prisma.candidate.findFirst({
+                    where: {
+                        isActive: true,
+                        idProvinsi: Number(dataArea?.idProvinsi),
+                        idKabkot: null,
+                        tingkat: 1
+                    },
+                    orderBy: {
+                        name: 'asc'
+                    }
+                })
+
+                hasil = data?.AreaProvinsi?.name + ' - ' + _.upperCase(kandidat?.name)
             }
-        })
-        if (!_.isUndefined(data?.Candidate?.name)) {
-            hasil = data?.AreaProvinsi?.name + ' - ' + _.upperCase(data?.Candidate?.name)
+
         } else {
-            const kandidat = await prisma.candidate.findFirst({
+            data = await prisma.userArea.findFirst({
                 where: {
-                    isActive: true,
-                    idProvinsi: Number(dataArea?.idProvinsi),
-                    idKabkot: null,
-                    tingkat: 1
+                    idUser: String(dataCookies),
+                    isFront: true
                 },
-                orderBy: {
-                    name: 'asc'
+                select: {
+                    AreaKabkot: {
+                        select: {
+                            name: true
+                        }
+                    },
+                    Candidate: {
+                        select: {
+                            name: true
+                        }
+                    }
                 }
             })
 
-            hasil = data?.AreaProvinsi?.name + ' - ' + _.upperCase(kandidat?.name)
-        }
+            if (!_.isUndefined(data?.Candidate?.name)) {
+                hasil = data?.AreaKabkot?.name + ' - ' + _.upperCase(data?.Candidate?.name)
+            } else {
+                const kandidat = await prisma.candidate.findFirst({
+                    where: {
+                        isActive: true,
+                        idProvinsi: Number(dataArea?.idProvinsi),
+                        idKabkot: Number(dataArea?.idKabkot),
+                        tingkat: 2
+                    },
+                    orderBy: {
+                        name: 'asc'
+                    }
+                })
 
-    } else {
-        data = await prisma.userArea.findFirst({
-            where: {
-                idUser: String(dataCookies),
-                isFront: true
-            },
-            select: {
-                AreaKabkot: {
-                    select: {
-                        name: true
-                    }
-                },
-                Candidate: {
-                    select: {
-                        name: true
-                    }
-                }
+                hasil = data?.AreaKabkot?.name + ' - ' + _.upperCase(kandidat?.name)
             }
-        })
-
-        if (!_.isUndefined(data?.Candidate?.name)) {
-            hasil = data?.AreaKabkot?.name + ' - ' + _.upperCase(data?.Candidate?.name)
-        } else {
-            const kandidat = await prisma.candidate.findFirst({
-                where: {
-                    isActive: true,
-                    idProvinsi: Number(dataArea?.idProvinsi),
-                    idKabkot: Number(dataArea?.idKabkot),
-                    tingkat: 2
-                },
-                orderBy: {
-                    name: 'asc'
-                }
-            })
-
-            hasil = data?.AreaKabkot?.name + ' - ' + _.upperCase(kandidat?.name)
         }
     }
 
-
     return hasil
-
-
-
 }
