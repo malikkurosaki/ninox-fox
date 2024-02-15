@@ -1,5 +1,6 @@
 'use server'
 import prisma from "@/modules/_global/bin/prisma";
+import _ from "lodash";
 import { revalidatePath } from "next/cache";
 
 /**
@@ -18,10 +19,10 @@ export default async function funUploadJarakFasilitas({ body }: { body: any }) {
                 id: Number(i.id)
             },
             data: {
-                sd: Number(i.JarakKeSDTerdekat),
-                smp: Number(i.JarakKeSMPTerdekat),
-                sma: Number(i.JarakKeSMATerdekat),
-                smk: Number(i.JarakKeSMKTerdekat),
+                sd: (_.isNaN(Number(i.JarakKeSDTerdekat))) ? 0 : Number(i.JarakKeSDTerdekat),
+                smp: (_.isNaN(Number(i.JarakKeSMPTerdekat))) ? 0 : Number(i.JarakKeSMPTerdekat),
+                sma: (_.isNaN(Number(i.JarakKeSMATerdekat))) ? 0 : Number(i.JarakKeSMATerdekat),
+                smk: (_.isNaN(Number(i.JarakKeSMKTerdekat))) ? 0 : Number(i.JarakKeSMKTerdekat),
             }
         });
     }

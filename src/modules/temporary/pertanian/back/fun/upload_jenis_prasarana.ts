@@ -1,5 +1,6 @@
 'use server'
 import prisma from "@/modules/_global/bin/prisma";
+import _ from "lodash";
 import { revalidatePath } from "next/cache";
 
 /**
@@ -18,10 +19,10 @@ export default async function funUploadJenisPrasaranaTransportasi({ body }: { bo
                 id: Number(i.id)
             },
             data: {
-                diperkeras: Number(i.Diperkeras),
-                aspal: Number(i.Aspal),
-                tidakTerdefinisi: Number(i.TidakTerdefinisi),
-                tanah: Number(i.Tanah),
+                diperkeras: (_.isNaN(Number(i.Diperkeras))) ? 0 : Number(i.Diperkeras),
+                aspal: (_.isNaN(Number(i.Aspal))) ? 0 : Number(i.Aspal),
+                tidakTerdefinisi: (_.isNaN(Number(i.TidakTerdefinisi))) ? 0 : Number(i.TidakTerdefinisi),
+                tanah: (_.isNaN(Number(i.Tanah))) ? 0 : Number(i.Tanah),
             }
         });
     }

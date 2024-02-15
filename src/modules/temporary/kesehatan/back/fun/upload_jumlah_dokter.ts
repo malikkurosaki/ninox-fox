@@ -1,5 +1,6 @@
 'use server'
 import prisma from "@/modules/_global/bin/prisma";
+import _ from "lodash";
 import { revalidatePath } from "next/cache";
 
 /**
@@ -18,8 +19,8 @@ export default async function funUploadJumlahDokter({ body }: { body: any }) {
                 id: Number(i.id)
             },
             data: {
-                pria: Number(i.TenagaDokterPriaYangTinggalMenetapDiDesa),
-                wanita: Number(i.TenagaDokterWanitaYangTinggalMenetapDiDesa),
+                pria: (_.isNaN(Number(i.TenagaDokterPriaYangTinggalMenetapDiDesa))) ? 0 : Number(i.TenagaDokterPriaYangTinggalMenetapDiDesa),
+                wanita: (_.isNaN(Number(i.TenagaDokterWanitaYangTinggalMenetapDiDesa))) ? 0 : Number(i.TenagaDokterWanitaYangTinggalMenetapDiDesa),
             }
         });
     }

@@ -1,5 +1,6 @@
 'use server'
 import prisma from "@/modules/_global/bin/prisma";
+import _ from "lodash";
 import { revalidatePath } from "next/cache";
 
 /**
@@ -18,8 +19,8 @@ export default async function funUploadPenganiayaan({ body }: { body: any }) {
                 id: Number(i.id)
             },
             data: {
-                meningkat: Number(i.Meningkat),
-                menurun: Number(i.Menurun),
+                meningkat: (_.isNaN(Number(i.Meningkat))) ? 0 : Number(i.Meningkat),
+                menurun: (_.isNaN(Number(i.Menurun))) ? 0 : Number(i.Menurun),
             }
         });
     }

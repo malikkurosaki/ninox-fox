@@ -1,5 +1,6 @@
 'use server'
 import prisma from "@/modules/_global/bin/prisma";
+import _ from "lodash";
 import { revalidatePath } from "next/cache";
 
 /**
@@ -18,13 +19,13 @@ export default async function funUploadFasilitas({ body }: { body: any }) {
                 id: Number(i.id)
             },
             data: {
-                rumahSakit: Number(i.RumahSakit),
-                rumahBersalin: Number(i.RumahBersalin),
-                rumahSakitBersalin: Number(i.RumahSakitBersalin),
-                bidan: Number(i.TempatPraktekBidan),
-                apotek: Number(i.Apotek),
-                puskesmasDgRawatInap: Number(i.PuskesmasDenganRawatInap),
-                puskesmasTnpRawatInap: Number(i.PuskesmasTanpaRawatInap),
+                rumahSakit: (_.isNaN(Number(i.RumahSakit))) ? 0 : Number(i.RumahSakit),
+                rumahBersalin: (_.isNaN(Number(i.RumahBersalin))) ? 0 : Number(i.RumahBersalin),
+                rumahSakitBersalin: (_.isNaN(Number(i.RumahSakitBersalin))) ? 0 : Number(i.RumahSakitBersalin),
+                bidan: (_.isNaN(Number(i.TempatPraktekBidan))) ? 0 : Number(i.TempatPraktekBidan),
+                apotek: (_.isNaN(Number(i.Apotek))) ? 0 : Number(i.Apotek),
+                puskesmasDgRawatInap: (_.isNaN(Number(i.PuskesmasDenganRawatInap))) ? 0 : Number(i.PuskesmasDenganRawatInap),
+                puskesmasTnpRawatInap: (_.isNaN(Number(i.PuskesmasTanpaRawatInap))) ? 0 : Number(i.PuskesmasTanpaRawatInap),
             }
         });
     }

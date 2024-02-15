@@ -1,5 +1,6 @@
 'use server'
 import prisma from "@/modules/_global/bin/prisma";
+import _ from "lodash";
 import { revalidatePath } from "next/cache";
 
 /**
@@ -18,10 +19,10 @@ export default async function funUploadLembagaKeuangan({ body }: { body: any }) 
                 id: Number(i.id)
             },
             data: {
-                bankUmumPemerintah: Number(i.JumlahBankUmumPemerintah),
-                bankUmumSwasta: Number(i.JumlahBankUmumSwasta),
-                bankPengkreditanRakyat: Number(i.JumlahBankPengkreditanRakyat),
-                koperasiSimpanPinjam: Number(i.JumlahKoperasiSimpanPinjam),
+                bankUmumPemerintah: (_.isNaN(Number(i.JumlahBankUmumPemerintah))) ? 0 : Number(i.JumlahBankUmumPemerintah),
+                bankUmumSwasta: (_.isNaN(Number(i.JumlahBankUmumSwasta))) ? 0 : Number(i.JumlahBankUmumSwasta),
+                bankPengkreditanRakyat: (_.isNaN(Number(i.JumlahBankPengkreditanRakyat))) ? 0 : Number(i.JumlahBankPengkreditanRakyat),
+                koperasiSimpanPinjam: (_.isNaN(Number(i.JumlahKoperasiSimpanPinjam))) ? 0 : Number(i.JumlahKoperasiSimpanPinjam),
             }
         });
     }
