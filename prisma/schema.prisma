@@ -521,9 +521,9 @@ model SE_Ketenagakerjaan_JaminanKesehatan {
   idKabkot      Int?
   AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
   idKecamatan   Int?
-  ya            Int            @default(0)
-  tidak         Int            @default(0)
-  tidakTahu     Int            @default(0)
+  ya            Float            @default(0)
+  tidak         Float            @default(0)
+  tidakTahu     Float            @default(0)
   isActive      Boolean        @default(true)
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
@@ -537,9 +537,9 @@ model SE_Ketenagakerjaan_JaminanKecelakaanKerja {
   idKabkot      Int?
   AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
   idKecamatan   Int?
-  ya            Int            @default(0)
-  tidak         Int            @default(0)
-  tidakTahu     Int            @default(0)
+  ya            Float            @default(0)
+  tidak         Float            @default(0)
+  tidakTahu     Float            @default(0)
   isActive      Boolean        @default(true)
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
@@ -553,9 +553,9 @@ model SE_Ketenagakerjaan_JaminanKematian {
   idKabkot      Int?
   AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
   idKecamatan   Int?
-  ya            Int            @default(0)
-  tidak         Int            @default(0)
-  tidakTahu     Int            @default(0)
+  ya            Float            @default(0)
+  tidak         Float            @default(0)
+  tidakTahu     Float            @default(0)
   isActive      Boolean        @default(true)
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
@@ -569,9 +569,9 @@ model SE_Ketenagakerjaan_JaminanHariTua {
   idKabkot      Int?
   AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
   idKecamatan   Int?
-  ya            Int            @default(0)
-  tidak         Int            @default(0)
-  tidakTahu     Int            @default(0)
+  ya            Float            @default(0)
+  tidak         Float            @default(0)
+  tidakTahu     Float            @default(0)
   isActive      Boolean        @default(true)
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
@@ -585,9 +585,9 @@ model SE_Ketenagakerjaan_JaminanPensiun {
   idKabkot      Int?
   AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
   idKecamatan   Int?
-  ya            Int            @default(0)
-  tidak         Int            @default(0)
-  tidakTahu     Int            @default(0)
+  ya            Float            @default(0)
+  tidak         Float            @default(0)
+  tidakTahu     Float            @default(0)
   isActive      Boolean        @default(true)
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
@@ -601,7 +601,7 @@ model SE_Ketenagakerjaan_Pengangguran {
   idKabkot      Int?
   AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
   idKecamatan   Int?
-  value         Int            @default(0)
+  value         Float            @default(0)
   isActive      Boolean        @default(true)
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
@@ -615,8 +615,8 @@ model SE_Transportasi_PermukaanJalanYgTerluas {
   idKabkot      Int?
   AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
   idKecamatan   Int?
-  aspal         Int            @default(0)
-  diperkeras    Int            @default(0)
+  aspal         Float            @default(0)
+  diperkeras    Float            @default(0)
   isActive      Boolean        @default(true)
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
@@ -630,7 +630,7 @@ model SE_Transportasi_JalanDiLaluiKendaraan {
   idKabkot      Int?
   AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
   idKecamatan   Int?
-  value         Int            @default(0)
+  value         Float            @default(0)
   isActive      Boolean        @default(true)
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
@@ -644,7 +644,7 @@ model SE_Transportasi_Kecelakaan {
   idKabkot      Int?
   AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
   idKecamatan   Int?
-  value         Int            @default(0)
+  value         Float            @default(0)
   isActive      Boolean        @default(true)
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
@@ -658,12 +658,12 @@ model SE_Agama_RumahIbadah {
   idKabkot        Int?
   AreaKecamatan   AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
   idKecamatan     Int?
-  masjid          Int            @default(0)
-  gerejaKhatolik  Int            @default(0)
-  gerejaProtestan Int            @default(0)
-  pura            Int            @default(0)
-  wihara          Int            @default(0)
-  kelenteng       Int            @default(0)
+  masjid          Float            @default(0)
+  gerejaKhatolik  Float            @default(0)
+  gerejaProtestan Float            @default(0)
+  pura            Float            @default(0)
+  wihara          Float            @default(0)
+  kelenteng       Float            @default(0)
   isActive        Boolean        @default(true)
   createdAt       DateTime       @default(now())
   updatedAt       DateTime       @updatedAt
@@ -677,10 +677,10 @@ model SE_Pendidikan_JarakFasilitas {
   idKabkot      Int?
   AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
   idKecamatan   Int?
-  sd            Int            @default(0)
-  smp           Int            @default(0)
-  smk           Int            @default(0)
-  sma           Int            @default(0)
+  sd            Float            @default(0)
+  smp           Float            @default(0)
+  smk           Float            @default(0)
+  sma           Float            @default(0)
   isActive      Boolean        @default(true)
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
@@ -694,7 +694,7 @@ model SE_Pendidikan_JalanKakiKurangEmpatJam {
   idKabkot      Int?
   AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
   idKecamatan   Int?
-  value         Int            @default(0)
+  value         Float            @default(0)
   isActive      Boolean        @default(true)
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
@@ -708,7 +708,7 @@ model SE_Pendidikan_GuruTersertifikasi {
   idKabkot      Int?
   AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
   idKecamatan   Int?
-  value         Int            @default(0)
+  value         Float            @default(0)
   isActive      Boolean        @default(true)
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
@@ -722,7 +722,7 @@ model SE_Pendidikan_GuruHonorer {
   idKabkot      Int?
   AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
   idKecamatan   Int?
-  value         Int            @default(0)
+  value         Float            @default(0)
   isActive      Boolean        @default(true)
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
@@ -736,8 +736,8 @@ model SE_Kesehatan_KelasIbuHamil {
   idKabkot      Int?
   AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
   idKecamatan   Int?
-  ya            Int            @default(0)
-  tidakAda      Int            @default(0)
+  ya            Float            @default(0)
+  tidakAda      Float            @default(0)
   isActive      Boolean        @default(true)
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
@@ -751,8 +751,8 @@ model SE_Kesehatan_IbuHamilDariKeluargaMiskin {
   idKabkot      Int?
   AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
   idKecamatan   Int?
-  ya            Int            @default(0)
-  tidakAda      Int            @default(0)
+  ya            Float            @default(0)
+  tidakAda      Float            @default(0)
   isActive      Boolean        @default(true)
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
@@ -766,8 +766,8 @@ model SE_Kesehatan_JaminanUntukBaduta {
   idKabkot      Int?
   AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
   idKecamatan   Int?
-  ya            Int            @default(0)
-  tidak         Int            @default(0)
+  ya            Float            @default(0)
+  tidak         Float            @default(0)
   isActive      Boolean        @default(true)
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
@@ -781,8 +781,8 @@ model SE_Kesehatan_PosPelayanan {
   idKabkot      Int?
   AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
   idKecamatan   Int?
-  terpadu       Int            @default(0)
-  aktif         Int            @default(0)
+  terpadu       Float            @default(0)
+  aktif         Float            @default(0)
   isActive      Boolean        @default(true)
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
@@ -796,13 +796,13 @@ model SE_Kesehatan_Fasilitas {
   idKabkot              Int?
   AreaKecamatan         AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
   idKecamatan           Int?
-  rumahSakit            Int            @default(0)
-  rumahBersalin         Int            @default(0)
-  rumahSakitBersalin    Int            @default(0)
-  bidan                 Int            @default(0)
-  apotek                Int            @default(0)
-  puskesmasDgRawatInap  Int            @default(0)
-  puskesmasTnpRawatInap Int            @default(0)
+  rumahSakit            Float            @default(0)
+  rumahBersalin         Float            @default(0)
+  rumahSakitBersalin    Float            @default(0)
+  bidan                 Float            @default(0)
+  apotek                Float            @default(0)
+  puskesmasDgRawatInap  Float            @default(0)
+  puskesmasTnpRawatInap Float            @default(0)
   isActive              Boolean        @default(true)
   createdAt             DateTime       @default(now())
   updatedAt             DateTime       @updatedAt
@@ -816,10 +816,10 @@ model SE_Kesehatan_RataRataJarakFasilitas {
   idKabkot                Int?
   AreaKecamatan           AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
   idKecamatan             Int?
-  bidan                   Int            @default(0)
-  puskesmasTanpaRawatInap Int            @default(0)
-  puskesmasDgRawatInap    Int            @default(0)
-  rumahSakit              Int            @default(0)
+  bidan                   Float            @default(0)
+  puskesmasTanpaRawatInap Float            @default(0)
+  puskesmasDgRawatInap    Float            @default(0)
+  rumahSakit              Float            @default(0)
   isActive                Boolean        @default(true)
   createdAt               DateTime       @default(now())
   updatedAt               DateTime       @updatedAt
@@ -833,8 +833,8 @@ model SE_Kesehatan_JumlahDokter {
   idKabkot      Int?
   AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
   idKecamatan   Int?
-  pria          Int            @default(0)
-  wanita        Int            @default(0)
+  pria          Float            @default(0)
+  wanita        Float            @default(0)
   isActive      Boolean        @default(true)
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
@@ -848,8 +848,8 @@ model SE_Keamanan_Perkelahian {
   idKabkot      Int?
   AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
   idKecamatan   Int?
-  menurun       Int            @default(0)
-  meningkat     Int            @default(0)
+  menurun       Float            @default(0)
+  meningkat     Float            @default(0)
   isActive      Boolean        @default(true)
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
@@ -863,8 +863,8 @@ model SE_Keamanan_Pencurian {
   idKabkot      Int?
   AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
   idKecamatan   Int?
-  menurun       Int            @default(0)
-  meningkat     Int            @default(0)
+  menurun       Float            @default(0)
+  meningkat     Float            @default(0)
   isActive      Boolean        @default(true)
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
@@ -878,8 +878,8 @@ model SE_Keamanan_PencurianDanKekerasan {
   idKabkot      Int?
   AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
   idKecamatan   Int?
-  menurun       Int            @default(0)
-  meningkat     Int            @default(0)
+  menurun       Float            @default(0)
+  meningkat     Float            @default(0)
   isActive      Boolean        @default(true)
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
@@ -893,8 +893,8 @@ model SE_Keamanan_PenipuanDanPenggelapan {
   idKabkot      Int?
   AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
   idKecamatan   Int?
-  menurun       Int            @default(0)
-  meningkat     Int            @default(0)
+  menurun       Float            @default(0)
+  meningkat     Float            @default(0)
   isActive      Boolean        @default(true)
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
@@ -908,8 +908,8 @@ model SE_Keamanan_Penganiayaan {
   idKabkot      Int?
   AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
   idKecamatan   Int?
-  menurun       Int            @default(0)
-  meningkat     Int            @default(0)
+  menurun       Float            @default(0)
+  meningkat     Float            @default(0)
   isActive      Boolean        @default(true)
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
@@ -923,8 +923,8 @@ model SE_Keamanan_Perkosaan {
   idKabkot      Int?
   AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
   idKecamatan   Int?
-  menurun       Int            @default(0)
-  meningkat     Int            @default(0)
+  menurun       Float            @default(0)
+  meningkat     Float            @default(0)
   isActive      Boolean        @default(true)
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
@@ -938,8 +938,8 @@ model SE_Keamanan_Narkoba {
   idKabkot      Int?
   AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
   idKecamatan   Int?
-  menurun       Int            @default(0)
-  meningkat     Int            @default(0)
+  menurun       Float            @default(0)
+  meningkat     Float            @default(0)
   isActive      Boolean        @default(true)
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
@@ -953,9 +953,9 @@ model SE_Ekonomi_JumlahPasar {
   idKabkot             Int?
   AreaKecamatan        AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
   idKecamatan          Int?
-  bangunanPermanen     Int            @default(0)
-  bangunanSemiPermanen Int            @default(0)
-  tanpaBangunan        Int            @default(0)
+  bangunanPermanen     Float            @default(0)
+  bangunanSemiPermanen Float            @default(0)
+  tanpaBangunan        Float            @default(0)
   isActive             Boolean        @default(true)
   createdAt            DateTime       @default(now())
   updatedAt            DateTime       @updatedAt
@@ -969,10 +969,10 @@ model SE_Ekonomi_LembagaKeuangan {
   idKabkot               Int?
   AreaKecamatan          AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
   idKecamatan            Int?
-  bankUmumPemerintah     Int            @default(0)
-  bankUmumSwasta         Int            @default(0)
-  bankPengkreditanRakyat Int            @default(0)
-  koperasiSimpanPinjam   Int            @default(0)
+  bankUmumPemerintah     Float            @default(0)
+  bankUmumSwasta         Float            @default(0)
+  bankPengkreditanRakyat Float            @default(0)
+  koperasiSimpanPinjam   Float            @default(0)
   isActive               Boolean        @default(true)
   createdAt              DateTime       @default(now())
   updatedAt              DateTime       @updatedAt
@@ -986,10 +986,10 @@ model SE_Pertanian_JenisPrasaranaTransportasi {
   idKabkot         Int?
   AreaKecamatan    AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
   idKecamatan      Int?
-  diperkeras       Int            @default(0)
-  aspal            Int            @default(0)
-  tidakTerdefinisi Int            @default(0)
-  tanah            Int            @default(0)
+  diperkeras       Float            @default(0)
+  aspal            Float            @default(0)
+  tidakTerdefinisi Float            @default(0)
+  tanah            Float            @default(0)
   isActive         Boolean        @default(true)
   createdAt        DateTime       @default(now())
   updatedAt        DateTime       @updatedAt
@@ -1003,8 +1003,8 @@ model SE_Pertanian_Irigasi {
   idKabkot      Int?
   AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
   idKecamatan   Int?
-  ya            Int            @default(0)
-  tidak         Int            @default(0)
+  ya            Float            @default(0)
+  tidak         Float            @default(0)
   isActive      Boolean        @default(true)
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
@@ -1018,7 +1018,7 @@ model SE_Kemiskinan_Data {
   idKabkot      Int?
   AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
   idKecamatan   Int?
-  value         Int            @default(0)
+  value         Float            @default(0)
   isActive      Boolean        @default(true)
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
@@ -1032,7 +1032,7 @@ model SE_Kemiskinan_BPJS {
   idKabkot      Int?
   AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
   idKecamatan   Int?
-  value         Int            @default(0)
+  value         Float            @default(0)
   isActive      Boolean        @default(true)
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
