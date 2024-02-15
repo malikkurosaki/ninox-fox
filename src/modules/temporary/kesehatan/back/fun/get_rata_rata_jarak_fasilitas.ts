@@ -36,10 +36,10 @@ export default async function funGetRataRataJarakFasilitas({ provinsi, kab }: { 
             }))
 
             dataTable = _.map(_.groupBy(dataTable, "idKabkot"), (v: any) => ({
-                bidan: _.sumBy(v, 'bidan'),
-                puskesmasDgRawatInap: _.sumBy(v, 'puskesmasDgRawatInap'),
-                puskesmasTanpaRawatInap: _.sumBy(v, 'puskesmasTanpaRawatInap'),
-                rumahSakit: _.sumBy(v, 'rumahSakit'),
+                bidan: _.round((_.sumBy(v, 'bidan')) / v.length, 2),
+                puskesmasDgRawatInap: _.round((_.sumBy(v, 'puskesmasDgRawatInap')) / v.length, 2),
+                puskesmasTanpaRawatInap: _.round((_.sumBy(v, 'puskesmasTanpaRawatInap')) / v.length, 2),
+                rumahSakit: _.round((_.sumBy(v, 'rumahSakit')) / v.length, 2),
                 name: v[0].name
             }))
 
@@ -112,10 +112,10 @@ export default async function funGetRataRataJarakFasilitas({ provinsi, kab }: { 
         }))
 
         dataTable = _.map(_.groupBy(dataTable, "idProvinsi"), (v: any) => ({
-            bidan: _.sumBy(v, 'bidan'),
-            puskesmasDgRawatInap: _.sumBy(v, 'puskesmasDgRawatInap'),
-            puskesmasTanpaRawatInap: _.sumBy(v, 'puskesmasTanpaRawatInap'),
-            rumahSakit: _.sumBy(v, 'rumahSakit'),
+            bidan: _.round((_.sumBy(v, 'bidan')) / v.length, 2),
+            puskesmasDgRawatInap: _.round((_.sumBy(v, 'puskesmasDgRawatInap')) / v.length, 2),
+            puskesmasTanpaRawatInap: _.round((_.sumBy(v, 'puskesmasTanpaRawatInap')) / v.length, 2),
+            rumahSakit: _.round((_.sumBy(v, 'rumahSakit')) / v.length, 2),
             name: v[0].name
         }))
 

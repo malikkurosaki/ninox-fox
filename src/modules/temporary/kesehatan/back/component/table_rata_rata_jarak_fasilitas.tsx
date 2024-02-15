@@ -53,10 +53,10 @@ export default function TableRataRataJarakFasilitas({ title, data, th }: { title
                       <Table.Tr key={i}>
                         <Table.Td>{i+1}</Table.Td>
                         <Table.Td>{v.name}</Table.Td>
-                        <Table.Td>{v.rumahSakit}</Table.Td>
-                        <Table.Td>{v.bidan}</Table.Td>
-                        <Table.Td>{v.puskesmasDgRawatInap}</Table.Td>
-                        <Table.Td>{v.puskesmasTanpaRawatInap}</Table.Td>
+                        <Table.Td>{v.rumahSakit} km</Table.Td>
+                        <Table.Td>{v.bidan} km</Table.Td>
+                        <Table.Td>{v.puskesmasDgRawatInap} km</Table.Td>
+                        <Table.Td>{v.puskesmasTanpaRawatInap} km</Table.Td>
                       </Table.Tr>
                     ))}
                   </Table.Tbody>

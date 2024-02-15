@@ -1,5 +1,6 @@
 'use server'
 import prisma from "@/modules/_global/bin/prisma";
+import _ from "lodash";
 import { revalidatePath } from "next/cache";
 
 /**
@@ -18,9 +19,9 @@ export default async function funUploadJaminanPensiun({ body }: { body: any }) {
                 id: Number(i.id)
             },
             data: {
-                ya: Number(i.Ya),
-                tidak: Number(i.Tidak),
-                tidakTahu: Number(i.TidakTahu)
+                ya: (_.isNaN(Number(i.Ya))) ? 0 : Number(i.Ya),
+                tidak: (_.isNaN(Number(i.Tidak))) ? 0 : Number(i.Tidak),
+                tidakTahu: (_.isNaN(Number(i.TidakTahu))) ? 0 : Number(i.TidakTahu)
             }
         });
     }

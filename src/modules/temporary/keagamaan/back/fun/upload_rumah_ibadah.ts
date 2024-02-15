@@ -1,5 +1,6 @@
 'use server'
 import prisma from "@/modules/_global/bin/prisma";
+import _ from "lodash";
 import { revalidatePath } from "next/cache";
 
 /**
@@ -18,12 +19,12 @@ export default async function funUploadRumahIbadah({ body }: { body: any }) {
                 id: Number(i.id)
             },
             data: {
-                masjid: Number(i.Masjid),
-                gerejaKhatolik: Number(i.GerejaKhatolik),
-                gerejaProtestan: Number(i.GerejaProtestan),
-                pura: Number(i.Pura),
-                wihara: Number(i.Wihara),
-                kelenteng: Number(i.Kelenteng),
+                masjid: (_.isNaN(Number(i.Masjid))) ? 0 : Number(i.Masjid),
+                gerejaKhatolik: (_.isNaN(Number(i.GerejaKhatolik))) ? 0 : Number(i.GerejaKhatolik),
+                gerejaProtestan: (_.isNaN(Number(i.GerejaProtestan))) ? 0 : Number(i.GerejaProtestan),
+                pura: (_.isNaN(Number(i.Pura))) ? 0 : Number(i.Pura),
+                wihara: (_.isNaN(Number(i.Wihara))) ? 0 : Number(i.Wihara),
+                kelenteng: (_.isNaN(Number(i.Kelenteng))) ? 0 : Number(i.Kelenteng),
             }
         });
     }

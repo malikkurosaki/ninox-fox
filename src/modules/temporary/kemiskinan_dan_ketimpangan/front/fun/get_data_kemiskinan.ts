@@ -14,8 +14,15 @@ export default async function funGetFrontDataKemiskinan({ prov, kab, kec }: { pr
                     idProvinsi: Number(prov)
                 }
             })
+
+            const count = await prisma.sE_Kemiskinan_Data.count({
+                where: {
+                    idProvinsi: Number(prov)
+                }
+            })
+
             const dataTable = _.map(_.groupBy(data, "idProvinsi"), (v: any) => ({
-                value: _.sumBy(v, 'value')
+                value: _.round((_.sumBy(v, 'value')) / count, 2)
             }))
 
             return dataTable
@@ -27,8 +34,16 @@ export default async function funGetFrontDataKemiskinan({ prov, kab, kec }: { pr
                     idKabkot: Number(kab)
                 }
             })
+
+            const count = await prisma.sE_Kemiskinan_Data.count({
+                where: {
+                    idProvinsi: Number(prov),
+                    idKabkot: Number(kab)
+                }
+            })
+
             const dataTable = _.map(_.groupBy(data, "idKabkot"), (v: any) => ({
-                value: _.sumBy(v, 'value')
+                value: _.round((_.sumBy(v, 'value')) / count, 2)
             }))
 
             return dataTable
@@ -41,8 +56,17 @@ export default async function funGetFrontDataKemiskinan({ prov, kab, kec }: { pr
                     idKecamatan: Number(kec)
                 }
             })
+
+            const count = await prisma.sE_Kemiskinan_Data.count({
+                where: {
+                    idProvinsi: Number(prov),
+                    idKabkot: Number(kab),
+                    idKecamatan: Number(kec)
+                }
+            })
+
             const dataTable = _.map(_.groupBy(data, "idKecamatan"), (v: any) => ({
-                value: _.sumBy(v, 'value')
+                value: _.round((_.sumBy(v, 'value')) / count, 2)
             }))
 
             return dataTable
