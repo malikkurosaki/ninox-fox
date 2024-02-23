@@ -15,6 +15,9 @@ export default async function funGetEmotionChart({ candidate, startDate, endDate
                     gte: new Date(startDate),
                     lte: new Date(endDate),
                 }
+            },
+            orderBy:{
+                dateEmotion: 'asc'
             }
         })
     }
