@@ -1,0 +1,6 @@
+.box {
+    @mixin hover {
+        background-color: dark;
+        transform: scale(1.02);
+      }
+}
