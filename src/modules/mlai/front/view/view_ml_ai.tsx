@@ -1,45 +1,57 @@
 "use client"
 import { PageSubTitle } from '@/modules/_global';
 import { funGetOneCandidateFront } from '@/modules/candidate';
-import { ActionIcon, Box, Button, Container, Divider, Group, Image, Indicator, Menu, MenuTarget, ScrollArea, Select, Stack, Text } from '@mantine/core';
-import React, { useState } from 'react';
+import { ActionIcon, Box, Button, Container, Divider, Group, Image, Indicator, Menu, ScrollArea, Select, Stack, Text } from '@mantine/core';
+import React, { useEffect, useState } from 'react';
 import TextAnimation from 'react-typing-dynamics';
-import { funGetMlAiFront } from '../..';
+import { funGetDateMlAiFront, funGetMlAiFront, funGetMlAiFrontV2 } from '../..';
 import _ from 'lodash';
-import { DateInput, DatePicker, DatePickerProps } from '@mantine/dates';
+import { DateInput, DatePickerProps } from '@mantine/dates';
 import moment from 'moment';
 import { CiMenuKebab } from 'react-icons/ci';
+import { useAtom } from 'jotai';
+import { _valReadIdMlai } from '../val/val_mlai';
+import Wrapper from '../component/wrapper_read';
 
-const dataMl = [
-  {
-    id: 1,
-    desc: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quodLorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam., quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. ',
-  },
-]
-
-export default function ViewMlAi({ data, candidate, oneCandidate }: { data: any, candidate: any, oneCandidate: any }) {
-  const [isData, setData] = useState(data)
+export default function ViewMlAi({ dataV2, dataTanggal, candidate, oneCandidate }: { dataV2: any, dataTanggal: any, candidate: any, oneCandidate: any }) {
   const [listCandidate, setListCandidate] = useState(candidate)
   const [isCandidate, setCandidate] = useState(oneCandidate?.id)
   const [isNameCan, setNameCan] = useState(oneCandidate?.name.toUpperCase())
   const [isImgCan, setImgCan] = useState(`/img/candidate/${oneCandidate?.img}`)
-  const randomInt = ['02-03-2024', '08-03-2024', '17-03-2024', '28-03-2024']
+  const [isDate, setDate] = useState<any>(new Date())
+  const [isMonth, setMonth] = useState<any>(moment(new Date().getMonth()).format('MM'))
+  const [isListTgl, setListTgl] = useState(dataTanggal)
+  const [valRead, setRead] = useAtom(_valReadIdMlai)
+  const [dataMlai, setDataMlai] = useState(dataV2.data)
+  const [dataJamMlai, setDataJamMlai] = useState(dataV2.dataJam)
+  const [isBTime, setBTime] = useState(dataV2.isJam)
 
+  async function changeMonth(value: any) {
+    const monthKlik = moment(value).format('MM')
+    if (monthKlik != isMonth) {
+      setMonth(monthKlik)
+      const loadTgl = await funGetDateMlAiFront({ candidate: isCandidate, date: value })
+      setListTgl(loadTgl)
+    }
+  }
 
   async function chooseCandidate(value: any) {
-    setData([])
     setCandidate((value == null) ? oneCandidate?.id : value)
-    const dataDB = await funGetMlAiFront({ candidate: value })
+    const dataDB = await funGetMlAiFrontV2({ candidate: value, date: isDate })
     const dataCan = await funGetOneCandidateFront({ candidate: value })
-    setData(dataDB)
+    const loadTgl = await funGetDateMlAiFront({ candidate: isCandidate, date: isDate })
+    setListTgl(loadTgl)
+    setDataMlai(dataDB?.data)
+    setDataJamMlai(dataDB?.dataJam)
+    setBTime(dataDB?.isJam)
     setNameCan((dataCan?.name.toUpperCase()))
     setImgCan(`/img/candidate/${dataCan?.img}`)
   }
-  const dayRenderer: DatePickerProps['renderDay'] = (date) => {
 
-    const coba = moment(date).format('DD-MM-YYYY')
+  const dayRenderer: DatePickerProps['renderDay'] = (date) => {
+    const coba = moment(date).format('YYYY-MM-DD')
     const day = date.getDate()
-    const muncul = randomInt.includes(coba)
+    const muncul = isListTgl.includes(coba)
     return (
       <Indicator size={6} radius="xs" label={<Divider my="md" />} position="bottom-center" color="green" offset={-2} disabled={!muncul}>
         <div>{day}</div>
@@ -47,13 +59,25 @@ export default function ViewMlAi({ data, candidate, oneCandidate }: { data: any,
     );
   };
 
-
-  function displayDates(array: Date[]): string {
-    const dateStrings = array.map((d) => d.toISOString().split('T')[0]);
-
-    return dateStrings.join(' ');
+  async function chooseDate(value: any) {
+    setDate(value)
+    const dataDB = await funGetMlAiFrontV2({ candidate: isCandidate, date: value })
+    setDataMlai(dataDB?.data)
+    setDataJamMlai(dataDB?.dataJam)
+    setBTime(dataDB?.isJam)
   }
-  const [value, setValue] = useState<Date | null>(null);
+
+
+
+  async function chooseTime(value: any) {
+    setBTime(value)
+    const dataLoad = await funGetMlAiFrontV2({ candidate: isCandidate, date: isDate, time: value })
+    setDataMlai(dataLoad?.data)
+  }
+
+  useEffect(() => {
+    setDataMlai(dataV2.data)
+  }, [dataV2])
 
   return (
     <>
@@ -65,7 +89,6 @@ export default function ViewMlAi({ data, candidate, oneCandidate }: { data: any,
           <Image src={isImgCan} bg={"white"} style={{ border: "4px solid white" }} radius={"100%"} alt='Kandidat' maw={200} mx="auto" />
           <Container px={0} size="15rem" mt={20}>
             <Select
-
               placeholder="Kandidat"
               data={listCandidate.map((can: any) => ({
                 value: String(can.id),
@@ -93,34 +116,94 @@ export default function ViewMlAi({ data, candidate, oneCandidate }: { data: any,
                     variant="filled"
                     placeholder="SELECT DATE"
                     maxDate={new Date()}
-                    minDate={new Date('2023-09-01')}
-                    value={value}
-                    onChange={setValue}
+                    value={isDate}
+                    onChange={(val) => {
+                      chooseDate(val)
+                    }}
                     renderDay={dayRenderer}
+                    onDateChange={(val) => { changeMonth(val) }}
                   />
-                  <Button color="indigo" w={100}>08.33</Button>
-                  <Button color="indigo" w={100}>10.00</Button>
-                  <Button color="indigo" w={100}>13.10</Button>
-                  <Button color="indigo" w={100}>15.40</Button>
-                  <Button color="indigo" w={100}>20.20</Button>
-                  <Group>
-                    <Menu shadow="md" width={200} position="right-start">
-                      <Menu.Target>
-                        <ActionIcon variant="subtle" color="rgba(255, 255, 255, 1)" aria-label="Settings">
-                          <CiMenuKebab style={{ width: '70%', height: '70%' }} />
-                        </ActionIcon>
-                      </Menu.Target>
-                      <Menu.Dropdown pb={0}>
-                        <Button color="indigo" mb={5} fullWidth>13.10</Button>
-                        <Button color="indigo" mb={5} fullWidth>15.40</Button>
-                        <Button color="indigo" mb={5} fullWidth>20.20</Button>
-                      </Menu.Dropdown>
-                    </Menu>
-                  </Group>
+                  {
+                    dataJamMlai.slice(0, 5).map((item: any, i: any) => {
+                      return (
+                        <div key={i}>
+                          <Button color="indigo" w={100} variant={(isBTime == item.timeContent) ? 'filled' : 'outline'}
+                            onClick={() => {
+                              chooseTime(item.timeContent)
+                            }}
+                          >
+                            {item.timeContent}
+                          </Button>
+                        </div>
+                      )
+                    })
+                  }
+                  {dataJamMlai.length > 5 &&
+                    <Group>
+                      <Menu shadow="md" width={200} position="right-start">
+                        <Menu.Target>
+                          <ActionIcon variant="subtle" color="rgba(255, 255, 255, 1)" aria-label="Settings">
+                            <CiMenuKebab style={{ width: '70%', height: '70%' }} />
+                          </ActionIcon>
+                        </Menu.Target>
+                        <Menu.Dropdown pb={0}>
+                          <ScrollArea h={100}>
+                            {
+                              dataJamMlai.slice(5, dataJamMlai.length).map((item: any, i: any) => {
+                                return (
+                                  <Menu.Item mb={5} bg={(isBTime == item.timeContent) ? 'indigo' : "#230D37"} key={i}
+                                    onClick={() => { chooseTime(item.timeContent) }}
+                                  >
+                                    <Text ta={"center"} c={"white"} fz={16}>
+                                      {item.timeContent}
+                                    </Text>
+                                  </Menu.Item>
+                                )
+
+                              })
+                            }
+                          </ScrollArea>
+                        </Menu.Dropdown>
+                      </Menu>
+                    </Group>
+                  }
                 </Group>
               </Box>
               <ScrollArea h={"34vh"}>
-                <Stack >
+                <Stack>
+                  {dataMlai && dataMlai.map((item: any, i: any) => {
+                    return (
+                      <Box key={i}>
+                        {
+                          valRead.includes(item.id) ? (
+                            <>
+                              <Box c={"white"} dangerouslySetInnerHTML={{ __html: item.content }} />
+                            </>
+                          ) : (
+                            <>
+                              <Wrapper id={item.id}>
+                                <Stack c={"white"}>
+                                  <TextAnimation
+                                    phrases={[...item.content.split('\n')]}
+                                    typingSpeed={0}
+                                    backspaceDelay={0}
+                                    eraseDelay={0}
+                                    timeComplete={0}
+                                    errorProbability={0}
+                                    eraseOnComplete={false}
+                                    isSecure={false}
+                                  />
+                                </Stack>
+                              </Wrapper>
+                            </>
+                          )}
+
+                      </Box>
+
+                    )
+                  })}
+                </Stack>
+                {/* <Stack >
                   {
                     isData && isData.length > 0 && (
                       <Text c={"white"} fz={14}>
@@ -137,7 +220,7 @@ export default function ViewMlAi({ data, candidate, oneCandidate }: { data: any,
                       </Text>
                     )
                   }
-                </Stack>
+                </Stack> */}
 
               </ScrollArea>
             </Box>

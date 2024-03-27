@@ -7,8 +7,6 @@ export default async function funAddMlAi({ body, content }: { body: any, content
   let y = new Date('1970-01-01 ' + body.timeContent)
   let isoDateTime = new Date(y.getTime() - (y.getTimezoneOffset() * 60000)).toISOString()
 
-  console.log(body.dateContent)
-
   const data = await prisma.mlAi.create({
     data: {
       idCandidate: body.idCandidate,
