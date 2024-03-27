@@ -1,10 +1,10 @@
 'use client'
 import { ButtonBack } from "@/modules/_global"
-import { Box, Button, Group, Modal, Select, Stack, Text, TextInput, Textarea } from "@mantine/core"
+import { ActionIcon, Box, Button, Group, Modal, Select, Stack, Text, TextInput, Textarea } from "@mantine/core"
 import { useAtom } from "jotai"
 import { isModalMlAi } from "../val/val_mlai"
 import ModalEditMlAi from "../component/modal_edit_mlai"
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { Link, RichTextEditor } from "@mantine/tiptap"
 import { useEditor } from "@tiptap/react"
 import StarterKit from "@tiptap/starter-kit"
@@ -17,6 +17,9 @@ import Color from "@tiptap/extension-color"
 import TextAlign from "@tiptap/extension-text-align"
 import { CiPickerEmpty } from "react-icons/ci"
 import toast from "react-simple-toasts"
+import { DateInput, TimeInput } from "@mantine/dates"
+import { AiOutlineClockCircle } from "react-icons/ai"
+import moment from "moment"
 
 /**
  * Fungsi untuk menampilkan view form edit mlai.
@@ -24,12 +27,21 @@ import toast from "react-simple-toasts"
  */
 
 export default function EditMlAi({ data }: { data: any }) {
+    const ref = useRef<HTMLInputElement>(null)
     const [openModal, setOpenModal] = useAtom(isModalMlAi)
     const [isBody, setBody] = useState({
         id: data.id,
         idCandidate: data.idCandidate,
-        content: data.content
+        content: data.content,
+        dateContent: data.dateContent == null ? '' : data.dateContent,
+        timeContent: data.timeContent == null ? '' : data.timeContent
     })
+
+    const pickerControl = (
+        <ActionIcon variant="subtle" color="gray" onClick={() => ref.current?.showPicker()}>
+            <AiOutlineClockCircle style={{ width: "70%", height: "70%" }} />
+        </ActionIcon>
+    );
 
     const editor = useEditor({
         extensions: [
@@ -47,7 +59,7 @@ export default function EditMlAi({ data }: { data: any }) {
     });
 
     function onConfirmation() {
-        if (editor?.getHTML() == '<p></p>')
+        if (Object.values(isBody).includes("") || editor?.getHTML() == '<p></p>')
             return toast("Data cannot be empty", { theme: "dark" });
         setOpenModal(true)
     }
@@ -65,6 +77,31 @@ export default function EditMlAi({ data }: { data: any }) {
                         <TextInput label={"Kabupaten"} value={data.areaKabkot} disabled />
                     </Group>
                     <TextInput label={"Kandidat"} value={data.name} disabled />
+                    <Group grow>
+                        <DateInput valueFormat="DD-MM-YYYY" required
+                            label={"Tanggal"}
+                            placeholder="Pilih Tanggal"
+                            value={(isBody.dateContent == '' || isBody.dateContent == null) ? null : new Date(isBody.dateContent)}
+                            onChange={(e) => {
+                                setBody({
+                                    ...isBody,
+                                    dateContent: moment(e).format("YYYY-MM-DD"),
+                                });
+                            }}
+                        />
+                        <TimeInput
+                            label="Jam"
+                            required ref={ref}
+                            rightSection={pickerControl}
+                            value={isBody.timeContent}
+                            onChange={(val) =>
+                                setBody({
+                                    ...isBody,
+                                    timeContent: String(val.target.value)
+                                })
+                            }
+                        />
+                    </Group>
                 </Stack>
                 {/* <Textarea
                     mt={20}
