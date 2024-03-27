@@ -3,7 +3,7 @@ import { useDisclosure, useShallowEffect } from '@mantine/hooks';
 import React, { useState } from 'react';
 import { MdArrowForwardIos } from 'react-icons/md';
 import { usePathname, useRouter } from 'next/navigation';
-import { ActionIcon, AppShell, AppShellNavbar, AppShellSection, Box, Burger, Divider, Grid, Group, Modal, NavLink, Skeleton, Stack, Text, Title, Tooltip } from '@mantine/core';
+import { ActionIcon, AppShell, AppShellNavbar, AppShellSection, Box, Burger, Divider, Drawer, Grid, Group, Indicator, Modal, NavLink, Skeleton, Stack, Text, Title, Tooltip, useMantineColorScheme } from '@mantine/core';
 import _ from 'lodash';
 import { DataNavbarTutup } from '../components/data_navbar_tutup';
 import { WARNA } from '../../fun/WARNA';
@@ -13,9 +13,15 @@ import { DataNavbarBuka } from '../components/data_navbar_buka';
 import { useAtom } from 'jotai';
 import { isModalLayout } from '../val/isModallayout';
 import ModalLogoutUser from '../components/modal_logout_user';
+import { IoMdClose, IoMdNotificationsOutline } from 'react-icons/io';
+import { isDrawer } from '../val/isDrawer';
+import DrawerNotifikasi from '../components/drawer_notifikasi';
+import { IoClose } from 'react-icons/io5';
+
 
 export default function LayoutViewFront({ children }: { children: React.ReactNode }) {
   const [valOpenModal, setOpenModal] = useAtom(isModalLayout)
+  const [valOpenDrawer, setOpenDrawer] = useAtom(isDrawer)
   const [opened, { toggle }] = useDisclosure();
   const [isOpenNavbar, setOpenNavbar] = useState(true)
   const [isNavOpt, setNavOpt] = useState({ width: 100, breakpoint: 'sm', collapsed: { mobile: isOpenNavbar } })
@@ -26,6 +32,16 @@ export default function LayoutViewFront({ children }: { children: React.ReactNod
   useShallowEffect(() => {
     setActive(pathname);
   });
+  const { setColorScheme, clearColorScheme } = useMantineColorScheme();
+  function OpenModal() {
+    setOpenDrawer(true)
+    setColorScheme('dark')
+  }
+  function CloseModal() {
+    setOpenDrawer(false)
+    clearColorScheme()
+  }
+
   return (
     <>
       <AppShell
@@ -65,7 +81,11 @@ export default function LayoutViewFront({ children }: { children: React.ReactNod
                       </Tooltip>
                     </Box>
                   ))}
-
+                  <Indicator inline processing color="red" size={12} label={20}>
+                    <ActionIcon variant="subtle" c={"white"} onClick={OpenModal}>
+                      <IoMdNotificationsOutline size={30} />
+                    </ActionIcon>
+                  </Indicator>
                 </Stack>
               </Group>
               <Group
@@ -138,6 +158,16 @@ export default function LayoutViewFront({ children }: { children: React.ReactNod
                 </Box>
               )
             })}
+            <Box m={5} mt={5} ml={18}>
+              <Box onClick={OpenModal} style={{ cursor: "pointer" }}>
+                <Indicator inline processing color="red" size={12} label={20}>
+                  <Text c={"white"} >
+                    NOTIFIKASI
+                  </Text>
+                </Indicator>
+              </Box>
+            </Box>
+
             <Group
               style={{
                 position: "absolute",
@@ -169,6 +199,22 @@ export default function LayoutViewFront({ children }: { children: React.ReactNod
       >
         <ModalLogoutUser />
       </Modal>
+
+      <Drawer opened={valOpenDrawer}
+        onClose={() => setOpenDrawer(false)}
+        position='right'
+        closeOnClickOutside={false}
+        withCloseButton={false}
+        title={
+         <Group gap={"md"}>
+          <ActionIcon variant='subtle' onClick={CloseModal}>
+          <IoClose size={30} color={"white"} /></ActionIcon>
+           <Text>NOTIFIKASI</Text>
+         </Group>
+        }
+      >
+        <DrawerNotifikasi />
+      </Drawer>
     </>
   );
 }
