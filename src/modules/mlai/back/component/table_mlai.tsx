@@ -83,19 +83,21 @@ export default function TableMlAi({ title, data, searchParam }: { title: any, da
                         borderBottom: "1px solid #CED4D9",
                       }}
                     >
-                      <Table.Th>No</Table.Th>
-                      <Table.Th w={200}>Kandidat</Table.Th>
+                      <Table.Th w={50}>No</Table.Th>
+                      <Table.Th>Kandidat</Table.Th>
+                      <Table.Th>Tanggal</Table.Th>
+                      <Table.Th>Jam</Table.Th>
                       <Table.Th>
                         <Center>Aksi</Center>
                       </Table.Th>
                     </Table.Tr>
                   </Table.Thead>
                   {isData.map((v: any, i: any) => (
-                    <ComponentTable v={v} i={i} key={i} onClick={(val)=>{
+                    <ComponentTable v={v} i={i} key={i} onClick={(val) => {
                       setDataDelete(val)
                       setDataCandidate(v.idCandidate)
                       setOpenModal(true)
-                    }}/>
+                    }} />
                   ))}
                 </Table>
               </ScrollArea>
@@ -111,8 +113,8 @@ export default function TableMlAi({ title, data, searchParam }: { title: any, da
         withCloseButton={false}
         closeOnClickOutside={false}
       >
-        <ModalDelMlAi candidate={isDataCandidate} id={dataDelete} onSuccess={()=>onLoad()}/>
-      </Modal> 
+        <ModalDelMlAi candidate={isDataCandidate} id={dataDelete} onSuccess={() => onLoad()} />
+      </Modal>
     </>
   );
 }

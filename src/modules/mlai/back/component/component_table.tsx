@@ -29,6 +29,8 @@ export default function ComponentTable({ v, i, onClick }: { v: any; i: any, onCl
         <Table.Tr>
           <Table.Td>{i + 1}</Table.Td>
           <Table.Td>{v.name}</Table.Td>
+          <Table.Td>{v.dateContent}</Table.Td>
+          <Table.Td>{v.timeContent}</Table.Td>
           <Table.Td>
             <Center>
               <Stack>

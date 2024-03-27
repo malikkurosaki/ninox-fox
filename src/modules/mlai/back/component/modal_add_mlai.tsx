@@ -13,17 +13,17 @@ import { funLogUser } from "@/modules/user"
  * @returns {component} modal konfirmasi add ml ai.
  */
 
-export default function ModalAddMlAi({ candidate, text, onSuccess }: { candidate: any, text: any, onSuccess: (val: any) => void }) {
+export default function ModalAddMlAi({ data, text, onSuccess }: { data: any, text: any, onSuccess: (val: any) => void }) {
     const [openModal, setOpenModal] = useAtom(isModalMlAi)
     const router = useRouter()
 
     async function onCreateMlAi() {
-        const cek = await funGetAccessArea({ candidate: candidate })
+        const cek = await funGetAccessArea({ candidate: data.idCandidate })
         if (!cek) {
             setOpenModal(false)
             return toast("Anda tidak mempunyai akses ke wilayah tersebut", { theme: "dark" })
         }
-        const addData = await funAddMlAi({ candidate: candidate, content: text })
+        const addData = await funAddMlAi({ body: data, content: text })
         if (!addData.success) return toast(addData.message, { theme: "dark" })
         await funLogUser({ act: 'ADD', desc: `User menambah data ML-AI`, idContent: addData.data, tbContent: 'mlai' })
         toast("Sukses", { theme: "dark" })
