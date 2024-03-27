@@ -205,6 +205,7 @@ export default function LayoutViewFront({ children }: { children: React.ReactNod
         position='right'
         closeOnClickOutside={false}
         withCloseButton={false}
+        transitionProps={{ transition: 'slide-left', duration: 150, timingFunction: 'linear' }}
         title={
          <Group gap={"md"}>
           <ActionIcon variant='subtle' onClick={CloseModal}>
