@@ -63,19 +63,21 @@ model UserAccess {
 }
 
 model User {
-  id         String     @id @default(cuid())
-  UserRole   UserRole   @relation(fields: [idUserRole], references: [id])
-  idUserRole Int
-  name       String
-  email      String     @unique
-  password   String
-  phone      String // kemungkinan ada 1 orang yang punya akun yg beda namun punya wa yg sama
-  isAllArea  Boolean    @default(false)
-  isActive   Boolean    @default(true)
-  createdAt  DateTime   @default(now())
-  updatedAt  DateTime   @updatedAt
-  UserLog    UserLog[]
-  UserArea   UserArea[]
+  id            String          @id @default(cuid())
+  UserRole      UserRole        @relation(fields: [idUserRole], references: [id])
+  idUserRole    Int
+  name          String
+  email         String          @unique
+  password      String
+  phone         String // kemungkinan ada 1 orang yang punya akun yg beda namun punya wa yg sama
+  isAllArea     Boolean         @default(false)
+  isActive      Boolean         @default(true)
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  UserLog       UserLog[]
+  UserArea      UserArea[]
+  Notification  Notifications[] @relation("UserToClient")
+  Notification2 Notifications[] @relation("UserToAdmin")
 }
 
 model UserLog {
@@ -512,6 +514,20 @@ model CandidatePairing {
   isActive      Boolean        @default(true)
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
+}
+
+model Notifications {
+  id           String   @id @default(cuid())
+  User1        User     @relation("UserToClient", fields: [idUserClient], references: [id], map: "UserToClientMap")
+  idUserClient String
+  User2        User     @relation("UserToAdmin", fields: [idUserAdmin], references: [id], map: "UserToAdminMap")
+  idUserAdmin  String
+  category     String
+  description  String
+  isRead       Boolean  @default(false)
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }
 
 // DATA SOSIAL EKONOMI
