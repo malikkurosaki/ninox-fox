@@ -1,5 +1,5 @@
 'use client'
-import { Anchor, Box, Divider, Flex, Group, Text, useMantineColorScheme } from '@mantine/core';
+import { Anchor, Box, Divider, Flex, Group, ScrollArea, Text, useMantineColorScheme } from '@mantine/core';
 import React, { useState } from 'react';
 import { IoNotificationsOffOutline } from 'react-icons/io5';
 import { isDrawer } from '../val/isDrawer';
@@ -52,7 +52,6 @@ export default function DrawerNotifikasi({ data }: { data: any }) {
 
   function StartModal() {
     setOpenDrawer(false)
-    clearColorScheme()
     router.push(`/summary`)
   }
 
@@ -74,27 +73,29 @@ export default function DrawerNotifikasi({ data }: { data: any }) {
               <Text c={'#696969'} fw={'bold'}>TIDAK ADA NOTIFIKASI</Text>
             </Flex>
           ) :
-            isData.map((v: any, i: any) => {
+            <ScrollArea h={'95vh'} scrollbarSize={2}>
+              {isData.map((v: any, i: any) => {
               return (
-                <Box key={i} mb={10}>
+                <Box key={i} mb={10} m={10}>
                   <Box
                     style={{
                       border: `1px solid gray`,
                       padding: 20,
                       borderRadius: 10,
-                      cursor: "pointer",
                     }}
                     className={classes.box}
-                    // onClick={StartModal}
+                    // 
                   >
+                    <Box onClick={StartModal} style={{cursor: "pointer",}}>
                     <Group>
-                      <MdBrowserUpdated size={25} />
-                      <Text fw={'bold'}>{v.title}</Text>
+                      <MdBrowserUpdated size={25} color={'white'}/>
+                      <Text fw={'bold'} c={'white'}>{v.title}</Text>
                     </Group>
-                    <Box>
+  
                       <Box pt={5}>
-                        <Text>{v.description}</Text>
+                        <Text c={'white'}>{v.description}</Text>
                       </Box>
+                    </Box>
                       <Divider my={5} />
                       <Group justify="space-between">
                         <Text size="sm" c={'#828282'} ta={'right'}>
@@ -103,10 +104,10 @@ export default function DrawerNotifikasi({ data }: { data: any }) {
                         <Anchor size={'sm'} onClick={()=>{onReadNotif(v.id)}}>tandai telah dibaca</Anchor>
                       </Group>
                     </Box>
-                  </Box>
                 </Box>
               )
-            })
+            })}
+            </ScrollArea>
         }
 
       </Box>
