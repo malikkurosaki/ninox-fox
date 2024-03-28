@@ -26,6 +26,11 @@ import funGetOneKabkot from './fun/fun_get_one_kabkot';
 import funGetOneKecamatan from './fun/fun_get_one_kecamatan';
 import funGetAreaByDefault from './fun/get_area_by_default';
 import funGetIdprovByName from './back/fun/get_idprov_by_name';
+import funGetCountNotification from './fun/get_count_notifications';
+import funGetAllNotifications from './fun/get_all_notifications';
+import funUpdReadNotifications from './fun/upd_read_notifications';
+import funGetOneProvinsi from './fun/fun_get_one_provinsi';
+import funAddNotifications from './back/fun/add_notifications';
 
 
 export { provinsiCount }
@@ -59,3 +64,8 @@ export { funGetAreaByDefault }
 export { ViewWilayah }
 export { funGetIdprovByName }
 export { COLOR_SOSIAL_EKONOMI }
+export { funGetCountNotification }
+export { funGetAllNotifications }
+export { funUpdReadNotifications }
+export { funGetOneProvinsi }
+export { funAddNotifications }

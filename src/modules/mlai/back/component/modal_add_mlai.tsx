@@ -5,7 +5,7 @@ import { isModalMlAi } from "../val/val_mlai"
 import toast from "react-simple-toasts"
 import { useRouter } from "next/navigation"
 import funAddMlAi from "../fun/fun_add_mlai"
-import { funGetAccessArea } from "@/modules/_global"
+import { funAddNotifications, funGetAccessArea } from "@/modules/_global"
 import { funLogUser } from "@/modules/user"
 
 /**
@@ -26,6 +26,7 @@ export default function ModalAddMlAi({ data, text, onSuccess }: { data: any, tex
         const addData = await funAddMlAi({ body: data, content: text })
         if (!addData.success) return toast(addData.message, { theme: "dark" })
         await funLogUser({ act: 'ADD', desc: `User menambah data ML-AI`, idContent: addData.data, tbContent: 'mlai' })
+        await funAddNotifications({ kategori: 'mlai', candidateId: data.idCandidate })
         toast("Sukses", { theme: "dark" })
         setOpenModal(false)
         onSuccess(true)

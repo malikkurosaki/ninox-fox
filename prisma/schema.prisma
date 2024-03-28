@@ -522,6 +522,7 @@ model Notifications {
   idUserClient String
   User2        User     @relation("UserToAdmin", fields: [idUserAdmin], references: [id], map: "UserToAdminMap")
   idUserAdmin  String
+  title        String
   category     String
   description  String
   isRead       Boolean  @default(false)
