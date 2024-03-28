@@ -17,14 +17,16 @@ import { IoMdClose, IoMdNotificationsOutline } from 'react-icons/io';
 import { isDrawer } from '../val/isDrawer';
 import DrawerNotifikasi from '../components/drawer_notifikasi';
 import { IoClose } from 'react-icons/io5';
+import { funGetAllNotifications } from '../..';
 
 
-export default function LayoutViewFront({ children }: { children: React.ReactNode }) {
+export default function LayoutViewFront({ notif, children }: { notif: number, children: React.ReactNode }) {
   const [valOpenModal, setOpenModal] = useAtom(isModalLayout)
   const [valOpenDrawer, setOpenDrawer] = useAtom(isDrawer)
   const [opened, { toggle }] = useDisclosure();
   const [isOpenNavbar, setOpenNavbar] = useState(true)
   const [isNavOpt, setNavOpt] = useState({ width: 100, breakpoint: 'sm', collapsed: { mobile: isOpenNavbar } })
+  const [isListNotif, setListNotif] = useState<any>([])
 
   const router = useRouter();
   const pathname = usePathname();
@@ -33,10 +35,14 @@ export default function LayoutViewFront({ children }: { children: React.ReactNod
     setActive(pathname);
   });
   const { setColorScheme, clearColorScheme } = useMantineColorScheme();
-  function OpenModal() {
+
+  async function OpenModal() {
+    const loadNotif = await funGetAllNotifications()
+    setListNotif(loadNotif)
     setOpenDrawer(true)
     setColorScheme('dark')
   }
+
   function CloseModal() {
     setOpenDrawer(false)
     clearColorScheme()
@@ -81,11 +87,20 @@ export default function LayoutViewFront({ children }: { children: React.ReactNod
                       </Tooltip>
                     </Box>
                   ))}
-                  <Indicator inline processing color="red" size={12} label={20}>
-                    <ActionIcon variant="subtle" c={"white"} onClick={OpenModal}>
-                      <IoMdNotificationsOutline size={30} />
-                    </ActionIcon>
-                  </Indicator>
+                  {
+                    notif > 0 ? (
+                      <Indicator inline processing color="red" size={12} label={notif}>
+                        <ActionIcon variant="subtle" c={"white"} onClick={OpenModal}>
+                          <IoMdNotificationsOutline size={30} />
+                        </ActionIcon>
+                      </Indicator>
+                    ) : (
+                      <ActionIcon variant="subtle" c={"white"} onClick={OpenModal}>
+                        <IoMdNotificationsOutline size={30} />
+                      </ActionIcon>
+                    )
+                  }
+
                 </Stack>
               </Group>
               <Group
@@ -160,11 +175,20 @@ export default function LayoutViewFront({ children }: { children: React.ReactNod
             })}
             <Box m={5} mt={5} ml={18}>
               <Box onClick={OpenModal} style={{ cursor: "pointer" }}>
-                <Indicator inline processing color="red" size={12} label={20}>
-                  <Text c={"white"} >
-                    NOTIFIKASI
-                  </Text>
-                </Indicator>
+                {
+                  notif > 0 ? (
+                    <Indicator inline processing color="red" size={12} label={notif}>
+                      <Text c={"white"} >
+                        NOTIFIKASI
+                      </Text>
+                    </Indicator>
+                  ) : (
+                    <Text c={"white"} >
+                      NOTIFIKASI
+                    </Text>
+                  )
+                }
+
               </Box>
             </Box>
 
@@ -207,14 +231,14 @@ export default function LayoutViewFront({ children }: { children: React.ReactNod
         withCloseButton={false}
         transitionProps={{ transition: 'slide-left', duration: 150, timingFunction: 'linear' }}
         title={
-         <Group gap={"md"}>
-          <ActionIcon variant='subtle' onClick={CloseModal}>
-          <IoClose size={30} color={"white"} /></ActionIcon>
-           <Text>NOTIFIKASI</Text>
-         </Group>
+          <Group gap={"md"}>
+            <ActionIcon variant='subtle' onClick={CloseModal}>
+              <IoClose size={30} color={"white"} /></ActionIcon>
+            <Text>NOTIFIKASI</Text>
+          </Group>
         }
       >
-        <DrawerNotifikasi />
+        <DrawerNotifikasi data={isListNotif}/>
       </Drawer>
     </>
   );

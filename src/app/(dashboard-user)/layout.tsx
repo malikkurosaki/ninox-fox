@@ -1,3 +1,5 @@
+import { funGetCountNotification } from "@/modules/_global";
+import prisma from "@/modules/_global/bin/prisma";
 import { LayoutViewFront } from "@/modules/_global/front";
 import { pwd_key_config } from "@/modules/auth";
 import { unsealData } from "iron-session";
@@ -11,9 +13,10 @@ export default async function Layout({ children }: { children: React.ReactNode }
     const dataCookies = await unsealData(c!.value, { password: pwd_key_config as string })
     if (_.isEmpty(dataCookies)) return redirect('/')
 
+    const countNotif = await funGetCountNotification()
     return (
         <>
-            <LayoutViewFront>
+            <LayoutViewFront notif={countNotif}>
                 {children}
             </LayoutViewFront>
         </>
