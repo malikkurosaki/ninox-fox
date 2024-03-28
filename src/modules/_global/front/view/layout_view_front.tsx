@@ -40,12 +40,10 @@ export default function LayoutViewFront({ notif, children }: { notif: number, ch
     const loadNotif = await funGetAllNotifications()
     setListNotif(loadNotif)
     setOpenDrawer(true)
-    setColorScheme('dark')
   }
 
   function CloseModal() {
     setOpenDrawer(false)
-    clearColorScheme()
   }
 
   return (
@@ -224,7 +222,7 @@ export default function LayoutViewFront({ notif, children }: { notif: number, ch
         <ModalLogoutUser />
       </Modal>
 
-      <Drawer opened={valOpenDrawer}
+      {/* <Drawer opened={valOpenDrawer}
         onClose={() => setOpenDrawer(false)}
         position='right'
         closeOnClickOutside={false}
@@ -239,7 +237,50 @@ export default function LayoutViewFront({ notif, children }: { notif: number, ch
         }
       >
         <DrawerNotifikasi data={isListNotif}/>
-      </Drawer>
+      </Drawer> */}
+       {valOpenDrawer &&
+        <>
+          <Box style={{
+            transition: 'ease-in-out',
+            transitionDuration: 'revert',
+            transitionTimingFunction: 'linear',
+            
+          }}>
+          <Box bg={WARNA.ungu} style={{
+            position: "fixed",
+            right: 0,
+            top: 0,
+            height: "100%",
+            width: '30%',
+            zIndex: 700,
+            // transitionDelay: 'initial'
+          }}>
+            <Box p={10}>
+              <Group>
+                <ActionIcon variant='subtle' onClick={CloseModal}>
+                  <IoClose size={30} color={"white"} />
+                </ActionIcon>
+                <Text c={"white"}>NOTIFIKASI</Text>
+              </Group>
+              <DrawerNotifikasi data={isListNotif}/>
+            </Box>
+          </Box>
+          </Box>
+          <Box bg={'#000000'} p={20} style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "70%",
+            height: "100%",
+            zIndex: 500,
+            opacity: '0.5',
+          }} onClick={CloseModal}>
+
+          </Box>
+
+
+        </>
+      }
     </>
   );
 }
