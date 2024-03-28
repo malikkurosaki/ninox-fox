@@ -4,7 +4,7 @@ import { useAtom } from "jotai";
 import { isModalSwot } from "../val/val_swot";
 import toast from "react-simple-toasts";
 import funAddSwotf from "../fun/fun_add_swot";
-import { funGetAccessArea } from "@/modules/_global";
+import { funAddNotifications, funGetAccessArea } from "@/modules/_global";
 import { funLogUser } from "@/modules/user";
 
 /**
@@ -24,6 +24,7 @@ export default function ModalAddSwot({ data, text, onSuccess }: { data: any, tex
         const addData = await funAddSwotf({ body: data, content: text })
         if (!addData.success) return toast(addData.message, { theme: "dark" });
         await funLogUser({ act: 'ADD', desc: `User menambah data SWOT`, idContent: addData.data, tbContent: 'swot' })
+        await funAddNotifications({ kategori: 'swot', candidateId: data.idCandidate })
         toast("Success", { theme: "dark" })
         setOpenModal(false)
         onSuccess(true)

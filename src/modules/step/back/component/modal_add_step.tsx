@@ -4,7 +4,7 @@ import { useAtom } from "jotai";
 import { isModalStep } from "../val/val_step";
 import toast from "react-simple-toasts";
 import funAddStep from "../fun/fun_add_step";
-import { funGetAccessArea } from "@/modules/_global";
+import { funAddNotifications, funGetAccessArea } from "@/modules/_global";
 import { funLogUser } from "@/modules/user";
 
 /**
@@ -24,6 +24,7 @@ export default function ModalAddStep({ data, text, onSuccess }: { data: any, tex
         const addData = await funAddStep({ body: data, content: text })
         if (!addData.success) return toast(addData.message, { theme: "dark" });
         await funLogUser({ act: 'ADD', desc: `User menambah data STEP`, idContent: addData.data, tbContent: 'step' })
+        await funAddNotifications({ kategori: 'step', candidateId: data.idCandidate })
         toast("Success", { theme: "dark" })
         setOpenModal(false)
         onSuccess(true)

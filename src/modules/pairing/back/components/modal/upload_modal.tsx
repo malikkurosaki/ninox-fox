@@ -6,7 +6,7 @@ import { useState } from "react"
 import { isModalPairing } from "../../val/val_modal_pairing"
 import funUploadPairing from "../../fun/upload_pairing"
 import { funLogUser } from "@/modules/user"
-import { funGetAccessArea } from "@/modules/_global"
+import { funAddNotifications, funGetAccessArea } from "@/modules/_global"
 import moment from "moment"
 
 export default function ModalUploadPairing({ data, onSuccess }: { data: any, onSuccess: (val: any) => void }) {
@@ -22,6 +22,7 @@ export default function ModalUploadPairing({ data, onSuccess }: { data: any, onS
         }
         await funUploadPairing({ body: data })
         await funLogUser({ act: 'UPL', desc: `User mengupload data Pairing (${data[0].idCandidate1} & ${data[0].idCandidate2} - ${moment(data[0].date).format('DD/MM/YYYY')})`, idContent: '-', tbContent: 'pairing' })
+        await funAddNotifications({ kategori: 'pairing', candidateId: data[0].idCandidate1, candidateId2: data[0].idCandidate2 })
         setLoading(false)
         toast('Success', { theme: 'dark' })
         setOpenModal(false)

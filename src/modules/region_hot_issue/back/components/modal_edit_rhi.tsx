@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import toast from 'react-simple-toasts';
 import { isModalRhi } from '../val/val_rhi';
 import funEditRhi from '../fun/edit_rhi';
-import { funGetAccessArea } from '@/modules/_global';
+import { funAddNotifications, funGetAccessArea } from '@/modules/_global';
 import { funLogUser } from '@/modules/user';
 
 
@@ -23,6 +23,7 @@ export default function ModalEditRhi({ dataId, provinsi, content }: { dataId: an
         const res = await funEditRhi({ id: dataId, text: content });
         if (!res.success) return toast("Failed! " + res.message, { theme: "dark" });
         await funLogUser({ act: 'UPD', desc: `User mengubah data Region Hot Issue`, idContent: dataId, tbContent: 'rhi' })
+        await funAddNotifications({ kategori: 'rhi', provinsiId: provinsi })
         toast("Success", { theme: "dark" })
         setOpenModal(false)
     }

@@ -5,7 +5,7 @@ import toast from "react-simple-toasts"
 import { isModalPct } from "../val/val_public"
 import { useState } from "react"
 import funUploadPct from "../fun/upload_pct"
-import { funGetAccessArea, funGetIdprovByName } from "@/modules/_global"
+import { funAddNotifications, funGetAccessArea, funGetIdprovByName } from "@/modules/_global"
 import { funLogUser } from "@/modules/user"
 
 export default function ModalUploadPct({ data, onSuccess }: { data: any, onSuccess: (val: any) => void }) {
@@ -26,6 +26,7 @@ export default function ModalUploadPct({ data, onSuccess }: { data: any, onSucce
         }
         await funUploadPct({ body: data })
         await funLogUser({ act: 'UPL', desc: `User mengupload data Public Concern Trends`, idContent: '-', tbContent: 'pct' })
+        await funAddNotifications({ kategori: 'pct', provinsiId: prov?.id })
         setLoading(false)
         toast('Success', { theme: 'dark' })
         setOpenModal(false)

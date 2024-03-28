@@ -6,7 +6,7 @@ import { isModalRhi } from "../val/val_rhi"
 import { useState } from "react"
 import funUploadRhi from "../fun/upload_rhi"
 import { funLogUser } from "@/modules/user"
-import { funGetAccessArea, funGetIdprovByName } from "@/modules/_global"
+import { funAddNotifications, funGetAccessArea, funGetIdprovByName } from "@/modules/_global"
 
 
 export default function ModalUploadRhi({ data, onSuccess }: { data: any, onSuccess: (val: any) => void }) {
@@ -27,6 +27,7 @@ export default function ModalUploadRhi({ data, onSuccess }: { data: any, onSucce
         }
         await funUploadRhi({ body: data })
         await funLogUser({ act: 'UPL', desc: `User mengupload data Region Hot Issue`, idContent: '-', tbContent: 'rhi' })
+        await funAddNotifications({ kategori: 'rhi', provinsiId: prov?.id })
         setLoading(false)
         toast('Success', { theme: 'dark' })
         setOpenModal(false)
