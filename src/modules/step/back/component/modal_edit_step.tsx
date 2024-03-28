@@ -4,7 +4,7 @@ import { useAtom } from "jotai";
 import { isModalStep } from "../val/val_step";
 import toast from "react-simple-toasts";
 import funEditStep from "../fun/fun_edit_step";
-import { funGetAccessArea } from "@/modules/_global";
+import { funAddNotifications, funGetAccessArea } from "@/modules/_global";
 import { funLogUser } from "@/modules/user";
 
 /**
@@ -23,6 +23,7 @@ export default function ModalEditStep({ data, content }: { data: any, content: a
         }
         const edit = await funEditStep({ body: data, text: content })
         await funLogUser({ act: 'UPD', desc: `User mengubah data STEP`, idContent: data.id, tbContent: 'step' })
+        await funAddNotifications({ kategori: 'step', candidateId: data.idCandidate })
         toast("Sukses", { theme: "dark" });
         setOpenModal(false);
     }

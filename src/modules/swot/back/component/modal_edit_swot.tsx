@@ -4,7 +4,7 @@ import { useAtom } from "jotai";
 import { isModalSwot } from "../val/val_swot";
 import toast from "react-simple-toasts";
 import funEditSwot from "../fun/fun_edit_swot";
-import { funGetAccessArea } from "@/modules/_global";
+import { funAddNotifications, funGetAccessArea } from "@/modules/_global";
 import { funLogUser } from "@/modules/user";
 
 /**
@@ -23,6 +23,7 @@ export default function ModalEditSwot({ data, content }: { data: any, content: a
         }
         const edit = await funEditSwot({ body: data, text: content })
         await funLogUser({ act: 'UPD', desc: `User mengubah data SWOT`, idContent: data.id, tbContent: 'swot' })
+        await funAddNotifications({ kategori: 'swot', candidateId: data.idCandidate })
         toast("Sukses", { theme: "dark" });
         setOpenModal(false);
     }

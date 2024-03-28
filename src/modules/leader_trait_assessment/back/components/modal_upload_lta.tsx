@@ -6,7 +6,7 @@ import { isModalLta } from "../val/val_lta"
 import funUploadLta from "../fun/upload_lta"
 import { useState } from "react"
 import { funLogUser } from "@/modules/user"
-import { funGetAccessArea, funGetIdprovByName } from "@/modules/_global"
+import { funAddNotifications, funGetAccessArea, funGetIdprovByName } from "@/modules/_global"
 
 export default function ModalUploadLta({ data, onSuccess }: { data: any, onSuccess: (val: any) => void }) {
     const [openModal, setOpenModal] = useAtom(isModalLta)
@@ -26,6 +26,7 @@ export default function ModalUploadLta({ data, onSuccess }: { data: any, onSucce
         } else {
             await funUploadLta({ body: data })
             await funLogUser({ act: 'UPL', desc: `User mengupload data Leader Trait Assessment`, idContent: '-', tbContent: 'lta' })
+            await funAddNotifications({ kategori: 'lta', provinsiId: prov?.id })
             setLoading(false)
             toast('Success', { theme: 'dark' })
             setOpenModal(false)
