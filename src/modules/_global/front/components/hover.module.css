@@ -5,12 +5,23 @@
       }
 }
 
-.transisi {
-  transition: cubic-bezier(0.165, 0.84, 0.44, 1);
-  -webkit-transition: cubic-bezier(0.165, 0.84, 0.44, 1);
-  -moz-transition: cubic-bezier(0.165, 0.84, 0.44, 1);
-  -ms-transition: cubic-bezier(0.165, 0.84, 0.44, 1);
-  -o-transition: cubic-bezier(0.165, 0.84, 0.44, 1);
-  transition-duration: 10s;
-  transition-delay: 5s;
+.root {
+  background-color: var(--notification-color, var(--mantine-color-black));
+  border: rem(1px) solid var(--mantine-color-violet-9);
+  &::before {
+    background-color: var(--mantine-color-black);
+  }
+}
+
+.description,
+.title {
+  color: var(--mantine-color-white);
+}
+
+.closeButton {
+  color: var(--mantine-color-white);
+
+  @mixin hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
 }

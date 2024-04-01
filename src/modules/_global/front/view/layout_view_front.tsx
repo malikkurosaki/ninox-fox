@@ -19,6 +19,7 @@ import DrawerNotifikasi from '../components/drawer_notifikasi';
 import { IoClose } from 'react-icons/io5';
 import { funGetAllNotifications } from '../..';
 import classes from '..//components/hover.module.css'
+import { notifications } from '@mantine/notifications';
 
 
 export default function LayoutViewFront({ notif, children }: { notif: number, children: React.ReactNode }) {
@@ -45,6 +46,16 @@ export default function LayoutViewFront({ notif, children }: { notif: number, ch
 
   function CloseModal() {
     setOpenDrawer(false)
+  }
+
+  function notificationData() {
+    notifications.show({
+      title: 'Notification with custom styles',
+      message: 'It is default blue',
+      classNames: classes,
+      color: 'black',
+      icon: <IoMdNotificationsOutline size={25} />
+    })
   }
 
   return (
@@ -99,6 +110,12 @@ export default function LayoutViewFront({ notif, children }: { notif: number, ch
                       </ActionIcon>
                     )
                   }
+
+                  {/* Notifikasi pembuka */}
+                  <ActionIcon variant="subtle" c={"white"} onClick={() => notificationData()}>
+                    <IoMdNotificationsOutline size={30} />
+                  </ActionIcon>
+                  {/* Notifikasi penutup */}
 
                 </Stack>
               </Group>
