@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@mantine/colors-generator": "^7.7.0",
     "@mantine/core": "^7.1.2",
     "@mantine/dates": "^7.1.2",
     "@mantine/dropzone": "^7.1.2",
@@ -28,6 +29,7 @@
     "@tiptap/react": "^2.1.13",
     "@tiptap/starter-kit": "^2.1.13",
     "@types/papaparse": "^5.3.9",
+    "chroma-js": "^2.4.2",
     "dangerously-set-html-content": "^1.1.0",
     "dayjs": "^1.11.10",
     "echarts": "^5.4.3",
