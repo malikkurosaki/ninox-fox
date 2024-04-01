@@ -3,7 +3,7 @@ import { useDisclosure, useShallowEffect } from '@mantine/hooks';
 import React, { useState } from 'react';
 import { MdArrowForwardIos } from 'react-icons/md';
 import { usePathname, useRouter } from 'next/navigation';
-import { ActionIcon, AppShell, AppShellNavbar, AppShellSection, Box, Burger, Divider, Drawer, Grid, Group, Indicator, Modal, NavLink, Skeleton, Stack, Text, Title, Tooltip, useMantineColorScheme } from '@mantine/core';
+import { ActionIcon, AppShell, AppShellNavbar, AppShellSection, Box, Burger, Center, Collapse, Divider, Drawer, Grid, Group, Indicator, Modal, NavLink, Skeleton, Stack, Text, Title, Tooltip, Transition, useMantineColorScheme } from '@mantine/core';
 import _ from 'lodash';
 import { DataNavbarTutup } from '../components/data_navbar_tutup';
 import { WARNA } from '../../fun/WARNA';
@@ -18,6 +18,7 @@ import { isDrawer } from '../val/isDrawer';
 import DrawerNotifikasi from '../components/drawer_notifikasi';
 import { IoClose } from 'react-icons/io5';
 import { funGetAllNotifications } from '../..';
+import classes from '..//components/hover.module.css'
 
 
 export default function LayoutViewFront({ notif, children }: { notif: number, children: React.ReactNode }) {
@@ -222,65 +223,65 @@ export default function LayoutViewFront({ notif, children }: { notif: number, ch
         <ModalLogoutUser />
       </Modal>
 
-      {/* <Drawer opened={valOpenDrawer}
-        onClose={() => setOpenDrawer(false)}
-        position='right'
-        closeOnClickOutside={false}
-        withCloseButton={false}
-        transitionProps={{ transition: 'slide-left', duration: 150, timingFunction: 'linear' }}
-        title={
-          <Group gap={"md"}>
-            <ActionIcon variant='subtle' onClick={CloseModal}>
-              <IoClose size={30} color={"white"} /></ActionIcon>
-            <Text>NOTIFIKASI</Text>
-          </Group>
-        }
+      <Transition
+        mounted={valOpenDrawer}
+        transition="slide-left"
+        duration={500}
+        timingFunction="ease"
       >
-        <DrawerNotifikasi data={isListNotif}/>
-      </Drawer> */}
-       {valOpenDrawer &&
-        <>
-          <Box style={{
-            transition: 'ease-in-out',
-            transitionDuration: 'revert',
-            transitionTimingFunction: 'linear',
-            
-          }}>
-          <Box bg={WARNA.ungu} style={{
-            position: "fixed",
-            right: 0,
-            top: 0,
-            height: "100%",
-            width: '30%',
-            zIndex: 700,
-            // transitionDelay: 'initial'
-          }}>
-            <Box p={10}>
-              <Group>
+        {
+          (style) =>
+            <Box
+              bg={WARNA.ungu}
+              p={10}
+              top={0}
+              right={0}
+              h={'100%'}
+              w={'30%'}
+              pos={'fixed'}
+              style={{
+                ...style,
+                zIndex: 999,
+              }}
+            >
+              <Group >
                 <ActionIcon variant='subtle' onClick={CloseModal}>
                   <IoClose size={30} color={"white"} />
                 </ActionIcon>
                 <Text c={"white"}>NOTIFIKASI</Text>
               </Group>
-              <DrawerNotifikasi data={isListNotif}/>
+              <DrawerNotifikasi data={isListNotif} />
             </Box>
-          </Box>
-          </Box>
-          <Box bg={'#000000'} p={20} style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            width: "70%",
-            height: "100%",
-            zIndex: 500,
-            opacity: '0.5',
-          }} onClick={CloseModal}>
-
-          </Box>
-
-
-        </>
-      }
+          // )
+        }
+      </Transition>
+      <Transition
+        mounted={valOpenDrawer}
+        transition="fade"
+        duration={100}
+        timingFunction="ease"
+      >
+        {
+          (style) =>
+            <Box
+              bg={'#000000'}
+              p={10}
+              top={0}
+              left={0}
+              h={'100%'}
+              w={'100%'}
+              pos={'fixed'}
+              style={{
+                ...style,
+                zIndex: 500,
+                opacity: '0.5',
+              }}
+              onClick={CloseModal}
+            >
+            </Box>
+          // )
+        }
+      </Transition>
     </>
   );
 }
