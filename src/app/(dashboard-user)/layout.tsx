@@ -1,5 +1,4 @@
 import { funGetCountNotification } from "@/modules/_global";
-import prisma from "@/modules/_global/bin/prisma";
 import { LayoutViewFront } from "@/modules/_global/front";
 import { pwd_key_config } from "@/modules/auth";
 import { unsealData } from "iron-session";
