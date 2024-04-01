@@ -1,6 +1,6 @@
 "use client"
 import { useDisclosure, useShallowEffect } from '@mantine/hooks';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MdArrowForwardIos } from 'react-icons/md';
 import { usePathname, useRouter } from 'next/navigation';
 import { ActionIcon, AppShell, AppShellNavbar, AppShellSection, Box, Burger, Center, Collapse, Divider, Drawer, Grid, Group, Indicator, Modal, NavLink, Skeleton, Stack, Text, Title, Tooltip, Transition, useMantineColorScheme } from '@mantine/core';
@@ -18,9 +18,10 @@ import { isDrawer } from '../val/isDrawer';
 import DrawerNotifikasi from '../components/drawer_notifikasi';
 import { IoClose } from 'react-icons/io5';
 import { funGetAllNotifications } from '../..';
+import mtqq_client from "../../util/mqtt_client"
+import { funGetUserByCookies } from '@/modules/auth';
 import classes from '..//components/hover.module.css'
 import { notifications } from '@mantine/notifications';
-
 
 export default function LayoutViewFront({ notif, children }: { notif: number, children: React.ReactNode }) {
   const [valOpenModal, setOpenModal] = useAtom(isModalLayout)
@@ -29,14 +30,16 @@ export default function LayoutViewFront({ notif, children }: { notif: number, ch
   const [isOpenNavbar, setOpenNavbar] = useState(true)
   const [isNavOpt, setNavOpt] = useState({ width: 100, breakpoint: 'sm', collapsed: { mobile: isOpenNavbar } })
   const [isListNotif, setListNotif] = useState<any>([])
-
+  const [isNotif, setNotif] = useState(notif)
   const router = useRouter();
   const pathname = usePathname();
   const [active, setActive] = useState("");
+  const [user, setUser] = useState<any>("")
+
   useShallowEffect(() => {
-    setActive(pathname);
+    setActive(pathname)
+    onFindUser()
   });
-  const { setColorScheme, clearColorScheme } = useMantineColorScheme();
 
   async function OpenModal() {
     const loadNotif = await funGetAllNotifications()
@@ -48,6 +51,7 @@ export default function LayoutViewFront({ notif, children }: { notif: number, ch
     setOpenDrawer(false)
   }
 
+//notifikasi
   function notificationData() {
     notifications.show({
       title: 'Notification with custom styles',
@@ -58,6 +62,26 @@ export default function LayoutViewFront({ notif, children }: { notif: number, ch
     })
   }
 
+
+  async function onFindUser() {
+    const loadUser = await funGetUserByCookies()
+    setUser(loadUser?.id)
+  }
+
+
+  useEffect(() => {
+    mtqq_client.on("connect", () => {
+      // console.log("connect")
+      mtqq_client.subscribe("app_ninox_fox")
+    })
+
+    mtqq_client.on("message", (topic, message) => {
+      const data = JSON.parse(message.toString())
+      if (data.user == user) {
+        setNotif(isNotif + 1)
+      }
+    })
+  }, [isNotif, user])
   return (
     <>
       <AppShell
@@ -98,8 +122,8 @@ export default function LayoutViewFront({ notif, children }: { notif: number, ch
                     </Box>
                   ))}
                   {
-                    notif > 0 ? (
-                      <Indicator inline processing color="red" size={12} label={notif}>
+                    isNotif > 0 ? (
+                      <Indicator inline processing color="red" size={12} label={isNotif}>
                         <ActionIcon variant="subtle" c={"white"} onClick={OpenModal}>
                           <IoMdNotificationsOutline size={30} />
                         </ActionIcon>
@@ -192,8 +216,8 @@ export default function LayoutViewFront({ notif, children }: { notif: number, ch
             <Box m={5} mt={5} ml={18}>
               <Box onClick={OpenModal} style={{ cursor: "pointer" }}>
                 {
-                  notif > 0 ? (
-                    <Indicator inline processing color="red" size={12} label={notif}>
+                  isNotif > 0 ? (
+                    <Indicator inline processing color="red" size={12} label={isNotif}>
                       <Text c={"white"} >
                         NOTIFIKASI
                       </Text>
