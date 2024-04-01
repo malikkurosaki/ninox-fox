@@ -31,6 +31,8 @@ import funGetAllNotifications from './fun/get_all_notifications';
 import funUpdReadNotifications from './fun/upd_read_notifications';
 import funGetOneProvinsi from './fun/fun_get_one_provinsi';
 import funAddNotifications from './back/fun/add_notifications';
+import MqttLoad from './util/mqtt_load';
+import mtqq_client from "./util/mqtt_client"
 
 
 export { provinsiCount }
@@ -69,3 +71,5 @@ export { funGetAllNotifications }
 export { funUpdReadNotifications }
 export { funGetOneProvinsi }
 export { funAddNotifications }
+export { MqttLoad }
+export { mtqq_client }

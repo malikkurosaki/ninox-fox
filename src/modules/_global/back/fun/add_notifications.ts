@@ -4,6 +4,7 @@ import prisma from "../../bin/prisma"
 import { funGetOneCandidate } from "@/modules/candidate"
 import { funGetOneProvinsi } from "../.."
 import _ from "lodash"
+import mtqq_client from "../../util/mqtt_client"
 
 export default async function funAddNotifications({ kategori, candidateId, candidateId2, provinsiId }: { kategori: any, candidateId?: any, candidateId2?: any, provinsiId?: any }) {
    const kandidat = await funGetOneCandidate({ id: candidateId })
@@ -67,6 +68,17 @@ export default async function funAddNotifications({ kategori, candidateId, candi
    await prisma.notifications.createMany({
       data: listUser
    })
+
+   for (let index = 0; index < listUser.length; index++) {
+      const user = listUser[index].idUserClient
+      const title = listUser[index].title
+      const desc = listUser[index].description
+      mtqq_client.publish("app_ninox_fox", JSON.stringify({
+         "user": user,
+         "title": title,
+         "description": desc
+      }))
+   }
 
    return { success: true }
 }
