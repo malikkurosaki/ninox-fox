@@ -13,6 +13,7 @@ import funUploadPosPelayanan from "../fun/upload_pos_pelayanan"
 import funUploadFasilitas from "../fun/upload_fasilitas"
 import funUploadRataRataJarakFasilitas from "../fun/upload_rata_rata_jarak_fasilitas"
 import funUploadJumlahDokter from "../fun/upload_jumlah_dokter"
+import { funAddNotifications } from "@/modules/_global"
 
 /**
  * Menampilkan modal konfirmasi upload data audience
@@ -46,6 +47,7 @@ export default function ModalUploadKesehatan({ kategori, data, onSuccess }: { ka
         }
 
         await funLogUser({ act: 'UPL', desc: `User mengupload data ${kategori}`, idContent: '-', tbContent: `se_kesehatan` })
+        await funAddNotifications({ kategori: 'kesehatan', provinsiId: data[0].idProvinsi })
         setLoading(false)
         toast('Success', { theme: 'dark' })
         setOpenModal(false)

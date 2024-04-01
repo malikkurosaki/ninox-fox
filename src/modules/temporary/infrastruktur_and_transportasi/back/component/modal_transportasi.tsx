@@ -9,6 +9,7 @@ import { isModalTransportasi } from "../val/val_transportasi"
 import funUploadPermukaanJalan from "../fun/upload_permukaan_jalan"
 import funUploadJalanDilaluiKendaraan from "../fun/upload_jalan_dilalui_kendaraan"
 import funUploadKecelakaan from "../fun/upload_kecelakaan"
+import { funAddNotifications } from "@/modules/_global"
 
 /**
  * Menampilkan modal konfirmasi upload data audience
@@ -33,6 +34,7 @@ export default function ModalUploadTransportasi({ kategori, data, onSuccess }: {
             await funUploadKecelakaan({ body: data })
         }
         await funLogUser({ act: 'UPL', desc: `User mengupload data ${kategori}`, idContent: '-', tbContent: `se_transportasi` })
+        await funAddNotifications({ kategori: 'infrastruktur-transportasi', provinsiId: data[0].idProvinsi })
         setLoading(false)
         toast('Success', { theme: 'dark' })
         setOpenModal(false)

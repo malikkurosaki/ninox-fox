@@ -41,6 +41,24 @@ export default function DrawerNotifikasi({ data, onSuccess }: { data: any, onSuc
       link = '/insights'
     } else if (kategori == 'rhi') {
       link = '/insights'
+    } else {
+      if (kategori == 'ketenagakerjaan') {
+        link = '/data-sosial-ekonomi/' + kategori
+      } else if (kategori == 'infrastruktur-transportasi') {
+        link = '/data-sosial-ekonomi/' + kategori
+      } else if (kategori == 'keagamaan') {
+        link = '/data-sosial-ekonomi/' + kategori
+      } else if (kategori == 'pendidikan') {
+        link = '/data-sosial-ekonomi/' + kategori
+      } else if (kategori == 'kesehatan') {
+        link = '/data-sosial-ekonomi/' + kategori
+      } else if (kategori == 'ekonomi') {
+        link = '/data-sosial-ekonomi/' + kategori
+      } else if (kategori == 'pertanian') {
+        link = '/data-sosial-ekonomi/' + kategori
+      } else if (kategori == 'kemiskinan-ketimpangan') {
+        link = '/data-sosial-ekonomi/' + kategori
+      }
     }
 
     router.push(link)

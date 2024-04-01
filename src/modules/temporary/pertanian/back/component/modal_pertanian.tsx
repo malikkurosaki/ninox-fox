@@ -8,6 +8,7 @@ import _ from "lodash"
 import { isModalPertanian } from "../val/val_pertanian"
 import funUploadJenisPrasaranaTransportasi from "../fun/upload_jenis_prasarana"
 import funUploadIrigasi from "../fun/upload_irigasi"
+import { funAddNotifications } from "@/modules/_global"
 
 /**
  * Menampilkan modal konfirmasi upload data audience
@@ -31,6 +32,7 @@ export default function ModalUploadPertanian({ kategori, data, onSuccess }: { ka
         }
 
         await funLogUser({ act: 'UPL', desc: `User mengupload data ${kategori}`, idContent: '-', tbContent: `se_keamanan` })
+        await funAddNotifications({ kategori: 'pertanian', provinsiId: data[0].idProvinsi })
         setLoading(false)
         toast('Success', { theme: 'dark' })
         setOpenModal(false)

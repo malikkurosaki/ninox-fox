@@ -10,6 +10,7 @@ import funUploadJarakFasilitas from "../fun/upload_jarak_fasilitas"
 import funUploadJalanKakiKurang4Jam from "../fun/upload_jalan_kaki_kurang_4_jam"
 import funUploadGuruTersertifikasi from "../fun/upload_guru_tersertifikasi"
 import funUploadGuruHonorer from "../fun/upload_guru_honorer"
+import { funAddNotifications } from "@/modules/_global"
 
 /**
  * Menampilkan modal konfirmasi upload data audience
@@ -37,6 +38,7 @@ export default function ModalUploadPendidikan({ kategori, data, onSuccess }: { k
         }
 
         await funLogUser({ act: 'UPL', desc: `User mengupload data ${kategori}`, idContent: '-', tbContent: `se_pendidikan` })
+        await funAddNotifications({ kategori: 'pendidikan', provinsiId: data[0].idProvinsi })
         setLoading(false)
         toast('Success', { theme: 'dark' })
         setOpenModal(false)

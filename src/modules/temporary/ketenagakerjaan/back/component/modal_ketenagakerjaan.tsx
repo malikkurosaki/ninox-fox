@@ -12,6 +12,7 @@ import funUploadJaminanKematian from "../fun/upload_jaminan_kematian"
 import funUploadJaminanHariTua from "../fun/upload_jaminan_hari_tua"
 import funUploadJaminanPensiun from "../fun/upload_jaminan_pensiun"
 import funUploadPengangguran from "../fun/upload_pengangguran"
+import { funAddNotifications } from "@/modules/_global"
 
 /**
  * Menampilkan modal konfirmasi upload data audience
@@ -42,6 +43,7 @@ export default function ModalUploadKetenagakerjaan({ kategori, data, onSuccess }
             await funUploadPengangguran({ body: data })
         }
         await funLogUser({ act: 'UPL', desc: `User mengupload data ${kategori}`, idContent: '-', tbContent: `se_ketenagakerjaan` })
+        await funAddNotifications({ kategori: 'ketenagakerjaan', provinsiId: data[0].idProvinsi })
         setLoading(false)
         toast('Success', { theme: 'dark' })
         setOpenModal(false)
