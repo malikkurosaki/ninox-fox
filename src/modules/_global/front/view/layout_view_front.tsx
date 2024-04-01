@@ -17,7 +17,7 @@ import { IoMdClose, IoMdNotificationsOutline } from 'react-icons/io';
 import { isDrawer } from '../val/isDrawer';
 import DrawerNotifikasi from '../components/drawer_notifikasi';
 import { IoClose } from 'react-icons/io5';
-import { funGetAllNotifications } from '../..';
+import { funGetAllNotifications, funGetCountNotification } from '../..';
 import mtqq_client from "../../util/mqtt_client"
 import { funGetUserByCookies } from '@/modules/auth';
 import classes from '..//components/hover.module.css'
@@ -51,14 +51,16 @@ export default function LayoutViewFront({ notif, children }: { notif: number, ch
     setOpenDrawer(false)
   }
 
-//notifikasi
-  function notificationData() {
+
+  function notificationData(title: any, message: any) {
+    notifications.clean()
     notifications.show({
-      title: 'Notification with custom styles',
-      message: 'It is default blue',
+      title: title,
+      message: message,
       classNames: classes,
       color: 'black',
-      icon: <IoMdNotificationsOutline size={25} />
+      autoClose: 5000,
+      icon: <IoMdNotificationsOutline size={25} />,
     })
   }
 
@@ -79,9 +81,17 @@ export default function LayoutViewFront({ notif, children }: { notif: number, ch
       const data = JSON.parse(message.toString())
       if (data.user == user) {
         setNotif(isNotif + 1)
+        notificationData(data.title, data.description)
       }
     })
   }, [isNotif, user])
+
+  async function reloadNotif() {
+    const loadN = await funGetCountNotification()
+    setNotif(loadN)
+  }
+
+
   return (
     <>
       <AppShell
@@ -136,9 +146,9 @@ export default function LayoutViewFront({ notif, children }: { notif: number, ch
                   }
 
                   {/* Notifikasi pembuka */}
-                  <ActionIcon variant="subtle" c={"white"} onClick={() => notificationData()}>
+                  {/* <ActionIcon variant="subtle" c={"white"} onClick={() => notificationData()}>
                     <IoMdNotificationsOutline size={30} />
-                  </ActionIcon>
+                  </ActionIcon> */}
                   {/* Notifikasi penutup */}
 
                 </Stack>
@@ -291,7 +301,9 @@ export default function LayoutViewFront({ notif, children }: { notif: number, ch
                 </ActionIcon>
                 <Text c={"white"}>NOTIFIKASI</Text>
               </Group>
-              <DrawerNotifikasi data={isListNotif} />
+              <DrawerNotifikasi data={isListNotif} onSuccess={() => {
+                reloadNotif()
+              }} />
             </Box>
           // )
         }
