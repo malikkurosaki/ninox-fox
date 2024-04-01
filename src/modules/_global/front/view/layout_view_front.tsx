@@ -3,7 +3,7 @@ import { useDisclosure, useShallowEffect } from '@mantine/hooks';
 import React, { useEffect, useState } from 'react';
 import { MdArrowForwardIos } from 'react-icons/md';
 import { usePathname, useRouter } from 'next/navigation';
-import { ActionIcon, AppShell, AppShellNavbar, AppShellSection, Box, Burger, Center, Collapse, Divider, Drawer, Grid, Group, Indicator, Modal, NavLink, Skeleton, Stack, Text, Title, Tooltip, Transition, useMantineColorScheme } from '@mantine/core';
+import { ActionIcon, AppShell, AppShellNavbar, AppShellSection, Box, Burger, Center, Collapse, Divider, Drawer, Grid, Group, Indicator, Modal, NavLink, Notification, Skeleton, Stack, Text, Title, Tooltip, Transition, useMantineColorScheme } from '@mantine/core';
 import _ from 'lodash';
 import { DataNavbarTutup } from '../components/data_navbar_tutup';
 import { WARNA } from '../../fun/WARNA';
@@ -53,15 +53,21 @@ export default function LayoutViewFront({ notif, children }: { notif: number, ch
 
 
   function notificationData(title: any, message: any) {
-    notifications.clean()
-    notifications.show({
-      title: title,
-      message: message,
-      classNames: classes,
-      color: 'black',
-      autoClose: 5000,
-      icon: <IoMdNotificationsOutline size={25} />,
-    })
+    notifications.clean(),
+      notifications.show({
+        onClickCapture: () => { OpenModal()
+          notifications.clean()},
+        title: title,
+        message: message,
+        classNames: classes,
+        color: 'black',
+        autoClose: 5000,
+        icon: <IoMdNotificationsOutline size={25} onClick={() => {
+          OpenModal()
+          notifications.clean()
+        }} />,
+        
+      })
   }
 
 
@@ -227,7 +233,7 @@ export default function LayoutViewFront({ notif, children }: { notif: number, ch
               <Box onClick={OpenModal} style={{ cursor: "pointer" }}>
                 {
                   isNotif > 0 ? (
-                    <Indicator inline processing color="red" size={12} label={isNotif}>
+                    <Indicator position="middle-end" offset={-20} inline processing color="red" size={12} label={isNotif}>
                       <Text c={"white"} >
                         NOTIFIKASI
                       </Text>
@@ -292,7 +298,7 @@ export default function LayoutViewFront({ notif, children }: { notif: number, ch
               pos={'fixed'}
               style={{
                 ...style,
-                zIndex: 999,
+                zIndex: 700,
               }}
             >
               <Group >
@@ -331,10 +337,11 @@ export default function LayoutViewFront({ notif, children }: { notif: number, ch
               }}
               onClick={CloseModal}
             >
+
             </Box>
-          // )
         }
       </Transition>
+
     </>
   );
 }
