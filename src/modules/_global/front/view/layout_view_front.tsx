@@ -21,6 +21,7 @@ import { funGetAllNotifications } from '../..';
 import mtqq_client from "../../util/mqtt_client"
 import { funGetUserByCookies } from '@/modules/auth';
 import classes from '..//components/hover.module.css'
+import { notifications } from '@mantine/notifications';
 
 export default function LayoutViewFront({ notif, children }: { notif: number, children: React.ReactNode }) {
   const [valOpenModal, setOpenModal] = useAtom(isModalLayout)
@@ -50,6 +51,18 @@ export default function LayoutViewFront({ notif, children }: { notif: number, ch
     setOpenDrawer(false)
   }
 
+//notifikasi
+  function notificationData() {
+    notifications.show({
+      title: 'Notification with custom styles',
+      message: 'It is default blue',
+      classNames: classes,
+      color: 'black',
+      icon: <IoMdNotificationsOutline size={25} />
+    })
+  }
+
+
   async function onFindUser() {
     const loadUser = await funGetUserByCookies()
     setUser(loadUser?.id)
@@ -69,7 +82,6 @@ export default function LayoutViewFront({ notif, children }: { notif: number, ch
       }
     })
   }, [isNotif, user])
-
   return (
     <>
       <AppShell
@@ -122,6 +134,12 @@ export default function LayoutViewFront({ notif, children }: { notif: number, ch
                       </ActionIcon>
                     )
                   }
+
+                  {/* Notifikasi pembuka */}
+                  <ActionIcon variant="subtle" c={"white"} onClick={() => notificationData()}>
+                    <IoMdNotificationsOutline size={30} />
+                  </ActionIcon>
+                  {/* Notifikasi penutup */}
 
                 </Stack>
               </Group>
