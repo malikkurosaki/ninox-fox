@@ -8,6 +8,7 @@ import _ from "lodash"
 import { isModalEkonomi } from "../val/val_ekonomi"
 import funUploadJumlahPasar from "../fun/upload_jumlah_pasar"
 import funUploadLembagaKeuangan from "../fun/upload_lembaga_keuangan"
+import { funAddNotifications } from "@/modules/_global"
 
 /**
  * Menampilkan modal konfirmasi upload data audience
@@ -31,6 +32,7 @@ export default function ModalUploadEkonomi({ kategori, data, onSuccess }: { kate
         }
 
         await funLogUser({ act: 'UPL', desc: `User mengupload data ${kategori}`, idContent: '-', tbContent: `se_keamanan` })
+        await funAddNotifications({ kategori: 'ekonomi', provinsiId: data[0].idProvinsi })
         setLoading(false)
         toast('Success', { theme: 'dark' })
         setOpenModal(false)

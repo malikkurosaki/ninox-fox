@@ -8,6 +8,7 @@ import _ from "lodash"
 import { isModalKemiskinan } from "../val/val_kemiskinan"
 import funUploadDataKemiskinan from "../fun/upload_data_kemiskinan"
 import funUploadBpjs from "../fun/upload_bpjs"
+import { funAddNotifications } from "@/modules/_global"
 
 /**
  * Menampilkan modal konfirmasi upload data audience
@@ -31,6 +32,7 @@ export default function ModalUploadKemiskinan({ kategori, data, onSuccess }: { k
         }
 
         await funLogUser({ act: 'UPL', desc: `User mengupload data ${kategori}`, idContent: '-', tbContent: `se_keamanan` })
+        await funAddNotifications({ kategori: 'kemiskinan-ketimpangan', provinsiId: data[0].idProvinsi })
         setLoading(false)
         toast('Success', { theme: 'dark' })
         setOpenModal(false)

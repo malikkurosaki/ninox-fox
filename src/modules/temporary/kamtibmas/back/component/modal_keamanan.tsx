@@ -13,6 +13,7 @@ import funUploadPenipuanDanPenggelapan from "../fun/upload_penipuan_dan_penggela
 import funUploadPenganiayaan from "../fun/upload_penganiayaan"
 import funUploadPerkosaan from "../fun/upload_perkosaan"
 import funUploadNarkoba from "../fun/upload_narkoba"
+import { funAddNotifications } from "@/modules/_global"
 
 /**
  * Menampilkan modal konfirmasi upload data audience
@@ -46,6 +47,7 @@ export default function ModalUploadKeamanan({ kategori, data, onSuccess }: { kat
         }
 
         await funLogUser({ act: 'UPL', desc: `User mengupload data ${kategori}`, idContent: '-', tbContent: `se_keamanan` })
+        await funAddNotifications({ kategori: 'kamtibmas', provinsiId: data[0].idProvinsi })
         setLoading(false)
         toast('Success', { theme: 'dark' })
         setOpenModal(false)

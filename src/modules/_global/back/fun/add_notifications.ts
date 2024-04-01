@@ -11,6 +11,10 @@ export default async function funAddNotifications({ kategori, candidateId, candi
    const admin = await funGetUserByCookies()
    let desc = ''
    let judul = ''
+   let kondisi = {
+      idCandidate: kandidat.id,
+      isFront: true
+   }
 
    if (kategori == 'emotion') {
       desc = 'Data emosi kandidat ' + kandidat.name + ' telah diperbarui'
@@ -28,29 +32,68 @@ export default async function funAddNotifications({ kategori, candidateId, candi
       const kandidat2 = await funGetOneCandidate({ id: candidateId2 })
       desc = 'Data pasangan regional ' + kandidat.name + ' & ' + kandidat2.name + ' telah diperbarui'
       judul = 'Update data pasangan regional'
-   } else if (kategori == 'pct') {
-      const prov = await funGetOneProvinsi({ id: provinsiId })
-      desc = 'Data trend perhatian publik provinsi ' + prov?.name + ' telah diperbarui'
-      judul = 'Update data trend perhatian publik'
-   } else if (kategori == 'lta') {
-      const prov = await funGetOneProvinsi({ id: provinsiId })
-      desc = 'Data penilaian sifat pemimpin provinsi ' + prov?.name + ' telah diperbarui'
-      judul = 'Update data penilaian sifat pemimpin'
-   } else if (kategori == 'rhi') {
-      const prov = await funGetOneProvinsi({ id: provinsiId })
-      desc = 'Data isu provinsi ' + prov?.name + ' telah diperbarui'
-      judul = 'Update data isu wilayah'
+   } else {
+      kondisi = <any>{
+         idProvinsi: provinsiId,
+         isFront: true
+      }
+
+      if (kategori == 'ketenagakerjaan') {
+         const prov = await funGetOneProvinsi({ id: provinsiId })
+         desc = 'Data ketenagakerjaan wilayah ' + prov?.name + ' telah diperbarui'
+         judul = 'Update data ketenagakerjaan'
+      } else if (kategori == 'infrastruktur-transportasi') {
+         const prov = await funGetOneProvinsi({ id: provinsiId })
+         desc = 'Data infrastruktur wilayah ' + prov?.name + ' telah diperbarui'
+         judul = 'Update data infrastruktur & transportasi'
+      } else if (kategori == 'keagamaan') {
+         const prov = await funGetOneProvinsi({ id: provinsiId })
+         desc = 'Data keagamaan wilayah ' + prov?.name + ' telah diperbarui'
+         judul = 'Update data keagamaan & transportasi'
+      } else if (kategori == 'pendidikan') {
+         const prov = await funGetOneProvinsi({ id: provinsiId })
+         desc = 'Data pendidikan wilayah ' + prov?.name + ' telah diperbarui'
+         judul = 'Update data pendidikan & transportasi'
+      } else if (kategori == 'kesehatan') {
+         const prov = await funGetOneProvinsi({ id: provinsiId })
+         desc = 'Data kesehatan wilayah ' + prov?.name + ' telah diperbarui'
+         judul = 'Update data kesehatan'
+      } else if (kategori == 'ekonomi') {
+         const prov = await funGetOneProvinsi({ id: provinsiId })
+         desc = 'Data ekonomi wilayah ' + prov?.name + ' telah diperbarui'
+         judul = 'Update data ekonomi'
+      } else if (kategori == 'pertanian') {
+         const prov = await funGetOneProvinsi({ id: provinsiId })
+         desc = 'Data pertanian wilayah ' + prov?.name + ' telah diperbarui'
+         judul = 'Update data pertanian'
+      } else if (kategori == 'kemiskinan-ketimpangan') {
+         const prov = await funGetOneProvinsi({ id: provinsiId })
+         desc = 'Data kemiskinan-ketimpangan wilayah ' + prov?.name + ' telah diperbarui'
+         judul = 'Update data kemiskinan-ketimpangan'
+      }
    }
+
+
+   // else if (kategori == 'pct') {
+   //    const prov = await funGetOneProvinsi({ id: provinsiId })
+   //    desc = 'Data trend perhatian publik provinsi ' + prov?.name + ' telah diperbarui'
+   //    judul = 'Update data trend perhatian publik'
+   // } else if (kategori == 'lta') {
+   //    const prov = await funGetOneProvinsi({ id: provinsiId })
+   //    desc = 'Data penilaian sifat pemimpin provinsi ' + prov?.name + ' telah diperbarui'
+   //    judul = 'Update data penilaian sifat pemimpin'
+   // } else if (kategori == 'rhi') {
+   //    const prov = await funGetOneProvinsi({ id: provinsiId })
+   //    desc = 'Data isu provinsi ' + prov?.name + ' telah diperbarui'
+   //    judul = 'Update data isu wilayah'
+   // }
 
    if (provinsiId == null) {
       provinsiId = kandidat.idProvinsi
    }
 
    const userArea = await prisma.userArea.findMany({
-      where: {
-         idProvinsi: provinsiId,
-         isFront: true
-      },
+      where: kondisi,
       select: {
          idUser: true
       }

@@ -7,6 +7,7 @@ import { funLogUser } from "@/modules/user"
 import _ from "lodash"
 import { isModalAgama } from "../val/val_keagamaan"
 import funUploadRumahIbadah from "../fun/upload_rumah_ibadah"
+import { funAddNotifications } from "@/modules/_global"
 
 /**
  * Menampilkan modal konfirmasi upload data audience
@@ -28,6 +29,7 @@ export default function ModalUploadAgama({ kategori, data, onSuccess }: { katego
         }
 
         await funLogUser({ act: 'UPL', desc: `User mengupload data ${kategori}`, idContent: '-', tbContent: `se_agama` })
+        await funAddNotifications({ kategori: 'keagamaan', provinsiId: data[0].idProvinsi })
         setLoading(false)
         toast('Success', { theme: 'dark' })
         setOpenModal(false)
