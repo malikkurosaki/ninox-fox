@@ -16,8 +16,8 @@ import funGetFrontGuruTersertifikasi from '../fun/get_guru_tersertifikasi';
 import funGetFrontGuruHonorer from '../fun/get_guru_honorer';
 
 
-export default function ViewPendidikan({ prov, kab, jarak_fasilitas, jalan_kaki, guru_tersertifikasi, guru_honorer }: { prov: any, kab: any, jarak_fasilitas: any, jalan_kaki: any, guru_tersertifikasi: any, guru_honorer: any }) {
-  const [isProvinsi, setProvinsi] = useState<any>("17")
+export default function ViewPendidikan({ prov, kab, val_def, jarak_fasilitas, jalan_kaki, guru_tersertifikasi, guru_honorer }: { prov: any, kab: any, val_def: any, jarak_fasilitas: any, jalan_kaki: any, guru_tersertifikasi: any, guru_honorer: any }) {
+  const [isProvinsi, setProvinsi] = useState<any>(_.toString(val_def.idProvinsi))
   const [isKabupaten, setKabupaten] = useState<any>(null)
   const [isKecamatan, setKecamatan] = useState<any>(null)
   const [dataKabupaten, setDataKabupaten] = useState<any>(kab)
@@ -183,7 +183,7 @@ export default function ViewPendidikan({ prov, kab, jarak_fasilitas, jalan_kaki,
           <TableDataGuruTersertifikasi data={dataGuruTersertifikasi} />
         </Box>
         <Box pt={40}>
-          <TableDataGuruHonorer data={dataGuruHonorer}/>
+          <TableDataGuruHonorer data={dataGuruHonorer} />
         </Box>
       </Box>
     </>

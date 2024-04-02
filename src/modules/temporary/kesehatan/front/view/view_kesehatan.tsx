@@ -18,8 +18,8 @@ import funGetFrontFasilitas from '../fun/get_fasilitas';
 import funGetFrontRataRataJarakFasilitas from '../fun/get_rata_rata_jarak_fasilitas';
 import funGetFrontJumlahDokter from '../fun/get_jumlah_dokter';
 
-export default function ViewKesehatan({ prov, kab, kelas_ibu_hamil, ibu_hamil_miskin, jaminan_untuk_baduta, pos_pelayanan, fasilitas, rata_rata_jarak_fasilitas, jumlah_dokter }: { prov: any, kab: any, kelas_ibu_hamil: any, ibu_hamil_miskin: any, jaminan_untuk_baduta: any, pos_pelayanan: any, fasilitas: any, rata_rata_jarak_fasilitas: any, jumlah_dokter: any }) {
-  const [isProvinsi, setProvinsi] = useState<any>("17")
+export default function ViewKesehatan({ prov, kab, val_def, kelas_ibu_hamil, ibu_hamil_miskin, jaminan_untuk_baduta, pos_pelayanan, fasilitas, rata_rata_jarak_fasilitas, jumlah_dokter }: { prov: any, kab: any, val_def: any, kelas_ibu_hamil: any, ibu_hamil_miskin: any, jaminan_untuk_baduta: any, pos_pelayanan: any, fasilitas: any, rata_rata_jarak_fasilitas: any, jumlah_dokter: any }) {
+  const [isProvinsi, setProvinsi] = useState<any>(_.toString(val_def.idProvinsi))
   const [isKabupaten, setKabupaten] = useState<any>(null)
   const [isKecamatan, setKecamatan] = useState<any>(null)
   const [dataKabupaten, setDataKabupaten] = useState<any>(kab)

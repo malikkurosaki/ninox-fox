@@ -9,8 +9,8 @@ import _ from 'lodash';
 import funGetFrontJenisPrasaranaTransportasi from '../fun/get_jenis_prasarana_transportasi';
 import funGetFrontIrigasi from '../fun/get_irigasi';
 
-export default function ViewPertanian({ prov, kab, jenis_prasarana, irigasi }: { prov: any, kab: any, jenis_prasarana: any, irigasi: any }) {
-  const [isProvinsi, setProvinsi] = useState<any>("17")
+export default function ViewPertanian({ prov, kab, val_def, jenis_prasarana, irigasi }: { prov: any, kab: any, val_def: any, jenis_prasarana: any, irigasi: any }) {
+  const [isProvinsi, setProvinsi] = useState<any>(_.toString(val_def.idProvinsi))
   const [isKabupaten, setKabupaten] = useState<any>(null)
   const [isKecamatan, setKecamatan] = useState<any>(null)
   const [dataKabupaten, setDataKabupaten] = useState<any>(kab)
@@ -141,7 +141,7 @@ export default function ViewPertanian({ prov, kab, jenis_prasarana, irigasi }: {
                 padding: 20
               }}
             >
-              <EchartPenggunaanSungai data={dataIrigasi}/>
+              <EchartPenggunaanSungai data={dataIrigasi} />
             </Box>
           </SimpleGrid>
         </Box>

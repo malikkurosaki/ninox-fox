@@ -18,8 +18,8 @@ import funGetFrontPenganiayaan from '../fun/get_penganiayaan';
 import funGetFrontPerkosaan from '../fun/get_perkosaan';
 import funGetFrontNarkoba from '../fun/get_narkoba';
 
-export default function ViewKamtibmas({ prov, kab, perkelahian, pencurian, pencurian_dan_kekerasan, penipuan_dan_penggelapan, penganiayaan, perkosaan, narkoba }: { prov: any, kab: any, perkelahian: any, pencurian: any, pencurian_dan_kekerasan: any, penipuan_dan_penggelapan: any, penganiayaan: any, perkosaan: any, narkoba: any }) {
-  const [isProvinsi, setProvinsi] = useState<any>("17")
+export default function ViewKamtibmas({ prov, kab, val_def, perkelahian, pencurian, pencurian_dan_kekerasan, penipuan_dan_penggelapan, penganiayaan, perkosaan, narkoba }: { prov: any, kab: any, val_def: any, perkelahian: any, pencurian: any, pencurian_dan_kekerasan: any, penipuan_dan_penggelapan: any, penganiayaan: any, perkosaan: any, narkoba: any }) {
+  const [isProvinsi, setProvinsi] = useState<any>(_.toString(val_def.idProvinsi))
   const [isKabupaten, setKabupaten] = useState<any>(null)
   const [isKecamatan, setKecamatan] = useState<any>(null)
   const [dataKabupaten, setDataKabupaten] = useState<any>(kab)

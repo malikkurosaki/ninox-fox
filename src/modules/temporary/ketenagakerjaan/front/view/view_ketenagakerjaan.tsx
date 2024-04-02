@@ -16,8 +16,8 @@ import funGetFrontJaminanHariTua from '../fun/get_jaminan_hari_tua';
 import funGetFrontJaminanPensiun from '../fun/get_jaminan_pensiun';
 import funGetFrontPengangguran from '../fun/get_pengangguran';
 
-export default function ViewKetenagakerjaan({ prov, kab, jaminan_kesehatan, jaminan_kecelakaan_kerja, jaminan_kematian, jaminan_hari_tua, jaminan_pensiun, pengangguran }: { prov: any, kab: any, jaminan_kesehatan: any, jaminan_kecelakaan_kerja: any, jaminan_kematian: any, jaminan_hari_tua: any, jaminan_pensiun: any, pengangguran: any }) {
-  const [isProvinsi, setProvinsi] = useState<any>("17")
+export default function ViewKetenagakerjaan({ prov, kab, val_def, jaminan_kesehatan, jaminan_kecelakaan_kerja, jaminan_kematian, jaminan_hari_tua, jaminan_pensiun, pengangguran }: { prov: any, kab: any, val_def: any, jaminan_kesehatan: any, jaminan_kecelakaan_kerja: any, jaminan_kematian: any, jaminan_hari_tua: any, jaminan_pensiun: any, pengangguran: any }) {
+  const [isProvinsi, setProvinsi] = useState<any>(_.toString(val_def.idProvinsi))
   const [isKabupaten, setKabupaten] = useState<any>(null)
   const [isKecamatan, setKecamatan] = useState<any>(null)
   const [dataKabupaten, setDataKabupaten] = useState<any>(kab)
@@ -209,7 +209,7 @@ export default function ViewKetenagakerjaan({ prov, kab, jaminan_kesehatan, jami
               padding: 20
             }}
           >
-            <EchartDataPengangguran data={dataPengangguran}/>
+            <EchartDataPengangguran data={dataPengangguran} />
           </Box>
         </SimpleGrid>
       </Box>
