@@ -16,6 +16,10 @@ export default async function funAddNotifications({ kategori, candidateId, candi
       isFront: true
    }
 
+   if (provinsiId == null) {
+      provinsiId = kandidat.idProvinsi
+   }
+
    if (kategori == 'emotion') {
       desc = 'Data emosi kandidat ' + kandidat.name + ' telah diperbarui'
       judul = 'Update data emosi'
@@ -34,10 +38,10 @@ export default async function funAddNotifications({ kategori, candidateId, candi
       judul = 'Update data pasangan regional'
    } else {
       kondisi = <any>{
-         idProvinsi: provinsiId,
+         idProvinsi: Number(provinsiId),
          isFront: true
       }
-      
+
       if (kategori == 'pct') {
          const prov = await funGetOneProvinsi({ id: provinsiId })
          desc = 'Data trend perhatian publik provinsi ' + prov?.name + ' telah diperbarui'
@@ -85,9 +89,6 @@ export default async function funAddNotifications({ kategori, candidateId, candi
       }
    }
 
-   if (provinsiId == null) {
-      provinsiId = kandidat.idProvinsi
-   }
 
    const userArea = await prisma.userArea.findMany({
       where: kondisi,
