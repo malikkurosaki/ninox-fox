@@ -9,8 +9,8 @@ import { ChartBangunanPermanen, funGetFrontJumlahPasar, funGetFrontLembagaKeuang
 import EchartPublicConcerns from '@/modules/regional_insights/components/echart_public_concerns';
 import _ from 'lodash';
 
-export default function ViewEkonomi({ prov, kab, jumlah_pasar, lembaga_keuangan }: { prov: any, kab: any, jumlah_pasar: any, lembaga_keuangan: any }) {
-  const [isProvinsi, setProvinsi] = useState<any>("17")
+export default function ViewEkonomi({ prov, kab, val_def, jumlah_pasar, lembaga_keuangan }: { prov: any, kab: any, val_def:any, jumlah_pasar: any, lembaga_keuangan: any }) {
+  const [isProvinsi, setProvinsi] = useState<any>(_.toString(val_def.idProvinsi))
   const [isKabupaten, setKabupaten] = useState<any>(null)
   const [isKecamatan, setKecamatan] = useState<any>(null)
   const [dataKabupaten, setDataKabupaten] = useState<any>(kab)

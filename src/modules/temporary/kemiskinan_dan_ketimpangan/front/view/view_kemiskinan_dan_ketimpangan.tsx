@@ -8,8 +8,8 @@ import _ from 'lodash';
 import funGetFrontDataKemiskinan from '../fun/get_data_kemiskinan';
 import funGetFrontBpjs from '../fun/get_bpjs';
 
-export default function ViewKemiskinanDanKetimpangan({ prov, kab, data_kemiskinan, data_bpjs }: { prov: any, kab: any, data_kemiskinan: any, data_bpjs: any }) {
-  const [isProvinsi, setProvinsi] = useState<any>("17")
+export default function ViewKemiskinanDanKetimpangan({ prov, kab, val_def, data_kemiskinan, data_bpjs }: { prov: any, kab: any, val_def: any, data_kemiskinan: any, data_bpjs: any }) {
+  const [isProvinsi, setProvinsi] = useState<any>(_.toString(val_def.idProvinsi))
   const [isKabupaten, setKabupaten] = useState<any>(null)
   const [isKecamatan, setKecamatan] = useState<any>(null)
   const [dataKabupaten, setDataKabupaten] = useState<any>(kab)

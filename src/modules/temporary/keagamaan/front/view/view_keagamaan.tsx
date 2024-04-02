@@ -6,8 +6,8 @@ import EchartRumahIbadah from '../components/echart_rumah_ibadah';
 import _ from 'lodash';
 import funGetFrontRumahIbadah from '../fun/get_rumah_ibadah';
 
-export default function ViewKeagamaan({ prov, kab, rumah_ibadah }: { prov: any, kab: any, rumah_ibadah: any }) {
-  const [isProvinsi, setProvinsi] = useState<any>("17")
+export default function ViewKeagamaan({ prov, kab, val_def, rumah_ibadah }: { prov: any, kab: any, val_def: any, rumah_ibadah: any }) {
+  const [isProvinsi, setProvinsi] = useState<any>(_.toString(val_def.idProvinsi))
   const [isKabupaten, setKabupaten] = useState<any>(null)
   const [isKecamatan, setKecamatan] = useState<any>(null)
   const [dataKabupaten, setDataKabupaten] = useState<any>(kab)
@@ -104,7 +104,7 @@ export default function ViewKeagamaan({ prov, kab, rumah_ibadah }: { prov: any, 
                 padding: 20
               }}
             >
-              <EchartRumahIbadah data={dataRumahIbadah}/>
+              <EchartRumahIbadah data={dataRumahIbadah} />
             </Box>
           </SimpleGrid>
         </Box>
