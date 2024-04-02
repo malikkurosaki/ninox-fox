@@ -37,8 +37,20 @@ export default async function funAddNotifications({ kategori, candidateId, candi
          idProvinsi: provinsiId,
          isFront: true
       }
-
-      if (kategori == 'ketenagakerjaan') {
+      
+      if (kategori == 'pct') {
+         const prov = await funGetOneProvinsi({ id: provinsiId })
+         desc = 'Data trend perhatian publik provinsi ' + prov?.name + ' telah diperbarui'
+         judul = 'Update data trend perhatian publik'
+      } else if (kategori == 'lta') {
+         const prov = await funGetOneProvinsi({ id: provinsiId })
+         desc = 'Data penilaian sifat pemimpin provinsi ' + prov?.name + ' telah diperbarui'
+         judul = 'Update data penilaian sifat pemimpin'
+      } else if (kategori == 'rhi') {
+         const prov = await funGetOneProvinsi({ id: provinsiId })
+         desc = 'Data isu provinsi ' + prov?.name + ' telah diperbarui'
+         judul = 'Update data isu wilayah'
+      } else if (kategori == 'ketenagakerjaan') {
          const prov = await funGetOneProvinsi({ id: provinsiId })
          desc = 'Data ketenagakerjaan wilayah ' + prov?.name + ' telah diperbarui'
          judul = 'Update data ketenagakerjaan'
@@ -72,21 +84,6 @@ export default async function funAddNotifications({ kategori, candidateId, candi
          judul = 'Update data kemiskinan-ketimpangan'
       }
    }
-
-
-   // else if (kategori == 'pct') {
-   //    const prov = await funGetOneProvinsi({ id: provinsiId })
-   //    desc = 'Data trend perhatian publik provinsi ' + prov?.name + ' telah diperbarui'
-   //    judul = 'Update data trend perhatian publik'
-   // } else if (kategori == 'lta') {
-   //    const prov = await funGetOneProvinsi({ id: provinsiId })
-   //    desc = 'Data penilaian sifat pemimpin provinsi ' + prov?.name + ' telah diperbarui'
-   //    judul = 'Update data penilaian sifat pemimpin'
-   // } else if (kategori == 'rhi') {
-   //    const prov = await funGetOneProvinsi({ id: provinsiId })
-   //    desc = 'Data isu provinsi ' + prov?.name + ' telah diperbarui'
-   //    judul = 'Update data isu wilayah'
-   // }
 
    if (provinsiId == null) {
       provinsiId = kandidat.idProvinsi

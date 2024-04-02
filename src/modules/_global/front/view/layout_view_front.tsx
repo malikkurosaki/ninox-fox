@@ -52,11 +52,15 @@ export default function LayoutViewFront({ notif, children }: { notif: number, ch
   }
 
 
+  
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   function notificationData(title: any, message: any) {
     notifications.clean(),
       notifications.show({
-        onClickCapture: () => { OpenModal()
-          notifications.clean()},
+        onClickCapture: () => {
+          OpenModal()
+          notifications.clean()
+        },
         title: title,
         message: message,
         classNames: classes,
@@ -66,7 +70,6 @@ export default function LayoutViewFront({ notif, children }: { notif: number, ch
           OpenModal()
           notifications.clean()
         }} />,
-        
       })
   }
 
@@ -90,7 +93,7 @@ export default function LayoutViewFront({ notif, children }: { notif: number, ch
         notificationData(data.title, data.description)
       }
     })
-  }, [isNotif, user])
+  }, [isNotif, user, notificationData])
 
   async function reloadNotif() {
     const loadN = await funGetCountNotification()
