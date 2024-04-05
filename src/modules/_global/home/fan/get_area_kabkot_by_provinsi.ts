@@ -19,7 +19,7 @@ export default async function funGetAreaKabKotByProvinsi({ idProvinsi }: { idPro
         }
     })
 
-    const allData = data.map((v) => ({
+    const allData = data.map((v: any) => ({
         ..._.omit(v, ["name"], ["idKabKot"]),
         idKabkot: v.idKabkot,
         name: v.AreaKabkot?.name
