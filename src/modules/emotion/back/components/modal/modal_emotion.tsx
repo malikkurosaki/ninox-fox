@@ -5,7 +5,9 @@ import React, { useState } from "react";
 import toast from "react-simple-toasts";
 import { isModalEmotion } from "../../val/val_emotion";
 import funCopyEmotion from "../../fun/copy_emotion";
-import { funGetAccessArea } from "@/modules/_global";
+import { funAddNotifications, funGetAccessArea } from "@/modules/_global";
+import moment from "moment";
+import { funLogUser } from "@/modules/user";
 
 /**
  * Fungsi menampilkan modal.
@@ -19,12 +21,13 @@ export default function ModalCopyEmotion({ from, to, candidate, onSuccess }: { f
   async function onUpload() {
     const cek = await funGetAccessArea({ candidate: candidate })
     if (!cek) {
-        setOpenModal(false)
-        return toast("Anda tidak mempunyai akses ke wilayah tersebut", { theme: "dark" })
+      setOpenModal(false)
+      return toast("Anda tidak mempunyai akses ke wilayah tersebut", { theme: "dark" })
     }
     setLoading(true)
     await funCopyEmotion({ dateFrom: from, dateTo: to, candidate: candidate })
-    // await funLogUser({ act: "COPY DATA", desc: `User Copy Emotion Candidate (Candidate ID : ${candidate}, From ${from} To ${to})` })
+    await funLogUser({ act: 'CPY', desc: `User mengcopy data Emotion (${candidate} - ${moment(from).format('DD/MM/YY')} to ${moment(to).format('DD/MM/YY')})`, idContent: '-', tbContent: 'emotion' })
+    await funAddNotifications({ kategori: 'emotion', candidateId: candidate })
     setLoading(false)
     toast('Success', { theme: 'dark' })
     setOpenModal(false)

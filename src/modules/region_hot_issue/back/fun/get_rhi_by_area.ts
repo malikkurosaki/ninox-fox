@@ -35,6 +35,9 @@ export default async function funGetRhiByArea({ find }: { find: any }) {
                             name: true
                         }
                     }
+                },
+                orderBy: {
+                    id: 'asc'
                 }
             })
 
@@ -69,6 +72,9 @@ export default async function funGetRhiByArea({ find }: { find: any }) {
                             name: true
                         }
                     }
+                },
+                orderBy: {
+                    id: 'asc'
                 }
             })
 
@@ -102,6 +108,9 @@ export default async function funGetRhiByArea({ find }: { find: any }) {
                             name: true
                         }
                     }
+                },
+                orderBy: {
+                    id: 'asc'
                 }
             })
 

@@ -1,9 +1,9 @@
 "use client"
 import { useDisclosure, useShallowEffect } from '@mantine/hooks';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MdArrowForwardIos } from 'react-icons/md';
 import { usePathname, useRouter } from 'next/navigation';
-import { ActionIcon, AppShell, AppShellNavbar, AppShellSection, Box, Burger, Divider, Grid, Group, Modal, NavLink, Skeleton, Stack, Text, Title, Tooltip } from '@mantine/core';
+import { ActionIcon, AppShell, AppShellNavbar, AppShellSection, Box, Burger, Center, Collapse, Divider, Drawer, Grid, Group, Indicator, Modal, NavLink, Notification, Skeleton, Stack, Text, Title, Tooltip, Transition, useMantineColorScheme } from '@mantine/core';
 import _ from 'lodash';
 import { DataNavbarTutup } from '../components/data_navbar_tutup';
 import { WARNA } from '../../fun/WARNA';
@@ -13,19 +13,94 @@ import { DataNavbarBuka } from '../components/data_navbar_buka';
 import { useAtom } from 'jotai';
 import { isModalLayout } from '../val/isModallayout';
 import ModalLogoutUser from '../components/modal_logout_user';
+import { IoMdClose, IoMdNotificationsOutline } from 'react-icons/io';
+import { isDrawer } from '../val/isDrawer';
+import DrawerNotifikasi from '../components/drawer_notifikasi';
+import { IoClose } from 'react-icons/io5';
+import { funGetAllNotifications, funGetCountNotification } from '../..';
+import mtqq_client from "../../util/mqtt_client"
+import { funGetUserByCookies } from '@/modules/auth';
+import classes from '..//components/hover.module.css'
+import { notifications } from '@mantine/notifications';
 
-export default function LayoutViewFront({ children }: { children: React.ReactNode }) {
+export default function LayoutViewFront({ notif, children }: { notif: number, children: React.ReactNode }) {
   const [valOpenModal, setOpenModal] = useAtom(isModalLayout)
+  const [valOpenDrawer, setOpenDrawer] = useAtom(isDrawer)
   const [opened, { toggle }] = useDisclosure();
   const [isOpenNavbar, setOpenNavbar] = useState(true)
   const [isNavOpt, setNavOpt] = useState({ width: 100, breakpoint: 'sm', collapsed: { mobile: isOpenNavbar } })
-
+  const [isListNotif, setListNotif] = useState<any>([])
+  const [isNotif, setNotif] = useState(notif)
   const router = useRouter();
   const pathname = usePathname();
   const [active, setActive] = useState("");
+  const [user, setUser] = useState<any>("")
+
   useShallowEffect(() => {
-    setActive(pathname);
+    setActive(pathname)
+    onFindUser()
   });
+
+  async function OpenModal() {
+    const loadNotif = await funGetAllNotifications()
+    setListNotif(loadNotif)
+    setOpenDrawer(true)
+  }
+
+  function CloseModal() {
+    setOpenDrawer(false)
+  }
+
+
+  
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  function notificationData(title: any, message: any) {
+    notifications.clean(),
+      notifications.show({
+        onClickCapture: () => {
+          OpenModal()
+          notifications.clean()
+        },
+        title: title,
+        message: message,
+        classNames: classes,
+        color: 'black',
+        autoClose: 5000,
+        icon: <IoMdNotificationsOutline size={25} onClick={() => {
+          OpenModal()
+          notifications.clean()
+        }} />,
+      })
+  }
+
+
+  async function onFindUser() {
+    const loadUser = await funGetUserByCookies()
+    setUser(loadUser?.id)
+  }
+
+
+  useEffect(() => {
+    mtqq_client.on("connect", () => {
+      // console.log("connect")
+      mtqq_client.subscribe("app_ninox_fox")
+    })
+
+    mtqq_client.on("message", (topic, message) => {
+      const data = JSON.parse(message.toString())
+      if (data.user == user) {
+        setNotif(isNotif + 1)
+        notificationData(data.title, data.description)
+      }
+    })
+  }, [isNotif, user, notificationData])
+
+  async function reloadNotif() {
+    const loadN = await funGetCountNotification()
+    setNotif(loadN)
+  }
+
+
   return (
     <>
       <AppShell
@@ -65,6 +140,25 @@ export default function LayoutViewFront({ children }: { children: React.ReactNod
                       </Tooltip>
                     </Box>
                   ))}
+                  {
+                    isNotif > 0 ? (
+                      <Indicator inline processing color="red" size={12} label={isNotif}>
+                        <ActionIcon variant="subtle" c={"white"} onClick={OpenModal}>
+                          <IoMdNotificationsOutline size={30} />
+                        </ActionIcon>
+                      </Indicator>
+                    ) : (
+                      <ActionIcon variant="subtle" c={"white"} onClick={OpenModal}>
+                        <IoMdNotificationsOutline size={30} />
+                      </ActionIcon>
+                    )
+                  }
+
+                  {/* Notifikasi pembuka */}
+                  {/* <ActionIcon variant="subtle" c={"white"} onClick={() => notificationData()}>
+                    <IoMdNotificationsOutline size={30} />
+                  </ActionIcon> */}
+                  {/* Notifikasi penutup */}
 
                 </Stack>
               </Group>
@@ -138,6 +232,25 @@ export default function LayoutViewFront({ children }: { children: React.ReactNod
                 </Box>
               )
             })}
+            <Box m={5} mt={5} ml={18}>
+              <Box onClick={OpenModal} style={{ cursor: "pointer" }}>
+                {
+                  isNotif > 0 ? (
+                    <Indicator position="middle-end" offset={-20} inline processing color="red" size={12} label={isNotif}>
+                      <Text c={"white"} >
+                        NOTIFIKASI
+                      </Text>
+                    </Indicator>
+                  ) : (
+                    <Text c={"white"} >
+                      NOTIFIKASI
+                    </Text>
+                  )
+                }
+
+              </Box>
+            </Box>
+
             <Group
               style={{
                 position: "absolute",
@@ -169,6 +282,69 @@ export default function LayoutViewFront({ children }: { children: React.ReactNod
       >
         <ModalLogoutUser />
       </Modal>
+
+      <Transition
+        mounted={valOpenDrawer}
+        transition="slide-left"
+        duration={500}
+        timingFunction="ease"
+      >
+        {
+          (style) =>
+            <Box
+              bg={WARNA.ungu}
+              p={10}
+              top={0}
+              right={0}
+              h={'100%'}
+              w={'30%'}
+              pos={'fixed'}
+              style={{
+                ...style,
+                zIndex: 700,
+              }}
+            >
+              <Group >
+                <ActionIcon variant='subtle' onClick={CloseModal}>
+                  <IoClose size={30} color={"white"} />
+                </ActionIcon>
+                <Text c={"white"}>NOTIFIKASI</Text>
+              </Group>
+              <DrawerNotifikasi data={isListNotif} onSuccess={() => {
+                reloadNotif()
+              }} />
+            </Box>
+          // )
+        }
+      </Transition>
+      <Transition
+        mounted={valOpenDrawer}
+        transition="fade"
+        duration={100}
+        timingFunction="ease"
+      >
+        {
+          (style) =>
+            <Box
+              bg={'#000000'}
+              p={10}
+              top={0}
+              left={0}
+              h={'100%'}
+              w={'100%'}
+              pos={'fixed'}
+              style={{
+                ...style,
+                zIndex: 500,
+                opacity: '0.5',
+              }}
+              onClick={CloseModal}
+            >
+
+            </Box>
+        }
+      </Transition>
+
     </>
   );
 }

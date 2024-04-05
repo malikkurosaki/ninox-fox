@@ -6,6 +6,7 @@ import toast from "react-simple-toasts"
 import { useRouter } from "next/navigation"
 import funDeleteMlAi from "../fun/fun_delete_mlai"
 import { funGetAccessArea } from "@/modules/_global"
+import { funLogUser } from "@/modules/user"
 
 /**
  * Fungsi untuk menampilkan modal konfirmasi delete ml ai.
@@ -24,6 +25,7 @@ export default function ModalDelMlAi({ id, candidate, onSuccess }: { id: any, ca
         }
         const delData = await funDeleteMlAi({ id: id })
         if (!delData.success) return toast(delData.message, { theme: "dark" })
+        await funLogUser({ act: 'DEL', desc: `User menghapus data ML-AI`, idContent: id, tbContent: 'mlai' })
         toast("Sukses", { theme: "dark" });
         setOpenModal(false);
         onSuccess(true)

@@ -1,10 +1,14 @@
-import { ViewPairingFront } from '@/modules/pairing';
+import { funGetAreaByDefault } from '@/modules/_global';
+import { funGetAllCandidateFront } from '@/modules/candidate';
+import { ViewPairingFront, funGetPairingRegional } from '@/modules/pairing';
 import React from 'react';
 
-function Page() {
+export default async function Page() {
+  const can = await funGetAllCandidateFront()
+  const dataPairing = await funGetPairingRegional({})
+  const daerah = await funGetAreaByDefault()
+
   return (
-    <ViewPairingFront/>
+    <ViewPairingFront candidate={can} data={dataPairing} area={daerah} />
   );
 }
-
-export default Page;

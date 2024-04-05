@@ -33,7 +33,7 @@
         "email": "amalia_admin@bip.com",
         "password": "amalia@admin",
         "phone": "628980185458",
-        "isAllArea": true
+        "isAllArea": false
     },
     {
         "id": "UserGuest1",
@@ -42,6 +42,6 @@
         "email": "amalia_guest@bip.com",
         "password": "amalia@guest",
         "phone": "628980185458",
-        "isAllArea": true
+        "isAllArea": false
     }
 ]

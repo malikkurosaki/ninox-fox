@@ -5,6 +5,9 @@ import toast from "react-simple-toasts"
 import { useState } from "react"
 import { isModalEmotion } from "../../val/val_emotion"
 import funUploadEmotion from "../../fun/upload_emotion"
+import { funAddNotifications, funGetAccessArea } from "@/modules/_global"
+import { funLogUser } from "@/modules/user"
+import moment from "moment"
 
 export default function ModalUploadEmotion({ data, onSuccess }: { data: any, onSuccess: (val: any) => void }) {
     const [openModal, setOpenModal] = useAtom(isModalEmotion)
@@ -12,8 +15,14 @@ export default function ModalUploadEmotion({ data, onSuccess }: { data: any, onS
 
     async function onUpload() {
         setLoading(true)
+        const cek = await funGetAccessArea({ provinsi: data[0].idProvinsi })
+        if (!cek) {
+            setLoading(false)
+            return toast("Anda tidak mempunyai akses ke wilayah tersebut", { theme: "dark" })
+        }
         await funUploadEmotion({ body: data })
-        // await funLogUser({ act: "UPLOAD", desc: `User Uploads Data Public Concerns Trends` })
+        await funLogUser({ act: 'UPL', desc: `User mengupload data Emotion (${data[0].idCandidate} - ${moment(data[0].date).format('DD/MM/YYYY')})`, idContent: '-', tbContent: 'emotion' })
+        await funAddNotifications({ kategori: 'emotion', candidateId: data[0].idCandidate })
         setLoading(false)
         toast('Success', { theme: 'dark' })
         setOpenModal(false)

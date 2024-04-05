@@ -4,16 +4,62 @@ import { EChartsOption, color } from "echarts";
 import EChartsReact from "echarts-for-react";
 import { useShallowEffect } from '@mantine/hooks';
 import * as echarts from 'echarts';
-import { Box, Button, Divider, Group } from '@mantine/core';
+import { Box, Button, Divider, Group, LoadingOverlay, Menu } from '@mantine/core';
+import moment from 'moment';
+import { DatePicker } from '@mantine/dates';
+import toast from 'react-simple-toasts';
+import { funGetEmotionChart } from '../..';
 
-export default function EchartCandidateSummary() {
-    const [options, setOptions] = useState<EChartsOption>({});
+export default function EchartCandidateSummary({ data, candidate }: { data: any, candidate: any }) {
+    const [options, setOptions] = useState<EChartsOption>({})
+    const [listData, setListData] = useState(data)
+    const [value, setValue] = useState<[Date | null, Date | null]>([null, null])
+    const [showPopDate, setPopDate] = useState(false)
+    const [isButton, setButton] = useState('week')
+    const [newDateStart, setNewDateStart] = useState(moment(new Date("2023-09-01")).format("YYYY-MM-DD"))
+    const [newDateEnd, setNewDateEnd] = useState(moment(new Date()).format("YYYY-MM-DD"))
+    const [okButton, setOkButton] = useState(false)
+    const [isLoadingMonth, setLoadingMonth] = useState(false)
+    const [isLoadingWeek, setLoadingWeek] = useState(false)
+    const [isLoadingCustom, setLoadingCustom] = useState(false)
+    const [loadingData, setLoadingData] = useState(false)
+
+    async function onChooseTime(time: any) {
+        let startDate
+        setButton(time)
+        let endDate = moment(new Date()).format('YYYY-MM-DD')
+        if (time == 'month') {
+            setLoadingMonth(true)
+            setLoadingData(true)
+            startDate = moment(new Date()).subtract(1, "months").format("YYYY-MM-DD")
+        } else if (time == 'week') {
+            setLoadingWeek(true)
+            setLoadingData(true)
+            startDate = moment(new Date()).subtract(7, "days").format("YYYY-MM-DD");
+        } else if (time == 'custom') {
+            setLoadingCustom(true)
+            setLoadingData(true)
+            startDate = newDateStart
+            endDate = newDateEnd
+        }
+
+        if (time == 'custom') setPopDate(false)
+
+        const loadChart = await funGetEmotionChart({ candidate: candidate.id, startDate: startDate, endDate: endDate })
+        setListData(loadChart)
+        loadData(loadChart)
+        setLoadingCustom(false)
+        setLoadingMonth(false)
+        setLoadingWeek(false)
+        setLoadingData(false)
+
+    }
 
     useShallowEffect(() => {
-        loadData()
-    }, [])
+        loadData(listData)
+    }, [listData])
 
-    const loadData = () => {
+    const loadData = (dataChart: any) => {
         const option: EChartsOption = {
             color: ['green', 'gray', 'red'],
             tooltip: {
@@ -35,7 +81,9 @@ export default function EchartCandidateSummary() {
                 {
                     type: 'category',
                     boundaryGap: false,
-                    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    data: !dataChart
+                        ? []
+                        : dataChart!.map((v: any) => v.date),
                     axisLabel: {
                         color: "white",
                         rotate: 30
@@ -64,7 +112,9 @@ export default function EchartCandidateSummary() {
                     name: 'Positive',
                     type: 'line',
                     showSymbol: false,
-                    data: [10, 32, 56, 21, 55, 40, 50],
+                    data: !dataChart
+                        ? []
+                        : dataChart!.map((v: any) => v.positive),
                     stack: 'z',
                     color: 'green',
                     areaStyle: {
@@ -88,8 +138,10 @@ export default function EchartCandidateSummary() {
                     type: 'line',
                     smooth: true,
                     showSymbol: false,
-                    data: [20, 21, 5, 41, 22, 34, 31],
-                    color: "#EBEBEB",
+                    data: !dataChart
+                        ? []
+                        : dataChart!.map((v: any) => v.neutral),
+                    color: "white",
                     stack: 'x',
                     areaStyle: {
                         opacity: 1,
@@ -111,7 +163,9 @@ export default function EchartCandidateSummary() {
                     type: 'line',
                     smooth: true,
                     showSymbol: false,
-                    data: [20, 22, 22, 14, 19, 30, 66],
+                    data: !dataChart
+                        ? []
+                        : dataChart!.map((v: any) => v.negative),
                     color: "red",
                     stack: 'y',
                     areaStyle: {
@@ -137,24 +191,83 @@ export default function EchartCandidateSummary() {
     return (
         <>
             <Box
-                // style={{
-                //     background: "rgba(0,0,0,0.3)",
-                //     padding: 10,
-                //     borderRadius: 10
-                // }}
+            // style={{
+            //     background: "rgba(0,0,0,0.3)",
+            //     padding: 10,
+            //     borderRadius: 10
+            // }}
             >
                 <Group justify='flex-end'>
                     <Group>
-                        <Button variant='subtle' c={"white"}>Month</Button>
+                        <Button loading={isLoadingWeek} variant={(isButton == 'week') ? 'filled' : 'subtle'} c={"white"} onClick={() => onChooseTime('week')}>Minggu</Button>
                         <Divider orientation="vertical" />
-                        <Button variant='subtle' c={"white"}>Week</Button>
+                        <Button loading={isLoadingMonth} variant={(isButton == 'month') ? 'filled' : 'subtle'} c={"white"} onClick={() => onChooseTime('month')}>Bulan</Button>
                         <Divider orientation="vertical" />
-                        <Button variant='subtle' c={"white"}>Custom</Button>
+                        <Menu opened={showPopDate} position='bottom-end'>
+                            <Menu.Target>
+                                <Button loading={isLoadingCustom} variant={(isButton == 'custom') ? 'filled' : 'subtle'} c={"white"} onClick={() => setPopDate(true)}>Kustom</Button>
+                            </Menu.Target>
+                            <Menu.Dropdown p={20}>
+                                <DatePicker
+                                    type="range"
+                                    value={value}
+                                    minDate={new Date('2023-09-01')}
+                                    maxDate={new Date()}
+                                    onChange={(v) => {
+                                        setValue(v)
+                                        if (v[0] && v[1]) {
+                                            const diferent = moment(v[1]).diff(
+                                                moment(v[0]),
+                                                "days"
+                                            );
+
+                                            if (diferent < 8)
+                                                return toast('Please select date more than 7 days, or user 1 week option button', { theme: 'dark' });
+                                            setNewDateStart(moment(v[0]).format("YYYY-MM-DD"))
+                                            setNewDateEnd(moment(v[1]).format("YYYY-MM-DD"))
+                                            setOkButton(true);
+                                        } else {
+                                            setOkButton(false);
+                                        }
+                                    }
+                                    }
+                                />
+                                <Group justify="space-between" mt={10} >
+                                    <Button
+                                        onClick={() => setPopDate(false)}
+                                        w={100}
+                                        p={10}
+                                        variant="outline"
+                                        style={{
+                                            backgroundColor: 'white'
+                                        }}
+                                    >
+                                        BATAL
+                                    </Button>
+                                    {okButton && (
+                                        <Button
+                                            onClick={() => { onChooseTime('custom') }}
+                                            w={100}
+                                            variant="filled"
+                                        >
+                                            OK
+                                        </Button>
+                                    )}
+                                </Group>
+                            </Menu.Dropdown>
+                        </Menu>
                     </Group>
                 </Group>
-                <EChartsReact style={{
-                    height: 320
-                }} option={options} />
+                <Box pos={"relative"}>
+                    <LoadingOverlay
+                        visible={loadingData}
+                        overlayProps={{ radius: "sm", blur: "8px", bg: "rgba(27,11,47,0.8)" }}
+                        loaderProps={{ color: "white" }}
+                    />
+                    <EChartsReact style={{
+                        height: 320
+                    }} option={options} />
+                </Box>
             </Box>
         </>
     );

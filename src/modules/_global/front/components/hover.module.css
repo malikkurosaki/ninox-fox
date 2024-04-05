@@ -1,0 +1,27 @@
+.box {
+    @mixin hover {
+        background-color: dark;
+        transform: scale(1.02);
+      }
+}
+
+.root {
+  background-color: var(--notification-color, var(--mantine-color-black));
+  border: rem(1px) solid var(--mantine-color-violet-9);
+  &::before {
+    background-color: var(--mantine-color-black);
+  }
+}
+
+.description,
+.title {
+  color: var(--mantine-color-white);
+}
+
+.closeButton {
+  color: var(--mantine-color-white);
+
+  @mixin hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+}

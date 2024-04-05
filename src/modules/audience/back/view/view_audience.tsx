@@ -17,13 +17,11 @@ import toast from "react-simple-toasts";
 import papa from "papaparse"
 import { TableDataAudience } from "../..";
 
-
 /**
  * Fungsi untuk menampilkan table list Audience.
  * @param {string} title - Judul table.
  * @returns {component} Table list audience sesuai dengan parameter.
  */
-
 
 export default function ViewAudience({ param, provinsi, kabupaten, kecamatan, datatable, datadownload }: { param: any, provinsi: any, kabupaten: any, kecamatan: any, datatable: any, datadownload: any }) {
   const router = useRouter()
@@ -59,7 +57,7 @@ export default function ViewAudience({ param, provinsi, kabupaten, kecamatan, da
   }
 
   function onProccess() {
-    if (_.isNull(isProvinsi)) return toast("Silahkan pilih provinsi", { theme: "dark" })
+    // if (_.isNull(isProvinsi)) return toast("Silahkan pilih provinsi", { theme: "dark" })
     router.replace('/dashboard/audience?prov=' + isProvinsi + '&city=' + isKabupaten + '&kec=' + isKecamatan)
   }
 
@@ -84,8 +82,7 @@ export default function ViewAudience({ param, provinsi, kabupaten, kecamatan, da
                     value: String(pro.id),
                     label: pro.name
                   }))}
-                  value={isProvinsi}
-                  required
+                  value={(_.isNull(isProvinsi)) ? null : String(isProvinsi)}
                   label={"Provinsi"}
                   searchable
                   onChange={(val) => onProvinsi({ idProv: val })}
@@ -96,7 +93,7 @@ export default function ViewAudience({ param, provinsi, kabupaten, kecamatan, da
                     value: String(kab.id),
                     label: kab.name
                   }))}
-                  value={isKabupaten}
+                  value={(_.isNull(isKabupaten)) ? null : String(isKabupaten)}
                   label="Kabupaten/Kota"
                   searchable
                   onChange={(val) => onKabupaten({ idKab: val })}
@@ -107,7 +104,7 @@ export default function ViewAudience({ param, provinsi, kabupaten, kecamatan, da
                     value: String(kec.id),
                     label: kec.name
                   }))}
-                  value={isKecamatan}
+                  value={(_.isNull(isKecamatan)) ? null : String(isKecamatan)}
                   label="Kecamatan"
                   searchable
                   onChange={(val) => setKecamatan(val)}

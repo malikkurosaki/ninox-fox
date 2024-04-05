@@ -1,9 +1,8 @@
 'use server'
-import { Candidate } from '@prisma/client';
-
 import { provinsiCount } from "@/modules/_global";
 import prisma from "@/modules/_global/bin/prisma"
 import _ from "lodash"
+import moment from 'moment';
 
 /**
  * Fungsi untuk menampilkan ml ai berdasarkan area
@@ -22,6 +21,8 @@ export default async function funGetAllMlAi({ find }: { find: any }) {
                 select: {
                     id: true,
                     content: true,
+                    timeContent: true,
+                    dateContent: true,
                     Candidate: {
                         select: {
                             name: true,
@@ -36,6 +37,9 @@ export default async function funGetAllMlAi({ find }: { find: any }) {
                         tingkat: find.tingkat,
                         idProvinsi: find.idProvinsi
                     }
+                },
+                orderBy: {
+                    id: 'asc'
                 }
             })
 
@@ -51,6 +55,8 @@ export default async function funGetAllMlAi({ find }: { find: any }) {
                 select: {
                     id: true,
                     content: true,
+                    timeContent: true,
+                    dateContent: true,
                     Candidate: {
                         select: {
                             name: true,
@@ -66,6 +72,9 @@ export default async function funGetAllMlAi({ find }: { find: any }) {
                         idProvinsi: find.idProvinsi,
                         idKabkot: find.idKabkot
                     }
+                },
+                orderBy: {
+                    id: 'asc'
                 }
             })
 
@@ -84,9 +93,11 @@ export default async function funGetAllMlAi({ find }: { find: any }) {
 
 
     const result = dataTable.map((v: any) => ({
-        ..._.omit(v, ["Candidate"]),
+        ..._.omit(v, ["Candidate", "timeContent", "dateContent"]),
         name: v.Candidate?.name,
-        idCandidate: v.Candidate.id
+        idCandidate: v.Candidate.id,
+        dateContent: moment(v.dateContent).format('DD-MM-YYYY'),
+        timeContent: moment.utc(v.timeContent).format('HH:mm'),
     }));
 
     const allData = {

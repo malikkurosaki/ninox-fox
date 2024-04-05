@@ -1,4 +1,3 @@
-
 import ComponentTable from "./back/component/component_table";
 import ModalAddMlAi from "./back/component/modal_add_mlai";
 import ModalDelMlAi from "./back/component/modal_del_mlai";
@@ -12,6 +11,9 @@ import funGetOneMlAi from "./back/fun/fun_get_one_mlai";
 import AddMlAi from "./back/view/add_mlai";
 import EditMlAi from "./back/view/edit_mlai";
 import ListMlAi from "./back/view/list_mlai";
+import funGetDateMlAiFront from "./front/fun/get_date_ml_ai_front";
+import funGetMlAiFront from "./front/fun/get_ml_ai_front";
+import funGetMlAiFrontV2 from "./front/fun/get_ml_ai_front_v2";
 import ViewMlAi from "./front/view/view_ml_ai";
 
 export { funGetAllMlAi }
@@ -28,3 +30,6 @@ export { TableMlAi }
 export { funAddMlAi }
 export { funDeleteMlAi }
 export { funEditMlAi }
+export { funGetMlAiFront }
+export { funGetMlAiFrontV2 }
+export { funGetDateMlAiFront }

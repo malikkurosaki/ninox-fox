@@ -1,10 +1,14 @@
-import { ViewStep } from '@/modules/step';
+import { funGetAllCandidateFront, funGetOneCandidateFront, funGetUserDefaultFront } from '@/modules/candidate';
+import { ViewStep, funGetStepFront } from '@/modules/step';
 import React from 'react';
 
-function Page() {
+export default async function Page() {
+  const canDef = await funGetUserDefaultFront()
+  const data = await funGetStepFront({ candidate: canDef.idCandidate })
+  const can = await funGetAllCandidateFront()
+  const oneCandidate = await funGetOneCandidateFront({ candidate: canDef.idCandidate })
+
   return (
-    <ViewStep/>
+    <ViewStep data={data} candidate={can} oneCandidate={oneCandidate} />
   );
 }
-
-export default Page;

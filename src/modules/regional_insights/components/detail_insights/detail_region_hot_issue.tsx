@@ -10,7 +10,7 @@ const dataRegion = [
   }
 ]
 
-export default function DetailRegionHotIssue() {
+export default function DetailRegionHotIssue({ data }: { data: any }) {
   return (
     <>
       <Box>
@@ -22,9 +22,14 @@ export default function DetailRegionHotIssue() {
           }}
         >
           <Box pb={20}>
-            <Text fz={18} fw={"bold"} c={"red"}>REGION HOT ISSUE</Text>
+            <Text fz={18} fw={"bold"} c={"red"}>ISU WILAYAH</Text>
           </Box>
-          {dataRegion.map((item) => {
+          <ScrollArea h={240}>
+            <Stack >
+              <Box c={"white"} dangerouslySetInnerHTML={{ __html: data[0].description }} />
+            </Stack>
+          </ScrollArea>
+          {/* {dataRegion.map((item) => {
             return (
               <ScrollArea h={240} key={item.id}>
                 <Stack >
@@ -43,7 +48,7 @@ export default function DetailRegionHotIssue() {
                 </Stack>
               </ScrollArea>
             )
-          })}
+          })} */}
 
         </Box>
       </Box>

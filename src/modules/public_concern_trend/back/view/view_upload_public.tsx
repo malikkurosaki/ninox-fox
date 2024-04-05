@@ -15,6 +15,7 @@ import ModalUploadPct from "../components/modal_upload_public"
 export default function ViewUploadPct() {
     const [json, setJson] = useState<any[]>([])
     const [openModal, setOpenModal] = useAtom(isModalPct)
+    const [isLoading, setLoading] = useState(false)
 
 
     async function onLoad(data: any) {
@@ -59,6 +60,7 @@ export default function ViewUploadPct() {
                 >
                     <Text fw={"bold"} c={"white"} mb={20}>UPLOAD DATA PUBLIC CONCERN TRENDS</Text>
                     <Dropzone
+                        loading={isLoading}
                         style={{
                             border: "1px dashed",
                             color: "white",
@@ -66,9 +68,11 @@ export default function ViewUploadPct() {
                             cursor: "pointer"
                         }}
                         onDrop={async (files: any) => {
+                            setLoading(true)
                             const csv_file = Buffer.from(await files[0].arrayBuffer()).toString()
                             const { data } = papa.parse(csv_file, { header: true, })
                             onLoad(data)
+                            setLoading(false)
                         }}
                         onReject={(files: any) => {
                             toast("success")

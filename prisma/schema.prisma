@@ -63,90 +63,196 @@ model UserAccess {
 }
 
 model User {
-  id         String     @id @default(cuid())
-  UserRole   UserRole   @relation(fields: [idUserRole], references: [id])
-  idUserRole Int
-  name       String
-  email      String     @unique
-  password   String
-  phone      String // kemungkinan ada 1 orang yang punya akun yg beda namun punya wa yg sama
-  isAllArea  Boolean    @default(false)
-  isActive   Boolean    @default(true)
-  createdAt  DateTime   @default(now())
-  updatedAt  DateTime   @updatedAt
-  UserLog    UserLog[]
-  UserArea   UserArea[]
+  id            String          @id @default(cuid())
+  UserRole      UserRole        @relation(fields: [idUserRole], references: [id])
+  idUserRole    Int
+  name          String
+  email         String          @unique
+  password      String
+  phone         String // kemungkinan ada 1 orang yang punya akun yg beda namun punya wa yg sama
+  isAllArea     Boolean         @default(false)
+  isActive      Boolean         @default(true)
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  UserLog       UserLog[]
+  UserArea      UserArea[]
+  Notification  Notifications[] @relation("UserToClient")
+  Notification2 Notifications[] @relation("UserToAdmin")
 }
 
 model UserLog {
-  id          String   @id @default(cuid())
-  User        User     @relation(fields: [idUser], references: [id])
-  idUser      String
-  activity    String
-  description String   @db.Text
-  isActive    Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id           String   @id @default(cuid())
+  User         User     @relation(fields: [idUser], references: [id])
+  idUser       String
+  activity     String
+  description  String   @db.Text
+  idContent    String?  @db.Text
+  tableContent String?  @db.Text
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }
 
 model AreaProvinsi {
-  id                       Int                        @id @default(autoincrement())
-  name                     String
-  isActive                 Boolean                    @default(true)
-  createdAt                DateTime                   @default(now())
-  updatedAt                DateTime                   @updatedAt
-  AreaKabkot               AreaKabkot[]
-  UserArea                 UserArea[]
-  LeaderTraitAssessment    LeaderTraitAssessment[]
-  PublicConcernTrend       PublicConcernTrend[]
-  RegionHotIssues          RegionHotIssues[]
-  Candidate                Candidate[]
-  CandidateEmotion         CandidateEmotion[]
-  Audience                 Audience[]
-  CandidatePairing         CandidatePairing[]
-  PublicConcernTrendFix    PublicConcernTrendFix[]
-  LeaderTraitAssessmentFix LeaderTraitAssessmentFix[]
+  id                                        Int                                         @id @default(autoincrement())
+  name                                      String
+  isActive                                  Boolean                                     @default(true)
+  createdAt                                 DateTime                                    @default(now())
+  updatedAt                                 DateTime                                    @updatedAt
+  AreaKabkot                                AreaKabkot[]
+  UserArea                                  UserArea[]
+  LeaderTraitAssessment                     LeaderTraitAssessment[]
+  PublicConcernTrend                        PublicConcernTrend[]
+  RegionHotIssues                           RegionHotIssues[]
+  Candidate                                 Candidate[]
+  CandidateEmotion                          CandidateEmotion[]
+  Audience                                  Audience[]
+  CandidatePairing                          CandidatePairing[]
+  PublicConcernTrendFix                     PublicConcernTrendFix[]
+  LeaderTraitAssessmentFix                  LeaderTraitAssessmentFix[]
+  SE_Transportasi_Kecelakaan                SE_Transportasi_Kecelakaan[]
+  SE_Agama_RumahIbadah                      SE_Agama_RumahIbadah[]
+  SE_Pendidikan_GuruTersertifikasi          SE_Pendidikan_GuruTersertifikasi[]
+  SE_Kesehatan_PosPelayanan                 SE_Kesehatan_PosPelayanan[]
+  SE_Kesehatan_Fasilitas                    SE_Kesehatan_Fasilitas[]
+  SE_Ketenagakerjaan_JaminanKesehatan       SE_Ketenagakerjaan_JaminanKesehatan[]
+  SE_Ketenagakerjaan_JaminanKecelakaanKerja SE_Ketenagakerjaan_JaminanKecelakaanKerja[]
+  SE_Ketenagakerjaan_JaminanKematian        SE_Ketenagakerjaan_JaminanKematian[]
+  SE_Ketenagakerjaan_JaminanHariTua         SE_Ketenagakerjaan_JaminanHariTua[]
+  SE_Ketenagakerjaan_JaminanPensiun         SE_Ketenagakerjaan_JaminanPensiun[]
+  SE_Ketenagakerjaan_Pengangguran           SE_Ketenagakerjaan_Pengangguran[]
+  SE_Transportasi_PermukaanJalanYgTerluas   SE_Transportasi_PermukaanJalanYgTerluas[]
+  SE_Transportasi_JalanDiLaluiKendaraan     SE_Transportasi_JalanDiLaluiKendaraan[]
+  SE_Pendidikan_JarakFasilitas              SE_Pendidikan_JarakFasilitas[]
+  SE_Pendidikan_JalanKakiKurangEmpatJam     SE_Pendidikan_JalanKakiKurangEmpatJam[]
+  SE_Pendidikan_GuruHonorer                 SE_Pendidikan_GuruHonorer[]
+  SE_Kesehatan_KelasIbuHamil                SE_Kesehatan_KelasIbuHamil[]
+  SE_Kesehatan_IbuHamilDariKeluargaMiskin   SE_Kesehatan_IbuHamilDariKeluargaMiskin[]
+  SE_Kesehatan_JaminanUntukBaduta           SE_Kesehatan_JaminanUntukBaduta[]
+  SE_Kesehatan_RataRataJarakFasilitas       SE_Kesehatan_RataRataJarakFasilitas[]
+  SE_Kesehatan_JumlahDokter                 SE_Kesehatan_JumlahDokter[]
+  SE_Keamanan_Perkelahian                   SE_Keamanan_Perkelahian[]
+  SE_Keamanan_Pencurian                     SE_Keamanan_Pencurian[]
+  SE_Keamanan_PencurianDanKekerasan         SE_Keamanan_PencurianDanKekerasan[]
+  SE_Keamanan_PenipuanDanPenggelapan        SE_Keamanan_PenipuanDanPenggelapan[]
+  SE_Keamanan_Penganiayaan                  SE_Keamanan_Penganiayaan[]
+  SE_Keamanan_Perkosaan                     SE_Keamanan_Perkosaan[]
+  SE_Keamanan_Narkoba                       SE_Keamanan_Narkoba[]
+  SE_Ekonomi_JumlahPasar                    SE_Ekonomi_JumlahPasar[]
+  SE_Ekonomi_LembagaKeuangan                SE_Ekonomi_LembagaKeuangan[]
+  SE_Pertanian_JenisPrasaranaTransportasi   SE_Pertanian_JenisPrasaranaTransportasi[]
+  SE_Pertanian_Irigasi                      SE_Pertanian_Irigasi[]
+  SE_Kemiskinan_Data                        SE_Kemiskinan_Data[]
+  SE_Kemiskinan_BPJS                        SE_Kemiskinan_BPJS[]
 }
 
 model AreaKabkot {
-  id                       Int                        @id @default(autoincrement())
-  AreaProvinsi             AreaProvinsi               @relation(fields: [idProvinsi], references: [id])
-  idProvinsi               Int
-  name                     String
-  isActive                 Boolean                    @default(true)
-  createdAt                DateTime                   @default(now())
-  updatedAt                DateTime                   @updatedAt
-  AreaKecamatan            AreaKecamatan[]
-  UserArea                 UserArea[]
-  LeaderTraitAssessment    LeaderTraitAssessment[]
-  PublicConcernTrend       PublicConcernTrend[]
-  RegionHotIssues          RegionHotIssues[]
-  Candidate                Candidate[]
-  CandidateEmotion         CandidateEmotion[]
-  Audience                 Audience[]
-  CandidatePairing         CandidatePairing[]
-  PublicConcernTrendFix    PublicConcernTrendFix[]
-  LeaderTraitAssessmentFix LeaderTraitAssessmentFix[]
+  id                                        Int                                         @id @default(autoincrement())
+  AreaProvinsi                              AreaProvinsi                                @relation(fields: [idProvinsi], references: [id])
+  idProvinsi                                Int
+  name                                      String
+  isActive                                  Boolean                                     @default(true)
+  createdAt                                 DateTime                                    @default(now())
+  updatedAt                                 DateTime                                    @updatedAt
+  AreaKecamatan                             AreaKecamatan[]
+  UserArea                                  UserArea[]
+  LeaderTraitAssessment                     LeaderTraitAssessment[]
+  PublicConcernTrend                        PublicConcernTrend[]
+  RegionHotIssues                           RegionHotIssues[]
+  Candidate                                 Candidate[]
+  CandidateEmotion                          CandidateEmotion[]
+  Audience                                  Audience[]
+  CandidatePairing                          CandidatePairing[]
+  PublicConcernTrendFix                     PublicConcernTrendFix[]
+  LeaderTraitAssessmentFix                  LeaderTraitAssessmentFix[]
+  SE_Transportasi_Kecelakaan                SE_Transportasi_Kecelakaan[]
+  SE_Agama_RumahIbadah                      SE_Agama_RumahIbadah[]
+  SE_Pendidikan_GuruTersertifikasi          SE_Pendidikan_GuruTersertifikasi[]
+  SE_Kesehatan_PosPelayanan                 SE_Kesehatan_PosPelayanan[]
+  SE_Kesehatan_Fasilitas                    SE_Kesehatan_Fasilitas[]
+  SE_Ketenagakerjaan_JaminanKesehatan       SE_Ketenagakerjaan_JaminanKesehatan[]
+  SE_Ketenagakerjaan_JaminanKecelakaanKerja SE_Ketenagakerjaan_JaminanKecelakaanKerja[]
+  SE_Ketenagakerjaan_JaminanKematian        SE_Ketenagakerjaan_JaminanKematian[]
+  SE_Ketenagakerjaan_JaminanHariTua         SE_Ketenagakerjaan_JaminanHariTua[]
+  SE_Ketenagakerjaan_JaminanPensiun         SE_Ketenagakerjaan_JaminanPensiun[]
+  SE_Ketenagakerjaan_Pengangguran           SE_Ketenagakerjaan_Pengangguran[]
+  SE_Transportasi_PermukaanJalanYgTerluas   SE_Transportasi_PermukaanJalanYgTerluas[]
+  SE_Transportasi_JalanDiLaluiKendaraan     SE_Transportasi_JalanDiLaluiKendaraan[]
+  SE_Pendidikan_JarakFasilitas              SE_Pendidikan_JarakFasilitas[]
+  SE_Pendidikan_JalanKakiKurangEmpatJam     SE_Pendidikan_JalanKakiKurangEmpatJam[]
+  SE_Pendidikan_GuruHonorer                 SE_Pendidikan_GuruHonorer[]
+  SE_Kesehatan_KelasIbuHamil                SE_Kesehatan_KelasIbuHamil[]
+  SE_Kesehatan_IbuHamilDariKeluargaMiskin   SE_Kesehatan_IbuHamilDariKeluargaMiskin[]
+  SE_Kesehatan_JaminanUntukBaduta           SE_Kesehatan_JaminanUntukBaduta[]
+  SE_Kesehatan_RataRataJarakFasilitas       SE_Kesehatan_RataRataJarakFasilitas[]
+  SE_Kesehatan_JumlahDokter                 SE_Kesehatan_JumlahDokter[]
+  SE_Keamanan_Perkelahian                   SE_Keamanan_Perkelahian[]
+  SE_Keamanan_Pencurian                     SE_Keamanan_Pencurian[]
+  SE_Keamanan_PencurianDanKekerasan         SE_Keamanan_PencurianDanKekerasan[]
+  SE_Keamanan_PenipuanDanPenggelapan        SE_Keamanan_PenipuanDanPenggelapan[]
+  SE_Keamanan_Penganiayaan                  SE_Keamanan_Penganiayaan[]
+  SE_Keamanan_Perkosaan                     SE_Keamanan_Perkosaan[]
+  SE_Keamanan_Narkoba                       SE_Keamanan_Narkoba[]
+  SE_Ekonomi_JumlahPasar                    SE_Ekonomi_JumlahPasar[]
+  SE_Ekonomi_LembagaKeuangan                SE_Ekonomi_LembagaKeuangan[]
+  SE_Pertanian_JenisPrasaranaTransportasi   SE_Pertanian_JenisPrasaranaTransportasi[]
+  SE_Pertanian_Irigasi                      SE_Pertanian_Irigasi[]
+  SE_Kemiskinan_Data                        SE_Kemiskinan_Data[]
+  SE_Kemiskinan_BPJS                        SE_Kemiskinan_BPJS[]
 }
 
 model AreaKecamatan {
-  id                       Int                        @id @default(autoincrement())
-  AreaKabkot               AreaKabkot                 @relation(fields: [idKabkot], references: [id])
-  idKabkot                 Int
-  name                     String
-  isActive                 Boolean                    @default(true)
-  createdAt                DateTime                   @default(now())
-  updatedAt                DateTime                   @updatedAt
-  AreaKelurahan            AreaKelurahan[]
-  UserArea                 UserArea[]
-  LeaderTraitAssessment    LeaderTraitAssessment[]
-  PublicConcernTrend       PublicConcernTrend[]
-  RegionHotIssues          RegionHotIssues[]
-  CandidateEmotion         CandidateEmotion[]
-  Audience                 Audience[]
-  CandidatePairing         CandidatePairing[]
-  PublicConcernTrendFix    PublicConcernTrendFix[]
-  LeaderTraitAssessmentFix LeaderTraitAssessmentFix[]
+  id                                        Int                                         @id @default(autoincrement())
+  AreaKabkot                                AreaKabkot                                  @relation(fields: [idKabkot], references: [id])
+  idKabkot                                  Int
+  name                                      String
+  isActive                                  Boolean                                     @default(true)
+  createdAt                                 DateTime                                    @default(now())
+  updatedAt                                 DateTime                                    @updatedAt
+  AreaKelurahan                             AreaKelurahan[]
+  UserArea                                  UserArea[]
+  LeaderTraitAssessment                     LeaderTraitAssessment[]
+  PublicConcernTrend                        PublicConcernTrend[]
+  RegionHotIssues                           RegionHotIssues[]
+  CandidateEmotion                          CandidateEmotion[]
+  Audience                                  Audience[]
+  CandidatePairing                          CandidatePairing[]
+  PublicConcernTrendFix                     PublicConcernTrendFix[]
+  LeaderTraitAssessmentFix                  LeaderTraitAssessmentFix[]
+  SE_Transportasi_Kecelakaan                SE_Transportasi_Kecelakaan[]
+  SE_Agama_RumahIbadah                      SE_Agama_RumahIbadah[]
+  SE_Pendidikan_GuruTersertifikasi          SE_Pendidikan_GuruTersertifikasi[]
+  SE_Kesehatan_PosPelayanan                 SE_Kesehatan_PosPelayanan[]
+  SE_Kesehatan_Fasilitas                    SE_Kesehatan_Fasilitas[]
+  SE_Ketenagakerjaan_JaminanKesehatan       SE_Ketenagakerjaan_JaminanKesehatan[]
+  SE_Ketenagakerjaan_JaminanKecelakaanKerja SE_Ketenagakerjaan_JaminanKecelakaanKerja[]
+  SE_Ketenagakerjaan_JaminanKematian        SE_Ketenagakerjaan_JaminanKematian[]
+  SE_Ketenagakerjaan_JaminanHariTua         SE_Ketenagakerjaan_JaminanHariTua[]
+  SE_Ketenagakerjaan_JaminanPensiun         SE_Ketenagakerjaan_JaminanPensiun[]
+  SE_Ketenagakerjaan_Pengangguran           SE_Ketenagakerjaan_Pengangguran[]
+  SE_Transportasi_PermukaanJalanYgTerluas   SE_Transportasi_PermukaanJalanYgTerluas[]
+  SE_Transportasi_JalanDiLaluiKendaraan     SE_Transportasi_JalanDiLaluiKendaraan[]
+  SE_Pendidikan_JarakFasilitas              SE_Pendidikan_JarakFasilitas[]
+  SE_Pendidikan_JalanKakiKurangEmpatJam     SE_Pendidikan_JalanKakiKurangEmpatJam[]
+  SE_Pendidikan_GuruHonorer                 SE_Pendidikan_GuruHonorer[]
+  SE_Kesehatan_KelasIbuHamil                SE_Kesehatan_KelasIbuHamil[]
+  SE_Kesehatan_IbuHamilDariKeluargaMiskin   SE_Kesehatan_IbuHamilDariKeluargaMiskin[]
+  SE_Kesehatan_JaminanUntukBaduta           SE_Kesehatan_JaminanUntukBaduta[]
+  SE_Kesehatan_RataRataJarakFasilitas       SE_Kesehatan_RataRataJarakFasilitas[]
+  SE_Kesehatan_JumlahDokter                 SE_Kesehatan_JumlahDokter[]
+  SE_Keamanan_Perkelahian                   SE_Keamanan_Perkelahian[]
+  SE_Keamanan_Pencurian                     SE_Keamanan_Pencurian[]
+  SE_Keamanan_PencurianDanKekerasan         SE_Keamanan_PencurianDanKekerasan[]
+  SE_Keamanan_PenipuanDanPenggelapan        SE_Keamanan_PenipuanDanPenggelapan[]
+  SE_Keamanan_Penganiayaan                  SE_Keamanan_Penganiayaan[]
+  SE_Keamanan_Perkosaan                     SE_Keamanan_Perkosaan[]
+  SE_Keamanan_Narkoba                       SE_Keamanan_Narkoba[]
+  SE_Ekonomi_JumlahPasar                    SE_Ekonomi_JumlahPasar[]
+  SE_Ekonomi_LembagaKeuangan                SE_Ekonomi_LembagaKeuangan[]
+  SE_Pertanian_JenisPrasaranaTransportasi   SE_Pertanian_JenisPrasaranaTransportasi[]
+  SE_Pertanian_Irigasi                      SE_Pertanian_Irigasi[]
+  SE_Kemiskinan_Data                        SE_Kemiskinan_Data[]
+  SE_Kemiskinan_BPJS                        SE_Kemiskinan_BPJS[]
 }
 
 model AreaKelurahan {
@@ -179,6 +285,8 @@ model UserArea {
   idKecamatan   Int?
   AreaKelurahan AreaKelurahan? @relation(fields: [idKelurahan], references: [id])
   idKelurahan   Int?
+  Candidate     Candidate?     @relation(fields: [idCandidate], references: [id])
+  idCandidate   String?
   isFront       Boolean        @default(false)
   isActive      Boolean        @default(true)
   createdAt     DateTime       @default(now())
@@ -300,6 +408,7 @@ model Candidate {
   CandidateEmotion  CandidateEmotion[]
   CandidatePairing  CandidatePairing[] @relation("C1ToCandidate")
   Candidate2Pairing CandidatePairing[] @relation("C2ToCandidate")
+  UserArea          UserArea[]
 }
 
 model MlAi {
@@ -308,6 +417,8 @@ model MlAi {
   idCandidate String
   category    String?
   content     String    @db.Text
+  dateContent DateTime? @db.Date
+  timeContent DateTime? @db.Time
   isActive    Boolean   @default(true)
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
@@ -390,7 +501,7 @@ model CandidatePairing {
   idKabkot      Int?
   AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
   idKecamatan   Int?
-  rate          Decimal
+  rate          Float
   dateEmotion   DateTime       @db.Date
   confidence    Int
   supportive    Int
@@ -400,6 +511,547 @@ model CandidatePairing {
   uncomfortable Int
   negative      Int
   dissapproval  Int
+  isActive      Boolean        @default(true)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model Notifications {
+  id           String   @id @default(cuid())
+  User1        User     @relation("UserToClient", fields: [idUserClient], references: [id], map: "UserToClientMap")
+  idUserClient String
+  User2        User     @relation("UserToAdmin", fields: [idUserAdmin], references: [id], map: "UserToAdminMap")
+  idUserAdmin  String
+  title        String
+  category     String
+  description  String
+  isRead       Boolean  @default(false)
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+// DATA SOSIAL EKONOMI
+model SE_Ketenagakerjaan_JaminanKesehatan {
+  id            Int            @id @default(autoincrement())
+  AreaProvinsi  AreaProvinsi?  @relation(fields: [idProvinsi], references: [id])
+  idProvinsi    Int?
+  AreaKabkot    AreaKabkot?    @relation(fields: [idKabkot], references: [id])
+  idKabkot      Int?
+  AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
+  idKecamatan   Int?
+  ya            Float          @default(0)
+  tidak         Float          @default(0)
+  tidakTahu     Float          @default(0)
+  isActive      Boolean        @default(true)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model SE_Ketenagakerjaan_JaminanKecelakaanKerja {
+  id            Int            @id @default(autoincrement())
+  AreaProvinsi  AreaProvinsi?  @relation(fields: [idProvinsi], references: [id])
+  idProvinsi    Int?
+  AreaKabkot    AreaKabkot?    @relation(fields: [idKabkot], references: [id])
+  idKabkot      Int?
+  AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
+  idKecamatan   Int?
+  ya            Float          @default(0)
+  tidak         Float          @default(0)
+  tidakTahu     Float          @default(0)
+  isActive      Boolean        @default(true)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model SE_Ketenagakerjaan_JaminanKematian {
+  id            Int            @id @default(autoincrement())
+  AreaProvinsi  AreaProvinsi?  @relation(fields: [idProvinsi], references: [id])
+  idProvinsi    Int?
+  AreaKabkot    AreaKabkot?    @relation(fields: [idKabkot], references: [id])
+  idKabkot      Int?
+  AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
+  idKecamatan   Int?
+  ya            Float          @default(0)
+  tidak         Float          @default(0)
+  tidakTahu     Float          @default(0)
+  isActive      Boolean        @default(true)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model SE_Ketenagakerjaan_JaminanHariTua {
+  id            Int            @id @default(autoincrement())
+  AreaProvinsi  AreaProvinsi?  @relation(fields: [idProvinsi], references: [id])
+  idProvinsi    Int?
+  AreaKabkot    AreaKabkot?    @relation(fields: [idKabkot], references: [id])
+  idKabkot      Int?
+  AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
+  idKecamatan   Int?
+  ya            Float          @default(0)
+  tidak         Float          @default(0)
+  tidakTahu     Float          @default(0)
+  isActive      Boolean        @default(true)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model SE_Ketenagakerjaan_JaminanPensiun {
+  id            Int            @id @default(autoincrement())
+  AreaProvinsi  AreaProvinsi?  @relation(fields: [idProvinsi], references: [id])
+  idProvinsi    Int?
+  AreaKabkot    AreaKabkot?    @relation(fields: [idKabkot], references: [id])
+  idKabkot      Int?
+  AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
+  idKecamatan   Int?
+  ya            Float          @default(0)
+  tidak         Float          @default(0)
+  tidakTahu     Float          @default(0)
+  isActive      Boolean        @default(true)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model SE_Ketenagakerjaan_Pengangguran {
+  id            Int            @id @default(autoincrement())
+  AreaProvinsi  AreaProvinsi?  @relation(fields: [idProvinsi], references: [id])
+  idProvinsi    Int?
+  AreaKabkot    AreaKabkot?    @relation(fields: [idKabkot], references: [id])
+  idKabkot      Int?
+  AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
+  idKecamatan   Int?
+  value         Float          @default(0)
+  isActive      Boolean        @default(true)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model SE_Transportasi_PermukaanJalanYgTerluas {
+  id            Int            @id @default(autoincrement())
+  AreaProvinsi  AreaProvinsi?  @relation(fields: [idProvinsi], references: [id])
+  idProvinsi    Int?
+  AreaKabkot    AreaKabkot?    @relation(fields: [idKabkot], references: [id])
+  idKabkot      Int?
+  AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
+  idKecamatan   Int?
+  aspal         Float          @default(0)
+  diperkeras    Float          @default(0)
+  isActive      Boolean        @default(true)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model SE_Transportasi_JalanDiLaluiKendaraan {
+  id            Int            @id @default(autoincrement())
+  AreaProvinsi  AreaProvinsi?  @relation(fields: [idProvinsi], references: [id])
+  idProvinsi    Int?
+  AreaKabkot    AreaKabkot?    @relation(fields: [idKabkot], references: [id])
+  idKabkot      Int?
+  AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
+  idKecamatan   Int?
+  value         Float          @default(0)
+  isActive      Boolean        @default(true)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model SE_Transportasi_Kecelakaan {
+  id            Int            @id @default(autoincrement())
+  AreaProvinsi  AreaProvinsi?  @relation(fields: [idProvinsi], references: [id])
+  idProvinsi    Int?
+  AreaKabkot    AreaKabkot?    @relation(fields: [idKabkot], references: [id])
+  idKabkot      Int?
+  AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
+  idKecamatan   Int?
+  value         Float          @default(0)
+  isActive      Boolean        @default(true)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model SE_Agama_RumahIbadah {
+  id              Int            @id @default(autoincrement())
+  AreaProvinsi    AreaProvinsi?  @relation(fields: [idProvinsi], references: [id])
+  idProvinsi      Int?
+  AreaKabkot      AreaKabkot?    @relation(fields: [idKabkot], references: [id])
+  idKabkot        Int?
+  AreaKecamatan   AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
+  idKecamatan     Int?
+  masjid          Float          @default(0)
+  gerejaKhatolik  Float          @default(0)
+  gerejaProtestan Float          @default(0)
+  pura            Float          @default(0)
+  wihara          Float          @default(0)
+  kelenteng       Float          @default(0)
+  isActive        Boolean        @default(true)
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+}
+
+model SE_Pendidikan_JarakFasilitas {
+  id            Int            @id @default(autoincrement())
+  AreaProvinsi  AreaProvinsi?  @relation(fields: [idProvinsi], references: [id])
+  idProvinsi    Int?
+  AreaKabkot    AreaKabkot?    @relation(fields: [idKabkot], references: [id])
+  idKabkot      Int?
+  AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
+  idKecamatan   Int?
+  sd            Float          @default(0)
+  smp           Float          @default(0)
+  smk           Float          @default(0)
+  sma           Float          @default(0)
+  isActive      Boolean        @default(true)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model SE_Pendidikan_JalanKakiKurangEmpatJam {
+  id            Int            @id @default(autoincrement())
+  AreaProvinsi  AreaProvinsi?  @relation(fields: [idProvinsi], references: [id])
+  idProvinsi    Int?
+  AreaKabkot    AreaKabkot?    @relation(fields: [idKabkot], references: [id])
+  idKabkot      Int?
+  AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
+  idKecamatan   Int?
+  value         Float          @default(0)
+  isActive      Boolean        @default(true)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model SE_Pendidikan_GuruTersertifikasi {
+  id            Int            @id @default(autoincrement())
+  AreaProvinsi  AreaProvinsi?  @relation(fields: [idProvinsi], references: [id])
+  idProvinsi    Int?
+  AreaKabkot    AreaKabkot?    @relation(fields: [idKabkot], references: [id])
+  idKabkot      Int?
+  AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
+  idKecamatan   Int?
+  value         Float          @default(0)
+  isActive      Boolean        @default(true)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model SE_Pendidikan_GuruHonorer {
+  id            Int            @id @default(autoincrement())
+  AreaProvinsi  AreaProvinsi?  @relation(fields: [idProvinsi], references: [id])
+  idProvinsi    Int?
+  AreaKabkot    AreaKabkot?    @relation(fields: [idKabkot], references: [id])
+  idKabkot      Int?
+  AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
+  idKecamatan   Int?
+  value         Float          @default(0)
+  isActive      Boolean        @default(true)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model SE_Kesehatan_KelasIbuHamil {
+  id            Int            @id @default(autoincrement())
+  AreaProvinsi  AreaProvinsi?  @relation(fields: [idProvinsi], references: [id])
+  idProvinsi    Int?
+  AreaKabkot    AreaKabkot?    @relation(fields: [idKabkot], references: [id])
+  idKabkot      Int?
+  AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
+  idKecamatan   Int?
+  ya            Float          @default(0)
+  tidakAda      Float          @default(0)
+  isActive      Boolean        @default(true)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model SE_Kesehatan_IbuHamilDariKeluargaMiskin {
+  id            Int            @id @default(autoincrement())
+  AreaProvinsi  AreaProvinsi?  @relation(fields: [idProvinsi], references: [id])
+  idProvinsi    Int?
+  AreaKabkot    AreaKabkot?    @relation(fields: [idKabkot], references: [id])
+  idKabkot      Int?
+  AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
+  idKecamatan   Int?
+  ya            Float          @default(0)
+  tidakAda      Float          @default(0)
+  isActive      Boolean        @default(true)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model SE_Kesehatan_JaminanUntukBaduta {
+  id            Int            @id @default(autoincrement())
+  AreaProvinsi  AreaProvinsi?  @relation(fields: [idProvinsi], references: [id])
+  idProvinsi    Int?
+  AreaKabkot    AreaKabkot?    @relation(fields: [idKabkot], references: [id])
+  idKabkot      Int?
+  AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
+  idKecamatan   Int?
+  ya            Float          @default(0)
+  tidak         Float          @default(0)
+  isActive      Boolean        @default(true)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model SE_Kesehatan_PosPelayanan {
+  id            Int            @id @default(autoincrement())
+  AreaProvinsi  AreaProvinsi?  @relation(fields: [idProvinsi], references: [id])
+  idProvinsi    Int?
+  AreaKabkot    AreaKabkot?    @relation(fields: [idKabkot], references: [id])
+  idKabkot      Int?
+  AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
+  idKecamatan   Int?
+  terpadu       Float          @default(0)
+  aktif         Float          @default(0)
+  isActive      Boolean        @default(true)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model SE_Kesehatan_Fasilitas {
+  id                    Int            @id @default(autoincrement())
+  AreaProvinsi          AreaProvinsi?  @relation(fields: [idProvinsi], references: [id])
+  idProvinsi            Int?
+  AreaKabkot            AreaKabkot?    @relation(fields: [idKabkot], references: [id])
+  idKabkot              Int?
+  AreaKecamatan         AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
+  idKecamatan           Int?
+  rumahSakit            Float          @default(0)
+  rumahBersalin         Float          @default(0)
+  rumahSakitBersalin    Float          @default(0)
+  bidan                 Float          @default(0)
+  apotek                Float          @default(0)
+  puskesmasDgRawatInap  Float          @default(0)
+  puskesmasTnpRawatInap Float          @default(0)
+  isActive              Boolean        @default(true)
+  createdAt             DateTime       @default(now())
+  updatedAt             DateTime       @updatedAt
+}
+
+model SE_Kesehatan_RataRataJarakFasilitas {
+  id                      Int            @id @default(autoincrement())
+  AreaProvinsi            AreaProvinsi?  @relation(fields: [idProvinsi], references: [id])
+  idProvinsi              Int?
+  AreaKabkot              AreaKabkot?    @relation(fields: [idKabkot], references: [id])
+  idKabkot                Int?
+  AreaKecamatan           AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
+  idKecamatan             Int?
+  bidan                   Float          @default(0)
+  puskesmasTanpaRawatInap Float          @default(0)
+  puskesmasDgRawatInap    Float          @default(0)
+  rumahSakit              Float          @default(0)
+  isActive                Boolean        @default(true)
+  createdAt               DateTime       @default(now())
+  updatedAt               DateTime       @updatedAt
+}
+
+model SE_Kesehatan_JumlahDokter {
+  id            Int            @id @default(autoincrement())
+  AreaProvinsi  AreaProvinsi?  @relation(fields: [idProvinsi], references: [id])
+  idProvinsi    Int?
+  AreaKabkot    AreaKabkot?    @relation(fields: [idKabkot], references: [id])
+  idKabkot      Int?
+  AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
+  idKecamatan   Int?
+  pria          Float          @default(0)
+  wanita        Float          @default(0)
+  isActive      Boolean        @default(true)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model SE_Keamanan_Perkelahian {
+  id            Int            @id @default(autoincrement())
+  AreaProvinsi  AreaProvinsi?  @relation(fields: [idProvinsi], references: [id])
+  idProvinsi    Int?
+  AreaKabkot    AreaKabkot?    @relation(fields: [idKabkot], references: [id])
+  idKabkot      Int?
+  AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
+  idKecamatan   Int?
+  menurun       Float          @default(0)
+  meningkat     Float          @default(0)
+  isActive      Boolean        @default(true)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model SE_Keamanan_Pencurian {
+  id            Int            @id @default(autoincrement())
+  AreaProvinsi  AreaProvinsi?  @relation(fields: [idProvinsi], references: [id])
+  idProvinsi    Int?
+  AreaKabkot    AreaKabkot?    @relation(fields: [idKabkot], references: [id])
+  idKabkot      Int?
+  AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
+  idKecamatan   Int?
+  menurun       Float          @default(0)
+  meningkat     Float          @default(0)
+  isActive      Boolean        @default(true)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model SE_Keamanan_PencurianDanKekerasan {
+  id            Int            @id @default(autoincrement())
+  AreaProvinsi  AreaProvinsi?  @relation(fields: [idProvinsi], references: [id])
+  idProvinsi    Int?
+  AreaKabkot    AreaKabkot?    @relation(fields: [idKabkot], references: [id])
+  idKabkot      Int?
+  AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
+  idKecamatan   Int?
+  menurun       Float          @default(0)
+  meningkat     Float          @default(0)
+  isActive      Boolean        @default(true)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model SE_Keamanan_PenipuanDanPenggelapan {
+  id            Int            @id @default(autoincrement())
+  AreaProvinsi  AreaProvinsi?  @relation(fields: [idProvinsi], references: [id])
+  idProvinsi    Int?
+  AreaKabkot    AreaKabkot?    @relation(fields: [idKabkot], references: [id])
+  idKabkot      Int?
+  AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
+  idKecamatan   Int?
+  menurun       Float          @default(0)
+  meningkat     Float          @default(0)
+  isActive      Boolean        @default(true)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model SE_Keamanan_Penganiayaan {
+  id            Int            @id @default(autoincrement())
+  AreaProvinsi  AreaProvinsi?  @relation(fields: [idProvinsi], references: [id])
+  idProvinsi    Int?
+  AreaKabkot    AreaKabkot?    @relation(fields: [idKabkot], references: [id])
+  idKabkot      Int?
+  AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
+  idKecamatan   Int?
+  menurun       Float          @default(0)
+  meningkat     Float          @default(0)
+  isActive      Boolean        @default(true)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model SE_Keamanan_Perkosaan {
+  id            Int            @id @default(autoincrement())
+  AreaProvinsi  AreaProvinsi?  @relation(fields: [idProvinsi], references: [id])
+  idProvinsi    Int?
+  AreaKabkot    AreaKabkot?    @relation(fields: [idKabkot], references: [id])
+  idKabkot      Int?
+  AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
+  idKecamatan   Int?
+  menurun       Float          @default(0)
+  meningkat     Float          @default(0)
+  isActive      Boolean        @default(true)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model SE_Keamanan_Narkoba {
+  id            Int            @id @default(autoincrement())
+  AreaProvinsi  AreaProvinsi?  @relation(fields: [idProvinsi], references: [id])
+  idProvinsi    Int?
+  AreaKabkot    AreaKabkot?    @relation(fields: [idKabkot], references: [id])
+  idKabkot      Int?
+  AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
+  idKecamatan   Int?
+  menurun       Float          @default(0)
+  meningkat     Float          @default(0)
+  isActive      Boolean        @default(true)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model SE_Ekonomi_JumlahPasar {
+  id                   Int            @id @default(autoincrement())
+  AreaProvinsi         AreaProvinsi?  @relation(fields: [idProvinsi], references: [id])
+  idProvinsi           Int?
+  AreaKabkot           AreaKabkot?    @relation(fields: [idKabkot], references: [id])
+  idKabkot             Int?
+  AreaKecamatan        AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
+  idKecamatan          Int?
+  bangunanPermanen     Float          @default(0)
+  bangunanSemiPermanen Float          @default(0)
+  tanpaBangunan        Float          @default(0)
+  isActive             Boolean        @default(true)
+  createdAt            DateTime       @default(now())
+  updatedAt            DateTime       @updatedAt
+}
+
+model SE_Ekonomi_LembagaKeuangan {
+  id                     Int            @id @default(autoincrement())
+  AreaProvinsi           AreaProvinsi?  @relation(fields: [idProvinsi], references: [id])
+  idProvinsi             Int?
+  AreaKabkot             AreaKabkot?    @relation(fields: [idKabkot], references: [id])
+  idKabkot               Int?
+  AreaKecamatan          AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
+  idKecamatan            Int?
+  bankUmumPemerintah     Float          @default(0)
+  bankUmumSwasta         Float          @default(0)
+  bankPengkreditanRakyat Float          @default(0)
+  koperasiSimpanPinjam   Float          @default(0)
+  isActive               Boolean        @default(true)
+  createdAt              DateTime       @default(now())
+  updatedAt              DateTime       @updatedAt
+}
+
+model SE_Pertanian_JenisPrasaranaTransportasi {
+  id               Int            @id @default(autoincrement())
+  AreaProvinsi     AreaProvinsi?  @relation(fields: [idProvinsi], references: [id])
+  idProvinsi       Int?
+  AreaKabkot       AreaKabkot?    @relation(fields: [idKabkot], references: [id])
+  idKabkot         Int?
+  AreaKecamatan    AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
+  idKecamatan      Int?
+  diperkeras       Float          @default(0)
+  aspal            Float          @default(0)
+  tidakTerdefinisi Float          @default(0)
+  tanah            Float          @default(0)
+  isActive         Boolean        @default(true)
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+}
+
+model SE_Pertanian_Irigasi {
+  id            Int            @id @default(autoincrement())
+  AreaProvinsi  AreaProvinsi?  @relation(fields: [idProvinsi], references: [id])
+  idProvinsi    Int?
+  AreaKabkot    AreaKabkot?    @relation(fields: [idKabkot], references: [id])
+  idKabkot      Int?
+  AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
+  idKecamatan   Int?
+  ya            Float          @default(0)
+  tidak         Float          @default(0)
+  isActive      Boolean        @default(true)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model SE_Kemiskinan_Data {
+  id            Int            @id @default(autoincrement())
+  AreaProvinsi  AreaProvinsi?  @relation(fields: [idProvinsi], references: [id])
+  idProvinsi    Int?
+  AreaKabkot    AreaKabkot?    @relation(fields: [idKabkot], references: [id])
+  idKabkot      Int?
+  AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
+  idKecamatan   Int?
+  value         Float          @default(0)
+  isActive      Boolean        @default(true)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model SE_Kemiskinan_BPJS {
+  id            Int            @id @default(autoincrement())
+  AreaProvinsi  AreaProvinsi?  @relation(fields: [idProvinsi], references: [id])
+  idProvinsi    Int?
+  AreaKabkot    AreaKabkot?    @relation(fields: [idKabkot], references: [id])
+  idKabkot      Int?
+  AreaKecamatan AreaKecamatan? @relation(fields: [idKecamatan], references: [id])
+  idKecamatan   Int?
+  value         Float          @default(0)
   isActive      Boolean        @default(true)
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt

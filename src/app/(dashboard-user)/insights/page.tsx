@@ -1,15 +1,22 @@
-import funGetAllCandidateFront from '@/modules/candidate/front/fun/get_all_candidate_front';
-import { ViewRegionalInsights } from '@/modules/regional_insights';
+import { funGetAudienceFront } from '@/modules/audience';
+import { funGetAllCandidateFront, funGetOneCandidateFront, funGetUserDefaultFront } from '@/modules/candidate';
+import { funGetLtaFront } from '@/modules/leader_trait_assessment';
+import { funGetPctFront } from '@/modules/public_concern_trend';
+import { ViewRegionalInsights, funGetEmotionRegionalInsight } from '@/modules/regional_insights';
 import React from 'react';
 
 export default async function Page() {
-  // const dCandidate = await funGetAllCandidateFront()
-
-  // console.log(dCandidate)
+  const canDef = await funGetUserDefaultFront()
+  const dataDb = await funGetEmotionRegionalInsight({})
+  const can = await funGetAllCandidateFront()
+  const dataAudience = await funGetAudienceFront()
+  const dataPct = await funGetPctFront()
+  const dataLta = await funGetLtaFront()
+  const oneCandidate = await funGetOneCandidateFront({ candidate: canDef.idCandidate })
 
   return (
     <>
-      <ViewRegionalInsights />
+      <ViewRegionalInsights oneCandidate={oneCandidate} lta={dataLta} emotion={dataDb} candidate={can} audience={dataAudience} pct={dataPct} />
     </>
   );
 }

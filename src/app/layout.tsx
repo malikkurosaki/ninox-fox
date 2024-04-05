@@ -4,8 +4,10 @@ import { MantineProvider, ColorSchemeScript } from '@mantine/core';
 import { theme } from '../../theme';
 import "@mantine/dates/styles.css";
 import 'react-simple-toasts/dist/theme/dark.css'
-import {Poppins} from "next/font/google"
+import { Poppins } from "next/font/google"
 import '@mantine/tiptap/styles.css';
+import '@mantine/notifications/styles.css';
+import { Notifications } from '@mantine/notifications';
 
 
 export const poppins = Poppins({
@@ -31,7 +33,7 @@ export default function RootLayout({ children }: { children: any }) {
         />
       </head>
       <body style={poppins.style}>
-        <MantineProvider theme={theme}>{children}</MantineProvider>
+        <MantineProvider theme={theme}><Notifications position='top-right' zIndex={1000} />{children}</MantineProvider>
       </body>
     </html>
   );

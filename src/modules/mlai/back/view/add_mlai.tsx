@@ -1,11 +1,10 @@
 'use client'
 import { ButtonBack, MasterKabGetByProvince } from "@/modules/_global"
-import { Box, Button, Group, Modal, Radio, Select, Stack, Text, TextInput, Textarea } from "@mantine/core"
+import { ActionIcon, Box, Button, Group, Modal, Radio, Select, Stack, Text, TextInput, Textarea } from "@mantine/core"
 import ModalAddMlAi from "../component/modal_add_mlai"
 import { useAtom } from "jotai"
 import { isModalMlAi } from "../val/val_mlai"
-import { useSearchParams } from "next/navigation"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import _, { values } from "lodash"
 import toast from "react-simple-toasts"
 import { Link, RichTextEditor } from "@mantine/tiptap"
@@ -20,6 +19,9 @@ import SubScript from '@tiptap/extension-subscript';
 import { Color } from '@tiptap/extension-color';
 import TextStyle from '@tiptap/extension-text-style';
 import { funGetCandidateActiveByArea } from "@/modules/candidate"
+import { DateInput, TimeInput } from "@mantine/dates"
+import { AiOutlineClockCircle } from "react-icons/ai"
+import moment from "moment"
 
 /**
  * Fungsi untuk menampilkan view form add mlai.
@@ -27,32 +29,47 @@ import { funGetCandidateActiveByArea } from "@/modules/candidate"
  */
 
 export default function AddMlAi({ params, candidate, provinsi, kabupaten }: { params: any, candidate: any, provinsi: any, kabupaten: any }) {
-    const today = new Date();
+    const ref = useRef<HTMLInputElement>(null);
     const [openModal, setOpenModal] = useAtom(isModalMlAi)
-    const query = useSearchParams()
     const [isDataCandidate, setDataCandidate] = useState(candidate)
     const [dataProvinsi, setDataProvinsi] = useState(provinsi)
     const [dataKabupaten, setDataKabupaten] = useState<any>(kabupaten)
-    const [isProvinsi, setProvinsi] = useState<any>(params.idProvinsi || null)
-    const [isKabupaten, setKabupaten] = useState<any>(params.idKabkot || null)
-    const [isCandidate, setCandidate] = useState<any>("")
+    const [isProvinsi, setProvinsi] = useState<any>(null)
+    const [isKabupaten, setKabupaten] = useState<any>(null)
+    const [isDataMlai, setDataMlai] = useState({
+        idCandidate: '',
+        dateContent: '',
+        timeContent: ''
+    })
+
+    const pickerControl = (
+        <ActionIcon variant="subtle" color="gray" onClick={() => ref.current?.showPicker()}>
+            <AiOutlineClockCircle style={{ width: "70%", height: "70%" }} />
+        </ActionIcon>
+    );
 
     async function onProvinsi({ idProv }: { idProv: any }) {
         setProvinsi(idProv)
         setKabupaten(null)
-        setCandidate(null)
+        setDataMlai({
+            ...isDataMlai,
+            idCandidate: ''
+        })
         const dataDbKab = await MasterKabGetByProvince({ idProvinsi: Number(idProv) })
         const dataDbCan = await funGetCandidateActiveByArea({ find: { idProvinsi: Number(idProv), tingkat: 1 } })
         setDataKabupaten(dataDbKab)
         setDataCandidate(dataDbCan)
-      }
-    
-      async function onKabupaten({ idKab }: { idKab: any }) {
+    }
+
+    async function onKabupaten({ idKab }: { idKab: any }) {
         setKabupaten(idKab)
-        setCandidate(null)
+        setDataMlai({
+            ...isDataMlai,
+            idCandidate: ''
+        })
         const dataDbCan = await funGetCandidateActiveByArea({ find: { idProvinsi: Number(isProvinsi), idKabkot: Number(idKab), tingkat: 2 } })
         setDataCandidate(dataDbCan)
-      }
+    }
 
     const editor = useEditor({
         extensions: [
@@ -70,15 +87,15 @@ export default function AddMlAi({ params, candidate, provinsi, kabupaten }: { pa
     });
 
     function onConfirmation() {
-        if (isCandidate == "" || editor?.getHTML() == '<p></p>')
-            return toast("Data cannot be empty", { theme: "dark" });
+        if (Object.values(isDataMlai).includes("") || editor?.getHTML() == '<p></p>')
+            return toast("Form cannot be empty", { theme: "dark" });
         setOpenModal(true)
     }
     useEffect(() => {
-        setProvinsi((params.idProvinsi == 0) ? null : params.idProvinsi)
-        setKabupaten((params.idKabkot == 0) ? null : params.idKabkot)
+        // setProvinsi((params.idProvinsi == 0) ? null : params.idProvinsi)
+        // setKabupaten((params.idKabkot == 0) ? null : params.idKabkot)
         // setCandidate((params.idCandidate == 0) ? null : params.idCandidate)
-      }, [params])
+    }, [params])
 
     return (
         <>
@@ -98,7 +115,7 @@ export default function AddMlAi({ params, candidate, provinsi, kabupaten }: { pa
                         label={"Provinsi"}
                         value={isProvinsi}
                         onChange={(val) => (
-                            onProvinsi({idProv: val})
+                            onProvinsi({ idProv: val })
                         )}
                         searchable
                     />
@@ -111,9 +128,8 @@ export default function AddMlAi({ params, candidate, provinsi, kabupaten }: { pa
                         label={"Kabupaten"}
                         value={isKabupaten}
                         onChange={(val) => (
-                            onKabupaten({idKab: val})
+                            onKabupaten({ idKab: val })
                         )}
-                        // disabled
                     />
                 </Group>
                 <Select
@@ -123,25 +139,41 @@ export default function AddMlAi({ params, candidate, provinsi, kabupaten }: { pa
                         label: can.name
                     }))}
                     required
-                    value={isCandidate}
+                    value={isDataMlai.idCandidate == '' ? null : isDataMlai.idCandidate}
                     label={"Kandidat"}
                     searchable
-                    onChange={(val) => {
-                        setCandidate(val)
-                    }}
-                />
-                {/* <Textarea
-                    mt={20}
-                    placeholder="Value Content"
-                    label="Content"
-                    withAsterisk
-                    onChange={(val) => {
-                        setBody({
-                            ...isBody,
-                            content: val.target.value
+                    onChange={(val: any) => {
+                        setDataMlai({
+                            ...isDataMlai,
+                            idCandidate: val == null ? '' : val
                         })
                     }}
-                /> */}
+                />
+                <Group grow>
+                    <DateInput valueFormat="DD-MM-YYYY" required
+                        label={"Tanggal"}
+                        placeholder="Pilih Tanggal"
+                        value={(isDataMlai.dateContent == '') ? null : new Date(isDataMlai.dateContent)}
+                        onChange={(e) => {
+                            setDataMlai({
+                                ...isDataMlai,
+                                dateContent: moment(e).format("YYYY-MM-DD"),
+                            });
+                        }}
+                    />
+                    <TimeInput
+                        label="Jam"
+                        required ref={ref}
+                        rightSection={pickerControl}
+                        value={isDataMlai.timeContent}
+                        onChange={(val) =>
+                            setDataMlai({
+                                ...isDataMlai,
+                                timeContent: String(val.target.value)
+                            })
+                        }
+                    />
+                </Group>
                 <Box pt={30}>
                     <RichTextEditor editor={editor}>
                         <RichTextEditor.Toolbar sticky stickyOffset={60}>
@@ -230,7 +262,19 @@ export default function AddMlAi({ params, candidate, provinsi, kabupaten }: { pa
                 withCloseButton={false}
                 closeOnClickOutside={false}
             >
-                <ModalAddMlAi candidate={isCandidate} text={editor?.getHTML()} />
+                <ModalAddMlAi text={editor?.getHTML()} data={isDataMlai}
+                    onSuccess={() => {
+                        editor?.commands.setContent('<p></p>')
+                        setProvinsi(null)
+                        setKabupaten(null)
+                        setDataMlai({
+                            ...isDataMlai,
+                            idCandidate: '',
+                            dateContent: '',
+                            timeContent: '',
+                        })
+                    }}
+                />
             </Modal>
         </>
     )

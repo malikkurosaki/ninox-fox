@@ -5,37 +5,37 @@ export const DataNavbarBuka = [
       key: "1",
       link: "/summary",
       icon: MdStorage,
-      label: "SUMMARY"
+      label: "BERANDA"
     },
     {
       key: "2",
       link: "/popularity",
       icon: MdOutlineStarBorderPurple500,
-      label: "POPULARITY METRIC"
+      label: "METRIK POPULARITAS"
     },
     {
       key: "3",
       link: "/insights",
       icon: MdOutlineStars,
-      label: "REGIONAL INSIGHTS"
+      label: "WAWASAN REGIONAL"
     },
     {
       key: "4",
       link: "/pairing",
       icon: MdJoinLeft,
-      label: "REGIONAL DATA PAIRING"
+      label: "DATA PASANGAN REGIONAL"
     },
     {
       key: "5",
       link: "/step",
       icon: MdFreeCancellation,
-      label: "STEP ASSESSMENT"
+      label: "PENILAIAN STEP"
     },
     {
       key: "6",
       link: "/swot",
       icon: MdGrading,
-      label: "SWOT EVALUATION"
+      label: "EVALUASI SWOT"
     },
     {
       key: "7",
