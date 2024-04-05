@@ -51,7 +51,7 @@ const dataKabupaten = [
 export default function ViewRegionalInsights({ oneCandidate, candidate, emotion, audience, pct, lta }: { oneCandidate: any, candidate: any, emotion: any, audience: any, pct: any, lta: any }) {
   const router = useRouter()
   const [listCandidate, setListCandidate] = useState(candidate)
-  const [isCandidate, setCandidate] = useState(oneCandidate.id)
+  const [isCandidate, setCandidate] = useState(oneCandidate.id == null ? candidate[0].id : oneCandidate.id)
   const [isData, setData] = useState(emotion)
 
   async function onGenerate() {
