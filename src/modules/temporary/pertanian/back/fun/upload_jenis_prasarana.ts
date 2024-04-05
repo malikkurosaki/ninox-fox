@@ -14,17 +14,19 @@ export default async function funUploadJenisPrasaranaTransportasi({ body }: { bo
     // looping data csv
     for (let i of body) {
         // update data audience
-        await prisma.sE_Pertanian_JenisPrasaranaTransportasi.update({
-            where: {
-                id: Number(i.id)
-            },
-            data: {
-                diperkeras: (_.isNaN(Number(i.Diperkeras))) ? 0 : Number(i.Diperkeras),
-                aspal: (_.isNaN(Number(i.Aspal))) ? 0 : Number(i.Aspal),
-                tidakTerdefinisi: (_.isNaN(Number(i.TidakTerdefinisi))) ? 0 : Number(i.TidakTerdefinisi),
-                tanah: (_.isNaN(Number(i.Tanah))) ? 0 : Number(i.Tanah),
-            }
-        });
+        if (i.id != "") {
+            await prisma.sE_Pertanian_JenisPrasaranaTransportasi.update({
+                where: {
+                    id: Number(i.id)
+                },
+                data: {
+                    diperkeras: (_.isNaN(Number(i.Diperkeras))) ? 0 : Number(i.Diperkeras),
+                    aspal: (_.isNaN(Number(i.Aspal))) ? 0 : Number(i.Aspal),
+                    tidakTerdefinisi: (_.isNaN(Number(i.TidakTerdefinisi))) ? 0 : Number(i.TidakTerdefinisi),
+                    tanah: (_.isNaN(Number(i.Tanah))) ? 0 : Number(i.Tanah),
+                }
+            });
+        }
     }
 
     revalidatePath('dashboard/se/jenis-prasarana-transportasi');

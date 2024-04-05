@@ -14,14 +14,16 @@ export default async function funUploadGuruHonorer({ body }: { body: any }) {
     // looping data csv
     for (let i of body) {
         // update data audience
-        await prisma.sE_Pendidikan_GuruHonorer.update({
-            where: {
-                id: Number(i.id)
-            },
-            data: {
-                value: (_.isNaN(Number(i.Value))) ? 0 : Number(i.Value),
-            }
-        });
+        if (i.id != "") {
+            await prisma.sE_Pendidikan_GuruHonorer.update({
+                where: {
+                    id: Number(i.id)
+                },
+                data: {
+                    value: (_.isNaN(Number(i.Value))) ? 0 : Number(i.Value),
+                }
+            });
+        }
     }
 
     revalidatePath('dashboard/se/guru-honorer')
