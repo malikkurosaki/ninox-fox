@@ -7,7 +7,7 @@ import _ from "lodash"
 import { MasterProvinceGetAll } from "../.."
 
 export default async function funGetUserAreaProvinsi({ idUser }: { idUser?: any }) {
-    let kondisi,idUserFix
+    let kondisi, idUserFix
 
     const c = cookies().get("_cookiesNinox")
     const dataCookies = await unsealData(c!.value, { password: pwd_key_config as string })
@@ -30,7 +30,7 @@ export default async function funGetUserAreaProvinsi({ idUser }: { idUser?: any 
 
     if (user?.isAllArea == true) {
         const data = await MasterProvinceGetAll()
-        const allData = data.map((v) => ({
+        const allData = data.map((v: any) => ({
             ..._.omit(v, ["id"]),
             idProvinsi: v.id,
             name: v.name
@@ -55,7 +55,7 @@ export default async function funGetUserAreaProvinsi({ idUser }: { idUser?: any 
 
         })
 
-        const allData = data.map((v) => ({
+        const allData = data.map((v: any) => ({
             ..._.omit(v, ["AreaProvinsi"]),
             idProvinsi: v.idProvinsi,
             name: v.AreaProvinsi?.name
