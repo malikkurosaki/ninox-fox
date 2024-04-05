@@ -48,10 +48,10 @@ const dataKabupaten = [
   },
 ]
 
-export default function ViewRegionalInsights({ candidate, emotion, audience, pct, lta }: { candidate: any, emotion: any, audience: any, pct: any, lta: any }) {
+export default function ViewRegionalInsights({ oneCandidate, candidate, emotion, audience, pct, lta }: { oneCandidate: any, candidate: any, emotion: any, audience: any, pct: any, lta: any }) {
   const router = useRouter()
   const [listCandidate, setListCandidate] = useState(candidate)
-  const [isCandidate, setCandidate] = useState(candidate[0]?.id)
+  const [isCandidate, setCandidate] = useState(oneCandidate.id)
   const [isData, setData] = useState(emotion)
 
   async function onGenerate() {
@@ -92,7 +92,7 @@ export default function ViewRegionalInsights({ candidate, emotion, audience, pct
               <Group justify='space-between' pb={10}>
                 <Text fz={26} fw={"bold"} c={"white"}>{_.upperCase(item.name)}</Text>
                 <Box>
-                  <Button w={130} c={"dark"} bg={"white"} onClick={() => router.push("/insights/"+isCandidate+"/"+item.id+"")}>DETAIL</Button>
+                  <Button w={130} c={"dark"} bg={"white"} onClick={() => router.push("/insights/" + isCandidate + "/" + item.id + "")}>DETAIL</Button>
                 </Box>
               </Group>
               <EchartSentimentAnalysis dataEmotion={item} dataLocked={audience} />

@@ -14,14 +14,16 @@ export default async function funUploadJalanDilaluiKendaraan({ body }: { body: a
     // looping data csv
     for (let i of body) {
         // update data audience
-        await prisma.sE_Transportasi_JalanDiLaluiKendaraan.update({
-            where: {
-                id: Number(i.id)
-            },
-            data: {
-                value: (_.isNaN(Number(i.Value))) ? 0 :  Number(i.Value),
-            }
-        });
+        if (i.id != "") {
+            await prisma.sE_Transportasi_JalanDiLaluiKendaraan.update({
+                where: {
+                    id: Number(i.id)
+                },
+                data: {
+                    value: (_.isNaN(Number(i.Value))) ? 0 : Number(i.Value),
+                }
+            });
+        }
     }
 
     revalidatePath('dashboard/se/jalan-dilalui-kendaraan')

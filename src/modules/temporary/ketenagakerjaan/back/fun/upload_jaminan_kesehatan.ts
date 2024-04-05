@@ -14,16 +14,18 @@ export default async function funUploadJaminanKesehatan({ body }: { body: any })
     // looping data csv
     for (let i of body) {
         // update data audience
-        await prisma.sE_Ketenagakerjaan_JaminanKesehatan.update({
-            where: {
-                id: Number(i.id)
-            },
-            data: {
-                ya: (_.isNaN(Number(i.Ya))) ? 0 : Number(i.Ya),
-                tidak: (_.isNaN(Number(i.Tidak))) ? 0 : Number(i.Tidak),
-                tidakTahu: (_.isNaN(Number(i.TidakTahu))) ? 0 : Number(i.TidakTahu)
-            }
-        });
+        if (i.id != "") {
+            await prisma.sE_Ketenagakerjaan_JaminanKesehatan.update({
+                where: {
+                    id: Number(i.id)
+                },
+                data: {
+                    ya: (_.isNaN(Number(i.Ya))) ? 0 : Number(i.Ya),
+                    tidak: (_.isNaN(Number(i.Tidak))) ? 0 : Number(i.Tidak),
+                    tidakTahu: (_.isNaN(Number(i.TidakTahu))) ? 0 : Number(i.TidakTahu)
+                }
+            });
+        }
     }
 
     revalidatePath('dashboard/se/jaminan-kesehatan')

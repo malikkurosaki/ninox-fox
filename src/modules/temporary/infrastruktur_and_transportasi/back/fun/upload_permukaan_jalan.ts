@@ -14,15 +14,17 @@ export default async function funUploadPermukaanJalan({ body }: { body: any }) {
     // looping data csv
     for (let i of body) {
         // update data audience
-        await prisma.sE_Transportasi_PermukaanJalanYgTerluas.update({
-            where: {
-                id: Number(i.id)
-            },
-            data: {
-                diperkeras: (_.isNaN(Number(i.Diperkeras))) ? 0 : Number(i.Diperkeras),
-                aspal: (_.isNaN(Number(i.Aspal))) ? 0 : Number(i.Aspal),
-            }
-        });
+        if (i.id != "") {
+            await prisma.sE_Transportasi_PermukaanJalanYgTerluas.update({
+                where: {
+                    id: Number(i.id)
+                },
+                data: {
+                    diperkeras: (_.isNaN(Number(i.Diperkeras))) ? 0 : Number(i.Diperkeras),
+                    aspal: (_.isNaN(Number(i.Aspal))) ? 0 : Number(i.Aspal),
+                }
+            });
+        }
     }
 
     revalidatePath('dashboard/se/permukaan-jalan')
