@@ -14,15 +14,17 @@ export default async function funUploadPencurian({ body }: { body: any }) {
     // looping data csv
     for (let i of body) {
         // update data audience
-        await prisma.sE_Keamanan_Pencurian.update({
-            where: {
-                id: Number(i.id)
-            },
-            data: {
-                meningkat: (_.isNaN(Number(i.Meningkat))) ? 0 : Number(i.Meningkat),
-                menurun: (_.isNaN(Number(i.Menurun))) ? 0 : Number(i.Menurun),
-            }
-        });
+        if (i.id != "") {
+            await prisma.sE_Keamanan_Pencurian.update({
+                where: {
+                    id: Number(i.id)
+                },
+                data: {
+                    meningkat: (_.isNaN(Number(i.Meningkat))) ? 0 : Number(i.Meningkat),
+                    menurun: (_.isNaN(Number(i.Menurun))) ? 0 : Number(i.Menurun),
+                }
+            });
+        }
     }
 
     revalidatePath('dashboard/se/pencurian')

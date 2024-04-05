@@ -14,15 +14,17 @@ export default async function funUploadJumlahDokter({ body }: { body: any }) {
     // looping data csv
     for (let i of body) {
         // update data audience
-        await prisma.sE_Kesehatan_JumlahDokter.update({
-            where: {
-                id: Number(i.id)
-            },
-            data: {
-                pria: (_.isNaN(Number(i.TenagaDokterPriaYangTinggalMenetapDiDesa))) ? 0 : Number(i.TenagaDokterPriaYangTinggalMenetapDiDesa),
-                wanita: (_.isNaN(Number(i.TenagaDokterWanitaYangTinggalMenetapDiDesa))) ? 0 : Number(i.TenagaDokterWanitaYangTinggalMenetapDiDesa),
-            }
-        });
+        if (i.id != "") {
+            await prisma.sE_Kesehatan_JumlahDokter.update({
+                where: {
+                    id: Number(i.id)
+                },
+                data: {
+                    pria: (_.isNaN(Number(i.TenagaDokterPriaYangTinggalMenetapDiDesa))) ? 0 : Number(i.TenagaDokterPriaYangTinggalMenetapDiDesa),
+                    wanita: (_.isNaN(Number(i.TenagaDokterWanitaYangTinggalMenetapDiDesa))) ? 0 : Number(i.TenagaDokterWanitaYangTinggalMenetapDiDesa),
+                }
+            });
+        }
     }
 
     revalidatePath('dashboard/se/jumlah-dokter')
