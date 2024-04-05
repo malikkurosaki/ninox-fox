@@ -23,7 +23,11 @@ export default async function funGetEmotionRegionalInsight({ candidate }: { cand
     let candidateReal = null, format, result = null
 
     if (candidate == null) {
-        candidateReal = can?.id
+        if (def.idCandidate != null) {
+            candidateReal = def.idCandidate
+        } else {
+            candidateReal = can?.id
+        }
     } else {
         candidateReal = candidate
     }
