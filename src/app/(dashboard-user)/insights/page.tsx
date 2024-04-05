@@ -7,7 +7,7 @@ import React from 'react';
 
 export default async function Page() {
   const canDef = await funGetUserDefaultFront()
-  const dataDb = await funGetEmotionRegionalInsight({candidate: canDef.idCandidate})
+  const dataDb = await funGetEmotionRegionalInsight({})
   const can = await funGetAllCandidateFront()
   const dataAudience = await funGetAudienceFront()
   const dataPct = await funGetPctFront()
