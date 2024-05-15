@@ -517,18 +517,20 @@ model CandidatePairing {
 }
 
 model Notifications {
-  id           String   @id @default(cuid())
-  User1        User     @relation("UserToClient", fields: [idUserClient], references: [id], map: "UserToClientMap")
-  idUserClient String
-  User2        User     @relation("UserToAdmin", fields: [idUserAdmin], references: [id], map: "UserToAdminMap")
-  idUserAdmin  String
-  title        String
-  category     String
-  description  String
-  isRead       Boolean  @default(false)
-  isActive     Boolean  @default(true)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  id            String   @id @default(cuid())
+  User1         User     @relation("UserToClient", fields: [idUserClient], references: [id], map: "UserToClientMap")
+  idUserClient  String
+  User2         User     @relation("UserToAdmin", fields: [idUserAdmin], references: [id], map: "UserToAdminMap")
+  idUserAdmin   String
+  title         String
+  category      String?
+  link          String?
+  kategoriInput Int      @default(1) // 1 == by sistem, 2 == input manual
+  description   String
+  isRead        Boolean  @default(false)
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }
 
 // DATA SOSIAL EKONOMI
