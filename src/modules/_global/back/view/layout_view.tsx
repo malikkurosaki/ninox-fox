@@ -341,7 +341,7 @@ export default function LayoutView({ children, dataMenu, dataUser }: { children:
                   >
                     <FaUserCircle
                       style={{ width: "70%", height: "70%" }}
-                      stroke={1.5}
+                      stroke={"1.5"}
                     />
                   </ActionIcon>
                 </Menu.Target>
