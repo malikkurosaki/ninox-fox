@@ -11,6 +11,7 @@ export default async function funAddNotifications({ kategori, candidateId, candi
    const admin = await funGetUserByCookies()
    let desc = ''
    let judul = ''
+   let paramCan = true
    let kondisi = {
       idCandidate: kandidat.id,
       isFront: true
@@ -37,6 +38,7 @@ export default async function funAddNotifications({ kategori, candidateId, candi
       desc = 'Data pasangan regional ' + kandidat.name + ' & ' + kandidat2.name + ' telah diperbarui'
       judul = 'Update data pasangan regional'
    } else {
+      paramCan = false
       kondisi = <any>{
          idProvinsi: Number(provinsiId),
          isFront: true
@@ -103,12 +105,16 @@ export default async function funAddNotifications({ kategori, candidateId, candi
       idUserAdmin: (admin) ? admin.id : '',
       category: kategori,
       description: desc,
-      title: judul
+      title: judul,
+      idCandidate: (paramCan) ? kandidat.id : null,
+      idProvinsi: provinsiId
    }));
 
    await prisma.notifications.createMany({
       data: listUser
    })
+
+   console.log('masuk')
 
    for (let index = 0; index < listUser.length; index++) {
       const user = listUser[index].idUserClient
