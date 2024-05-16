@@ -6,6 +6,7 @@ import { revalidatePath } from "next/cache"
 import mtqq_client from "../../../_global/util/mqtt_client"
 
 export default async function funAddNotificationsBack({ body }: { body: any }) {
+   let paramCan = true
    const admin = await funGetUserByCookies()
    const userArea = await prisma.userArea.findMany({
       where: {
@@ -17,6 +18,10 @@ export default async function funAddNotificationsBack({ body }: { body: any }) {
       }
    })
 
+   // if (body.link != 'emotion' && body.link != 'step' && body.link != 'swot' && body.link != 'mlai' && body.link != 'pairing') {
+   //    paramCan = false
+   // }
+
 
    const listUser = userArea.map((v: any) => ({
       ..._.omit(v, ["idUser"]),
@@ -26,6 +31,8 @@ export default async function funAddNotificationsBack({ body }: { body: any }) {
       description: body.description,
       category: body.link,
       kategoriInput: 2,
+      idCandidate: body.idCandidate,
+      idProvinsi: Number(body.idProvinsi)
    }));
 
    await prisma.notifications.createMany({
