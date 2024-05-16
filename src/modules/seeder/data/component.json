@@ -142,5 +142,13 @@
         "owner": "admin",
         "group": "dataSosialEkonomi",
         "link": "/dashboard/se/"
+    },
+    {
+        "id": 19,
+        "keyMenu": "md18",
+        "menu": "Notifikasi",
+        "owner": "admin",
+        "group": "dataDua",
+        "link": "/dashboard/notifikasi"
     }
 ]
