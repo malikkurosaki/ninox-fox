@@ -13,7 +13,7 @@ export function GlobalDark() {
   const sunIcon = (
     <CiSun
       style={{ width: rem(16), height: rem(16) }}
-      stroke={2.5}
+      stroke={"2.5"}
       color={theme.colors.yellow[4]}
     />
   );
@@ -21,7 +21,7 @@ export function GlobalDark() {
   const moonIcon = (
     <IoMdMoon
       style={{ width: rem(16), height: rem(16) }}
-      stroke={2.5}
+      stroke={"2.5"}
       color={theme.colors.dark[4]}
     />
   );
