@@ -24,6 +24,4 @@ NextJS, Mantine, Prisma Postgres
 
 ![gambar](ninox.png)
 
-makuro 
-makuro 
-makuro
+makuro_123
