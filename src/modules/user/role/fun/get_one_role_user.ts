@@ -26,7 +26,7 @@ export default async function funGetOneRoleUser({ id }: { id: number }) {
 
     const allData = {
         dataRole: data,
-        dataComponent: dataAccess.map((v) => (v.idComponent))
+        dataComponent: dataAccess.map((v: any) => (v.idComponent))
     }
 
     return allData
