@@ -1,9 +1,8 @@
 "use server"
 import prisma from "@/modules/_global/bin/prisma"
-import { MlAi } from "@prisma/client"
 import { revalidatePath } from "next/cache"
 
-export default async function funEditMlAi({ body, text }: { body: MlAi, text: any }) {
+export default async function funEditMlAi({ body, text }: { body: any, text: any }) {
     let y = new Date('1970-01-01 ' + body.timeContent)
     let isoDateTime = new Date(y.getTime() - (y.getTimezoneOffset() * 60000)).toISOString()
     const tanggal = new Date(String(body.dateContent))

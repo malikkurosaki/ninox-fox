@@ -1,6 +1,5 @@
 "use server"
 import prisma from "@/modules/_global/bin/prisma"
-import { Step } from "@prisma/client"
 import { revalidatePath } from "next/cache"
 
 /**
@@ -8,7 +7,7 @@ import { revalidatePath } from "next/cache"
  * @param {Step} body - berisi idcandidate, category, content, sentiment
  * @returns success - true 
  */
-export default async function funEditStep({ body, text }: { body: Step, text: any }) {
+export default async function funEditStep({ body, text }: { body: any, text: any }) {
     const data = await prisma.step.update({
         where: {
             id: body.id,
