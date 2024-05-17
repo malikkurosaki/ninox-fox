@@ -1,7 +1,6 @@
 "use server"
 import prisma from '@/modules/_global/bin/prisma';
 import { seederUserAccess } from '..';
-import { UserAccess } from './../../../../node_modules/.prisma/client/index.d';
 
 /**
  * Fungsi untuk ambil data seeder user access.

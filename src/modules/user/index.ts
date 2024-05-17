@@ -21,6 +21,7 @@ import ModalEditRoleUser from './role/components/modal_edit_role_user';
 import funAddRoleUser from './role/fun/add_role_user';
 import funUpdateRoleUser from './role/fun/update_user_role';
 import funGetUserDefaultFront from './fun/get_user_area_def_front';
+import funGetAllAdmin from './fun/get_all_admin';
 
 export { funGetAllUser }
 export { UserLogView }
@@ -50,3 +51,4 @@ export { funAddRoleUser }
 export { funUpdateRoleUser }
 export { funGetUserDefaultFront }
 export { DefaultConfUser }
+export { funGetAllAdmin }
