@@ -25,7 +25,7 @@ export default async function funGetAllConfUser() {
         }
     })
 
-    const dataOmitUser = dataUser.map((item) => ({
+    const dataOmitUser = dataUser.map((item: any) => ({
         ..._.omit(item, ["UserRole"]),
         role: item.UserRole?.name
     }))
@@ -55,7 +55,7 @@ export default async function funGetAllConfUser() {
         }
     })
 
-    const dataOmitArea = dataArea.map((item) => ({
+    const dataOmitArea = dataArea.map((item: any) => ({
         ..._.omit(item, ["AreaProvinsi", "AreaKabkot", "Candidate"]),
         area: (item.AreaKabkot == undefined) ? item.AreaProvinsi?.name : item.AreaKabkot?.name,
         candidate: item.Candidate?.name,
@@ -63,7 +63,7 @@ export default async function funGetAllConfUser() {
 
 
 
-    const dataFix = dataOmitUser.map((item) => ({
+    const dataFix = dataOmitUser.map((item: any) => ({
         ..._.omit(item, ["user", "role"]),
         name: item.name,
         email: item.email,

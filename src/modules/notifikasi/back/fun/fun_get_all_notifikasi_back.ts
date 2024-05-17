@@ -45,7 +45,7 @@ export default async function funGetAllNotifikasiBack({ page, admin }: { page: a
       }
    })
 
-   const result = data.map((v) => ({
+   const result = data.map((v: any) => ({
       ..._.omit(v, ['User1', 'User2']),
       user: v.User1.name,
       admin: v.User2.name,

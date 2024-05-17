@@ -52,7 +52,7 @@ export default async function funGetLogUser({ body }: { body: any }) {
         }
     })
 
-    const result = data.map((v) => ({
+    const result = data.map((v: any) => ({
         ..._.omit(v, ['User']),
         name: v.User.name,
 

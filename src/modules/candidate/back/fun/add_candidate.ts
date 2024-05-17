@@ -1,6 +1,5 @@
 'use server'
 import prisma from "@/modules/_global/bin/prisma";
-import { Candidate } from "@prisma/client";
 import _ from "lodash";
 import { revalidatePath } from "next/cache";
 import fs from 'fs';
@@ -11,7 +10,7 @@ import fs from 'fs';
  * @returns success - true 
  */
 
-export default async function funAddCandidate({ body, img }: { body: Candidate, img: FormData }) {
+export default async function funAddCandidate({ body, img }: { body: any, img: FormData }) {
 
     const data = await prisma.candidate.create({
         data: body,
