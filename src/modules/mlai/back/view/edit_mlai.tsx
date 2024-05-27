@@ -60,7 +60,7 @@ export default function EditMlAi({ data }: { data: any }) {
 
     function onConfirmation() {
         if (Object.values(isBody).includes("") || editor?.getHTML() == '<p></p>')
-            return toast("Data cannot be empty", { theme: "dark" });
+            return toast("Form cannot be empty", { theme: "dark" });
         setOpenModal(true)
     }
 
@@ -71,6 +71,18 @@ export default function EditMlAi({ data }: { data: any }) {
                 <Text fw={"bold"}>EDIT ML-AI</Text>
             </Stack>
             <Box pt={30}>
+                {
+                    data.idRequestMlAi != null && (
+                        <>
+                            <Text fw={'bold'} fz={20}>
+                                REQUEST
+                            </Text>
+                            <Text>
+                                {data.request}
+                            </Text>
+                        </>
+                    )
+                }
                 <Stack>
                     <Group grow>
                         <TextInput label={"Provinsi"} value={data.areaProvinsi} disabled />

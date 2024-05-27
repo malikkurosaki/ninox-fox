@@ -41,5 +41,35 @@ export default async function funGetAllNotifications() {
       }
    })
 
-   return data
+   const dataRead = await prisma.notifications.findMany({
+      where: {
+         OR: [
+            {
+               isActive: true,
+               isRead: true,
+               idUserClient: user?.id,
+               idCandidate: can.idCandidate
+            },
+            {
+               isActive: true,
+               isRead: true,
+               idUserClient: user?.id,
+               idProvinsi: userArea.idProvinsi,
+               idCandidate: null
+            },
+         ]
+      },
+      orderBy: {
+         createdAt: 'desc'
+      }
+   })
+
+
+   const allData = {
+      trueRead : dataRead,
+      falseRead : data
+   }
+
+
+   return allData
 }

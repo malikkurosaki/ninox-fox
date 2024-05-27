@@ -7,10 +7,13 @@ import funAddMlAi from "./back/fun/fun_add_mlai";
 import funDeleteMlAi from "./back/fun/fun_delete_mlai";
 import funEditMlAi from "./back/fun/fun_edit_mlai";
 import funGetAllMlAi from "./back/fun/fun_get_all_mlai";
+import funGetAllRequestMlai from "./back/fun/fun_get_all_request";
 import funGetOneMlAi from "./back/fun/fun_get_one_mlai";
+import funGetOneRequestAddMlAi from "./back/fun/fun_get_one_request_add_mlai";
 import AddMlAi from "./back/view/add_mlai";
 import EditMlAi from "./back/view/edit_mlai";
 import ListMlAi from "./back/view/list_mlai";
+import ListRequest from "./back/view/list_request";
 import funGetDateMlAiFront from "./front/fun/get_date_ml_ai_front";
 import funGetMlAiFront from "./front/fun/get_ml_ai_front";
 import funGetMlAiFrontV2 from "./front/fun/get_ml_ai_front_v2";
@@ -37,3 +40,6 @@ export { funGetMlAiFrontV2 }
 export { funGetDateMlAiFront }
 export { ViewDataLearner }
 export { ViewDataLearner2 }
+export { ListRequest }
+export { funGetAllRequestMlai }
+export { funGetOneRequestAddMlAi }

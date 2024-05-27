@@ -9,6 +9,7 @@ export default async function funAddMlAi({ body, content }: { body: any, content
 
   const data = await prisma.mlAi.create({
     data: {
+      idRequestMlAi: body.idRequest,
       idCandidate: body.idCandidate,
       dateContent: new Date(body.dateContent),
       timeContent: isoDateTime,
@@ -34,6 +35,18 @@ export default async function funAddMlAi({ body, content }: { body: any, content
     }
   })
 
+  if (body.idRequest != null) {
+    const upd = await prisma.mlAiRequest.update({
+      where: {
+        id: body.idRequest
+      },
+      data: {
+        status: 1
+      }
+    })
+  }
+
+  revalidatePath('dashboard/ml-ai/request')
   revalidatePath("dashboard/ml-ai?prov" + data.Candidate.AreaProvinsi + "&city" + data.Candidate.AreaKabkot)
 
   return {
