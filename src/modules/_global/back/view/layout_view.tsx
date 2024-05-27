@@ -428,6 +428,46 @@ export default function LayoutView({ children, dataMenu, dataUser }: { children:
               );
             })}
 
+            {dataMenu && dataMenu.dataMLAI && (
+              <NavLink
+                label="ML-AI"
+                childrenOffset={28}
+                fw={"bolder"}
+              >
+                {dataMenu && dataMenu.dataMLAI && dataMenu.dataMLAI.map((item: any) => {
+                  return (
+                    <NavLink
+                      key={item.keyMenu}
+                      active={item.link === active}
+                      fw={item.menu ? "bolder" : "normal"}
+                      label={item.menu}
+                      onClick={() => {
+                        router.push(item.link);
+                      }}
+                      color="#213555"
+                      variant="filled"
+                    />
+                  );
+                })}
+              </NavLink>
+            )}
+
+            {dataMenu && dataMenu.dataTiga && dataMenu.dataTiga.map((item: any) => {
+              return (
+                <NavLink
+                  key={item.keyMenu}
+                  active={item.link === active}
+                  fw={item.menu ? "bolder" : "normal"}
+                  label={_.upperCase(item.menu)}
+                  onClick={() => {
+                    router.push(item.link);
+                  }}
+                  color="#213555"
+                  variant="filled"
+                />
+              );
+            })}
+
             {dataMenu && dataMenu.dataSosialEkonomi && (
               <NavLink
                 label="DATA SOSIAL EKONOMI"

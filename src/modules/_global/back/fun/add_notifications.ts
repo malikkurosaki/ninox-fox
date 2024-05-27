@@ -114,7 +114,6 @@ export default async function funAddNotifications({ kategori, candidateId, candi
       data: listUser
    })
 
-   console.log('masuk')
 
    for (let index = 0; index < listUser.length; index++) {
       const user = listUser[index].idUserClient
