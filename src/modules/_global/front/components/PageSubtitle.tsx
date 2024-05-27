@@ -41,7 +41,7 @@ export const PageSubTitle = ({ text1, text2 }: { text1: string, text2: string })
             <Title c={"white"} fw={'bold'} fz={32}>{text1}</Title>
             <Text c={"white"} fz={32}>{text2}</Text>
           </Group>
-          <Group pt={13}>
+          <Group pt={13} pr={65}>
             <Text fz={16} c={"white"}>
               {isDateFull}
             </Text>
