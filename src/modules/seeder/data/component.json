@@ -82,9 +82,9 @@
     {
         "id": 11,
         "keyMenu": "md10",
-        "menu": "ML-AI",
+        "menu": "Data ML-AI",
         "owner": "admin",
-        "group": "dataDua",
+        "group": "dataMLAI",
         "link": "/dashboard/ml-ai"
     },
     {
@@ -92,7 +92,7 @@
         "keyMenu": "md11",
         "menu": "Kandidat",
         "owner": "admin",
-        "group": "dataDua",
+        "group": "dataTiga",
         "link": "/dashboard/candidate"
     },
     {
@@ -148,7 +148,15 @@
         "keyMenu": "md18",
         "menu": "Notifikasi",
         "owner": "admin",
-        "group": "dataDua",
+        "group": "dataTiga",
         "link": "/dashboard/notifikasi"
+    },
+    {
+        "id": 20,
+        "keyMenu": "md19",
+        "menu": "Data Learner",
+        "owner": "admin",
+        "group": "dataMLAI",
+        "link": "/dashboard/ml-ai/request"
     }
 ]

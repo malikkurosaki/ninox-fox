@@ -14,7 +14,8 @@ export default function DrawerNotifikasi({ data, onSuccess }: { data: any, onSuc
   const { setColorScheme, clearColorScheme } = useMantineColorScheme();
   const [valOpenDrawer, setOpenDrawer] = useAtom(isDrawer)
   const router = useRouter()
-  const [isData, setData] = useState(data)
+  const [isData, setData] = useState(data.falseRead)
+  const [isDataRead, setDataRead] = useState(data.trueRead)
 
   async function StartModal(id: any, kategori: any) {
     const upd = await funUpdReadNotifications({ id: id })
@@ -67,7 +68,8 @@ export default function DrawerNotifikasi({ data, onSuccess }: { data: any, onSuc
   async function onReadNotif(value: any) {
     const upd = await funUpdReadNotifications({ id: value })
     const loadData = await funGetAllNotifications()
-    setData(loadData)
+    setData(loadData.falseRead)
+    setDataRead(loadData.trueRead)
     onSuccess(true)
   }
 
@@ -89,12 +91,11 @@ export default function DrawerNotifikasi({ data, onSuccess }: { data: any, onSuc
                   <Box key={i} mb={10} m={10}>
                     <Box
                       style={{
-                        border: `1px solid gray`,
+                        border: `1px solid white`,
                         padding: 20,
                         borderRadius: 10,
                       }}
                       className={classes.box}
-                    // 
                     >
                       <Box onClick={() => StartModal(v.id, v.category)} style={{ cursor: "pointer", }}>
                         <Group>
@@ -106,12 +107,44 @@ export default function DrawerNotifikasi({ data, onSuccess }: { data: any, onSuc
                           <Text c={'white'}>{v.description}</Text>
                         </Box>
                       </Box>
-                      <Divider my={5} />
+                      <Divider my={5} color='white' />
                       <Group justify="space-between">
                         <Text size="sm" c={'#828282'} ta={'right'}>
                           {moment(v.createdAt).format('LLL')}
                         </Text>
                         <Anchor size={'sm'} onClick={() => { onReadNotif(v.id) }}>tandai telah dibaca</Anchor>
+                      </Group>
+                    </Box>
+                  </Box>
+                )
+              })}
+              {isDataRead.map((v: any, i: any) => {
+                return (
+                  <Box key={i} mb={10} m={10}>
+                    <Box
+                      style={{
+                        border: `1px solid gray`,
+                        padding: 20,
+                        borderRadius: 10,
+                      }}
+                      className={classes.box}
+                    >
+                      <Box onClick={() => StartModal(v.id, v.category)} style={{ cursor: "pointer", }}>
+                        <Group>
+                          <MdBrowserUpdated size={25} color={'#828282'} />
+                          <Text fw={'bold'} c={'#828282'}>{v.title}</Text>
+                        </Group>
+
+                        <Box pt={5}>
+                          <Text c={'#828282'}>{v.description}</Text>
+                        </Box>
+                      </Box>
+                      <Divider my={5} color='#828282' />
+                      <Group justify="space-between">
+                        <Text size="sm" c={'#828282'} ta={'right'}>
+                          {moment(v.createdAt).format('LLL')}
+                        </Text>
+                        <Text size={'sm'} c={'#828282'}>telah dibaca</Text>
                       </Group>
                     </Box>
                   </Box>
