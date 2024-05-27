@@ -22,6 +22,8 @@ import mtqq_client from "../../util/mqtt_client"
 import { funGetUserByCookies } from '@/modules/auth';
 import classes from '..//components/hover.module.css'
 import { notifications } from '@mantine/notifications';
+import { DataMlAi } from '../components/data_ml_ai';
+import { DataSosialEkonomi } from '../components/data_sosial_ekonomi';
 
 export default function LayoutViewFront({ notif, children }: { notif: number, children: React.ReactNode }) {
   const [valOpenModal, setOpenModal] = useAtom(isModalLayout)
@@ -127,7 +129,7 @@ export default function LayoutViewFront({ notif, children }: { notif: number, ch
                 <Stack align="center" p={"xs"}>
                   {DataNavbarTutup.map((v, i) => (
                     <Box key={i}>
-                      <Tooltip label={_.upperCase((v.label))}>
+                      <Tooltip label={_.upperCase((v.label))} position="right" color={v.link === active ? "#CF080A" : ''}>
                         <ActionIcon
                           c={v.link === active ? "#CF0A0A" : "white"}
                           size={30}
@@ -141,26 +143,38 @@ export default function LayoutViewFront({ notif, children }: { notif: number, ch
                       </Tooltip>
                     </Box>
                   ))}
-                  {/* {
-                    isNotif > 0 ? (
-                      <Indicator inline processing color="red" size={12} label={isNotif}>
-                        <ActionIcon variant="subtle" c={"white"} onClick={OpenModal}>
-                          <IoMdNotificationsOutline size={30} />
+                  {DataMlAi.map((v, i) => (
+                    <Box key={i}>
+                      <Tooltip label={_.upperCase((v.label))} position="right" color={v.link === active ? "#CF080A" : ''}>
+                        <ActionIcon
+                          c={v.link === active ? "#CF0A0A" : "white"}
+                          size={30}
+                          variant="subtle"
+                          onClick={() => {
+                            router.push(v.link);
+                          }}
+                        >
+                          <v.icon size={32} />
                         </ActionIcon>
-                      </Indicator>
-                    ) : (
-                      <ActionIcon variant="subtle" c={"white"} onClick={OpenModal}>
-                        <IoMdNotificationsOutline size={30} />
-                      </ActionIcon>
-                    )
-                  } */}
-
-                  {/* Notifikasi pembuka */}
-                  {/* <ActionIcon variant="subtle" c={"white"} onClick={() => notificationData()}>
-                    <IoMdNotificationsOutline size={30} />
-                  </ActionIcon> */}
-                  {/* Notifikasi penutup */}
-
+                      </Tooltip>
+                    </Box>
+                  ))}
+                  {DataSosialEkonomi.map((v, i) => (
+                    <Box key={i}>
+                      <Tooltip label={_.upperCase((v.label))} position="right" color={v.link === active ? "#CF080A" : ''}>
+                        <ActionIcon
+                          c={v.link === active ? "#CF0A0A" : "white"}
+                          size={30}
+                          variant="subtle"
+                          onClick={() => {
+                            router.push(v.link);
+                          }}
+                        >
+                          <v.icon size={32} />
+                        </ActionIcon>
+                      </Tooltip>
+                    </Box>
+                  ))}
                 </Stack>
               </Group>
               <Group
@@ -233,25 +247,85 @@ export default function LayoutViewFront({ notif, children }: { notif: number, ch
                 </Box>
               )
             })}
-            {/* <Box m={5} mt={5} ml={18}>
-              <Box onClick={OpenModal} style={{ cursor: "pointer" }}>
-                {
-                  isNotif > 0 ? (
-                    <Indicator position="middle-end" offset={-20} inline processing color="red" size={12} label={isNotif}>
-                      <Text c={"white"} >
-                        NOTIFIKASI
-                      </Text>
-                    </Indicator>
-                  ) : (
-                    <Text c={"white"} >
-                      NOTIFIKASI
-                    </Text>
+            <Box m={5} mt={5}>
+              <NavLink
+                label="ML-AI"
+                childrenOffset={28}
+                c={'white'}
+                variant='subtle'
+                href="#required-for-focus"
+                active
+              >
+                {DataMlAi.map((item) => {
+                  return (
+                    <Box key={item.key} m={5} mt={5}>
+                      <NavLink
+                        active
+                        label={active === item.link ? (
+                          <Box>
+                            <Title order={5} onClick={() => router.push(item.link)}>
+                              {item.label}
+                            </Title>
+                            <Grid pt={5}>
+                              <Grid.Col span={3}>
+                                <Divider color={"#CF0A0A"} size="lg" />
+                              </Grid.Col>
+                            </Grid>
+                          </Box>
+                        ) : (
+                          <Box>
+                            <Text onClick={() => router.push(item.link)}>
+                              {item.label}
+                            </Text>
+
+                          </Box>
+                        )
+                        }
+                        onClick={() => {
+                          router.push(item.link);
+                        }}
+                        c={"white"}
+                        variant="subtle"
+                      />
+                    </Box>
                   )
-                }
+                })}
+              </NavLink>
+            </Box>
+            {DataSosialEkonomi.map((item) => {
+              return (
+                <Box key={item.key} m={5} mt={5}>
+                  <NavLink
+                    active
+                    label={active === item.link ? (
+                      <Box>
+                        <Title order={5} onClick={() => router.push(item.link)}>
+                          {item.label}
+                        </Title>
+                        <Grid pt={5}>
+                          <Grid.Col span={3}>
+                            <Divider color={"#CF0A0A"} size="lg" />
+                          </Grid.Col>
+                        </Grid>
+                      </Box>
+                    ) : (
+                      <Box>
+                        <Text onClick={() => router.push(item.link)}>
+                          {item.label}
+                        </Text>
 
-              </Box>
-            </Box> */}
-
+                      </Box>
+                    )
+                    }
+                    onClick={() => {
+                      router.push(item.link);
+                    }}
+                    c={"white"}
+                    variant="subtle"
+                  />
+                </Box>
+              )
+            })}
             <Group
               style={{
                 position: "absolute",
@@ -269,21 +343,21 @@ export default function LayoutViewFront({ notif, children }: { notif: number, ch
           </AppShellNavbar>
         }
         <AppShell.Main bg={WARNA.bgGradasi}>
-          <Box pr={10} style={{ zIndex: 400, position: "fixed", right: 30, top: 35 }}>
+          <Box pr={10} style={{ zIndex: 400, position: "fixed", right: 30, top: 38 }}>
 
-              {
-                isNotif > 0 ? (
-                  <Indicator inline processing color="red" size={12} label={isNotif}>
-                    <ActionIcon variant="filled" color="#18003C" size={30} radius="xl" onClick={OpenModal}>
-                      <IoMdNotificationsOutline size={30} />
-                    </ActionIcon>
-                  </Indicator>
-                ) : (
-                  <ActionIcon variant="filled" color="#18003C" size={30} radius="xl" onClick={OpenModal}>
+            {
+              isNotif > 0 ? (
+                <Indicator inline processing color="red" size={12} label={isNotif}>
+                  <ActionIcon variant="filled" color="#18003C" size={25} radius="xl" onClick={OpenModal}>
                     <IoMdNotificationsOutline size={30} />
                   </ActionIcon>
-                )
-              }
+                </Indicator>
+              ) : (
+                <ActionIcon variant="filled" color="#18003C" size={25} radius="xl" onClick={OpenModal}>
+                  <IoMdNotificationsOutline size={30} />
+                </ActionIcon>
+              )
+            }
           </Box>
           <Box p={20}>
             {children}
