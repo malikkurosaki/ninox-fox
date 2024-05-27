@@ -79,12 +79,14 @@ export default function ViewPairingFront({ candidate, data, area }: { candidate:
                   <Center>
                     <Box p={10}>
                       <Image src={`/img/candidate/${isData.candidate.imgCandidate1}`} bg={"white"} style={{ border: "4px solid white" }} radius={"100%"} alt='kandidat 1' h={200} w="auto" />
-                      <Text fw={"bold"} ta={"center"} c={"white"}>{_.upperCase(isData.candidate.nameCandidate1)}</Text>
+                      <Text fw={"bold"} mt={10} ta={"center"} c={"white"}>{_.upperCase(isData.candidate.nameCandidate1)}</Text>
+                      <Text  c={"white"} ta={"center"} fz={13}>CALON GUBERNUR</Text>
                     </Box>
                   </Center>
                   <Box p={10}>
                     <Image src={`/img/candidate/${isData.candidate.imgCandidate2}`} bg={"white"} style={{ border: "4px solid white" }} radius={"100%"} alt='kandidat 2' h={200} w="auto" />
-                    <Text fw={"bold"} ta={"center"} c={"white"}>{_.upperCase(isData.candidate.nameCandidate2)}</Text>
+                    <Text fw={"bold"} mt={10} ta={"center"} c={"white"}>{_.upperCase(isData.candidate.nameCandidate2)}</Text>
+                    <Text  c={"white"} ta={"center"} fz={13}>CALON WAKIL GUBERNUR</Text>
                   </Box>
                 </SimpleGrid>
               </Box>
