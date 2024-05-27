@@ -37,17 +37,17 @@ export const DataNavbarBuka = [
       icon: MdGrading,
       label: "EVALUASI SWOT"
     },
-    {
-      key: "7",
-      link: "/ml-ai",
-      icon: MdHub,
-      label: "ML-AI"
-    },
-    {
-      key: "8",
-      link: "/data-sosial-ekonomi/ketenagakerjaan",
-      icon: MdOutlineSocialDistance,
-      label: "DATA SOSIAL EKONOMI"
-    },
+    // {
+    //   key: "7",
+    //   link: "/ml-ai",
+    //   icon: MdHub,
+    //   label: "ML-AI"
+    // },
+    // {
+    //   key: "8",
+    //   link: "/data-sosial-ekonomi/ketenagakerjaan",
+    //   icon: MdOutlineSocialDistance,
+    //   label: "DATA SOSIAL EKONOMI"
+    // },
 
   ]
