@@ -14,6 +14,8 @@ import ListMlAi from "./back/view/list_mlai";
 import funGetDateMlAiFront from "./front/fun/get_date_ml_ai_front";
 import funGetMlAiFront from "./front/fun/get_ml_ai_front";
 import funGetMlAiFrontV2 from "./front/fun/get_ml_ai_front_v2";
+import ViewDataLearner from "./front/view/view_data_learner";
+import ViewDataLearner2 from "./front/view/view_data_learner_2";
 import ViewMlAi from "./front/view/view_ml_ai";
 
 export { funGetAllMlAi }
@@ -33,3 +35,5 @@ export { funEditMlAi }
 export { funGetMlAiFront }
 export { funGetMlAiFrontV2 }
 export { funGetDateMlAiFront }
+export { ViewDataLearner }
+export { ViewDataLearner2 }
