@@ -52,7 +52,7 @@ export default function LayoutViewFront({ notif, children }: { notif: number, ch
   }
 
 
-  
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   function notificationData(title: any, message: any) {
     notifications.clean(),
@@ -103,6 +103,7 @@ export default function LayoutViewFront({ notif, children }: { notif: number, ch
 
   return (
     <>
+
       <AppShell
         navbar={isNavOpt}
       >
@@ -140,7 +141,7 @@ export default function LayoutViewFront({ notif, children }: { notif: number, ch
                       </Tooltip>
                     </Box>
                   ))}
-                  {
+                  {/* {
                     isNotif > 0 ? (
                       <Indicator inline processing color="red" size={12} label={isNotif}>
                         <ActionIcon variant="subtle" c={"white"} onClick={OpenModal}>
@@ -152,7 +153,7 @@ export default function LayoutViewFront({ notif, children }: { notif: number, ch
                         <IoMdNotificationsOutline size={30} />
                       </ActionIcon>
                     )
-                  }
+                  } */}
 
                   {/* Notifikasi pembuka */}
                   {/* <ActionIcon variant="subtle" c={"white"} onClick={() => notificationData()}>
@@ -232,7 +233,7 @@ export default function LayoutViewFront({ notif, children }: { notif: number, ch
                 </Box>
               )
             })}
-            <Box m={5} mt={5} ml={18}>
+            {/* <Box m={5} mt={5} ml={18}>
               <Box onClick={OpenModal} style={{ cursor: "pointer" }}>
                 {
                   isNotif > 0 ? (
@@ -249,7 +250,7 @@ export default function LayoutViewFront({ notif, children }: { notif: number, ch
                 }
 
               </Box>
-            </Box>
+            </Box> */}
 
             <Group
               style={{
@@ -268,6 +269,22 @@ export default function LayoutViewFront({ notif, children }: { notif: number, ch
           </AppShellNavbar>
         }
         <AppShell.Main bg={WARNA.bgGradasi}>
+          <Box pr={10} style={{ zIndex: 400, position: "fixed", right: 30, top: 35 }}>
+
+              {
+                isNotif > 0 ? (
+                  <Indicator inline processing color="red" size={12} label={isNotif}>
+                    <ActionIcon variant="filled" color="#18003C" size={30} radius="xl" onClick={OpenModal}>
+                      <IoMdNotificationsOutline size={30} />
+                    </ActionIcon>
+                  </Indicator>
+                ) : (
+                  <ActionIcon variant="filled" color="#18003C" size={30} radius="xl" onClick={OpenModal}>
+                    <IoMdNotificationsOutline size={30} />
+                  </ActionIcon>
+                )
+              }
+          </Box>
           <Box p={20}>
             {children}
           </Box>
