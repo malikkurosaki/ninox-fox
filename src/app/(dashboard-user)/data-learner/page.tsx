@@ -1,11 +1,10 @@
-import { ViewDataLearner, ViewDataLearner2 } from '@/modules/mlai';
+import { ViewDataLearner, ViewDataLearner2, funGetLogRequestMlaiFront } from '@/modules/mlai';
 import React from 'react';
 
-function Page() {
+export default async function Page() {
+  const data = await funGetLogRequestMlaiFront()
   return (
     // <ViewDataLearner />
-    <ViewDataLearner2/>
+    <ViewDataLearner2 log={data}/>
   );
 }
-
-export default Page;
