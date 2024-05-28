@@ -9,7 +9,7 @@ export default function TableRequestTerjawab({ data, nPage }: { data: any, nPage
   const [isChoosePage, setChoosePage] = useState(1)
 
   async function onClickPage(val: any) {
-    const load = await funGetAllRequestMlai({ page: val })
+    const load = await funGetAllRequestMlai({ page: val, status: 1 })
     setChoosePage(val)
     setData(load.data)
     setNPage(load.nPage)
@@ -45,7 +45,7 @@ export default function TableRequestTerjawab({ data, nPage }: { data: any, nPage
                 </Table.Tr>
               </Table.Thead>
               {isData.map((v: any, i: any) => (
-                <ComponentTableRequest v={v} i={i} key={i} />
+                <ComponentTableRequest v={v} i={i} key={i} page={isChoosePage}/>
               ))}
             </Table>
           </ScrollArea>

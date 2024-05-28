@@ -3,13 +3,14 @@ import prisma from "@/modules/_global/bin/prisma"
 import _, { ceil } from "lodash";
 import moment from "moment";
 
-export default async function funGetAllRequestMlai({ page, search }: { page: any, search?: any }) {
+export default async function funGetAllRequestMlai({ page, status, search }: { page: any, status: any, search?: any }) {
    const dataSkip = _.toNumber(page) * 25 - 25;
    const data = await prisma.mlAiRequest.findMany({
       skip: dataSkip,
       take: 25,
       where: {
          isActive: true,
+         status: status,
          request: {
             contains: search,
             mode: 'insensitive'
@@ -50,6 +51,7 @@ export default async function funGetAllRequestMlai({ page, search }: { page: any
    const nData = await prisma.mlAiRequest.count({
       where: {
          isActive: true,
+         status: status,
          request: {
             contains: search,
             mode: 'insensitive'
@@ -59,6 +61,7 @@ export default async function funGetAllRequestMlai({ page, search }: { page: any
 
    const allData = {
       data: result,
+      total: nData,
       nPage: ceil(nData / 25)
    }
 

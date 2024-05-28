@@ -1,7 +1,6 @@
 'use client'
 import { Box, Center, Group, Pagination, ScrollArea, Table } from "@mantine/core"
 import ComponentTableRequest from "./component_table_request"
-import { MdGroupWork } from "react-icons/md"
 import { useState } from "react"
 import funGetAllRequestMlai from "../fun/fun_get_all_request"
 
@@ -11,7 +10,7 @@ export default function TableRequest({ data, nPage }: { data: any, nPage: any })
    const [isChoosePage, setChoosePage] = useState(1)
 
    async function onClickPage(val: any) {
-      const load = await funGetAllRequestMlai({ page: val })
+      const load = await funGetAllRequestMlai({ page: val, status: 0 })
       setChoosePage(val)
       setData(load.data)
       setNPage(load.nPage)
@@ -47,7 +46,7 @@ export default function TableRequest({ data, nPage }: { data: any, nPage: any })
                         </Table.Tr>
                      </Table.Thead>
                      {isData.map((v: any, i: any) => (
-                        <ComponentTableRequest v={v} i={i} key={i} />
+                        <ComponentTableRequest v={v} i={i} key={i} page={isChoosePage} />
                      ))}
                   </Table>
                </ScrollArea>

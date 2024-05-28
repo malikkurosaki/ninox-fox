@@ -1,6 +1,6 @@
 'use client'
 import { Anchor, Box, Divider, Flex, Group, ScrollArea, Text, useMantineColorScheme } from '@mantine/core';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { IoNotificationsOffOutline } from 'react-icons/io5';
 import { isDrawer } from '../val/isDrawer';
 import { useAtom } from 'jotai';
@@ -9,6 +9,7 @@ import classes from './hover.module.css'
 import { useRouter } from 'next/navigation';
 import moment from 'moment';
 import { funGetAllNotifications, funUpdReadNotifications } from '../..';
+import { useWindowScroll } from '@mantine/hooks';
 
 export default function DrawerNotifikasi({ data, onSuccess }: { data: any, onSuccess: (val: any) => void }) {
   const { setColorScheme, clearColorScheme } = useMantineColorScheme();
@@ -34,6 +35,8 @@ export default function DrawerNotifikasi({ data, onSuccess }: { data: any, onSuc
       link = '/swot'
     } else if (kategori == 'mlai') {
       link = '/ml-ai'
+    } else if (kategori == 'mlai-request') {
+      link = '/data-learner'
     } else if (kategori == 'pairing') {
       link = '/pairing'
     } else if (kategori == 'pct') {
@@ -67,11 +70,24 @@ export default function DrawerNotifikasi({ data, onSuccess }: { data: any, onSuc
 
   async function onReadNotif(value: any) {
     const upd = await funUpdReadNotifications({ id: value })
-    const loadData = await funGetAllNotifications()
+    const loadData = await funGetAllNotifications({ page: 1 })
     setData(loadData.falseRead)
     setDataRead(loadData.trueRead)
     onSuccess(true)
   }
+
+  const [scrollPosition, onScrollPositionChange] = useState(0)
+  const viewport = useRef<HTMLDivElement>(null)
+  const [scroll, scrollTo] = useWindowScroll()
+
+  function onScroll(val: any) {
+    console.log(val)
+    onScrollPositionChange(val)
+    console.log(viewport.current!.scrollHeight)
+  }
+
+  const scrollToBottom = () =>
+    viewport.current!.scrollTo({ top: 977, behavior: 'smooth' });
 
   return (
     <>
@@ -85,7 +101,12 @@ export default function DrawerNotifikasi({ data, onSuccess }: { data: any, onSuc
               <Text c={'#696969'} fw={'bold'}>TIDAK ADA NOTIFIKASI</Text>
             </Flex>
           ) :
-            <ScrollArea h={'95vh'} scrollbarSize={2}>
+            <ScrollArea
+              h={'95vh'}
+              scrollbarSize={2}
+              viewportRef={viewport}
+              onScrollPositionChange={(val) => onScroll(val.y)}
+            >
               {isData.map((v: any, i: any) => {
                 return (
                   <Box key={i} mb={10} m={10}>

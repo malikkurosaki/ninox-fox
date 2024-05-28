@@ -54,7 +54,7 @@ export default function ViewDataLearner() {
   }
   return (
     <>
-      <PageSubTitle text1='REKOMENDASI CEPAT' text2='DATA LEARNER' />
+      <PageSubTitle text1='DATA' text2='LEARNER' />
       <Box pt={20}>
         <Box pb={20}>
           {data && (
