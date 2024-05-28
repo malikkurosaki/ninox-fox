@@ -3,9 +3,13 @@ import { PageSubTitle } from '@/modules/_global';
 import { Box, Button, Divider, Group, rem, ScrollArea, SimpleGrid, Spoiler, Text } from '@mantine/core';
 import React, { useState } from 'react';
 import { GiBackwardTime } from "react-icons/gi";
+import { IoIosCheckmarkCircleOutline } from "react-icons/io";
 import _ from "lodash"
 import { useElementSize } from '@mantine/hooks';
 import TextAnimation from 'react-typing-dynamics';
+import funAddRequestMlAiFront from '../fun/add_request_mlai';
+import funGetLogRequestMlaiFront from '../fun/get_log_request_mlai_front';
+import moment from 'moment';
 
 const dataLog = [
   {
@@ -46,13 +50,29 @@ const dataLog = [
 
 ]
 
-export default function ViewDataLearner2() {
-  const { ref, width, height } = useElementSize();
-  const [data, setData] = useState(false)
+export default function ViewDataLearner2({ log }: { log: any }) {
+  const { ref, width, height } = useElementSize()
+  const [response, setResponse] = useState('')
+  const [request, setRequest] = useState('')
+  const [dataLog, setDataLog] = useState(log)
 
-  function onProses() {
-    setData(true)
+  async function onProses() {
+    setResponse('')
+    if (request == '' || request == null || request == undefined) {
+      return setResponse('Silahkan isi form request')
+    }
+
+    const ins = await funAddRequestMlAiFront({ request: request })
+    if (ins.success === true) {
+      setRequest('')
+      setResponse('Terima kasih telah melakukan request, respons akan diberikan secepatnya')
+      const load = await funGetLogRequestMlaiFront()
+      setDataLog(load)
+    } else {
+      setResponse('Error, silakan coba lagi nanti')
+    }
   }
+
 
   return (
     <>
@@ -74,9 +94,11 @@ export default function ViewDataLearner2() {
               <textarea
                 ref={ref}
                 style={{
-                  width: '100%', height: '63vh', borderRadius: 5, backgroundColor: '#12002A', color: '#ffffff', border: 'none', outline: 'none'
+                  width: '100%', height: '63vh', borderRadius: 5, backgroundColor: '#12002A', color: '#ffffff', border: 'none', outline: 'none', resize: 'none'
                 }}
+                value={request}
                 placeholder="Input apa yang kamu inginkan........"
+                onChange={(val) => setRequest(val.currentTarget.value)}
               />
             </Box>
             <Button mt={20} fullWidth radius={10} onClick={onProses} color="indigo">KIRIM</Button>
@@ -91,10 +113,10 @@ export default function ViewDataLearner2() {
                 height: '20vh'
               }}>
                 <Text c={'white'} mb={20} fz={18}>RESPONS</Text>
-                {data && (
+                {response && (
                   <Text c={'#CE9E23'}>
                     <TextAnimation
-                      phrases={['Terima kasih telah melalkukan request, respons akan diberikan secepatnya']}
+                      phrases={[response]}
                       typingSpeed={0}
                       backspaceDelay={0}
                       eraseDelay={0}
@@ -117,26 +139,31 @@ export default function ViewDataLearner2() {
                 <Text c={'white'} mb={20} fz={18}>LOG REQUEST</Text>
                 <ScrollArea h={'50vh'}>
 
-                  {dataLog.map((v, i) => {
+                  {dataLog.map((v: any, i: any) => {
                     return (
                       <Box style={{
                         cursor: "pointer"
                       }} key={i}>
                         <Spoiler maxHeight={30} showLabel="Show more" hideLabel="Hide">
 
-                          <Text c={v.color}>{v.log} </Text>
+                          <Text c={v.status == 0 ? '#CE9E23' : '#2CCC1E'}>{v.request} </Text>
                         </Spoiler>
                         <Group justify='space-between' style={{
                           alignItems: "center",
                           alignContent: "center"
                         }}>
-                          <Text c={'#D0CFCF'} fz={13}>{v.tgl}</Text>
+                          <Text c={'#D0CFCF'} fz={13}>{moment(v.createdAt).format('LLL')}</Text>
                           <Group gap={5} mt={10} style={{
                             alignItems: "center",
                             alignContent: "center"
                           }}>
-                            <GiBackwardTime size={25} color={v.color} />
-                            <Text c={v.color} fz={13}>{v.req}</Text>
+                            {
+                              v.status == 0
+                                ? <GiBackwardTime size={25} color={'#CE9E23'} />
+                                : <IoIosCheckmarkCircleOutline size={25} color={'#2CCC1E'} />
+                            }
+
+                            <Text c={v.status == 0 ? '#CE9E23' : '#2CCC1E'} fz={13}>{v.status == 0 ? 'Pending' : 'Terjawab'}</Text>
                           </Group>
                         </Group>
                         <Divider my="md" color={'#6E6C68'} />
@@ -147,8 +174,6 @@ export default function ViewDataLearner2() {
               </Box>
             </Box>
           </Box>
-
-
         </SimpleGrid>
       </Box>
     </>
