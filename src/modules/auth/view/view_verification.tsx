@@ -38,6 +38,7 @@ export default function ViewVerification({ phone, otp, user }: { phone: any, otp
       // await funLogUser({ act: 'LOGIN', desc: `User login` })
       router.push('/summary')
       toast("Verification code is correct", { theme: "dark" })
+      setLoading(false)
     } else {
       // jika salah
       toast("Incorrect verification code", { theme: "dark" })
@@ -75,10 +76,8 @@ export default function ViewVerification({ phone, otp, user }: { phone: any, otp
               <Button
                 mt={30}
                 fullWidth
-                bg={"white"}
-                c={"#005B41"}
+                variant="filled" color="#280B4F"
                 loading={isLoading}
-                disabled={isLoading}
                 onClick={() => { getVerification() }}
               >
                 Submit
