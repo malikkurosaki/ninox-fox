@@ -44,7 +44,7 @@ export default function LayoutViewFront({ notif, children }: { notif: number, ch
   });
 
   async function OpenModal() {
-    const loadNotif = await funGetAllNotifications()
+    const loadNotif = await funGetAllNotifications({ page: 1 })
     setListNotif(loadNotif)
     setOpenDrawer(true)
   }
