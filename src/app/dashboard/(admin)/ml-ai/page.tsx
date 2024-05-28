@@ -14,7 +14,7 @@ export default async function Page({ searchParams }: { searchParams: { prov: str
 
   const pro = await MasterProvinceGetAll()
   const kab = await MasterKabGetByProvince({ idProvinsi: dataMlai.idProvinsi })
-  const dataDB = await funGetAllMlAi({ find: dataMlai })
+  const dataDB = await funGetAllMlAi({ find: dataMlai, page: 1 })
   return (
     <>
       <ListMlAi params={dataMlai} provinsi={pro} kabupaten={kab} datatable={dataDB} />
