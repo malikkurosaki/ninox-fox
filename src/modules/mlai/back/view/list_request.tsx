@@ -5,7 +5,7 @@ import { MdOutlineMarkEmailUnread } from "react-icons/md";
 import { MdOutlineMarkEmailRead } from "react-icons/md";
 import TableRequestTerjawab from "../component/table_request_terjawab";
 
-export default function ListRequest({ data, page }: { data: any, page: any }) {
+export default function ListRequest({ dataPending, pagePending, nPending, dataTerjawab, pageTerjawab, nTerjawab }: { dataPending: any, pagePending: any, nPending: any, dataTerjawab: any, pageTerjawab: any, nTerjawab: any }) {
    return (
       <>
          <Stack>
@@ -31,7 +31,7 @@ export default function ListRequest({ data, page }: { data: any, page: any }) {
                               BELUM TERJAWAB
                            </Text>
                            <Text fw={"bold"}>
-                              20
+                              {nPending}
                            </Text>
                         </Group>
                      </Tabs.Tab>
@@ -44,18 +44,18 @@ export default function ListRequest({ data, page }: { data: any, page: any }) {
                               TERJAWAB
                            </Text>
                            <Text fw={"bold"}>
-                              10
+                              {nTerjawab}
                            </Text>
                         </Group>
                      </Tabs.Tab>
                   </Tabs.List>
 
                   <Tabs.Panel value="belum">
-                     <TableRequest data={data} nPage={page} />
+                     <TableRequest data={dataPending} nPage={pagePending} />
                   </Tabs.Panel>
 
                   <Tabs.Panel value="terjawab">
-                     <TableRequestTerjawab data={data} nPage={page} />
+                     <TableRequestTerjawab data={dataTerjawab} nPage={pageTerjawab} />
                   </Tabs.Panel>
                </Tabs>
             </Box>

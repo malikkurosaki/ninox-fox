@@ -15,16 +15,17 @@ import {
 import { CiRead, CiUnread } from "react-icons/ci";
 import { MdOutlineQuestionAnswer } from "react-icons/md";
 
-export default function ComponentTableRequest({ v, i }: { v: any; i: any }) {
+export default function ComponentTableRequest({ v, i, page }: { v: any; i: any, page: any }) {
    const open = useState(false);
    const router = useRouter();
+   page = page * 25 - 24
 
 
    return (
       <>
          <Table.Tbody key={i}>
             <Table.Tr>
-               <Table.Td>{i + 1}</Table.Td>
+               <Table.Td>{page + i}</Table.Td>
                <Table.Td>{v.date}</Table.Td>
                <Table.Td>{v.name}</Table.Td>
                <Table.Td>
