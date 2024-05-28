@@ -32,12 +32,12 @@ export default function ViewSummary({ oneCandidate, emoTable, emoPersen, emoChar
         </SimpleGrid> */}
 
         <Grid gutter={40}>
-          <Grid.Col span={{ base: 4, md: 4, lg: 4 }}>
+          <Grid.Col span={{ base: 4, md: 4, lg: 4 }} >
             <CandidateSummary candidate={oneCandidate} persen={emoPersen} />
           </Grid.Col>
           <Grid.Col span={{ base: 3, md: 3, lg: 3 }}>
             <Center>
-              <Image src={"/bgEmotion1.png"} alt='bg' h={"45vh"}
+              <Image src={"/pngwing.com.png"} alt='bg' h={"40vh"}
                 w="auto" />
             </Center>
           </Grid.Col>
