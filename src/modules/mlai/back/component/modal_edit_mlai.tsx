@@ -24,8 +24,13 @@ export default function ModalEditMlAi({ data, content }: { data: any, content: a
             return toast("Anda tidak mempunyai akses ke wilayah tersebut", { theme: "dark" })
         }
         const edit = await funEditMlAi({ body: data, text: content })
-        await funLogUser({ act: 'UPD', desc: `User mengubah data ML-AI`, idContent: data.id, tbContent: 'mlai' })
-        await funAddNotifications({ kategori: 'mlai', candidateId: data.idCandidate })
+        if (data.idRequest == null) {
+            await funLogUser({ act: 'UPD', desc: `User mengubah data ML-AI`, idContent: data.id, tbContent: 'mlai' })
+            await funAddNotifications({ kategori: 'mlai', candidateId: data.idCandidate })
+        } else {
+            await funLogUser({ act: 'UPD', desc: `User mengubah jawaban data Request ML-AI`, idContent: data.idRequest, tbContent: 'mlaiRequest' })
+            await funAddNotifications({ kategori: 'mlai-request', candidateId: data.idCandidate })
+        }
         toast("Sukses", { theme: "dark" });
         setOpenModal(false);
     }

@@ -76,7 +76,7 @@ export default function ViewDataLearner2({ log }: { log: any }) {
 
   return (
     <>
-      <PageSubTitle text1='REKOMENDASI CEPAT' text2='DATA LEARNER' />
+      <PageSubTitle text1='DATA' text2='LEARNER' />
       <Box pt={20}>
         <SimpleGrid
           cols={{ base: 1, sm: 2, lg: 2 }}

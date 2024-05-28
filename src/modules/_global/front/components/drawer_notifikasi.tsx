@@ -34,6 +34,8 @@ export default function DrawerNotifikasi({ data, onSuccess }: { data: any, onSuc
       link = '/swot'
     } else if (kategori == 'mlai') {
       link = '/ml-ai'
+    } else if (kategori == 'mlai-request') {
+      link = '/data-learner'
     } else if (kategori == 'pairing') {
       link = '/pairing'
     } else if (kategori == 'pct') {

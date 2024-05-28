@@ -31,6 +31,7 @@ export default function EditMlAi({ data }: { data: any }) {
     const [openModal, setOpenModal] = useAtom(isModalMlAi)
     const [isBody, setBody] = useState({
         id: data.id,
+        idRequest: data.idRequestMlAi,
         idCandidate: data.idCandidate,
         content: data.content,
         dateContent: data.dateContent == null ? '' : data.dateContent,
