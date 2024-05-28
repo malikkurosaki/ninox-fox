@@ -10,14 +10,10 @@ export default function CandidateSummary({ candidate, persen }: { candidate: any
 
   return (
     <>
-      <Box>
+      <Box style={{
+        zIndex: 999
+      }}>
         <Box
-        // style={{
-        //   background: "rgba(0,0,0,0.3)",
-        //   padding: 10,
-        //   borderRadius: 10,
-        //   zIndex: 99999
-        // }}
         >
           <Image src={isImgCan} bg={"white"} style={{ border: "4px solid white" }} radius={"100%"} alt='kandidat' maw={200} mx="auto" />
           <Box p={10}>
