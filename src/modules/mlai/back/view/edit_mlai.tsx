@@ -1,6 +1,6 @@
 'use client'
 import { ButtonBack } from "@/modules/_global"
-import { ActionIcon, Box, Button, Group, Modal, Select, Stack, Text, TextInput, Textarea } from "@mantine/core"
+import { ActionIcon, Box, Button, Group, Modal, Select, Spoiler, Stack, Text, TextInput, Textarea } from "@mantine/core"
 import { useAtom } from "jotai"
 import { isModalMlAi } from "../val/val_mlai"
 import ModalEditMlAi from "../component/modal_edit_mlai"
@@ -70,19 +70,24 @@ export default function EditMlAi({ data }: { data: any }) {
             <Stack mt={30}>
                 <Text fw={"bold"}>EDIT ML-AI</Text>
             </Stack>
-            <Box pt={30}>
-                {
-                    data.idRequestMlAi != null && (
-                        <>
-                            <Text fw={'bold'} fz={20}>
-                                REQUEST
-                            </Text>
-                            <Text>
-                                {data.request}
-                            </Text>
-                        </>
-                    )
-                }
+            <Box pt={20}>
+                <Box p={20} mb={20} bg={'#CED4D9'} style={{ borderRadius: 10 }}>
+                    <Text mb={10} fw={'bold'} fz={20}>
+                        REQUEST
+                    </Text>
+                    {
+                        data.idRequestMlAi != null && (
+                            <>
+                                <Spoiler maxHeight={50} showLabel={<Text c={'#787A7C'}>Show more</Text>} hideLabel={<Text c={'#787A7C'}>Hide</Text>}>
+                                    <Text>
+                                        {data.request}
+                                    </Text>
+                                </Spoiler>
+                            </>
+                        )
+                    }
+
+                </Box>
                 <Stack>
                     <Group grow>
                         <TextInput label={"Provinsi"} value={data.areaProvinsi} disabled />

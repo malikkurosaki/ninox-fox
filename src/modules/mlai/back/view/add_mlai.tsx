@@ -1,6 +1,6 @@
 'use client'
 import { ButtonBack, MasterKabGetByProvince } from "@/modules/_global"
-import { ActionIcon, Box, Button, Group, Modal, Radio, Select, Stack, Text, TextInput, Textarea } from "@mantine/core"
+import { ActionIcon, Box, Button, Group, Modal, Radio, Select, Spoiler, Stack, Text, TextInput, Textarea } from "@mantine/core"
 import ModalAddMlAi from "../component/modal_add_mlai"
 import { useAtom } from "jotai"
 import { isModalMlAi } from "../val/val_mlai"
@@ -111,12 +111,16 @@ export default function AddMlAi({ params, req, candidate, provinsi, kabupaten }:
                     req.id != null
                         ? (
                             <>
-                                <Text fw={'bold'} fz={20}>
-                                    REQUEST
-                                </Text>
-                                <Text>
-                                    {req.request}
-                                </Text>
+                                <Box p={20} mb={20} bg={'#CED4D9'} style={{ borderRadius: 10 }}>
+                                    <Text mb={10} fw={'bold'} fz={20}>
+                                        REQUEST
+                                    </Text>
+                                    <Spoiler maxHeight={50} showLabel={<Text c={'#787A7C'}>Show more</Text>} hideLabel={<Text c={'#787A7C'}>Hide</Text>}>
+                                        <Text>
+                                            {req.request}
+                                        </Text>
+                                    </Spoiler>
+                                </Box>
                                 <Group grow>
                                     <TextInput label={"Provinsi"} value={req.areaProvinsi} disabled />
                                     <TextInput label={"Kabupaten"} value={req.areaKabkot} disabled />

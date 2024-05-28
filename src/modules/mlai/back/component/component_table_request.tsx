@@ -28,13 +28,6 @@ export default function ComponentTableRequest({ v, i }: { v: any; i: any }) {
                <Table.Td>{v.date}</Table.Td>
                <Table.Td>{v.name}</Table.Td>
                <Table.Td>
-                  {
-                     (v.status == 1)
-                        ? <Badge color="blue">Terjawab</Badge>
-                        : <Badge color="yellow">Belum Terjawab</Badge>
-                  }
-               </Table.Td>
-               <Table.Td>
                   <Center>
                      <Stack>
                         <Group>
@@ -90,29 +83,18 @@ export default function ComponentTableRequest({ v, i }: { v: any; i: any }) {
                         </Stack>
                         {
                            (v.status == 1)
-                              ? <>
-                                 <Text c={"white"} fw={"bold"} fz={20} mb={10}>
-                                    Response
-                                 </Text>
-                                 <Stack c={'white'}>
-                                    <Box dangerouslySetInnerHTML={{ __html: v.response }} />
-                                 </Stack>
-                              </>
+                              ? <Box pt={20}>
+                                 <Box pl={20} pb={10} pt={10} bg={'#CED4D9'} style={{ borderRadius: 10 }}>
+                                    {/* <Stack c={'white'}> */}
+                                    <Text fw={"bold"} fz={20}>
+                                       Response
+                                    </Text>
+                                    <Box m={0} dangerouslySetInnerHTML={{ __html: v.response }} />
+                                    {/* </Stack> */}
+                                 </Box>
+                              </Box>
                               : <></>
                         }
-                        {/* <Text style={{ fontSize: '16', color: "white" }} dangerouslySetInnerHTML={RubahHTML(v.content)} /> */}
-                        {/* <Text c={"white"}>
-                  <TextAnimation
-                    phrases={[...v.content.split('\n')]}
-                    typingSpeed={0}
-                    backspaceDelay={0}
-                    eraseDelay={0}
-                    timeComplete={0}
-                    errorProbability={0}
-                    eraseOnComplete={false}
-                    isSecure={false}
-                  />
-                </Text> */}
                      </Box>
                   </Collapse>
                </Table.Td>

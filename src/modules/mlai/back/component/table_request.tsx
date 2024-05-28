@@ -39,11 +39,9 @@ export default function TableRequest({ data, nPage }: { data: any, nPage: any })
                            }}
                         >
                            <Table.Th w={50}>No</Table.Th>
-                           <Table.Th>Tanggal</Table.Th>
-                           <Table.Th>User</Table.Th>
-                           <Table.Th>Status
-                           </Table.Th>
-                           <Table.Th>
+                           <Table.Th w={250} >Tanggal</Table.Th>
+                           <Table.Th >User</Table.Th>
+                           <Table.Th w={200}>
                               <Center>Aksi</Center>
                            </Table.Th>
                         </Table.Tr>
