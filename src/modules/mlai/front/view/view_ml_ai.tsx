@@ -172,6 +172,17 @@ export default function ViewMlAi({ dataV2, dataTanggal, candidate, oneCandidate 
                     return (
                       <Box key={i}>
                         {
+                          item.idRequestMlAi != null && (
+                            <>
+                              <Text c={'white'}>Request</Text>
+                              <Text c={'white'}>{item.request}</Text>
+                              <Divider />
+                              <Text c={'white'}>Respon</Text>
+                            </>
+                          )
+                        }
+
+                        {
                           valRead.includes(item.id) ? (
                             <>
                               <Box c={"white"} dangerouslySetInnerHTML={{ __html: item.content }} />
