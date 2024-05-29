@@ -33,6 +33,9 @@ export default async function funAddNotifications({ kategori, candidateId, candi
    } else if (kategori == 'mlai') {
       desc = 'Data ML-AI kandidat ' + kandidat.name + ' telah diperbarui'
       judul = 'Update data ML-AI'
+   } else if (kategori == 'mlai-request') {
+      desc = 'Respon data learner telah diupdate'
+      judul = 'Respon data learner'
    } else if (kategori == 'pairing') {
       const kandidat2 = await funGetOneCandidate({ id: candidateId2 })
       desc = 'Data pasangan regional ' + kandidat.name + ' & ' + kandidat2.name + ' telah diperbarui'
@@ -114,7 +117,6 @@ export default async function funAddNotifications({ kategori, candidateId, candi
       data: listUser
    })
 
-   console.log('masuk')
 
    for (let index = 0; index < listUser.length; index++) {
       const user = listUser[index].idUserClient

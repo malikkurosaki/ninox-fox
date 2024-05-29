@@ -25,8 +25,14 @@ export default function ModalAddMlAi({ data, text, onSuccess }: { data: any, tex
         }
         const addData = await funAddMlAi({ body: data, content: text })
         if (!addData.success) return toast(addData.message, { theme: "dark" })
-        await funLogUser({ act: 'ADD', desc: `User menambah data ML-AI`, idContent: addData.data, tbContent: 'mlai' })
-        await funAddNotifications({ kategori: 'mlai', candidateId: data.idCandidate })
+        if (data.idRequest == null) {
+            await funLogUser({ act: 'ADD', desc: `User menambah data ML-AI`, idContent: addData.data, tbContent: 'mlai' })
+            await funAddNotifications({ kategori: 'mlai', candidateId: data.idCandidate })
+        } else {
+            await funLogUser({ act: 'ADD', desc: `User menjawab data Request ML-AI`, idContent: data.idRequest, tbContent: 'mlaiRequest' })
+            await funAddNotifications({ kategori: 'mlai-request', candidateId: data.idCandidate })
+        }
+
         toast("Sukses", { theme: "dark" })
         setOpenModal(false)
         onSuccess(true)
