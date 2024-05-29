@@ -80,7 +80,7 @@ export default function ViewDataLearner2({ log }: { log: any }) {
       <Box pt={20}>
         <SimpleGrid
           cols={{ base: 1, sm: 2, lg: 2 }}
-          spacing={{ base: 10, sm: 'xl' }}
+          spacing={{ base: 10, sm: 20 }}
           verticalSpacing={{ base: 'md', sm: 'xl' }}
         >
           <Box>
