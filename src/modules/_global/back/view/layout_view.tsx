@@ -15,7 +15,7 @@ import { ModalLogout } from "../..";
  * @returns component untuk template dashboard
  */
 
-export default function LayoutView({ children, dataMenu, dataUser }: { children: React.ReactNode, dataMenu: any, dataUser: any }) {
+export default function LayoutView({ children, dataMenu, dataUser, pending }: { children: React.ReactNode, dataMenu: any, dataUser: any, pending: any }) {
   const [opened, { toggle }] = useDisclosure();
   const dataSosialEkonomi = [
     {
@@ -433,9 +433,13 @@ export default function LayoutView({ children, dataMenu, dataUser }: { children:
               <NavLink
                 label={<Group>
                   <Box>ML-AI</Box>
-                  <Indicator inline processing color="red" size={12} position="middle-end" label={20} />
-                </Group>
+                  {
+                    pending > 0 && (
+                      <Indicator inline color="red" size={12} position="middle-end" label={pending} />
+                    )
+                  }
 
+                </Group>
                 }
                 childrenOffset={28}
                 fw={"bolder"}

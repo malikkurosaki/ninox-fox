@@ -1,18 +1,29 @@
 "use server"
 import prisma from "@/modules/_global/bin/prisma";
+import moment from "moment";
 import { revalidatePath } from "next/cache";
 
 export default async function funAddMlAi({ body, content }: { body: any, content: any }) {
+  let dateInput, timeInput
+  const now = new Date()
+  if (body.dateContent == '' || body.timeContent == '') {
+    dateInput = moment(now).format('YYYY-MM-DD')
+    let y = new Date('1970-01-01 ' + moment(now).format('hh:mm'))
+    timeInput = new Date(y.getTime() - (y.getTimezoneOffset() * 60000)).toISOString()
+  } else {
+    dateInput = body.dateContent
+    let y = new Date('1970-01-01 ' + body.timeContent)
+    timeInput = new Date(y.getTime() - (y.getTimezoneOffset() * 60000)).toISOString()
+  }
 
-  let y = new Date('1970-01-01 ' + body.timeContent)
-  let isoDateTime = new Date(y.getTime() - (y.getTimezoneOffset() * 60000)).toISOString()
+
 
   const data = await prisma.mlAi.create({
     data: {
       idRequestMlAi: body.idRequest,
       idCandidate: body.idCandidate,
-      dateContent: new Date(body.dateContent),
-      timeContent: isoDateTime,
+      dateContent: new Date(dateInput),
+      timeContent: timeInput,
       content: content
     },
     select: {

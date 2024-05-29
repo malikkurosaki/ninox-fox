@@ -8,6 +8,7 @@ import funDeleteMlAi from "./back/fun/fun_delete_mlai";
 import funEditMlAi from "./back/fun/fun_edit_mlai";
 import funGetAllMlAi from "./back/fun/fun_get_all_mlai";
 import funGetAllRequestMlai from "./back/fun/fun_get_all_request";
+import funGetCountPendingRequest from "./back/fun/fun_get_count_pending_request";
 import funGetOneMlAi from "./back/fun/fun_get_one_mlai";
 import funGetOneRequestAddMlAi from "./back/fun/fun_get_one_request_add_mlai";
 import AddMlAi from "./back/view/add_mlai";
@@ -47,3 +48,4 @@ export { funGetAllRequestMlai }
 export { funGetOneRequestAddMlAi }
 export { funAddRequestMlAiFront }
 export { funGetLogRequestMlaiFront }
+export { funGetCountPendingRequest }

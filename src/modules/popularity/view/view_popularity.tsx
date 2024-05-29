@@ -8,7 +8,7 @@ import _ from 'lodash';
 import { funGetPopularityToday, funGetRateChart } from '..';
 import moment from 'moment';
 
-export default function ViewPopularity({ candidate, pairingToday, chartRate }: { candidate: any, pairingToday: any, chartRate: any }) {
+export default function ViewPopularity({ candidate, pairingToday, chartRate, tingkat }: { candidate: any, pairingToday: any, chartRate: any, tingkat: any }) {
   const [isPairingToday, setPairingToday] = useState(pairingToday)
   const [isCandidate1, setCandidate1] = useState(pairingToday.pairingCandidate.idCandidate1)
   const [isCandidate2, setCandidate2] = useState(pairingToday.pairingCandidate.idCandidate2)
@@ -42,12 +42,12 @@ export default function ViewPopularity({ candidate, pairingToday, chartRate }: {
                 <Box>
                   <Image src={`/img/candidate/${isPairingToday.pairingCandidate.imgCandidate1}`} bg={"white"} style={{ border: "4px solid white" }} radius={"100%"} alt="kandidat 1" h={200} w="auto" />
                   <Text mt={20} c={"white"} ta={"center"} fw={'bold'}>{_.upperCase(isPairingToday.pairingCandidate.nameCandidate1)}</Text>
-                  <Text c={"white"} ta={"center"} fz={13}>CALON BUPATI</Text>
+                  <Text c={"white"} ta={"center"} fz={13}>{tingkat == 1 ? 'CALON GUBERNUR' : 'CALON BUPATI'}</Text>
                 </Box>
                 <Box>
                   <Image src={`/img/candidate/${isPairingToday.pairingCandidate.imgCandidate2}`} bg={"white"} style={{ border: "4px solid white" }} radius={"100%"} alt="kandidat 2" h={200} w="auto" />
                   <Text mt={20} c={"white"} ta={"center"} fw={'bold'}>{_.upperCase(isPairingToday.pairingCandidate.nameCandidate2)}</Text>
-                  <Text c={"white"} ta={"center"} fz={13}>CALON WAKIL BUPATI</Text>
+                  <Text c={"white"} ta={"center"} fz={13}>{tingkat == 1 ? 'CALON WAKIL GUBERNUR' : 'CALON WAKIL BUPATI'}</Text>
                 </Box>
               </Group>
 

@@ -6,7 +6,7 @@ import { PageSubTitle } from '@/modules/_global';
 import _ from 'lodash';
 import { funGetPairingRegional } from '../..';
 
-export default function ViewPairingFront({ candidate, data, area }: { candidate: any, data: any, area: any }) {
+export default function ViewPairingFront({ candidate, data, area, tingkat }: { candidate: any, data: any, area: any, tingkat: any }) {
   const [isData, setData] = useState(data)
   const [isCandidate1, setCandidate1] = useState(data.candidate.idCandidate1)
   const [isCandidate2, setCandidate2] = useState(data.candidate.idCandidate2)
@@ -80,13 +80,13 @@ export default function ViewPairingFront({ candidate, data, area }: { candidate:
                     <Box p={10}>
                       <Image src={`/img/candidate/${isData.candidate.imgCandidate1}`} bg={"white"} style={{ border: "4px solid white" }} radius={"100%"} alt='kandidat 1' h={200} w="auto" />
                       <Text fw={"bold"} mt={10} ta={"center"} c={"white"}>{_.upperCase(isData.candidate.nameCandidate1)}</Text>
-                      <Text  c={"white"} ta={"center"} fz={13}>CALON BUPATI</Text>
+                      <Text c={"white"} ta={"center"} fz={13}>{tingkat == 1 ? 'CALON GUBERNUR' : 'CALON BUPATI'}</Text>
                     </Box>
                   </Center>
                   <Box p={10}>
                     <Image src={`/img/candidate/${isData.candidate.imgCandidate2}`} bg={"white"} style={{ border: "4px solid white" }} radius={"100%"} alt='kandidat 2' h={200} w="auto" />
                     <Text fw={"bold"} mt={10} ta={"center"} c={"white"}>{_.upperCase(isData.candidate.nameCandidate2)}</Text>
-                    <Text  c={"white"} ta={"center"} fz={13}>CALON WAKIL BUPATI</Text>
+                    <Text c={"white"} ta={"center"} fz={13}>{tingkat == 1 ? 'CALON WAKIL GUBERNUR' : 'CALON WAKIL BUPATI'}</Text>
                   </Box>
                 </SimpleGrid>
               </Box>

@@ -1,4 +1,4 @@
-import { funGetAllCandidateFront } from '@/modules/candidate';
+import { funGetAllCandidateFront, funGetUserDefaultFront } from '@/modules/candidate';
 import { ViewPopularity, funGetPopularityToday, funGetRateChart } from '@/modules/popularity';
 import moment from 'moment';
 import React from 'react';
@@ -6,6 +6,7 @@ import React from 'react';
 export default async function Page() {
   const can = await funGetAllCandidateFront()
   const dataPairingToday = await funGetPopularityToday({})
+  const valdefault = await funGetUserDefaultFront()
   const dataRateChart = await funGetRateChart({
     candidate1: dataPairingToday.pairingCandidate.idCandidate1,
     candidate2: dataPairingToday.pairingCandidate.idCandidate2,
@@ -14,7 +15,7 @@ export default async function Page() {
   })
 
   return (
-    <ViewPopularity candidate={can} pairingToday={dataPairingToday} chartRate={dataRateChart} />
+    <ViewPopularity candidate={can} pairingToday={dataPairingToday} chartRate={dataRateChart} tingkat={valdefault.tingkat} />
   );
 }
 
