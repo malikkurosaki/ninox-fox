@@ -81,7 +81,6 @@ export default function ViewMlAi({ dataV2, dataTanggal, candidate, oneCandidate 
 
   return (
     <>
-      {/* <PageSubTitle text1='ML-AI' text2='PROMPT RECOMENDATIONS' /> */}
       <PageSubTitle text1='REKOMENDASI CEPAT' text2='ML-AI' />
       <Box pt={20}>
         <Box
@@ -98,7 +97,6 @@ export default function ViewMlAi({ dataV2, dataTanggal, candidate, oneCandidate 
               onChange={(val) => chooseCandidate(val)}
             />
           </Container>
-          {/* <Text fw={"bold"} ta={"center"} c={"white"}>{isNameCan}</Text> */}
         </Box>
         <Text mt={20} c={"green"} fz={20} fw={"bold"}>PENINGKATAN ANALISIS KEKUATAN</Text>
         <Box pt={20}>
@@ -159,7 +157,6 @@ export default function ViewMlAi({ dataV2, dataTanggal, candidate, oneCandidate 
                                     </Text>
                                   </Menu.Item>
                                 )
-
                               })
                             }
                           </ScrollArea>
@@ -197,31 +194,10 @@ export default function ViewMlAi({ dataV2, dataTanggal, candidate, oneCandidate 
                               </Wrapper>
                             </>
                           )}
-
                       </Box>
-
                     )
                   })}
                 </Stack>
-                {/* <Stack >
-                  {
-                    isData && isData.length > 0 && (
-                      <Text c={"white"} fz={14}>
-                        <TextAnimation
-                          phrases={[...isData[_.random(0, isData.length - 1)].content.split('\n')]}
-                          typingSpeed={0}
-                          backspaceDelay={0}
-                          eraseDelay={0}
-                          timeComplete={0}
-                          errorProbability={0}
-                          eraseOnComplete={false}
-                          isSecure={false}
-                        />
-                      </Text>
-                    )
-                  }
-                </Stack> */}
-
               </ScrollArea>
             </Box>
           </Box>
