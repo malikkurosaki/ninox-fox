@@ -81,7 +81,7 @@ export default function ViewMlAi({ dataV2, dataTanggal, candidate, oneCandidate 
 
   return (
     <>
-      <PageSubTitle text1='REKOMENDASI CEPAT' text2='ML-AI' />
+      <PageSubTitle text1='REKOMENDASI' text2='ML-AI' />
       <Box pt={20}>
         <Box
         >
@@ -166,18 +166,19 @@ export default function ViewMlAi({ dataV2, dataTanggal, candidate, oneCandidate 
                   }
                 </Group>
               </Box>
-              <ScrollArea h={"34vh"}>
-                <Stack>
+              <ScrollArea h={"34vh"} pt={20}>
+                <Box>
                   {dataMlai && dataMlai.map((item: any, i: any) => {
                     return (
                       <Box key={i}>
                         {
                           item.idRequestMlAi != null && (
                             <>
-                              <Text c={'white'}>Request</Text>
-                              <Text c={'white'}>{item.request}</Text>
-                              <Divider />
-                              <Text c={'white'}>Respon</Text>
+                              <Text c={'#9E9A9A'} mb={15}>REQUEST</Text>
+                              <Text c={'#9E9A9A'}>{item.request}</Text>
+                              {/* <Text c={'white'}>Respon</Text> */}
+                              <Divider my={20} color={'#9E9A9A'} />
+                              <Text c={'white'}>RESPONS</Text>
                             </>
                           )
                         }
@@ -188,9 +189,8 @@ export default function ViewMlAi({ dataV2, dataTanggal, candidate, oneCandidate 
                               <Box c={"white"} dangerouslySetInnerHTML={{ __html: item.content }} />
                             </>
                           ) : (
-                            <>
                               <Wrapper id={item.id}>
-                                <Stack c={"white"}>
+                                  <Text c={"white"}>
                                   <TextAnimation
                                     phrases={[...item.content.split('\n')]}
                                     typingSpeed={0}
@@ -201,14 +201,13 @@ export default function ViewMlAi({ dataV2, dataTanggal, candidate, oneCandidate 
                                     eraseOnComplete={false}
                                     isSecure={false}
                                   />
-                                </Stack>
+                                </Text>
                               </Wrapper>
-                            </>
                           )}
                       </Box>
                     )
                   })}
-                </Stack>
+                </Box>
               </ScrollArea>
             </Box>
           </Box>

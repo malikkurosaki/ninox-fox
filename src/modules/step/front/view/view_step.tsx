@@ -27,7 +27,7 @@ export default function ViewStep({ data, candidate, oneCandidate }: { data: any,
 
   return (
     <>
-      <PageSubTitle text1='PENILAIAN' text2='STEP' />
+      <PageSubTitle text1='ANALISA' text2='STEP' />
       <Grid gutter={30}>
         <Grid.Col span={{ md: 3, lg: 3 }}>
           <Flex justify={"center"} align={"center"} style={{
