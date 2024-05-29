@@ -138,14 +138,12 @@ export default function ViewDataLearner2({ log }: { log: any }) {
               }}>
                 <Text c={'white'} mb={20} fz={18}>LOG REQUEST</Text>
                 <ScrollArea h={'50vh'}>
-
                   {dataLog.map((v: any, i: any) => {
                     return (
                       <Box style={{
                         cursor: "pointer"
                       }} key={i}>
                         <Spoiler maxHeight={30} showLabel="Show more" hideLabel="Hide">
-
                           <Text c={v.status == 0 ? '#CE9E23' : '#2CCC1E'}>{v.request} </Text>
                         </Spoiler>
                         <Group justify='space-between' style={{
@@ -162,7 +160,6 @@ export default function ViewDataLearner2({ log }: { log: any }) {
                                 ? <GiBackwardTime size={25} color={'#CE9E23'} />
                                 : <IoIosCheckmarkCircleOutline size={25} color={'#2CCC1E'} />
                             }
-
                             <Text c={v.status == 0 ? '#CE9E23' : '#2CCC1E'} fz={13}>{v.status == 0 ? 'Pending' : 'Terjawab'}</Text>
                           </Group>
                         </Group>

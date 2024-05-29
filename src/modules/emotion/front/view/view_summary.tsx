@@ -13,31 +13,13 @@ export default function ViewSummary({ oneCandidate, emoTable, emoPersen, emoChar
     <>
       <PageSubTitle text1='GRAFIK' text2='SPEKTRUM EMOSI' />
       <Stack pt={20}>
-        {/* <SimpleGrid
-          cols={{ base: 1, sm: 3, lg: 3 }}
-          spacing={{ base: 10, sm: 'xl' }}
-          verticalSpacing={{ base: 'md', sm: 'xl' }}
-        >
-          <Box>
-            <CandidateSummary />
-          </Box>
-          <Center
-          >
-            <Image src={"/bgEmotion1.png"} alt='bg' h={"45vh"}
-              w="auto" />
-          </Center>
-          <Box>
-            <EchartCandidateSummary />
-          </Box>
-        </SimpleGrid> */}
-
         <Grid gutter={40}>
           <Grid.Col span={{ base: 4, md: 4, lg: 4 }} >
             <CandidateSummary candidate={oneCandidate} persen={emoPersen} />
           </Grid.Col>
           <Grid.Col span={{ base: 3, md: 3, lg: 3 }}>
             <Center>
-              <Image src={"/pngwing.com.png"} alt='bg' h={"40vh"}
+              <Image src={"/pngwing.com.png"} alt='bg' h={"33vh"}
                 w="auto" />
             </Center>
           </Grid.Col>
@@ -45,25 +27,6 @@ export default function ViewSummary({ oneCandidate, emoTable, emoPersen, emoChar
             <EchartCandidateSummary data={emoChart} candidate={oneCandidate} />
           </Grid.Col>
         </Grid>
-
-        {/* <Grid gutter={40}>
-          <Grid.Col span={{ base: 4, md: 4, lg: 4 }}>
-            <CandidateSummary />
-          </Grid.Col>
-          <Grid.Col span={{ base: 8, md: 8, lg: 8 }}>
-              <EchartCandidateSummary />
-          </Grid.Col>
-        </Grid>
-        <Box
-        style={{
-          padding: 20,
-          border: "1px solid #13022A",
-          borderRadius: 10
-        }}
-        >
-        <Image alt='peta' src={"/peta.png"}/>
-        </Box> */}
-
         <Box pt={10}>
           <TableTop10 emotion={emoTable} tingkat={oneCandidate?.tingkat} locked={locked} />
         </Box>
@@ -71,9 +34,6 @@ export default function ViewSummary({ oneCandidate, emoTable, emoPersen, emoChar
           <TopPairingCandidate pairingCandidate={pairingCandidate} />
         </Box>
       </Stack>
-
-
-
     </>
   );
 }

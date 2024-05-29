@@ -93,14 +93,12 @@ export default function ViewDataLearner() {
             }}>
               <Text c={'white'} mb={20} fz={18}>LOG REQUEST</Text>
               <ScrollArea h={'69.5vh'}>
-
                 {dataLog.map((v, i) => {
                   return (
                     <Box style={{
                       cursor: "pointer"
                     }} key={i}>
                       <Spoiler maxHeight={30} showLabel="Show more" hideLabel="Hide">
-
                         <Text c={v.color}>{v.log} </Text>
                       </Spoiler>
                       <Group justify='space-between' style={{
@@ -123,8 +121,6 @@ export default function ViewDataLearner() {
               </ScrollArea>
             </Box>
           </Box>
-
-
         </SimpleGrid>
       </Box>
     </>
