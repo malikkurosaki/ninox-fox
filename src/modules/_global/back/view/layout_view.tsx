@@ -1,6 +1,6 @@
 "use client";
 import { useDisclosure, useShallowEffect } from "@mantine/hooks";
-import { ActionIcon, AppShell, Box, Burger, Group, Menu, Modal, NavLink, ScrollArea, UnstyledButton, rem, } from "@mantine/core";
+import { ActionIcon, AppShell, Box, Burger, Group, Indicator, Menu, Modal, NavLink, ScrollArea, Text, UnstyledButton, rem, } from "@mantine/core";
 import React, { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { FaUserCircle, FaUserTie } from "react-icons/fa";
@@ -429,8 +429,14 @@ export default function LayoutView({ children, dataMenu, dataUser }: { children:
             })}
 
             {dataMenu && dataMenu.dataMLAI && (
+
               <NavLink
-                label="ML-AI"
+                label={<Group>
+                  <Box>ML-AI</Box>
+                  <Indicator inline processing color="red" size={12} position="middle-end" label={20} />
+                </Group>
+
+                }
                 childrenOffset={28}
                 fw={"bolder"}
               >
