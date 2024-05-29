@@ -116,7 +116,7 @@ export default function ViewPairingFront({ candidate, data, area }: { candidate:
               <Button fullWidth mt={20} c={"dark"} bg={"white"} onClick={onGenerate}>HASIL</Button>
 
               <Box pt={45}>
-                <Text ta={"center"} fz={20} c={"white"}>PROBABILITAS KESUKSESAN</Text>
+                <Text ta={"center"} fz={20} c={"white"}>PROBABILITAS KEBERHASILAN</Text>
               </Box>
               <Box pt={10}>
                 <Text ta={"center"} fz={70} fw={"bold"} c={"green"}>{(_.isUndefined(isData.rate) ? '00.00' : isData.rate)} %</Text>

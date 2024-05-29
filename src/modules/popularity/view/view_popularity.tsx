@@ -32,7 +32,7 @@ export default function ViewPopularity({ candidate, pairingToday, chartRate }: {
 
   return (
     <>
-      <PageSubTitle text1='METRIK' text2='POPULARITAS' />
+      <PageSubTitle text1='PENILAIAN' text2='SENTIMEN PEMILIH' />
       <Stack pt={20}>
         <Grid gutter={'lg'}>
           <Grid.Col span={{ md: 6, lg: 6 }}>
@@ -80,7 +80,7 @@ export default function ViewPopularity({ candidate, pairingToday, chartRate }: {
               <Button fullWidth bg={"white"} c={"dark"} onClick={onGenerate}>HASIL</Button>
             </SimpleGrid>
             <Box pt={50}>
-              <Text ta={"center"} c={"white"} fw={"bold"} fz={30}>PROBABILITAS KESUKSESAN</Text>
+              <Text ta={"center"} c={"white"} fw={"bold"} fz={30}>PROBABILITAS KEBERHASILAN</Text>
               <Text ta={"center"} c={"#228be6"} fw={"bold"} fz={120}>{(_.isUndefined(isPairingToday.rate) ? '00.00' : isPairingToday.rate)} %</Text>
             </Box>
           </Grid.Col>
