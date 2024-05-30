@@ -90,7 +90,7 @@ export default function AddMlAi({ params, req, candidate, provinsi, kabupaten }:
     });
 
     function onConfirmation() {
-        if (Object.values(isDataMlai).includes("") || editor?.getHTML() == '<p></p>')
+        if (isDataMlai.idCandidate == null || isDataMlai.idCandidate == '' || editor?.getHTML() == '<p></p>')
             return toast("Form cannot be empty", { theme: "dark" });
         setOpenModal(true)
     }
@@ -179,7 +179,7 @@ export default function AddMlAi({ params, req, candidate, provinsi, kabupaten }:
                         )
                 }
                 <Group grow>
-                    <DateInput valueFormat="DD-MM-YYYY" required
+                    <DateInput valueFormat="DD-MM-YYYY"
                         label={"Tanggal"}
                         placeholder="Pilih Tanggal"
                         value={(isDataMlai.dateContent == '') ? null : new Date(isDataMlai.dateContent)}
@@ -192,7 +192,7 @@ export default function AddMlAi({ params, req, candidate, provinsi, kabupaten }:
                     />
                     <TimeInput
                         label="Jam"
-                        required ref={ref}
+                        ref={ref}
                         rightSection={pickerControl}
                         value={isDataMlai.timeContent}
                         onChange={(val) =>

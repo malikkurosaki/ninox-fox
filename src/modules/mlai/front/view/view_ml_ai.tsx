@@ -81,8 +81,7 @@ export default function ViewMlAi({ dataV2, dataTanggal, candidate, oneCandidate 
 
   return (
     <>
-      {/* <PageSubTitle text1='ML-AI' text2='PROMPT RECOMENDATIONS' /> */}
-      <PageSubTitle text1='REKOMENDASI CEPAT' text2='ML-AI' />
+      <PageSubTitle text1='REKOMENDASI' text2='ML-AI' />
       <Box pt={20}>
         <Box
         >
@@ -98,7 +97,6 @@ export default function ViewMlAi({ dataV2, dataTanggal, candidate, oneCandidate 
               onChange={(val) => chooseCandidate(val)}
             />
           </Container>
-          {/* <Text fw={"bold"} ta={"center"} c={"white"}>{isNameCan}</Text> */}
         </Box>
         <Text mt={20} c={"green"} fz={20} fw={"bold"}>PENINGKATAN ANALISIS KEKUATAN</Text>
         <Box pt={20}>
@@ -159,7 +157,6 @@ export default function ViewMlAi({ dataV2, dataTanggal, candidate, oneCandidate 
                                     </Text>
                                   </Menu.Item>
                                 )
-
                               })
                             }
                           </ScrollArea>
@@ -169,20 +166,31 @@ export default function ViewMlAi({ dataV2, dataTanggal, candidate, oneCandidate 
                   }
                 </Group>
               </Box>
-              <ScrollArea h={"34vh"}>
-                <Stack>
+              <ScrollArea h={"34vh"} pt={20}>
+                <Box>
                   {dataMlai && dataMlai.map((item: any, i: any) => {
                     return (
                       <Box key={i}>
+                        {
+                          item.idRequestMlAi != null && (
+                            <>
+                              <Text c={'#9E9A9A'} mb={15}>REQUEST</Text>
+                              <Text c={'#9E9A9A'}>{item.request}</Text>
+                              {/* <Text c={'white'}>Respon</Text> */}
+                              <Divider my={20} color={'#9E9A9A'} />
+                              <Text c={'white'}>RESPONS</Text>
+                            </>
+                          )
+                        }
+
                         {
                           valRead.includes(item.id) ? (
                             <>
                               <Box c={"white"} dangerouslySetInnerHTML={{ __html: item.content }} />
                             </>
                           ) : (
-                            <>
                               <Wrapper id={item.id}>
-                                <Stack c={"white"}>
+                                  <Text c={"white"}>
                                   <TextAnimation
                                     phrases={[...item.content.split('\n')]}
                                     typingSpeed={0}
@@ -193,35 +201,13 @@ export default function ViewMlAi({ dataV2, dataTanggal, candidate, oneCandidate 
                                     eraseOnComplete={false}
                                     isSecure={false}
                                   />
-                                </Stack>
+                                </Text>
                               </Wrapper>
-                            </>
                           )}
-
                       </Box>
-
                     )
                   })}
-                </Stack>
-                {/* <Stack >
-                  {
-                    isData && isData.length > 0 && (
-                      <Text c={"white"} fz={14}>
-                        <TextAnimation
-                          phrases={[...isData[_.random(0, isData.length - 1)].content.split('\n')]}
-                          typingSpeed={0}
-                          backspaceDelay={0}
-                          eraseDelay={0}
-                          timeComplete={0}
-                          errorProbability={0}
-                          eraseOnComplete={false}
-                          isSecure={false}
-                        />
-                      </Text>
-                    )
-                  }
-                </Stack> */}
-
+                </Box>
               </ScrollArea>
             </Box>
           </Box>

@@ -10,6 +10,7 @@ import TextAnimation from 'react-typing-dynamics';
 import funAddRequestMlAiFront from '../fun/add_request_mlai';
 import funGetLogRequestMlaiFront from '../fun/get_log_request_mlai_front';
 import moment from 'moment';
+import { useRouter } from 'next/navigation';
 
 const dataLog = [
   {
@@ -51,6 +52,7 @@ const dataLog = [
 ]
 
 export default function ViewDataLearner2({ log }: { log: any }) {
+  const router = useRouter()
   const { ref, width, height } = useElementSize()
   const [response, setResponse] = useState('')
   const [request, setRequest] = useState('')
@@ -138,14 +140,19 @@ export default function ViewDataLearner2({ log }: { log: any }) {
               }}>
                 <Text c={'white'} mb={20} fz={18}>LOG REQUEST</Text>
                 <ScrollArea h={'50vh'}>
-
                   {dataLog.map((v: any, i: any) => {
                     return (
                       <Box style={{
                         cursor: "pointer"
-                      }} key={i}>
+                      }} key={i}
+                        onClick={() => {
+                          if (v.status == 1) {
+                            router.push('/ml-ai')
+                          }
+                        }
+                        }
+                      >
                         <Spoiler maxHeight={30} showLabel="Show more" hideLabel="Hide">
-
                           <Text c={v.status == 0 ? '#CE9E23' : '#2CCC1E'}>{v.request} </Text>
                         </Spoiler>
                         <Group justify='space-between' style={{
@@ -162,7 +169,6 @@ export default function ViewDataLearner2({ log }: { log: any }) {
                                 ? <GiBackwardTime size={25} color={'#CE9E23'} />
                                 : <IoIosCheckmarkCircleOutline size={25} color={'#2CCC1E'} />
                             }
-
                             <Text c={v.status == 0 ? '#CE9E23' : '#2CCC1E'} fz={13}>{v.status == 0 ? 'Pending' : 'Terjawab'}</Text>
                           </Group>
                         </Group>

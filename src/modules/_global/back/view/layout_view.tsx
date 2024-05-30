@@ -1,6 +1,6 @@
 "use client";
 import { useDisclosure, useShallowEffect } from "@mantine/hooks";
-import { ActionIcon, AppShell, Box, Burger, Group, Menu, Modal, NavLink, ScrollArea, UnstyledButton, rem, } from "@mantine/core";
+import { ActionIcon, AppShell, Box, Burger, Group, Indicator, Menu, Modal, NavLink, ScrollArea, Text, UnstyledButton, rem, } from "@mantine/core";
 import React, { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { FaUserCircle, FaUserTie } from "react-icons/fa";
@@ -15,7 +15,7 @@ import { ModalLogout } from "../..";
  * @returns component untuk template dashboard
  */
 
-export default function LayoutView({ children, dataMenu, dataUser }: { children: React.ReactNode, dataMenu: any, dataUser: any }) {
+export default function LayoutView({ children, dataMenu, dataUser, pending }: { children: React.ReactNode, dataMenu: any, dataUser: any, pending: any }) {
   const [opened, { toggle }] = useDisclosure();
   const dataSosialEkonomi = [
     {
@@ -429,8 +429,18 @@ export default function LayoutView({ children, dataMenu, dataUser }: { children:
             })}
 
             {dataMenu && dataMenu.dataMLAI && (
+
               <NavLink
-                label="ML-AI"
+                label={<Group>
+                  <Box>ML-AI</Box>
+                  {
+                    pending > 0 && (
+                      <Indicator inline color="red" size={12} position="middle-end" label={pending} />
+                    )
+                  }
+
+                </Group>
+                }
                 childrenOffset={28}
                 fw={"bolder"}
               >

@@ -40,9 +40,14 @@ export default async function funGetAllMlAi({ find, page }: { find: any, page: a
                         idProvinsi: find.idProvinsi
                     }
                 },
-                orderBy: {
-                    id: 'asc'
-                }
+                orderBy: [
+                    {
+                        dateContent: 'desc'
+                    },
+                    {
+                        timeContent: 'desc'
+                    }
+                ]
             })
 
             dataCount = await prisma.mlAi.count({
@@ -88,9 +93,14 @@ export default async function funGetAllMlAi({ find, page }: { find: any, page: a
                         idKabkot: find.idKabkot
                     }
                 },
-                orderBy: {
-                    id: 'asc'
-                }
+                orderBy: [
+                    {
+                        dateContent: 'desc'
+                    },
+                    {
+                        timeContent: 'desc'
+                    }
+                ]
             })
 
             dataCount = await prisma.mlAi.count({
