@@ -35,7 +35,7 @@ export default function ViewSwot({ data, candidate, oneCandidate }: { data: any,
   const [isData, setData] = useState<any>()
   const [listCandidate, setListCandidate] = useState(candidate)
   const [isCandidate, setCandidate] = useState(oneCandidate?.id)
-  const [isNameCan, setNameCan] = useState(oneCandidate?.name.toUpperCase())
+  const [isNameCan, setNameCan] = useState(oneCandidate?.name)
   const [isImgCan, setImgCan] = useState(`/img/candidate/${oneCandidate?.img}`)
 
   useShallowEffect(() => {
@@ -54,7 +54,7 @@ export default function ViewSwot({ data, candidate, oneCandidate }: { data: any,
       dataDB, (v) => v.category
     )
     setData(grouping)
-    setNameCan((dataCan?.name.toUpperCase()))
+    setNameCan((dataCan?.name))
     setImgCan(`/img/candidate/${dataCan?.img}`)
   }
 

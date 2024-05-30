@@ -16,7 +16,7 @@ import Wrapper from '../component/wrapper_read';
 export default function ViewMlAi({ dataV2, dataTanggal, candidate, oneCandidate }: { dataV2: any, dataTanggal: any, candidate: any, oneCandidate: any }) {
   const [listCandidate, setListCandidate] = useState(candidate)
   const [isCandidate, setCandidate] = useState(oneCandidate?.id)
-  const [isNameCan, setNameCan] = useState(oneCandidate?.name.toUpperCase())
+  const [isNameCan, setNameCan] = useState(oneCandidate?.name)
   const [isImgCan, setImgCan] = useState(`/img/candidate/${oneCandidate?.img}`)
   const [isDate, setDate] = useState<any>(new Date())
   const [isMonth, setMonth] = useState<any>(moment(new Date().getMonth()).format('MM'))
@@ -44,7 +44,7 @@ export default function ViewMlAi({ dataV2, dataTanggal, candidate, oneCandidate 
     setDataMlai(dataDB?.data)
     setDataJamMlai(dataDB?.dataJam)
     setBTime(dataDB?.isJam)
-    setNameCan((dataCan?.name.toUpperCase()))
+    setNameCan((dataCan?.name))
     setImgCan(`/img/candidate/${dataCan?.img}`)
   }
 

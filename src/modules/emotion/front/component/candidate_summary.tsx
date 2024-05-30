@@ -5,7 +5,7 @@ import _ from 'lodash';
 import React, { useState } from 'react';
 
 export default function CandidateSummary({ candidate, persen }: { candidate: any, persen: any }) {
-  const [isNameCan, setNameCan] = useState(candidate?.name.toUpperCase())
+  const [isNameCan, setNameCan] = useState(candidate?.name)
   const [isImgCan, setImgCan] = useState(`/img/candidate/${candidate?.img}`)
 
   return (
