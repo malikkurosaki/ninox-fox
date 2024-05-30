@@ -176,7 +176,6 @@ export default function ViewMlAi({ dataV2, dataTanggal, candidate, oneCandidate 
                             <>
                               <Text c={'#9E9A9A'} mb={15}>REQUEST</Text>
                               <Text c={'#9E9A9A'}>{item.request}</Text>
-                              {/* <Text c={'white'}>Respon</Text> */}
                               <Divider my={20} color={'#9E9A9A'} />
                               <Text c={'white'}>RESPONS</Text>
                             </>

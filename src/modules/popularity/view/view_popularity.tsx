@@ -90,7 +90,7 @@ export default function ViewPopularity({ candidate, pairingToday, chartRate, tin
             <EchartPopularityLine data={isRateChart} candidate={isPairingToday.pairingCandidate} />
           </Grid.Col>
           <Grid.Col span={{ md: 5, lg: 5 }}>
-            <EchartPopularityPie data={isPieChart} />
+            {/* <EchartPopularityPie data={isPieChart} /> */}
           </Grid.Col>
         </Grid>
       </Stack>
