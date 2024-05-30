@@ -2,6 +2,7 @@
 import prisma from "@/modules/_global/bin/prisma";
 import moment from "moment";
 import { revalidatePath } from "next/cache";
+import mtqq_client from "../../../_global/util/mqtt_client"
 
 export default async function funAddMlAi({ body, content }: { body: any, content: any }) {
   let dateInput, timeInput
@@ -55,6 +56,11 @@ export default async function funAddMlAi({ body, content }: { body: any, content
         status: 1
       }
     })
+
+    mtqq_client.publish("app_ninox_fox_be", JSON.stringify({
+      "statusAdmin": true,
+      "kategori": '-',
+    }))
   }
 
   revalidatePath('dashboard/ml-ai/request')

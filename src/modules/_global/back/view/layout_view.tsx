@@ -1,7 +1,7 @@
 "use client";
 import { useDisclosure, useShallowEffect } from "@mantine/hooks";
 import { ActionIcon, AppShell, Box, Burger, Group, Indicator, Menu, Modal, NavLink, ScrollArea, Text, UnstyledButton, rem, } from "@mantine/core";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { FaUserCircle, FaUserTie } from "react-icons/fa";
 import { RiLogoutCircleRLine } from "react-icons/ri";
@@ -9,6 +9,7 @@ import { useAtom } from "jotai";
 import { isModalLayout } from "../val/isModalLayout";
 import _ from "lodash";
 import { ModalLogout } from "../..";
+import mtqq_client from "../../util/mqtt_client"
 
 /**
  * Fungsi untuk menampilkan template dashsboard admin.
@@ -292,6 +293,7 @@ export default function LayoutView({ children, dataMenu, dataUser, pending }: { 
     }
   ];
 
+  const [qtyPending, setQtyPending] = useState(pending)
   const router = useRouter();
   const pathname = usePathname();
   const [valOpenModal, setOpenModal] = useAtom(isModalLayout)
@@ -299,6 +301,22 @@ export default function LayoutView({ children, dataMenu, dataUser, pending }: { 
   useShallowEffect(() => {
     setActive(pathname);
   });
+
+  useEffect(() => {
+    mtqq_client.on("connect", () => {
+      console.log("masuk")
+      mtqq_client.subscribe("app_ninox_fox_be")
+    })
+
+    mtqq_client.on("message", (topic, message) => {
+      const data = JSON.parse(message.toString())
+      if (data.statusAdmin == true && data.kategori == '+') {
+        setQtyPending(qtyPending + 1)
+      } else if (data.statusAdmin == true && data.kategori == '-') {
+        setQtyPending(qtyPending - 1)
+      }
+    })
+  }, [qtyPending])
 
   return (
     <>
@@ -434,8 +452,8 @@ export default function LayoutView({ children, dataMenu, dataUser, pending }: { 
                 label={<Group>
                   <Box>ML-AI</Box>
                   {
-                    pending > 0 && (
-                      <Indicator inline color="red" size={12} position="middle-end" label={pending} />
+                    qtyPending > 0 && (
+                      <Indicator inline color="red" size={12} position="middle-end" label={qtyPending} />
                     )
                   }
 
