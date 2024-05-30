@@ -11,7 +11,7 @@ export default function ViewStep({ data, candidate, oneCandidate }: { data: any,
   const [isData, setData] = useState(data)
   const [listCandidate, setListCandidate] = useState(candidate)
   const [isCandidate, setCandidate] = useState(oneCandidate?.id)
-  const [isNameCan, setNameCan] = useState(oneCandidate?.name.toUpperCase())
+  const [isNameCan, setNameCan] = useState(oneCandidate?.name)
   const [isImgCan, setImgCan] = useState(`/img/candidate/${oneCandidate?.img}`)
 
 
@@ -21,7 +21,7 @@ export default function ViewStep({ data, candidate, oneCandidate }: { data: any,
     const dataDB = await funGetStepFront({ candidate: value })
     const dataCan = await funGetOneCandidateFront({ candidate: value })
     setData(dataDB)
-    setNameCan((dataCan?.name.toUpperCase()))
+    setNameCan((dataCan?.name))
     setImgCan(`/img/candidate/${dataCan?.img}`)
   }
 

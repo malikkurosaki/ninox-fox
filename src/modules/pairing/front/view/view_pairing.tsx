@@ -79,13 +79,13 @@ export default function ViewPairingFront({ candidate, data, area, tingkat }: { c
                   <Center>
                     <Box p={10}>
                       <Image src={`/img/candidate/${isData.candidate.imgCandidate1}`} bg={"white"} style={{ border: "4px solid white" }} radius={"100%"} alt='kandidat 1' h={200} w="auto" />
-                      <Text fw={"bold"} mt={10} ta={"center"} c={"white"}>{_.upperCase(isData.candidate.nameCandidate1)}</Text>
+                      <Text fw={"bold"} mt={10} ta={"center"} c={"white"}>{isData.candidate.nameCandidate1}</Text>
                       <Text c={"white"} ta={"center"} fz={13}>{tingkat == 1 ? 'CALON GUBERNUR' : 'CALON BUPATI'}</Text>
                     </Box>
                   </Center>
                   <Box p={10}>
                     <Image src={`/img/candidate/${isData.candidate.imgCandidate2}`} bg={"white"} style={{ border: "4px solid white" }} radius={"100%"} alt='kandidat 2' h={200} w="auto" />
-                    <Text fw={"bold"} mt={10} ta={"center"} c={"white"}>{_.upperCase(isData.candidate.nameCandidate2)}</Text>
+                    <Text fw={"bold"} mt={10} ta={"center"} c={"white"}>{isData.candidate.nameCandidate2}</Text>
                     <Text c={"white"} ta={"center"} fz={13}>{tingkat == 1 ? 'CALON WAKIL GUBERNUR' : 'CALON WAKIL BUPATI'}</Text>
                   </Box>
                 </SimpleGrid>
