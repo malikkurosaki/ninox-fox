@@ -7,6 +7,7 @@ import { PageSubTitle } from '@/modules/_global';
 import _ from 'lodash';
 import { funGetPopularityToday, funGetRateChart } from '..';
 import moment from 'moment';
+import EchartPopularityBar from '../components/echart_popularity_bar';
 
 export default function ViewPopularity({ candidate, pairingToday, chartRate, tingkat }: { candidate: any, pairingToday: any, chartRate: any, tingkat: any }) {
   const [isPairingToday, setPairingToday] = useState(pairingToday)
@@ -85,12 +86,13 @@ export default function ViewPopularity({ candidate, pairingToday, chartRate, tin
             </Box>
           </Grid.Col>
         </Grid>
-        <Grid gutter={30}>
-          <Grid.Col span={{ md: 7, lg: 7 }}>
+        <Grid >
+          <Grid.Col span={{ md: 6, lg: 6 }}>
             <EchartPopularityLine data={isRateChart} candidate={isPairingToday.pairingCandidate} />
           </Grid.Col>
-          <Grid.Col span={{ md: 5, lg: 5 }}>
+          <Grid.Col span={{ md: 6, lg: 6 }}>
             {/* <EchartPopularityPie data={isPieChart} /> */}
+            <EchartPopularityBar/>
           </Grid.Col>
         </Grid>
       </Stack>
