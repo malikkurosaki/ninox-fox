@@ -41,12 +41,12 @@ export default function ViewPopularity({ candidate, pairingToday, chartRate, tin
               <Group justify='space-evenly' gap={30} pt={65}>
                 <Box>
                   <Image src={`/img/candidate/${isPairingToday.pairingCandidate.imgCandidate1}`} bg={"white"} style={{ border: "4px solid white" }} radius={"100%"} alt="kandidat 1" h={200} w="auto" />
-                  <Text mt={20} c={"white"} ta={"center"} fw={'bold'}>{_.upperCase(isPairingToday.pairingCandidate.nameCandidate1)}</Text>
+                  <Text mt={20} c={"white"} ta={"center"} fw={'bold'}>{isPairingToday.pairingCandidate.nameCandidate1}</Text>
                   <Text c={"white"} ta={"center"} fz={13}>{tingkat == 1 ? 'CALON GUBERNUR' : 'CALON BUPATI'}</Text>
                 </Box>
                 <Box>
                   <Image src={`/img/candidate/${isPairingToday.pairingCandidate.imgCandidate2}`} bg={"white"} style={{ border: "4px solid white" }} radius={"100%"} alt="kandidat 2" h={200} w="auto" />
-                  <Text mt={20} c={"white"} ta={"center"} fw={'bold'}>{_.upperCase(isPairingToday.pairingCandidate.nameCandidate2)}</Text>
+                  <Text mt={20} c={"white"} ta={"center"} fw={'bold'}>{isPairingToday.pairingCandidate.nameCandidate2}</Text>
                   <Text c={"white"} ta={"center"} fz={13}>{tingkat == 1 ? 'CALON WAKIL GUBERNUR' : 'CALON WAKIL BUPATI'}</Text>
                 </Box>
               </Group>
