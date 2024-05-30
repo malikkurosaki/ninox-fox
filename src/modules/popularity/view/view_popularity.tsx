@@ -1,5 +1,5 @@
 "use client"
-import { Box, Button, Flex, Grid, Group, Image, Select, SimpleGrid, Stack, Text } from '@mantine/core';
+import { Box, Button, Center, Flex, Grid, Group, Image, Select, SimpleGrid, Stack, Text } from '@mantine/core';
 import React, { useState } from 'react';
 import EchartPopularityLine from '../components/echart_popularity_line';
 import EchartPopularityPie from '../components/echart_popularity_pie';
@@ -39,16 +39,20 @@ export default function ViewPopularity({ candidate, pairingToday, chartRate, tin
             <Box
             >
               <Group justify='space-evenly' gap={30} pt={65}>
-                <Box>
-                  <Image src={`/img/candidate/${isPairingToday.pairingCandidate.imgCandidate1}`} bg={"white"} style={{ border: "4px solid white" }} radius={"100%"} alt="kandidat 1" h={200} w="auto" />
-                  <Text mt={20} c={"white"} ta={"center"} fw={'bold'}>{isPairingToday.pairingCandidate.nameCandidate1}</Text>
-                  <Text c={"white"} ta={"center"} fz={13}>{tingkat == 1 ? 'CALON GUBERNUR' : 'CALON BUPATI'}</Text>
-                </Box>
-                <Box>
-                  <Image src={`/img/candidate/${isPairingToday.pairingCandidate.imgCandidate2}`} bg={"white"} style={{ border: "4px solid white" }} radius={"100%"} alt="kandidat 2" h={200} w="auto" />
-                  <Text mt={20} c={"white"} ta={"center"} fw={'bold'}>{isPairingToday.pairingCandidate.nameCandidate2}</Text>
-                  <Text c={"white"} ta={"center"} fz={13}>{tingkat == 1 ? 'CALON WAKIL GUBERNUR' : 'CALON WAKIL BUPATI'}</Text>
-                </Box>
+                <Center>
+                  <Box>
+                    <Image src={`/img/candidate/${isPairingToday.pairingCandidate.imgCandidate1}`} bg={"white"} style={{ border: "4px solid white" }} radius={"100%"} alt="kandidat 1" h={200} w="auto" />
+                    <Text mt={20} c={"white"} ta={"center"} fw={'bold'}>{isPairingToday.pairingCandidate.nameCandidate1}</Text>
+                    <Text c={"white"} ta={"center"} fz={13}>{tingkat == 1 ? 'CALON GUBERNUR' : 'CALON BUPATI'}</Text>
+                  </Box>
+                </Center>
+                <Center>
+                  <Box>
+                    <Image src={`/img/candidate/${isPairingToday.pairingCandidate.imgCandidate2}`} bg={"white"} style={{ border: "4px solid white" }} radius={"100%"} alt="kandidat 2" h={200} w="auto" />
+                    <Text mt={20} c={"white"} ta={"center"} fw={'bold'}>{isPairingToday.pairingCandidate.nameCandidate2}</Text>
+                    <Text c={"white"} ta={"center"} fz={13}>{tingkat == 1 ? 'CALON WAKIL GUBERNUR' : 'CALON WAKIL BUPATI'}</Text>
+                  </Box>
+                </Center>
               </Group>
 
             </Box>
