@@ -79,7 +79,7 @@ export default function ViewSwot({ data, candidate, oneCandidate }: { data: any,
 
               >
                 <Image src={isImgCan} bg={"white"} style={{ border: "4px solid white" }} radius={"100%"} alt='kandidat' maw={200} mx="auto" />
-                <Text fw={"bold"} ta={"center"} c={"white"}>{isNameCan}</Text>
+                <Text fw={"bold"} ta={"center"} c={"white"} mt={10}>{isNameCan}</Text>
               </Box>
               <Select
                 mt={10}
