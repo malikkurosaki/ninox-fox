@@ -64,7 +64,7 @@ const isData = [
   }
 ]
 
-export default function NewTableTop10() {
+export default function NewTableTop10Dummy() {
   return (
     <>
       <Box style={{
