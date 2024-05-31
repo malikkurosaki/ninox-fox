@@ -20,7 +20,7 @@ export default function CandidateSummary({ candidate, persen }: { candidate: any
             <Text fw={"bold"} ta={"center"} fz={{ base: 12, xl: 16, lg: 15, md: 14, sm: 13 }} c={"white"}>{isNameCan}</Text>
           </Box>
         </Box>
-        <Box pt={20}>
+        <Box pt={{ base: 5, xl: 20, lg: 20, md: 10, sm: 10}}>
           <SimpleGrid
             cols={{ base: 1, sm: 1, lg: 3, xl: 3 }}
           >
