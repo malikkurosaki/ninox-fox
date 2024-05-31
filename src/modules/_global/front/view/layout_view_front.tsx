@@ -343,7 +343,7 @@ export default function LayoutViewFront({ notif, children }: { notif: number, ch
           </AppShellNavbar>
         }
         <AppShell.Main bg={WARNA.bgGradasi}>
-          <Box pr={10} style={{ zIndex: 400, position: "fixed", right: 30, top: 38 }}>
+          <Box pr={10} pt={{base: 26, xl: 38, lg: 30, sm: 26}} style={{ zIndex: 400, position: "fixed", right: 30 }}>
 
             {
               isNotif > 0 ? (
@@ -388,7 +388,7 @@ export default function LayoutViewFront({ notif, children }: { notif: number, ch
               top={0}
               right={0}
               h={'100%'}
-              w={'30%'}
+              w={{base: '50%', xl: '30%', lg: '35%', md: '40%', sm: '50%'}}
               pos={'fixed'}
               style={{
                 ...style,
