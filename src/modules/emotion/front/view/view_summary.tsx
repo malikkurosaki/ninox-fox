@@ -18,16 +18,16 @@ export default function ViewSummary({ oneCandidate, emoTable, emoPersen, emoChar
       <Stack pt={20}>
 
         <Grid gutter={40}>
-          <Grid.Col span={{ base: 4, md: 4, lg: 4 }} style={{zIndex: 100}}>
+          <Grid.Col span={{ base: 5, md: 4, lg: 5, xl:5 }} style={{zIndex: 100}}>
             <CandidateSummary candidate={oneCandidate} persen={emoPersen} />
           </Grid.Col>
-          <Grid.Col span={{ base: 3, md: 3, lg: 3 }}>
+          <Grid.Col span={{ base: 1, md: 3, lg: 2, xl: 2 }}>
             <Center>
               <Image src={"/dunia.png"} alt='bg' h={"45vh"}
                 w="auto"  opacity={0.5}/>
             </Center>
           </Grid.Col>
-          <Grid.Col span={{ base: 5, md: 5, lg: 5 }} style={{zIndex: 100}}>
+          <Grid.Col span={{ base: 6, md: 5, lg: 5, xl: 5 }} style={{zIndex: 100}}>
             {/* <EchartCandidateSummary data={emoChart} candidate={oneCandidate} /> */}
             <NewChartCandidate />
           </Grid.Col>
