@@ -139,13 +139,13 @@ export default function NewChartCandidate() {
     <>
       <Group justify='flex-end'>
         <Group>
-          <Button>Minggu</Button>
+          <Button size="xs">Minggu</Button>
           <Divider orientation="vertical" />
-          <Button >Bulan</Button>
+          <Button size="xs">Bulan</Button>
           <Divider orientation="vertical" />
           <Menu  position='bottom-end'>
             <Menu.Target>
-              <Button>Kustom</Button>
+              <Button size="xs">Kustom</Button>
             </Menu.Target>
             <Menu.Dropdown p={20}>
               <DatePicker
