@@ -8,7 +8,7 @@ import { Box, Button, Divider, Group, LoadingOverlay, Menu } from '@mantine/core
 import moment from 'moment';
 import { DatePicker } from '@mantine/dates';
 import toast from 'react-simple-toasts';
-import { funGetEmotionChart } from '../..';
+import { funGetEmotionChartNew } from '../..';
 
 export default function EchartCandidateSummary({ data, candidate }: { data: any, candidate: any }) {
     const [options, setOptions] = useState<EChartsOption>({})
@@ -45,7 +45,7 @@ export default function EchartCandidateSummary({ data, candidate }: { data: any,
 
         if (time == 'custom') setPopDate(false)
 
-        const loadChart = await funGetEmotionChart({ candidate: candidate.id, startDate: startDate, endDate: endDate })
+        const loadChart = await funGetEmotionChartNew({ candidate: candidate.id, startDate: startDate, endDate: endDate })
         setListData(loadChart)
         loadData(loadChart)
         setLoadingCustom(false)

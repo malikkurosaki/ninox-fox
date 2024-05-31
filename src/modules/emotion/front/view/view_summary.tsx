@@ -6,8 +6,9 @@ import CandidateSummary from '../component/candidate_summary';
 import EchartCandidateSummary from '../component/echart_candidate_summary';
 import TableTop10 from '../component/table_top_10';
 import TopPairingCandidate from '../component/top_pairing_candidate';
-import NewTableTop10 from '../component/new_table_top10';
 import NewChartCandidate from '../component/new_chart_candidate';
+import NewTableTop10Dummy from '../component/new_table_top10_dummy';
+import NewTableTop10 from '../component/new_table_top_10';
 
 export default function ViewSummary({ oneCandidate, emoTable, emoPersen, emoChart, locked, pairingCandidate }: { oneCandidate: any, emoTable: any, emoPersen: any, emoChart: any, locked: any, pairingCandidate: any }) {
 
@@ -28,15 +29,16 @@ export default function ViewSummary({ oneCandidate, emoTable, emoPersen, emoChar
             </Center>
           </Grid.Col>
           <Grid.Col span={{ base: 5, md: 5, lg: 5 }} style={{zIndex: 100}}>
-            {/* <EchartCandidateSummary data={emoChart} candidate={oneCandidate} /> */}
-            <NewChartCandidate />
+            <EchartCandidateSummary data={emoChart} candidate={oneCandidate} />
+            {/* <NewChartCandidate /> */}
           </Grid.Col>
         </Grid>
       </Stack>
       {/* </BackgroundImage> */}
       <Box pt={10}>
         {/* <TableTop10 emotion={emoTable} tingkat={oneCandidate?.tingkat} locked={locked} /> */}
-        <NewTableTop10 />
+        {/* <NewTableTop10Dummy /> */}
+        <NewTableTop10 emotion={emoTable} tingkat={oneCandidate?.tingkat} locked={locked}/>
       </Box>
       <Box pt={30}>
         <TopPairingCandidate pairingCandidate={pairingCandidate} />
