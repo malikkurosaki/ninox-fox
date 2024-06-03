@@ -7,11 +7,11 @@ export default async function funGetAllNotifications({ page }: { page: any }) {
    const user = await funGetUserByCookies()
    const can = await funGetUserDefaultFront()
    const userArea = await funGetUserDefaultFront()
-   const dataSkip = Number(page) * 7 - 7;
+   const dataSkip = Number(page) * 15 - 15;
 
    const dataPage = await prisma.notifications.findMany({
       skip: dataSkip,
-      take: 7,
+      take: 15,
       where: {
          OR: [
             {

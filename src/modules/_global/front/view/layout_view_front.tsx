@@ -84,7 +84,6 @@ export default function LayoutViewFront({ notif, children }: { notif: number, ch
 
   useEffect(() => {
     mtqq_client.on("connect", () => {
-      // console.log("connect")
       mtqq_client.subscribe("app_ninox_fox")
     })
 

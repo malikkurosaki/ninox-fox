@@ -304,7 +304,6 @@ export default function LayoutView({ children, dataMenu, dataUser, pending }: { 
 
   useEffect(() => {
     mtqq_client.on("connect", () => {
-      console.log("masuk")
       mtqq_client.subscribe("app_ninox_fox_be")
     })
 
