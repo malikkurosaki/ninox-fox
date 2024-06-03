@@ -28,7 +28,7 @@ export default function ViewSummary({ oneCandidate, emoTable, emoPersen, emoChar
                 w="auto"  opacity={0.5}/>
             </Center>
           </Grid.Col>
-          <Grid.Col span={{ base: 5, md: 5, lg: 5 }} style={{zIndex: 100}}>
+          <Grid.Col span={{ base: 6, md: 5, lg: 5 }} style={{zIndex: 100}}>
             <EchartCandidateSummary data={emoChart} candidate={oneCandidate} />
             {/* <NewChartCandidate /> */}
           </Grid.Col>

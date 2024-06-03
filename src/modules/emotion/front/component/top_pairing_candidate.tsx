@@ -64,7 +64,7 @@ export default function TopPairingCandidate({ pairingCandidate }: { pairingCandi
                     </Box> */}
                     <PageSubTitle text1='PASANGAN KANDIDAT' text2='TERATAS' />
                     <SimpleGrid
-                        cols={{ base: 1, sm: 2, lg: 2 }}
+                        cols={{ base: 1, sm: 1, md: 2, lg: 2 }}
                         spacing={{ base: 10, sm: 'xl' }}
                         pt={10}
                     >
@@ -77,11 +77,11 @@ export default function TopPairingCandidate({ pairingCandidate }: { pairingCandi
                                         padding: 10
                                     }}>
                                         <Grid gutter={0}>
-                                            <Grid.Col span={{ md: 6, lg: 6 }}>
+                                            <Grid.Col span={{sm : 12, md: 12, lg: 12 }}>
                                                 <Box pt={"3vh"}>
                                                     <Group justify='space-around'>
-                                                        <Image alt='Kandidat 1' src={`/img/candidate/${item.imgCandidate1}`} radius={'7%'} maw={100} mx="auto" />
-                                                        <Image alt='Kandidat 2' src={`/img/candidate/${item.imgCandidate2}`} radius={'7%'} maw={100} mx="auto" />
+                                                        <Image alt='Kandidat 1' src={`/img/candidate/${item.imgCandidate1}`} radius={'7%'} maw={150} mx="auto" />
+                                                        <Image alt='Kandidat 2' src={`/img/candidate/${item.imgCandidate2}`} radius={'7%'} maw={150} mx="auto" />
                                                     </Group>
                                                     <Box pt={20}>
                                                         <Text ta={"center"} c={"white"} fw={"bold"} fz={35}>{item.rate} %</Text>
@@ -89,7 +89,7 @@ export default function TopPairingCandidate({ pairingCandidate }: { pairingCandi
                                                 </Box>
 
                                             </Grid.Col>
-                                            <Grid.Col span={{ md: 6, lg: 6 }}>
+                                            <Grid.Col span={{sm: 12, md: 12, lg: 12 }}>
                                                 <EchartTopPairingCandidate candidate1={item.idCandidate1} candidate2={item.idCandidate2} />
                                             </Grid.Col>
                                         </Grid>
