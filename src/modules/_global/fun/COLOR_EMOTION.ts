@@ -41,6 +41,29 @@ export const COLOR_EMOTION = [
   },
 ]
 
+export const COLOR_EMOTION_NEW = [
+  {
+    id: "1",
+    name: "mendukung",
+    color: "green",
+  },
+  {
+    id: "2",
+    name: "mempertimbangkan",
+    color: "yellow",
+  },
+  {
+    id: "3",
+    name: "tidaktahu",
+    color: "gray",
+  },
+  {
+    id: "4",
+    name: "tidakmendukung",
+    color: "red",
+  },
+]
+
 export const COLOR_PCT = [
   "#9c3341",
   "#6ABD45",
