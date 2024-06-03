@@ -1,7 +1,7 @@
 "use client"
 import { PageSubTitle } from '@/modules/_global';
 import { Box, Button, Divider, Group, rem, ScrollArea, SimpleGrid, Spoiler, Text } from '@mantine/core';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { GiBackwardTime } from "react-icons/gi";
 import { IoIosCheckmarkCircleOutline } from "react-icons/io";
 import _ from "lodash"
@@ -11,6 +11,8 @@ import funAddRequestMlAiFront from '../fun/add_request_mlai';
 import funGetLogRequestMlaiFront from '../fun/get_log_request_mlai_front';
 import moment from 'moment';
 import { useRouter } from 'next/navigation';
+import { ScrollLoader } from 'next-scroll-loader';
+import CobaScroll from '../component/coba_scroll';
 
 const dataLog = [
   {
@@ -57,6 +59,9 @@ export default function ViewDataLearner2({ log }: { log: any }) {
   const [response, setResponse] = useState('')
   const [request, setRequest] = useState('')
   const [dataLog, setDataLog] = useState(log)
+  const [data, setData] = useState(log);
+  const [isLoad, setLoad] = useState(false)
+
 
   async function onProses() {
     setResponse('')
@@ -70,6 +75,8 @@ export default function ViewDataLearner2({ log }: { log: any }) {
       setResponse('Terima kasih telah melakukan request, respons akan diberikan secepatnya')
       const load = await funGetLogRequestMlaiFront()
       setDataLog(load)
+      setData(load)
+      setLoad(!isLoad)
     } else {
       setResponse('Error, silakan coba lagi nanti')
     }
@@ -139,44 +146,7 @@ export default function ViewDataLearner2({ log }: { log: any }) {
                 height: '60vh'
               }}>
                 <Text c={'white'} mb={20} fz={18}>LOG REQUEST</Text>
-                <ScrollArea h={'50vh'}>
-                  {dataLog.map((v: any, i: any) => {
-                    return (
-                      <Box style={{
-                        cursor: "pointer"
-                      }} key={i}
-                        onClick={() => {
-                          if (v.status == 1) {
-                            router.push('/ml-ai')
-                          }
-                        }
-                        }
-                      >
-                        <Spoiler maxHeight={30} showLabel="Show more" hideLabel="Hide">
-                          <Text c={v.status == 0 ? '#CE9E23' : '#2CCC1E'}>{v.request} </Text>
-                        </Spoiler>
-                        <Group justify='space-between' style={{
-                          alignItems: "center",
-                          alignContent: "center"
-                        }}>
-                          <Text c={'#D0CFCF'} fz={13}>{moment(v.createdAt).format('LLL')}</Text>
-                          <Group gap={5} mt={10} style={{
-                            alignItems: "center",
-                            alignContent: "center"
-                          }}>
-                            {
-                              v.status == 0
-                                ? <GiBackwardTime size={25} color={'#CE9E23'} />
-                                : <IoIosCheckmarkCircleOutline size={25} color={'#2CCC1E'} />
-                            }
-                            <Text c={v.status == 0 ? '#CE9E23' : '#2CCC1E'} fz={13}>{v.status == 0 ? 'Pending' : 'Terjawab'}</Text>
-                          </Group>
-                        </Group>
-                        <Divider my="md" color={'#6E6C68'} />
-                      </Box>
-                    )
-                  })}
-                </ScrollArea>
+                <CobaScroll isload={isLoad} />
               </Box>
             </Box>
           </Box>
