@@ -73,7 +73,7 @@ export default function ViewRegionalInsights({ oneCandidate, candidate, emotion,
             paddingBottom: 10
           }}
         >
-          <Group justify='flex-end'>
+          <Group>
             <Select
               placeholder="Kandidat"
               data={listCandidate.map((can: any) => ({
