@@ -1,5 +1,5 @@
 import { isModalBeranda } from './val/isModalBeranda';
-import { COLOR_EMOTION, COLOR_PCT, COLOR_SOSIAL_EKONOMI } from './fun/COLOR_EMOTION';
+import { COLOR_EMOTION, COLOR_EMOTION_NEW, COLOR_PCT, COLOR_SOSIAL_EKONOMI } from './fun/COLOR_EMOTION';
 import { LayoutViewFront } from '@/modules/_global/front';
 import { LayoutView, ViewWilayah, funGetAccessAdmin } from "./back";
 import { ButtonBack } from "./back";
@@ -73,3 +73,4 @@ export { funGetOneProvinsi }
 export { funAddNotifications }
 export { MqttLoad }
 export { mtqq_client }
+export { COLOR_EMOTION_NEW }
