@@ -57,10 +57,9 @@ export default function ViewDetailRegionalInsights({ emotion, area, audience, pc
         paddingTop: 10,
         paddingBottom: 10
       }}>
-        <Group justify='space-between'>
-          <Text fz={26} fw={"bold"} c={"white"}>{_.upperCase(area)}</Text>
+        <Group>
+            <Text fz={26} fw={"bold"} c={"white"}>{_.upperCase(area)}</Text>
           <Group>
-            {/* <TextInput placeholder='CARI' mr={30} /> */}
             <Select
               placeholder="Pilih Wilayah"
               data={wilayah.map((wil: any) => ({

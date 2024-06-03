@@ -35,7 +35,34 @@ export default function ViewPopularity({ candidate, pairingToday, chartRate, tin
   return (
     <>
       <PageSubTitle text1='PENILAIAN' text2='SENTIMEN PEMILIH' />
-      <Stack pt={20}>
+      <Group justify='flex-end' pt={10}>
+        <SimpleGrid
+          cols={{ base: 1, sm: 3, lg: 3 }}
+          spacing={{ base: 10, sm: 'xl' }}
+        >
+
+          <Select
+            placeholder="Kandidat 1"
+            data={candidate.map((can: any) => ({
+              value: String(can.id),
+              label: can.name
+            }))}
+            value={isCandidate1}
+            onChange={(val) => { setCandidate1(val) }}
+          />
+          <Select
+            placeholder="Kandidat 2"
+            data={candidate.map((can: any) => ({
+              value: String(can.id),
+              label: can.name
+            }))}
+            value={isCandidate2}
+            onChange={(val) => { setCandidate2(val) }}
+          />
+          <Button fullWidth bg={"white"} c={"dark"} onClick={onGenerate}>HASIL</Button>
+        </SimpleGrid>
+      </Group>
+      <Box>
         <Grid gutter={'lg'}>
           <Grid.Col span={{ md: 6, lg: 6 }}>
             <Box
@@ -64,31 +91,6 @@ export default function ViewPopularity({ candidate, pairingToday, chartRate, tin
             </Box>
           </Grid.Col>
           <Grid.Col span={{ md: 6, lg: 6 }}>
-            <SimpleGrid
-              cols={{ base: 1, sm: 2, lg: 3 }}
-              spacing={{ base: 10, sm: 'xl' }}
-            >
-
-              <Select
-                placeholder="Kandidat 1"
-                data={candidate.map((can: any) => ({
-                  value: String(can.id),
-                  label: can.name
-                }))}
-                value={isCandidate1}
-                onChange={(val) => { setCandidate1(val) }}
-              />
-              <Select
-                placeholder="Kandidat 2"
-                data={candidate.map((can: any) => ({
-                  value: String(can.id),
-                  label: can.name
-                }))}
-                value={isCandidate2}
-                onChange={(val) => { setCandidate2(val) }}
-              />
-              <Button fullWidth bg={"white"} c={"dark"} onClick={onGenerate}>HASIL</Button>
-            </SimpleGrid>
             <Box pt={50}>
               <Text ta={"center"} c={"white"} fw={"bold"} fz={30}>PROBABILITAS KEBERHASILAN</Text>
               <Text ta={"center"} c={"#228be6"} fw={"bold"} fz={120}>{(_.isUndefined(isPairingToday.rate) ? '00.00' : isPairingToday.rate)} %</Text>
@@ -105,7 +107,7 @@ export default function ViewPopularity({ candidate, pairingToday, chartRate, tin
             <EchartPopularityBar dataEmotion={isPieChart}/>
           </Grid.Col>
         </Grid>
-      </Stack>
+      </Box>
     </>
   );
 }

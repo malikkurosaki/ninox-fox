@@ -30,19 +30,17 @@ export default function ViewStep({ data, candidate, oneCandidate }: { data: any,
       <PageSubTitle text1='ANALISA' text2='STEP' />
       <Grid gutter={30}>
         <Grid.Col span={{ md: 3, lg: 3 }}>
-          <Flex justify={"center"} align={"center"} style={{
-            height: "80vh"
-          }}>
+          <Flex justify={"center"} align={"center"} h={{base: '40vh', xl: '80vh', lg: '80vh', md: '80vh'}}>
             <Box
               w={{ base: 300, sm: 400 }}
             >
               <Box
                 style={{
-                  background: "rgba(0,0,0,0.3)",
+                 
                   padding: 10,
                   borderRadius: 10
                 }}
-
+                bg={{base: '', xl: 'rgba(0,0,0,0.3)', lg: 'rgba(0,0,0,0.3)', md: 'rgba(0,0,0,0.3)'}}
               >
                 <Image src={isImgCan} bg={"white"} style={{ border: "4px solid white" }} radius={"100%"} alt='kandidat' maw={200} mx="auto" />
                 <Text fw={"bold"} ta={"center"} c={"white"} mt={10}>{isNameCan}</Text>

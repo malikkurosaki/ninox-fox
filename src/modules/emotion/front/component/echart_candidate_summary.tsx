@@ -190,22 +190,16 @@ export default function EchartCandidateSummary({ data, candidate }: { data: any,
     }
     return (
         <>
-            <Box
-            // style={{
-            //     background: "rgba(0,0,0,0.3)",
-            //     padding: 10,
-            //     borderRadius: 10
-            // }}
-            >
+            <Box>
                 <Group justify='flex-end'>
                     <Group>
-                        <Button loading={isLoadingWeek} variant={(isButton == 'week') ? 'filled' : 'subtle'} c={"white"} onClick={() => onChooseTime('week')}>Minggu</Button>
+                        <Button size="xs" loading={isLoadingWeek} variant={(isButton == 'week') ? 'filled' : 'subtle'} c={"white"} onClick={() => onChooseTime('week')}>Minggu</Button>
                         <Divider orientation="vertical" />
-                        <Button loading={isLoadingMonth} variant={(isButton == 'month') ? 'filled' : 'subtle'} c={"white"} onClick={() => onChooseTime('month')}>Bulan</Button>
+                        <Button size="xs" loading={isLoadingMonth} variant={(isButton == 'month') ? 'filled' : 'subtle'} c={"white"} onClick={() => onChooseTime('month')}>Bulan</Button>
                         <Divider orientation="vertical" />
                         <Menu opened={showPopDate} position='bottom-end'>
                             <Menu.Target>
-                                <Button loading={isLoadingCustom} variant={(isButton == 'custom') ? 'filled' : 'subtle'} c={"white"} onClick={() => setPopDate(true)}>Kustom</Button>
+                                <Button size="xs" loading={isLoadingCustom} variant={(isButton == 'custom') ? 'filled' : 'subtle'} c={"white"} onClick={() => setPopDate(true)}>Kustom</Button>
                             </Menu.Target>
                             <Menu.Dropdown p={20}>
                                 <DatePicker

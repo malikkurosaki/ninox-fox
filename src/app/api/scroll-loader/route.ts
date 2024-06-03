@@ -41,12 +41,28 @@ export async function GET(req: Request) {
         ]
     })
 
-    // console.log(data1)
-    // const data = {
-    //     trueRead: data1.filter((i: any) => i.isRead === true),
-    //     falseRead: data1.filter((i: any) => i.isRead === false),
-    // }
+    await prisma.notifications.updateMany({
+        where: {
+            OR: [
+                {
+                    isActive: true,
+                    isRead: false,
+                    idUserClient: user?.id,
+                    idCandidate: can.idCandidate
+                },
+                {
+                    isActive: true,
+                    isRead: false,
+                    idUserClient: user?.id,
+                    idProvinsi: userArea.idProvinsi,
+                    idCandidate: null
+                },
+            ]
+        },
+        data: {
+            isRead: false
+        }
+    })
 
-    // console.log('data BE' + data)
     return Response.json(data)
 }
