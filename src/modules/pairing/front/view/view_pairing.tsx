@@ -66,10 +66,11 @@ export default function ViewPairingFront({ candidate, data, area, tingkat }: { c
             >
               <Box
                 style={{
-                  background: "rgba(0,0,0,0.3)",
+                  // background: "rgba(0,0,0,0.3)",
                   padding: 10,
                   borderRadius: 10
                 }}
+                bg={{ base: '', sm: '', md: "rgba(0,0,0,0.3)", lg: 'rgba(0,0,0,0.3)', xl: 'rgba(0,0,0,0.3)' }}
               >
                 <SimpleGrid
                   cols={{ sm: 2, lg: 2 }}
@@ -99,27 +100,33 @@ export default function ViewPairingFront({ candidate, data, area, tingkat }: { c
               <Group>
 
               </Group>
-              <Select
-                mt={20}
-                placeholder="Kandidat 1"
-                data={candidate.map((can: any) => ({
-                  value: String(can.id),
-                  label: can.name
-                }))}
-                value={isCandidate1}
-                onChange={(val) => { setCandidate1(val) }}
-              />
-              <Select
-                mt={20}
-                placeholder="Kandidat 2"
-                data={candidate.map((can: any) => ({
-                  value: String(can.id),
-                  label: can.name
-                }))}
-                value={isCandidate2}
-                onChange={(val) => { setCandidate2(val) }}
-              />
-              <Button fullWidth mt={20} c={"dark"} bg={"white"} onClick={onGenerate}>HASIL</Button>
+              <Box mt={20}>
+                <SimpleGrid
+                  cols={{ base: 3, sm: 3, md: 1, lg: 1, xl: 1 }}
+                >
+                  <Select
+
+                    placeholder="Kandidat 1"
+                    data={candidate.map((can: any) => ({
+                      value: String(can.id),
+                      label: can.name
+                    }))}
+                    value={isCandidate1}
+                    onChange={(val) => { setCandidate1(val) }}
+                  />
+                  <Select
+
+                    placeholder="Kandidat 2"
+                    data={candidate.map((can: any) => ({
+                      value: String(can.id),
+                      label: can.name
+                    }))}
+                    value={isCandidate2}
+                    onChange={(val) => { setCandidate2(val) }}
+                  />
+                  <Button fullWidth c={"dark"} bg={"white"} onClick={onGenerate}>HASIL</Button>
+                </SimpleGrid>
+              </Box>
 
               <Box pt={45}>
                 <Text ta={"center"} fz={20} c={"white"}>PROBABILITAS KEBERHASILAN</Text>
