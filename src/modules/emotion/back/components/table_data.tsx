@@ -64,8 +64,6 @@ const data = [
  * @returns  Hasil menampilkan tabel beserta valuenya.
  */
 export default function TableData({ title, data, th }: { title: string, data: any, th: any }) {
-
-
   const [isData, setData] = useState(data)
 
   useEffect(() => {

@@ -156,10 +156,10 @@ export default function ViewUploadEmotion() {
                                                         <Table.Th rowSpan={2} ta={"center"}>Kecamatan</Table.Th>
                                                         <Table.Th rowSpan={2} ta={"center"}>Kelurahan</Table.Th>
                                                         <Table.Th rowSpan={2} ta={"center"}>Tanggal</Table.Th>
-                                                        <Table.Th colSpan={2} ta={"center"}>POTENSI MENDUKUNG</Table.Th>
-                                                        <Table.Th colSpan={2} ta={"center"}>MEMPERTIMBANGKAN</Table.Th>
-                                                        <Table.Th colSpan={2} ta={"center"}>TIDAK TAHU</Table.Th>
-                                                        <Table.Th colSpan={2} ta={"center"}>POTENSI TIDAK MENDUKUNG</Table.Th>
+                                                        <Table.Th colSpan={2} ta={"center"}>Potensi Mendukung</Table.Th>
+                                                        <Table.Th colSpan={2} ta={"center"}>Mempertimbangkan</Table.Th>
+                                                        <Table.Th colSpan={2} ta={"center"}>Tidak Tahu</Table.Th>
+                                                        <Table.Th colSpan={2} ta={"center"}>Potensi Tidak Mendukung</Table.Th>
                                                     </Table.Tr>
                                                     <Table.Tr
                                                         style={{

@@ -45,22 +45,22 @@ export const COLOR_EMOTION_NEW = [
   {
     id: "1",
     name: "mendukung",
-    color: "green",
+    color: "#40BF56",
   },
   {
     id: "2",
     name: "mempertimbangkan",
-    color: "yellow",
+    color: "#FAB007",
   },
   {
     id: "3",
     name: "tidaktahu",
-    color: "gray",
+    color: "#858E96",
   },
   {
     id: "4",
     name: "tidakmendukung",
-    color: "red",
+    color: "#F95252",
   },
 ]
 

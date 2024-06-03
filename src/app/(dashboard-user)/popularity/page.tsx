@@ -1,11 +1,12 @@
 import { funGetAllCandidateFront, funGetUserDefaultFront } from '@/modules/candidate';
-import { ViewPopularity, funGetPopularityToday, funGetRateChart } from '@/modules/popularity';
+import { ViewPopularity, funGetPopularityToday, funGetPopularityTodayNew, funGetRateChart } from '@/modules/popularity';
 import moment from 'moment';
 import React from 'react';
 
 export default async function Page() {
+  // const dataPairingToday = await funGetPopularityToday({})
+  const dataPairingToday = await funGetPopularityTodayNew({})
   const can = await funGetAllCandidateFront()
-  const dataPairingToday = await funGetPopularityToday({})
   const valdefault = await funGetUserDefaultFront()
   const dataRateChart = await funGetRateChart({
     candidate1: dataPairingToday.pairingCandidate.idCandidate1,
