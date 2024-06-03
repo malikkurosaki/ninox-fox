@@ -5,8 +5,9 @@ import EchartPopularityLine from '../components/echart_popularity_line';
 import EchartPopularityPie from '../components/echart_popularity_pie';
 import { PageSubTitle } from '@/modules/_global';
 import _ from 'lodash';
-import { funGetPopularityToday, funGetRateChart } from '..';
+import { funGetPopularityToday, funGetPopularityTodayNew, funGetRateChart } from '..';
 import moment from 'moment';
+import EchartPopularityBarDummy from '../components/echart_popularity_bar_dummy';
 import EchartPopularityBar from '../components/echart_popularity_bar';
 
 export default function ViewPopularity({ candidate, pairingToday, chartRate, tingkat }: { candidate: any, pairingToday: any, chartRate: any, tingkat: any }) {
@@ -17,7 +18,7 @@ export default function ViewPopularity({ candidate, pairingToday, chartRate, tin
   const [isRateChart, setRateChart] = useState(chartRate)
 
   async function onGenerate() {
-    const data = await funGetPopularityToday({ candidate1: isCandidate1, candidate2: isCandidate2 })
+    const data = await funGetPopularityTodayNew({ candidate1: isCandidate1, candidate2: isCandidate2 })
     setPairingToday(data)
     setPieChart(data.chart)
 
@@ -100,7 +101,8 @@ export default function ViewPopularity({ candidate, pairingToday, chartRate, tin
           </Grid.Col>
           <Grid.Col span={{ md: 6, lg: 6 }}>
             {/* <EchartPopularityPie data={isPieChart} /> */}
-            <EchartPopularityBar/>
+            {/* <EchartPopularityBarDummy/> */}
+            <EchartPopularityBar dataEmotion={isPieChart}/>
           </Grid.Col>
         </Grid>
       </Stack>
