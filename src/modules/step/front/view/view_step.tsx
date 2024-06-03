@@ -67,7 +67,7 @@ export default function ViewStep({ data, candidate, oneCandidate }: { data: any,
                     <Box key={i} pb={20}>
                       <Text fw={"bold"} c={"white"} fz={25} >{_.upperCase(v)}</Text>
                       <SimpleGrid
-                        cols={{ base: 1, sm: 2, lg: 2 }}
+                        cols={{ base: 1, sm: 1, md: 2, lg: 2, xl: 2 }}
                         spacing={{ base: 10, sm: 'xl' }}
                         verticalSpacing={{ base: 'md', sm: 'xl' }}
                       >
