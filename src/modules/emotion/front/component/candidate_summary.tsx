@@ -15,7 +15,7 @@ export default function CandidateSummary({ candidate, persen }: { candidate: any
       }}>
         <Box
         >
-          <Image src={isImgCan} bg={"white"} style={{ border: "4px solid white" }} radius={"100%"} alt='kandidat' maw={{ base: 100, xl: 200, lg: 180, md: 150, sm: 140 }} mx="auto" />
+          <Image src={isImgCan} bg={"white"} style={{ border: "4px solid white" }} radius={"100%"} alt='kandidat' maw={200} mx="auto" />
           <Box p={10}>
             <Text fw={"bold"} ta={"center"} fz={{ base: 12, xl: 16, lg: 15, md: 14, sm: 13 }} c={"white"}>{isNameCan}</Text>
           </Box>
