@@ -103,53 +103,85 @@ export default function DrawerNotifikasi({ data, onSuccess }: { data: any, onSuc
               <Text c={'#696969'} fw={'bold'}>TIDAK ADA NOTIFIKASI</Text>
             </Flex>
           ) :
-            // <ScrollArea
-            //   h={'95vh'}
-            //   scrollbarSize={2}
-            //   viewportRef={viewport}
-            //   onScrollPositionChange={(val) => onScroll(val.y)}
-            // >
+            <ScrollLoader url="/api/scroll-loader" height='95vh' take={5}>
+              {(data: any) =>
+                <Box>
+                  {!data.isRead && (
+                    <Box>
+                      <Box key={data} mb={10} m={10}>
+                        <Box
+                          style={{
+                            border: "1px solid white",
+                            padding: 20,
+                            borderRadius: 10,
+                          }}
+                          className={classes.box}
+                        >
+                          <Box
+                            onClick={() => StartModal(data.id, data.category)}
+                            style={{ cursor: "pointer" }}
+                          >
+                            <Group>
+                              <MdBrowserUpdated size={25} color={'white'} />
+                              <Text fw={'bold'} c={'white'}>{data.title}</Text>
+                            </Group>
 
-
-
-          // </ScrollArea>
-          <ScrollLoader url="/api/scroll-loader" take={3}>
-          {(data: any) =>
-            <Box>
-              <Box key={data} mb={10} m={10}>
-                <Box
-                  style={{
-                    border: `1px solid white`,
-                    padding: 20,
-                    borderRadius: 10,
-                  }}
-                  className={classes.box}
-                >
-                  <Box onClick={() => StartModal(data.id, data.category)} style={{ cursor: "pointer", }}>
-                    <Group>
-                      <MdBrowserUpdated size={25} color={'white'} />
-                      <Text fw={'bold'} c={'white'}>{data.title}</Text>
-                    </Group>
-
-                    <Box pt={5}>
-                      <Text c={'white'}>{data.description}</Text>
+                            <Box pt={5}>
+                              <Text c={'white'}>{data.description}</Text>
+                            </Box>
+                          </Box>
+                          <Divider my={5} color='white' />
+                          <Group justify="space-between">
+                            <Text size="sm" c={'#828282'} ta={'right'}>
+                              {moment(data.createdAt).format('LLL')}
+                            </Text>
+                            <Anchor size={'sm'} onClick={() => { onReadNotif(data.id) }}>
+                              tandai telah dibaca
+                            </Anchor>
+                          </Group>
+                        </Box>
+                      </Box>
                     </Box>
-                  </Box>
-                  <Divider my={5} color='white' />
-                  <Group justify="space-between">
-                    <Text size="sm" c={'#828282'} ta={'right'}>
-                      {moment(data.createdAt).format('LLL')}
-                    </Text>
-                    <Anchor size={'sm'} onClick={() => { onReadNotif(data.id) }}>tandai telah dibaca</Anchor>
-                  </Group>
+                  )}
+                  {data.isRead && (
+                    // render something else when isRead is true
+                    <Box key={data} mb={10} m={10}>
+                      <Box
+                        style={{
+                          border: "1px solid gray",
+                          padding: 20,
+                          borderRadius: 10,
+                        }}
+                        className={classes.box}
+                      >
+                        <Box
+                          onClick={() => StartModal(data.id, data.category)}
+                          style={{ cursor: "pointer" }}
+                        >
+                          <Group>
+                            <MdBrowserUpdated size={25} color={'#828282'} />
+                            <Text fw={'bold'} c={'#828282'}>{data.title}</Text>
+                          </Group>
+
+                          <Box pt={5}>
+                            <Text c={'#828282'}>{data.description}</Text>
+                          </Box>
+                        </Box>
+                        <Divider my={5} color='#828282' />
+                        <Group justify="space-between">
+                          <Text size="sm" c={'#828282'} ta={'right'}>
+                            {moment(data.createdAt).format('LLL')}
+                          </Text>
+                          <Anchor size={'sm'} c={'#828282'}>
+                            telah dibaca
+                          </Anchor>
+                        </Group>
+                      </Box>
+                    </Box>
+                  )}
                 </Box>
-              </Box>
-            </Box>
-
-          }
-        </ScrollLoader>
-
-          // <ScrollL
+              }
+            </ScrollLoader>
         }
 
       </Box>
