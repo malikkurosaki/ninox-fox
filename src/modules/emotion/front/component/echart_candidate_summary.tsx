@@ -141,7 +141,7 @@ export default function EchartCandidateSummary({ data, candidate }: { data: any,
                     data: !dataChart
                         ? []
                         : dataChart!.map((v: any) => v.neutral),
-                    color: "white",
+                    color: "#f5f5f5",
                     stack: 'x',
                     areaStyle: {
                         opacity: 1,

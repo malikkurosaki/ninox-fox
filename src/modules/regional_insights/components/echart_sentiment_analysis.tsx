@@ -51,7 +51,7 @@ export default function EchartSentimentAnalysis({ dataEmotion, dataLocked }: { d
       xAxis: [
         {
           type: 'category',
-          data: ['Mendukung', 'Mempertimbangkan', 'Tidak Tahu', 'Tidak Mendukung'],
+          data: ['Potensi Mendukung', 'Mempertimbangkan', 'Tidak Tahu', 'Potensi Tidak Mendukung'],
           axisLabel: {
             // rotate: 45,
             color: "white",

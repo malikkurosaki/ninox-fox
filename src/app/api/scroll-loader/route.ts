@@ -4,10 +4,9 @@ import { funGetUserDefaultFront } from "@/modules/user"
 import 'colors'
 
 export async function GET(req: Request) {
-    const take = +(new URL(req.url).searchParams.get('take') || "10")
+    const take = +(new URL(req.url).searchParams.get('take') || "15")
     const skip = +(new URL(req.url).searchParams.get('skip') || "0")
 
-    console.log(new URL(req.url).searchParams.get('skip'), "=====>".red)
 
     const user = await funGetUserByCookies()
     const can = await funGetUserDefaultFront()
@@ -39,29 +38,6 @@ export async function GET(req: Request) {
                 createdAt: 'desc'
             }
         ]
-    })
-
-    await prisma.notifications.updateMany({
-        where: {
-            OR: [
-                {
-                    isActive: true,
-                    isRead: false,
-                    idUserClient: user?.id,
-                    idCandidate: can.idCandidate
-                },
-                {
-                    isActive: true,
-                    isRead: false,
-                    idUserClient: user?.id,
-                    idProvinsi: userArea.idProvinsi,
-                    idCandidate: null
-                },
-            ]
-        },
-        data: {
-            isRead: false
-        }
     })
 
     return Response.json(data)

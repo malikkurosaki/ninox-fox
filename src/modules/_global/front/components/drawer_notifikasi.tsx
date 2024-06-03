@@ -1,6 +1,6 @@
 'use client'
-import { Anchor, Box, Divider, Flex, Group, ScrollArea, Text, useMantineColorScheme } from '@mantine/core';
-import React, { useEffect, useRef, useState } from 'react';
+import { Anchor, Box, Divider, Flex, Group, Text } from '@mantine/core';
+import React, { useState } from 'react';
 import { IoNotificationsOffOutline } from 'react-icons/io5';
 import { isDrawer } from '../val/isDrawer';
 import { useAtom } from 'jotai';
@@ -9,16 +9,16 @@ import classes from './hover.module.css'
 import { useRouter } from 'next/navigation';
 import moment from 'moment';
 import { funGetAllNotifications, funUpdReadNotifications } from '../..';
-import { useWindowScroll } from '@mantine/hooks';
 import { ScrollLoader } from 'next-scroll-loader'
+import _ from "lodash"
 
 
 export default function DrawerNotifikasi({ data, onSuccess }: { data: any, onSuccess: (val: any) => void }) {
-  const { setColorScheme, clearColorScheme } = useMantineColorScheme();
   const [valOpenDrawer, setOpenDrawer] = useAtom(isDrawer)
   const router = useRouter()
-  const [isData, setData] = useState(data.falseRead)
-  const [isDataRead, setDataRead] = useState(data.trueRead)
+  const [isJumlah, setJumlah] = useState(Number(data.falseRead.length + data.trueRead.length))
+  // const [isData, setData] = useState(data.falseRead)
+  // const [isDataRead, setDataRead] = useState(data.trueRead)
 
   async function StartModal(id: any, kategori: any) {
     const upd = await funUpdReadNotifications({ id: id })
@@ -70,32 +70,20 @@ export default function DrawerNotifikasi({ data, onSuccess }: { data: any, onSuc
     router.push(link)
   }
 
+
   async function onReadNotif(value: any) {
     const upd = await funUpdReadNotifications({ id: value })
-    const loadData = await funGetAllNotifications({ page: 1 })
-    setData(loadData.falseRead)
-    setDataRead(loadData.trueRead)
+    // const loadData = await funGetAllNotifications({ page: 1 })
+    // setData(loadData.falseRead)
+    // setDataRead(loadData.trueRead)
     onSuccess(true)
   }
-
-  const [scrollPosition, onScrollPositionChange] = useState(0)
-  const viewport = useRef<HTMLDivElement>(null)
-  const [scroll, scrollTo] = useWindowScroll()
-
-  function onScroll(val: any) {
-    console.log(val)
-    onScrollPositionChange(val)
-    console.log(viewport.current!.scrollHeight)
-  }
-
-  const scrollToBottom = () =>
-    viewport.current!.scrollTo({ top: 977, behavior: 'smooth' });
 
   return (
     <>
       <Box pt={10}>
         {
-          data.length == 0 ? (
+          isJumlah == 0 || _.isNaN(isJumlah) ? (
             <Flex justify={'center'} align={'center'} mih={'80vh'} direction={'column'} >
               <Box mb={10}>
                 <IoNotificationsOffOutline size={50} color="#696969" />
@@ -103,7 +91,7 @@ export default function DrawerNotifikasi({ data, onSuccess }: { data: any, onSuc
               <Text c={'#696969'} fw={'bold'}>TIDAK ADA NOTIFIKASI</Text>
             </Flex>
           ) :
-            <ScrollLoader url="/api/scroll-loader" height='95vh' take={5}>
+            <ScrollLoader url="/api/scroll-loader" height='95vh' take={15}>
               {(data: any) =>
                 <Box>
                   {!data.isRead && (

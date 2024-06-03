@@ -41,8 +41,8 @@ export default function DetailEchartSentimentAnalysis({ dataEmotion, dataLocked 
       tooltip: {
         trigger: 'axis',
         axisPointer: {
-          type: 'shadow'
-        }
+          type: 'shadow',
+        },
       },
       grid: {
         left: '3%',
@@ -53,9 +53,9 @@ export default function DetailEchartSentimentAnalysis({ dataEmotion, dataLocked 
       xAxis: [
         {
           type: 'category',
-          data: ['Mendukung', 'Mempertimbangkan', 'Tidak Tahu', 'Tidak Mendukung'],
+          data: ['Potensi Mendukung', 'Mempertimbangkan', 'Tidak Tahu', 'Potensi \n Tidak Mendukung'],
           axisLabel: {
-            // rotate: 45,
+            // rotate: 10,
             color: "white",
             fontSize: 10
           },
