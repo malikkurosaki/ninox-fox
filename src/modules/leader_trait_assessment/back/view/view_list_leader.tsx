@@ -162,7 +162,7 @@ export default function ViewListLeader({ datadownload, param, provinsi, kabupate
 
                   const jsonDwnloadLink = document.createElement("a")
                   jsonDwnloadLink.href = jsonDataUrl
-                  jsonDwnloadLink.download = datadownload.title
+                  jsonDwnloadLink.download = datadownload.title + ".csv"
                   jsonDwnloadLink.click()
                 }}
               >
