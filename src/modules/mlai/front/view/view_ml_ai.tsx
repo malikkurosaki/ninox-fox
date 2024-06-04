@@ -170,14 +170,28 @@ export default function ViewMlAi({ dataV2, dataTanggal, candidate, oneCandidate 
                 <Box>
                   {dataMlai && dataMlai.map((item: any, i: any) => {
                     return (
-                      <Box key={i}>
+                      <Box key={i} >
                         {
                           item.idRequestMlAi != null && (
                             <>
-                              <Text c={'#9E9A9A'} mb={15}>REQUEST</Text>
-                              <Text c={'#9E9A9A'}>{item.request}</Text>
-                              <Divider my={20} color={'#9E9A9A'} />
-                              <Text c={'white'}>RESPONS</Text>
+                              <Box style={{
+                                borderLeftColor: 'green',
+                                borderLeftStyle:'solid',
+                                borderLeftWidth: 4,
+                                paddingLeft: 15,
+                                paddingRight: 10,
+                                paddingTop: 5,
+                                paddingBottom: 5,
+                              }}>
+                                <Group>
+                                  <Box>
+                                    <Text c={'white'} mb={15} fw={"bold"}>REQUEST</Text>
+                                    <Text c={'white'}>{item.request}</Text>
+                                  </Box>
+
+                                </Group>
+                              </Box>
+                              <Text mt={20} fw={"bold"} c={'white'}>RESPONS</Text>
                             </>
                           )
                         }
@@ -188,20 +202,20 @@ export default function ViewMlAi({ dataV2, dataTanggal, candidate, oneCandidate 
                               <Box c={"white"} dangerouslySetInnerHTML={{ __html: item.content }} />
                             </>
                           ) : (
-                              <Wrapper id={item.id}>
-                                  <Text c={"white"}>
-                                  <TextAnimation
-                                    phrases={[...item.content.split('\n')]}
-                                    typingSpeed={0}
-                                    backspaceDelay={0}
-                                    eraseDelay={0}
-                                    timeComplete={0}
-                                    errorProbability={0}
-                                    eraseOnComplete={false}
-                                    isSecure={false}
-                                  />
-                                </Text>
-                              </Wrapper>
+                            <Wrapper id={item.id}>
+                              <Text c={"white"}>
+                                <TextAnimation
+                                  phrases={[...item.content.split('\n')]}
+                                  typingSpeed={0}
+                                  backspaceDelay={0}
+                                  eraseDelay={0}
+                                  timeComplete={0}
+                                  errorProbability={0}
+                                  eraseOnComplete={false}
+                                  isSecure={false}
+                                />
+                              </Text>
+                            </Wrapper>
                           )}
                       </Box>
                     )
