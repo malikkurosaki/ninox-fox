@@ -11,7 +11,7 @@ import funAddRequestMlAiFront from '../fun/add_request_mlai';
 import funGetLogRequestMlaiFront from '../fun/get_log_request_mlai_front';
 import moment from 'moment';
 import { useRouter } from 'next/navigation';
-import { ScrollLoader } from 'next-scroll-loader';
+// import { ScrollLoader } from 'next-scroll-loader';
 import CobaScroll from '../component/coba_scroll';
 
 const dataLog = [

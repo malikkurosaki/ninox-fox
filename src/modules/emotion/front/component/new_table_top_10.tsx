@@ -28,12 +28,12 @@ export default function NewTableTop10({ emotion, tingkat, locked }: { emotion: a
                      <Table.Tr >
                         <Table.Th>NO</Table.Th>
                         <Table.Th w={250}>{(tingkat == 2) ? 'KECAMATAN' : 'KABUPATEN / KOTA'}</Table.Th>
-                        <Table.Th ta={'center'}> SUARA TERKUNCI </Table.Th>
-                        <Table.Th ta={'center'}> SUARA TERFILTER </Table.Th>
-                        <Table.Th ta={'center'} c={'green'}> POTENSI MENDUKUNG</Table.Th>
-                        <Table.Th ta={'center'} c={'yellow'}> MEMPERTIMBANGKAN </Table.Th>
-                        <Table.Th ta={'center'} c={'gray'} > TIDAK TAHU </Table.Th>
-                        <Table.Th ta={'center'} c={'red'}> POTENSI TIDAK MENDUKUNG </Table.Th>
+                        <Table.Th ta={'end'}> SUARA TERKUNCI </Table.Th>
+                        <Table.Th ta={'end'}> SUARA TERFILTER </Table.Th>
+                        <Table.Th ta={'end'} c={'green'}> POTENSI MENDUKUNG</Table.Th>
+                        <Table.Th ta={'end'} c={'yellow'}> MEMPERTIMBANGKAN </Table.Th>
+                        <Table.Th ta={'end'} c={'gray'} > TIDAK TAHU </Table.Th>
+                        <Table.Th ta={'end'} c={'red'}> POTENSI TIDAK MENDUKUNG </Table.Th>
                      </Table.Tr>
                   </Table.Thead>
                   <Table.Tbody c={"white"} >
