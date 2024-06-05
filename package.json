@@ -43,7 +43,7 @@
     "moment": "^2.29.4",
     "mqtt": "^5.5.0",
     "next": "13.5.4",
-    "next-scroll-loader": "1.0.2",
+    "next-scroll-loader": "^1.0.5",
     "papaparse": "^5.4.1",
     "react": "^18",
     "react-dom": "^18",
