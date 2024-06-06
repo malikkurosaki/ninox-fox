@@ -12,6 +12,7 @@ import EchartPopularityBar from '../components/echart_popularity_bar';
 import { useAtom } from 'jotai';
 import { useHeadroom } from '@mantine/hooks';
 import { isDetactionNavbar } from '@/modules/regional_insights';
+import toast from 'react-simple-toasts';
 
 export default function ViewPopularity({ candidate, pairingToday, chartRate, tingkat }: { candidate: any, pairingToday: any, chartRate: any, tingkat: any }) {
   const [isPairingToday, setPairingToday] = useState(pairingToday)
@@ -24,6 +25,8 @@ export default function ViewPopularity({ candidate, pairingToday, chartRate, tin
   const pinned = useHeadroom({ fixedAt: 120 });
 
   async function onGenerate() {
+    if (isCandidate1 == null || isCandidate2 == null || isCandidate1 == undefined || isCandidate2 == undefined)
+      return toast("Silahkan pilih kandidat", { theme: "dark" })
     const data = await funGetPopularityTodayNew({ candidate1: isCandidate1, candidate2: isCandidate2 })
     setPairingToday(data)
     setPieChart(data.chart)
@@ -61,24 +64,28 @@ export default function ViewPopularity({ candidate, pairingToday, chartRate, tin
             cols={{ base: 1, sm: 3, lg: 3 }}
             spacing={{ base: 10, sm: 'xl' }}
           >
-            <Select
-              placeholder="Kandidat 1"
-              data={candidate.map((can: any) => ({
-                value: String(can.id),
-                label: can.name
-              }))}
-              value={isCandidate1}
-              onChange={(val) => { setCandidate1(val) }}
-            />
-            <Select
-              placeholder="Kandidat 2"
-              data={candidate.map((can: any) => ({
-                value: String(can.id),
-                label: can.name
-              }))}
-              value={isCandidate2}
-              onChange={(val) => { setCandidate2(val) }}
-            />
+                    <Select
+            placeholder="Kandidat 1"
+            data={candidate.map((can: any) => ({
+              value: String(can.id),
+              label: can.name,
+            }))}
+            value={isCandidate1}
+            onChange={(val) => {
+              setCandidate1(val)
+              setCandidate2(null)
+            }}
+          />
+          <Select
+            placeholder="Kandidat 2"
+            data={candidate.map((can: any) => ({
+              value: String(can.id),
+              label: can.name,
+              disabled: isCandidate1 == String(can.id) ? true : false
+            }))}
+            value={isCandidate2}
+            onChange={(val) => { setCandidate2(val) }}
+          />
             <Button fullWidth bg={"white"} c={"dark"} onClick={onGenerate}>HASIL</Button>
           </SimpleGrid>
         </Group>
