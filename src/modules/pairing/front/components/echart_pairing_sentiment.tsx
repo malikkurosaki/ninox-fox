@@ -81,7 +81,7 @@ export default function EchartPairingSentiment({ data }: { data: any }) {
           type: 'category',
           data: ['Potensi Mendukung', 'Mempertimbangkan', 'Tidak Tahu', 'Potensi Tidak Mendukung'],
           axisLabel: {
-            rotate: 45,
+            // rotate: 45,
             color: "white",
             fontSize: 10
           },
