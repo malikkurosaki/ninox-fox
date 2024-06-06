@@ -5,6 +5,7 @@ import EchartPairingSentiment from '../components/echart_pairing_sentiment';
 import { PageSubTitle, WARNA } from '@/modules/_global';
 import _ from 'lodash';
 import { funGetPairingRegional } from '../..';
+import toast from 'react-simple-toasts';
 
 export default function ViewPairingFront({ candidate, data, area, tingkat }: { candidate: any, data: any, area: any, tingkat: any }) {
   const [isData, setData] = useState(data)
@@ -15,6 +16,8 @@ export default function ViewPairingFront({ candidate, data, area, tingkat }: { c
   const [isArea, setArea] = useState<any>(null)
 
   async function onGenerate() {
+    if (isCandidate1 == null || isCandidate2 == null || isCandidate1 == undefined || isCandidate2 == undefined)
+      return toast("Silahkan pilih kandidat", { theme: "dark" })
     const data = await funGetPairingRegional({ candidate1: isCandidate1, candidate2: isCandidate2 })
     setData(data)
     setBarChart(data.chart)
@@ -45,9 +48,8 @@ export default function ViewPairingFront({ candidate, data, area, tingkat }: { c
           paddingBottom: 10
         }}
       >
-        <Group 
+        <Group
         >
-          {/* <TextInput w={300} mt={20} placeholder='Cari' /> */}
           <Select
             placeholder="Pilih wilayah"
             data={area.map((pro: any) => ({
@@ -105,21 +107,23 @@ export default function ViewPairingFront({ candidate, data, area, tingkat }: { c
                   cols={{ base: 3, sm: 3, md: 1, lg: 1, xl: 1 }}
                 >
                   <Select
-
                     placeholder="Kandidat 1"
                     data={candidate.map((can: any) => ({
                       value: String(can.id),
                       label: can.name
                     }))}
                     value={isCandidate1}
-                    onChange={(val) => { setCandidate1(val) }}
+                    onChange={(val) => {
+                      setCandidate1(val)
+                      setCandidate2(null)
+                    }}
                   />
                   <Select
-
                     placeholder="Kandidat 2"
                     data={candidate.map((can: any) => ({
                       value: String(can.id),
-                      label: can.name
+                      label: can.name,
+                      disabled: isCandidate1 == String(can.id) ? true : false
                     }))}
                     value={isCandidate2}
                     onChange={(val) => { setCandidate2(val) }}
