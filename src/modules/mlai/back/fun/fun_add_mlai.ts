@@ -9,7 +9,7 @@ export default async function funAddMlAi({ body, content }: { body: any, content
   const now = new Date()
   if (body.dateContent == '' || body.timeContent == '') {
     dateInput = moment(now).format('YYYY-MM-DD')
-    let y = new Date('1970-01-01 ' + moment(now).format('hh:mm'))
+    let y = new Date('1970-01-01 ' + moment(now).format('HH:mm'))
     timeInput = new Date(y.getTime() - (y.getTimezoneOffset() * 60000)).toISOString()
   } else {
     dateInput = body.dateContent
@@ -64,6 +64,9 @@ export default async function funAddMlAi({ body, content }: { body: any, content
   }
 
   revalidatePath('dashboard/ml-ai/request')
+  revalidatePath('dashboard/ml-ai/')
+  revalidatePath('/ml-ai')
+  revalidatePath('/data-learner')
   revalidatePath("dashboard/ml-ai?prov" + data.Candidate.AreaProvinsi + "&city" + data.Candidate.AreaKabkot)
 
   return {
