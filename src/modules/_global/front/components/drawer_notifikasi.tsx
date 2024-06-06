@@ -16,7 +16,7 @@ import _ from "lodash"
 export default function DrawerNotifikasi({ data, onSuccess }: { data: any, onSuccess: (val: any) => void }) {
   const [valOpenDrawer, setOpenDrawer] = useAtom(isDrawer)
   const router = useRouter()
-  const [isJumlah, setJumlah] = useState(Number(data.falseRead.length + data.trueRead.length))
+  const [isJumlah, setJumlah] = useState(data.length)
 
   // const [isData, setData] = useState(data.falseRead)
   // const [isDataRead, setDataRead] = useState(data.trueRead)
@@ -76,15 +76,15 @@ export default function DrawerNotifikasi({ data, onSuccess }: { data: any, onSuc
   const [scrollPage, setScrollPage] = useState(1)
 
 
-  const ScrollItem = ({ dataScroll }: { dataScroll: any }) => {
+  const ScrollItem = ({ dataScroll, page }: { dataScroll: any, page:any }) => {
     const [dataScr, setDataScr] = useState<{ [key: string]: any }>(dataScroll)
 
     async function onReadNotif(value: any) {
       const upd = await funUpdReadNotifications({ id: value })
 
 
-      const loadData = await funGetAllNotifications({ page: 1 })
-      setListScrollData(loadData.falseRead)
+      const loadData = await funGetAllNotifications({ page: page })
+      setListScrollData(loadData)
       // setListScrollData(loadData.trueRead)
       // setData(upd)
       // setData(loadData.falseRead)
@@ -185,7 +185,7 @@ export default function DrawerNotifikasi({ data, onSuccess }: { data: any, onSuc
           </Flex>
         ) :
           <ScrollLoaderExternalState url="/api/scroll-loader" height='95vh' take={15} data={listScrollData} setData={setListScrollData} page={scrollPage} setPage={setScrollPage}  >
-            {(dataScoll: any) => <ScrollItem dataScroll={dataScoll} />}
+            {(dataScoll: any) => <ScrollItem dataScroll={dataScoll} page={scrollPage}/>}
           </ScrollLoaderExternalState>
       }
 

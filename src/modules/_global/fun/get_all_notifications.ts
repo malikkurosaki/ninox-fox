@@ -8,10 +8,11 @@ export default async function funGetAllNotifications({ page }: { page: any }) {
    const can = await funGetUserDefaultFront()
    const userArea = await funGetUserDefaultFront()
    const dataSkip = Number(page) * 15 - 15;
+   const dataTake = page * 15
 
    const dataPage = await prisma.notifications.findMany({
-      skip: dataSkip,
-      take: 15,
+      skip: 0,
+      take: dataTake,
       where: {
          OR: [
             {
@@ -92,5 +93,5 @@ export default async function funGetAllNotifications({ page }: { page: any }) {
    }
 
 
-   return allData
+   return dataPage
 }
