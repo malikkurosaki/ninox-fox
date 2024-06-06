@@ -11,6 +11,7 @@ import _ from 'lodash';
 import { useHeadroom } from '@mantine/hooks';
 import { useAtom } from 'jotai';
 import { isDetactionNavbar } from '../val/isDetectionNavbar';
+import toast from 'react-simple-toasts';
 
 const dataKabupaten = [
   {
@@ -61,6 +62,8 @@ export default function ViewRegionalInsights({ oneCandidate, candidate, emotion,
   const pinned = useHeadroom({ fixedAt: 120 });
 
   async function onGenerate() {
+    if (isCandidate == null || isCandidate == undefined)
+      return toast("Silahkan pilih kandidat", { theme: "dark" })
     const dataLoad = await funGetEmotionRegionalInsightNew({ candidate: isCandidate })
     setData(dataLoad)
   }
@@ -81,7 +84,7 @@ export default function ViewRegionalInsights({ oneCandidate, candidate, emotion,
           transition: 'transform 400ms ease',
           backgroundColor: WARNA.ungu,
         }}
-        left={isDetection? 250 : 100}
+        left={isDetection ? 250 : 100}
       >
         <PageSubTitle text1='WAWASAN' text2='REGIONAL' />
         <Box>
