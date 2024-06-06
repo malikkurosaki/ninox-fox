@@ -1,14 +1,17 @@
 "use client"
-import { Box, Button, Center, Flex, Grid, Group, Image, Select, SimpleGrid, Stack, Text } from '@mantine/core';
+import { Box, Button, Center, Flex, Grid, Group, Image, rem, Select, SimpleGrid, Stack, Text } from '@mantine/core';
 import React, { useState } from 'react';
 import EchartPopularityLine from '../components/echart_popularity_line';
 import EchartPopularityPie from '../components/echart_popularity_pie';
-import { PageSubTitle } from '@/modules/_global';
+import { PageSubTitle, WARNA } from '@/modules/_global';
 import _ from 'lodash';
 import { funGetPopularityToday, funGetPopularityTodayNew, funGetRateChart } from '..';
 import moment from 'moment';
 import EchartPopularityBarDummy from '../components/echart_popularity_bar_dummy';
 import EchartPopularityBar from '../components/echart_popularity_bar';
+import { useAtom } from 'jotai';
+import { useHeadroom } from '@mantine/hooks';
+import { isDetactionNavbar } from '@/modules/regional_insights';
 import toast from 'react-simple-toasts';
 
 export default function ViewPopularity({ candidate, pairingToday, chartRate, tingkat }: { candidate: any, pairingToday: any, chartRate: any, tingkat: any }) {
@@ -17,6 +20,9 @@ export default function ViewPopularity({ candidate, pairingToday, chartRate, tin
   const [isCandidate2, setCandidate2] = useState(pairingToday.pairingCandidate.idCandidate2)
   const [isPieChart, setPieChart] = useState(isPairingToday.chart)
   const [isRateChart, setRateChart] = useState(chartRate)
+
+  const [isDetection, setDetection] = useAtom(isDetactionNavbar)
+  const pinned = useHeadroom({ fixedAt: 120 });
 
   async function onGenerate() {
     if (isCandidate1 == null || isCandidate2 == null || isCandidate1 == undefined || isCandidate2 == undefined)
@@ -37,14 +43,28 @@ export default function ViewPopularity({ candidate, pairingToday, chartRate, tin
 
   return (
     <>
-      <PageSubTitle text1='PENILAIAN' text2='SENTIMEN PEMILIH' />
-      <Group justify='flex-end' pt={10}>
-        <SimpleGrid
-          cols={{ base: 1, sm: 3, lg: 3 }}
-          spacing={{ base: 10, sm: 'xl' }}
-        >
-
-          <Select
+      <Box
+        style={{
+          position: 'fixed',
+          top: 0,
+          right: 0,
+          padding: 20,
+          paddingBottom: 40,
+          height: isDetection ? rem(185) : rem(145),
+          zIndex: 20,
+          transform: `translate3d(0, ${pinned ? 0 : isDetection ? rem(-185) : rem(-145)}, 0)`,
+          transition: 'transform 400ms ease',
+          backgroundColor: WARNA.ungu,
+        }}
+        left={isDetection ? 250 : 100}
+      >
+        <PageSubTitle text1='PENILAIAN' text2='SENTIMEN PEMILIH' />
+        <Group justify='flex-end' pt={10}>
+          <SimpleGrid
+            cols={{ base: 1, sm: 3, lg: 3 }}
+            spacing={{ base: 10, sm: 'xl' }}
+          >
+                    <Select
             placeholder="Kandidat 1"
             data={candidate.map((can: any) => ({
               value: String(can.id),
@@ -66,10 +86,11 @@ export default function ViewPopularity({ candidate, pairingToday, chartRate, tin
             value={isCandidate2}
             onChange={(val) => { setCandidate2(val) }}
           />
-          <Button fullWidth bg={"white"} c={"dark"} onClick={onGenerate}>HASIL</Button>
-        </SimpleGrid>
-      </Group>
-      <Box>
+            <Button fullWidth bg={"white"} c={"dark"} onClick={onGenerate}>HASIL</Button>
+          </SimpleGrid>
+        </Group>
+      </Box>
+      <Box pt={`calc(${rem(120)} + var(--mantine-spacing-md))`}>
         <Grid gutter={'lg'}>
           <Grid.Col span={{ md: 6, lg: 6 }}>
             <Box

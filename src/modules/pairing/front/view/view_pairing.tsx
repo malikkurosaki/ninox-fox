@@ -1,11 +1,15 @@
 "use client"
-import { Box, Button, Center, Divider, Grid, Group, Image, ScrollArea, Select, SimpleGrid, Stack, Text, TextInput } from '@mantine/core';
+import { Box, Button, Center, Divider, Grid, Group, Image, rem, ScrollArea, Select, SimpleGrid, Stack, Text, TextInput } from '@mantine/core';
 import React, { useState } from 'react';
 import EchartPairingSentiment from '../components/echart_pairing_sentiment';
 import { PageSubTitle, WARNA } from '@/modules/_global';
 import _ from 'lodash';
 import { funGetPairingRegional } from '../..';
+import { useAtom } from 'jotai';
+import { useHeadroom } from '@mantine/hooks';
+import { isDetactionNavbar } from '@/modules/regional_insights';
 import toast from 'react-simple-toasts';
+
 
 export default function ViewPairingFront({ candidate, data, area, tingkat }: { candidate: any, data: any, area: any, tingkat: any }) {
   const [isData, setData] = useState(data)
@@ -14,6 +18,9 @@ export default function ViewPairingFront({ candidate, data, area, tingkat }: { c
   const [isAllBarChart, setAllBarChart] = useState(data.chart)
   const [isBarChart, setBarChart] = useState(data.chart)
   const [isArea, setArea] = useState<any>(null)
+
+  const [isDetection, setDetection] = useAtom(isDetactionNavbar)
+  const pinned = useHeadroom({ fixedAt: 120 });
 
   async function onGenerate() {
     if (isCandidate1 == null || isCandidate2 == null || isCandidate1 == undefined || isCandidate2 == undefined)
@@ -37,19 +44,23 @@ export default function ViewPairingFront({ candidate, data, area, tingkat }: { c
 
   return (
     <>
-      <PageSubTitle text1='DATA PASANGAN' text2='REGIONAL' />
       <Box
         style={{
-          backgroundColor: WARNA.ungu,
-          position: "sticky",
+          position: 'fixed',
           top: 0,
-          zIndex: 99,
-          paddingTop: 10,
-          paddingBottom: 10
+          right: 0,
+          padding: 20,
+          paddingBottom: 40,
+          height: isDetection ? rem(175) : rem(145),
+          zIndex: 20,
+          transform: `translate3d(0, ${pinned ? 0 : isDetection ? rem(-165) : rem(-145)}, 0)`,
+          transition: 'transform 400ms ease',
+          backgroundColor: WARNA.ungu,
         }}
+        left={isDetection ? 250 : 100}
       >
-        <Group
-        >
+        <PageSubTitle text1='DATA PASANGAN' text2='REGIONAL' />
+        <Group justify='flex-end'>
           <Select
             placeholder="Pilih wilayah"
             data={area.map((pro: any) => ({
@@ -61,7 +72,7 @@ export default function ViewPairingFront({ candidate, data, area, tingkat }: { c
           />
         </Group>
       </Box>
-      <Stack pt={20}>
+      <Stack pt={`calc(${rem(120)} + var(--mantine-spacing-md))`}>
         <Grid gutter={30}>
           <Grid.Col span={{ md: 5, lg: 5 }}>
             <Box
