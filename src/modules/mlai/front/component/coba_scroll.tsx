@@ -2,7 +2,7 @@
 import { Box, Divider, Group, Spoiler, Text } from '@mantine/core';
 import { useShallowEffect } from '@mantine/hooks';
 import moment from 'moment';
-import { ScrollLoader } from 'next-scroll-loader';
+// import { ScrollLoader } from 'next-scroll-loader';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { GiBackwardTime } from 'react-icons/gi';
@@ -31,7 +31,7 @@ export default function CobaScroll({ isload }: { isload: boolean }) {
 
   return (
     <>
-      <ScrollLoader url={link} height='50vh' take={15}>
+      {/* <ScrollLoader url={link} height='50vh' take={15}>
         {(data: any) =>
           <Box>
             <Box style={{
@@ -68,7 +68,7 @@ export default function CobaScroll({ isload }: { isload: boolean }) {
             </Box>
           </Box>
         }
-      </ScrollLoader>
+      </ScrollLoader> */}
     </>
   );
 }

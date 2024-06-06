@@ -72,23 +72,23 @@ export default function EditMlAi({ data }: { data: any }) {
                 <Text fw={"bold"}>EDIT ML-AI</Text>
             </Stack>
             <Box pt={20}>
-                <Box p={20} mb={20} bg={'#CED4D9'} style={{ borderRadius: 10 }}>
-                    <Text mb={10} fw={'bold'} fz={20}>
-                        REQUEST
-                    </Text>
-                    {
-                        data.idRequestMlAi != null && (
-                            <>
+                {
+                    data.idRequestMlAi != null && (
+                        <>
+                            <Box p={20} mb={20} bg={'#CED4D9'} style={{ borderRadius: 10 }}>
+                                <Text mb={10} fw={'bold'} fz={20}>
+                                    REQUEST
+                                </Text>
                                 <Spoiler maxHeight={50} showLabel={<Text c={'#787A7C'}>Show more</Text>} hideLabel={<Text c={'#787A7C'}>Hide</Text>}>
                                     <Text>
                                         {data.request}
                                     </Text>
                                 </Spoiler>
-                            </>
-                        )
-                    }
+                            </Box>
+                        </>
+                    )
+                }
 
-                </Box>
                 <Stack>
                     <Group grow>
                         <TextInput label={"Provinsi"} value={data.areaProvinsi} disabled />

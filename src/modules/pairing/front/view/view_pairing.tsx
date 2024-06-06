@@ -2,7 +2,7 @@
 import { Box, Button, Center, Divider, Grid, Group, Image, ScrollArea, Select, SimpleGrid, Stack, Text, TextInput } from '@mantine/core';
 import React, { useState } from 'react';
 import EchartPairingSentiment from '../components/echart_pairing_sentiment';
-import { PageSubTitle } from '@/modules/_global';
+import { PageSubTitle, WARNA } from '@/modules/_global';
 import _ from 'lodash';
 import { funGetPairingRegional } from '../..';
 
@@ -37,15 +37,15 @@ export default function ViewPairingFront({ candidate, data, area, tingkat }: { c
       <PageSubTitle text1='DATA PASANGAN' text2='REGIONAL' />
       <Box
         style={{
-          // backgroundColor: WARNA.ungu,
+          backgroundColor: WARNA.ungu,
           position: "sticky",
           top: 0,
           zIndex: 99,
-          // padding: 10,
+          paddingTop: 10,
           paddingBottom: 10
         }}
       >
-        <Group justify='flex-end'
+        <Group 
         >
           {/* <TextInput w={300} mt={20} placeholder='Cari' /> */}
           <Select

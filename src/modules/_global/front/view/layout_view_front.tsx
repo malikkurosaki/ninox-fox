@@ -342,17 +342,17 @@ export default function LayoutViewFront({ notif, children }: { notif: number, ch
           </AppShellNavbar>
         }
         <AppShell.Main bg={WARNA.bgGradasi}>
-          <Box pr={10} pt={{base: 26, xl: 38, lg: 30, sm: 26}} style={{ zIndex: 400, position: "fixed", right: 30 }}>
+          <Box pr={10} pt={{base: 23, xl: 32, lg: 26, sm: 23}} style={{ zIndex: 400, position: "fixed", right: 20 }}>
 
             {
               isNotif > 0 ? (
                 <Indicator inline processing color="red" size={12} label={isNotif}>
-                  <ActionIcon variant="filled" color="#18003C" size={25} radius="xl" onClick={OpenModal}>
+                  <ActionIcon variant="filled" color="#390B7D" p={5} size={35} radius="xl" onClick={OpenModal}>
                     <IoMdNotificationsOutline size={30} />
                   </ActionIcon>
                 </Indicator>
               ) : (
-                <ActionIcon variant="filled" color="#18003C" size={25} radius="xl" onClick={OpenModal}>
+                <ActionIcon variant="filled" color="#0E0121" p={5} size={35} radius="xl" onClick={OpenModal}>
                   <IoMdNotificationsOutline size={30} />
                 </ActionIcon>
               )
