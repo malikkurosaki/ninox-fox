@@ -18,6 +18,6 @@ export default async function Page() {
   const dataChartNew = await funGetEmotionChartNew({ candidate: oneCandidate?.id, startDate: moment(new Date()).subtract(7, "days").format("YYYY-MM-DD"), endDate: moment(new Date()).format("YYYY-MM-DD") })
 
   return (
-    <ViewSummary oneCandidate={oneCandidate} emoTable={dataEmotionNew} emoPersen={dataPersenNew} emoChart={dataChartNew} locked={dataLocked} pairingCandidate={dataPairingCandidate} />
+    <ViewSummary oneCandidate={oneCandidate} tingkat={can.tingkat} emoTable={dataEmotionNew} emoPersen={dataPersenNew} emoChart={dataChartNew} locked={dataLocked} pairingCandidate={dataPairingCandidate} />
   );
 }
