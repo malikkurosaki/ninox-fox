@@ -1,5 +1,5 @@
 "use client"
-import { Box, Button, Grid, Group, Image, Select, Stack, Text, TextInput } from '@mantine/core';
+import { Box, Button, Grid, Group, Image, rem, Select, Stack, Text, TextInput } from '@mantine/core';
 import React, { useState } from 'react';
 import EchartSentimentAnalysis from '../components/echart_sentiment_analysis';
 import EchartPublicConcerns from '../components/echart_public_concerns';
@@ -8,6 +8,9 @@ import { useRouter } from 'next/navigation';
 import { PageSubTitle, WARNA } from '@/modules/_global';
 import { funGetEmotionRegionalInsight } from '..';
 import _ from 'lodash';
+import { useHeadroom } from '@mantine/hooks';
+import { useAtom } from 'jotai';
+import { isDetactionNavbar } from '../val/isDetectionNavbar';
 
 const dataKabupaten = [
   {
@@ -54,26 +57,35 @@ export default function ViewRegionalInsights({ oneCandidate, candidate, emotion,
   const [isCandidate, setCandidate] = useState(oneCandidate?.id == null ? candidate[0]?.id : oneCandidate.id)
   const [isData, setData] = useState(emotion)
 
+  const [isDetection, setDetection] = useAtom(isDetactionNavbar)
+  const pinned = useHeadroom({ fixedAt: 120 });
+
   async function onGenerate() {
     const dataLoad = await funGetEmotionRegionalInsight({ candidate: isCandidate })
     setData(dataLoad)
   }
 
+
   return (
     <>
-      <PageSubTitle text1='WAWASAN' text2='REGIONAL' />
-      <Stack pt={20}>
-        <Box
-          style={{
-            backgroundColor: WARNA.ungu,
-            position: "sticky",
-            top: 0,
-            zIndex: 99,
-            paddingTop: 10,
-            paddingBottom: 10
-          }}
-        >
-          <Group>
+      <Box
+        style={{
+          position: 'fixed',
+          top: 0,
+          right: 0,
+          padding: 20,
+          paddingBottom: 40,
+          height: isDetection ? rem(175) : rem(145),
+          zIndex: 20,
+          transform: `translate3d(0, ${pinned ? 0 : isDetection ? rem(-165) : rem(-145)}, 0)`,
+          transition: 'transform 400ms ease',
+          backgroundColor: WARNA.ungu,
+        }}
+        left={isDetection? 250 : 100}
+      >
+        <PageSubTitle text1='WAWASAN' text2='REGIONAL' />
+        <Box>
+          <Group justify='flex-end'>
             <Select
               placeholder="Kandidat"
               data={listCandidate.map((can: any) => ({
@@ -86,6 +98,8 @@ export default function ViewRegionalInsights({ oneCandidate, candidate, emotion,
             <Button c={"dark"} bg={"white"} onClick={onGenerate}>HASIL</Button>
           </Group>
         </Box>
+      </Box>
+      <Stack pt={`calc(${rem(120)} + var(--mantine-spacing-md))`}>
         {isData && isData.map((item: any, i: any) => {
           return (
             <Box key={item.id} pt={20}>
