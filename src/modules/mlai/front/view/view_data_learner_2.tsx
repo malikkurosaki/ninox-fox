@@ -13,6 +13,7 @@ import moment from 'moment';
 import { useRouter } from 'next/navigation';
 // import { ScrollLoader } from 'next-scroll-loader';
 import CobaScroll from '../component/coba_scroll';
+import { RESPONSE_MLAI } from '../val/val_respon_mlai';
 
 const dataLog = [
   {
@@ -62,7 +63,6 @@ export default function ViewDataLearner2({ log }: { log: any }) {
   const [data, setData] = useState(log);
   const [isLoad, setLoad] = useState(false)
 
-
   async function onProses() {
     setResponse('')
     if (request == '' || request == null || request == undefined) {
@@ -72,7 +72,10 @@ export default function ViewDataLearner2({ log }: { log: any }) {
     const ins = await funAddRequestMlAiFront({ request: request })
     if (ins.success === true) {
       setRequest('')
-      setResponse('Terima kasih telah melakukan request, respons akan diberikan secepatnya')
+      await new Promise((r) =>
+        setTimeout(r, 500)
+      )
+      setResponse(RESPONSE_MLAI[Math.floor(Math.random() * 5)])
       const load = await funGetLogRequestMlaiFront()
       setDataLog(load)
       setData(load)
