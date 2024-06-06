@@ -85,13 +85,13 @@ export default function DrawerNotifikasi({ data, onSuccess }: { data: any, onSuc
 
       const loadData = await funGetAllNotifications({ page: 1 })
       setListScrollData(loadData.falseRead)
+      // setListScrollData(loadData.trueRead)
       // setData(upd)
       // setData(loadData.falseRead)
       // setDataRead(loadData.trueRead)
 
       onSuccess(true)
     }
-
 
     return <Box>
       {!dataScr.isRead && (
