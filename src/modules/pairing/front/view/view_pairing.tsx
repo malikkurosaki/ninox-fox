@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import EchartPairingSentiment from '../components/echart_pairing_sentiment';
 import { PageSubTitle, WARNA } from '@/modules/_global';
 import _ from 'lodash';
-import { funGetPairingRegional } from '../..';
+import { funGetPairingRegional, funGetPairingRegionalNew } from '../..';
 import { useAtom } from 'jotai';
 import { useHeadroom } from '@mantine/hooks';
 import { isDetactionNavbar } from '@/modules/regional_insights';
@@ -25,7 +25,7 @@ export default function ViewPairingFront({ candidate, data, area, tingkat }: { c
   async function onGenerate() {
     if (isCandidate1 == null || isCandidate2 == null || isCandidate1 == undefined || isCandidate2 == undefined)
       return toast("Silahkan pilih kandidat", { theme: "dark" })
-    const data = await funGetPairingRegional({ candidate1: isCandidate1, candidate2: isCandidate2 })
+    const data = await funGetPairingRegionalNew({ candidate1: isCandidate1, candidate2: isCandidate2 })
     setData(data)
     setBarChart(data.chart)
     setAllBarChart(data.chart)
@@ -139,7 +139,10 @@ export default function ViewPairingFront({ candidate, data, area, tingkat }: { c
                     value={isCandidate2}
                     onChange={(val) => { setCandidate2(val) }}
                   />
-                  <Button fullWidth c={"dark"} bg={"white"} onClick={onGenerate}>HASIL</Button>
+                  <Button fullWidth c={"dark"} bg={"white"} onClick={() => {
+                    onGenerate()
+                    setArea(null)
+                  }}>HASIL</Button>
                 </SimpleGrid>
               </Box>
 
