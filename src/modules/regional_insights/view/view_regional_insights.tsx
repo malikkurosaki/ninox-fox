@@ -6,7 +6,7 @@ import EchartPublicConcerns from '../components/echart_public_concerns';
 import EchartLeader from '../components/echart_leader';
 import { useRouter } from 'next/navigation';
 import { PageSubTitle, WARNA } from '@/modules/_global';
-import { funGetEmotionRegionalInsight } from '..';
+import { funGetEmotionRegionalInsight, funGetEmotionRegionalInsightNew } from '..';
 import _ from 'lodash';
 import { useHeadroom } from '@mantine/hooks';
 import { useAtom } from 'jotai';
@@ -61,7 +61,7 @@ export default function ViewRegionalInsights({ oneCandidate, candidate, emotion,
   const pinned = useHeadroom({ fixedAt: 120 });
 
   async function onGenerate() {
-    const dataLoad = await funGetEmotionRegionalInsight({ candidate: isCandidate })
+    const dataLoad = await funGetEmotionRegionalInsightNew({ candidate: isCandidate })
     setData(dataLoad)
   }
 
