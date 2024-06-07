@@ -11,62 +11,16 @@ import funAddRequestMlAiFront from '../fun/add_request_mlai';
 import funGetLogRequestMlaiFront from '../fun/get_log_request_mlai_front';
 import moment from 'moment';
 import { useRouter } from 'next/navigation';
-// import { ScrollLoader } from 'next-scroll-loader';
 import CobaScroll from '../component/coba_scroll';
 import { RESPONSE_MLAI } from '../val/val_respon_mlai';
 import { ScrollLoaderExternalState } from 'next-scroll-loader';
 
-const dataLog = [
-  {
-    id: 1,
-    log: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-    req: 'Pending',
-    tgl: '21 Mei 2024',
-    color: "#CE9E23",
-  },
-  {
-    id: 2,
-    log: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-    req: 'Sukses',
-    tgl: '11 Mei 2024',
-    color: "#2CCC1E",
-  },
-  {
-    id: 3,
-    log: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-    req: 'Sukses',
-    tgl: '09 Mei 2024',
-    color: "#2CCC1E",
-  },
-  {
-    id: 4,
-    log: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-    req: 'Pending',
-    tgl: '10 Mei 2024',
-    color: "#CE9E23",
-  },
-  {
-    id: 5,
-    log: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-    req: 'Sukses',
-    tgl: '20 Mei 2024',
-    color: "#2CCC1E",
-  },
 
-]
-
-export default function ViewDataLearner2({ log }: { log: any }) {
+export default function ViewDataLearner2() {
   const router = useRouter()
   const { ref, width, height } = useElementSize()
   const [response, setResponse] = useState('')
   const [request, setRequest] = useState('')
-  const [dataLog, setDataLog] = useState(log)
-  const [data, setData] = useState(log);
-  const [isLoad, setLoad] = useState(false)
-  const [page, setPage] = useState()
-
-  const [listLogRequest, setListLogRequest] = useState<any[]>([])
-  const [scrollPage, setScrollPage] = useState(1)
 
   async function onProses({ page }: { page: any }) {
     setResponse('')
@@ -81,15 +35,54 @@ export default function ViewDataLearner2({ log }: { log: any }) {
         setTimeout(r, 500)
       )
       setResponse(RESPONSE_MLAI[Math.floor(Math.random() * 5)])
-      // const load = await funGetLogRequestMlaiFront({ page: page })
-      const load = await funGetLogRequestMlaiFront()
-      setListLogRequest(load)
-      setDataLog(load)
-      setData(load)
-      setLoad(!isLoad)
+      const load = await funGetLogRequestMlaiFront({ page: page })
+      setListScrollData(load)
     } else {
       setResponse('Error, silakan coba lagi nanti')
     }
+  }
+
+  const [listScrollData, setListScrollData] = useState<any[]>([])
+  const [scrollPage, setScrollPage] = useState(1)
+
+
+  const ScrollItem = ({ dataScroll, page }: { dataScroll: any, page: any }) => {
+    const [dataScr, setDataScr] = useState<{ [key: string]: any }>(dataScroll)
+
+    return <Box>
+      <Box style={{
+        cursor: "pointer"
+      }} key={dataScr.id}
+        onClick={() => {
+          if (dataScr.status == 1) {
+            router.push('/ml-ai')
+          }
+        }
+        }
+      >
+        <Spoiler maxHeight={30} showLabel="Show more" hideLabel="Hide">
+          <Text c={dataScr.status == 0 ? '#CE9E23' : '#2CCC1E'}>{dataScr.request} </Text>
+        </Spoiler>
+        <Group justify='space-between' style={{
+          alignItems: "center",
+          alignContent: "center"
+        }}>
+          <Text c={'#D0CFCF'} fz={13}>{moment(dataScr.createdAt).format('LLL')}</Text>
+          <Group gap={5} mt={10} style={{
+            alignItems: "center",
+            alignContent: "center"
+          }}>
+            {
+              dataScr.status == 0
+                ? <GiBackwardTime size={25} color={'#CE9E23'} />
+                : <IoIosCheckmarkCircleOutline size={25} color={'#2CCC1E'} />
+            }
+            <Text c={dataScr.status == 0 ? '#CE9E23' : '#2CCC1E'} fz={13}>{dataScr.status == 0 ? 'Pending' : 'Terjawab'}</Text>
+          </Group>
+        </Group>
+        <Divider my="md" color={'#6E6C68'} />
+      </Box>
+    </Box>
   }
 
 
@@ -158,7 +151,10 @@ export default function ViewDataLearner2({ log }: { log: any }) {
                 height: '60vh'
               }}>
                 <Text c={'white'} mb={20} fz={18}>LOG REQUEST</Text>
-                <CobaScroll isload={isLoad} datalist={listLogRequest} />
+                {/* <CobaScroll isload={isLoad} datalist={listLogRequest} /> */}
+                <ScrollLoaderExternalState url="/api/get-log-request" height='50vh' take={15} data={listScrollData} setData={setListScrollData} page={scrollPage} setPage={setScrollPage}  >
+                  {(dataScoll: any) => <ScrollItem dataScroll={dataScoll} page={scrollPage} />}
+                </ScrollLoaderExternalState>
               </Box>
             </Box>
           </Box>
