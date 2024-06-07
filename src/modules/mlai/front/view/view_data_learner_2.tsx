@@ -14,6 +14,7 @@ import { useRouter } from 'next/navigation';
 // import { ScrollLoader } from 'next-scroll-loader';
 import CobaScroll from '../component/coba_scroll';
 import { RESPONSE_MLAI } from '../val/val_respon_mlai';
+import { ScrollLoaderExternalState } from 'next-scroll-loader';
 
 const dataLog = [
   {
@@ -62,8 +63,12 @@ export default function ViewDataLearner2({ log }: { log: any }) {
   const [dataLog, setDataLog] = useState(log)
   const [data, setData] = useState(log);
   const [isLoad, setLoad] = useState(false)
+  const [page, setPage] = useState()
 
-  async function onProses() {
+  const [listLogRequest, setListLogRequest] = useState<any[]>([])
+  const [scrollPage, setScrollPage] = useState(1)
+
+  async function onProses({ page }: { page: any }) {
     setResponse('')
     if (request == '' || request == null || request == undefined) {
       return setResponse('Silahkan isi form request')
@@ -76,7 +81,9 @@ export default function ViewDataLearner2({ log }: { log: any }) {
         setTimeout(r, 500)
       )
       setResponse(RESPONSE_MLAI[Math.floor(Math.random() * 5)])
+      // const load = await funGetLogRequestMlaiFront({ page: page })
       const load = await funGetLogRequestMlaiFront()
+      setListLogRequest(load)
       setDataLog(load)
       setData(load)
       setLoad(!isLoad)
@@ -113,7 +120,9 @@ export default function ViewDataLearner2({ log }: { log: any }) {
                 onChange={(val) => setRequest(val.currentTarget.value)}
               />
             </Box>
-            <Button mt={20} fullWidth radius={10} onClick={onProses} color="indigo">KIRIM</Button>
+            <Button mt={20} fullWidth radius={10} onClick={() => {
+              onProses({ page: scrollPage })
+            }} color="indigo">KIRIM</Button>
           </Box>
           <Box>
 
@@ -149,7 +158,7 @@ export default function ViewDataLearner2({ log }: { log: any }) {
                 height: '60vh'
               }}>
                 <Text c={'white'} mb={20} fz={18}>LOG REQUEST</Text>
-                <CobaScroll isload={isLoad} />
+                <CobaScroll isload={isLoad} datalist={listLogRequest} />
               </Box>
             </Box>
           </Box>
@@ -158,3 +167,4 @@ export default function ViewDataLearner2({ log }: { log: any }) {
     </>
   );
 }
+

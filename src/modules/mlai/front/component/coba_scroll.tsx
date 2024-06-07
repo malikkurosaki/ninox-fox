@@ -2,16 +2,19 @@
 import { Box, Divider, Group, Spoiler, Text } from '@mantine/core';
 import { useShallowEffect } from '@mantine/hooks';
 import moment from 'moment';
+import { ScrollLoaderExternalState } from 'next-scroll-loader';
 // import { ScrollLoader } from 'next-scroll-loader';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { GiBackwardTime } from 'react-icons/gi';
 import { IoIosCheckmarkCircleOutline } from 'react-icons/io';
 
-export default function CobaScroll({ isload }: { isload: boolean }) {
+export default function CobaScroll({ isload, datalist }: { isload: any, datalist: any }) {
   const router = useRouter()
   const [link, setLink] = useState("/api/get-log-request")
   const [cekLoad, setLoad] = useState(false)
+  const [listScrollData, setListScrollData] = useState(datalist)
+  const [scrollPage, setScrollPage] = useState(1)
 
   async function load1() {
     setLink("")
@@ -31,7 +34,7 @@ export default function CobaScroll({ isload }: { isload: boolean }) {
 
   return (
     <>
-      {/* <ScrollLoader url={link} height='50vh' take={15}>
+      <ScrollLoaderExternalState url={link} height='50vh' take={15} data={listScrollData} setData={setListScrollData} page={scrollPage} setPage={setScrollPage}  >
         {(data: any) =>
           <Box>
             <Box style={{
@@ -68,7 +71,8 @@ export default function CobaScroll({ isload }: { isload: boolean }) {
             </Box>
           </Box>
         }
-      </ScrollLoader> */}
+      </ScrollLoaderExternalState>
     </>
   );
 }
+
