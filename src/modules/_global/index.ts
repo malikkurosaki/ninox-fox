@@ -33,6 +33,7 @@ import funGetOneProvinsi from './fun/fun_get_one_provinsi';
 import funAddNotifications from './back/fun/add_notifications';
 import MqttLoad from './util/mqtt_load';
 import mtqq_client from "./util/mqtt_client"
+import Glitch from './front/components/glitch';
 
 
 export { provinsiCount }
@@ -74,3 +75,4 @@ export { funAddNotifications }
 export { MqttLoad }
 export { mtqq_client }
 export { COLOR_EMOTION_NEW }
+export { Glitch }

@@ -14,7 +14,7 @@ import { useRouter } from 'next/navigation';
 import CobaScroll from '../component/coba_scroll';
 import { RESPONSE_MLAI } from '../val/val_respon_mlai';
 import { ScrollLoaderExternalState } from 'next-scroll-loader';
-
+import { HiChevronDown, HiChevronUp } from "react-icons/hi";
 
 export default function ViewDataLearner3() {
   const router = useRouter()
@@ -65,12 +65,18 @@ export default function ViewDataLearner3() {
           showMore ? (
             <Box>
               <Text c={dataScr.status == 0 ? '#CE9E23' : '#2CCC1E'}>{dataScr.request}</Text>
-              <Anchor c={'blue'} onClick={() => setShowMore(false)}>Hide</Anchor>
+              <Group gap={3} style={{alignItems: "center"}}>
+                <Anchor c={'blue'} onClick={() => setShowMore(false)}>Hide</Anchor>
+                <HiChevronUp size={25} color='#228BE6'/>
+              </Group>
             </Box>
           ) : (
             <Box>
               <Text c={dataScr.status == 0 ? '#CE9E23' : '#2CCC1E'}>{dataScr.request.substring(0, 200) + '...'}</Text>
-              <Anchor c={'blue'} onClick={() => setShowMore(true)}>Show more</Anchor>
+              <Group gap={3} style={{alignItems: "center"}}>
+                  <Anchor c={'blue'} onClick={() => setShowMore(true)}>Show more</Anchor>
+                  <HiChevronDown size={25} color='#228BE6'/>
+              </Group>
             </Box>
           )
         ) : (
