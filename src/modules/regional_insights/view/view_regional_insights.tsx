@@ -13,45 +13,6 @@ import { useAtom } from 'jotai';
 import { isDetactionNavbar } from '../val/isDetectionNavbar';
 import toast from 'react-simple-toasts';
 
-const dataKabupaten = [
-  {
-    id: 1,
-    name: "DENPASAR"
-  },
-  {
-    id: 2,
-    name: "BADUNG"
-  },
-  {
-    id: 3,
-    name: "BULELENG"
-  },
-  {
-    id: 4,
-    name: "BANGLI"
-  },
-  {
-    id: 5,
-    name: "GIANYAR"
-  },
-  {
-    id: 6,
-    name: "JEMBRANA"
-  },
-  {
-    id: 7,
-    name: "KARANGASEM"
-  },
-  {
-    id: 8,
-    name: "KLUNGKUNG"
-  },
-  {
-    id: 9,
-    name: "TABANAN"
-  },
-]
-
 export default function ViewRegionalInsights({ oneCandidate, candidate, emotion, audience, pct, lta }: { oneCandidate: any, candidate: any, emotion: any, audience: any, pct: any, lta: any }) {
   const router = useRouter()
   const [listCandidate, setListCandidate] = useState(candidate)
@@ -66,7 +27,7 @@ export default function ViewRegionalInsights({ oneCandidate, candidate, emotion,
     if (isCandidate == null || isCandidate == undefined) {
       setGlitch(true)
       await new Promise((r) =>
-        setTimeout(r, 500)
+        setTimeout(r, 300)
       )
       setGlitch(false)
       return toast("Silahkan pilih kandidat", { theme: "light", position: 'center', })

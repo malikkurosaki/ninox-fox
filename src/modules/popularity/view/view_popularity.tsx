@@ -3,7 +3,7 @@ import { Box, Button, Center, Flex, Grid, Group, Image, rem, Select, SimpleGrid,
 import React, { useState } from 'react';
 import EchartPopularityLine from '../components/echart_popularity_line';
 import EchartPopularityPie from '../components/echart_popularity_pie';
-import { PageSubTitle, WARNA } from '@/modules/_global';
+import { Glitch, PageSubTitle, WARNA } from '@/modules/_global';
 import _ from 'lodash';
 import { funGetPopularityToday, funGetPopularityTodayNew, funGetRateChart } from '..';
 import moment from 'moment';
@@ -20,13 +20,20 @@ export default function ViewPopularity({ candidate, pairingToday, chartRate, tin
   const [isCandidate2, setCandidate2] = useState(pairingToday.pairingCandidate.idCandidate2)
   const [isPieChart, setPieChart] = useState(isPairingToday.chart)
   const [isRateChart, setRateChart] = useState(chartRate)
+  const [isGlitch, setGlitch] = useState(false)
 
   const [isDetection, setDetection] = useAtom(isDetactionNavbar)
   const pinned = useHeadroom({ fixedAt: 120 });
 
   async function onGenerate() {
-    if (isCandidate1 == null || isCandidate2 == null || isCandidate1 == undefined || isCandidate2 == undefined)
-      return toast("Silahkan pilih kandidat", { theme: "dark" })
+    if (isCandidate1 == null || isCandidate2 == null || isCandidate1 == undefined || isCandidate2 == undefined) {
+      setGlitch(true)
+      await new Promise((r) =>
+        setTimeout(r, 300)
+      )
+      setGlitch(false)
+      return toast("Silahkan pilih kandidat", { theme: "light", position: 'center', })
+    }
     const data = await funGetPopularityTodayNew({ candidate1: isCandidate1, candidate2: isCandidate2 })
     setPairingToday(data)
     setPieChart(data.chart)
@@ -43,6 +50,7 @@ export default function ViewPopularity({ candidate, pairingToday, chartRate, tin
 
   return (
     <>
+      {isGlitch && <Glitch />}
       <Box
         style={{
           position: 'fixed',
@@ -64,28 +72,28 @@ export default function ViewPopularity({ candidate, pairingToday, chartRate, tin
             cols={{ base: 1, sm: 3, lg: 3 }}
             spacing={{ base: 10, sm: 'xl' }}
           >
-                    <Select
-            placeholder="Kandidat 1"
-            data={candidate.map((can: any) => ({
-              value: String(can.id),
-              label: can.name,
-            }))}
-            value={isCandidate1}
-            onChange={(val) => {
-              setCandidate1(val)
-              setCandidate2(null)
-            }}
-          />
-          <Select
-            placeholder="Kandidat 2"
-            data={candidate.map((can: any) => ({
-              value: String(can.id),
-              label: can.name,
-              disabled: isCandidate1 == String(can.id) ? true : false
-            }))}
-            value={isCandidate2}
-            onChange={(val) => { setCandidate2(val) }}
-          />
+            <Select
+              placeholder="Kandidat 1"
+              data={candidate.map((can: any) => ({
+                value: String(can.id),
+                label: can.name,
+              }))}
+              value={isCandidate1}
+              onChange={(val) => {
+                setCandidate1(val)
+                setCandidate2(null)
+              }}
+            />
+            <Select
+              placeholder="Kandidat 2"
+              data={candidate.map((can: any) => ({
+                value: String(can.id),
+                label: can.name,
+                disabled: isCandidate1 == String(can.id) ? true : false
+              }))}
+              value={isCandidate2}
+              onChange={(val) => { setCandidate2(val) }}
+            />
             <Button fullWidth bg={"white"} c={"dark"} onClick={onGenerate}>HASIL</Button>
           </SimpleGrid>
         </Group>

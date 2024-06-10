@@ -61,21 +61,25 @@ export default function ViewDataLearner3() {
         }
         }
       >
-        {dataScr.request.length > 200 ? (
+        {dataScr.request.length > 150 ? (
           showMore ? (
             <Box>
               <Text c={dataScr.status == 0 ? '#CE9E23' : '#2CCC1E'}>{dataScr.request}</Text>
-              <Group gap={3} style={{alignItems: "center"}}>
-                <Anchor c={'blue'} onClick={() => setShowMore(false)}>Hide</Anchor>
-                <HiChevronUp size={25} color='#228BE6'/>
+              <Group gap={3} style={{ alignItems: "center" }}>
+                <Anchor c={'blue'} onClick={() => setShowMore(false)}>
+                  Hide
+                  <HiChevronUp size={25} />
+                </Anchor>
               </Group>
             </Box>
           ) : (
             <Box>
-              <Text c={dataScr.status == 0 ? '#CE9E23' : '#2CCC1E'}>{dataScr.request.substring(0, 200) + '...'}</Text>
-              <Group gap={3} style={{alignItems: "center"}}>
-                  <Anchor c={'blue'} onClick={() => setShowMore(true)}>Show more</Anchor>
-                  <HiChevronDown size={25} color='#228BE6'/>
+              <Text c={dataScr.status == 0 ? '#CE9E23' : '#2CCC1E'}>{dataScr.request.substring(0, 150) + '...'}</Text>
+              <Group gap={3} style={{ alignItems: "center" }}>
+                <Anchor c={'blue'} onClick={() => setShowMore(true)}>
+                  Show more
+                  <HiChevronDown size={25} />
+                </Anchor>
               </Group>
             </Box>
           )
