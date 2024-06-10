@@ -2,7 +2,7 @@
 import { Box, Button, Center, Divider, Grid, Group, Image, rem, ScrollArea, Select, SimpleGrid, Stack, Text, TextInput } from '@mantine/core';
 import React, { useState } from 'react';
 import EchartPairingSentiment from '../components/echart_pairing_sentiment';
-import { PageSubTitle, WARNA } from '@/modules/_global';
+import { Glitch, PageSubTitle, WARNA } from '@/modules/_global';
 import _ from 'lodash';
 import { funGetPairingRegional, funGetPairingRegionalNew } from '../..';
 import { useAtom } from 'jotai';
@@ -18,13 +18,20 @@ export default function ViewPairingFront({ candidate, data, area, tingkat }: { c
   const [isAllBarChart, setAllBarChart] = useState(data.chart)
   const [isBarChart, setBarChart] = useState(data.chart)
   const [isArea, setArea] = useState<any>(null)
+  const [isGlitch, setGlitch] = useState(false)
 
   const [isDetection, setDetection] = useAtom(isDetactionNavbar)
   const pinned = useHeadroom({ fixedAt: 120 });
 
   async function onGenerate() {
-    if (isCandidate1 == null || isCandidate2 == null || isCandidate1 == undefined || isCandidate2 == undefined)
-      return toast("Silahkan pilih kandidat", { theme: "dark" })
+    if (isCandidate1 == null || isCandidate2 == null || isCandidate1 == undefined || isCandidate2 == undefined) {
+      setGlitch(true)
+      await new Promise((r) =>
+        setTimeout(r, 300)
+      )
+      setGlitch(false)
+      return toast("Silahkan pilih kandidat", { theme: "light", position: 'center', })
+    }
     const data = await funGetPairingRegionalNew({ candidate1: isCandidate1, candidate2: isCandidate2 })
     setData(data)
     setBarChart(data.chart)
@@ -44,6 +51,7 @@ export default function ViewPairingFront({ candidate, data, area, tingkat }: { c
 
   return (
     <>
+      {isGlitch && <Glitch />}
       <Box
         style={{
           position: 'fixed',
