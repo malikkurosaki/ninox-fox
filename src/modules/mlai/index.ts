@@ -22,6 +22,7 @@ import funGetMlAiFront from "./front/fun/get_ml_ai_front";
 import funGetMlAiFrontV2 from "./front/fun/get_ml_ai_front_v2";
 import ViewDataLearner from "./front/view/view_data_learner";
 import ViewDataLearner2 from "./front/view/view_data_learner_2";
+import ViewDataLearner3 from "./front/view/view_data_learner_3";
 import ViewMlAi from "./front/view/view_ml_ai";
 
 export { funGetAllMlAi }
@@ -49,3 +50,4 @@ export { funGetOneRequestAddMlAi }
 export { funAddRequestMlAiFront }
 export { funGetLogRequestMlaiFront }
 export { funGetCountPendingRequest }
+export { ViewDataLearner3 }
