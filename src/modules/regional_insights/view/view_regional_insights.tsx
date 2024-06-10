@@ -5,7 +5,7 @@ import EchartSentimentAnalysis from '../components/echart_sentiment_analysis';
 import EchartPublicConcerns from '../components/echart_public_concerns';
 import EchartLeader from '../components/echart_leader';
 import { useRouter } from 'next/navigation';
-import { PageSubTitle, WARNA } from '@/modules/_global';
+import { Glitch, PageSubTitle, WARNA } from '@/modules/_global';
 import { funGetEmotionRegionalInsight, funGetEmotionRegionalInsightNew } from '..';
 import _ from 'lodash';
 import { useHeadroom } from '@mantine/hooks';
@@ -57,13 +57,20 @@ export default function ViewRegionalInsights({ oneCandidate, candidate, emotion,
   const [listCandidate, setListCandidate] = useState(candidate)
   const [isCandidate, setCandidate] = useState(oneCandidate?.id == null ? candidate[0]?.id : oneCandidate.id)
   const [isData, setData] = useState(emotion)
+  const [isGlitch, setGlitch] = useState(false)
 
   const [isDetection, setDetection] = useAtom(isDetactionNavbar)
   const pinned = useHeadroom({ fixedAt: 120 });
 
   async function onGenerate() {
-    if (isCandidate == null || isCandidate == undefined)
-      return toast("Silahkan pilih kandidat", { theme: "dark" })
+    if (isCandidate == null || isCandidate == undefined) {
+      setGlitch(true)
+      await new Promise((r) =>
+        setTimeout(r, 500)
+      )
+      setGlitch(false)
+      return toast("Silahkan pilih kandidat", { theme: "light", position: 'center', })
+    }
     const dataLoad = await funGetEmotionRegionalInsightNew({ candidate: isCandidate })
     setData(dataLoad)
   }
@@ -71,6 +78,7 @@ export default function ViewRegionalInsights({ oneCandidate, candidate, emotion,
 
   return (
     <>
+      {isGlitch && <Glitch/>}
       <Box
         style={{
           position: 'fixed',
