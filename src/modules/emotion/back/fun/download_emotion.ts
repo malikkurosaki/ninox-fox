@@ -75,14 +75,14 @@ export default async function funDownloadEmotion({ request }: { request: any }) 
                 kecamatan: v.AreaKecamatan.name,
                 kelurahan: v.AreaKelurahan.name,
                 date: moment(request.date).format('YYYY-MM-DD'),
-                confidence: v.confidence,
-                supportive: v.supportive,
-                positive: v.positive,
-                undecided: v.undecided,
-                unsupportive: v.unsupportive,
-                uncomfortable: v.uncomfortable,
-                negative: v.negative,
-                dissapproval: v.dissapproval,
+                PotensiMendukungFix: v.confidence,
+                PotensiMendukungBerubah: v.supportive,
+                MempertimbangkanFix: v.positive,
+                MempertimbangkanBerubah: v.undecided,
+                TidakTahuFix: v.unsupportive,
+                TidakTahuBerubah: v.uncomfortable,
+                PotensiTidakMendukungFix: v.negative,
+                PotensiTidakMendukungBerubah: v.dissapproval,
             }))
         } else {
             if (request.tingkat == 1) {
@@ -139,14 +139,14 @@ export default async function funDownloadEmotion({ request }: { request: any }) 
                     kecamatan: v.kecamatan,
                     kelurahan: v.kelurahan,
                     date: moment(request.date).format('YYYY-MM-DD'),
-                    confidence: '(nilai)',
-                    supportive: '(nilai)',
-                    positive: '(nilai)',
-                    undecided: '(nilai)',
-                    unsupportive: '(nilai)',
-                    uncomfortable: '(nilai)',
-                    negative: '(nilai)',
-                    dissapproval: '(nilai)'
+                    PotensiMendukungFix: '(nilai)',
+                    PotensiMendukungBerubah: '(nilai)',
+                    MempertimbangkanFix: '(nilai)',
+                    MempertimbangkanBerubah: '(nilai)',
+                    TidakTahuFix: '(nilai)',
+                    TidakTahuBerubah: '(nilai)',
+                    PotensiTidakMendukungFix: '(nilai)',
+                    PotensiTidakMendukungBerubah: '(nilai)'
                 }))
 
             } else {
@@ -203,14 +203,14 @@ export default async function funDownloadEmotion({ request }: { request: any }) 
                     kecamatan: v.kecamatan,
                     kelurahan: v.kelurahan,
                     date: moment(request.date).format('YYYY-MM-DD'),
-                    confidence: '(nilai)',
-                    supportive: '(nilai)',
-                    positive: '(nilai)',
-                    undecided: '(nilai)',
-                    unsupportive: '(nilai)',
-                    uncomfortable: '(nilai)',
-                    negative: '(nilai)',
-                    dissapproval: '(nilai)'
+                    PotensiMendukungFix: '(nilai)',
+                    PotensiMendukungBerubah: '(nilai)',
+                    MempertimbangkanFix: '(nilai)',
+                    MempertimbangkanBerubah: '(nilai)',
+                    TidakTahuFix: '(nilai)',
+                    TidakTahuBerubah: '(nilai)',
+                    PotensiTidakMendukungFix: '(nilai)',
+                    PotensiTidakMendukungBerubah: '(nilai)'
                 }))
             }
         }

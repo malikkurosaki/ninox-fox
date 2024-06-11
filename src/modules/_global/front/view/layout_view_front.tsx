@@ -24,6 +24,8 @@ import classes from '..//components/hover.module.css'
 import { notifications } from '@mantine/notifications';
 import { DataMlAi } from '../components/data_ml_ai';
 import { DataSosialEkonomi } from '../components/data_sosial_ekonomi';
+import { isDetactionNavbar } from '@/modules/regional_insights';
+
 
 export default function LayoutViewFront({ notif, children }: { notif: number, children: React.ReactNode }) {
   const [valOpenModal, setOpenModal] = useAtom(isModalLayout)
@@ -37,6 +39,7 @@ export default function LayoutViewFront({ notif, children }: { notif: number, ch
   const pathname = usePathname();
   const [active, setActive] = useState("");
   const [user, setUser] = useState<any>("")
+  const [isDetection, setDetection] = useAtom(isDetactionNavbar)
 
   useShallowEffect(() => {
     setActive(pathname)
@@ -84,7 +87,6 @@ export default function LayoutViewFront({ notif, children }: { notif: number, ch
 
   useEffect(() => {
     mtqq_client.on("connect", () => {
-      // console.log("connect")
       mtqq_client.subscribe("app_ninox_fox")
     })
 
@@ -188,6 +190,7 @@ export default function LayoutViewFront({ notif, children }: { notif: number, ch
                   <ActionIcon onClick={() => {
                     setNavOpt({ width: 250, breakpoint: 'sm', collapsed: { mobile: isOpenNavbar } })
                     setOpenNavbar(false)
+                    setDetection(true)
                   }} variant='subtle' c={"white"}>
                     <MdArrowForwardIos size={30} />
                   </ActionIcon>
@@ -209,6 +212,7 @@ export default function LayoutViewFront({ notif, children }: { notif: number, ch
               <ActionIcon onClick={() => {
                 setNavOpt({ width: 100, breakpoint: 'sm', collapsed: { mobile: isOpenNavbar } })
                 setOpenNavbar(true)
+                setDetection(false)
               }} variant='subtle' c={"white"}>
                 <AiOutlineClose size={30} />
               </ActionIcon>
@@ -343,17 +347,17 @@ export default function LayoutViewFront({ notif, children }: { notif: number, ch
           </AppShellNavbar>
         }
         <AppShell.Main bg={WARNA.bgGradasi}>
-          <Box pr={10} style={{ zIndex: 400, position: "fixed", right: 30, top: 38 }}>
+          <Box pr={10} pt={{ base: 23, xl: 32, lg: 26, sm: 23 }} style={{ zIndex: 400, position: "fixed", right: 20 }}>
 
             {
               isNotif > 0 ? (
                 <Indicator inline processing color="red" size={12} label={isNotif}>
-                  <ActionIcon variant="filled" color="#18003C" size={25} radius="xl" onClick={OpenModal}>
+                  <ActionIcon variant="filled" color="#390B7D" p={5} size={35} radius="xl" onClick={OpenModal}>
                     <IoMdNotificationsOutline size={30} />
                   </ActionIcon>
                 </Indicator>
               ) : (
-                <ActionIcon variant="filled" color="#18003C" size={25} radius="xl" onClick={OpenModal}>
+                <ActionIcon variant="filled" color="#0E0121" p={5} size={35} radius="xl" onClick={OpenModal}>
                   <IoMdNotificationsOutline size={30} />
                 </ActionIcon>
               )
@@ -388,7 +392,7 @@ export default function LayoutViewFront({ notif, children }: { notif: number, ch
               top={0}
               right={0}
               h={'100%'}
-              w={'30%'}
+              w={{ base: '50%', xl: '30%', lg: '35%', md: '40%', sm: '50%' }}
               pos={'fixed'}
               style={{
                 ...style,
