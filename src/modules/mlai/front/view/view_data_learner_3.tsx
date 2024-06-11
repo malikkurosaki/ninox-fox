@@ -66,7 +66,7 @@ export default function ViewDataLearner3() {
             <Box>
               <Text c={dataScr.status == 0 ? '#CE9E23' : '#2CCC1E'}>{dataScr.request}</Text>
               <Group gap={3} style={{ alignItems: "center" }}>
-                <Anchor c={'blue'} onClick={() => setShowMore(false)}>
+                <Anchor c={'blue'} onClick={() => setShowMore(false)} style={{ display: 'flex', alignItems: 'center' }}>
                   Hide
                   <HiChevronUp size={25} />
                 </Anchor>
@@ -76,7 +76,11 @@ export default function ViewDataLearner3() {
             <Box>
               <Text c={dataScr.status == 0 ? '#CE9E23' : '#2CCC1E'}>{dataScr.request.substring(0, 150) + '...'}</Text>
               <Group gap={3} style={{ alignItems: "center" }}>
-                <Anchor c={'blue'} onClick={() => setShowMore(true)}>
+                {/* <Anchor c={'blue'} onClick={() => setShowMore(true)}>
+                  Show more
+                  <HiChevronDown size={25} />
+                </Anchor> */}
+                <Anchor c={'blue'} onClick={() => setShowMore(true)} style={{ display: 'flex', alignItems: 'center' }}>
                   Show more
                   <HiChevronDown size={25} />
                 </Anchor>
