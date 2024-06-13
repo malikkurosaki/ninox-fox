@@ -159,7 +159,7 @@ export default function AddCandidate({ params, provinsi, kabupaten, }: { params:
                                 }}
                             />
                             <Group justify="flex-end">
-                                <Button bg={"gray"} w={150} mt={30} onClick={() => onConfirmation()}>SAVE</Button>
+                                <Button bg={"gray"} w={150} mt={30} onClick={() => onConfirmation()}>SIMPAN</Button>
                             </Group>
                         </Box>
                     </Stack>

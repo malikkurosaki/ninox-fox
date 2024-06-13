@@ -110,7 +110,7 @@ export default async function funAddNotifications({ kategori, candidateId, candi
       description: desc,
       title: judul,
       idCandidate: (paramCan) ? kandidat.id : null,
-      idProvinsi: provinsiId
+      idProvinsi: Number(provinsiId)
    }));
 
    await prisma.notifications.createMany({

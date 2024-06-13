@@ -121,9 +121,9 @@ export default function ModalBeranda({ areaPro, onSuccess }: { areaPro: any, onS
               onClick={() => setOpenModal(false)}
               fullWidth
             >
-              CLOSE
+              TUTUP
             </Button>
-            <Button fullWidth radius={10} color="green" onClick={defaultWilayah}>SUBMIT</Button>
+            <Button fullWidth radius={10} color="green" onClick={defaultWilayah}>SIMPAN</Button>
           </SimpleGrid>
         </Alert>
       </Box>

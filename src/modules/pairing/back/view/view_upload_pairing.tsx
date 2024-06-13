@@ -67,7 +67,7 @@ export default function ViewUploadPairing() {
                         borderRadius: 10
                     }}
                 >
-                    <Text fw={"bold"} c={"white"} mb={20}>UPLOAD REGIONAL DATA PAIRING</Text>
+                    <Text fw={"bold"} c={"white"} mb={20}>UPLOAD DATA PENILAIAN SENTIMEN PEMILIH DAN DATA PASANGAN REGIONAL</Text>
                     <Dropzone
                         style={{
                             border: "1px dashed",
@@ -109,10 +109,10 @@ export default function ViewUploadPairing() {
 
                             <div>
                                 <Text size="xl" inline>
-                                    Drag files here or click to select files
+                                    Seret file ke sini atau klik untuk memilih file
                                 </Text>
                                 <Text size="sm" inline mt={7} >
-                                    Attach one file, the file must not exceed 5MB
+                                    Lampirkan satu file, file tidak boleh melebihi 5MB
                                 </Text>
                             </div>
                         </Group>
@@ -147,8 +147,8 @@ export default function ViewUploadPairing() {
                                                         }}
                                                     >
                                                         <Table.Th rowSpan={2} ta={"center"}>ID</Table.Th>
-                                                        <Table.Th rowSpan={2} ta={"center"}>Candidate 1</Table.Th>
-                                                        <Table.Th rowSpan={2} ta={"center"}>Candidate 2</Table.Th>
+                                                        <Table.Th rowSpan={2} ta={"center"}>Kandidat 1</Table.Th>
+                                                        <Table.Th rowSpan={2} ta={"center"}>Kandidat 2</Table.Th>
                                                         <Table.Th rowSpan={2} ta={"center"}>Provinsi</Table.Th>
                                                         <Table.Th rowSpan={2} ta={"center"}>Kabupaten/Kota</Table.Th>
                                                         <Table.Th rowSpan={2} ta={"center"}>Kecamatan</Table.Th>
