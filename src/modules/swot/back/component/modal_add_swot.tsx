@@ -6,6 +6,7 @@ import toast from "react-simple-toasts";
 import funAddSwotf from "../fun/fun_add_swot";
 import { funAddNotifications, funGetAccessArea } from "@/modules/_global";
 import { funLogUser } from "@/modules/user";
+import { useState } from "react";
 
 /**
  * Fungsi untuk menampilkan modal konfirmasi add swot.
@@ -14,11 +15,14 @@ import { funLogUser } from "@/modules/user";
 
 export default function ModalAddSwot({ data, text, onSuccess }: { data: any, text: any, onSuccess: (val: any) => void }) {
     const [openModal, setOpenModal] = useAtom(isModalSwot)
+    const [isLoading, setLoading] = useState(false)
 
     async function onCreateSwot() {
+        setLoading(true)
         const cek = await funGetAccessArea({ candidate: data.idCandidate })
         if (!cek) {
             setOpenModal(false)
+            setLoading(false)
             return toast("Anda tidak mempunyai akses ke wilayah tersebut", { theme: "dark" })
         }
         const addData = await funAddSwotf({ body: data, content: text })
@@ -28,6 +32,7 @@ export default function ModalAddSwot({ data, text, onSuccess }: { data: any, tex
         toast("Success", { theme: "dark" })
         setOpenModal(false)
         onSuccess(true)
+        setLoading(false)
     }
 
     return (
@@ -46,7 +51,7 @@ export default function ModalAddSwot({ data, text, onSuccess }: { data: any, tex
                         >
                             TIDAK
                         </Button>
-                        <Button radius={10} color="gray.7" w={150} onClick={() => onCreateSwot()}>
+                        <Button loading={isLoading} radius={10} color="gray.7" w={150} onClick={() => onCreateSwot()}>
                             YA
                         </Button>
                     </Group>

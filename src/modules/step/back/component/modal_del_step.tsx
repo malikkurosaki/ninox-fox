@@ -6,6 +6,7 @@ import toast from "react-simple-toasts";
 import funDeleteStep from "../fun/fun_delete_step";
 import { funGetAccessArea } from "@/modules/_global";
 import { funLogUser } from "@/modules/user";
+import { useState } from "react";
 
 /**
  * Fungsi untuk menampilkan modal konfirmasi delete step.
@@ -14,10 +15,13 @@ import { funLogUser } from "@/modules/user";
 
 export default function ModalDelStep({ id, candidate, onSuccess }: { id: any, candidate: any, onSuccess: (val: any) => void }) {
     const [openModal, setOpenModal] = useAtom(isModalStep)
+    const [isLoading, setLoading] = useState(false)
 
     async function onDelStep() {
+        setLoading(true)
         const cek = await funGetAccessArea({ candidate: candidate })
         if (!cek) {
+            setLoading(false)
             setOpenModal(false)
             return toast("Anda tidak mempunyai akses ke wilayah tersebut", { theme: "dark" })
         }
@@ -27,6 +31,7 @@ export default function ModalDelStep({ id, candidate, onSuccess }: { id: any, ca
         toast("Sukses", { theme: "dark" });
         setOpenModal(false);
         onSuccess(true)
+        setLoading(false)
     }
 
     return (
@@ -45,7 +50,7 @@ export default function ModalDelStep({ id, candidate, onSuccess }: { id: any, ca
                         >
                             TIDAK
                         </Button>
-                        <Button radius={10} color="gray.7" w={150} onClick={() => onDelStep()}>
+                        <Button loading={isLoading} radius={10} color="gray.7" w={150} onClick={() => onDelStep()}>
                             YA
                         </Button>
                     </Group>

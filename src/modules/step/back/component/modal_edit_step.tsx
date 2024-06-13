@@ -6,6 +6,7 @@ import toast from "react-simple-toasts";
 import funEditStep from "../fun/fun_edit_step";
 import { funAddNotifications, funGetAccessArea } from "@/modules/_global";
 import { funLogUser } from "@/modules/user";
+import { useState } from "react";
 
 /**
  * Fungsi untuk menampilkan modal konfirmasi edit step.
@@ -14,10 +15,13 @@ import { funLogUser } from "@/modules/user";
 
 export default function ModalEditStep({ data, content }: { data: any, content: any }) {
     const [openModal, setOpenModal] = useAtom(isModalStep)
+    const [isLoading, setLoading] = useState(false)
 
     async function onEditStep() {
+        setLoading(true)
         const cek = await funGetAccessArea({ candidate: data.idCandidate })
         if (!cek) {
+            setLoading(false)
             setOpenModal(false)
             return toast("Anda tidak mempunyai akses ke wilayah tersebut", { theme: "dark" })
         }
@@ -26,6 +30,7 @@ export default function ModalEditStep({ data, content }: { data: any, content: a
         await funAddNotifications({ kategori: 'step', candidateId: data.idCandidate })
         toast("Sukses", { theme: "dark" });
         setOpenModal(false);
+        setLoading(false)
     }
 
     return (
@@ -44,7 +49,7 @@ export default function ModalEditStep({ data, content }: { data: any, content: a
                         >
                             TIDAK
                         </Button>
-                        <Button radius={10} color="gray.7" w={150} onClick={() => onEditStep()}>
+                        <Button loading={isLoading} radius={10} color="gray.7" w={150} onClick={() => onEditStep()}>
                             YA
                         </Button>
                     </Group>

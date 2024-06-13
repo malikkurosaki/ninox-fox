@@ -1,7 +1,7 @@
 'use client'
 import { Alert, Box, Button, Group, Text } from '@mantine/core';
 import { useAtom } from 'jotai';
-import React from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import toast from 'react-simple-toasts';
 import { isModalRhi } from '../val/val_rhi';
@@ -13,10 +13,13 @@ import { funLogUser } from '@/modules/user';
 export default function ModalEditRhi({ dataId, provinsi, content }: { dataId: any, provinsi: any, content: any }) {
     const [valOpenModal, setOpenModal] = useAtom(isModalRhi)
     const router = useRouter()
+    const [isLoading, setLoading] = useState(false)
 
     async function editRhi() {
+        setLoading(true)
         const cek = await funGetAccessArea({ provinsi: provinsi })
         if (!cek) {
+            setLoading(false)
             setOpenModal(false)
             return toast("Anda tidak mempunyai akses ke wilayah tersebut", { theme: "dark" })
         }
@@ -26,6 +29,7 @@ export default function ModalEditRhi({ dataId, provinsi, content }: { dataId: an
         await funAddNotifications({ kategori: 'rhi', provinsiId: provinsi })
         toast("Success", { theme: "dark" })
         setOpenModal(false)
+        setLoading(false)
     }
 
     return (
@@ -46,6 +50,7 @@ export default function ModalEditRhi({ dataId, provinsi, content }: { dataId: an
                             radius={10}
                             color="gray.7"
                             w={150}
+                            loading={isLoading}
                             onClick={() => editRhi()}
                         >
                             YA
