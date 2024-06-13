@@ -154,6 +154,7 @@ export default function ViewCopyDataPairing({ provinsi }: { provinsi: any }) {
                   }))}
                   value={isKabupaten}
                   label="Kabupaten/Kota"
+                  searchable
                   onChange={(val) => { onKabupaten(val) }}
                 />
               </Box>

@@ -156,6 +156,7 @@ export default function AddMlAi({ params, req, candidate, provinsi, kabupaten }:
                                         onChange={(val) => (
                                             onKabupaten({ idKab: val })
                                         )}
+                                        searchable
                                     />
                                 </Group>
                                 <Select

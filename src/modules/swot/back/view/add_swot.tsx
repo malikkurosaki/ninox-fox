@@ -105,6 +105,7 @@ export default function AddSwot({ params, candidate, provinsi, kabupaten }: { pa
                             label: pro.name
                         }))}
                         required
+                        searchable
                         label={"Provinsi"}
                         value={isProvinsi}
                         onChange={(val) => (
@@ -119,6 +120,7 @@ export default function AddSwot({ params, candidate, provinsi, kabupaten }: { pa
                             label: kab.name
                         }))}
                         label={"Kabupaten"}
+                        searchable
                         value={isKabupaten}
                         onChange={(val) => (
                             onKabupaten({ idKab: val })
