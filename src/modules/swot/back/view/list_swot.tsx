@@ -44,7 +44,7 @@ export default function ListSwot({ params, provinsi, kabupaten, datatable }: { p
     return (
         <>
             <Stack>
-                <Text fw={"bold"}>SWOT</Text>
+                <Text fw={"bold"}>ANALISA SWOT</Text>
             </Stack>
             <Group grow mt={30}>
                 <Select
