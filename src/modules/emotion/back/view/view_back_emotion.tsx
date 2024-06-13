@@ -73,7 +73,7 @@ export default function ViewBackEmotion({ param, provinsi, kabupaten, candidate,
   return (
     <>
       <Stack>
-        <Text fw={"bold"}>EMOTION EDITOR</Text>
+        <Text fw={"bold"}>SENTIMEN KANDIDAT</Text>
       </Stack>
       <Box pt={30}>
         <SimpleGrid

@@ -44,10 +44,10 @@ export default function ModalAddSwot({ data, text, onSuccess }: { data: any, tex
                             w={150}
                             onClick={() => setOpenModal(false)}
                         >
-                            NO
+                            TIDAK
                         </Button>
                         <Button radius={10} color="gray.7" w={150} onClick={() => onCreateSwot()}>
-                            YES
+                            YA
                         </Button>
                     </Group>
                 </Alert>

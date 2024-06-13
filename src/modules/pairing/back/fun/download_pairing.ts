@@ -22,7 +22,7 @@ export default async function funDownloadPairing({ request }: { request: any }) 
             where: kondisi
         })
 
-        title = "Pairing " + dCandidate1?.name + " & " + dCandidate2?.name + " - " + moment(request.date).format('DD MMMM YYYY')
+        title = "Penilain Sentimen Pemilih dan Data Pasangan Regional " + dCandidate1?.name + " & " + dCandidate2?.name + " - " + moment(request.date).format('DD MMMM YYYY')
 
         if (cek > 0) {
             data = await prisma.candidatePairing.findMany({

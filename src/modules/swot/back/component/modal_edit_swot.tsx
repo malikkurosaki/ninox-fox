@@ -33,7 +33,7 @@ export default function ModalEditSwot({ data, content }: { data: any, content: a
             <Box>
                 <Alert color="gray" variant="outline">
                     <Text fw={700} ta={"center"} mb={20} mt={20}>
-                        ANDA YAKIN INGIN MENGEDIT  SWOT?
+                        ANDA YAKIN INGIN MENGEDIT SWOT?
                     </Text>
                     <Group justify="space-between" pt={10}>
                         <Button
@@ -42,10 +42,10 @@ export default function ModalEditSwot({ data, content }: { data: any, content: a
                             w={150}
                             onClick={() => setOpenModal(false)}
                         >
-                            NO
+                            TIDAK
                         </Button>
                         <Button radius={10} color="gray.7" w={150} onClick={() => onEditSwot()}>
-                            YES
+                            YA
                         </Button>
                     </Group>
                 </Alert>

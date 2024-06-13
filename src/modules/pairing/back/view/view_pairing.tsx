@@ -84,7 +84,7 @@ export default function ViewPairing({ param, provinsi, kabupaten, candidate, dat
   return (
     <>
       <Stack>
-        <Text fw={"bold"}>REGIONAL DATA PAIRING</Text>
+        <Text fw={"bold"}>PENILAIAN SENTIMEN PEMILIH DAN DATA PASANGAN REGIONAL</Text>
       </Stack>
       <Box pt={30}>
         <SimpleGrid
@@ -126,7 +126,7 @@ export default function ViewPairing({ param, provinsi, kabupaten, candidate, dat
                   }))}
                   required
                   value={isCandidate1}
-                  label={"Candidate 1"}
+                  label={"Kandidat 1"}
                   searchable
                   onChange={(val) => {
                     setCandidate2(null)
@@ -141,7 +141,7 @@ export default function ViewPairing({ param, provinsi, kabupaten, candidate, dat
                   }))}
                   required
                   value={isCandidate2}
-                  label={"Candidate 2"}
+                  label={"Kandidat 2"}
                   searchable
                   onChange={(val) => {
                     if (val == isCandidate1) {

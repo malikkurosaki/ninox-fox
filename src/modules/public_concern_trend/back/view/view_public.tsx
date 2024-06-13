@@ -67,7 +67,7 @@ function ViewPublic({ param, provinsi, kabupaten, kecamatan, datatable, datadown
   return (
     <>
       <Stack>
-        <Text fw={"bold"}>PUBLIC CONCERNS TRENDS</Text>
+        <Text fw={"bold"}>TREN PERHATIAN PUBLIK</Text>
       </Stack>
       <Box pt={30}>
         <SimpleGrid

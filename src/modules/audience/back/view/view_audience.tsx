@@ -65,7 +65,7 @@ export default function ViewAudience({ param, provinsi, kabupaten, kecamatan, da
   return (
     <>
       <Stack>
-        <Text fw={"bold"}>AUDIENCE</Text>
+        <Text fw={"bold"}>SUARA TERKUNCI</Text>
       </Stack>
       <Box pt={30}>
         <SimpleGrid

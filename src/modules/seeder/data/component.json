@@ -18,7 +18,7 @@
     {
         "id": 3,
         "keyMenu": "md2",
-        "menu": "Emotion Editor",
+        "menu": "Sentimen Kandidat",
         "owner": "admin",
         "group": "dataSatu",
         "link": "/dashboard/emotion"

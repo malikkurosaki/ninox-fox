@@ -36,7 +36,7 @@ export default function ModalDelSwot({id, candidate, onSuccess}: {id: any, candi
             <Box>
                 <Alert color="gray" variant="outline">
                     <Text fw={700} ta={"center"} mb={20} mt={20}>
-                        ANDA YAKIN INGIN MENGHAPUS  SWOT?
+                        ANDA YAKIN INGIN MENGHAPUS SWOT?
                     </Text>
                     <Group justify="space-between" pt={10}>
                         <Button
@@ -45,10 +45,10 @@ export default function ModalDelSwot({id, candidate, onSuccess}: {id: any, candi
                             w={150}
                             onClick={() => setOpenModal(false)}
                         >
-                            NO
+                            TIDAK
                         </Button>
                         <Button radius={10} color="gray.7" w={150} onClick={() => onDelSwot()}>
-                            YES
+                            YA
                         </Button>
                     </Group>
                 </Alert>

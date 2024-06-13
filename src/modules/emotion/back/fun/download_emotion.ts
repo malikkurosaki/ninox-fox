@@ -19,7 +19,7 @@ export default async function funDownloadEmotion({ request }: { request: any }) 
             where: kondisi
         })
 
-        title = "Emotion " + dCandidate?.name + " - " + moment(request.date).format('DD MMMM YYYY')
+        title = "Sentimen " + dCandidate?.name + " - " + moment(request.date).format('DD MMMM YYYY')
 
         if (cek > 0) {
             data = await prisma.candidateEmotion.findMany({

@@ -30,7 +30,7 @@ export default function ModalEditRoleUser({ name, component, id }: { name: any, 
             <Box>
                 <Alert color="gray" variant="outline">
                     <Text fw={700} ta={"center"} mb={20} mt={20}>
-                        ANDA YAKIN INGIN MENGEDIT  ROLE USER?
+                        ANDA YAKIN INGIN MENGEDIT ROLE USER?
                     </Text>
                     <Group justify="space-between" pt={10}>
                         <Button
@@ -39,10 +39,10 @@ export default function ModalEditRoleUser({ name, component, id }: { name: any, 
                             w={150}
                             onClick={() => setOpenModal(false)}
                         >
-                            NO
+                            TIDAK
                         </Button>
                         <Button radius={10} color="gray.7" w={150} onClick={() => onRoleUser()}>
-                            YES
+                            YA
                         </Button>
                     </Group>
                 </Alert>
