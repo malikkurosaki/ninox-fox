@@ -114,15 +114,15 @@ export default async function funDownloadPairing({ request }: { request: any }) 
                     kabkot: v.name,
                     kecamatan: '',
                     date: moment(request.date).format('YYYY-MM-DD'),
-                    rate: '(nilai %)',
-                    PotensiMendukungFix: '(nilai)',
-                    PotensiMendukungBerubah: '(nilai)',
-                    MempertimbangkanFix: '(nilai)',
-                    MempertimbangkanBerubah: '(nilai)',
-                    TidakTahuFix: '(nilai)',
-                    TidakTahuBerubah: '(nilai)',
-                    PotensiTidakMendukungFix: '(nilai)',
-                    PotensiTidakMendukungBerubah: '(nilai)'
+                    rate: '0',
+                    PotensiMendukungFix: '0',
+                    PotensiMendukungBerubah: '0',
+                    MempertimbangkanFix: '0',
+                    MempertimbangkanBerubah: '0',
+                    TidakTahuFix: '0',
+                    TidakTahuBerubah: '0',
+                    PotensiTidakMendukungFix: '0',
+                    PotensiTidakMendukungBerubah: '0'
                 }))
 
             } else {
@@ -161,15 +161,15 @@ export default async function funDownloadPairing({ request }: { request: any }) 
                     kabkot: v.AreaKabkot.name,
                     kecamatan: v.name,
                     date: moment(request.date).format('YYYY-MM-DD'),
-                    rate: '(nilai %)',
-                    PotensiMendukungFix: '(nilai)',
-                    PotensiMendukungBerubah: '(nilai)',
-                    MempertimbangkanFix: '(nilai)',
-                    MempertimbangkanBerubah: '(nilai)',
-                    TidakTahuFix: '(nilai)',
-                    TidakTahuBerubah: '(nilai)',
-                    PotensiTidakMendukungFix: '(nilai)',
-                    PotensiTidakMendukungBerubah: '(nilai)'
+                    rate: '0',
+                    PotensiMendukungFix: '0',
+                    PotensiMendukungBerubah: '0',
+                    MempertimbangkanFix: '0',
+                    MempertimbangkanBerubah: '0',
+                    TidakTahuFix: '0',
+                    TidakTahuBerubah: '0',
+                    PotensiTidakMendukungFix: '0',
+                    PotensiTidakMendukungBerubah: '0'
                 }))
 
 
