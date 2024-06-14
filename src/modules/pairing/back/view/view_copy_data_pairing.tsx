@@ -113,7 +113,7 @@ export default function ViewCopyDataPairing({ provinsi }: { provinsi: any }) {
         <ButtonBack />
         <Text fw={"bold"} fz={20}>
           {" "}
-          COPY DATA PAIRING
+          COPY DATA PENILAIAN SENTIMEN PEMILIH DAN DATA PASANGAN REGIONAL
         </Text>
       </Stack>
 
@@ -154,6 +154,7 @@ export default function ViewCopyDataPairing({ provinsi }: { provinsi: any }) {
                   }))}
                   value={isKabupaten}
                   label="Kabupaten/Kota"
+                  searchable
                   onChange={(val) => { onKabupaten(val) }}
                 />
               </Box>
@@ -168,7 +169,7 @@ export default function ViewCopyDataPairing({ provinsi }: { provinsi: any }) {
                   }))}
                   value={isCandidate1}
                   required
-                  label={"Candidate 1"}
+                  label={"Kandidat 1"}
                   searchable
                   onChange={(val) => { onCandidate1(val) }}
                 />
@@ -182,7 +183,7 @@ export default function ViewCopyDataPairing({ provinsi }: { provinsi: any }) {
                   }))}
                   value={isCandidate2}
                   required
-                  label={"Candidate 2"}
+                  label={"Kandidat 2"}
                   searchable
                   onChange={(val) => { onCandidate2(val) }}
                 />
@@ -201,7 +202,7 @@ export default function ViewCopyDataPairing({ provinsi }: { provinsi: any }) {
             <Center>
               <Box>
                 <Text fw={"bold"} fz={20}>
-                  FROM
+                  DARI TANGGAL
                 </Text>
                 <Box
                   style={{
@@ -219,7 +220,7 @@ export default function ViewCopyDataPairing({ provinsi }: { provinsi: any }) {
             <Center>
               <Box>
                 <Text fw={"bold"} fz={20}>
-                  TO
+                  SAMPAI TANGGAL
                 </Text>
                 <Box
                   style={{

@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation"
 import funEditMlAi from "../fun/fun_edit_mlai"
 import { funAddNotifications, funGetAccessArea } from "@/modules/_global"
 import { funLogUser } from "@/modules/user"
+import { useState } from "react"
 
 /**
  * Fungsi untuk menampilkan modal konfirmasi edit ml ai.
@@ -16,10 +17,13 @@ import { funLogUser } from "@/modules/user"
 export default function ModalEditMlAi({ data, content }: { data: any, content: any }) {
     const [openModal, setOpenModal] = useAtom(isModalMlAi)
     const router = useRouter()
+    const [isLoading, setLoading] = useState(false)
 
     async function onEditMlAi() {
+        setLoading(true)
         const cek = await funGetAccessArea({ candidate: data.idCandidate })
         if (!cek) {
+            setLoading(false)
             setOpenModal(false)
             return toast("Anda tidak mempunyai akses ke wilayah tersebut", { theme: "dark" })
         }
@@ -35,6 +39,7 @@ export default function ModalEditMlAi({ data, content }: { data: any, content: a
         }
         toast("Sukses", { theme: "dark" });
         setOpenModal(false);
+        setLoading(false)
     }
 
     return (
@@ -53,7 +58,7 @@ export default function ModalEditMlAi({ data, content }: { data: any, content: a
                         >
                             TIDAK
                         </Button>
-                        <Button radius={10} color="gray.7" w={150} onClick={() => onEditMlAi()}>
+                        <Button loading={isLoading} radius={10} color="gray.7" w={150} onClick={() => onEditMlAi()}>
                             YA
                         </Button>
                     </Group>

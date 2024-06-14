@@ -61,6 +61,11 @@ export default async function funAddMlAi({ body, content }: { body: any, content
       "statusAdmin": true,
       "kategori": '-',
     }))
+
+    mtqq_client.publish("app_ninox_fox_reload", JSON.stringify({
+      "role": 'user',
+      "page": 'data-learner'
+    }))
   }
 
   revalidatePath('dashboard/ml-ai/request')

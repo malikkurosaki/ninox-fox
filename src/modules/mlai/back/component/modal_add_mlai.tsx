@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation"
 import funAddMlAi from "../fun/fun_add_mlai"
 import { funAddNotifications, funGetAccessArea } from "@/modules/_global"
 import { funLogUser } from "@/modules/user"
+import { useState } from "react"
 
 /**
  * Fungsi untuk menampilkan modal konfirmasi add ml ai.
@@ -16,10 +17,13 @@ import { funLogUser } from "@/modules/user"
 export default function ModalAddMlAi({ data, text, onSuccess }: { data: any, text: any, onSuccess: (val: any) => void }) {
     const [openModal, setOpenModal] = useAtom(isModalMlAi)
     const router = useRouter()
+    const [isLoading, setLoading] = useState(false)
 
     async function onCreateMlAi() {
+        setLoading(true)
         const cek = await funGetAccessArea({ candidate: data.idCandidate })
         if (!cek) {
+            setLoading(false)
             setOpenModal(false)
             return toast("Anda tidak mempunyai akses ke wilayah tersebut", { theme: "dark" })
         }
@@ -36,6 +40,7 @@ export default function ModalAddMlAi({ data, text, onSuccess }: { data: any, tex
         toast("Sukses", { theme: "dark" })
         setOpenModal(false)
         onSuccess(true)
+        setLoading(false)
     }
 
 
@@ -55,7 +60,7 @@ export default function ModalAddMlAi({ data, text, onSuccess }: { data: any, tex
                         >
                             TIDAK
                         </Button>
-                        <Button radius={10} color="gray.7" w={150} onClick={() => onCreateMlAi()}>
+                        <Button radius={10} loading={isLoading} color="gray.7" w={150} onClick={() => onCreateMlAi()}>
                             YA
                         </Button>
                     </Group>

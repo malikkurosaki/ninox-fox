@@ -103,7 +103,7 @@ export default function ViewCopyData({ provinsi }: { provinsi: any }) {
         <ButtonBack />
         <Text fw={"bold"} fz={20}>
           {" "}
-          COPY DATA EMOTION
+          COPY DATA SENTIMEN KANDIDAT
         </Text>
       </Stack>
 
@@ -144,6 +144,7 @@ export default function ViewCopyData({ provinsi }: { provinsi: any }) {
                   }))}
                   value={isKabupaten}
                   label="Kabupaten/Kota"
+                  searchable
                   onChange={(val) => { onKabupaten(val) }}
                 />
               </Box>
@@ -158,7 +159,7 @@ export default function ViewCopyData({ provinsi }: { provinsi: any }) {
                   }))}
                   value={isCandidate1}
                   required
-                  label={"Candidate"}
+                  label={"Kandidat"}
                   searchable
                   onChange={(val) => { onCandidate1(val) }}
                 />
@@ -177,7 +178,7 @@ export default function ViewCopyData({ provinsi }: { provinsi: any }) {
             <Center>
               <Box>
                 <Text fw={"bold"} fz={20}>
-                  FROM
+                  DARI TANGGAL
                 </Text>
                 <Box
                   style={{
@@ -195,7 +196,7 @@ export default function ViewCopyData({ provinsi }: { provinsi: any }) {
             <Center>
               <Box>
                 <Text fw={"bold"} fz={20}>
-                  TO
+                  SAMPAI TANGGAL
                 </Text>
                 <Box
                   style={{

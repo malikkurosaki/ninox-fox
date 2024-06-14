@@ -15,12 +15,19 @@ import CobaScroll from '../component/coba_scroll';
 import { RESPONSE_MLAI } from '../val/val_respon_mlai';
 import { ScrollLoaderExternalState } from 'next-scroll-loader';
 import { HiChevronDown, HiChevronUp } from "react-icons/hi";
+import mtqq_client from "../../../_global/util/mqtt_client"
 
 export default function ViewDataLearner3() {
   const router = useRouter()
   const { ref, width, height } = useElementSize()
   const [response, setResponse] = useState('')
   const [request, setRequest] = useState('')
+
+
+  async function loadLog({ page }: { page: any }) {
+    const load = await funGetLogRequestMlaiFront({ page: page })
+    setListScrollData(load)
+  }
 
   async function onProses({ page }: { page: any }) {
     setResponse('')
@@ -35,8 +42,7 @@ export default function ViewDataLearner3() {
         setTimeout(r, 500)
       )
       setResponse(RESPONSE_MLAI[Math.floor(Math.random() * 5)])
-      const load = await funGetLogRequestMlaiFront({ page: page })
-      setListScrollData(load)
+      loadLog({ page: page })
     } else {
       setResponse('Error, silakan coba lagi nanti')
     }
@@ -113,6 +119,21 @@ export default function ViewDataLearner3() {
       </Box>
     </Box>
   }
+
+
+  useEffect(() => {
+    mtqq_client.on("connect", () => {
+      mtqq_client.subscribe("app_ninox_fox_reload")
+    })
+
+    mtqq_client.on("message", (topic, message) => {
+      const data = JSON.parse(message.toString())
+      if (data.role == 'user' && data.page == 'data-learner') {
+        loadLog({ page: scrollPage })
+      }
+    })
+  }, [])
+
   return (
     <>
       <PageSubTitle text1='DATA' text2='LEARNER' />

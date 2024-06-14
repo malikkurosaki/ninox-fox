@@ -85,7 +85,7 @@ export default function ComponentTable({ v, i, onClick }: { v: any; i: any, onCl
                 }}
               >
                 <Text c={"white"} fw={"bold"} fz={20} mb={10}>
-                  Content
+                  Konten
                 </Text>
                 <Stack c={'white'}>
                   <Box dangerouslySetInnerHTML={{ __html: v.content }} />

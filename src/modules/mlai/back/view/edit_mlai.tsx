@@ -212,7 +212,7 @@ export default function EditMlAi({ data }: { data: any }) {
                     </RichTextEditor>
                 </Box>
                 <Group justify="flex-end">
-                    <Button bg={"gray"} mt={30} size="md" onClick={() => onConfirmation()}>SAVE</Button>
+                    <Button bg={"gray"} mt={30} size="md" onClick={() => onConfirmation()}>SIMPAN</Button>
                 </Group>
             </Box>
             <Modal

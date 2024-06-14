@@ -63,6 +63,7 @@ export default function ListMlAi({ params, provinsi, kabupaten, datatable }: { p
                         value: String(kab.id),
                         label: kab.name
                     }))}
+                    searchable
                     label={"Kabupaten"}
                     value={(_.isNull(isKabupaten)) ? null : String(isKabupaten)}
                     onChange={(val) => (

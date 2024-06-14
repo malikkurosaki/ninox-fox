@@ -40,7 +40,7 @@ export default function ListStep({ params, provinsi, kabupaten, datatable }: { p
     return (
         <>
             <Stack>
-                <Text fw={"bold"}>STEP</Text>
+                <Text fw={"bold"}>ANALISA STEP</Text>
             </Stack>
             <Group grow mt={30}>
                 <Select

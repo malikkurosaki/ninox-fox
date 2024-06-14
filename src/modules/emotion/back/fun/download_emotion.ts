@@ -19,7 +19,7 @@ export default async function funDownloadEmotion({ request }: { request: any }) 
             where: kondisi
         })
 
-        title = "Emotion " + dCandidate?.name + " - " + moment(request.date).format('DD MMMM YYYY')
+        title = "Sentimen " + dCandidate?.name + " - " + moment(request.date).format('DD MMMM YYYY')
 
         if (cek > 0) {
             data = await prisma.candidateEmotion.findMany({
@@ -139,14 +139,14 @@ export default async function funDownloadEmotion({ request }: { request: any }) 
                     kecamatan: v.kecamatan,
                     kelurahan: v.kelurahan,
                     date: moment(request.date).format('YYYY-MM-DD'),
-                    PotensiMendukungFix: '(nilai)',
-                    PotensiMendukungBerubah: '(nilai)',
-                    MempertimbangkanFix: '(nilai)',
-                    MempertimbangkanBerubah: '(nilai)',
-                    TidakTahuFix: '(nilai)',
-                    TidakTahuBerubah: '(nilai)',
-                    PotensiTidakMendukungFix: '(nilai)',
-                    PotensiTidakMendukungBerubah: '(nilai)'
+                    PotensiMendukungFix: '0',
+                    PotensiMendukungBerubah: '0',
+                    MempertimbangkanFix: '0',
+                    MempertimbangkanBerubah: '0',
+                    TidakTahuFix: '0',
+                    TidakTahuBerubah: '0',
+                    PotensiTidakMendukungFix: '0',
+                    PotensiTidakMendukungBerubah: '0'
                 }))
 
             } else {
@@ -203,14 +203,14 @@ export default async function funDownloadEmotion({ request }: { request: any }) 
                     kecamatan: v.kecamatan,
                     kelurahan: v.kelurahan,
                     date: moment(request.date).format('YYYY-MM-DD'),
-                    PotensiMendukungFix: '(nilai)',
-                    PotensiMendukungBerubah: '(nilai)',
-                    MempertimbangkanFix: '(nilai)',
-                    MempertimbangkanBerubah: '(nilai)',
-                    TidakTahuFix: '(nilai)',
-                    TidakTahuBerubah: '(nilai)',
-                    PotensiTidakMendukungFix: '(nilai)',
-                    PotensiTidakMendukungBerubah: '(nilai)'
+                    PotensiMendukungFix: '0',
+                    PotensiMendukungBerubah: '0',
+                    MempertimbangkanFix: '0',
+                    MempertimbangkanBerubah: '0',
+                    TidakTahuFix: '0',
+                    TidakTahuBerubah: '0',
+                    PotensiTidakMendukungFix: '0',
+                    PotensiTidakMendukungBerubah: '0'
                 }))
             }
         }
