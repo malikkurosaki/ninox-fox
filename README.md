@@ -27,4 +27,4 @@ NextJS, Mantine, Prisma Postgres
 makuro_123
 makuro
 
-__ubah dikir v1.0.0__
+__ubah dikir v1.0.2__
