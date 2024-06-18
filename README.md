@@ -26,3 +26,5 @@ NextJS, Mantine, Prisma Postgres
 
 makuro_123
 makuro
+
+# add test
