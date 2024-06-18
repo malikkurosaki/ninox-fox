@@ -22,3 +22,6 @@ NextJS, Mantine, Prisma Postgres
 
 
 ![gambar](ninox.png)
+
+
+version: v1.0.0
