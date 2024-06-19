@@ -1,8 +1,6 @@
 # Ninox-Fox Project
 ***file ini akan terus diupdate apabila ada pembaruan terhadap routing, api, seeder maupun segala hal yang berkaitan dengan sistem*
 
-##
-
 ### Features
 - coming soon ....
 
@@ -25,3 +23,4 @@ NextJS, Mantine, Prisma Postgres
 
 
 version: v1.0.0
+
