@@ -8,6 +8,9 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+  },
   "dependencies": {
     "@mantine/colors-generator": "^7.7.0",
     "@mantine/core": "^7.1.2",
