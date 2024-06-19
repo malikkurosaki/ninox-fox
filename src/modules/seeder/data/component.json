@@ -1,0 +1,162 @@
+[
+    {
+        "id": 1,
+        "keyMenu": "md0",
+        "menu": "Dashboard User",
+        "owner": "user",
+        "group": "dashboardUser",
+        "link": "/summary"
+    },
+    {
+        "id": 2,
+        "keyMenu": "md1",
+        "menu": "Beranda",
+        "owner": "admin",
+        "group": "dataSatu",
+        "link": "/dashboard"
+    },
+    {
+        "id": 3,
+        "keyMenu": "md2",
+        "menu": "Sentimen Kandidat",
+        "owner": "admin",
+        "group": "dataSatu",
+        "link": "/dashboard/emotion"
+    },
+    {
+        "id": 4,
+        "keyMenu": "md3",
+        "menu": "Penilaian Sentimen Pemilih dan Data Pasangan Regional",
+        "owner": "admin",
+        "group": "dataSatu",
+        "link": "/dashboard/pairing"
+    },
+    {
+        "id": 5,
+        "keyMenu": "md4",
+        "menu": "Suara Terkunci",
+        "owner": "admin",
+        "group": "dataRegion",
+        "link": "/dashboard/audience"
+    },
+    {
+        "id": 6,
+        "keyMenu": "md5",
+        "menu": "Tren Perhatian Publik",
+        "owner": "admin",
+        "group": "dataRegion",
+        "link": "/dashboard/public-concern-trend"
+    },
+    {
+        "id": 7,
+        "keyMenu": "md6",
+        "menu": "Penilaian Sifat Pemimpin",
+        "owner": "admin",
+        "group": "dataRegion",
+        "link": "/dashboard/leader-trait-assessment"
+    },
+    {
+        "id": 8,
+        "keyMenu": "md7",
+        "menu": "Isu Wilayah",
+        "owner": "admin",
+        "group": "dataRegion",
+        "link": "/dashboard/region-hot-issue"
+    },
+    {
+        "id": 9,
+        "keyMenu": "md8",
+        "menu": "Analisa STEP",
+        "owner": "admin",
+        "group": "dataDua",
+        "link": "/dashboard/step"
+    },
+    {
+        "id": 10,
+        "keyMenu": "md9",
+        "menu": "Analisa SWOT",
+        "owner": "admin",
+        "group": "dataDua",
+        "link": "/dashboard/swot"
+    },
+    {
+        "id": 11,
+        "keyMenu": "md10",
+        "menu": "Data ML-AI",
+        "owner": "admin",
+        "group": "dataMLAI",
+        "link": "/dashboard/ml-ai"
+    },
+    {
+        "id": 12,
+        "keyMenu": "md11",
+        "menu": "Kandidat",
+        "owner": "admin",
+        "group": "dataTiga",
+        "link": "/dashboard/candidate"
+    },
+    {
+        "id": 13,
+        "keyMenu": "md12",
+        "menu": "Role User",
+        "owner": "developer",
+        "group": "dataDeveloper",
+        "link": "/dashboard/role-user"
+    },
+    {
+        "id": 14,
+        "keyMenu": "md13",
+        "menu": "User",
+        "owner": "developer",
+        "group": "dataDeveloper",
+        "link": "/dashboard/user"
+    },
+    {
+        "id": 15,
+        "keyMenu": "md14",
+        "menu": "Log User",
+        "owner": "developer",
+        "group": "dataDeveloper",
+        "link": "/dashboard/log-user"
+    },
+    {
+        "id": 16,
+        "keyMenu": "md15",
+        "menu": "Seeder",
+        "owner": "developer",
+        "group": "dataDeveloper",
+        "link": "/dashboard/seeder"
+    },
+    {
+        "id": 17,
+        "keyMenu": "md16",
+        "menu": "Hapus Data",
+        "owner": "developer",
+        "group": "dataDeveloper",
+        "link": "/dashboard/delete-data"
+    },
+    {
+        "id": 18,
+        "keyMenu": "md17",
+        "menu": "Data Sosial Ekonomi",
+        "owner": "admin",
+        "group": "dataSosialEkonomi",
+        "link": "/dashboard/se/"
+    },
+    {
+        "id": 19,
+        "keyMenu": "md18",
+        "menu": "Notifikasi",
+        "owner": "admin",
+        "group": "dataTiga",
+        "link": "/dashboard/notifikasi"
+    },
+    {
+        "id": 20,
+        "keyMenu": "md19",
+        "menu": "Data Learner",
+        "owner": "admin",
+        "group": "dataMLAI",
+        "link": "/dashboard/ml-ai/request"
+    }
+]
