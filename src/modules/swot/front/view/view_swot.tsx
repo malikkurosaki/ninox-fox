@@ -56,7 +56,10 @@ export default function ViewSwot({ data, candidate, oneCandidate }: { data: any,
     setData(grouping)
     setNameCan((dataCan?.name))
     setImgCan(`/img/candidate/${dataCan?.img}`)
+    console.log(_.isEmpty(isData), isData, isData['STRENGTH'])
   }
+
+  const arrayKey = ['STRENGTH', 'WEAKNESS', 'OPPORTUNITY', 'THREAT']
 
   return (
     <>
@@ -64,7 +67,7 @@ export default function ViewSwot({ data, candidate, oneCandidate }: { data: any,
       <PageSubTitle text1='ANALISA' text2='SWOT' />
       <Grid gutter={30}>
         <Grid.Col span={{ md: 3, lg: 3 }}>
-          <Flex justify={"center"} align={"center"} h={{base: '40vh', xl: '80vh', lg: '80vh', md: '80vh'}}>
+          <Flex justify={"center"} align={"center"} h={{ base: '40vh', xl: '80vh', lg: '80vh', md: '80vh' }}>
             <Box
               w={{ base: 300, sm: 400 }}
             >
@@ -74,7 +77,7 @@ export default function ViewSwot({ data, candidate, oneCandidate }: { data: any,
                   padding: 10,
                   borderRadius: 10
                 }}
-                bg={{base: '', xl: 'rgba(0,0,0,0.3)', lg: 'rgba(0,0,0,0.3)', md: 'rgba(0,0,0,0.3)'}}
+                bg={{ base: '', xl: 'rgba(0,0,0,0.3)', lg: 'rgba(0,0,0,0.3)', md: 'rgba(0,0,0,0.3)' }}
               >
                 <Image src={isImgCan} bg={"white"} style={{ border: "4px solid white" }} radius={"100%"} alt='kandidat' maw={200} mx="auto" />
                 <Text fw={"bold"} ta={"center"} c={"white"} mt={10}>{isNameCan}</Text>
@@ -95,6 +98,50 @@ export default function ViewSwot({ data, candidate, oneCandidate }: { data: any,
         <Grid.Col span={{ md: 9, lg: 9 }}>
           <ScrollArea h={"85vh"}>
             {
+              arrayKey.map((item: any, i: any) => (
+                <Box key={i} pb={20}>
+                  <Box
+                    style={{
+                      background: "rgba(0,0,0,0.3)",
+                      padding: 10,
+                      borderRadius: 10,
+                      minHeight: 150
+                    }}
+                  >
+                    <Box pb={10}>
+                      <Text fw={"bold"} c={"green"}>{item}</Text>
+                    </Box>
+                    {(() => {
+                      if (!_.isEmpty(isData) && !_.isUndefined(isData[item])) {
+                        const datanya = isData[item]
+                        return (
+                          <>
+                            <ScrollArea h={150} w={"a"}>
+                              <Stack pl={10}>
+                                <Text c={"white"} fz={14}>
+                                  <TextAnimation
+                                    phrases={[...datanya[_.random(0, datanya.length - 1)].content.split('\n')]}
+                                    typingSpeed={(i == 0) ? 0 : Number(datanya.id ? Math.floor(Math.random() * 1 + 0) : Math.floor(Math.random() * 1 + 5))}
+                                    backspaceDelay={Number(datanya.id ? Math.floor(Math.random() * 899999 + 100000) : Math.floor(Math.random() * 899999 + 100000))}
+                                    eraseDelay={Number(datanya.id ? Math.floor(Math.random() * 899999 + 100000) : Math.floor(Math.random() * 899999 + 100000))}
+                                    timeComplete={Number(datanya.id ? Math.floor(Math.random() * 899999 + 100000) : Math.floor(Math.random() * 899999 + 100000))}
+                                    errorProbability={Number(datanya.id ? 0 : 0.1)}
+                                    eraseOnComplete={false}
+                                    isSecure={false}
+                                  />
+                                </Text>
+                              </Stack>
+                            </ScrollArea>
+                          </>
+                        )
+                      }
+
+                    })()}
+                  </Box>
+                </Box>
+              ))
+            }
+            {/* {
               _.keys(isData).map((item: any, i: any) => (
                 <Box key={i} pb={20}>
                   <Box
@@ -112,7 +159,7 @@ export default function ViewSwot({ data, candidate, oneCandidate }: { data: any,
                       if (datanya)
                         return (
                           <>
-                            <ScrollArea h={150} w={"a"}>
+                            <ScrollArea h={230} w={"a"}>
                               <Stack pl={10}>
                                 <Text c={"white"} fz={14}>
                                   <TextAnimation
@@ -134,7 +181,7 @@ export default function ViewSwot({ data, candidate, oneCandidate }: { data: any,
                   </Box>
                 </Box>
               ))
-            }
+            } */}
           </ScrollArea>
         </Grid.Col>
       </Grid>
