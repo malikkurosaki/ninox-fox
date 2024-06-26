@@ -131,7 +131,7 @@ export default function AddSwot({ params, candidate, provinsi, kabupaten }: { pa
 
     function onConfirmation() {
         // if (Object.values(isBody).includes("") || editor?.getHTML() == '<p></p>')
-        if (Object.values(isBody).includes(""))
+        if (Object.values(isBody).includes("") || (editor?.getHTML() == '<p></p>' && editor2?.getHTML() == '<p></p>' && editor3?.getHTML() == '<p></p>' && editor4?.getHTML() == '<p></p>'))
             return toast("Form cannot be empty", { theme: "dark" });
         setOpenModal(true)
     }
