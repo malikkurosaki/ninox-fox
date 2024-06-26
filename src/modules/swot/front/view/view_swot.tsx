@@ -105,7 +105,7 @@ export default function ViewSwot({ data, candidate, oneCandidate }: { data: any,
                       background: "rgba(0,0,0,0.3)",
                       padding: 10,
                       borderRadius: 10,
-                      height: 280
+                      minHeight: 150
                     }}
                   >
                     <Box pb={10}>
@@ -116,7 +116,7 @@ export default function ViewSwot({ data, candidate, oneCandidate }: { data: any,
                         const datanya = isData[item]
                         return (
                           <>
-                            <ScrollArea h={230} w={"a"}>
+                            <ScrollArea h={150} w={"a"}>
                               <Stack pl={10}>
                                 <Text c={"white"} fz={14}>
                                   <TextAnimation
