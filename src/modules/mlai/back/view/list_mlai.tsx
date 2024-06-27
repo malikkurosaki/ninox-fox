@@ -35,7 +35,8 @@ export default function ListMlAi({ params, provinsi, kabupaten, datatable }: { p
     useEffect(() => {
         setProvinsi(params.idProvinsi == 0 ? null : params.idProvinsi)
         setKabupaten(params.idKabkot == 0 ? null : params.idKabkot)
-    }, [params])
+        setDatakabupaten(kabupaten)
+    }, [params, kabupaten])
 
     return (
         <>
@@ -72,6 +73,9 @@ export default function ListMlAi({ params, provinsi, kabupaten, datatable }: { p
                 />
                 <Button mt={25} bg={"gray"} onClick={() => onProsses()}>
                     PROSES
+                </Button>
+                <Button mt={25} bg={"gray"} onClick={() => router.push("ml-ai/add")}>
+                    TAMBAH ML-AI
                 </Button>
             </Group>
             {!_.isNull(datatable.title) &&

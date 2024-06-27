@@ -36,8 +36,8 @@ export default function AddMlAi({ params, req, candidate, provinsi, kabupaten }:
     const [isDataCandidate, setDataCandidate] = useState(candidate)
     const [dataProvinsi, setDataProvinsi] = useState(provinsi)
     const [dataKabupaten, setDataKabupaten] = useState<any>(kabupaten)
-    const [isProvinsi, setProvinsi] = useState<any>(null)
-    const [isKabupaten, setKabupaten] = useState<any>(null)
+    const [isProvinsi, setProvinsi] = useState<any>(String(params.idProvinsi) || null)
+    const [isKabupaten, setKabupaten] = useState<any>(String(params.idKabkot) || null)
     const [isDataMlai, setDataMlai] = useState({
         idRequest: req.id,
         idCandidate: req.idCandidate,
@@ -70,7 +70,7 @@ export default function AddMlAi({ params, req, candidate, provinsi, kabupaten }:
             ...isDataMlai,
             idCandidate: ''
         })
-        const dataDbCan = await funGetCandidateActiveByArea({ find: { idProvinsi: Number(isProvinsi), idKabkot: Number(idKab), tingkat: 2 } })
+        const dataDbCan = await funGetCandidateActiveByArea({ find: { idProvinsi: Number(isProvinsi), idKabkot: Number(idKab), tingkat: (idKab == null) ? 1 : 2 } })
         setDataCandidate(dataDbCan)
     }
 
@@ -297,8 +297,8 @@ export default function AddMlAi({ params, req, candidate, provinsi, kabupaten }:
                         if (req.id != null)
                             return router.push('/dashboard/ml-ai/request')
                         editor?.commands.setContent('<p></p>')
-                        setProvinsi(null)
-                        setKabupaten(null)
+                        // setProvinsi(null)
+                        // setKabupaten(null)
                         setDataMlai({
                             ...isDataMlai,
                             idRequest: null,

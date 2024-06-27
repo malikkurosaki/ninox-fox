@@ -13,7 +13,7 @@ import { useState } from "react";
  * @returns {component} Modal konfirmasi add step.
  */
 
-export default function ModalAddStep({ data, text, onSuccess }: { data: any, text: any, onSuccess: (val: any) => void }) {
+export default function ModalAddStep({ data, textPositive, textNegative, onSuccess }: { data: any, textPositive: any, textNegative: any, onSuccess: (val: any) => void }) {
     const [openModal, setOpenModal] = useAtom(isModalStep)
     const [isLoading, setLoading] = useState(false)
 
@@ -25,9 +25,9 @@ export default function ModalAddStep({ data, text, onSuccess }: { data: any, tex
             setOpenModal(false)
             return toast("Anda tidak mempunyai akses ke wilayah tersebut", { theme: "dark" })
         }
-        const addData = await funAddStep({ body: data, content: text })
+        const addData = await funAddStep({ body: data, positive: textPositive, negative: textNegative })
         if (!addData.success) return toast(addData.message, { theme: "dark" });
-        await funLogUser({ act: 'ADD', desc: `User menambah data STEP`, idContent: addData.data, tbContent: 'step' })
+        // await funLogUser({ act: 'ADD', desc: `User menambah data STEP`, idContent: addData.data, tbContent: 'step' })
         await funAddNotifications({ kategori: 'step', candidateId: data.idCandidate })
         toast("Success", { theme: "dark" })
         setOpenModal(false)
