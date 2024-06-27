@@ -63,9 +63,9 @@ export default function TableMlAi({ title, data, searchParam, nPage }: { title: 
             <Text fw={"bold"} c={"white"}>
               {title}
             </Text>
-            <Button bg={"gray"} onClick={() => router.push("ml-ai/add?prov=" + searchParams.get('prov') + '&city=' + searchParams.get('city'))}>
+            {/* <Button bg={"gray"} onClick={() => router.push("ml-ai/add?prov=" + searchParams.get('prov') + '&city=' + searchParams.get('city'))}>
               TAMBAH ML-AI
-            </Button>
+            </Button> */}
           </Group>
           <Box pt={20}>
             <Box

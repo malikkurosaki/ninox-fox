@@ -30,8 +30,8 @@ export default function AddStep({ params, candidate, provinsi, kabupaten }: { pa
     const [isDataCandidate, setDataCandidate] = useState(candidate)
     const [dataProvinsi, setDataProvinsi] = useState(provinsi)
     const [dataKabupaten, setDataKabupaten] = useState<any>(kabupaten)
-    const [isProvinsi, setProvinsi] = useState<any>(params.idProvinsi || null)
-    const [isKabupaten, setKabupaten] = useState<any>(params.idKabkot || null)
+    const [isProvinsi, setProvinsi] = useState<any>(String(params.idProvinsi) || null)
+    const [isKabupaten, setKabupaten] = useState<any>(String(params.idKabkot) || null)
     const [isCandidate, setCandidate] = useState<any>(null)
     const [isCategory, setCategory] = useState<any>(null)
 
@@ -369,12 +369,12 @@ export default function AddStep({ params, candidate, provinsi, kabupaten }: { pa
                     editorPositive?.commands.setContent('<p></p>')
                     editorNegative?.commands.setContent('<p></p>')
                     setCategory(null)
-                    setProvinsi(null)
-                    setKabupaten(null)
-                    setCandidate(null)
+                    // setProvinsi(null)
+                    // setKabupaten(null)
+                    // setCandidate(null)
                     setBody({
                         ...isBody,
-                        idCandidate: '',
+                        // idCandidate: '',
                         category: '',
                         // sentiment: '1'
                     })
