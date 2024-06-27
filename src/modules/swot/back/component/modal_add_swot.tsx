@@ -13,7 +13,7 @@ import { useState } from "react";
  * @returns {component} Modal konfirmasi add swot.
  */
 
-export default function ModalAddSwot({ data, text, onSuccess }: { data: any, text: any, onSuccess: (val: any) => void }) {
+export default function ModalAddSwot({ data, textS, textW, textO, textT, onSuccess }: { data: any, textS: any, textW: any, textO: any, textT: any, onSuccess: (val: any) => void }) {
     const [openModal, setOpenModal] = useAtom(isModalSwot)
     const [isLoading, setLoading] = useState(false)
 
@@ -25,9 +25,9 @@ export default function ModalAddSwot({ data, text, onSuccess }: { data: any, tex
             setLoading(false)
             return toast("Anda tidak mempunyai akses ke wilayah tersebut", { theme: "dark" })
         }
-        const addData = await funAddSwotf({ body: data, content: text })
+        const addData = await funAddSwotf({ body: data, S: textS, W: textW, O: textO, T: textT })
         if (!addData.success) return toast(addData.message, { theme: "dark" });
-        await funLogUser({ act: 'ADD', desc: `User menambah data SWOT`, idContent: addData.data, tbContent: 'swot' })
+        // await funLogUser({ act: 'ADD', desc: `User menambah data SWOT`, idContent: addData.data, tbContent: 'swot' })
         await funAddNotifications({ kategori: 'swot', candidateId: data.idCandidate })
         toast("Success", { theme: "dark" })
         setOpenModal(false)
