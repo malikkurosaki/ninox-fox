@@ -77,6 +77,9 @@ export default function ListSwot({ params, provinsi, kabupaten, datatable }: { p
                 <Button mt={25} bg={"gray"} onClick={() => onProsses()}>
                     PROSES
                 </Button>
+                <Button mt={25} bg={"gray"} onClick={() => router.push("swot/add")}>
+                    TAMBAH SWOT
+                </Button>
             </Group>
             {!_.isNull(datatable.title) &&
                 <TableSwot title={datatable.title} data={datatable.data} searchParam={params} />
