@@ -31,8 +31,8 @@ export default function AddSwot({ params, candidate, provinsi, kabupaten }: { pa
     const [isDataCandidate, setDataCandidate] = useState(candidate)
     const [dataProvinsi, setDataProvinsi] = useState(provinsi)
     const [dataKabupaten, setDataKabupaten] = useState<any>(kabupaten)
-    const [isProvinsi, setProvinsi] = useState<any>(null)
-    const [isKabupaten, setKabupaten] = useState<any>(null)
+    const [isProvinsi, setProvinsi] = useState<any>(String(params.idProvinsi) || null)
+    const [isKabupaten, setKabupaten] = useState<any>(String(params.idKabkot) || null)
     const [isCandidate, setCandidate] = useState<any>(null)
     const [isCategory, setCategory] = useState<any>(null)
 
@@ -553,9 +553,9 @@ export default function AddSwot({ params, candidate, provinsi, kabupaten }: { pa
                     textO={editor3?.getHTML()}
                     textT={editor4?.getHTML()}
                     onSuccess={() => {
-                        setKabupaten(null)
+                        // setKabupaten(null)
                         setCandidate(null)
-                        setProvinsi(null)
+                        // setProvinsi(null)
                         setCategory(null)
                         setBody({
                             ...isBody,
