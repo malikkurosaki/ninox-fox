@@ -8,55 +8,31 @@ import TextAnimation from 'react-typing-dynamics';
 import { funGetSwotFront } from '../..';
 import { funGetOneCandidateFront } from '@/modules/candidate';
 
-const dataSwot = [
-  {
-    id: 1,
-    title: 'STRENGTH',
-    desc: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.',
-  },
-  {
-    id: 2,
-    title: 'WEAKNESS',
-    desc: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.',
-  },
-  {
-    id: 3,
-    title: 'OPPORTUNITY',
-    desc: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.',
-  },
-  {
-    id: 4,
-    title: 'THREAT',
-    desc: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, quaerat, quibusdam.',
-  },
-]
-
 export default function ViewSwot({ data, candidate, oneCandidate }: { data: any, candidate: any, oneCandidate: any }) {
-  const [isData, setData] = useState<any>()
+  const [isData, setData] = useState<any>(data)
   const [listCandidate, setListCandidate] = useState(candidate)
   const [isCandidate, setCandidate] = useState(oneCandidate?.id)
   const [isNameCan, setNameCan] = useState(oneCandidate?.name)
   const [isImgCan, setImgCan] = useState(`/img/candidate/${oneCandidate?.img}`)
 
   useShallowEffect(() => {
-    const group = _.groupBy(
-      data, (v) => v.category
-    )
-    setData(group)
-  }, [])
+    // const group = _.groupBy(
+    //   data, (v) => v.category
+    // )
+    setData(data)
+  }, [data])
 
   async function chooseCandidate(value: any) {
     setData([])
     setCandidate((value == null) ? oneCandidate?.id : value)
     const dataDB = await funGetSwotFront({ candidate: value })
     const dataCan = await funGetOneCandidateFront({ candidate: value })
-    const grouping = _.groupBy(
-      dataDB, (v) => v.category
-    )
-    setData(grouping)
+    // const grouping = _.groupBy(
+    //   dataDB, (v) => v.category
+    // )
+    setData(dataDB)
     setNameCan((dataCan?.name))
     setImgCan(`/img/candidate/${dataCan?.img}`)
-    console.log(_.isEmpty(isData), isData, isData['STRENGTH'])
   }
 
   const arrayKey = ['STRENGTH', 'WEAKNESS', 'OPPORTUNITY', 'THREAT']
@@ -97,7 +73,7 @@ export default function ViewSwot({ data, candidate, oneCandidate }: { data: any,
         </Grid.Col>
         <Grid.Col span={{ md: 9, lg: 9 }}>
           <ScrollArea h={"85vh"}>
-            {
+            {/* {
               arrayKey.map((item: any, i: any) => (
                 <Box key={i} pb={20}>
                   <Box
@@ -140,26 +116,27 @@ export default function ViewSwot({ data, candidate, oneCandidate }: { data: any,
                   </Box>
                 </Box>
               ))
-            }
-            {/* {
+            } */}
+            {
               _.keys(isData).map((item: any, i: any) => (
                 <Box key={i} pb={20}>
                   <Box
                     style={{
                       background: "rgba(0,0,0,0.3)",
                       padding: 10,
-                      borderRadius: 10
+                      borderRadius: 10,
+                      minHeight: 150
                     }}
                   >
                     <Box pb={10}>
-                      <Text fw={"bold"} c={"green"}>{item}</Text>
+                      <Text fw={"bold"} c={"green"}>{_.upperCase(item)}</Text>
                     </Box>
                     {(() => {
                       const datanya = isData[item]
-                      if (datanya)
+                      if (!_.isEmpty(datanya))
                         return (
                           <>
-                            <ScrollArea h={230} w={"a"}>
+                            <ScrollArea h={150} w={"a"}>
                               <Stack pl={10}>
                                 <Text c={"white"} fz={14}>
                                   <TextAnimation
@@ -181,7 +158,7 @@ export default function ViewSwot({ data, candidate, oneCandidate }: { data: any,
                   </Box>
                 </Box>
               ))
-            } */}
+            }
           </ScrollArea>
         </Grid.Col>
       </Grid>
