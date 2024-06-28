@@ -28,13 +28,13 @@ import funCekPairing from "../fun/cek_pairing";
  * @returns Hasilnya menampilkan tanggal dan button untuk proccess copy data.
  */
 
-export default function ViewCopyDataPairing({ provinsi }: { provinsi: any }) {
+export default function ViewCopyDataPairing({ provinsi, kabupaten, candidate, valDef }: { provinsi: any, kabupaten: any, candidate: any, valDef: any }) {
   const [value, setValue] = useState<Date | null>(null);
   const [openModal, setOpenModal] = useAtom(isModalPairing);
-  const [dataKabupaten, setDataKabupaten] = useState<any>([])
-  const [dataCandidate, setDataCandidate] = useState<any>([])
-  const [isProvinsi, setProvinsi] = useState<any>(null)
-  const [isKabupaten, setKabupaten] = useState<any>(null)
+  const [dataKabupaten, setDataKabupaten] = useState<any>(kabupaten)
+  const [dataCandidate, setDataCandidate] = useState<any>(candidate)
+  const [isProvinsi, setProvinsi] = useState<any>(String(valDef.idProvinsi))
+  const [isKabupaten, setKabupaten] = useState<any>(String(valDef.idKabkot))
   const [isCandidate1, setCandidate1] = useState<any>(null)
   const [isCandidate2, setCandidate2] = useState<any>(null)
   const [isFrom, setFrom] = useState(null)
@@ -57,7 +57,7 @@ export default function ViewCopyDataPairing({ provinsi }: { provinsi: any }) {
     setKabupaten(val)
     setCandidate1(null)
     setCandidate2(null)
-    const dataDbCan = await funGetCandidateActiveByArea({ find: { idProvinsi: Number(isProvinsi), idKabkot: Number(val), tingkat: 2 } })
+    const dataDbCan = await funGetCandidateActiveByArea({ find: { idProvinsi: Number(isProvinsi), idKabkot: Number(val), tingkat: (val == null) ? 1 : 2 } })
     setDataCandidate(dataDbCan)
   }
 
