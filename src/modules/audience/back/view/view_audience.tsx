@@ -36,7 +36,9 @@ export default function ViewAudience({ param, provinsi, kabupaten, kecamatan, da
     setProvinsi((param.idProvinsi == 0) ? null : param.idProvinsi)
     setKabupaten((param.idKabkot == 0) ? null : param.idKabkot)
     setKecamatan((param.idKec == 0) ? null : param.idKec)
-  }, [param])
+    setDataKabupaten(kabupaten)
+    setDataKecamatan(kecamatan)
+  }, [param, kabupaten, kecamatan])
 
 
   async function onProvinsi({ idProv }: { idProv: any }) {
