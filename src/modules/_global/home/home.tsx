@@ -25,7 +25,7 @@ export default function Home({ areaPro, pro, kab, kec, kel, can1, can2, valWilay
 
   return (
     <>
-      <Text fz={25} c={'#213555'} fw={'bold'}>Hello, {(user && user.name) ? user.name : 'unknown user'}!</Text>
+      <Text fz={25} c={'#213555'} fw={'bold'}>Hello, {(user && user.name) ? user.name : 'unknown user'}!!</Text>
       <Group>
         <Text c={"#4F709C"}>DEFAULT WILAYAH DAN KANDIDAT UNTUK DASHBOARD USER ADALAH </Text>
         <Button variant="subtle" color="#4F709C" radius="xl" p={'0'} onClick={() => setOpenModal(true)}>{isValWilayah}</Button>
